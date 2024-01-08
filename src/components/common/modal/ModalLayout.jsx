@@ -2,13 +2,13 @@ import { IconButton, Modal } from '@mui/material'
 import CloseIcon from '@mui/icons-material/Close'
 import * as S from './styled'
 
-const ModalLayout = ({ children, isOpen, setIsOpen, title }) => {
+const ModalLayout = ({ children, isOpen, onClose, title }) => {
     return (
-        <Modal open={isOpen} onClose={() => setIsOpen(false)}>
+        <Modal open={isOpen} onClose={onClose}>
             <S.ModalContainer>
                 <S.ModalTitle>
                     <S.H2>{title}</S.H2>
-                    <IconButton onClick={() => setIsOpen(false)}>
+                    <IconButton onClick={onClose}>
                         <CloseIcon />
                     </IconButton>
                 </S.ModalTitle>

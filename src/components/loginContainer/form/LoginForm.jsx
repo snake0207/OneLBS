@@ -1,17 +1,16 @@
-import { useState } from 'react'
 import { useFormik } from 'formik'
-import JoinModal from '#/components/loginContainer/modal/JoinModal'
 import { TextInput } from '#/components/common/input/TextInput'
 import PasswordInput from '#/components/common/input/PasswordInput'
 import { useLoginProcessActions } from '#/store/loginProcessStore'
-import { LOGIN_PROCESS } from '#/contents/constant'
+import { LOGIN_PROCESS, MODAL_TITLE } from '#/contents/constant'
 import { loginSchema } from '#/contents/validationSchema'
 import { usePostLogin } from '#/hooks/queries/login'
+import { useModalActions } from '#/store/modalStore'
 import * as S from '../styled'
 
 const LoginForm = () => {
     const { changeLoginProcess } = useLoginProcessActions()
-    const [isJoinModalOpen, setIsJoinModalOpen] = useState(false)
+    const { openModal } = useModalActions()
     const { mutate } = usePostLogin()
     const formik = useFormik({
         initialValues: {
@@ -44,12 +43,11 @@ const LoginForm = () => {
                 <S.MediumText>서비스 이용을 위해 회원가입해 주세요.</S.MediumText>
                 <S.Actions>
                     <S.Button type="submit">로그인</S.Button>
-                    <S.Button onClick={() => setIsJoinModalOpen(true)} type="button">
+                    <S.Button onClick={() => openModal(MODAL_TITLE.JOIN)} type="button">
                         회원가입
                     </S.Button>
                 </S.Actions>
             </S.ActionContainer>
-            <JoinModal isJoinModalOpen={isJoinModalOpen} setIsJoinModalOpen={setIsJoinModalOpen} />
         </S.FormContainer>
     )
 }

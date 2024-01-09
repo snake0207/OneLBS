@@ -4,9 +4,11 @@ import { TextInput } from '#/components/common/input/TextInput'
 import PasswordInput from '#/components/common/input/PasswordInput'
 import { RadioInput } from '#/components/common/radio'
 import { joinSchema } from '#/contents/validationSchema'
+import { useModalActions } from '#/store/modalStore'
+import { MODAL_TITLE } from '#/contents/constant'
 import * as S from './styled'
 
-const ModalJoin = () => {
+const JoinModal = () => {
     const dummyAuthorityArr = [
         { value: '0', label: '일반 사용자(guest)' },
         { value: '1', label: '일반 관리자(user)' },
@@ -17,6 +19,7 @@ const ModalJoin = () => {
         { value: '1', label: '개인정보 수집이용동의' },
         { value: '0', label: '동의하지 않음' },
     ]
+    const { openModal } = useModalActions()
     const formik = useFormik({
         initialValues: {
             userMail: '',
@@ -32,6 +35,7 @@ const ModalJoin = () => {
         validationSchema: joinSchema,
         onSubmit: (form) => {
             console.log(form)
+            openModal(MODAL_TITLE.privacyPolicy)
         },
     })
     const [isSendMail, setIsSendMail] = useState(false)
@@ -106,4 +110,4 @@ const ModalJoin = () => {
     )
 }
 
-export default ModalJoin
+export default JoinModal

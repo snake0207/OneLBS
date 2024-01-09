@@ -10,7 +10,7 @@ export const ModalContainer = styled.section`
     background-color: white;
     width: 600px;
     min-width: 600px;
-    height: calc(100vh - 100px);
+    max-height: calc(100vh - 100px);
     overflow-y: auto;
 `
 

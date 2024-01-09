@@ -79,3 +79,33 @@ common에 존재하는 modal 디렉토리 아래에 도메인별로 분리하여
 이렇게 구현하면 provider에 주입이 필요한 값들을 React를 통해서 관리가 가능하고 동시에 루트 컴포넌트를 감싸서 사용할 수 있습니다.
 
 > provider를 감싸는 순서에 주의해야 합니다.
+
+# VS Code extension 추천
+
+## Auto Import - ES6, TS, JSX, TSX
+
+컴포넌트, 유틸함수등 이름을 작성하면 자동으로 import 경로를 추천해준다.
+
+## Auto Rename Tag
+
+html 태그의 이름 변경시 닫는 태그의 이름도 같이 변경된다.
+
+## ESLint
+
+eslintrc.cjs 파일에 작성된 규칙을 VS Code에 적용시켜준다.
+
+## Prettier - Code formatter
+
+prettierrc.cjs 파일에 작성된 규칙을 VS Code에 적용, 저장 시 자동 포멧팅, 문법 오류 수정 등을 제공한다.
+
+## Git Graph
+
+연결된 레포지토리의 내역을 그래프로 보여준다.
+
+## GitLens -- Git supercharged
+
+해당 코드를 누가 작성했는지 알 수 있다.
+
+## vscode-styled-components
+
+styled component 사용시 css코드에 대한 자동완성 기능을 제공한다.

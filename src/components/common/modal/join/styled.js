@@ -1,5 +1,10 @@
 import styled from '@emotion/styled'
 
+export const LargeText = styled.p`
+    font-size: 20px;
+    margin: 6px 0;
+`
+
 export const MediumText = styled.p`
     font-size: 16px;
     margin: 6px 0;
@@ -15,7 +20,7 @@ export const ModalActions = styled.div`
     justify-content: flex-end;
     align-items: flex-end;
     flex: 1 1 auto;
-    margin-top: 40px;
+    margin-top: 60px;
 `
 
 export const Button = styled.button`
@@ -27,4 +32,16 @@ export const Button = styled.button`
     border: 1px solid gray;
     border-radius: 5px;
     cursor: pointer;
+`
+
+export const CenterContainer = styled.section`
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+`
+
+export const IconContainer = styled.div`
+    font-size: 100;
 `

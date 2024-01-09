@@ -3,7 +3,7 @@ import JoinModal from './components/loginContainer/modal/JoinModal'
 import { MODAL_TITLE } from './contents/constant'
 import { useModalActions, useModalTitleState } from './store/modalStore'
 
-const MODAL_COMPONENT_ARR = [{ type: MODAL_TITLE.JOIN, component: <JoinModal /> }]
+const MODAL_COMPONENT_ARR = [{ type: MODAL_TITLE.join, component: <JoinModal /> }]
 
 const GlobalModal = () => {
     const modalTitle = useModalTitleState()

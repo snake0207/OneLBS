@@ -2,7 +2,7 @@ import { create } from 'zustand'
 import { LOGIN_PROCESS } from '../contents/constant'
 
 const useLoginProcessStore = create((set) => ({
-    loginProcess: LOGIN_PROCESS.INFOMATION,
+    loginProcess: LOGIN_PROCESS.imfomation,
     actions: {
         changeLoginProcess: (process) => set({ loginProcess: process }),
     },

@@ -136,11 +136,6 @@ export const Hr = styled.hr`
     width: 100%;
 `
 
-export const RedSpan = styled.span`
-    font-size: inherit;
-    color: red;
-`
-
 export const ActionContainer = styled.section`
     display: flex;
     justify-content: space-between;
@@ -164,12 +159,4 @@ export const Button = styled.button`
     border: 1px solid gray;
     border-radius: 5px;
     cursor: pointer;
-`
-
-export const ModalActions = styled.div`
-    display: flex;
-    justify-content: flex-end;
-    align-items: flex-end;
-    flex: 1 1 auto;
-    margin-top: 40px;
 `

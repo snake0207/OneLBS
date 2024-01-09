@@ -4,9 +4,9 @@ import { TextInput } from '#/components/common/input/TextInput'
 import PasswordInput from '#/components/common/input/PasswordInput'
 import { RadioInput } from '#/components/common/radio'
 import { joinSchema } from '#/contents/validationSchema'
-import * as S from '../styled'
+import * as S from './styled'
 
-const JoinModal = () => {
+const ModalJoin = () => {
     const dummyAuthorityArr = [
         { value: '0', label: '일반 사용자(guest)' },
         { value: '1', label: '일반 관리자(user)' },
@@ -106,4 +106,4 @@ const JoinModal = () => {
     )
 }
 
-export default JoinModal
+export default ModalJoin

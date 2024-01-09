@@ -1,5 +1,8 @@
 import { create } from 'zustand'
 
+/**
+ * modalTitle: MODAL_TITLE.title
+ */
 const useModalStore = create((set) => ({
     modalTitle: null,
     actions: {

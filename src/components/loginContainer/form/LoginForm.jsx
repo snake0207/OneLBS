@@ -21,7 +21,7 @@ const LoginForm = () => {
         onSubmit: (form) => {
             console.log(form)
             mutate(form)
-            changeLoginProcess(LOGIN_PROCESS.CERTIFIED)
+            changeLoginProcess(LOGIN_PROCESS.certified)
         },
     })
     return (
@@ -43,7 +43,7 @@ const LoginForm = () => {
                 <S.MediumText>서비스 이용을 위해 회원가입해 주세요.</S.MediumText>
                 <S.Actions>
                     <S.Button type="submit">로그인</S.Button>
-                    <S.Button onClick={() => openModal(MODAL_TITLE.JOIN)} type="button">
+                    <S.Button onClick={() => openModal(MODAL_TITLE.join)} type="button">
                         회원가입
                     </S.Button>
                 </S.Actions>

@@ -18,21 +18,21 @@ const LoginContainer = () => {
                     </div>
                     <S.ContentContainer>
                         <S.ProcessContainer>
-                            <S.Process isProcess={loginProcess === LOGIN_PROCESS.INFOMATION}>
+                            <S.Process isProcess={loginProcess === LOGIN_PROCESS.imfomation}>
                                 <span>1</span>
                                 <S.MediumText>정보입력</S.MediumText>
                             </S.Process>
-                            <S.Process isProcess={loginProcess === LOGIN_PROCESS.CERTIFIED}>
+                            <S.Process isProcess={loginProcess === LOGIN_PROCESS.certified}>
                                 <span>2</span>
                                 <S.MediumText>인증</S.MediumText>
                             </S.Process>
-                            <S.Process isProcess={loginProcess === LOGIN_PROCESS.LOGIN}>
+                            <S.Process isProcess={loginProcess === LOGIN_PROCESS.login}>
                                 <span>3</span>
                                 <S.MediumText>로그인</S.MediumText>
                             </S.Process>
                         </S.ProcessContainer>
-                        {loginProcess === LOGIN_PROCESS.INFOMATION && <LoginForm />}
-                        {loginProcess === LOGIN_PROCESS.CERTIFIED && <CertifiedForm />}
+                        {loginProcess === LOGIN_PROCESS.imfomation && <LoginForm />}
+                        {loginProcess === LOGIN_PROCESS.certified && <CertifiedForm />}
                     </S.ContentContainer>
                 </S.LoginContainer>
             </S.Container>

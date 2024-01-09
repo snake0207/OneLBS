@@ -20,6 +20,7 @@ const JoinModal = () => {
         { value: '0', label: '동의하지 않음' },
     ]
     const { openModal } = useModalActions()
+    const [isSendMail, setIsSendMail] = useState(false)
     const formik = useFormik({
         initialValues: {
             userMail: '',
@@ -38,7 +39,6 @@ const JoinModal = () => {
             openModal(MODAL_TITLE.privacyPolicy)
         },
     })
-    const [isSendMail, setIsSendMail] = useState(false)
     return (
         <form onSubmit={formik.handleSubmit}>
             <S.MediumText>
@@ -88,14 +88,14 @@ const JoinModal = () => {
             <TextInput label={'Company'} name={'userCompany'} formik={formik} isRequired={true} />
             <TextInput label={'팀명'} name={'userTeamName'} formik={formik} isRequired={true} />
             <RadioInput
-                itemArr={dummyAuthorityArr}
+                items={dummyAuthorityArr}
                 name={'authority'}
                 label={'권한'}
                 formik={formik}
                 isRequired={true}
             />
             <RadioInput
-                itemArr={dummyTermsArr}
+                items={dummyTermsArr}
                 name={'isTermsAgreed'}
                 label={'약관동의'}
                 formik={formik}

@@ -2,7 +2,7 @@ import { FormControl, FormControlLabel, Radio, RadioGroup } from '@mui/material'
 import * as S from './styled'
 
 // 합성 컴포넌트
-const RadioInputMain = ({ children, itemArr, name, label, formik, isRequired = false }) => {
+const RadioInputMain = ({ children, items, name, label, formik, isRequired = false }) => {
     return (
         <S.RadioInputContainer>
             <S.RadioLabelContainer>
@@ -20,7 +20,7 @@ const RadioInputMain = ({ children, itemArr, name, label, formik, isRequired = f
                     onBlur={formik.handleBlur}
                     row
                 >
-                    {itemArr.map((item, idx) => (
+                    {items.map((item, idx) => (
                         <FormControlLabel
                             key={idx}
                             value={item.value}

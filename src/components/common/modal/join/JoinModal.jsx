@@ -4,7 +4,9 @@ import { TextInput } from '#/components/common/input/TextInput'
 import PasswordInput from '#/components/common/input/PasswordInput'
 import { RadioInput } from '#/components/common/radio'
 import { joinSchema } from '#/contents/validationSchema'
-import * as S from '../styled'
+import { useModalActions } from '#/store/modalStore'
+import { MODAL_TITLE } from '#/contents/constant'
+import * as S from './styled'
 
 const JoinModal = () => {
     const dummyAuthorityArr = [
@@ -17,6 +19,8 @@ const JoinModal = () => {
         { value: '1', label: '개인정보 수집이용동의' },
         { value: '0', label: '동의하지 않음' },
     ]
+    const { openModal } = useModalActions()
+    const [isSendMail, setIsSendMail] = useState(false)
     const formik = useFormik({
         initialValues: {
             userMail: '',
@@ -32,9 +36,9 @@ const JoinModal = () => {
         validationSchema: joinSchema,
         onSubmit: (form) => {
             console.log(form)
+            openModal(MODAL_TITLE.privacyPolicy)
         },
     })
-    const [isSendMail, setIsSendMail] = useState(false)
     return (
         <form onSubmit={formik.handleSubmit}>
             <S.MediumText>
@@ -84,14 +88,14 @@ const JoinModal = () => {
             <TextInput label={'Company'} name={'userCompany'} formik={formik} isRequired={true} />
             <TextInput label={'팀명'} name={'userTeamName'} formik={formik} isRequired={true} />
             <RadioInput
-                itemArr={dummyAuthorityArr}
+                items={dummyAuthorityArr}
                 name={'authority'}
                 label={'권한'}
                 formik={formik}
                 isRequired={true}
             />
             <RadioInput
-                itemArr={dummyTermsArr}
+                items={dummyTermsArr}
                 name={'isTermsAgreed'}
                 label={'약관동의'}
                 formik={formik}

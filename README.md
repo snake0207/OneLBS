@@ -1,4 +1,4 @@
-# ccs-admin project
+# gpss-admin project
 
 # Code Convention
 

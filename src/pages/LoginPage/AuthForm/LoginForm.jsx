@@ -1,12 +1,12 @@
+import { Box, Button, Typography } from '@mui/material'
 import { useFormik } from 'formik'
 import { TextInput } from '#/components/common/input/TextInput'
 import PasswordInput from '#/components/common/input/PasswordInput'
-import { useLoginProcessActions } from '#/store/loginProcessStore'
+import { useLoginProcessActions } from '#/store/authProcessStore'
 import { LOGIN_PROCESS, MODAL_TITLE } from '#/contents/constant'
 import { loginSchema } from '#/contents/validationSchema'
 import { usePostLogin } from '#/hooks/queries/login'
 import { useModalActions } from '#/store/modalStore'
-import * as S from '../styled'
 
 const LoginForm = () => {
     const { changeLoginProcess } = useLoginProcessActions()
@@ -25,8 +25,17 @@ const LoginForm = () => {
         },
     })
     return (
-        <S.FormContainer onSubmit={formik.handleSubmit}>
-            <S.MediumText>아이디, 비밀번호를 입력해 주세요.</S.MediumText>
+        <Box
+            component={'form'}
+            onSubmit={formik.handleSubmit}
+            sx={{
+                display: 'flex',
+                flexDirection: 'column',
+                justifyContent: 'space-between',
+                flex: '1 1 auto',
+            }}
+        >
+            <Typography>아이디, 비밀번호를 입력해 주세요.</Typography>
             <TextInput
                 label={'아이디(이메일)'}
                 name={'userMail'}
@@ -39,16 +48,29 @@ const LoginForm = () => {
                 placeholder={'Password'}
                 formik={formik}
             />
-            <S.ActionContainer>
-                <S.MediumText>서비스 이용을 위해 회원가입해 주세요.</S.MediumText>
-                <S.Actions>
-                    <S.Button type="submit">로그인</S.Button>
-                    <S.Button onClick={() => openModal(MODAL_TITLE.join)} type="button">
+            <Box
+                sx={{
+                    display: 'flex',
+                    justifyContent: 'space-between',
+                    alignItems: 'flex-end',
+                    height: 110,
+                }}
+            >
+                <Typography>서비스 이용을 위해 회원가입해 주세요.</Typography>
+                <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
+                    <Button variant="contained" type="submit">
+                        로그인
+                    </Button>
+                    <Button
+                        variant="contained"
+                        onClick={() => openModal(MODAL_TITLE.join)}
+                        type="button"
+                    >
                         회원가입
-                    </S.Button>
-                </S.Actions>
-            </S.ActionContainer>
-        </S.FormContainer>
+                    </Button>
+                </Box>
+            </Box>
+        </Box>
     )
 }
 

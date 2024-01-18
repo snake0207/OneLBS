@@ -28,7 +28,7 @@ const LoginContainer = () => {
                             </S.Process>
                             <S.Process isProcess={loginProcess === LOGIN_PROCESS.login}>
                                 <span>3</span>
-                                <S.MediumText>로그인`</S.MediumText>
+                                <S.MediumText>로그인</S.MediumText>
                             </S.Process>
                         </S.ProcessContainer>
                         {loginProcess === LOGIN_PROCESS.imfomation && <LoginForm />}

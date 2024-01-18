@@ -1,8 +1,6 @@
 import { Global, css } from '@emotion/react'
-import emotionReset from 'emotion-reset'
 
 const globalStyles = css`
-    ${emotionReset}
     :root {
         font-size: 16px;
 
@@ -11,9 +9,7 @@ const globalStyles = css`
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
 
-        a {
-            color: black;
-        }
+        box-sizing: border-box;
     }
     ::-ms-reveal {
         display: none;

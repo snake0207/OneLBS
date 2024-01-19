@@ -1,17 +1,24 @@
-import { FormControl, FormControlLabel, Radio, RadioGroup } from '@mui/material'
-import * as S from './styled'
+import {
+    Box,
+    Button,
+    FormControl,
+    FormControlLabel,
+    Radio,
+    RadioGroup,
+    Typography,
+} from '@mui/material'
 
 // 합성 컴포넌트
 const RadioInputMain = ({ children, items, name, label, formik, isRequired = false }) => {
     return (
-        <S.RadioInputContainer>
-            <S.RadioLabelContainer>
-                <S.RadioLabel>
-                    {isRequired && <S.RequiredSpan>*</S.RequiredSpan>}
+        <Box sx={{ my: 1 }}>
+            <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
+                <Typography variant="h6">
+                    {isRequired && <span style={{ color: 'red' }}>*</span>}
                     {label}
-                </S.RadioLabel>
+                </Typography>
                 {children}
-            </S.RadioLabelContainer>
+            </Box>
             <FormControl>
                 <RadioGroup
                     name={name}
@@ -30,15 +37,15 @@ const RadioInputMain = ({ children, items, name, label, formik, isRequired = fal
                     ))}
                 </RadioGroup>
             </FormControl>
-        </S.RadioInputContainer>
+        </Box>
     )
 }
 
 const RadioLabelButton = ({ name, onClick }) => {
     return (
-        <S.RadioButton onClick={onClick} type="button">
+        <Button variant="contained" onClick={onClick} type="button">
             {name}
-        </S.RadioButton>
+        </Button>
     )
 }
 

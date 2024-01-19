@@ -1,7 +1,6 @@
 import { Children, isValidElement, useEffect, useState } from 'react'
-import { IconButton, InputAdornment, OutlinedInput } from '@mui/material'
+import { Box, Button, IconButton, InputAdornment, OutlinedInput, Typography } from '@mui/material'
 import Close from '@mui/icons-material/Close'
-import * as S from './styled'
 
 // 합성 컴포넌트
 const TextInputMain = ({
@@ -16,13 +15,19 @@ const TextInputMain = ({
     const submitButton = getSubmitButton(children)
     const inputTimer = getInputTimer(children)
     return (
-        <S.Container isRule={!!inputRule}>
-            <div>
-                <S.InputLabel>
-                    {isRequired && <S.RequiredSpan>*</S.RequiredSpan>}
-                    {label}
-                </S.InputLabel>
-                <S.InputContainer>
+        <Box sx={{ my: 1 }}>
+            <Typography variant="h6">
+                {isRequired && <span style={{ color: 'red' }}>*</span>}
+                {label}
+            </Typography>
+            <Box
+                sx={{
+                    display: 'flex',
+                    flexDirection: 'column',
+                    height: 60,
+                }}
+            >
+                <Box sx={{ display: 'flex', justifyContent: 'space-between', gap: 1 }}>
                     <OutlinedInput
                         name={name}
                         value={formik.values[name]}
@@ -48,19 +53,23 @@ const TextInputMain = ({
                         }
                     />
                     {submitButton && submitButton}
-                </S.InputContainer>
-                {formik.touched[name] && <S.HelperText>{formik.errors[name]}</S.HelperText>}
-            </div>
-            {inputRule && <S.MediumText>{inputRule}</S.MediumText>}
-        </S.Container>
+                </Box>
+                {formik.touched[name] && (
+                    <Typography sx={{ color: 'red', fontSize: 14 }}>
+                        {formik.errors[name]}
+                    </Typography>
+                )}
+            </Box>
+            {inputRule && <Typography sx={{ my: 1 }}>{inputRule}</Typography>}
+        </Box>
     )
 }
 
 const SubmitButton = ({ name, onClick }) => {
     return (
-        <S.SubmitButton onClick={onClick} type="button">
+        <Button variant="contained" onClick={onClick} type="button" sx={{ flex: '0 0 auto' }}>
             {name}
-        </S.SubmitButton>
+        </Button>
     )
 }
 
@@ -75,12 +84,12 @@ const InputTimer = () => {
         }
     }, [time])
     return (
-        <S.MediumText>
+        <Typography>
             {parseInt(time / 60)}:
             {parseInt(time % 60)
                 .toString()
                 .padStart(2, 0)}
-        </S.MediumText>
+        </Typography>
     )
 }
 

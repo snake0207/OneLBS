@@ -2,14 +2,14 @@ import { Box, Button, Typography } from '@mui/material'
 import { useFormik } from 'formik'
 import { TextInput } from '#/components/common/input/TextInput'
 import PasswordInput from '#/components/common/input/PasswordInput'
-import { useLoginProcessActions } from '#/store/authProcessStore'
-import { LOGIN_PROCESS, MODAL_TITLE } from '#/contents/constant'
+import { useAuthProcessActions } from '#/store/authProcessStore'
+import { AUTH_PROCESS, MODAL_TITLE } from '#/contents/constant'
 import { loginSchema } from '#/contents/validationSchema'
 import { usePostLogin } from '#/hooks/queries/login'
 import { useModalActions } from '#/store/modalStore'
 
 const LoginForm = () => {
-    const { changeLoginProcess } = useLoginProcessActions()
+    const { changeAuthProcess } = useAuthProcessActions()
     const { openModal } = useModalActions()
     const { mutate } = usePostLogin()
     const formik = useFormik({
@@ -20,8 +20,8 @@ const LoginForm = () => {
         validationSchema: loginSchema,
         onSubmit: (form) => {
             console.log(form)
-            mutate(form)
-            changeLoginProcess(LOGIN_PROCESS.certified)
+            // mutate(form)
+            changeAuthProcess(AUTH_PROCESS.certified)
         },
     })
     return (

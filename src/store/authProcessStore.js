@@ -1,14 +1,14 @@
 import { create } from 'zustand'
-import { LOGIN_PROCESS } from '../contents/constant'
+import { AUTH_PROCESS } from '../contents/constant'
 
-const useLoginProcessStore = create((set) => ({
-    loginProcess: LOGIN_PROCESS.imfomation,
+const useAuthProcessStore = create((set) => ({
+    authProcess: AUTH_PROCESS.imfomation,
     actions: {
-        changeLoginProcess: (process) => set({ loginProcess: process }),
+        changeAuthProcess: (process) => set({ authProcess: process }),
     },
 }))
 
-export default useLoginProcessStore
+export default useAuthProcessStore
 
-export const useLoginProcessActions = () => useLoginProcessStore((state) => state.actions)
-export const useLoginProcessState = () => useLoginProcessStore((state) => state.loginProcess)
+export const useAuthProcessActions = () => useAuthProcessStore((state) => state.actions)
+export const useAuthProcessState = () => useAuthProcessStore((state) => state.authProcess)

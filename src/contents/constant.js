@@ -1,7 +1,7 @@
-export const LOGIN_PROCESS = {
-    imfomation: 'infomation',
-    certified: 'certified',
-    login: 'login',
+export const AUTH_PROCESS = {
+    imfomation: 0,
+    certified: 1,
+    login: 2,
 }
 
 export const MODAL_TITLE = {

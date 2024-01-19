@@ -1,6 +1,6 @@
 import { Box, Container, Divider, Stack } from '@mui/material'
 import CarouselOverview from '#/pages/LoginPage/CarouselOverview'
-import LoginFormContainer from '#/pages/LoginPage/AuthForm'
+import AuthFormContainer from '#/pages/LoginPage/AuthForm'
 
 function LoginPage() {
     return (
@@ -20,7 +20,7 @@ function LoginPage() {
                     <CarouselOverview />
                 </Box>
                 <Box sx={{ flex: 1 }}>
-                    <LoginFormContainer />
+                    <AuthFormContainer />
                 </Box>
             </Stack>
         </Container>

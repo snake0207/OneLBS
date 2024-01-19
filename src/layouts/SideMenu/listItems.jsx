@@ -19,7 +19,7 @@ export const mainListItems = () => (
                 <ListItemText primary={t('top_menu.search_management')} />
             </ListItemButton>
         </Link>
-        <Link href="/statistics" color="inherit" underline="none">
+        <Link href="/poi" color="inherit" underline="none">
             <ListItemButton>
                 <ListItemIcon>
                     <BarChartIcon />
@@ -27,7 +27,7 @@ export const mainListItems = () => (
                 <ListItemText primary={t('top_menu.poi_search')} />
             </ListItemButton>
         </Link>
-        <Link href="/map" color="inherit" underline="none">
+        <Link href="/permit" color="inherit" underline="none">
             <ListItemButton>
                 <ListItemIcon>
                     <LayersIcon />
@@ -35,7 +35,7 @@ export const mainListItems = () => (
                 <ListItemText primary={t('top_menu.permit_history')} />
             </ListItemButton>
         </Link>
-        <Link href="/etc" color="inherit" underline="none">
+        <Link href="/mcp" color="inherit" underline="none">
             <ListItemButton>
                 <ListItemIcon>
                     <LayersIcon />
@@ -43,7 +43,7 @@ export const mainListItems = () => (
                 <ListItemText primary={t('top_menu.mcp_poi_statistics')} />
             </ListItemButton>
         </Link>
-        <Link href="/etc" color="inherit" underline="none">
+        <Link href="/maintenance" color="inherit" underline="none">
             <ListItemButton>
                 <ListItemIcon>
                     <LayersIcon />

@@ -5,6 +5,7 @@ import MainPage from '#/pages/MainPage'
 import LoginPage from '#/pages/LoginPage'
 import DemoPage from '#/pages/DemoPage'
 import LayoutPage from '#/pages/DemoPage/LayoutPage'
+import ButtonPage from '#/pages/DemoPage/ButtonPage'
 
 const Routes = () => {
     return useRoutes([
@@ -21,6 +22,7 @@ const Routes = () => {
             children: [
                 { path: '/components', element: <DemoPage /> },
                 { path: '/components/layouts', element: <LayoutPage /> },
+                { path: '/components/buttons', element: <ButtonPage /> },
             ],
         },
     ])

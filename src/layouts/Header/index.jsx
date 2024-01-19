@@ -11,7 +11,9 @@ import Avatar from '@mui/material/Avatar'
 import Tooltip from '@mui/material/Tooltip'
 import MenuItem from '@mui/material/MenuItem'
 
-const settings = ['Profile', 'Account', 'Dashboard', 'Logout']
+import t from '#/common/libs/trans'
+
+const settings = [t('profile'), 'Account', 'Dashboard', t('logout')]
 
 function Header() {
     const [, setAnchorElNav] = React.useState(null)

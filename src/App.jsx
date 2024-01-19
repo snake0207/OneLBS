@@ -3,6 +3,7 @@ import { BrowserRouter } from 'react-router-dom'
 import { themeSettings } from './theme'
 import { ThemeProvider } from '@mui/material'
 import { createTheme } from '@mui/material/styles'
+import './i18n/index'
 
 import Routes from './routes'
 

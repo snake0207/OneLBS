@@ -1,5 +1,5 @@
-import CertifiedForm from '#/pages/LoginPage/AuthForm/CertifiedForm'
-import LoginForm from '#/pages/LoginPage/AuthForm/LoginForm'
+import CertifiedForm from '#/components/auth/AuthForm/CertifiedForm'
+import LoginForm from '#/components/auth/AuthForm/LoginForm'
 import { AUTH_PROCESS } from '#/contents/constant'
 import { useAuthProcessState } from '#/store/authProcessStore'
 import { Box, Divider, Stack, Step, StepLabel, Stepper, Typography } from '@mui/material'

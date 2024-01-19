@@ -1,6 +1,6 @@
 import { Box, Container, Divider, Stack } from '@mui/material'
-import CarouselOverview from '#/pages/LoginPage/CarouselOverview'
-import AuthFormContainer from '#/pages/LoginPage/AuthForm'
+import CarouselOverview from '#/components/auth/CarouselOverview'
+import AuthFormContainer from '#/components/auth/AuthForm'
 
 function LoginPage() {
     return (

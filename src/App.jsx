@@ -6,12 +6,14 @@ import { createTheme } from '@mui/material/styles'
 import './i18n/index'
 
 import Routes from './routes'
+import GlobalModal from '#/GlobalModal'
 
 function App() {
     const theme = useMemo(() => createTheme(themeSettings), [])
 
     return (
         <ThemeProvider theme={theme}>
+            <GlobalModal />
             <BrowserRouter>
                 <Routes />
             </BrowserRouter>

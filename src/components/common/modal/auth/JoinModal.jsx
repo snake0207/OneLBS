@@ -6,7 +6,8 @@ import { RadioInput } from '#/components/common/radio'
 import { joinSchema } from '#/contents/validationSchema'
 import { useModalActions } from '#/store/modalStore'
 import { MODAL_TITLE } from '#/contents/constant'
-import * as S from './styled'
+import { Button, Typography } from '@mui/material'
+import FlexEndButtonContainer from '#/components/common/button/FlexEndButtonContainer'
 
 const JoinModal = () => {
     const dummyAuthorityArr = [
@@ -41,9 +42,9 @@ const JoinModal = () => {
     })
     return (
         <form onSubmit={formik.handleSubmit}>
-            <S.MediumText>
-                <S.RedSpan>*</S.RedSpan> 필수 입력입니다.
-            </S.MediumText>
+            <Typography>
+                <span style={{ color: 'red' }}>*</span> 필수 입력입니다.
+            </Typography>
             <TextInput
                 label={'아이디(이메일)'}
                 name={'userMail'}
@@ -103,9 +104,11 @@ const JoinModal = () => {
             >
                 <RadioInput.RadioButton name={'자세히 보기'} onClick={null} />
             </RadioInput>
-            <S.ModalActions>
-                <S.Button type="submit">회원가입</S.Button>
-            </S.ModalActions>
+            <FlexEndButtonContainer>
+                <Button variant="contained" type="submit">
+                    회원가입
+                </Button>
+            </FlexEndButtonContainer>
         </form>
     )
 }

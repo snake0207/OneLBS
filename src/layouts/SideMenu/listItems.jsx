@@ -5,64 +5,60 @@ import ListItemText from '@mui/material/ListItemText'
 import DashboardIcon from '@mui/icons-material/Dashboard'
 import BarChartIcon from '@mui/icons-material/BarChart'
 import LayersIcon from '@mui/icons-material/Layers'
+import AppRegistrationIcon from '@mui/icons-material/AppRegistration'
+
 import Link from '@mui/material/Link'
 
-export const mainListItems = (
+import t from '#/common/libs/trans'
+
+export const mainListItems = () => (
     <React.Fragment>
         <Link href="/" color="inherit" underline="none">
             <ListItemButton>
                 <ListItemIcon>
                     <DashboardIcon />
                 </ListItemIcon>
-                <ListItemText primary="Main" />
+                <ListItemText primary={t('top_menu.search_management')} />
             </ListItemButton>
         </Link>
-        <Link href="/statistics" color="inherit" underline="none">
+        <Link href="/poi" color="inherit" underline="none">
             <ListItemButton>
                 <ListItemIcon>
                     <BarChartIcon />
                 </ListItemIcon>
-                <ListItemText primary="Statistics" />
+                <ListItemText primary={t('top_menu.poi_search')} />
             </ListItemButton>
         </Link>
-        <Link href="/map" color="inherit" underline="none">
+        <Link href="/permit" color="inherit" underline="none">
             <ListItemButton>
                 <ListItemIcon>
                     <LayersIcon />
                 </ListItemIcon>
-                <ListItemText primary="Map" />
+                <ListItemText primary={t('top_menu.permit_history')} />
             </ListItemButton>
         </Link>
-        <Link href="/etc" color="inherit" underline="none">
+        <Link href="/mcp" color="inherit" underline="none">
             <ListItemButton>
                 <ListItemIcon>
                     <LayersIcon />
                 </ListItemIcon>
-                <ListItemText primary="Etc" />
+                <ListItemText primary={t('top_menu.mcp_poi_statistics')} />
             </ListItemButton>
         </Link>
-        <Link href="/etc" color="inherit" underline="none">
+        <Link href="/maintenance" color="inherit" underline="none">
             <ListItemButton>
                 <ListItemIcon>
                     <LayersIcon />
                 </ListItemIcon>
-                <ListItemText primary="Etc" />
+                <ListItemText primary={t('top_menu.maintenance')} />
             </ListItemButton>
         </Link>
-        <Link href="/etc" color="inherit" underline="none">
+        <Link href="/components" color="inherit" underline="none">
             <ListItemButton>
                 <ListItemIcon>
-                    <LayersIcon />
+                    <AppRegistrationIcon />
                 </ListItemIcon>
-                <ListItemText primary="Etc" />
-            </ListItemButton>
-        </Link>
-        <Link href="/etc" color="inherit" underline="none">
-            <ListItemButton>
-                <ListItemIcon>
-                    <LayersIcon />
-                </ListItemIcon>
-                <ListItemText primary="Etc" />
+                <ListItemText primary="Components" />
             </ListItemButton>
         </Link>
     </React.Fragment>

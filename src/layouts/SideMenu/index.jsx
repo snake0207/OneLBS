@@ -64,7 +64,7 @@ const SideMenu = ({ open, toggleDrawer }) => {
                 </IconButton>
             </Toolbar>
             <Divider />
-            <List component="nav">{mainListItems}</List>
+            <List component="nav">{mainListItems()}</List>
         </Drawer>
     )
 }

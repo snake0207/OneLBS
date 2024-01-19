@@ -5,6 +5,8 @@ import ListItemText from '@mui/material/ListItemText'
 import DashboardIcon from '@mui/icons-material/Dashboard'
 import BarChartIcon from '@mui/icons-material/BarChart'
 import LayersIcon from '@mui/icons-material/Layers'
+import AppRegistrationIcon from '@mui/icons-material/AppRegistration'
+
 import Link from '@mui/material/Link'
 
 import t from '#/common/libs/trans'
@@ -51,20 +53,12 @@ export const mainListItems = () => (
                 <ListItemText primary={t('top_menu.maintenance')} />
             </ListItemButton>
         </Link>
-        <Link href="/etc" color="inherit" underline="none">
+        <Link href="/components" color="inherit" underline="none">
             <ListItemButton>
                 <ListItemIcon>
-                    <LayersIcon />
+                    <AppRegistrationIcon />
                 </ListItemIcon>
-                <ListItemText primary="Etc" />
-            </ListItemButton>
-        </Link>
-        <Link href="/etc" color="inherit" underline="none">
-            <ListItemButton>
-                <ListItemIcon>
-                    <LayersIcon />
-                </ListItemIcon>
-                <ListItemText primary="Etc" />
+                <ListItemText primary="Components" />
             </ListItemButton>
         </Link>
     </React.Fragment>

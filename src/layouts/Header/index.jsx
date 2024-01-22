@@ -10,6 +10,7 @@ import Tooltip from '@mui/material/Tooltip'
 import SettingsIcon from '@mui/icons-material/Settings'
 import FullscreenIcon from '@mui/icons-material/Fullscreen'
 import NotificationsIcon from '@mui/icons-material/Notifications'
+import useLayoutStore from '#/store/useLayoutStore'
 
 import Badge from '@mui/material/Badge'
 
@@ -21,12 +22,14 @@ const userMenus = [
     { key: 'logout', label: t('logout') },
 ]
 const languages = [
-    { key: 'kor', label: t('kor') },
-    { key: 'eng', label: t('eng') },
+    { key: 'kr', label: t('KOR'), value: 'kr' },
+    { key: 'en', label: t('ENG'), value: 'en' },
 ]
 
 function Header() {
+    const { language, setLanguage } = useLayoutStore()
     const [, setAnchorElNav] = React.useState(null)
+
     const handleSelectUserMenu = (item) => {
         console.log(item)
     }
@@ -37,6 +40,11 @@ function Header() {
 
     const handleSelectLangMenu = (item) => {
         console.log(item)
+        setLanguage(item.value)
+    }
+
+    const findLanguage = (lang) => {
+        return languages.find((item) => item.value === lang)
     }
 
     return (
@@ -75,7 +83,7 @@ function Header() {
                             selectable={true}
                             onSelect={handleSelectLangMenu}
                         >
-                            KOR
+                            {findLanguage(language)?.label}
                         </Dropdown>
                         <IconButton sx={{ p: 0 }}>
                             <FullscreenIcon />

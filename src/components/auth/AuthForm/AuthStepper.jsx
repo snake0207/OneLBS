@@ -2,11 +2,11 @@ import { useAuthStepState } from '#/store/authStepStore'
 import { Step, StepLabel, Stepper } from '@mui/material'
 
 const AuthStepper = () => {
-    const authProcess = useAuthStepState()
+    const authStep = useAuthStepState()
     const steps = ['정보입력', '인증', '로그인']
     return (
         <Stepper
-            activeStep={authProcess}
+            activeStep={authStep}
             alternativeLabel
             nonLinear
             sx={{ height: 120, alignItems: 'center' }}

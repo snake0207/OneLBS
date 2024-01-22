@@ -35,14 +35,38 @@ const LoginDemoPage = () => {
             <h2>AuthStepper</h2>
             <AuthStepper />
             <h2>Form</h2>
-            <div style={{ display: 'flex', gap: 30, height: 630 }}>
-                <div style={{ flexShrink: 0, width: 600 }}>
+            <div style={{ display: 'flex', gap: 30, height: 600 }}>
+                <div
+                    style={{
+                        display: 'flex',
+                        flexDirection: 'column',
+                        flexShrink: 0,
+                        width: 600,
+                        height: '100%',
+                    }}
+                >
                     <LoginForm />
                 </div>
-                <div style={{ flexShrink: 0, width: 600 }}>
+                <div
+                    style={{
+                        display: 'flex',
+                        flexDirection: 'column',
+                        flexShrink: 0,
+                        width: 600,
+                        height: '100%',
+                    }}
+                >
                     <CertifiedForm />
                 </div>
-                <div style={{ flexShrink: 0, width: 600 }}>
+                <div
+                    style={{
+                        display: 'flex',
+                        flexDirection: 'column',
+                        flexShrink: 0,
+                        width: 600,
+                        height: '100%',
+                    }}
+                >
                     <PasswordResetForm />
                 </div>
             </div>

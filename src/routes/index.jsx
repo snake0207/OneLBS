@@ -8,6 +8,7 @@ import LayoutPage from '#/pages/DemoPage/LayoutPage'
 import ButtonPage from '#/pages/DemoPage/ButtonPage'
 import PoiMapPage from '#/pages/poiMapPage/index.jsx'
 import MapPage from '#/pages/DemoPage/MapPage/index.jsx'
+import LoginDemoPage from '#/pages/DemoPage/LoginPage'
 
 const Routes = () => {
     return useRoutes([
@@ -29,6 +30,7 @@ const Routes = () => {
                 { path: '/components/layouts', element: <LayoutPage /> },
                 { path: '/components/buttons', element: <ButtonPage /> },
                 { path: '/components/maps', element: <MapPage /> },
+                { path: '/components/logins', element: <LoginDemoPage /> },
             ],
         },
     ])

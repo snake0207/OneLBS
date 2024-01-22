@@ -4,27 +4,7 @@ import { useState } from 'react'
 import { useEffect } from 'react'
 import { Box, Stack, Typography } from '@mui/material'
 
-const CarouselOverview = () => {
-    const dummyImageList = [
-        {
-            imgUrl: '',
-            title: 'AutoEver Global Search Info Service Management 1',
-            description:
-                'Enhancing the efficiency and effectiveness of global Search info service optimization',
-        },
-        {
-            imgUrl: '',
-            title: 'AutoEver Global Search Info Service Management 2',
-            description:
-                'Enhancing the efficiency and effectiveness of global Search info service optimization',
-        },
-        {
-            imgUrl: '',
-            title: 'AutoEver Global Search Info Service Management 3',
-            description:
-                'Enhancing the efficiency and effectiveness of global Search info service optimization',
-        },
-    ]
+const CarouselOverview = ({ dummyImageList }) => {
     // EmblaCarousel 기본 설정, Autoplay plugin 설정
     const [emblaRef, emblaApi] = useEmblaCarousel({ watchDrag: false }, [
         Autoplay({ delay: 1000 * 10, stopOnInteraction: false, stopOnMouseEnter: true }),

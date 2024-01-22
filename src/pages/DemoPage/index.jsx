@@ -17,6 +17,9 @@ function DemoPage() {
                 <li>
                     <a href="/components/maps">Maps</a>
                 </li>
+                <li>
+                    <a href="/components/logins">Logins</a>
+                </li>
             </ul>
         </Box>
     )

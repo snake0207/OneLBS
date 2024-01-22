@@ -16,15 +16,7 @@ const CertifiedForm = () => {
         },
     })
     return (
-        <Box
-            component={'form'}
-            onSubmit={formik.handleSubmit}
-            sx={{
-                display: 'flex',
-                flexDirection: 'column',
-                height: '100%',
-            }}
-        >
+        <>
             <Typography variant="h5">로그인</Typography>
             <Divider />
             <AuthStepper />
@@ -45,18 +37,24 @@ const CertifiedForm = () => {
                     <Link href="#">등록방법</Link>
                 </Box>
             </Box>
-            <TextInput
-                label={'OTP'}
-                name={'otp'}
-                placeholder={'6자리 숫자를 입력해 주세요.'}
-                formik={formik}
-            />
-            <FlexEndButtonContainer>
-                <Button variant="contained" type="submit" sx={{ alignSelf: 'flex-end' }}>
-                    인증
-                </Button>
-            </FlexEndButtonContainer>
-        </Box>
+            <Box
+                component={'form'}
+                onSubmit={formik.handleSubmit}
+                sx={{ display: 'flex', flexDirection: 'column', flex: 1 }}
+            >
+                <TextInput
+                    label={'OTP'}
+                    name={'otp'}
+                    placeholder={'6자리 숫자를 입력해 주세요.'}
+                    formik={formik}
+                />
+                <FlexEndButtonContainer>
+                    <Button variant="contained" type="submit" sx={{ alignSelf: 'flex-end' }}>
+                        인증
+                    </Button>
+                </FlexEndButtonContainer>
+            </Box>
+        </>
     )
 }
 

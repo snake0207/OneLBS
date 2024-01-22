@@ -1,5 +1,5 @@
 import t from '#/common/libs/trans'
-import Breadcrumbs from '#/components/common/Breadcrumbs'
+import RouterBreadcrumbs from '#/components/common/menu/RouterBreadcrumbs'
 import useLayoutStore from '#/store/useLayoutStore'
 
 function LayoutPage() {
@@ -20,7 +20,7 @@ function LayoutPage() {
                 <button onClick={() => setThemeMode('dark')}>{'dark'}</button>
             </div>
             <h2>Breadcrumbs</h2>
-            <Breadcrumbs />
+            <RouterBreadcrumbs />
         </div>
     )
 }

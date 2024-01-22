@@ -1,8 +1,9 @@
-import MapCategory from '#/components/common/map/MapCategory.jsx'
+import MapCategory from '#/components/common/map/MapCategory/index.jsx'
 import Box from '@mui/material/Box'
 import DirectionsCarFilledOutlinedIcon from '@mui/icons-material/DirectionsCarFilledOutlined.js'
 import Typography from '@mui/material/Typography'
-import MapSearch from '#/components/common/map/MapSearch.jsx'
+import MapSearch from '#/components/common/map/MapSearch/index.jsx'
+import MapPoiList from '#/components/common/map/MapPoiList/index.jsx'
 
 const MapPage = () => {
     return (

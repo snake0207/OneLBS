@@ -2,6 +2,7 @@ import Box from '@mui/material/Box'
 import { Autocomplete, Grid, InputAdornment, TextField, Typography } from '@mui/material'
 import SearchIcon from '@mui/icons-material/Search'
 import { useFormik } from 'formik'
+import { mapSearchSchema } from '#/contents/validationSchema.js'
 
 const countryCodeArr = [
     'ABW',
@@ -254,20 +255,26 @@ const countryCodeArr = [
     'ZMB',
     'ZWE',
 ]
-
+const languageCodeArr = ['ENG', 'KOR']
 const categoryCodeArr = ['ev Charging', 'fuel', 'parking', 'h2 Charging', 'dealerPoi']
 
 const MapSearch = () => {
     const formik = useFormik({
         initialValues: {
-            country: null,
+            country: '',
             lat: '',
             lng: '',
-            category: null,
+            category: [],
             searchValue: '',
+            language: 'ENG',
         },
+        validationSchema: mapSearchSchema,
         onSubmit: (form) => {
             console.log(form)
+            if (form.searchValue === '') {
+                alert('검색어를 입력해 주세요.')
+                return
+            }
         },
     })
     return (
@@ -299,13 +306,20 @@ const MapSearch = () => {
                                     'country',
                                     value !== null ? value : formik.initialValues.country,
                                 )
+                                console.log(formik)
                             }}
                             renderInput={(params) => (
                                 <TextField
                                     {...params}
-                                    color={'info'}
                                     placeholder={'선택'}
                                     name={'country'}
+                                    onBlur={formik.handleBlur}
+                                    error={formik.touched.country && !!formik.errors.country}
+                                    helperText={
+                                        formik.touched.country && !!formik.errors.country
+                                            ? formik.errors.country
+                                            : ''
+                                    }
                                 />
                             )}
                         />
@@ -321,11 +335,15 @@ const MapSearch = () => {
                         <TextField
                             sx={{ width: '100%' }}
                             size="small"
-                            color={'info'}
                             placeholder={'위도를 입력해주세요'}
                             name={'lat'}
                             onChange={formik.handleChange}
+                            onBlur={formik.handleBlur}
                             value={formik.values.lat}
+                            error={formik.touched.lat && !!formik.errors.lat}
+                            helperText={
+                                formik.touched.lat && !!formik.errors.lat ? formik.errors.lat : ''
+                            }
                         />
                     </Grid>
                     <Grid
@@ -339,11 +357,41 @@ const MapSearch = () => {
                         <TextField
                             sx={{ width: '100%' }}
                             size="small"
-                            color={'info'}
                             placeholder={'경도를 입력해주세요'}
                             name={'lng'}
                             onChange={formik.handleChange}
+                            onBlur={formik.handleBlur}
                             value={formik.values.lng}
+                            error={formik.touched.lng && !!formik.errors.lng}
+                            helperText={
+                                formik.touched.lng && !!formik.errors.lng ? formik.errors.lng : ''
+                            }
+                        />
+                    </Grid>
+                    <Grid
+                        item
+                        xs={3}
+                        sx={{ display: 'flex', justifyContent: 'start', alignItems: 'center' }}
+                    >
+                        <Typography>언어</Typography>
+                    </Grid>
+                    <Grid item xs={9}>
+                        <Autocomplete
+                            disablePortal
+                            options={languageCodeArr}
+                            size="small"
+                            name={'language'}
+                            defaultValue={[languageCodeArr[0]]}
+                            onChange={(event, value) => {
+                                formik.setFieldValue(
+                                    'language',
+                                    value !== null ? value : formik.initialValues.language,
+                                )
+                            }}
+                            value={formik.values.language}
+                            renderInput={(params) => (
+                                <TextField {...params} placeholder={'선택'} name={'language'} />
+                            )}
                         />
                     </Grid>
                     <Grid
@@ -355,6 +403,7 @@ const MapSearch = () => {
                     </Grid>
                     <Grid item xs={9}>
                         <Autocomplete
+                            multiple
                             disablePortal
                             options={categoryCodeArr}
                             size="small"
@@ -367,18 +416,12 @@ const MapSearch = () => {
                             }}
                             value={formik.values.category}
                             renderInput={(params) => (
-                                <TextField
-                                    {...params}
-                                    color={'info'}
-                                    placeholder={'선택'}
-                                    name={'category'}
-                                />
+                                <TextField {...params} placeholder={'선택'} name={'category'} />
                             )}
                         />
                     </Grid>
                     <Grid item xs={12}>
                         <TextField
-                            color={'info'}
                             placeholder={'검색어를 입력해주세요'}
                             size="small"
                             sx={{ width: '100%' }}
@@ -388,7 +431,10 @@ const MapSearch = () => {
                             InputProps={{
                                 endAdornment: (
                                     <InputAdornment position="end">
-                                        <SearchIcon onClick={formik.handleSubmit} />
+                                        <SearchIcon
+                                            onClick={formik.handleSubmit}
+                                            sx={{ cursor: 'pointer' }}
+                                        />
                                     </InputAdornment>
                                 ),
                             }}

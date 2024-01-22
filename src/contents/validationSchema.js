@@ -9,6 +9,9 @@ const HELPER_TEXT = {
     joinConfirmPassword: '비밀번호를 입력해 주세요. 비밀번호가 맞지 않습니다.',
     joinUserName: '이름을 입력해 주세요.',
     certifiedOtp: 'OTP 숫자를 입력해 주세요. OTP 숫자가 맞지 않습니다.',
+    searchCountry: '국가를 선택해주세요',
+    searchLat: '위도를 입력 해 주세요',
+    searchLng: '경도를 입력 해 주세요',
 }
 
 export const loginSchema = yup.object({
@@ -50,4 +53,16 @@ export const otpSchema = yup.object({
         .min(6, HELPER_TEXT.certifiedOtp)
         .max(6, HELPER_TEXT.certifiedOtp)
         .required(HELPER_TEXT.certifiedOtp),
+})
+
+export const mapSearchSchema = yup.object({
+    country: yup.string().required(HELPER_TEXT.searchCountry),
+    lat: yup
+        .string()
+        .matches(/^([-+]?\d{1,3}(?:\.\d{1,7})?)$/, HELPER_TEXT.searchLat)
+        .required(HELPER_TEXT.searchLat),
+    lng: yup
+        .string()
+        .matches(/^([-+]?\d{1,3}(?:\.\d{1,7})?)$/, HELPER_TEXT.searchLng)
+        .required(HELPER_TEXT.searchLng),
 })

@@ -22,9 +22,17 @@ const MapPage = () => {
                     />
                 </MapCategory>
             </Box>
-            <Box>
-                <Typography>Map Search Component</Typography>
-                <MapSearch />
+            <Box sx={{ display: 'flex' }}>
+                <Box>
+                    <Typography>Map Search Component</Typography>
+                    <MapSearch />
+                </Box>
+                <Box>
+                    <Typography>Map List Component with No Result</Typography>
+                    <MapPoiList isResultNon={true} />
+                    <Typography>Map List Component with Result</Typography>
+                    <MapPoiList isResultNon={false} />
+                </Box>
             </Box>
         </div>
     )

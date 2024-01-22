@@ -2,7 +2,7 @@ import { useFormik } from 'formik'
 import { TextInput } from '#/components/common/input/TextInput'
 import { otpSchema } from '#/contents/validationSchema'
 import { Box, Button, Divider, Link, Typography } from '@mui/material'
-import AuthStepper from '#/components/auth/AuthForm/AuthStepper'
+import AuthStepper from '#/components/auth/AuthStepper'
 import FlexEndButtonContainer from '#/components/common/button/FlexEndButtonContainer'
 
 const CertifiedForm = () => {

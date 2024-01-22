@@ -31,7 +31,7 @@ const MapPage = () => {
                 <Box>
                     <Typography>Map List Component with No Result</Typography>
                     <MapPoiList isResultNon={true} />
-                    <Typography>Map List Component with Result</Typography>
+                    <Typography>Map List Component with Result (스크롤 TOP 버튼 존재)</Typography>
                     <MapPoiList isResultNon={false} />
                 </Box>
             </Box>

@@ -14,7 +14,7 @@ function LoginPage() {
         >
             <Stack
                 divider={<Divider orientation="vertical" flexItem />}
-                sx={{ flexDirection: 'row', border: '3px double gray' }}
+                sx={{ flexDirection: 'row', border: '3px double gray', height: 630 }}
             >
                 <Box sx={{ flex: 1 }}>
                     <CarouselOverview />

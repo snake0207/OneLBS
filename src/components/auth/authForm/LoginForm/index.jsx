@@ -1,15 +1,17 @@
-import { Box, Button, Typography } from '@mui/material'
+import { Box, Button, Divider, Typography } from '@mui/material'
 import { useFormik } from 'formik'
 import { TextInput } from '#/components/common/input/TextInput'
 import PasswordInput from '#/components/common/input/PasswordInput'
-import { useAuthProcessActions } from '#/store/authProcessStore'
-import { AUTH_PROCESS, MODAL_TITLE } from '#/contents/constant'
+import FlexEndButtonContainer from '#/components/common/button/FlexEndButtonContainer'
+import AuthStepper from '#/components/auth/AuthStepper'
+import { useAuthStepActions } from '#/store/authStepStore'
+import { AUTH_STEP, MODAL_TITLE } from '#/contents/constant'
 import { loginSchema } from '#/contents/validationSchema'
 import { usePostLogin } from '#/hooks/queries/login'
 import { useModalActions } from '#/store/modalStore'
 
 const LoginForm = () => {
-    const { changeAuthProcess } = useAuthProcessActions()
+    const { changeAuthStep } = useAuthStepActions()
     const { openModal } = useModalActions()
     const { mutate } = usePostLogin()
     const formik = useFormik({
@@ -21,9 +23,12 @@ const LoginForm = () => {
         onSubmit: (form) => {
             console.log(form)
             // mutate(form)
-            changeAuthProcess(AUTH_PROCESS.certified)
+            changeAuthStep(AUTH_STEP.certified)
         },
     })
+    const handleClickPasswordReset = () => {
+        changeAuthStep(AUTH_STEP.passwordReset)
+    }
     return (
         <Box
             component={'form'}
@@ -31,10 +36,12 @@ const LoginForm = () => {
             sx={{
                 display: 'flex',
                 flexDirection: 'column',
-                justifyContent: 'space-between',
-                flex: '1 1 auto',
+                height: '100%',
             }}
         >
+            <Typography variant="h5">로그인</Typography>
+            <Divider />
+            <AuthStepper />
             <Typography>아이디, 비밀번호를 입력해 주세요.</Typography>
             <TextInput
                 label={'아이디(이메일)'}
@@ -48,28 +55,21 @@ const LoginForm = () => {
                 placeholder={'Password'}
                 formik={formik}
             />
-            <Box
-                sx={{
-                    display: 'flex',
-                    justifyContent: 'space-between',
-                    alignItems: 'flex-end',
-                    height: 110,
-                }}
-            >
-                <Typography>서비스 이용을 위해 회원가입해 주세요.</Typography>
-                <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
-                    <Button variant="contained" type="submit">
-                        로그인
-                    </Button>
-                    <Button
-                        variant="contained"
-                        onClick={() => openModal(MODAL_TITLE.join)}
-                        type="button"
-                    >
-                        회원가입
-                    </Button>
-                </Box>
-            </Box>
+            <FlexEndButtonContainer>
+                <Button variant="contained" type="submit">
+                    로그인
+                </Button>
+                <Button
+                    variant="contained"
+                    type="button"
+                    onClick={() => openModal(MODAL_TITLE.join)}
+                >
+                    회원가입
+                </Button>
+                <Button variant="contained" onClick={handleClickPasswordReset} type="button">
+                    비밀번호 초기화
+                </Button>
+            </FlexEndButtonContainer>
         </Box>
     )
 }

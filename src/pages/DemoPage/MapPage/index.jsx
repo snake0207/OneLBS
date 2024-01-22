@@ -4,6 +4,7 @@ import DirectionsCarFilledOutlinedIcon from '@mui/icons-material/DirectionsCarFi
 import Typography from '@mui/material/Typography'
 import MapSearch from '#/components/common/map/MapSearch/index.jsx'
 import MapPoiList from '#/components/common/map/MapPoiList/index.jsx'
+import MapInfoWindow from '#/components/common/map/MapInfoWindow/index.jsx'
 
 const MapPage = () => {
     return (
@@ -32,6 +33,12 @@ const MapPage = () => {
                     <MapPoiList isResultNon={true} />
                     <Typography>Map List Component with Result</Typography>
                     <MapPoiList isResultNon={false} />
+                </Box>
+            </Box>
+            <Box sx={{ display: 'flex' }}>
+                <Box sx={{ mr: 2 }}>
+                    <Typography>Map InfoWindow Component</Typography>
+                    <MapInfoWindow />
                 </Box>
             </Box>
         </div>

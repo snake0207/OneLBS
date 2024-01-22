@@ -1,4 +1,5 @@
 import t from '#/common/libs/trans'
+import RouterBreadcrumbs from '#/components/common/menu/RouterBreadcrumbs'
 import useLayoutStore from '#/store/useLayoutStore'
 
 function LayoutPage() {
@@ -18,6 +19,8 @@ function LayoutPage() {
                 <button onClick={() => setThemeMode('light')}>{'light'}</button>
                 <button onClick={() => setThemeMode('dark')}>{'dark'}</button>
             </div>
+            <h2>Breadcrumbs</h2>
+            <RouterBreadcrumbs />
         </div>
     )
 }

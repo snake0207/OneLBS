@@ -14,6 +14,9 @@
         "user_login_history": "유저 로그인 이력",
         "user_permission_history": "유저 권한 이력"
     },
+    "home": "Home",
+    "components": "Components",
+    "layouts": "Layouts",
     "profile": "프로필",
     "logout": "로그아웃",
     "kor": "KOR",

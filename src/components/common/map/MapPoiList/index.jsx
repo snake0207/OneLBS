@@ -1,5 +1,5 @@
 import { Box, Typography } from '@mui/material'
-import MapPoiContent from '#/components/common/map/MapPoiContent/index.jsx'
+import MapPoiContent from '#/components/common/map/MapPoiList/MapPoiContent/index.jsx'
 
 const sampleData = [
     {

@@ -23,7 +23,7 @@ const MapPage = () => {
                 </MapCategory>
             </Box>
             <Box sx={{ display: 'flex' }}>
-                <Box>
+                <Box sx={{ mr: 2 }}>
                     <Typography>Map Search Component</Typography>
                     <MapSearch />
                 </Box>

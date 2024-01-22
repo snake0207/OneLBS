@@ -1,6 +1,6 @@
 import { useEffect, useMemo } from 'react'
 import { BrowserRouter } from 'react-router-dom'
-import { themeSettings } from './theme'
+import { getThemeSettings } from './theme'
 import { ThemeProvider } from '@mui/material'
 import { createTheme } from '@mui/material/styles'
 import useLayoutStore from '#/store/useLayoutStore'
@@ -15,11 +15,11 @@ function App() {
     const { language, themeMode } = useLayoutStore()
     const { i18n } = useTranslation()
 
-    const theme = useMemo(() => createTheme(themeSettings), [])
+    const theme = useMemo(() => createTheme(getThemeSettings(themeMode)), [themeMode])
 
     useEffect(() => {
         i18n.changeLanguage(language)
-    }, [language])
+    }, [language, i18n])
 
     return (
         <ThemeProvider theme={theme}>

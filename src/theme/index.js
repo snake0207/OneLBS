@@ -45,28 +45,53 @@ export const tokens = {
 }
 
 // mui theme settings
-export const themeSettings = {
-    mode: 'light', // 'light' or 'dark
+export const getThemeSettings = (mode) => ({
     palette: {
-        primary: {
-            ...tokens.primary,
-            main: tokens.primary[500],
-            light: tokens.primary[400],
-        },
-        secondary: {
-            ...tokens.secondary,
-            main: tokens.secondary[500],
-        },
-        tertiary: {
-            ...tokens.tertiary,
-        },
-        grey: {
-            ...tokens.grey,
-            main: tokens.grey[500],
-        },
-        background: {
-            default: tokens.background.main,
-            light: tokens.background.light,
-        },
+        mode,
+        ...(mode === 'light'
+            ? {
+                  primary: {
+                      ...tokens.primary,
+                      main: tokens.primary[500],
+                      light: tokens.primary[400],
+                  },
+                  secondary: {
+                      ...tokens.secondary,
+                      main: tokens.secondary[500],
+                  },
+                  tertiary: {
+                      ...tokens.tertiary,
+                  },
+                  grey: {
+                      ...tokens.grey,
+                      main: tokens.grey[500],
+                  },
+                  background: {
+                      default: tokens.background.main,
+                      light: tokens.background.light,
+                  },
+              }
+            : {
+                  primary: {
+                      ...tokens.primary,
+                      main: tokens.primary[900],
+                      light: tokens.primary[400],
+                  },
+                  secondary: {
+                      ...tokens.secondary,
+                      main: tokens.secondary[500],
+                  },
+                  tertiary: {
+                      ...tokens.tertiary,
+                  },
+                  grey: {
+                      ...tokens.grey,
+                      main: tokens.grey[500],
+                  },
+                  background: {
+                      default: tokens.background.main,
+                      light: tokens.background.light,
+                  },
+              }),
     },
-}
+})

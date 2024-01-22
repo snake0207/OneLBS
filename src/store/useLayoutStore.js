@@ -4,7 +4,7 @@ import { persist, devtools } from 'zustand/middleware'
 
 const initialState = {
     language: 'kr',
-    themeMode: 'light',
+    themeMode: 'dark',
 }
 
 const useLayoutStore = create(

@@ -20,6 +20,9 @@ function DemoPage() {
                 <li>
                     <a href="/components/logins">Logins</a>
                 </li>
+                <li>
+                    <a href="/components/approval">Approval</a>
+                </li>
             </ul>
         </Box>
     )

@@ -4,7 +4,6 @@ import {
     AccordionSummary,
     Box,
     Button,
-    Grid,
     Typography,
 } from '@mui/material'
 import Divider from '@mui/material/Divider'
@@ -13,6 +12,7 @@ import CloseIcon from '@mui/icons-material/Close'
 import PlaceIcon from '@mui/icons-material/Place'
 import EvStationIcon from '@mui/icons-material/EvStation'
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
+
 const MapPoiDetail = () => {
     return (
         <Box sx={{ display: 'flex' }}>
@@ -28,26 +28,34 @@ const MapPoiDetail = () => {
                     <Typography variant={'h6'}>Times Square</Typography>
                 </Box>
                 <Divider />
-                <Grid container sx={{ marginY: '16px' }}>
-                    <Grid item xs={1}>
-                        <LanguageIcon />
-                    </Grid>
-                    <Grid item xs={11}>
-                        40.758077
-                    </Grid>
-                    <Grid item xs={1}>
-                        <LanguageIcon />
-                    </Grid>
-                    <Grid item xs={11}>
-                        -73.985480
-                    </Grid>
-                    <Grid item xs={1}>
-                        <PlaceIcon />
-                    </Grid>
-                    <Grid item xs={11}>
-                        10036 New York, Manhattan, United States
-                    </Grid>
-                </Grid>
+                <Box sx={{ marginY: '16px' }}>
+                    <Box sx={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+                        <Box sx={{ paddingTop: '5px' }}>
+                            <PlaceIcon />
+                        </Box>
+                        <Box>
+                            <Typography>10036 New York, Manhattan, United States</Typography>
+                        </Box>
+                    </Box>
+                    <Divider sx={{ marginY: '5px' }} />
+                    <Box sx={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+                        <Box sx={{ paddingTop: '5px' }}>
+                            <LanguageIcon />
+                        </Box>
+                        <Box>
+                            <Typography>40.758077</Typography>
+                        </Box>
+                    </Box>
+                    <Divider sx={{ marginY: '5px' }} />
+                    <Box sx={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+                        <Box sx={{ paddingTop: '5px' }}>
+                            <LanguageIcon />
+                        </Box>
+                        <Box>
+                            <Typography>-73.985480</Typography>
+                        </Box>
+                    </Box>
+                </Box>
                 <Box>
                     <Typography>카테고리</Typography>
                 </Box>

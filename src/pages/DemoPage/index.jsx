@@ -1,8 +1,10 @@
+import TitleBar from '#/components/common/menu/TitleBar'
 import { Box } from '@mui/material'
 
 function DemoPage() {
     return (
         <Box>
+            <TitleBar title="Component Demo Page" />
             <h1>Component Demo Page</h1>
             <ul>
                 <li>

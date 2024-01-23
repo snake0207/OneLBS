@@ -3,7 +3,7 @@ import Box from '@mui/material/Box'
 import DirectionsCarFilledOutlinedIcon from '@mui/icons-material/DirectionsCarFilledOutlined.js'
 import Typography from '@mui/material/Typography'
 import MapSearch from '#/components/common/map/MapSearch/index.jsx'
-import MapPoiList from '#/components/common/map/MapPoiList/index.jsx'
+import MapSearchList from '#/components/common/map/MapSearchList/index.jsx'
 import MapInfoWindow from '#/components/common/map/MapInfoWindow/index.jsx'
 
 const MapPage = () => {

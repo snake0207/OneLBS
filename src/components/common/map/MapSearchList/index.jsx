@@ -1,5 +1,5 @@
 import { Box, Typography } from '@mui/material'
-import MapPoiContent from '#/components/common/map/MapPoiList/MapPoiContent/index.jsx'
+import MapPoiContent from '#/components/common/map/MapSearchList/MapPoiContent/index.jsx'
 import List from '@mui/material/List'
 import { useEffect, useRef, useState } from 'react'
 
@@ -30,7 +30,7 @@ const sampleData = [
     },
 ]
 
-const MapPoiList = ({ isResultNon }) => {
+const MapSearchList = ({ isResultNon }) => {
     const [selectedPoi, setSelectedPoi] = useState(null)
     const [isTopBtnVisible, setIsTopBtnVisible] = useState(false)
     const poiList = useRef()
@@ -112,4 +112,4 @@ const MapPoiList = ({ isResultNon }) => {
     )
 }
 
-export default MapPoiList
+export default MapSearchList

@@ -1,20 +1,22 @@
 import { create } from 'zustand'
-import { createJSONStorage, persist } from 'zustand/middleware'
+import { createJSONStorage, persist, devtools } from 'zustand/middleware'
 
 const useAuthStore = create(
-    persist(
-        (set) => ({
-            accessToken: null,
-            changeAccessToken: (accessToken) => set({ accessToken }),
-        }),
-        {
-            name: 'auth-storage',
-            storage: createJSONStorage(() => localStorage),
-        },
+    devtools(
+        persist(
+            (set) => ({
+                accessToken: null,
+                setAccessToken: (accessToken) => set({ accessToken }),
+            }),
+            {
+                name: 'auth-storage',
+                storage: createJSONStorage(() => localStorage),
+            },
+        ),
     ),
 )
 
 export default useAuthStore
 
-export const useAuthchangeAccessToken = () => useAuthStore((state) => state.changeAccessToken)
+export const useSetAccessToken = () => useAuthStore((state) => state.setAccessToken)
 export const useAccessTokenState = () => useAuthStore((state) => state.accessToken)

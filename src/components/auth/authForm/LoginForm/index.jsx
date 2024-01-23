@@ -14,6 +14,7 @@ const LoginForm = () => {
     const { changeAuthStep } = useAuthStepActions()
     const { openModal } = useModalActions()
     const { mutate } = usePostLogin()
+
     const formik = useFormik({
         initialValues: {
             userMail: '',
@@ -26,9 +27,11 @@ const LoginForm = () => {
             changeAuthStep(AUTH_STEP.certified)
         },
     })
+
     const handleClickPasswordReset = () => {
         changeAuthStep(AUTH_STEP.passwordReset)
     }
+
     return (
         <>
             <Typography variant="h5">로그인</Typography>

@@ -5,6 +5,8 @@
         "poi_search": "POI Search",
         "permit_history": "결제 이력관리",
         "all_history": "전체 이력 조회",
+        "user_history": "이력 조회(신청자)",
+        "admin_history": "이력 조회(관리자)",
         "mcp_poi_statistics": "MCP POI 통계",
         "time_statistics": "시간별 통계",
         "area_statistics": "지역별 통계",

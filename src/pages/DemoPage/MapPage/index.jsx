@@ -36,7 +36,7 @@ const MapPage = () => {
                     <MapSearchList isResultNon={false} />
                 </Box>
                 <Box sx={{ mr: 2 }}>
-                    <Typography>Map Detail Component</Typography>
+                    <Typography>Map POI Detail Component</Typography>
                     <MapPoiDetail />
                 </Box>
             </Box>

@@ -1,13 +1,15 @@
-import { useState } from 'react'
 import { useFormik } from 'formik'
-import { TextInput } from '#/components/common/input/TextInput'
+import TextInput from '#/components/common/input/TextInput'
 import PasswordInput from '#/components/common/input/PasswordInput'
 import { RadioInput } from '#/components/common/radio'
 import { joinSchema } from '#/contents/validationSchema'
 import { useModalActions } from '#/store/modalStore'
 import { MODAL_TITLE } from '#/contents/constant'
-import { Button, Typography } from '@mui/material'
+import { Box, Button, Typography } from '@mui/material'
 import FlexEndButtonContainer from '#/components/common/button/FlexEndButtonContainer'
+import { usePostJoin } from '#/hooks/queries/auth'
+import EmailSubmitInput from '#/components/common/input/EmailSubmitInput'
+import VerifyCodeInput from '#/components/common/input/VerifyCodeInput'
 
 const JoinModal = () => {
     const dummyAuthorityArr = [
@@ -21,11 +23,11 @@ const JoinModal = () => {
         { value: '0', label: '동의하지 않음' },
     ]
     const { openModal } = useModalActions()
-    const [isSendMail, setIsSendMail] = useState(false)
+    const { mutate: joinMutate } = usePostJoin()
     const formik = useFormik({
         initialValues: {
             userMail: '',
-            confirmMail: '',
+            emailverifyCode: '',
             password: '',
             confirmPassword: '',
             userName: '',
@@ -37,33 +39,22 @@ const JoinModal = () => {
         validationSchema: joinSchema,
         onSubmit: (form) => {
             console.log(form)
+            // joinMutate(form)
             openModal(MODAL_TITLE.privacyPolicy)
         },
     })
+
     return (
-        <form onSubmit={formik.handleSubmit}>
+        <Box
+            component={'form'}
+            onSubmit={formik.handleSubmit}
+            sx={{ display: 'flex', flexDirection: 'column' }}
+        >
             <Typography>
                 <span style={{ color: 'red' }}>*</span> 필수 입력입니다.
             </Typography>
-            <TextInput
-                label={'아이디(이메일)'}
-                name={'userMail'}
-                placeholder={'E-mail'}
-                formik={formik}
-                isRequired={true}
-            >
-                <TextInput.SubmitButton name={'인증메일전송'} onClick={() => setIsSendMail(true)} />
-            </TextInput>
-            <TextInput
-                label={'메일인증코드'}
-                name={'confirmMail'}
-                placeholder={'6자리 숫자를 입력해 주세요.'}
-                formik={formik}
-                isRequired={true}
-            >
-                <TextInput.SubmitButton name={'인증하기'} onClick={null} />
-                {isSendMail && <TextInput.InputTimer />}
-            </TextInput>
+            <EmailSubmitInput name={'userMail'} formik={formik} />
+            <VerifyCodeInput name={'emailverifyCode'} formik={formik} />
             <PasswordInput
                 label={'비밀번호'}
                 name={'password'}
@@ -109,7 +100,7 @@ const JoinModal = () => {
                     회원가입
                 </Button>
             </FlexEndButtonContainer>
-        </form>
+        </Box>
     )
 }
 

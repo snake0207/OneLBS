@@ -16,6 +16,7 @@ import Badge from '@mui/material/Badge'
 
 import t from '#/common/libs/trans'
 import Dropdown from '#/components/common/button/Dropdown'
+import useFullScreen from '#/hooks/useFullScreen'
 
 const userMenus = [
     { key: 'profile', label: t('profile') },
@@ -29,6 +30,7 @@ const languages = [
 function Header() {
     const { language, setLanguage } = useLayoutStore()
     const [, setAnchorElNav] = React.useState(null)
+    const [, toggleFullScreen] = useFullScreen()
 
     const handleSelectUserMenu = (item) => {
         console.log(item)
@@ -85,7 +87,7 @@ function Header() {
                         >
                             {findLanguage(language)?.label}
                         </Dropdown>
-                        <IconButton sx={{ p: 0 }}>
+                        <IconButton sx={{ p: 0 }} onClick={() => toggleFullScreen()}>
                             <FullscreenIcon />
                         </IconButton>
                         <IconButton sx={{ p: 0 }}>

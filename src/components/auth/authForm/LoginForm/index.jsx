@@ -1,6 +1,6 @@
 import { Box, Button, Divider, Typography } from '@mui/material'
 import { useFormik } from 'formik'
-import { TextInput } from '#/components/common/input/TextInput'
+import TextInput from '#/components/common/input/TextInput'
 import PasswordInput from '#/components/common/input/PasswordInput'
 import FlexEndButtonContainer from '#/components/common/button/FlexEndButtonContainer'
 import AuthStepper from '#/components/auth/AuthStepper'

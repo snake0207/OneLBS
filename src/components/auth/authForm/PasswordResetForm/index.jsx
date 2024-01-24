@@ -1,6 +1,6 @@
 import FlexEndButtonContainer from '#/components/common/button/FlexEndButtonContainer'
 import PasswordInput from '#/components/common/input/PasswordInput'
-import { TextInput } from '#/components/common/input/TextInput'
+import TextInput from '#/components/common/input/TextInput'
 import { Box, Button, Divider, Typography } from '@mui/material'
 import { useFormik } from 'formik/dist'
 

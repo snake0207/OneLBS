@@ -1,5 +1,5 @@
 import { useFormik } from 'formik'
-import { TextInput } from '#/components/common/input/TextInput'
+import TextInput from '#/components/common/input/TextInput'
 import { otpSchema } from '#/contents/validationSchema'
 import { Box, Button, Divider, Link, Typography } from '@mui/material'
 import AuthStepper from '#/components/auth/AuthStepper'

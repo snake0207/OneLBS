@@ -7,7 +7,7 @@ import AuthStepper from '#/components/auth/AuthStepper'
 import { useAuthStepActions } from '#/store/authStepStore'
 import { AUTH_STEP, MODAL_TITLE } from '#/contents/constant'
 import { loginSchema } from '#/contents/validationSchema'
-import { usePostLogin } from '#/hooks/queries/login'
+import { usePostLogin } from '#/hooks/queries/auth'
 import { useModalActions } from '#/store/modalStore'
 
 const LoginForm = () => {

@@ -25,10 +25,10 @@ const menuItems = {
         { label: t('top_menu.area_statistics'), link: '/mcp' },
         { label: t('top_menu.cp_statistics'), link: '/mcp' },
     ],
-    maintenance: [
-        { label: t('top_menu.user_list'), link: '/maintenance' },
-        { label: t('top_menu.user_login_history'), link: '/maintenance' },
-        { label: t('top_menu.user_permission_history'), link: '/maintenance' },
+    user_management: [
+        { label: t('top_menu.user_list'), link: '/users' },
+        { label: t('top_menu.user_login_history'), link: '/users' },
+        { label: t('top_menu.user_permission_history'), link: '/users' },
     ],
 }
 
@@ -55,9 +55,9 @@ export const mainListItems = () => (
             items={menuItems['mcp_poi_statistics']}
         />
         <ExpandMenuItem
-            label={t('top_menu.maintenance')}
+            label={t('top_menu.user_management')}
             iconNode={<LayersIcon />}
-            items={menuItems['maintenance']}
+            items={menuItems['user_management']}
         />
         <Link href="/components" color="inherit" underline="none">
             <ListItemButton>

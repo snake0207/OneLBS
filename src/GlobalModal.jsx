@@ -1,7 +1,7 @@
 import ModalLayout from './components/common/modal'
-import JoinModal from './components/common/modal/auth/JoinModal'
-import JoinSuccessModal from './components/common/modal/auth/JoinSuccessModal'
-import PrivacyPolicyModal from './components/common/modal/auth/PrivacyPolicyModal'
+import JoinModal from './components/common/modal/auth/join'
+import JoinSuccessModal from './components/common/modal/auth/joinSccess'
+import PrivacyPolicyModal from './components/common/modal/auth/privacyPolicy'
 import { MODAL_TITLE } from './contents/constant'
 import { useModalActions, useModalTitleState } from './store/modalStore'
 

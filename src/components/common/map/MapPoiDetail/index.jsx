@@ -61,7 +61,7 @@ const MapPoiDetail = () => {
                 </Box>
                 <Divider />
                 <Box sx={{ display: 'flex' }}>
-                    <Accordion elevation={0} sx={{ padding: 0 }}>
+                    <Accordion elevation={0}>
                         <AccordionSummary expandIcon={<ExpandMoreIcon />} sx={{ padding: '0px' }}>
                             <EvStationIcon /> EV Charging
                         </AccordionSummary>

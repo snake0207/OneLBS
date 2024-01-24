@@ -18,6 +18,7 @@
         "@tanstack/react-query": "^5.17.0",
         "@tanstack/react-query-devtools": "^5.17.0",
         "axios": "^1.6.3",
+        "crypto-js": "^4.2.0",
         "embla-carousel-autoplay": "^8.0.0-rc19",
         "embla-carousel-react": "^8.0.0-rc19",
         "eslint-config-prettier": "^9.1.0",

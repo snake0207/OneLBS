@@ -47,7 +47,7 @@ const VerifyCodeInput = ({ name, formik }) => {
                     helperText={formik.touched[name] && formik.errors[name]}
                     InputProps={{
                         endAdornment: (
-                            <InputAdornment position="end">
+                            <InputAdornment position="end" sx={{ gap: 2 }}>
                                 {formik.values[name] && (
                                     <IconButton
                                         edge="end"

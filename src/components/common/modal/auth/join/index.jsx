@@ -4,7 +4,7 @@ import { Button, DialogActions, DialogContent, Typography } from '@mui/material'
 import { usePostJoin } from '#/hooks/queries/auth'
 import TextInput from '#/components/common/input/TextInput'
 import PasswordInput from '#/components/common/input/PasswordInput'
-import { RadioInput } from '#/components/common/radio'
+import RadioInput from '#/components/common/radio'
 import { joinSchema } from '#/contents/validationSchema'
 import EmailSubmitInput from '#/components/common/modal/auth/join/EmailSubmitInput'
 import VerifyCodeInput from '#/components/common/modal/auth/join/VerifyCodeInput'
@@ -94,22 +94,19 @@ const JoinModal = () => {
                     placeholder={'팀명을 입력하세요'}
                     formik={formik}
                 />
+                <Typography variant="h6">
+                    <span style={{ color: 'red' }}>*</span>권한
+                </Typography>
+                <RadioInput radioList={dummyAuthorityArr} name={'authority'} formik={formik} />
+                <Typography variant="h6">
+                    <span style={{ color: 'red' }}>*</span>약관동의
+                </Typography>
                 <RadioInput
-                    items={dummyAuthorityArr}
-                    name={'authority'}
-                    label={'권한'}
-                    formik={formik}
-                    isRequired={true}
-                />
-                <RadioInput
-                    items={dummyTermsArr}
+                    radioList={dummyTermsArr}
                     name={'isTermsAgreed'}
-                    label={'약관동의'}
                     formik={formik}
-                    isRequired={true}
-                >
-                    <RadioInput.RadioButton name={'자세히 보기'} onClick={null} />
-                </RadioInput>
+                    isDisabled={true}
+                />
             </DialogContent>
             <DialogActions>
                 <Button variant="contained" onClick={formik.handleSubmit} type="submit">

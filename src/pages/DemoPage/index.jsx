@@ -14,9 +14,6 @@ function DemoPage() {
                     <a href="/components/inputs">Inputs</a>
                 </li>
                 <li>
-                    <a href="/components/radios">Radios</a>
-                </li>
-                <li>
                     <a href="/components/buttons">Buttons</a>
                 </li>
                 <li>

@@ -3,6 +3,7 @@ import RouterBreadcrumbs from '#/components/common/menu/RouterBreadcrumbs'
 import useLayoutStore from '#/store/useLayoutStore'
 import useFullScreen from '#/hooks/useFullScreen'
 import TitleBar from '#/components/common/menu/TitleBar'
+import Settings from '#/components/layout/Settings'
 
 function LayoutPage() {
     const { language, themeMode, setLanguage, setThemeMode } = useLayoutStore()
@@ -31,6 +32,8 @@ function LayoutPage() {
             </div>
             <h2>Titlebar</h2>
             <TitleBar title={t('layouts')} />
+            <h2>Settings</h2>
+            <Settings />
         </div>
     )
 }

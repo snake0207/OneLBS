@@ -1,5 +1,5 @@
 import InfoIcon from '@mui/icons-material/Info'
-import { useModalActions } from '#/store/modalStore'
+import { useModalActions } from '#/store/useModalStore'
 import { Box, Button, Typography } from '@mui/material'
 import FlexEndButtonContainer from '#/components/common/button/FlexEndButtonContainer'
 

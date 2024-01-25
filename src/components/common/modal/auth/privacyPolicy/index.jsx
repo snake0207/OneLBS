@@ -1,5 +1,5 @@
 import { MODAL_TITLE } from '#/contents/constant'
-import { useModalActions } from '#/store/modalStore'
+import { useModalActions } from '#/store/useModalStore'
 import { Button } from '@mui/material'
 
 const PrivacyPolicyModal = () => {

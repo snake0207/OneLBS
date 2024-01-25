@@ -3,7 +3,7 @@ import JoinModal from './components/common/modal/auth/join'
 import JoinSuccessModal from './components/common/modal/auth/joinSccess'
 import PrivacyPolicyModal from './components/common/modal/auth/privacyPolicy'
 import { MODAL_TITLE } from './contents/constant'
-import { useModalActions, useModalTitleState } from './store/modalStore'
+import { useModalActions, useModalTitleState } from './store/useModalStore'
 
 const MODAL_COMPONENT_ARR = [
     { type: MODAL_TITLE.join, component: <JoinModal /> },

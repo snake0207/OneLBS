@@ -3,7 +3,7 @@ import LoginForm from '#/components/auth/authForm/LoginForm'
 import PasswordResetForm from '#/components/auth/authForm/PasswordResetForm'
 import { AUTH_STEP } from '#/contents/constant'
 import usePageBack from '#/hooks/usePageBack'
-import { useAuthStepActions, useAuthStepState } from '#/store/authStepStore'
+import { useAuthStepActions, useAuthStepState } from '#/store/useAuthStepStore'
 import { Box } from '@mui/material'
 
 const AuthFormContainer = () => {

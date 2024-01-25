@@ -4,11 +4,11 @@ import TextInput from '#/components/common/input/TextInput'
 import PasswordInput from '#/components/common/input/PasswordInput'
 import FlexEndButtonContainer from '#/components/common/button/FlexEndButtonContainer'
 import AuthStepper from '#/components/auth/AuthStepper'
-import { useAuthStepActions } from '#/store/authStepStore'
+import { useAuthStepActions } from '#/store/useAuthStepStore'
 import { AUTH_STEP, MODAL_TITLE } from '#/contents/constant'
 import { loginSchema } from '#/contents/validationSchema'
 import { usePostLogin } from '#/hooks/queries/auth'
-import { useModalActions } from '#/store/modalStore'
+import { useModalActions } from '#/store/useModalStore'
 
 const LoginForm = () => {
     const { changeAuthStep } = useAuthStepActions()

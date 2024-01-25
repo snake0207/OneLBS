@@ -22,5 +22,15 @@
     "profile": "프로필",
     "logout": "로그아웃",
     "kor": "한국어",
-    "eng": "영어"
+    "eng": "영어",
+    "color_mode": "색상모드",
+    "sidebar": "사이드바",
+    "device": "디바이스",
+    "white": "흰색",
+    "black": "검정색",
+    "expand": "펼침",
+    "collapse": "숨김",
+    "pc": "PC",
+    "mobile": "모바일",
+    "reset": "설정 초기화"
 }

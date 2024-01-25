@@ -20,33 +20,26 @@ function Settings() {
         useLayoutStore()
 
     const handleClick = (event) => {
-        console.log('handleClick')
         setAnchorEl(event.currentTarget)
     }
 
     const handleClose = () => {
-        console.log('handleClose')
         setAnchorEl(null)
     }
 
     const handleColorMode = (event) => {
-        console.log('handleColorMode', event.target.value)
         setThemeMode(event.target.value)
     }
 
     const handleSidebar = (event) => {
-        console.log('handleSidebar', event.target.value)
-        // type of event.target.value is string
         setSidebar(event.target.value === 'expand')
     }
 
     const handleDevice = (event) => {
-        console.log('handleDevice', event.target.value)
         setDevice(event.target.value)
     }
 
     const handleReset = () => {
-        console.log('handleReset')
         reset()
     }
 

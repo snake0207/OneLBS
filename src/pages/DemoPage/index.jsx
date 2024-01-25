@@ -23,6 +23,9 @@ function DemoPage() {
                     <a href="/components/logins">Logins</a>
                 </li>
                 <li>
+                    <a href="/components/modals">Modal</a>
+                </li>
+                <li>
                     <a href="/components/popup">Popup</a>
                 </li>
             </ul>

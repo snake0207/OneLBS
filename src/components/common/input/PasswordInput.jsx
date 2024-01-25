@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { Box, IconButton, InputAdornment, TextField, Typography } from '@mui/material'
 import VisibilityOff from '@mui/icons-material/VisibilityOff'
 import Visibility from '@mui/icons-material/Visibility'
+import Close from '@mui/icons-material/Close'
 
 const PasswordInput = ({ name, placeholder, formik, inputRule = null }) => {
     const [isPasswordVisible, setIsPasswordVisible] = useState(false)
@@ -26,6 +27,14 @@ const PasswordInput = ({ name, placeholder, formik, inputRule = null }) => {
                     InputProps={{
                         endAdornment: (
                             <InputAdornment position="end">
+                                {formik.values[name] && (
+                                    <IconButton
+                                        edge="end"
+                                        onClick={() => formik.setFieldValue(name, '')}
+                                    >
+                                        <Close />
+                                    </IconButton>
+                                )}
                                 <IconButton
                                     edge="end"
                                     onClick={() => setIsPasswordVisible((prev) => !prev)}

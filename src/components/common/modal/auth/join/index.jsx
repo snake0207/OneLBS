@@ -12,10 +12,10 @@ import JoinSuccessModal from '#/components/common/modal/auth/join/JoinSuccessMod
 
 const JoinModal = () => {
     const dummyAuthorityArr = [
-        { value: '0', label: '일반 사용자(guest)' },
-        { value: '1', label: '일반 관리자(user)' },
-        { value: '3', label: '승인 관리자(manager)' },
-        { value: '4', label: '운영 관리자(admin)' },
+        { value: '0', label: '일반 사용자' },
+        { value: '1', label: '일반 관리자' },
+        { value: '3', label: '승인 관리자' },
+        { value: '4', label: '운영 관리자' },
     ]
     const dummyTermsArr = [
         { value: '1', label: '개인정보 수집이용동의' },
@@ -54,7 +54,7 @@ const JoinModal = () => {
                 <PasswordInput
                     label={'비밀번호'}
                     name={'password'}
-                    placeholder={'Password'}
+                    placeholder={'비밀번호를 입력하세요'}
                     inputRule={'6~16자 이내 영문대문자, 숫자, 특수문자가 반드시 포함되야 합니다.'}
                     formik={formik}
                     isRequired={true}
@@ -62,24 +62,31 @@ const JoinModal = () => {
                 <PasswordInput
                     label={'비밀번호 확인'}
                     name={'confirmPassword'}
-                    placeholder={'Password'}
+                    placeholder={'비밀번호를 다시 한번 입력하세요'}
                     formik={formik}
                     isRequired={true}
                 />
                 <TextInput
                     label={'이름'}
                     name={'userName'}
-                    placeholder={'Name'}
+                    placeholder={'이름을 입력하세요'}
                     formik={formik}
                     isRequired={true}
                 />
                 <TextInput
                     label={'Company'}
                     name={'userCompany'}
+                    placeholder={'회사명을 입력하세요'}
                     formik={formik}
                     isRequired={true}
                 />
-                <TextInput label={'팀명'} name={'userTeamName'} formik={formik} isRequired={true} />
+                <TextInput
+                    label={'팀명'}
+                    name={'userTeamName'}
+                    placeholder={'팀명을 입력하세요'}
+                    formik={formik}
+                    isRequired={true}
+                />
                 <RadioInput
                     items={dummyAuthorityArr}
                     name={'authority'}

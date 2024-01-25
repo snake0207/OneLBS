@@ -1,5 +1,12 @@
 import { useState } from 'react'
-import { Box, IconButton, InputAdornment, OutlinedInput, Typography } from '@mui/material'
+import {
+    Box,
+    IconButton,
+    InputAdornment,
+    OutlinedInput,
+    TextField,
+    Typography,
+} from '@mui/material'
 import VisibilityOff from '@mui/icons-material/VisibilityOff'
 import Visibility from '@mui/icons-material/Visibility'
 
@@ -25,7 +32,7 @@ const PasswordInput = ({
                     height: 60,
                 }}
             >
-                <OutlinedInput
+                <TextField
                     name={name}
                     value={formik.values[name]}
                     onChange={formik.handleChange}
@@ -35,22 +42,20 @@ const PasswordInput = ({
                     size="small"
                     type={isPasswordVisible ? 'text' : 'password'}
                     placeholder={placeholder}
-                    endAdornment={
-                        <InputAdornment position="end">
-                            <IconButton
-                                edge="end"
-                                onClick={() => setIsPasswordVisible((prev) => !prev)}
-                            >
-                                {isPasswordVisible ? <VisibilityOff /> : <Visibility />}
-                            </IconButton>
-                        </InputAdornment>
-                    }
+                    helperText={formik.touched[name] && formik.errors[name]}
+                    InputProps={{
+                        endAdornment: (
+                            <InputAdornment position="end">
+                                <IconButton
+                                    edge="end"
+                                    onClick={() => setIsPasswordVisible((prev) => !prev)}
+                                >
+                                    {isPasswordVisible ? <VisibilityOff /> : <Visibility />}
+                                </IconButton>
+                            </InputAdornment>
+                        ),
+                    }}
                 />
-                {formik.touched[name] && (
-                    <Typography sx={{ color: 'red', fontSize: 14 }}>
-                        {formik.errors[name]}
-                    </Typography>
-                )}
             </Box>
             {inputRule && <Typography sx={{ my: 1 }}>{inputRule}</Typography>}
         </Box>

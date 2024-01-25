@@ -1,4 +1,4 @@
-import { useAuthStepState } from '#/store/authStepStore'
+import { useAuthStepState } from '#/store/useAuthStepStore'
 import { Step, StepLabel, Stepper } from '@mui/material'
 
 const AuthStepper = () => {

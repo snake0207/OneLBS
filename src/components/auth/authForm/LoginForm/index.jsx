@@ -1,19 +1,20 @@
 import { Box, Button, Divider, Typography } from '@mui/material'
 import { useFormik } from 'formik'
-import { TextInput } from '#/components/common/input/TextInput'
+import TextInput from '#/components/common/input/TextInput'
 import PasswordInput from '#/components/common/input/PasswordInput'
 import FlexEndButtonContainer from '#/components/common/button/FlexEndButtonContainer'
 import AuthStepper from '#/components/auth/AuthStepper'
-import { useAuthStepActions } from '#/store/authStepStore'
+import { useAuthStepActions } from '#/store/useAuthStepStore'
 import { AUTH_STEP, MODAL_TITLE } from '#/contents/constant'
 import { loginSchema } from '#/contents/validationSchema'
-import { usePostLogin } from '#/hooks/queries/login'
-import { useModalActions } from '#/store/modalStore'
+import { usePostLogin } from '#/hooks/queries/auth'
+import { useModalActions } from '#/store/useModalStore'
 
 const LoginForm = () => {
     const { changeAuthStep } = useAuthStepActions()
     const { openModal } = useModalActions()
     const { mutate } = usePostLogin()
+
     const formik = useFormik({
         initialValues: {
             userMail: '',
@@ -26,9 +27,11 @@ const LoginForm = () => {
             changeAuthStep(AUTH_STEP.certified)
         },
     })
+
     const handleClickPasswordReset = () => {
         changeAuthStep(AUTH_STEP.passwordReset)
     }
+
     return (
         <>
             <Typography variant="h5">로그인</Typography>

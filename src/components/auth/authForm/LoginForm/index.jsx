@@ -1,4 +1,4 @@
-import { Box, Button, Divider, Typography } from '@mui/material'
+import { Button, Divider, Typography } from '@mui/material'
 import { useFormik } from 'formik'
 import TextInput from '#/components/common/input/TextInput'
 import PasswordInput from '#/components/common/input/PasswordInput'
@@ -38,39 +38,29 @@ const LoginForm = () => {
             <Divider />
             <AuthStepper />
             <Typography>아이디, 비밀번호를 입력해 주세요.</Typography>
-            <Box
-                component={'form'}
-                onSubmit={formik.handleSubmit}
-                sx={{ display: 'flex', flexDirection: 'column', flex: 1 }}
-            >
-                <TextInput
-                    label={'아이디(이메일)'}
-                    name={'userMail'}
-                    placeholder={'E-mail'}
-                    formik={formik}
-                />
-                <PasswordInput
-                    label={'비밀번호'}
-                    name={'password'}
-                    placeholder={'Password'}
-                    formik={formik}
-                />
-                <FlexEndButtonContainer>
-                    <Button variant="contained" type="submit">
-                        로그인
-                    </Button>
-                    <Button
-                        variant="contained"
-                        type="button"
-                        onClick={() => openModal(MODAL_TITLE.join)}
-                    >
-                        회원가입
-                    </Button>
-                    <Button variant="contained" onClick={handleClickPasswordReset} type="button">
-                        비밀번호 초기화
-                    </Button>
-                </FlexEndButtonContainer>
-            </Box>
+            <Typography variant="h6">이메일</Typography>
+            <TextInput name={'userMail'} placeholder={'이메일을 입력하세요'} formik={formik} />
+            <Typography variant="h6">비밀번호</Typography>
+            <PasswordInput
+                name={'password'}
+                placeholder={'비밀번호를 입력하세요'}
+                formik={formik}
+            />
+            <FlexEndButtonContainer>
+                <Button variant="contained" onClick={formik.handleSubmit}>
+                    로그인
+                </Button>
+                <Button
+                    variant="contained"
+                    type="button"
+                    onClick={() => openModal(MODAL_TITLE.join)}
+                >
+                    회원가입
+                </Button>
+                <Button variant="contained" onClick={handleClickPasswordReset} type="button">
+                    비밀번호 초기화
+                </Button>
+            </FlexEndButtonContainer>
         </>
     )
 }

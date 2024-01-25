@@ -27,6 +27,13 @@ const HELPER_TEXT = {
     searchLng: '경도를 입력 해 주세요',
 }
 
+const REGEXP = {
+    verifyCode: /^\d{6}$/, // 6자리 숫자만
+    passwordIncludeChar: /^(?=.*[!@#$%^&*()\-_+=]).+$/, // 숫자키 특수문자 1개 이상 포함
+    passwordIncludeNumber: /^(?=.*\d).*$/, // 숫자 1개 이상 포함
+    passwordIncludeUppercase: /^(?=.*[A-Z]).*$/, // 영문 대문자 1개 이상 포함
+}
+
 export const loginSchema = yup.object({
     userMail: yup.string().email(HELPER_TEXT.emailNotMatch).required(HELPER_TEXT.emailRequired),
     password: yup.string().required(HELPER_TEXT.passwordRequired),
@@ -36,23 +43,23 @@ export const joinSchema = yup.object({
     userMail: yup.string().email(HELPER_TEXT.emailNotMatch).required(HELPER_TEXT.emailRequired),
     emailverifyCode: yup
         .string()
-        .matches(/^\d{6}$/, HELPER_TEXT.emailCodeNotMatch)
+        .matches(REGEXP.verifyCode, HELPER_TEXT.emailCodeNotMatch)
         .required(HELPER_TEXT.emailCodeRequired),
     password: yup
         .string()
         .min(8, HELPER_TEXT.passwordMinLength)
         .max(16, HELPER_TEXT.passwordMaxLength)
-        .matches(/(?=.*[!@#$%^&*()-_+=])/, HELPER_TEXT.passwordNotIncludeChar)
-        .matches(/^(?=.*[A-Z])/, HELPER_TEXT.passwordNotIncludeUppercase)
-        .matches(/^(?=.*\d)/, HELPER_TEXT.passwordNotIncludeNumber)
+        .matches(REGEXP.passwordIncludeChar, HELPER_TEXT.passwordNotIncludeChar)
+        .matches(REGEXP.passwordIncludeUppercase, HELPER_TEXT.passwordNotIncludeUppercase)
+        .matches(REGEXP.passwordIncludeNumber, HELPER_TEXT.passwordNotIncludeNumber)
         .required(HELPER_TEXT.passwordRequired),
     confirmPassword: yup
         .string()
         .min(8, HELPER_TEXT.passwordMinLength)
         .max(16, HELPER_TEXT.passwordMaxLength)
-        .matches(/(?=.*[!@#$%^&*()-_+=])/, HELPER_TEXT.passwordNotIncludeChar)
-        .matches(/^(?=.*[A-Z])/, HELPER_TEXT.passwordNotIncludeUppercase)
-        .matches(/^(?=.*\d)/, HELPER_TEXT.passwordNotIncludeNumber)
+        .matches(REGEXP.passwordIncludeChar, HELPER_TEXT.passwordNotIncludeChar)
+        .matches(REGEXP.passwordIncludeUppercase, HELPER_TEXT.passwordNotIncludeUppercase)
+        .matches(REGEXP.passwordIncludeNumber, HELPER_TEXT.passwordNotIncludeNumber)
         .oneOf([yup.ref('password'), null], HELPER_TEXT.confirmPasswordNotMatch)
         .required(HELPER_TEXT.passwordRequired),
     userName: yup.string().min(2, HELPER_TEXT.nameLength).required(HELPER_TEXT.nameRequired),
@@ -66,7 +73,7 @@ export const joinSchema = yup.object({
 export const otpSchema = yup.object({
     otp: yup
         .string()
-        .matches(/^\d{6}$/, HELPER_TEXT.otpNotMatch)
+        .matches(REGEXP.verifyCode, HELPER_TEXT.otpNotMatch)
         .required(HELPER_TEXT.otpRequired),
 })
 

@@ -22,6 +22,9 @@ function DemoPage() {
                 <li>
                     <a href="/components/logins">Logins</a>
                 </li>
+                <li>
+                    <a href="/components/popup">Popup</a>
+                </li>
             </ul>
         </Box>
     )

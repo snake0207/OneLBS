@@ -1,18 +1,31 @@
 import InfoIcon from '@mui/icons-material/Info'
 import { useModalActions } from '#/store/useModalStore'
-import { Box, Button, Typography } from '@mui/material'
-import FlexEndButtonContainer from '#/components/common/button/FlexEndButtonContainer'
+import {
+    Button,
+    Dialog,
+    DialogActions,
+    DialogContent,
+    DialogTitle,
+    IconButton,
+    Typography,
+} from '@mui/material'
+import CloseIcon from '@mui/icons-material/Close'
 
-const JoinSuccessModal = () => {
+const JoinSuccessModal = ({ isOpen, onClose }) => {
     const { closeModal } = useModalActions()
     return (
-        <>
-            <Box
+        <Dialog open={isOpen} onClose={onClose}>
+            <DialogTitle
+                sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}
+            >
+                회원가입 완료
+                <IconButton onClick={onClose}>
+                    <CloseIcon />
+                </IconButton>
+            </DialogTitle>
+            <DialogContent
+                dividers
                 sx={{
-                    display: 'flex',
-                    flexDirection: 'column',
-                    justifyContent: 'center',
-                    alignItems: 'center',
                     textAlign: 'center',
                 }}
             >
@@ -20,13 +33,13 @@ const JoinSuccessModal = () => {
                 <Typography>회원가입이 완료되었습니다.</Typography>
                 <Typography>관리자 승인 완료 후 서비스를 이용하실 수 있습니다.</Typography>
                 <Typography>회원가입 시 인증한 이메일로 승인 완료 메일이 발송됩니다.</Typography>
-            </Box>
-            <FlexEndButtonContainer>
+            </DialogContent>
+            <DialogActions>
                 <Button variant="contained" onClick={closeModal}>
                     확인
                 </Button>
-            </FlexEndButtonContainer>
-        </>
+            </DialogActions>
+        </Dialog>
     )
 }
 

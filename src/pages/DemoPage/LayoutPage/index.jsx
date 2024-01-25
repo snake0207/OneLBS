@@ -1,9 +1,12 @@
 import t from '#/common/libs/trans'
 import RouterBreadcrumbs from '#/components/common/menu/RouterBreadcrumbs'
 import useLayoutStore from '#/store/useLayoutStore'
+import useFullScreen from '#/hooks/useFullScreen'
+import TitleBar from '#/components/common/menu/TitleBar'
 
 function LayoutPage() {
     const { language, themeMode, setLanguage, setThemeMode } = useLayoutStore()
+    const [isFullScreen, toggleFullScreen] = useFullScreen()
     return (
         <div>
             <h1>Layouts</h1>
@@ -21,6 +24,13 @@ function LayoutPage() {
             </div>
             <h2>Breadcrumbs</h2>
             <RouterBreadcrumbs />
+            <h2>FullScreen</h2>
+            <div>Current FullScreen: {isFullScreen ? 'true' : 'false'}</div>
+            <div>
+                <button onClick={toggleFullScreen}>Toggle Full Screen</button>
+            </div>
+            <h2>Titlebar</h2>
+            <TitleBar title={t('layouts')} />
         </div>
     )
 }

@@ -6,53 +6,59 @@ import DashboardIcon from '@mui/icons-material/Dashboard'
 import BarChartIcon from '@mui/icons-material/BarChart'
 import LayersIcon from '@mui/icons-material/Layers'
 import AppRegistrationIcon from '@mui/icons-material/AppRegistration'
+import ExpandMenuItem from '#/components/common/menu/ExpandMenuItem'
 
 import Link from '@mui/material/Link'
 
 import t from '#/common/libs/trans'
 
+const menuItems = {
+    search_management: [{ label: t('top_menu.map'), link: '/map' }],
+    poi_search: [{ label: t('top_menu.map'), link: '/poi' }],
+    permi_history: [
+        { label: t('top_menu.all_history'), link: '/permit' },
+        { label: t('top_menu.user_history'), link: '/permit' },
+        { label: t('top_menu.admin_history'), link: '/permit' },
+    ],
+    mcp_poi_statistics: [
+        { label: t('top_menu.time_statistics'), link: '/mcp' },
+        { label: t('top_menu.area_statistics'), link: '/mcp' },
+        { label: t('top_menu.cp_statistics'), link: '/mcp' },
+    ],
+    user_management: [
+        { label: t('top_menu.user_list'), link: '/users' },
+        { label: t('top_menu.user_login_history'), link: '/users' },
+        { label: t('top_menu.user_permission_history'), link: '/users' },
+    ],
+}
+
 export const mainListItems = () => (
     <React.Fragment>
-        <Link href="/" color="inherit" underline="none">
-            <ListItemButton>
-                <ListItemIcon>
-                    <DashboardIcon />
-                </ListItemIcon>
-                <ListItemText primary={t('top_menu.search_management')} />
-            </ListItemButton>
-        </Link>
-        <Link href="/poi" color="inherit" underline="none">
-            <ListItemButton>
-                <ListItemIcon>
-                    <BarChartIcon />
-                </ListItemIcon>
-                <ListItemText primary={t('top_menu.poi_search')} />
-            </ListItemButton>
-        </Link>
-        <Link href="/permit" color="inherit" underline="none">
-            <ListItemButton>
-                <ListItemIcon>
-                    <LayersIcon />
-                </ListItemIcon>
-                <ListItemText primary={t('top_menu.permit_history')} />
-            </ListItemButton>
-        </Link>
-        <Link href="/mcp" color="inherit" underline="none">
-            <ListItemButton>
-                <ListItemIcon>
-                    <LayersIcon />
-                </ListItemIcon>
-                <ListItemText primary={t('top_menu.mcp_poi_statistics')} />
-            </ListItemButton>
-        </Link>
-        <Link href="/maintenance" color="inherit" underline="none">
-            <ListItemButton>
-                <ListItemIcon>
-                    <LayersIcon />
-                </ListItemIcon>
-                <ListItemText primary={t('top_menu.maintenance')} />
-            </ListItemButton>
-        </Link>
+        <ExpandMenuItem
+            label={t('top_menu.search_management')}
+            iconNode={<DashboardIcon />}
+            items={menuItems['search_management']}
+        />
+        <ExpandMenuItem
+            label={t('top_menu.poi_search')}
+            iconNode={<BarChartIcon />}
+            items={menuItems['poi_search']}
+        />
+        <ExpandMenuItem
+            label={t('top_menu.permit_history')}
+            iconNode={<LayersIcon />}
+            items={menuItems['permi_history']}
+        />
+        <ExpandMenuItem
+            label={t('top_menu.mcp_poi_statistics')}
+            iconNode={<LayersIcon />}
+            items={menuItems['mcp_poi_statistics']}
+        />
+        <ExpandMenuItem
+            label={t('top_menu.user_management')}
+            iconNode={<LayersIcon />}
+            items={menuItems['user_management']}
+        />
         <Link href="/components" color="inherit" underline="none">
             <ListItemButton>
                 <ListItemIcon>

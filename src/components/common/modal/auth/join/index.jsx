@@ -8,8 +8,8 @@ import { MODAL_TITLE } from '#/contents/constant'
 import { Box, Button, Typography } from '@mui/material'
 import FlexEndButtonContainer from '#/components/common/button/FlexEndButtonContainer'
 import { usePostJoin } from '#/hooks/queries/auth'
-import EmailSubmitInput from '#/components/common/input/EmailSubmitInput'
-import VerifyCodeInput from '#/components/common/input/VerifyCodeInput'
+import EmailSubmitInput from '#/components/common/modal/auth/join/EmailSubmitInput'
+import VerifyCodeInput from '#/components/common/modal/auth/join/VerifyCodeInput'
 
 const JoinModal = () => {
     const dummyAuthorityArr = [

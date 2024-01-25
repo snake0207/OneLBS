@@ -12,3 +12,15 @@ export const usePostJoin = () => {
         mutationFn: auth.postJoin,
     })
 }
+
+export const usePostEmailVerify = () => {
+    return useMutation({
+        mutationFn: auth.postEmailVerify,
+    })
+}
+
+export const usePostVerifyCode = () => {
+    return useMutation({
+        mutationFn: auth.postVerifyCode,
+    })
+}

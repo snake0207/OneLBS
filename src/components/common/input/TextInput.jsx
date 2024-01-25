@@ -1,7 +1,7 @@
 import { Box, IconButton, InputAdornment, TextField, Typography } from '@mui/material'
 import Close from '@mui/icons-material/Close'
 
-const TextInput = ({ name, formik, placeholder = null, inputRule = null }) => {
+const TextInput = ({ name, formik, placeholder = null, inputRule = null, IsDisabled = false }) => {
     return (
         <>
             <Box
@@ -34,6 +34,7 @@ const TextInput = ({ name, formik, placeholder = null, inputRule = null }) => {
                             </InputAdornment>
                         ),
                     }}
+                    disabled={IsDisabled}
                 />
             </Box>
             {inputRule && <Typography sx={{ my: 1 }}>{inputRule}</Typography>}

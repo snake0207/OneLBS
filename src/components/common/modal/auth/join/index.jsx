@@ -8,7 +8,7 @@ import RadioInput from '#/components/common/radio'
 import { joinSchema } from '#/contents/validationSchema'
 import EmailSubmitInput from '#/components/common/modal/auth/join/EmailSubmitInput'
 import VerifyCodeInput from '#/components/common/modal/auth/join/VerifyCodeInput'
-import JoinSuccessModal from '#/components/common/modal/auth/join/JoinSuccessModal'
+import JoinSuccessModal from '#/components/common/modal/auth/joinSuccess'
 
 const JoinModal = () => {
     const dummyAuthorityArr = [

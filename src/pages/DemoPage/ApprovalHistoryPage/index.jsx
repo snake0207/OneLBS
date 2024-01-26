@@ -1,8 +1,9 @@
-import { Box, Container, Pagination } from '@mui/material'
+import { Box, Container } from '@mui/material'
 import { useState } from 'react'
 import HistoryTable from '#/components/approval/HistoryTable/index.jsx'
 import Typography from '@mui/material/Typography'
 import SearchFilter from '#/components/approval/SearchFilter/index.jsx'
+import CommonPagination from '#/components/common/pagination/CommonPagination.jsx'
 
 const ApprovalHistoryPage = () => {
     const [dummyData, setDummyData] = useState([
@@ -183,12 +184,11 @@ const ApprovalHistoryPage = () => {
             history: '위, 경도 수정',
         },
     ])
-    const [currentPage, setCurrentPage] = useState(1)
 
-    const handlePageChange = (event, page) => {
+    // 페이지네이션 컴포넌트에 넘겨 페이지 변경 시 실행될 함수
+    const handlePageChange = (page) => {
         // TODO: API GET
-        console.log(`active page is ${page}`)
-        setCurrentPage(page)
+        console.log(`ACTIVE PAGE IS >> ${page}`)
     }
 
     return (
@@ -226,19 +226,10 @@ const ApprovalHistoryPage = () => {
                             '승인이력',
                         ]}
                     />
-
-                    <Box sx={{ display: 'flex', justifyContent: 'center', pt: 2 }}>
-                        <Pagination
-                            count={Math.ceil(dummyData.length / 10)} // 총 페이지 수
-                            page={currentPage}
-                            siblingCount={2}
-                            boundaryCount={1}
-                            shape="rounded"
-                            showFirstButton
-                            showLastButton
-                            onChange={handlePageChange}
-                        />
-                    </Box>
+                    <CommonPagination
+                        dataLength={dummyData.length} // total element count
+                        onChangePageFunction={handlePageChange} // 페이지 변경 시 실행 함수
+                    />
                 </Container>
             </Box>
         </Box>

@@ -7,7 +7,6 @@ import MenuIcon from '@mui/icons-material/Menu'
 import Container from '@mui/material/Container'
 import Avatar from '@mui/material/Avatar'
 import Tooltip from '@mui/material/Tooltip'
-import SettingsIcon from '@mui/icons-material/Settings'
 import FullscreenIcon from '@mui/icons-material/Fullscreen'
 import NotificationsIcon from '@mui/icons-material/Notifications'
 import useLayoutStore from '#/store/useLayoutStore'
@@ -17,6 +16,7 @@ import Badge from '@mui/material/Badge'
 import t from '#/common/libs/trans'
 import Dropdown from '#/components/common/button/Dropdown'
 import useFullScreen from '#/hooks/useFullScreen'
+import Settings from '#/components/layout/Settings'
 
 const userMenus = [
     { key: 'profile', label: t('profile') },
@@ -90,9 +90,7 @@ function Header() {
                         <IconButton sx={{ p: 0 }} onClick={() => toggleFullScreen()}>
                             <FullscreenIcon />
                         </IconButton>
-                        <IconButton sx={{ p: 0 }}>
-                            <SettingsIcon />
-                        </IconButton>
+                        <Settings />
                     </Box>
                 </Toolbar>
             </Container>

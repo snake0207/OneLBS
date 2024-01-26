@@ -6,6 +6,10 @@ import { create } from 'zustand'
 const useModalStore = create((set) => ({
     modalTitle: null,
     actions: {
+        /**
+         * @param {*} newState MODAL_TITLE.name
+         * @returns void
+         */
         openModal: (newState) => set({ modalTitle: newState }),
         closeModal: () => set({ modalTitle: null }),
     },

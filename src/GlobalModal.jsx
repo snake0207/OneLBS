@@ -1,5 +1,5 @@
 import ModalLayout from './components/common/modal'
-import JoinModal from './components/common/modal/auth/join'
+import JoinModal from './components/common/modal/auth/Join'
 import { MODAL_TITLE } from './contents/constant'
 import { useModalActions, useModalTitleState } from './store/useModalStore'
 

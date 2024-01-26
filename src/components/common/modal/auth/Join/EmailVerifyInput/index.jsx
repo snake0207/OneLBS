@@ -2,7 +2,7 @@ import { useTimeActions } from '#/store/useTimerStore'
 import Close from '@mui/icons-material/Close'
 import { Box, Button, IconButton, InputAdornment, TextField } from '@mui/material'
 
-const EmailSubmitInput = ({ name, formik }) => {
+const EmailVerifyInput = ({ name, formik }) => {
     const { setTime } = useTimeActions()
     const handleClickSendEmail = () => {
         if (!formik.errors[name]) console.log(formik.values[name])
@@ -56,4 +56,4 @@ const EmailSubmitInput = ({ name, formik }) => {
     )
 }
 
-export default EmailSubmitInput
+export default EmailVerifyInput

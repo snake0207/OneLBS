@@ -2,8 +2,12 @@ import ModalLayout from './components/common/modal'
 import JoinModal from './components/common/modal/auth/Join'
 import { MODAL_TITLE } from './contents/constant'
 import { useModalActions, useModalTitleState } from './store/useModalStore'
+import ApprovalDetailModal from '#/components/common/modal/approval/ApprovalDetailModal.jsx'
 
-const MODAL_COMPONENT_ARR = [{ type: MODAL_TITLE.join, component: <JoinModal /> }]
+const MODAL_COMPONENT_ARR = [
+    { type: MODAL_TITLE.join, component: <JoinModal /> },
+    { type: MODAL_TITLE.detail, component: <ApprovalDetailModal /> },
+]
 
 const GlobalModal = () => {
     const modalTitle = useModalTitleState()

@@ -2,7 +2,7 @@ import PasswordInput from '#/components/common/input/PasswordInput'
 import TextInput from '#/components/common/input/TextInput'
 import { useFormik } from 'formik'
 import * as yup from 'yup'
-import RadioInput from '#/components/common/RadioDD'
+import RadioInput from '#/components/common/Radio'
 import IpInput from '#/components/common/input/IpInput'
 
 const InputPage = () => {

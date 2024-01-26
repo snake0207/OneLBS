@@ -8,7 +8,7 @@ import {
     TableRow,
 } from '@mui/material'
 import Typography from '@mui/material/Typography'
-import { useModalActions } from '#/store/modalStore.js'
+import { useModalActions } from '#/store/useModalStore.js'
 import { MODAL_TITLE } from '#/contents/constant.js'
 
 const HistoryTable = ({ dummyData, headers }) => {

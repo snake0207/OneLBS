@@ -1,6 +1,6 @@
 import { Container } from '@mui/material'
 import Typography from '@mui/material/Typography'
-import { useModalParamState } from '#/store/modalStore.js'
+import { useModalParamState } from '#/store/useModalStore.js'
 
 const ApprovalDetailModal = () => {
     const modalParam = useModalParamState()

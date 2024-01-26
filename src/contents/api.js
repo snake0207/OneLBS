@@ -1,3 +1,6 @@
 export const API_PATH = {
-    login: '/api/v1/user/login',
+    login: '/',
+    join: '/',
+    emailVerify: '/',
+    VerifyCode: '/',
 }

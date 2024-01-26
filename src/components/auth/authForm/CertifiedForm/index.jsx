@@ -1,5 +1,5 @@
 import { useFormik } from 'formik'
-import { TextInput } from '#/components/common/input/TextInput'
+import TextInput from '#/components/common/input/TextInput'
 import { otpSchema } from '#/contents/validationSchema'
 import { Box, Button, Divider, Link, Typography } from '@mui/material'
 import AuthStepper from '#/components/auth/AuthStepper'
@@ -37,23 +37,17 @@ const CertifiedForm = () => {
                     <Link href="#">등록방법</Link>
                 </Box>
             </Box>
-            <Box
-                component={'form'}
-                onSubmit={formik.handleSubmit}
-                sx={{ display: 'flex', flexDirection: 'column', flex: 1 }}
-            >
-                <TextInput
-                    label={'OTP'}
-                    name={'otp'}
-                    placeholder={'6자리 숫자를 입력해 주세요.'}
-                    formik={formik}
-                />
-                <FlexEndButtonContainer>
-                    <Button variant="contained" type="submit" sx={{ alignSelf: 'flex-end' }}>
-                        인증
-                    </Button>
-                </FlexEndButtonContainer>
-            </Box>
+            <Typography variant="h6">OTP</Typography>
+            <TextInput name={'otp'} placeholder={'6자리 숫자를 입력해 주세요.'} formik={formik} />
+            <FlexEndButtonContainer>
+                <Button
+                    variant="contained"
+                    onClick={formik.handleSubmit}
+                    sx={{ alignSelf: 'flex-end' }}
+                >
+                    인증
+                </Button>
+            </FlexEndButtonContainer>
         </>
     )
 }

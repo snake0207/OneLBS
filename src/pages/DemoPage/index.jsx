@@ -1,8 +1,10 @@
+import TitleBar from '#/components/common/menu/TitleBar'
 import { Box } from '@mui/material'
 
 function DemoPage() {
     return (
         <Box>
+            <TitleBar title="Component Demo Page" />
             <h1>Component Demo Page</h1>
             <ul>
                 <li>
@@ -19,6 +21,12 @@ function DemoPage() {
                 </li>
                 <li>
                     <a href="/components/logins">Logins</a>
+                </li>
+                <li>
+                    <a href="/components/modals">Modal</a>
+                </li>
+                <li>
+                    <a href="/components/popup">Popup</a>
                 </li>
                 <li>
                     <a href="/components/approval">Approval</a>

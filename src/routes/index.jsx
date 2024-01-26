@@ -10,6 +10,9 @@ import PoiMapPage from '#/pages/poiMapPage/index.jsx'
 import MapPage from '#/pages/DemoPage/MapPage/index.jsx'
 import LoginDemoPage from '#/pages/DemoPage/LoginPage'
 import ApprovalHistoryPage from '#/pages/DemoPage/ApprovalHistoryPage/index.jsx'
+import PopupPage from '#/pages/DemoPage/PopupPage'
+import InputPage from '#/pages/DemoPage/InputPage'
+import ModalPage from '#/pages/DemoPage/ModalPage'
 
 const Routes = () => {
     return useRoutes([
@@ -29,10 +32,13 @@ const Routes = () => {
             children: [
                 { path: '/components', element: <DemoPage /> },
                 { path: '/components/layouts', element: <LayoutPage /> },
+                { path: '/components/inputs', element: <InputPage /> },
                 { path: '/components/buttons', element: <ButtonPage /> },
                 { path: '/components/maps', element: <MapPage /> },
                 { path: '/components/logins', element: <LoginDemoPage /> },
                 { path: '/components/approval', element: <ApprovalHistoryPage /> },
+                { path: '/components/modals', element: <ModalPage /> },
+                { path: '/components/popup', element: <PopupPage /> },
             ],
         },
     ])

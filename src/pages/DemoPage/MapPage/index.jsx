@@ -3,8 +3,10 @@ import Box from '@mui/material/Box'
 import DirectionsCarFilledOutlinedIcon from '@mui/icons-material/DirectionsCarFilledOutlined.js'
 import Typography from '@mui/material/Typography'
 import MapSearch from '#/components/common/map/MapSearch/index.jsx'
-import MapPoiList from '#/components/common/map/MapPoiList/index.jsx'
+import MapSearchList from '#/components/common/map/MapSearchList/index.jsx'
 import MapInfoWindow from '#/components/common/map/MapInfoWindow/index.jsx'
+import MapPoiDetail from '#/components/common/map/MapPoiDetail/index.jsx'
+import MapGpssDetail from '#/components/common/map/MapGpssDetail/index.jsx'
 
 const MapPage = () => {
     return (
@@ -28,11 +30,19 @@ const MapPage = () => {
                     <Typography>Map Search Component</Typography>
                     <MapSearch />
                 </Box>
-                <Box>
+                <Box sx={{ mr: 2 }}>
                     <Typography>Map List Component with No Result</Typography>
-                    <MapPoiList isResultNon={true} />
+                    <MapSearchList isResultNon={true} />
                     <Typography>Map List Component with Result (스크롤 TOP 버튼 존재)</Typography>
-                    <MapPoiList isResultNon={false} />
+                    <MapSearchList isResultNon={false} />
+                </Box>
+                <Box sx={{ mr: 2 }}>
+                    <Typography>Map POI Detail Component</Typography>
+                    <MapPoiDetail />
+                </Box>
+                <Box sx={{ mr: 2 }}>
+                    <Typography>Map GPSS Detail Component</Typography>
+                    <MapGpssDetail />
                 </Box>
             </Box>
             <Box sx={{ display: 'flex' }}>

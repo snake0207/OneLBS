@@ -17,6 +17,7 @@ const ModalLayout = ({ children, isOpen, onClose, title }) => {
                     minWidth: 600,
                     maxHeight: 'calc(100vh - 100px)',
                     overflowY: 'auto',
+                    // ':focus-visible': { outline: 'none' },
                 }}
             >
                 <Box

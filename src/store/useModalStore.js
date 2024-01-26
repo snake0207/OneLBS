@@ -7,6 +7,10 @@ const useModalStore = create((set) => ({
     modalTitle: null,
     modalParam: null,
     actions: {
+        /**
+         * @param {*} newState MODAL_TITLE.name
+         * @returns void
+         */
         openModal: (newState, newParam) => set({ modalTitle: newState, modalParam: newParam }),
         closeModal: () => set({ modalTitle: null, modalParam: null }),
     },

@@ -3,6 +3,8 @@ import TextInput from '#/components/common/input/TextInput'
 import { useFormik } from 'formik'
 import * as yup from 'yup'
 import RadioInput from '#/components/common/Radio'
+import IpInput from '#/components/common/input/IpInput'
+import IpAddressInput from './../../../components/common/modal/auth/Join/IpAddressInput/index'
 
 const InputPage = () => {
     const formik = useFormik({
@@ -16,6 +18,11 @@ const InputPage = () => {
         validationSchema: yup.object({
             demoInput: yup.string().required('this is required'),
             demoPassword: yup.string().required('this is required'),
+            demoIp1: yup.string().required('IP 입력해 주세요'),
+            demoIp2: yup.string().required('IP 입력해 주세요'),
+            demoIp3: yup.string().required('IP 입력해 주세요'),
+            demoIp4: yup.string().required('IP 입력해 주세요'),
+            demoIpDescription: yup.string().required('설명 입력해 주세요'),
         }),
         onSubmit: (form) => {
             console.log(form)
@@ -54,6 +61,18 @@ const InputPage = () => {
                     placeholder={'demo password'}
                 />
             </div>
+            <h2>IPInput</h2>
+            <div style={{ width: 600 }}>
+                <IpInput
+                    ipName1={'demoIp1'}
+                    ipName2={'demoIp2'}
+                    ipName3={'demoIp3'}
+                    ipName4={'demoIp4'}
+                    ipDescription={'demoIpDescription'}
+                    formik={formik}
+                />
+            </div>
+            <IpAddressInput />
             <h2>Radio</h2>
             <div style={{ display: 'flex', gap: 100 }}>
                 <div>

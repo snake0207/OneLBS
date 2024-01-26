@@ -1,14 +1,16 @@
 import { useState } from 'react'
 import { useFormik } from 'formik'
-import { Button, DialogActions, DialogContent, Typography } from '@mui/material'
+import { Box, Button, DialogActions, DialogContent, Typography } from '@mui/material'
 import { usePostJoin } from '#/hooks/queries/auth'
 import TextInput from '#/components/common/input/TextInput'
 import PasswordInput from '#/components/common/input/PasswordInput'
 import RadioInput from '#/components/common/Radio'
 import { joinSchema } from '#/contents/validationSchema'
-import EmailSubmitInput from '#/components/common/modal/auth/Join/EmailSubmitInput'
+import EmailVerifyInput from '#/components/common/modal/auth/Join/EmailVerifyInput/index.jsx'
 import VerifyCodeInput from '#/components/common/modal/auth/Join/VerifyCodeInput'
 import JoinSuccessModal from '#/components/common/modal/auth/JoinSuccess'
+import PrivacyPolicyModal from '#/components/common/modal/auth/PrivacyPolicy'
+import { usePopupActions } from '#/store/usePopupStore'
 
 const JoinModal = () => {
     const dummyAuthorityArr = [
@@ -22,7 +24,9 @@ const JoinModal = () => {
         { value: '0', label: '동의하지 않음' },
     ]
     const { mutate } = usePostJoin()
+    const actions = usePopupActions()
     const [isJoinSuccess, setIsJoinSuccess] = useState(false)
+    const [isOpenPrivacyPolicy, setIsOpenPrivacyPolicy] = useState(false)
     const formik = useFormik({
         initialValues: {
             userMail: '',
@@ -38,6 +42,7 @@ const JoinModal = () => {
         validationSchema: joinSchema,
         onSubmit: (form) => {
             console.log(form)
+            actions
             setIsJoinSuccess(true)
             // mutate(form)
         },
@@ -52,7 +57,7 @@ const JoinModal = () => {
                 <Typography variant="h6">
                     <span style={{ color: 'red' }}>*</span>이메일
                 </Typography>
-                <EmailSubmitInput name={'userMail'} formik={formik} />
+                <EmailVerifyInput name={'userMail'} formik={formik} />
                 <Typography variant="h6">
                     <span style={{ color: 'red' }}>*</span>메일인증코드
                 </Typography>
@@ -98,9 +103,14 @@ const JoinModal = () => {
                     <span style={{ color: 'red' }}>*</span>권한
                 </Typography>
                 <RadioInput radioList={dummyAuthorityArr} name={'authority'} formik={formik} />
-                <Typography variant="h6">
-                    <span style={{ color: 'red' }}>*</span>약관동의
-                </Typography>
+                <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
+                    <Typography variant="h6">
+                        <span style={{ color: 'red' }}>*</span>약관동의
+                    </Typography>
+                    <Button variant="contained" onClick={() => setIsOpenPrivacyPolicy(true)}>
+                        자세히 보기
+                    </Button>
+                </Box>
                 <RadioInput
                     radioList={dummyTermsArr}
                     name={'isTermsAgreed'}
@@ -114,6 +124,10 @@ const JoinModal = () => {
                 </Button>
             </DialogActions>
             <JoinSuccessModal isOpen={isJoinSuccess} onClose={() => setIsJoinSuccess(false)} />
+            <PrivacyPolicyModal
+                isOpen={isOpenPrivacyPolicy}
+                onClose={() => setIsOpenPrivacyPolicy(false)}
+            />
         </>
     )
 }

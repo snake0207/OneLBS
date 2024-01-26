@@ -12,6 +12,7 @@ import LoginDemoPage from '#/pages/DemoPage/LoginPage'
 import PopupPage from '#/pages/DemoPage/PopupPage'
 import InputPage from '#/pages/DemoPage/InputPage'
 import ModalPage from '#/pages/DemoPage/ModalPage'
+import ApprovalHistoryPage from '#/pages/DemoPage/ApprovalHistoryPage/index.jsx'
 
 const Routes = () => {
     return useRoutes([
@@ -37,6 +38,7 @@ const Routes = () => {
                 { path: '/components/logins', element: <LoginDemoPage /> },
                 { path: '/components/modals', element: <ModalPage /> },
                 { path: '/components/popup', element: <PopupPage /> },
+                { path: '/components/approval', element: <ApprovalHistoryPage /> },
             ],
         },
     ])

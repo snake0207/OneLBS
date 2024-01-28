@@ -1,7 +1,7 @@
 import { Box, Button, Tab, Tabs } from '@mui/material'
 import CloseIcon from '@mui/icons-material/Close'
-import MapGpssDetailTab from '#/components/common/map/MapGpssDetail/MapGpssDetailTab/index.jsx'
-import MapGpssHistoryTab from '#/components/common/map/MapGpssDetail/MapGpssHistoryTab/index.jsx'
+import MapGpssDetailTab from '#/components/common/map/MapGpssDetail/DetailTab/index.jsx'
+import MapGpssHistoryTab from '#/components/common/map/MapGpssDetail/HistoryTab/index.jsx'
 import { useState } from 'react'
 
 const MapGpssDetail = () => {

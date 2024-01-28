@@ -26,6 +26,8 @@ const MapGpssDetailTab = () => {
             lat: '',
             lng: '',
             reason: '',
+            reviewer: '',
+            approver: '',
         },
         onSubmit: (form) => {
             console.log(form)
@@ -192,16 +194,51 @@ const MapGpssDetailTab = () => {
             </Box>
             <Box>
                 <Box>
+                    <Typography>검토자</Typography>
+                </Box>
+                <Divider />
+                <Box sx={{ display: 'flex', alignItems: 'flex-start', gap: '6px', mt: '8px' }}>
+                    <TextInput
+                        formik={formik}
+                        name={'reviewer'}
+                        placeholder={'검토자를 입력해주세요'}
+                    />
+                    <Button variant={'contained'}>검색</Button>
+                </Box>
+                <Box
+                    sx={{
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        minHeight: '60px',
+                    }}
+                >
+                    <Typography sx={{}}>검색결과가 없습니다</Typography>
+                </Box>
+            </Box>
+            <Box>
+                <Box>
                     <Typography>결제자</Typography>
                 </Box>
                 <Divider />
-                <TextField
-                    sx={{ marginBottom: '16px', marginTop: '8px' }}
-                    size={'small'}
-                    multiline
-                    fullWidth
-                    placeholder="승인 요청 이유를 입력하세요"
-                ></TextField>
+                <Box sx={{ display: 'flex', alignItems: 'flex-start', gap: '6px', mt: '8px' }}>
+                    <TextInput
+                        formik={formik}
+                        name={'approver'}
+                        placeholder={'결제자를 입력해주세요'}
+                    />
+                    <Button variant={'contained'}>검색</Button>
+                </Box>
+                <Box
+                    sx={{
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        minHeight: '60px',
+                    }}
+                >
+                    <Typography sx={{}}>검색결과가 없습니다</Typography>
+                </Box>
             </Box>
 
             <Box sx={{ display: 'flex', justifyContent: 'end', gap: '6px' }}>

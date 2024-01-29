@@ -20,6 +20,5 @@ export default useModalStore
 
 export const useModalActions = () => useModalStore((state) => state.actions)
 
-export const useModalIsOpenState = () => useModalStore((state) => state.isOpen)
 export const useModalTitleState = () => useModalStore((state) => state.modalTitle)
 export const useModalParamState = () => useModalStore((state) => state.modalParam)

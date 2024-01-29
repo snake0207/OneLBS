@@ -6,6 +6,7 @@ export const AUTH_STEP = {
 }
 
 export const MODAL_TITLE = {
+    demo: 'Demo',
     join: '회원가입',
     detail: '상세정보',
 }

@@ -11,6 +11,8 @@ const ModalPage = () => {
     return (
         <div>
             <h1>Modal</h1>
+            <h2>DemoModal</h2>
+            <button onClick={() => openModal(MODAL_TITLE.demo)}>DemoModal</button>
             <h2>JoinModal</h2>
             <button onClick={() => openModal(MODAL_TITLE.join)}>JoinModal</button>
             <h2>JoinSuccessModal</h2>

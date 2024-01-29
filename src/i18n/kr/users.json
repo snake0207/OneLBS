@@ -1,0 +1,11 @@
+{
+    "email": "이메일",
+    "permission": "권한",
+    "select": "선택",
+    "general_user": "일반사용자",
+    "request_user": "요청자",
+    "reviewer": "검토자",
+    "approver": "승인자",
+    "admin": "운영자",
+    "search": "검색"
+}

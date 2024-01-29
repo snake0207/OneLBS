@@ -14,6 +14,8 @@ import PopupPage from '#/pages/DemoPage/PopupPage'
 import InputPage from '#/pages/DemoPage/InputPage'
 import ModalPage from '#/pages/DemoPage/ModalPage'
 import ApprovalHistoryPage from '#/pages/DemoPage/ApprovalHistoryPage/index.jsx'
+import UserManagementPage from '#/pages/DemoPage/UserManagementPage'
+import UserLoginHistoryPage from '#/pages/DemoPage/UserManagementPage/UserLoginHistoryPage'
 
 const Routes = () => {
     return useRoutes([
@@ -41,6 +43,8 @@ const Routes = () => {
                 { path: '/components/modals', element: <ModalPage /> },
                 { path: '/components/popup', element: <PopupPage /> },
                 { path: '/components/approval', element: <ApprovalHistoryPage /> },
+                { path: '/components/users', element: <UserManagementPage /> },
+                { path: '/components/users/login-history', element: <UserLoginHistoryPage /> },
             ],
         },
     ])

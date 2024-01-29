@@ -34,6 +34,9 @@ function DemoPage() {
                 <li>
                     <a href="/components/approval">Approval</a>
                 </li>
+                <li>
+                    <a href="/components/users">User Management</a>
+                </li>
             </ul>
         </Box>
     )

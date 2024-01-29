@@ -6,6 +6,7 @@ import LoginPage from '#/pages/LoginPage'
 import DemoPage from '#/pages/DemoPage'
 import LayoutPage from '#/pages/DemoPage/LayoutPage'
 import ButtonPage from '#/pages/DemoPage/ButtonPage'
+import SelectPage from '#/pages/DemoPage/SelectPage'
 import PoiMapPage from '#/pages/poiMapPage/index.jsx'
 import MapPage from '#/pages/DemoPage/MapPage/index.jsx'
 import LoginDemoPage from '#/pages/DemoPage/LoginPage'
@@ -34,6 +35,7 @@ const Routes = () => {
                 { path: '/components/layouts', element: <LayoutPage /> },
                 { path: '/components/inputs', element: <InputPage /> },
                 { path: '/components/buttons', element: <ButtonPage /> },
+                { path: '/components/select', element: <SelectPage /> },
                 { path: '/components/maps', element: <MapPage /> },
                 { path: '/components/logins', element: <LoginDemoPage /> },
                 { path: '/components/modals', element: <ModalPage /> },

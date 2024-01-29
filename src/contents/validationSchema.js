@@ -32,6 +32,7 @@ const REGEXP = {
     passwordIncludeChar: /^(?=.*[!@#$%^&*()\-_+=]).+$/, // 숫자키 특수문자 1개 이상 포함
     passwordIncludeNumber: /^(?=.*\d).*$/, // 숫자 1개 이상 포함
     passwordIncludeUppercase: /^(?=.*[A-Z]).*$/, // 영문 대문자 1개 이상 포함
+    coordinates: /^([-+]?\d{1,3}(?:\.\d{1,7})?)$/, // 위경도
 }
 
 export const loginSchema = yup.object({
@@ -81,10 +82,10 @@ export const mapSearchSchema = yup.object({
     country: yup.string().required(HELPER_TEXT.searchCountry),
     lat: yup
         .string()
-        .matches(/^([-+]?\d{1,3}(?:\.\d{1,7})?)$/, HELPER_TEXT.searchLat)
+        .matches(REGEXP.coordinates, HELPER_TEXT.searchLat)
         .required(HELPER_TEXT.searchLat),
     lng: yup
         .string()
-        .matches(/^([-+]?\d{1,3}(?:\.\d{1,7})?)$/, HELPER_TEXT.searchLng)
+        .matches(REGEXP.coordinates, HELPER_TEXT.searchLng)
         .required(HELPER_TEXT.searchLng),
 })

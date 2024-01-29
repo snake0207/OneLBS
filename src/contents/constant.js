@@ -10,3 +10,8 @@ export const MODAL_TITLE = {
     join: '회원가입',
     detail: '상세정보',
 }
+
+export const GPSS_TABLE_TYPE = {
+    reviewer: 'reviewer',
+    approver: 'approver',
+}

@@ -1,19 +1,23 @@
 import { FormControl, InputLabel, MenuItem, Select } from '@mui/material'
 
-function SelectBase({ items, label, value, onChange, ...props }) {
+function SelectBase({ name, formik, items, label, onChange, ...props }) {
     const handleChange = (event) => {
         // find item by value
         const selectedItem = items.find((item) => item.value === event.target.value)
-        onChange(selectedItem)
+
+        // set formik value
+        formik.setFieldValue(name, selectedItem.value)
+        if (onChange) onChange(selectedItem)
     }
 
     return (
         <FormControl>
             <InputLabel id="select-label">{label}</InputLabel>
             <Select
-                labelId="select-label"
                 id="select"
-                value={value}
+                name={name}
+                labelId="select-label"
+                value={formik.values[name]}
                 onChange={handleChange}
                 {...props}
             >

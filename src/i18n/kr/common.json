@@ -2,5 +2,13 @@
   "search": "검색",
   "select": "선택",
   "input_keyword": "검색어를 입력해 주세요",
-  "search_no_result": "검색 결과가 없습니다"
+  "search_no_result": "검색 결과가 없습니다",
+  "id": "아이디",
+  "name": "이름",
+  "company": "회사",
+  "country": "국가",
+  "lat": "위도",
+  "lng": "경도",
+  "language": "언어",
+  "category": "카테고리"
 }

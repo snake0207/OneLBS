@@ -1,5 +1,5 @@
 import { API_PATH } from '#/contents/api'
-import { postAPI } from '../axios'
+import { getAPI, postAPI } from '../axios'
 
 const postLogin = (data) => {
     return postAPI({ endPoint: API_PATH.login, data })
@@ -14,7 +14,11 @@ const postEmailVerify = (data) => {
 }
 
 const postVerifyCode = (data) => {
-    return postAPI({ endPoint: API_PATH.VerifyCode, data })
+    return postAPI({ endPoint: API_PATH.verifyCode, data })
+}
+
+const getUserIp = () => {
+    return getAPI({ endPoint: API_PATH.get_ip })
 }
 
 export default {
@@ -22,4 +26,5 @@ export default {
     postJoin,
     postEmailVerify,
     postVerifyCode,
+    getUserIp,
 }

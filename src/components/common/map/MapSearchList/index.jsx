@@ -2,6 +2,7 @@ import { Box, Typography } from '@mui/material'
 import MapPoiContent from '#/components/common/map/MapSearchList/MapPoiContent/index.jsx'
 import List from '@mui/material/List'
 import { useEffect, useRef, useState } from 'react'
+import t from '#/common/libs/trans.js'
 
 const sampleData = [
     {
@@ -71,7 +72,7 @@ const MapSearchList = ({ isResultNon }) => {
             ref={poiList}
         >
             {isResultNon === true ? (
-                <Typography>검색 결과가 없습니다</Typography>
+                <Typography>{t('search_no_result', 'common')}</Typography>
             ) : (
                 sampleData && (
                     <List sx={{ width: '100%' }}>

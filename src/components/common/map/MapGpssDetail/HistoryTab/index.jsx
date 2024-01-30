@@ -4,6 +4,7 @@ import PlaceIcon from '@mui/icons-material/Place'
 import LanguageIcon from '@mui/icons-material/Language'
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
 import EvStationIcon from '@mui/icons-material/EvStation'
+import t from '#/common/libs/trans.js'
 
 const MapGpssHistoryTab = () => {
     return (
@@ -41,7 +42,7 @@ const MapGpssHistoryTab = () => {
                 </Box>
             </Box>
             <Box>
-                <Typography>카테고리</Typography>
+                <Typography>{t('category', 'common')}</Typography>
             </Box>
             <Divider />
             <Box sx={{ display: 'flex' }}>

@@ -1,0 +1,14 @@
+{
+  "search": "search",
+  "select": "select",
+  "input_keyword": "please enter keyword",
+  "search_no_result": "no result",
+  "id": "id",
+  "name": "name",
+  "company": "company",
+  "country": "country",
+  "lat": "latitude",
+  "lng": "longitude",
+  "language": "language",
+  "category": "category"
+}

@@ -12,6 +12,7 @@ import CloseIcon from '@mui/icons-material/Close'
 import PlaceIcon from '@mui/icons-material/Place'
 import EvStationIcon from '@mui/icons-material/EvStation'
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
+import t from '#/common/libs/trans.js'
 
 const MapPoiDetail = () => {
     return (
@@ -57,7 +58,7 @@ const MapPoiDetail = () => {
                     </Box>
                 </Box>
                 <Box>
-                    <Typography>카테고리</Typography>
+                    <Typography>{t('category', 'common')}</Typography>
                 </Box>
                 <Divider />
                 <Box sx={{ display: 'flex' }}>

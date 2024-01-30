@@ -16,6 +16,7 @@ import ModalPage from '#/pages/DemoPage/ModalPage'
 import ApprovalHistoryPage from '#/pages/DemoPage/ApprovalHistoryPage/index.jsx'
 import UserManagementPage from '#/pages/DemoPage/UserManagementPage'
 import UserLoginHistoryPage from '#/pages/DemoPage/UserManagementPage/UserLoginHistoryPage'
+import UserPermissionPage from '#/pages/DemoPage/UserManagementPage/UserPermissionPage'
 
 const Routes = () => {
     return useRoutes([
@@ -45,6 +46,7 @@ const Routes = () => {
                 { path: '/components/approval', element: <ApprovalHistoryPage /> },
                 { path: '/components/users', element: <UserManagementPage /> },
                 { path: '/components/users/login-history', element: <UserLoginHistoryPage /> },
+                { path: '/components/users/permission-history', element: <UserPermissionPage /> },
             ],
         },
     ])

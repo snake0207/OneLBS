@@ -7,6 +7,7 @@ const TextInput = ({ name, formik, placeholder = null, inputRule = null, IsDisab
             <Box
                 sx={{
                     height: 60,
+                    flex: 1,
                 }}
             >
                 <TextField

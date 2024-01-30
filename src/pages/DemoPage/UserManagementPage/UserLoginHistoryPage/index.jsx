@@ -13,7 +13,7 @@ function UserLoginHistoryPage() {
 
     return (
         <div>
-            <h1>UserLoginHistoryPage</h1>
+            <h1>User Login History Page</h1>
             <h2>Search Filter</h2>
             <SearchFilter onSearch={handleSearch} />
             <h2>Login History Table</h2>

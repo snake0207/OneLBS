@@ -14,6 +14,8 @@ import Info from '@mui/icons-material/Info'
 import IpInput from '#/components/common/input/IpInput'
 import { formatJoinData } from '#/common/libs/formatData'
 
+import t from '#/common/libs/trans'
+
 const JoinModal = () => {
     const dummyAuthorityArr = [
         { value: 'GUEST', label: '일반 사용자' },
@@ -41,7 +43,7 @@ const JoinModal = () => {
             company: '',
             team: '',
             role: 'GUEST',
-            terms: 'N',
+            terms: 'Y',
             ipAddress1_0: '',
             ipAddress2_0: '',
             ipAddress3_0: '',
@@ -76,45 +78,65 @@ const JoinModal = () => {
         <>
             <DialogContent dividers>
                 <Typography>
-                    <span style={{ color: 'red' }}>*</span>필수 입력입니다.
+                    <span style={{ color: 'red' }}>*</span>
+                    {t('guide.required', 'auth')}
                 </Typography>
                 <Typography variant="h6">
-                    <span style={{ color: 'red' }}>*</span>이메일
+                    <span style={{ color: 'red' }}>*</span>
+                    {t('email', 'auth')}
                 </Typography>
                 <EmailVerifyInput name={'email'} formik={formik} />
                 <Typography variant="h6">
-                    <span style={{ color: 'red' }}>*</span>메일인증코드
+                    <span style={{ color: 'red' }}>*</span>
+                    {t('confirm_email_code', 'auth')}
                 </Typography>
                 <VerifyCodeInput name={'confirmEmailCode'} formik={formik} />
                 <Typography variant="h6">
-                    <span style={{ color: 'red' }}>*</span>비밀번호
+                    <span style={{ color: 'red' }}>*</span>
+                    {t('password', 'auth')}
                 </Typography>
                 <PasswordInput
                     name={'password'}
-                    placeholder={'비밀번호를 입력하세요'}
-                    inputRule={'6~16자 이내 영문대문자, 숫자, 특수문자가 반드시 포함되야 합니다.'}
+                    placeholder={t('placeholder.password', 'auth')}
+                    inputRule={t('guide.password_input_guide', 'auth')}
                     formik={formik}
                 />
                 <Typography variant="h6">
-                    <span style={{ color: 'red' }}>*</span>비밀번호 확인
+                    <span style={{ color: 'red' }}>*</span>
+                    {t('confirm_password', 'auth')}
                 </Typography>
                 <PasswordInput
                     name={'confirmPassword'}
-                    placeholder={'비밀번호를 다시 한번 입력하세요'}
+                    placeholder={t('confirm_password', 'auth')}
                     formik={formik}
                 />
                 <Typography variant="h6">
-                    <span style={{ color: 'red' }}>*</span>이름
+                    <span style={{ color: 'red' }}>*</span>
+                    {t('name', 'auth')}
                 </Typography>
-                <TextInput name={'name'} placeholder={'이름을 입력하세요'} formik={formik} />
+                <TextInput
+                    name={'name'}
+                    placeholder={t('placeholder.name', 'auth')}
+                    formik={formik}
+                />
                 <Typography variant="h6">
-                    <span style={{ color: 'red' }}>*</span>회사명
+                    <span style={{ color: 'red' }}>*</span>
+                    {t('company', 'auth')}
                 </Typography>
-                <TextInput name={'company'} placeholder={'회사명을 입력하세요'} formik={formik} />
+                <TextInput
+                    name={'company'}
+                    placeholder={t('placeholder.company', 'auth')}
+                    formik={formik}
+                />
                 <Typography variant="h6">
-                    <span style={{ color: 'red' }}>*</span>팀명
+                    <span style={{ color: 'red' }}>*</span>
+                    {t('team', 'auth')}
                 </Typography>
-                <TextInput name={'team'} placeholder={'팀명을 입력하세요'} formik={formik} />
+                <TextInput
+                    name={'team'}
+                    placeholder={t('placeholder.team', 'auth')}
+                    formik={formik}
+                />
                 {formik.values.role === 'GUEST' && (
                     <>
                         <Box
@@ -135,8 +157,8 @@ const JoinModal = () => {
                             </IconButton>
                         </Box>
                         <Typography variant="body2">
-                            <span style={{ color: 'red' }}>*</span>IP는 최대3개까지 입력 가능
-                            합니다.
+                            <span style={{ color: 'red' }}>*</span>
+                            {t('guide.ip_input_guide', 'auth')}
                         </Typography>
                         {Array.from({ length: ipInputCount }).map((_, idx) => (
                             <IpInput
@@ -152,15 +174,17 @@ const JoinModal = () => {
                     </>
                 )}
                 <Typography variant="h6">
-                    <span style={{ color: 'red' }}>*</span>권한
+                    <span style={{ color: 'red' }}>*</span>
+                    {t('role', 'auth')}
                 </Typography>
                 <RadioInput radioList={dummyAuthorityArr} name={'role'} formik={formik} />
                 <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
                     <Typography variant="h6">
-                        <span style={{ color: 'red' }}>*</span>약관동의
+                        <span style={{ color: 'red' }}>*</span>
+                        {t('consent_terms', 'auth')}
                     </Typography>
                     <Button variant="contained" onClick={() => setIsOpenPrivacyPolicy(true)}>
-                        자세히 보기
+                        {t('read_more', 'auth')}
                     </Button>
                 </Box>
                 <RadioInput
@@ -172,7 +196,7 @@ const JoinModal = () => {
             </DialogContent>
             <DialogActions>
                 <Button variant="contained" onClick={formik.handleSubmit} type="submit">
-                    회원가입
+                    {t('join', 'auth')}
                 </Button>
             </DialogActions>
             <JoinSuccessModal isOpen={isJoinSuccess} onClose={() => setIsJoinSuccess(false)} />

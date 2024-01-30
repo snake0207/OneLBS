@@ -46,7 +46,7 @@ export const loginSchema = yup.object({
 })
 
 export const joinSchema = yup.object().shape({
-    eamil: yup.string().email(HELPER_TEXT.emailNotMatch).required(HELPER_TEXT.emailRequired),
+    email: yup.string().email(HELPER_TEXT.emailNotMatch).required(HELPER_TEXT.emailRequired),
     confirmEmailCode: yup
         .string()
         .matches(REGEXP.verifyCode, HELPER_TEXT.emailCodeNotMatch)
@@ -71,37 +71,41 @@ export const joinSchema = yup.object().shape({
     name: yup.string().min(2, HELPER_TEXT.nameLength).required(HELPER_TEXT.nameRequired),
     company: yup.string().min(2, HELPER_TEXT.companyLength).required(HELPER_TEXT.companyRequired),
     team: yup.string().min(2, HELPER_TEXT.teamLength).required(HELPER_TEXT.teamRequired),
-    ipAddress1_0: yup.string().when('authority', {
+    ipAddress1_0: yup.string().when('role', {
         is: (value) => value === 'GUEST',
-        then: yup
-            .string()
-            .matches(REGEXP.ipNumber, HELPER_TEXT.ipNotMatch)
-            .required(HELPER_TEXT.ipRequired),
+        then: () =>
+            yup
+                .string()
+                .matches(REGEXP.ipNumber, HELPER_TEXT.ipNotMatch)
+                .required(HELPER_TEXT.ipRequired),
     }),
-    ipAddress2_0: yup.string().when('authority', {
+    ipAddress2_0: yup.string().when('role', {
         is: (value) => value === 'GUEST',
-        then: yup
-            .string()
-            .matches(REGEXP.ipNumber, HELPER_TEXT.ipNotMatch)
-            .required(HELPER_TEXT.ipRequired),
+        then: () =>
+            yup
+                .string()
+                .matches(REGEXP.ipNumber, HELPER_TEXT.ipNotMatch)
+                .required(HELPER_TEXT.ipRequired),
     }),
-    ipAddress3_0: yup.string().when('authority', {
+    ipAddress3_0: yup.string().when('role', {
         is: (value) => value === 'GUEST',
-        then: yup
-            .string()
-            .matches(REGEXP.ipNumber, HELPER_TEXT.ipNotMatch)
-            .required(HELPER_TEXT.ipRequired),
+        then: () =>
+            yup
+                .string()
+                .matches(REGEXP.ipNumber, HELPER_TEXT.ipNotMatch)
+                .required(HELPER_TEXT.ipRequired),
     }),
-    ipAddress4_0: yup.string().when('authority', {
+    ipAddress4_0: yup.string().when('role', {
         is: (value) => value === 'GUEST',
-        then: yup
-            .string()
-            .matches(REGEXP.ipNumber, HELPER_TEXT.ipNotMatch)
-            .required(HELPER_TEXT.ipRequired),
+        then: () =>
+            yup
+                .string()
+                .matches(REGEXP.ipNumber, HELPER_TEXT.ipNotMatch)
+                .required(HELPER_TEXT.ipRequired),
     }),
-    ipDescription_0: yup.string().when('authority', {
+    ipDescription_0: yup.string().when('role', {
         is: (value) => value === 'GUEST',
-        then: yup.string().required(HELPER_TEXT.ipDescRequired),
+        then: () => yup.string().required(HELPER_TEXT.ipDescRequired),
     }),
     ipAddress1_1: yup.string().matches(REGEXP.ipNumber, HELPER_TEXT.ipNotMatch),
     ipAddress2_1: yup.string().matches(REGEXP.ipNumber, HELPER_TEXT.ipNotMatch),

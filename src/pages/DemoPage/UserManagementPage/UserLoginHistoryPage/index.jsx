@@ -7,13 +7,17 @@ function UserLoginHistoryPage() {
         console.log('handleSearch', values)
     }
 
+    const handlePageChange = (page) => {
+        console.log(`page: ${page}`)
+    }
+
     return (
         <div>
             <h1>UserLoginHistoryPage</h1>
             <h2>Search Filter</h2>
             <SearchFilter onSearch={handleSearch} />
             <h2>Login History Table</h2>
-            <DataTable rows={loginHistory} />
+            <DataTable rows={loginHistory} pageSize={25} onPageChange={handlePageChange} />
         </div>
     )
 }

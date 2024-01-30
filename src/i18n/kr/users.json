@@ -1,6 +1,7 @@
 {
     "email": "이메일",
     "permission": "권한",
+    "period": "기간",
     "select": "선택",
     "general_user": "일반사용자",
     "request_user": "요청자",

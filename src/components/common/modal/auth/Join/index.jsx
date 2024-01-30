@@ -115,7 +115,7 @@ const JoinModal = () => {
                     <span style={{ color: 'red' }}>*</span>팀명
                 </Typography>
                 <TextInput name={'team'} placeholder={'팀명을 입력하세요'} formik={formik} />
-                {formik.values.authority === '0' && (
+                {formik.values.role === 'GUEST' && (
                     <>
                         <Box
                             sx={{

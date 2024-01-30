@@ -164,7 +164,7 @@ const MapGpssDetailTab = () => {
                                 formik={formik}
                                 name={'address'}
                                 IsDisabled={!isAddressSave}
-                                placeholder={t('addressInput', 'gpss')}
+                                placeholder={t('address_input', 'gpss')}
                             />
                         </Box>
                     )}
@@ -203,7 +203,7 @@ const MapGpssDetailTab = () => {
                                 formik={formik}
                                 name={'lat'}
                                 IsDisabled={!isLatSave}
-                                placeholder={t('latInput', 'gpss')}
+                                placeholder={t('lat_input', 'gpss')}
                             />
                         </Box>
                     )}
@@ -236,7 +236,7 @@ const MapGpssDetailTab = () => {
                                 formik={formik}
                                 name={'lng'}
                                 IsDisabled={!isLngSave}
-                                placeholder={t('lngInput', 'gpss')}
+                                placeholder={t('lng_input', 'gpss')}
                             />
                         </Box>
                     )}
@@ -370,7 +370,11 @@ const MapGpssDetailTab = () => {
             </Box>
 
             <Box sx={{ display: 'flex', justifyContent: 'end', gap: '6px' }}>
-                <Button variant={'contained'} onClick={handleClickTempSaveBtn}>
+                <Button
+                    variant={'contained'}
+                    onClick={handleClickTempSaveBtn}
+                    sx={{ whiteSpace: 'nowrap' }}
+                >
                     {t('temporary_save', 'gpss')}
                 </Button>
                 <Button variant={'contained'} onClick={handleClickEditBtn}>

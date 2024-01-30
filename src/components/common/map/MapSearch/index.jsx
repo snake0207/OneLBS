@@ -3,6 +3,8 @@ import { Autocomplete, Grid, InputAdornment, TextField, Typography } from '@mui/
 import SearchIcon from '@mui/icons-material/Search'
 import { useFormik } from 'formik'
 import { mapSearchSchema } from '#/contents/validationSchema.js'
+import t from '#/common/libs/trans.js'
+import { usePopupActions } from '#/store/usePopupStore.js'
 
 const countryCodeArr = [
     'ABW',
@@ -259,6 +261,7 @@ const languageCodeArr = ['ENG', 'KOR']
 const categoryCodeArr = ['ev Charging', 'fuel', 'parking', 'h2 Charging', 'dealerPoi']
 
 const MapSearch = () => {
+    const popupAction = usePopupActions()
     const formik = useFormik({
         initialValues: {
             country: '',
@@ -272,7 +275,7 @@ const MapSearch = () => {
         onSubmit: (form) => {
             console.log(form)
             if (form.searchValue === '') {
-                alert('검색어를 입력해 주세요.')
+                popupAction.showPopup('alert', t('input_keyword', 'common'))
                 return
             }
         },
@@ -293,7 +296,7 @@ const MapSearch = () => {
                         xs={3}
                         sx={{ display: 'flex', justifyContent: 'start', alignItems: 'center' }}
                     >
-                        <Typography>국가</Typography>
+                        <Typography>{t('country', 'common')}</Typography>
                     </Grid>
                     <Grid item xs={9}>
                         <Autocomplete
@@ -311,7 +314,7 @@ const MapSearch = () => {
                             renderInput={(params) => (
                                 <TextField
                                     {...params}
-                                    placeholder={'선택'}
+                                    placeholder={t('select', 'common')}
                                     name={'country'}
                                     onBlur={formik.handleBlur}
                                     error={formik.touched.country && !!formik.errors.country}
@@ -329,13 +332,13 @@ const MapSearch = () => {
                         xs={3}
                         sx={{ display: 'flex', justifyContent: 'start', alignItems: 'center' }}
                     >
-                        <Typography>위도</Typography>
+                        <Typography>{t('lat', 'common')}</Typography>
                     </Grid>
                     <Grid item xs={9}>
                         <TextField
                             sx={{ width: '100%' }}
                             size="small"
-                            placeholder={'위도를 입력해주세요'}
+                            placeholder={t('lat_input', 'gpss')}
                             name={'lat'}
                             onChange={formik.handleChange}
                             onBlur={formik.handleBlur}
@@ -351,13 +354,13 @@ const MapSearch = () => {
                         xs={3}
                         sx={{ display: 'flex', justifyContent: 'start', alignItems: 'center' }}
                     >
-                        <Typography>경도</Typography>
+                        <Typography>{t('lng', 'common')}</Typography>
                     </Grid>
                     <Grid item xs={9}>
                         <TextField
                             sx={{ width: '100%' }}
                             size="small"
-                            placeholder={'경도를 입력해주세요'}
+                            placeholder={t('lng_input', 'gpss')}
                             name={'lng'}
                             onChange={formik.handleChange}
                             onBlur={formik.handleBlur}
@@ -373,7 +376,7 @@ const MapSearch = () => {
                         xs={3}
                         sx={{ display: 'flex', justifyContent: 'start', alignItems: 'center' }}
                     >
-                        <Typography>언어</Typography>
+                        <Typography>{t('language', 'common')}</Typography>
                     </Grid>
                     <Grid item xs={9}>
                         <Autocomplete
@@ -390,7 +393,11 @@ const MapSearch = () => {
                             }}
                             value={formik.values.language}
                             renderInput={(params) => (
-                                <TextField {...params} placeholder={'선택'} name={'language'} />
+                                <TextField
+                                    {...params}
+                                    placeholder={t('select', 'common')}
+                                    name={'language'}
+                                />
                             )}
                         />
                     </Grid>
@@ -399,7 +406,7 @@ const MapSearch = () => {
                         xs={3}
                         sx={{ display: 'flex', justifyContent: 'start', alignItems: 'center' }}
                     >
-                        <Typography>카테고리</Typography>
+                        <Typography>{t('category', 'common')}</Typography>
                     </Grid>
                     <Grid item xs={9}>
                         <Autocomplete
@@ -416,13 +423,17 @@ const MapSearch = () => {
                             }}
                             value={formik.values.category}
                             renderInput={(params) => (
-                                <TextField {...params} placeholder={'선택'} name={'category'} />
+                                <TextField
+                                    {...params}
+                                    placeholder={t('select', 'common')}
+                                    name={'category'}
+                                />
                             )}
                         />
                     </Grid>
                     <Grid item xs={12}>
                         <TextField
-                            placeholder={'검색어를 입력해주세요'}
+                            placeholder={t('input_keyword', 'common')}
                             size="small"
                             sx={{ width: '100%' }}
                             name={'searchValue'}

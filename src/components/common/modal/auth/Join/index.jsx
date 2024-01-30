@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { useFormik } from 'formik'
-import { Box, Button, DialogActions, DialogContent, Typography } from '@mui/material'
+import { Box, Button, DialogActions, DialogContent, IconButton, Typography } from '@mui/material'
 import { usePostJoin } from '#/hooks/queries/auth'
 import TextInput from '#/components/common/input/TextInput'
 import PasswordInput from '#/components/common/input/PasswordInput'
@@ -10,43 +10,67 @@ import EmailVerifyInput from '#/components/common/modal/auth/Join/EmailVerifyInp
 import VerifyCodeInput from '#/components/common/modal/auth/Join/VerifyCodeInput'
 import JoinSuccessModal from '#/components/common/modal/auth/JoinSuccess'
 import PrivacyPolicyModal from '#/components/common/modal/auth/PrivacyPolicy'
-import { usePopupActions } from '#/store/usePopupStore'
+import Info from '@mui/icons-material/Info'
+import IpInput from '#/components/common/input/IpInput'
+import { formatJoinData } from '#/common/libs/formatData'
 
 const JoinModal = () => {
     const dummyAuthorityArr = [
-        { value: '0', label: '일반 사용자' },
-        { value: '1', label: '일반 관리자' },
-        { value: '3', label: '승인 관리자' },
-        { value: '4', label: '운영 관리자' },
+        { value: 'GUEST', label: '일반 사용자' },
+        { value: 'USER', label: '요청자' },
+        { value: 'REVIEWER', label: '검토자' },
+        { value: 'MANAGER', label: '승인자' },
+        { value: 'ADMIN', label: '운영자' },
     ]
     const dummyTermsArr = [
-        { value: '1', label: '개인정보 수집이용동의' },
-        { value: '0', label: '동의하지 않음' },
+        { value: 'Y', label: '개인정보 수집이용동의' },
+        { value: 'N', label: '동의하지 않음' },
     ]
     const { mutate } = usePostJoin()
-    const actions = usePopupActions()
     const [isJoinSuccess, setIsJoinSuccess] = useState(false)
     const [isOpenPrivacyPolicy, setIsOpenPrivacyPolicy] = useState(false)
+    const [ipInputCount, setIpInputCount] = useState(1)
+
     const formik = useFormik({
         initialValues: {
-            userMail: '',
-            emailverifyCode: '',
+            email: '',
+            confirmEmailCode: '',
             password: '',
             confirmPassword: '',
-            userName: '',
-            userCompany: '',
-            userTeamName: '',
-            authority: '0',
-            isTermsAgreed: '1',
+            name: '',
+            company: '',
+            team: '',
+            role: 'GUEST',
+            terms: 'N',
+            ipAddress1_0: '',
+            ipAddress2_0: '',
+            ipAddress3_0: '',
+            ipAddress4_0: '',
+            ipDescription_0: '',
+            ipAddress1_1: '',
+            ipAddress2_1: '',
+            ipAddress3_1: '',
+            ipAddress4_1: '',
+            ipDescription_1: '',
+            ipAddress1_2: '',
+            ipAddress2_2: '',
+            ipAddress3_2: '',
+            ipAddress4_2: '',
+            ipDescription_2: '',
         },
         validationSchema: joinSchema,
         onSubmit: (form) => {
             console.log(form)
-            actions
+            const data = formatJoinData(form)
+            console.log(data)
             setIsJoinSuccess(true)
             // mutate(form)
         },
     })
+
+    const handleClickAddIPInput = () => {
+        setIpInputCount((prev) => prev + 1)
+    }
 
     return (
         <>
@@ -57,11 +81,11 @@ const JoinModal = () => {
                 <Typography variant="h6">
                     <span style={{ color: 'red' }}>*</span>이메일
                 </Typography>
-                <EmailVerifyInput name={'userMail'} formik={formik} />
+                <EmailVerifyInput name={'email'} formik={formik} />
                 <Typography variant="h6">
                     <span style={{ color: 'red' }}>*</span>메일인증코드
                 </Typography>
-                <VerifyCodeInput name={'emailverifyCode'} formik={formik} />
+                <VerifyCodeInput name={'confirmEmailCode'} formik={formik} />
                 <Typography variant="h6">
                     <span style={{ color: 'red' }}>*</span>비밀번호
                 </Typography>
@@ -82,27 +106,55 @@ const JoinModal = () => {
                 <Typography variant="h6">
                     <span style={{ color: 'red' }}>*</span>이름
                 </Typography>
-                <TextInput name={'userName'} placeholder={'이름을 입력하세요'} formik={formik} />
+                <TextInput name={'name'} placeholder={'이름을 입력하세요'} formik={formik} />
                 <Typography variant="h6">
                     <span style={{ color: 'red' }}>*</span>회사명
                 </Typography>
-                <TextInput
-                    name={'userCompany'}
-                    placeholder={'회사명을 입력하세요'}
-                    formik={formik}
-                />
+                <TextInput name={'company'} placeholder={'회사명을 입력하세요'} formik={formik} />
                 <Typography variant="h6">
                     <span style={{ color: 'red' }}>*</span>팀명
                 </Typography>
-                <TextInput
-                    name={'userTeamName'}
-                    placeholder={'팀명을 입력하세요'}
-                    formik={formik}
-                />
+                <TextInput name={'team'} placeholder={'팀명을 입력하세요'} formik={formik} />
+                {formik.values.role === 'GUEST' && (
+                    <>
+                        <Box
+                            sx={{
+                                display: 'flex',
+                                justifyContent: 'space-between',
+                                alignItems: 'center',
+                            }}
+                        >
+                            <Typography variant="h6">
+                                <span style={{ color: 'red' }}>*</span>IP
+                            </Typography>
+                            <IconButton
+                                onClick={handleClickAddIPInput}
+                                disabled={3 === ipInputCount}
+                            >
+                                <Info />
+                            </IconButton>
+                        </Box>
+                        <Typography variant="body2">
+                            <span style={{ color: 'red' }}>*</span>IP는 최대3개까지 입력 가능
+                            합니다.
+                        </Typography>
+                        {Array.from({ length: ipInputCount }).map((_, idx) => (
+                            <IpInput
+                                key={idx}
+                                ipName1={`ipAddress1_${idx}`}
+                                ipName2={`ipAddress2_${idx}`}
+                                ipName3={`ipAddress3_${idx}`}
+                                ipName4={`ipAddress4_${idx}`}
+                                ipDescription={`ipDescription_${idx}`}
+                                formik={formik}
+                            />
+                        ))}
+                    </>
+                )}
                 <Typography variant="h6">
                     <span style={{ color: 'red' }}>*</span>권한
                 </Typography>
-                <RadioInput radioList={dummyAuthorityArr} name={'authority'} formik={formik} />
+                <RadioInput radioList={dummyAuthorityArr} name={'role'} formik={formik} />
                 <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
                     <Typography variant="h6">
                         <span style={{ color: 'red' }}>*</span>약관동의
@@ -113,7 +165,7 @@ const JoinModal = () => {
                 </Box>
                 <RadioInput
                     radioList={dummyTermsArr}
-                    name={'isTermsAgreed'}
+                    name={'terms'}
                     formik={formik}
                     isDisabled={true}
                 />

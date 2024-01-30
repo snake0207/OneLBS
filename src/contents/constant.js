@@ -13,5 +13,5 @@ export const MODAL_TITLE = {
 
 export const GPSS_TABLE_TYPE = {
     reviewer: 'reviewer',
-    approver: 'approver',
+    manager: 'manager',
 }

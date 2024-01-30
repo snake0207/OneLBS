@@ -4,8 +4,8 @@ import { GPSS_TABLE_TYPE } from '#/contents/constant.js'
 const UserSearchTable = ({ data, headers, ...props }) => {
     const {
         tableType,
-        selectedApprover,
-        setSelectedApprover,
+        selectedManager,
+        setSelectedManager,
         selectedReviewer,
         setSelectedReviewer,
     } = props
@@ -19,20 +19,20 @@ const UserSearchTable = ({ data, headers, ...props }) => {
             if (selected === userSeq) setSelectedReviewer(null)
             else setSelectedReviewer(userSeq)
         }
-        if (tableType === GPSS_TABLE_TYPE.approver) {
-            const selected = selectedApprover
+        if (tableType === GPSS_TABLE_TYPE.manager) {
+            const selected = selectedManager
             if (!selected) {
-                setSelectedApprover(userSeq)
+                setSelectedManager(userSeq)
                 return
             }
-            if (selected === userSeq) setSelectedApprover(null)
-            else setSelectedApprover(userSeq)
+            if (selected === userSeq) setSelectedManager(null)
+            else setSelectedManager(userSeq)
         }
     }
 
     const setIsSelected = (userSeq) => {
         if (tableType === GPSS_TABLE_TYPE.reviewer) return selectedReviewer === userSeq
-        if (tableType === GPSS_TABLE_TYPE.approver) return selectedApprover === userSeq
+        if (tableType === GPSS_TABLE_TYPE.manager) return selectedManager === userSeq
     }
 
     return (

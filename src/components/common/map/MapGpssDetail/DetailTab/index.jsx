@@ -20,6 +20,7 @@ import SaveIcon from '@mui/icons-material/Save'
 import TextInput from '#/components/common/input/TextInput/index.jsx'
 import UserSearchTable from '#/components/common/map/MapGpssDetail/UserSearchTable/index.jsx'
 import { GPSS_TABLE_TYPE } from '#/contents/constant.js'
+import { useGetManager, useGetReviewer } from '#/hooks/queries/gpss.js'
 
 const dummyData = [
     { id: 'qwer@acrofuture.com', name: '아*로1', company: '회사1', userSeq: 1 },
@@ -37,7 +38,7 @@ const MapGpssDetailTab = () => {
             lng: '',
             reason: '',
             reviewer: '',
-            approver: '',
+            manager: '',
         },
         onSubmit: (form) => {
             console.log(form)
@@ -48,7 +49,10 @@ const MapGpssDetailTab = () => {
     const [isLatSave, setIsLatSave] = useState(false)
     const [isLngSave, setIsLngSave] = useState(false)
     const [selectedReviewer, setSelectedReviewer] = useState(null)
-    const [selectedApprover, setSelectedApprover] = useState(null)
+    const [selectedManager, setSelectedManager] = useState(null)
+
+    const { data: reviewerData, refetch: getReviewer } = useGetReviewer(formik.values.reviewer)
+    const { data: managerData, refetch: getManager } = useGetManager(formik.values.manager)
 
     const handleClickSetAddressState = () => {
         setIsAddressSave(!isAddressSave)
@@ -58,6 +62,17 @@ const MapGpssDetailTab = () => {
     }
     const handleClickSetLngSate = () => {
         setIsLngSave(!isLngSave)
+    }
+
+    // 검토자 검색
+    const handleClickGetReviewer = () => {
+        console.log(formik.values.reviewer)
+        // getReviewer()
+    }
+    // 결제자 검색
+    const handleClickGetManager = () => {
+        console.log(formik.values.manager)
+        // getManager()
     }
     return (
         <Box sx={{ paddingTop: '16px' }}>
@@ -221,10 +236,12 @@ const MapGpssDetailTab = () => {
                 >
                     <TextInput
                         formik={formik}
-                        name={GPSS_TABLE_TYPE.reviewer}
+                        name={'reviewer'}
                         placeholder={'검토자를 입력해주세요'}
                     />
-                    <Button variant={'contained'}>검색</Button>
+                    <Button variant={'contained'} onClick={handleClickGetReviewer}>
+                        검색
+                    </Button>
                 </Box>
                 <Box
                     sx={{
@@ -239,7 +256,7 @@ const MapGpssDetailTab = () => {
                     <UserSearchTable
                         data={dummyData}
                         headers={tableHeader}
-                        tableType={'reviewer'}
+                        tableType={GPSS_TABLE_TYPE.reviewer}
                         selectedReviewer={selectedReviewer}
                         setSelectedReviewer={setSelectedReviewer}
                     />
@@ -261,10 +278,12 @@ const MapGpssDetailTab = () => {
                 >
                     <TextInput
                         formik={formik}
-                        name={'approver'}
+                        name={'manager'}
                         placeholder={'결제자를 입력해주세요'}
                     />
-                    <Button variant={'contained'}>검색</Button>
+                    <Button variant={'contained'} onClick={handleClickGetManager}>
+                        검색
+                    </Button>
                 </Box>
                 <Box
                     sx={{
@@ -279,9 +298,9 @@ const MapGpssDetailTab = () => {
                     <UserSearchTable
                         data={dummyData}
                         headers={tableHeader}
-                        tableType={GPSS_TABLE_TYPE.approver}
-                        selectedApprover={selectedApprover}
-                        setSelectedApprover={setSelectedApprover}
+                        tableType={GPSS_TABLE_TYPE.manager}
+                        selectedManager={selectedManager}
+                        setSelectedManager={setSelectedManager}
                     />
                 </Box>
             </Box>

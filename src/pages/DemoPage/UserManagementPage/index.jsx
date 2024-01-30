@@ -10,7 +10,7 @@ function UserManagementPage() {
                     <a href="/components/users/login-history">User Login History</a>
                 </li>
                 <li>
-                    <a href="#">User Permit History</a>
+                    <a href="/components/users/permission-history">User Permission History</a>
                 </li>
             </ul>
         </div>

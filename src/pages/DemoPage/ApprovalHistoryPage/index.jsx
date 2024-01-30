@@ -191,6 +191,11 @@ const ApprovalHistoryPage = () => {
         console.log(`ACTIVE PAGE IS >> ${page}`)
     }
 
+    const handleSubmitFilter = (params) => {
+        // TODO: API GET
+        console.log('FILTER PARAM >> ', params)
+    }
+
     return (
         <Box sx={{ display: 'flex', flexDirection: 'column', gap: '2rem' }}>
             <Box>
@@ -198,7 +203,7 @@ const ApprovalHistoryPage = () => {
                     검색 필터
                 </Typography>
                 <Container maxWidth={'800px'}>
-                    <SearchFilter />
+                    <SearchFilter handleSubmitFilter={handleSubmitFilter} />
                 </Container>
             </Box>
 

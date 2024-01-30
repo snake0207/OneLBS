@@ -1,9 +1,9 @@
-import { Box, Button, Table, TableCell, TableHead, TableRow } from '@mui/material'
+import { Box, Button, Stack, Table, TableCell, TableHead, TableRow } from '@mui/material'
 import TextInput from '#/components/common/input/TextInput'
 import { useFormik } from 'formik'
-import * as yup from 'yup'
 import t from '#/common/libs/trans'
 import Select from '#/components/common/Select'
+import DatePickerInput from '#/components/common/input/DatePickerInput'
 
 function SearchFilter({ onSearch }) {
     const getPermissionList = () => [
@@ -19,10 +19,9 @@ function SearchFilter({ onSearch }) {
         initialValues: {
             email: '',
             permission: 0,
+            start_date: null,
+            end_date: null,
         },
-        validationSchema: yup.object({
-            permission: yup.number(),
-        }),
         onSubmit: (values) => {
             if (onSearch) onSearch(values)
         },
@@ -60,6 +59,18 @@ function SearchFilter({ onSearch }) {
                                 sx={{ width: 200, height: 40 }}
                             />
                         </TableCell>
+                    </TableRow>
+                    <TableRow>
+                        <TableCell>{t('period', 'users')}</TableCell>
+                        <TableCell>
+                            <Stack direction="row" spacing={1}>
+                                <DatePickerInput name="start_date" formik={formik} />
+                                <Box> ~ </Box>
+                                <DatePickerInput name="end_date" formik={formik} />
+                            </Stack>
+                        </TableCell>
+                        <TableCell />
+                        <TableCell />
                     </TableRow>
                 </TableHead>
             </Table>

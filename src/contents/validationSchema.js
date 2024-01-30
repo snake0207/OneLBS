@@ -1,4 +1,5 @@
 import * as yup from 'yup'
+import t from '#/common/libs/trans.js'
 
 const HELPER_TEXT = {
     emailRequired: '이메일을 입력해 주세요.',
@@ -22,9 +23,9 @@ const HELPER_TEXT = {
     nameLength: '한 글자 이상 입력해 주세요.',
     otpRequired: 'OTP를 입력해 주세요.',
     otpNotMatch: '6자리 숫자를 입력해 주세요.',
-    searchCountry: '국가를 선택해주세요',
-    searchLat: '위도를 입력 해 주세요',
-    searchLng: '경도를 입력 해 주세요',
+    searchCountry: t('country_select', 'gpss'),
+    searchLat: t('lat_input', 'gpss'),
+    searchLng: t('lng_input', 'gpss'),
     ipRequired: 'IP 입력해 주세요.',
     ipNotMatch: 'IP 형식이 맞지 않습니다.',
     ipDescRequired: '설명을 입력해 주세요.',

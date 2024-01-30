@@ -1,9 +1,11 @@
 import { useAuthStepState } from '#/store/useAuthStepStore'
 import { Step, StepLabel, Stepper } from '@mui/material'
 
+import t from '#/common/libs/trans'
+
 const AuthStepper = () => {
     const authStep = useAuthStepState()
-    const steps = ['정보입력', '인증', '로그인']
+    const steps = [t('input_infomation', 'auth'), t('certified', 'auth'), t('login', 'auth')]
     return (
         <Stepper
             activeStep={authStep}

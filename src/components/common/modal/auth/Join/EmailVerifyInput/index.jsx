@@ -2,6 +2,8 @@ import { useTimeActions } from '#/store/useTimerStore'
 import Close from '@mui/icons-material/Close'
 import { Box, Button, IconButton, InputAdornment, TextField } from '@mui/material'
 
+import t from '#/common/libs/trans'
+
 const EmailVerifyInput = ({ name, formik }) => {
     const { setTime } = useTimeActions()
     const handleClickSendEmail = () => {
@@ -27,7 +29,7 @@ const EmailVerifyInput = ({ name, formik }) => {
                 fullWidth
                 size="small"
                 type="text"
-                placeholder={'이메일을 입력하세요'}
+                placeholder={t('placeholder.email', 'auth')}
                 helperText={formik.touched[name] && formik.errors[name]}
                 InputProps={{
                     endAdornment: (
@@ -50,7 +52,7 @@ const EmailVerifyInput = ({ name, formik }) => {
                 type="button"
                 sx={{ flex: '0 0 auto' }}
             >
-                인증메일전송
+                {t('send_mail_certified', 'auth')}
             </Button>
         </Box>
     )

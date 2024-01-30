@@ -1,0 +1,27 @@
+{
+  "country": "country",
+  "lat": "latitude",
+  "lng": "longitude",
+  "language": "language",
+  "category": "category",
+  "latInput": "please enter latitude",
+  "lngInput": "please enter longitude",
+  "country_select": "please select country",
+  "info": "info",
+  "last_modified_info": "last modified info",
+  "reason_for_approval": "reason for approval",
+  "reason_for_approval_input": "please enter reason for approval",
+  "reviewer": "reviewer",
+  "manager": "manager",
+  "temporary_save": "temporary save",
+  "edit_request": "edit",
+  "delete_request": "delete",
+  "pop_up": {
+    "temporary_save": "would you like to temporarily save above data?",
+    "edit_request": "would you like to submit edit request?",
+    "delete_request": "would you like to submit delete request?",
+    "reason_required": "please enter reason for approval",
+    "reviewer_required": "please select reviewer",
+    "manager_required": "please select manager"
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "country": "국가",
+  "lat": "위도",
+  "lng": "경도",
+  "language": "언어",
+  "category": "카테고리",
+  "latInput": "위도를 입력해 주세요",
+  "lngInput": "경도를 입력해 주세요",
+  "country_select": "국가를 선택 해 주세요",
+  "info": "정보",
+  "last_modified_info": "최종수정정보",
+  "reason_for_approval": "승인 요청 이유",
+  "reason_for_approval_input": "승인 요청 이유를 입력하세요",
+  "reviewer": "검토자",
+  "manager": "승인자",
+  "temporary_save": "임시저장",
+  "edit_request": "수정요청",
+  "delete_request": "삭제요청",
+  "pop_up": {
+    "temporary_save": "임시저장 하시겠습니까?",
+    "edit_request": "수정요청 상신하시겠습니까?",
+    "delete_request": "삭제요청 상신하시겠습니까?",
+    "reason_required": "승인 요청 이유를 입력해주세요",
+    "reviewer_required": "검토자를 선택 해 주세요",
+    "manager_required": "승인자를 선택 해 주세요"
+  }
+}

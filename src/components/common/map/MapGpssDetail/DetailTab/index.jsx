@@ -45,7 +45,10 @@ const MapGpssDetailTab = () => {
             console.log(form)
         },
     })
-
+    const popupAction = usePopupActions()
+    const { data: reviewerData, refetch: getReviewer } = useGetReviewer(formik.values.reviewer)
+    const { data: managerData, refetch: getManager } = useGetManager(formik.values.manager)
+    // 데이터 수정
     const [isAddressSave, setIsAddressSave] = useState(false)
     const [isLatSave, setIsLatSave] = useState(false)
     const [isLngSave, setIsLngSave] = useState(false)
@@ -55,9 +58,6 @@ const MapGpssDetailTab = () => {
     // 검토자 승인자 선택
     const [selectedReviewer, setSelectedReviewer] = useState(null)
     const [selectedManager, setSelectedManager] = useState(null)
-
-    const { data: reviewerData, refetch: getReviewer } = useGetReviewer(formik.values.reviewer)
-    const { data: managerData, refetch: getManager } = useGetManager(formik.values.manager)
 
     const handleClickSetAddressState = () => {
         setIsAddressSave(!isAddressSave)
@@ -81,6 +81,49 @@ const MapGpssDetailTab = () => {
         setIsManagerSearchClick(true)
         // getManager()
     }
+    // 임시저장
+    const handleClickTempSaveBtn = () => {
+        popupAction.showPopup('confirm', '임시저장 하시겠습니까?', gpssTempSave)
+    }
+    const gpssTempSave = () => {
+        console.log('임시저장')
+        popupAction.closePopup()
+    }
+    // 수정요청
+    const handleClickEditBtn = () => {
+        if (gpssRequestValidation())
+            popupAction.showPopup('confirm', 'aaa님에게 수정요청 상신하시겠습니까?', gpssEdit)
+    }
+    const gpssEdit = () => {
+        console.log('수정요청')
+        popupAction.closePopup()
+    }
+    // 삭제요청
+    const handleClickDeleteBtn = () => {
+        if (gpssRequestValidation())
+            popupAction.showPopup('confirm', 'aaa님에게 삭제요청 상신하시겠습니까?', gpssDelete)
+    }
+    const gpssDelete = () => {
+        console.log('삭제요청')
+        popupAction.closePopup()
+    }
+
+    const gpssRequestValidation = () => {
+        if (formik.values.reason === '') {
+            popupAction.showPopup('alert', '승인 요청 이유를 입력해주세요')
+            return false
+        }
+        if (!selectedReviewer) {
+            popupAction.showPopup('alert', '검토자를 선택 해 주세요')
+            return false
+        }
+        if (!selectedManager) {
+            popupAction.showPopup('alert', '승인자를 선택 해 주세요')
+            return false
+        }
+        return true
+    }
+
     return (
         <Box sx={{ paddingTop: '16px' }}>
             <Box>
@@ -325,9 +368,15 @@ const MapGpssDetailTab = () => {
             </Box>
 
             <Box sx={{ display: 'flex', justifyContent: 'end', gap: '6px' }}>
-                <Button variant={'contained'}>임시저장</Button>
-                <Button variant={'contained'}>수정요청</Button>
-                <Button variant={'contained'}>삭제요청</Button>
+                <Button variant={'contained'} onClick={handleClickTempSaveBtn}>
+                    임시저장
+                </Button>
+                <Button variant={'contained'} onClick={handleClickEditBtn}>
+                    수정요청
+                </Button>
+                <Button variant={'contained'} onClick={handleClickDeleteBtn}>
+                    삭제요청
+                </Button>
             </Box>
         </Box>
     )

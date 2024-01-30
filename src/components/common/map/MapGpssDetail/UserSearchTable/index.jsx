@@ -6,8 +6,8 @@ const UserSearchTable = ({ data, ...props }) => {
     const tableHeader = [t('id', 'common'), t('name', 'common'), t('company', 'common')]
     const {
         tableType,
-        selectedManager,
-        setSelectedManager,
+        selectedApprover,
+        setSelectedApprover,
         selectedReviewer,
         setSelectedReviewer,
     } = props
@@ -21,20 +21,20 @@ const UserSearchTable = ({ data, ...props }) => {
             if (selected === userSeq) setSelectedReviewer(null)
             else setSelectedReviewer(userSeq)
         }
-        if (tableType === GPSS_TABLE_TYPE.manager) {
-            const selected = selectedManager
+        if (tableType === GPSS_TABLE_TYPE.approver) {
+            const selected = selectedApprover
             if (!selected) {
-                setSelectedManager(userSeq)
+                setSelectedApprover(userSeq)
                 return
             }
-            if (selected === userSeq) setSelectedManager(null)
-            else setSelectedManager(userSeq)
+            if (selected === userSeq) selectedApprover(null)
+            else setSelectedApprover(userSeq)
         }
     }
 
     const setIsSelected = (userSeq) => {
         if (tableType === GPSS_TABLE_TYPE.reviewer) return selectedReviewer === userSeq
-        if (tableType === GPSS_TABLE_TYPE.manager) return selectedManager === userSeq
+        if (tableType === GPSS_TABLE_TYPE.approver) return selectedApprover === userSeq
     }
 
     return (

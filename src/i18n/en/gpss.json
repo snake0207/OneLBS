@@ -16,6 +16,6 @@
     "delete_request": "would you like to submit delete request?",
     "reason_required": "please enter reason for approval",
     "reviewer_required": "please select reviewer",
-    "manager_required": "please select manager"
+    "approver_required": "please select approver"
   }
 }

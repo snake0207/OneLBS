@@ -5,11 +5,11 @@ const getReviewer = (data) => {
     return getAPI({ endPoint: API_PATH.gpss.reviewer, data })
 }
 
-const getManager = (data) => {
-    return getAPI({ endPoint: API_PATH.gpss.manager, data })
+const getApprover = (data) => {
+    return getAPI({ endPoint: API_PATH.gpss.approver, data })
 }
 
 export default {
     getReviewer,
-    getManager,
+    getApprover,
 }

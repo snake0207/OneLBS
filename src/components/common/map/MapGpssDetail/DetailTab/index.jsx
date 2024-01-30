@@ -20,7 +20,7 @@ import SaveIcon from '@mui/icons-material/Save'
 import TextInput from '#/components/common/input/TextInput/index.jsx'
 import UserSearchTable from '#/components/common/map/MapGpssDetail/UserSearchTable/index.jsx'
 import { GPSS_TABLE_TYPE } from '#/contents/constant.js'
-import { useGetManager, useGetReviewer } from '#/hooks/queries/gpss.js'
+import { useGetApprover, useGetReviewer } from '#/hooks/queries/gpss.js'
 import { usePopupActions } from '#/store/usePopupStore.js'
 import t from '#/common/libs/trans.js'
 
@@ -38,7 +38,7 @@ const MapGpssDetailTab = () => {
             lng: '',
             reason: '',
             reviewer: '',
-            manager: '',
+            approver: '',
         },
         onSubmit: (form) => {
             console.log(form)
@@ -46,17 +46,17 @@ const MapGpssDetailTab = () => {
     })
     const popupAction = usePopupActions()
     const { data: reviewerData, refetch: getReviewer } = useGetReviewer(formik.values.reviewer)
-    const { data: managerData, refetch: getManager } = useGetManager(formik.values.manager)
+    const { data: approverData, refetch: getApprover } = useGetApprover(formik.values.approver)
     // 데이터 수정
     const [isAddressSave, setIsAddressSave] = useState(false)
     const [isLatSave, setIsLatSave] = useState(false)
     const [isLngSave, setIsLngSave] = useState(false)
     // 검토자 승인자 검색
     const [isReviewerSearchClick, setIsReviewerSearchClick] = useState(false)
-    const [isManagerSearchClick, setIsManagerSearchClick] = useState(false)
+    const [isApproverSearchClick, setIsApproverSearchClick] = useState(false)
     // 검토자 승인자 선택
     const [selectedReviewer, setSelectedReviewer] = useState(null)
-    const [selectedManager, setSelectedManager] = useState(null)
+    const [selectedApprover, setSelectedApprover] = useState(null)
 
     const handleClickSetAddressState = () => {
         setIsAddressSave(!isAddressSave)
@@ -75,10 +75,10 @@ const MapGpssDetailTab = () => {
         // getReviewer()
     }
     // 결제자 검색
-    const handleClickGetManager = () => {
-        if (formik.values.manager === '') return
-        setIsManagerSearchClick(true)
-        // getManager()
+    const handleClickGetApprover = () => {
+        if (formik.values.approver === '') return
+        setIsApproverSearchClick(true)
+        // getApprover()
     }
     // 임시저장
     const handleClickTempSaveBtn = () => {
@@ -117,8 +117,8 @@ const MapGpssDetailTab = () => {
             popupAction.showPopup('alert', t('pop_up.reviewer_required', 'gpss'))
             return false
         }
-        if (!selectedManager) {
-            popupAction.showPopup('alert', t('pop_up.manager_required', 'gpss'))
+        if (!selectedApprover) {
+            popupAction.showPopup('alert', t('pop_up.approver_required', 'gpss'))
             return false
         }
         return true
@@ -337,10 +337,10 @@ const MapGpssDetailTab = () => {
                 >
                     <TextInput
                         formik={formik}
-                        name={'manager'}
+                        name={'approver'}
                         placeholder={t('input_keyword', 'common')}
                     />
-                    <Button variant={'contained'} onClick={handleClickGetManager}>
+                    <Button variant={'contained'} onClick={handleClickGetApprover}>
                         {t('search', 'common')}
                     </Button>
                 </Box>
@@ -353,16 +353,16 @@ const MapGpssDetailTab = () => {
                         mt: '8px',
                     }}
                 >
-                    {isManagerSearchClick && (
+                    {isApproverSearchClick && (
                         <>
                             <Typography sx={{ marginY: '16px' }}>
                                 {t('search_no_result', 'common')}
                             </Typography>
                             <UserSearchTable
                                 data={dummyData}
-                                tableType={GPSS_TABLE_TYPE.manager}
-                                selectedManager={selectedManager}
-                                setSelectedManager={setSelectedManager}
+                                tableType={GPSS_TABLE_TYPE.approver}
+                                selectedApprover={selectedApprover}
+                                setSelectedApprover={setSelectedApprover}
                             />
                         </>
                     )}

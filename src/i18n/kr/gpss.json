@@ -16,6 +16,6 @@
     "delete_request": "삭제요청 상신하시겠습니까?",
     "reason_required": "승인 요청 이유를 입력해주세요",
     "reviewer_required": "검토자를 선택 해 주세요",
-    "manager_required": "승인자를 선택 해 주세요"
+    "approver_required": "승인자를 선택 해 주세요"
   }
 }

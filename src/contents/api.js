@@ -5,6 +5,6 @@ export const API_PATH = {
     VerifyCode: '/',
     gpss: {
         reviewer: '/reviewer',
-        manager: '/manager',
+        approver: '/approver',
     },
 }

@@ -10,10 +10,10 @@ export const useGetReviewer = (userName) => {
     return { data, refetch }
 }
 
-export const useGetManager = (userName) => {
+export const useGetApprover = (userName) => {
     const { data, refetch } = useQuery({
-        queryKey: [QUERY_KEYS.gpss.manager, userName],
-        queryFn: gpss.getManager,
+        queryKey: [QUERY_KEYS.gpss.approver, userName],
+        queryFn: gpss.getApprover,
         enabled: false,
     })
     return { data, refetch }

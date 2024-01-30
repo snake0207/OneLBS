@@ -21,6 +21,7 @@ import TextInput from '#/components/common/input/TextInput/index.jsx'
 import UserSearchTable from '#/components/common/map/MapGpssDetail/UserSearchTable/index.jsx'
 import { GPSS_TABLE_TYPE } from '#/contents/constant.js'
 import { useGetManager, useGetReviewer } from '#/hooks/queries/gpss.js'
+import { usePopupActions } from '#/store/usePopupStore.js'
 
 const dummyData = [
     { id: 'qwer@acrofuture.com', name: '아*로1', company: '회사1', userSeq: 1 },
@@ -48,6 +49,10 @@ const MapGpssDetailTab = () => {
     const [isAddressSave, setIsAddressSave] = useState(false)
     const [isLatSave, setIsLatSave] = useState(false)
     const [isLngSave, setIsLngSave] = useState(false)
+    // 검토자 승인자 검색
+    const [isReviewerSearchClick, setIsReviewerSearchClick] = useState(false)
+    const [isManagerSearchClick, setIsManagerSearchClick] = useState(false)
+    // 검토자 승인자 선택
     const [selectedReviewer, setSelectedReviewer] = useState(null)
     const [selectedManager, setSelectedManager] = useState(null)
 
@@ -66,12 +71,14 @@ const MapGpssDetailTab = () => {
 
     // 검토자 검색
     const handleClickGetReviewer = () => {
-        console.log(formik.values.reviewer)
+        if (formik.values.reviewer === '') return
+        setIsReviewerSearchClick(true)
         // getReviewer()
     }
     // 결제자 검색
     const handleClickGetManager = () => {
-        console.log(formik.values.manager)
+        if (formik.values.manager === '') return
+        setIsManagerSearchClick(true)
         // getManager()
     }
     return (
@@ -218,6 +225,10 @@ const MapGpssDetailTab = () => {
                     multiline
                     fullWidth
                     placeholder="승인 요청 이유를 입력하세요"
+                    name={'reason'}
+                    onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
+                    value={formik.values[name]}
                 ></TextField>
             </Box>
             <Box>
@@ -252,19 +263,23 @@ const MapGpssDetailTab = () => {
                         mt: '8px',
                     }}
                 >
-                    <Typography sx={{ marginY: '16px' }}>검색결과가 없습니다</Typography>
-                    <UserSearchTable
-                        data={dummyData}
-                        headers={tableHeader}
-                        tableType={GPSS_TABLE_TYPE.reviewer}
-                        selectedReviewer={selectedReviewer}
-                        setSelectedReviewer={setSelectedReviewer}
-                    />
+                    {isReviewerSearchClick && (
+                        <>
+                            <Typography sx={{ marginY: '16px' }}>검색결과가 없습니다</Typography>
+                            <UserSearchTable
+                                data={dummyData}
+                                headers={tableHeader}
+                                tableType={GPSS_TABLE_TYPE.reviewer}
+                                selectedReviewer={selectedReviewer}
+                                setSelectedReviewer={setSelectedReviewer}
+                            />
+                        </>
+                    )}
                 </Box>
             </Box>
             <Box>
                 <Box>
-                    <Typography>결제자</Typography>
+                    <Typography>승인자</Typography>
                 </Box>
                 <Divider />
                 <Box
@@ -294,14 +309,18 @@ const MapGpssDetailTab = () => {
                         mt: '8px',
                     }}
                 >
-                    <Typography sx={{ marginY: '16px' }}>검색결과가 없습니다</Typography>
-                    <UserSearchTable
-                        data={dummyData}
-                        headers={tableHeader}
-                        tableType={GPSS_TABLE_TYPE.manager}
-                        selectedManager={selectedManager}
-                        setSelectedManager={setSelectedManager}
-                    />
+                    {isManagerSearchClick && (
+                        <>
+                            <Typography sx={{ marginY: '16px' }}>검색결과가 없습니다</Typography>
+                            <UserSearchTable
+                                data={dummyData}
+                                headers={tableHeader}
+                                tableType={GPSS_TABLE_TYPE.manager}
+                                selectedManager={selectedManager}
+                                setSelectedManager={setSelectedManager}
+                            />
+                        </>
+                    )}
                 </Box>
             </Box>
 

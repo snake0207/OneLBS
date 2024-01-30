@@ -4,8 +4,10 @@ import { useFormik } from 'formik'
 import * as yup from 'yup'
 import RadioInput from '#/components/common/Radio'
 import IpInput from '#/components/common/input/IpInput'
-import { Box, Grid } from '@mui/material'
+import { Box, Button } from '@mui/material'
 import DatePickerInput from '#/components/common/input/DatePickerInput/index.jsx'
+import CheckBoxInput from '#/components/common/input/CheckBoxInput/index.jsx'
+import t from '#/common/libs/trans'
 
 const InputPage = () => {
     const formik = useFormik({
@@ -17,6 +19,9 @@ const InputPage = () => {
             demoRadioDisabled: 'demo1',
             demoDatePicker: null, // 기본값 X -> null
             demoDisableDatePicker: '2022-02-22', // 기본값 O -> 'YYYY-MM-DD' 형식
+            demoCheck1: false, // checkbox 기본값
+            demoCheck2: false,
+            demoCheck3: false,
         },
         validationSchema: yup.object({
             demoInput: yup.string().required('this is required'),
@@ -26,6 +31,8 @@ const InputPage = () => {
             demoIp3: yup.string().required('IP 입력해 주세요'),
             demoIp4: yup.string().required('IP 입력해 주세요'),
             demoIpDescription: yup.string().required('설명 입력해 주세요'),
+            demoCheck1: yup.boolean().isTrue(t('required', 'inputs')),
+            demoCheck2: yup.boolean().isTrue(t('required', 'inputs')),
         }),
         onSubmit: (form) => {
             console.log(form)
@@ -35,6 +42,11 @@ const InputPage = () => {
         { label: 'demo1', value: 'demo1' },
         { label: 'demo2', value: 'demo2' },
         { label: 'demo3', value: 'demo3' },
+    ]
+    const checkBoxes = [
+        { name: 'demoCheck1', label: '[필수] 만 14세 이상입니다.1' },
+        { name: 'demoCheck2', label: '[필수] 만 14세 이상입니다.2' },
+        { name: 'demoCheck3', label: '[선택] 만 14세 이상입니다.3' },
     ]
 
     return (
@@ -107,6 +119,19 @@ const InputPage = () => {
                     />
                 </Box>
             </Box>
+            <h2>Check Box</h2>
+            <Box sx={{ display: 'flex', flexDirection: 'column' }}>
+                <CheckBoxInput
+                    isAllExist={true} // 전체항목 표기여부
+                    allLabelText="전체 동의"
+                    checkItems={checkBoxes}
+                    formik={formik}
+                    isDisabled={false}
+                />
+            </Box>
+            <Button type={'submit'} onClick={formik.handleSubmit}>
+                submit
+            </Button>
         </div>
     )
 }

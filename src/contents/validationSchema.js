@@ -25,9 +25,13 @@ const HELPER_TEXT = {
     searchCountry: '국가를 선택해주세요',
     searchLat: '위도를 입력 해 주세요',
     searchLng: '경도를 입력 해 주세요',
+    ipRequired: 'IP 입력해 주세요.',
+    ipNotMatch: 'IP 형식이 맞지 않습니다.',
+    ipDescRequired: '설명을 입력해 주세요.',
 }
 
 const REGEXP = {
+    ipNumber: /^\d{1,3}$/,
     verifyCode: /^\d{6}$/, // 6자리 숫자만
     passwordIncludeChar: /^(?=.*[!@#$%^&*()\-_+=]).+$/, // 숫자키 특수문자 1개 이상 포함
     passwordIncludeNumber: /^(?=.*\d).*$/, // 숫자 1개 이상 포함
@@ -40,9 +44,9 @@ export const loginSchema = yup.object({
     password: yup.string().required(HELPER_TEXT.passwordRequired),
 })
 
-export const joinSchema = yup.object({
-    userMail: yup.string().email(HELPER_TEXT.emailNotMatch).required(HELPER_TEXT.emailRequired),
-    emailverifyCode: yup
+export const joinSchema = yup.object().shape({
+    eamil: yup.string().email(HELPER_TEXT.emailNotMatch).required(HELPER_TEXT.emailRequired),
+    confirmEmailCode: yup
         .string()
         .matches(REGEXP.verifyCode, HELPER_TEXT.emailCodeNotMatch)
         .required(HELPER_TEXT.emailCodeRequired),
@@ -63,12 +67,51 @@ export const joinSchema = yup.object({
         .matches(REGEXP.passwordIncludeNumber, HELPER_TEXT.passwordNotIncludeNumber)
         .oneOf([yup.ref('password'), null], HELPER_TEXT.confirmPasswordNotMatch)
         .required(HELPER_TEXT.passwordRequired),
-    userName: yup.string().min(2, HELPER_TEXT.nameLength).required(HELPER_TEXT.nameRequired),
-    userCompany: yup
-        .string()
-        .min(2, HELPER_TEXT.companyLength)
-        .required(HELPER_TEXT.companyRequired),
-    userTeamName: yup.string().min(2, HELPER_TEXT.teamLength).required(HELPER_TEXT.teamRequired),
+    name: yup.string().min(2, HELPER_TEXT.nameLength).required(HELPER_TEXT.nameRequired),
+    company: yup.string().min(2, HELPER_TEXT.companyLength).required(HELPER_TEXT.companyRequired),
+    team: yup.string().min(2, HELPER_TEXT.teamLength).required(HELPER_TEXT.teamRequired),
+    ipAddress1_0: yup.string().when('authority', {
+        is: (value) => value === 'GUEST',
+        then: yup
+            .string()
+            .matches(REGEXP.ipNumber, HELPER_TEXT.ipNotMatch)
+            .required(HELPER_TEXT.ipRequired),
+    }),
+    ipAddress2_0: yup.string().when('authority', {
+        is: (value) => value === 'GUEST',
+        then: yup
+            .string()
+            .matches(REGEXP.ipNumber, HELPER_TEXT.ipNotMatch)
+            .required(HELPER_TEXT.ipRequired),
+    }),
+    ipAddress3_0: yup.string().when('authority', {
+        is: (value) => value === 'GUEST',
+        then: yup
+            .string()
+            .matches(REGEXP.ipNumber, HELPER_TEXT.ipNotMatch)
+            .required(HELPER_TEXT.ipRequired),
+    }),
+    ipAddress4_0: yup.string().when('authority', {
+        is: (value) => value === 'GUEST',
+        then: yup
+            .string()
+            .matches(REGEXP.ipNumber, HELPER_TEXT.ipNotMatch)
+            .required(HELPER_TEXT.ipRequired),
+    }),
+    ipDescription_0: yup.string().when('authority', {
+        is: (value) => value === 'GUEST',
+        then: yup.string().required(HELPER_TEXT.ipDescRequired),
+    }),
+    ipAddress1_1: yup.string().matches(REGEXP.ipNumber, HELPER_TEXT.ipNotMatch),
+    ipAddress2_1: yup.string().matches(REGEXP.ipNumber, HELPER_TEXT.ipNotMatch),
+    ipAddress3_1: yup.string().matches(REGEXP.ipNumber, HELPER_TEXT.ipNotMatch),
+    ipAddress4_1: yup.string().matches(REGEXP.ipNumber, HELPER_TEXT.ipNotMatch),
+    ipDescription_1: yup.string(),
+    ipAddress1_2: yup.string().matches(REGEXP.ipNumber, HELPER_TEXT.ipNotMatch),
+    ipAddress2_2: yup.string().matches(REGEXP.ipNumber, HELPER_TEXT.ipNotMatch),
+    ipAddress3_2: yup.string().matches(REGEXP.ipNumber, HELPER_TEXT.ipNotMatch),
+    ipAddress4_2: yup.string().matches(REGEXP.ipNumber, HELPER_TEXT.ipNotMatch),
+    ipDescription_2: yup.string(),
 })
 
 export const otpSchema = yup.object({

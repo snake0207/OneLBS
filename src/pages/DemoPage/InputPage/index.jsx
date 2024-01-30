@@ -4,6 +4,8 @@ import { useFormik } from 'formik'
 import * as yup from 'yup'
 import RadioInput from '#/components/common/Radio'
 import IpInput from '#/components/common/input/IpInput'
+import { Box, Grid } from '@mui/material'
+import DatePickerInput from '#/components/common/input/DatePickerInput/index.jsx'
 
 const InputPage = () => {
     const formik = useFormik({
@@ -13,6 +15,8 @@ const InputPage = () => {
             demoPassword: '',
             demoRadio: 'demo1',
             demoRadioDisabled: 'demo1',
+            demoDatePicker: null, // 기본값 X -> null
+            demoDisableDatePicker: '2022-02-22', // 기본값 O -> 'YYYY-MM-DD' 형식
         },
         validationSchema: yup.object({
             demoInput: yup.string().required('this is required'),
@@ -32,6 +36,7 @@ const InputPage = () => {
         { label: 'demo2', value: 'demo2' },
         { label: 'demo3', value: 'demo3' },
     ]
+
     return (
         <div>
             <h1>Inputs</h1>
@@ -87,6 +92,21 @@ const InputPage = () => {
                     />
                 </div>
             </div>
+            <h2>DatePicker</h2>
+            <Box sx={{ display: 'flex', gap: 2 }}>
+                <Box width={300}>
+                    <p>default</p>
+                    <DatePickerInput name={'demoDatePicker'} formik={formik} />
+                </Box>
+                <Box width={300}>
+                    <p>disabled</p>
+                    <DatePickerInput
+                        name={'demoDisableDatePicker'}
+                        formik={formik}
+                        disabled={true}
+                    />
+                </Box>
+            </Box>
         </div>
     )
 }

@@ -3,4 +3,8 @@ export const API_PATH = {
     join: '/',
     emailVerify: '/',
     VerifyCode: '/',
+    gpss: {
+        reviewer: '/reviewer',
+        manager: '/manager',
+    },
 }

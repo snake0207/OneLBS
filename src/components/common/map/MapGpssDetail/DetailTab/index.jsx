@@ -22,14 +22,13 @@ import UserSearchTable from '#/components/common/map/MapGpssDetail/UserSearchTab
 import { GPSS_TABLE_TYPE } from '#/contents/constant.js'
 import { useGetManager, useGetReviewer } from '#/hooks/queries/gpss.js'
 import { usePopupActions } from '#/store/usePopupStore.js'
+import t from '#/common/libs/trans.js'
 
 const dummyData = [
     { id: 'qwer@acrofuture.com', name: '아*로1', company: '회사1', userSeq: 1 },
     { id: 'asdf@acrofuture.com', name: '아*로2', company: '회사2', userSeq: 2 },
     { id: 'zxcv@acrofuture.com', name: '아*로3', company: '회사3', userSeq: 3 },
 ]
-
-const tableHeader = ['아이디', '이름', '회사']
 
 const MapGpssDetailTab = () => {
     const formik = useFormik({
@@ -83,7 +82,7 @@ const MapGpssDetailTab = () => {
     }
     // 임시저장
     const handleClickTempSaveBtn = () => {
-        popupAction.showPopup('confirm', '임시저장 하시겠습니까?', gpssTempSave)
+        popupAction.showPopup('confirm', t('pop_up.temporary_save', 'gpss'), gpssTempSave)
     }
     const gpssTempSave = () => {
         console.log('임시저장')
@@ -91,8 +90,9 @@ const MapGpssDetailTab = () => {
     }
     // 수정요청
     const handleClickEditBtn = () => {
-        if (gpssRequestValidation())
-            popupAction.showPopup('confirm', 'aaa님에게 수정요청 상신하시겠습니까?', gpssEdit)
+        if (gpssRequestValidation()) {
+            popupAction.showPopup('confirm', t('pop_up.edit_request', 'gpss'), gpssEdit)
+        }
     }
     const gpssEdit = () => {
         console.log('수정요청')
@@ -101,7 +101,7 @@ const MapGpssDetailTab = () => {
     // 삭제요청
     const handleClickDeleteBtn = () => {
         if (gpssRequestValidation())
-            popupAction.showPopup('confirm', 'aaa님에게 삭제요청 상신하시겠습니까?', gpssDelete)
+            popupAction.showPopup('confirm', t('pop_up.delete_request', 'gpss'), gpssDelete)
     }
     const gpssDelete = () => {
         console.log('삭제요청')
@@ -110,15 +110,15 @@ const MapGpssDetailTab = () => {
 
     const gpssRequestValidation = () => {
         if (formik.values.reason === '') {
-            popupAction.showPopup('alert', '승인 요청 이유를 입력해주세요')
+            popupAction.showPopup('alert', t('pop_up.reason_required', 'gpss'))
             return false
         }
         if (!selectedReviewer) {
-            popupAction.showPopup('alert', '검토자를 선택 해 주세요')
+            popupAction.showPopup('alert', t('pop_up.reviewer_required', 'gpss'))
             return false
         }
         if (!selectedManager) {
-            popupAction.showPopup('alert', '승인자를 선택 해 주세요')
+            popupAction.showPopup('alert', t('pop_up.manager_required', 'gpss'))
             return false
         }
         return true
@@ -164,7 +164,7 @@ const MapGpssDetailTab = () => {
                                 formik={formik}
                                 name={'address'}
                                 IsDisabled={!isAddressSave}
-                                placeholder={'주소를 입력하세요'}
+                                placeholder={t('addressInput', 'gpss')}
                             />
                         </Box>
                     )}
@@ -203,7 +203,7 @@ const MapGpssDetailTab = () => {
                                 formik={formik}
                                 name={'lat'}
                                 IsDisabled={!isLatSave}
-                                placeholder={'위도를 입력하세요'}
+                                placeholder={t('latInput', 'gpss')}
                             />
                         </Box>
                     )}
@@ -236,14 +236,14 @@ const MapGpssDetailTab = () => {
                                 formik={formik}
                                 name={'lng'}
                                 IsDisabled={!isLngSave}
-                                placeholder={'경도를 입력하세요'}
+                                placeholder={t('lngInput', 'gpss')}
                             />
                         </Box>
                     )}
                 </Box>
             </Box>
             <Box>
-                <Typography>카테고리</Typography>
+                <Typography>{t('category', 'common')}</Typography>
             </Box>
             <Divider />
             <Box sx={{ display: 'flex', marginBottom: '16px' }}>
@@ -259,7 +259,7 @@ const MapGpssDetailTab = () => {
             </Box>
             <Box>
                 <Box>
-                    <Typography>승인 요청 이유</Typography>
+                    <Typography>{t('reason_for_approval', 'gpss')}</Typography>
                 </Box>
                 <Divider />
                 <TextField
@@ -267,7 +267,7 @@ const MapGpssDetailTab = () => {
                     size={'small'}
                     multiline
                     fullWidth
-                    placeholder="승인 요청 이유를 입력하세요"
+                    placeholder={t('reason_for_approval_input', 'gpss')}
                     name={'reason'}
                     onChange={formik.handleChange}
                     onBlur={formik.handleBlur}
@@ -276,7 +276,7 @@ const MapGpssDetailTab = () => {
             </Box>
             <Box>
                 <Box>
-                    <Typography>검토자</Typography>
+                    <Typography>{t('reviewer', 'users')}</Typography>
                 </Box>
                 <Divider />
                 <Box
@@ -291,10 +291,10 @@ const MapGpssDetailTab = () => {
                     <TextInput
                         formik={formik}
                         name={'reviewer'}
-                        placeholder={'검토자를 입력해주세요'}
+                        placeholder={t('input_keyword', 'common')}
                     />
                     <Button variant={'contained'} onClick={handleClickGetReviewer}>
-                        검색
+                        {t('search', 'common')}
                     </Button>
                 </Box>
                 <Box
@@ -308,10 +308,11 @@ const MapGpssDetailTab = () => {
                 >
                     {isReviewerSearchClick && (
                         <>
-                            <Typography sx={{ marginY: '16px' }}>검색결과가 없습니다</Typography>
+                            <Typography sx={{ marginY: '16px' }}>
+                                {t('search_no_result', 'common')}
+                            </Typography>
                             <UserSearchTable
                                 data={dummyData}
-                                headers={tableHeader}
                                 tableType={GPSS_TABLE_TYPE.reviewer}
                                 selectedReviewer={selectedReviewer}
                                 setSelectedReviewer={setSelectedReviewer}
@@ -322,7 +323,7 @@ const MapGpssDetailTab = () => {
             </Box>
             <Box>
                 <Box>
-                    <Typography>승인자</Typography>
+                    <Typography>{t('approver', 'users')}</Typography>
                 </Box>
                 <Divider />
                 <Box
@@ -337,10 +338,10 @@ const MapGpssDetailTab = () => {
                     <TextInput
                         formik={formik}
                         name={'manager'}
-                        placeholder={'결제자를 입력해주세요'}
+                        placeholder={t('input_keyword', 'common')}
                     />
                     <Button variant={'contained'} onClick={handleClickGetManager}>
-                        검색
+                        {t('search', 'common')}
                     </Button>
                 </Box>
                 <Box
@@ -354,10 +355,11 @@ const MapGpssDetailTab = () => {
                 >
                     {isManagerSearchClick && (
                         <>
-                            <Typography sx={{ marginY: '16px' }}>검색결과가 없습니다</Typography>
+                            <Typography sx={{ marginY: '16px' }}>
+                                {t('search_no_result', 'common')}
+                            </Typography>
                             <UserSearchTable
                                 data={dummyData}
-                                headers={tableHeader}
                                 tableType={GPSS_TABLE_TYPE.manager}
                                 selectedManager={selectedManager}
                                 setSelectedManager={setSelectedManager}
@@ -369,13 +371,13 @@ const MapGpssDetailTab = () => {
 
             <Box sx={{ display: 'flex', justifyContent: 'end', gap: '6px' }}>
                 <Button variant={'contained'} onClick={handleClickTempSaveBtn}>
-                    임시저장
+                    {t('temporary_save', 'gpss')}
                 </Button>
                 <Button variant={'contained'} onClick={handleClickEditBtn}>
-                    수정요청
+                    {t('edit_request', 'gpss')}
                 </Button>
                 <Button variant={'contained'} onClick={handleClickDeleteBtn}>
-                    삭제요청
+                    {t('delete_request', 'gpss')}
                 </Button>
             </Box>
         </Box>

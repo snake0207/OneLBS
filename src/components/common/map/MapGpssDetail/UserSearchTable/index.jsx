@@ -1,7 +1,9 @@
 import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@mui/material'
 import { GPSS_TABLE_TYPE } from '#/contents/constant.js'
+import t from '#/common/libs/trans.js'
 
-const UserSearchTable = ({ data, headers, ...props }) => {
+const UserSearchTable = ({ data, ...props }) => {
+    const tableHeader = [t('id', 'common'), t('name', 'common'), t('company', 'common')]
     const {
         tableType,
         selectedManager,
@@ -40,7 +42,7 @@ const UserSearchTable = ({ data, headers, ...props }) => {
             <Table>
                 <TableHead>
                     <TableRow>
-                        {headers.map((header, idx) => (
+                        {tableHeader.map((header, idx) => (
                             <TableCell align={'center'} key={idx} sx={{ padding: '8px' }}>
                                 {header}
                             </TableCell>

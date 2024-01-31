@@ -8,7 +8,7 @@ import { Box, FormHelperText, TextField, Typography } from '@mui/material'
  */
 const IpInput = ({ ipName1, ipName2, ipName3, ipName4, ipDescription, formik }) => {
     return (
-        <>
+        <Box>
             <Box sx={{ display: 'flex', alignItems: 'flex-end', gap: 1 }}>
                 <TextField
                     name={ipName1}
@@ -18,7 +18,7 @@ const IpInput = ({ ipName1, ipName2, ipName3, ipName4, ipDescription, formik }) 
                     error={formik.touched[ipName1] && !!formik.errors[ipName1]}
                     size="small"
                     type="text"
-                    sx={{ width: 60 }}
+                    sx={{ width: 60, minWidth: 60 }}
                 />
                 <Typography sx={{ fontWeight: 700 }}>.</Typography>
                 <TextField
@@ -29,7 +29,7 @@ const IpInput = ({ ipName1, ipName2, ipName3, ipName4, ipDescription, formik }) 
                     error={formik.touched[ipName2] && !!formik.errors[ipName2]}
                     size="small"
                     type="text"
-                    sx={{ width: 60 }}
+                    sx={{ width: 60, minWidth: 60 }}
                 />
                 <Typography sx={{ fontWeight: 700 }}>.</Typography>
                 <TextField
@@ -40,7 +40,7 @@ const IpInput = ({ ipName1, ipName2, ipName3, ipName4, ipDescription, formik }) 
                     error={formik.touched[ipName3] && !!formik.errors[ipName3]}
                     size="small"
                     type="text"
-                    sx={{ width: 60 }}
+                    sx={{ width: 60, minWidth: 60 }}
                 />
                 <Typography sx={{ fontWeight: 700 }}>.</Typography>
                 <TextField
@@ -51,7 +51,7 @@ const IpInput = ({ ipName1, ipName2, ipName3, ipName4, ipDescription, formik }) 
                     error={formik.touched[ipName4] && !!formik.errors[ipName4]}
                     size="small"
                     type="text"
-                    sx={{ width: 60 }}
+                    sx={{ width: 60, minWidth: 60 }}
                 />
                 <TextField
                     name={ipDescription}
@@ -61,6 +61,7 @@ const IpInput = ({ ipName1, ipName2, ipName3, ipName4, ipDescription, formik }) 
                     error={formik.touched[ipDescription] && !!formik.errors[ipDescription]}
                     size="small"
                     type="text"
+                    fullWidth
                 />
             </Box>
             <FormHelperText sx={{ mt: 1, ml: 2 }} error>
@@ -70,7 +71,7 @@ const IpInput = ({ ipName1, ipName2, ipName3, ipName4, ipDescription, formik }) 
                     (formik.touched[ipName4] && formik.errors[ipName4]) ||
                     (formik.touched[ipDescription] && formik.errors[ipDescription])}
             </FormHelperText>
-        </>
+        </Box>
     )
 }
 

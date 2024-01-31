@@ -2,6 +2,8 @@ import { Box } from '@mui/material'
 import { GoogleMap, useJsApiLoader } from '@react-google-maps/api'
 import { useCallback, useState } from 'react'
 import ClickMarker from '#/components/common/map/googleMap/CustomControl/ClickMarker/index.jsx'
+import CustomControl from '#/components/common/map/googleMap/CustomControl/index.jsx'
+import CurrentLocation from '#/components/common/map/googleMap/CustomControl/CurrentLocation/index.jsx'
 
 const mapStyle = {
     width: '100%',
@@ -45,6 +47,8 @@ const GoogleMapComponent = () => {
                         fullscreenControlOptions: {
                             position: window.google.maps.ControlPosition.TOP_RIGHT,
                         },
+                        mapTypeControl: false,
+                        clickableIcons: false,
                         scaleControl: true,
                     }}
                     mapContainerStyle={mapStyle}
@@ -53,8 +57,12 @@ const GoogleMapComponent = () => {
                     onLoad={onLoad}
                     onUnmount={onUnmount}
                 >
-                    {/* 지도 내 클릭 위취 표시 마커 */}
+                    {/* 지도내 클릭 위치 표시 마커 */}
                     <ClickMarker coordinate={coordinate} setCoordinate={setCoordinate} />
+                    {/* 내 현재 위치 표시 마커 */}
+                    <CustomControl position="TOP_RIGHT" style={{ right: '50px !important' }}>
+                        <CurrentLocation />
+                    </CustomControl>
                 </GoogleMap>
             </Box>
         )

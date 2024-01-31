@@ -2,6 +2,7 @@ import { Box, Table, TableHead, TableBody, TableRow, TableCell } from '@mui/mate
 import t from '#/common/libs/trans'
 import Row from './Row'
 
+import CommonPagination from '#/components/common/pagination/CommonPagination'
 /*
 [
     {
@@ -20,25 +21,49 @@ import Row from './Row'
 ]
 */
 
-function UserTable({ rows }) {
-    const handleResetPassword = (row) => {
-        console.log('handleResetPassword', row)
-    }
-
-    const handleDeactivate = (row) => {
-        console.log('handleDeactivate', row)
-    }
-
+function UserTable({
+    rows,
+    onNextPage,
+    onChangePermission,
+    onChangeStatus,
+    onChangeRemark,
+    onResetPassword,
+    onDeactivate,
+}) {
     const handleChangePermission = (row, value) => {
-        console.log('handleChangePermission', row, value)
+        // console.log('handleChangePermission', row, value)
+
+        if (onChangePermission) onChangePermission(row, value)
     }
 
     const handleChangeStatus = (row, value) => {
-        console.log('handleChangeStatus', row, value)
+        // console.log('handleChangeStatus', row, value)
+
+        if (onChangeStatus) onChangeStatus(row, value)
     }
 
     const handleChangeRemark = (row, value) => {
-        console.log('handleChangeRemark', row, value)
+        // console.log('handleChangeRemark', row, value)
+
+        if (onChangeRemark) onChangeRemark(row, value)
+    }
+
+    const handleResetPassword = (row) => {
+        // console.log('handleResetPassword', row)
+
+        if (onResetPassword) onResetPassword(row)
+    }
+
+    const handleDeactivate = (row) => {
+        // console.log('handleDeactivate', row)
+
+        if (onDeactivate) onDeactivate(row)
+    }
+
+    const handleNextPage = (page) => {
+        //console.log('handleNextPage', page)
+
+        onNextPage(page)
     }
 
     return (
@@ -74,6 +99,7 @@ function UserTable({ rows }) {
                     ))}
                 </TableBody>
             </Table>
+            <CommonPagination dataLength={rows?.length} onChangePageFunction={handleNextPage} />
         </Box>
     )
 }

@@ -9,7 +9,7 @@ function PopupPage() {
 
     const handleConfirmOk = () => {
         console.log('handleConfirmOk')
-        actions.closePopup()
+        //actions.closePopup()
     }
 
     const handleConfirmOkAction = () => {

@@ -2,6 +2,7 @@
     "email": "이메일",
     "permission": "권한",
     "period": "기간",
+    "all": "전체",
     "select": "선택",
     "general_user": "일반사용자",
     "request_user": "요청자",
@@ -14,5 +15,10 @@
     "login_date": "로그인 일시",
     "update_date": "변경 일시",
     "update_history": "변경 이력",
-    "no": "No."
+    "no": "No.",
+    "waiting": "대기",
+    "activate": "활성화",
+    "pause": "휴면",
+    "deactivate": "탈퇴",
+    "status": "상태"
 }

@@ -1,7 +1,6 @@
 import { Box } from '@mui/material'
 import { useEffect, useRef } from 'react'
 import { useGoogleMap } from '@react-google-maps/api'
-import googleMap from '#/components/common/map/googleMap/index.jsx'
 
 const CustomControl = (props) => {
     const { children, position } = props

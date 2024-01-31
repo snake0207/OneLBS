@@ -4,7 +4,7 @@ function UserManagementPage() {
             <h1>User Management Page</h1>
             <ul>
                 <li>
-                    <a href="#">User List</a>
+                    <a href="/components/users/list">User List</a>
                 </li>
                 <li>
                     <a href="/components/users/login-history">User Login History</a>

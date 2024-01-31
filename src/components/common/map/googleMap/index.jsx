@@ -1,6 +1,7 @@
 import { Box } from '@mui/material'
 import { GoogleMap, useJsApiLoader } from '@react-google-maps/api'
 import { useCallback, useState } from 'react'
+import ClickMarker from '#/components/common/map/googleMap/CustomControl/ClickMarker/index.jsx'
 
 const mapStyle = {
     width: '100%',
@@ -14,6 +15,10 @@ const seoul = {
 
 const GoogleMapComponent = () => {
     const [map, setMap] = useState(null)
+    const [coordinate, setCoordinate] = useState({
+        lat: null,
+        lng: null,
+    })
 
     const { isLoaded } = useJsApiLoader({
         id: 'google-map',
@@ -30,6 +35,12 @@ const GoogleMapComponent = () => {
         isLoaded && (
             <Box sx={{ width: '800px', height: '800px' }}>
                 <GoogleMap
+                    onClick={(event) => {
+                        setCoordinate({
+                            lat: parseFloat(event.latLng.lat().toFixed(7)),
+                            lng: parseFloat(event.latLng.lng().toFixed(7)),
+                        })
+                    }}
                     options={{
                         fullscreenControlOptions: {
                             position: window.google.maps.ControlPosition.TOP_RIGHT,
@@ -41,7 +52,10 @@ const GoogleMapComponent = () => {
                     zoom={4}
                     onLoad={onLoad}
                     onUnmount={onUnmount}
-                ></GoogleMap>
+                >
+                    {/* 지도 내 클릭 위취 표시 마커 */}
+                    <ClickMarker coordinate={coordinate} setCoordinate={setCoordinate} />
+                </GoogleMap>
             </Box>
         )
     )

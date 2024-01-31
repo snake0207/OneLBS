@@ -11,15 +11,16 @@ function ConfirmDialog({ open, content }) {
     const { onOk, onCancel } = usePopupStore()
 
     const handleCancel = () => {
-        if (onCancel) onCancel()
         actions.closePopup()
+
+        if (onCancel) onCancel()
     }
 
     const handleConfirm = () => {
-        if (onOk) onOk()
-        else actions.closePopup()
+        actions.closePopup()
 
-        //actions.closePopup()
+        if (onOk) onOk()
+        //else actions.closePopup()
     }
 
     return (

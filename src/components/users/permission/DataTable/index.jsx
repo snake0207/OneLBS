@@ -8,10 +8,10 @@ function DataTable({ rows, pageSize = 25, onPageChange, ...props }) {
         return [
             { field: 'id', headerName: t('no', 'users'), width: 70 },
             { field: 'email', headerName: t('email', 'users'), width: 200 },
+            { field: 'name', headerName: t('name', 'users'), width: 130 },
             { field: 'ip_address', headerName: t('ip_address', 'users'), width: 130 },
             { field: 'permission', headerName: t('permission', 'users'), width: 130 },
             { field: 'update_date', headerName: t('update_date', 'users'), width: 200 },
-            { field: 'name', headerName: t('name', 'users'), width: 130 },
             { field: 'update_history', headerName: t('update_history', 'users'), width: 280 },
         ]
     }

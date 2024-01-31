@@ -15,11 +15,20 @@ function SearchFilter({ onSearch }) {
         { key: 5, value: 5, label: t('admin', 'users') },
     ]
 
+    const getStatusList = () => [
+        { key: 0, value: 0, label: t('all', 'users') },
+        { key: 1, value: 1, label: t('waiting', 'users') },
+        { key: 2, value: 2, label: t('activate', 'users') },
+        { key: 3, value: 3, label: t('pause', 'users') },
+        { key: 4, value: 4, label: t('deactivate', 'users') },
+    ]
+
     const formik = useFormik({
         initialValues: {
             email: '',
             name: '',
             permission: 0,
+            status: 0,
             start_date: null,
             end_date: null,
         },
@@ -33,6 +42,8 @@ function SearchFilter({ onSearch }) {
             <Table>
                 <TableHead>
                     <TableRow>
+                        <TableCell />
+                        <TableCell />
                         <TableCell />
                         <TableCell />
                         <TableCell />
@@ -55,14 +66,23 @@ function SearchFilter({ onSearch }) {
                         <TableCell>
                             <TextInput name="name" formik={formik} sx={{ width: 200 }} />
                         </TableCell>
-                    </TableRow>
-                    <TableRow>
                         <TableCell>{t('permission', 'users')}</TableCell>
                         <TableCell>
                             <Select
                                 name={'permission'}
                                 formik={formik}
                                 items={getPermissionList()}
+                                sx={{ width: 200, height: 40 }}
+                            />
+                        </TableCell>
+                    </TableRow>
+                    <TableRow>
+                        <TableCell>{t('status', 'users')}</TableCell>
+                        <TableCell>
+                            <Select
+                                name={'status'}
+                                formik={formik}
+                                items={getStatusList()}
                                 sx={{ width: 200, height: 40 }}
                             />
                         </TableCell>
@@ -74,6 +94,8 @@ function SearchFilter({ onSearch }) {
                                 <DatePickerInput name="end_date" formik={formik} />
                             </Stack>
                         </TableCell>
+                        <TableCell />
+                        <TableCell />
                     </TableRow>
                 </TableHead>
             </Table>

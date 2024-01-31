@@ -7,6 +7,7 @@ import MapSearchList from '#/components/common/map/MapSearchList/index.jsx'
 import MapInfoWindow from '#/components/common/map/MapInfoWindow/index.jsx'
 import MapPoiDetail from '#/components/common/map/MapPoiDetail/index.jsx'
 import MapGpssDetail from '#/components/common/map/MapGpssDetail/index.jsx'
+import GoogleMapComponent from '#/components/common/map/googleMap/index.jsx'
 
 const MapPage = () => {
     return (
@@ -49,6 +50,12 @@ const MapPage = () => {
                 <Box sx={{ mr: 2 }}>
                     <Typography>Map InfoWindow Component</Typography>
                     <MapInfoWindow />
+                </Box>
+            </Box>
+            <Box sx={{ display: 'flex' }}>
+                <Box sx={{ mr: 2 }}>
+                    <Typography>Google Map Component</Typography>
+                    <GoogleMapComponent />
                 </Box>
             </Box>
         </div>

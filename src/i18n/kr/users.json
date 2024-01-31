@@ -20,5 +20,12 @@
     "activate": "활성화",
     "pause": "휴면",
     "deactivate": "탈퇴",
-    "status": "상태"
+    "status": "상태",
+    "company_name": "회사명",
+    "team_name": "팀명",
+    "register_date": "등록일",
+    "approve_date": "승인일",
+    "last_login_date": "마지막 로그인",
+    "remark": "비고",
+    "reset_password": "비밀번호 초기화"
 }

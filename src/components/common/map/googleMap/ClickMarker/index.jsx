@@ -5,18 +5,18 @@ import { Box, Typography } from '@mui/material'
 /**
  * 지도내 클릭 위치 마커 표시
  */
-const ClickMarker = ({ coordinate, setCoordinate }) => {
+const ClickMarker = ({ clickedCoord, setClickedCoord }) => {
     const map = useGoogleMap()
     const [marker, setMarker] = useState(null)
     const [infoWindow, setInfoWindow] = useState(null)
     useEffect(() => {
         if (infoWindow) infoWindow.close()
-        if (marker && infoWindow && coordinate.lat) infoWindow.open({ anchor: marker, map: map })
-    }, [infoWindow, coordinate])
+        if (marker && infoWindow && clickedCoord.lat) infoWindow.open({ anchor: marker, map: map })
+    }, [infoWindow, clickedCoord])
     return (
-        coordinate.lat && (
+        clickedCoord.lat && (
             <Marker
-                position={coordinate}
+                position={clickedCoord}
                 onLoad={(marker) => {
                     setMarker(marker)
                 }}
@@ -32,12 +32,12 @@ const ClickMarker = ({ coordinate, setCoordinate }) => {
                         setInfoWindow(null)
                     }}
                     onCloseClick={() => {
-                        setCoordinate({ lat: null, lng: null })
+                        setClickedCoord({ lat: null, lng: null })
                     }}
                 >
                     <Box>
                         <Typography sx={{ fontSize: '300' }}>
-                            {coordinate.lat},{coordinate.lng}
+                            {clickedCoord.lat},{clickedCoord.lng}
                         </Typography>
                     </Box>
                 </InfoWindow>

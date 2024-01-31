@@ -17,7 +17,7 @@ const seoul = {
 
 const GoogleMapComponent = () => {
     const [map, setMap] = useState(null)
-    const [coordinate, setCoordinate] = useState({
+    const [clickedCoord, setClickedCoord] = useState({
         lat: null,
         lng: null,
     })
@@ -38,7 +38,7 @@ const GoogleMapComponent = () => {
             <Box sx={{ width: '800px', height: '800px' }}>
                 <GoogleMap
                     onClick={(event) => {
-                        setCoordinate({
+                        setClickedCoord({
                             lat: parseFloat(event.latLng.lat().toFixed(7)),
                             lng: parseFloat(event.latLng.lng().toFixed(7)),
                         })
@@ -58,7 +58,7 @@ const GoogleMapComponent = () => {
                     onUnmount={onUnmount}
                 >
                     {/* 지도내 클릭 위치 표시 마커 */}
-                    <ClickMarker coordinate={coordinate} setCoordinate={setCoordinate} />
+                    <ClickMarker clickedCoord={clickedCoord} setClickedCoord={setClickedCoord} />
                     {/* 내 현재 위치 표시 마커 */}
                     <CustomControl position="TOP_RIGHT" style={{ right: '50px !important' }}>
                         <CurrentLocation />

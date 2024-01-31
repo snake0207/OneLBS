@@ -2,6 +2,9 @@ import { useEffect, useState } from 'react'
 import { InfoWindow, Marker, useGoogleMap } from '@react-google-maps/api'
 import { Box, Typography } from '@mui/material'
 
+/**
+ * 지도내 클릭 위치 마커 표시
+ */
 const ClickMarker = ({ coordinate, setCoordinate }) => {
     const map = useGoogleMap()
     const [marker, setMarker] = useState(null)

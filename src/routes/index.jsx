@@ -17,6 +17,7 @@ import ApprovalHistoryPage from '#/pages/DemoPage/ApprovalHistoryPage/index.jsx'
 import UserManagementPage from '#/pages/DemoPage/UserManagementPage'
 import UserLoginHistoryPage from '#/pages/DemoPage/UserManagementPage/UserLoginHistoryPage'
 import UserPermissionPage from '#/pages/DemoPage/UserManagementPage/UserPermissionPage'
+import ApprovalDetailPage from '#/pages/DemoPage/ApprovalHistoryPage/ApprovalDetailPage/index.jsx'
 
 const Routes = () => {
     return useRoutes([
@@ -44,6 +45,7 @@ const Routes = () => {
                 { path: '/components/modals', element: <ModalPage /> },
                 { path: '/components/popup', element: <PopupPage /> },
                 { path: '/components/approval', element: <ApprovalHistoryPage /> },
+                { path: '/components/approval/detail/:id', element: <ApprovalDetailPage /> },
                 { path: '/components/users', element: <UserManagementPage /> },
                 { path: '/components/users/login-history', element: <UserLoginHistoryPage /> },
                 { path: '/components/users/permission-history', element: <UserPermissionPage /> },

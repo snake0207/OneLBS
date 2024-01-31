@@ -9,6 +9,8 @@ import t from '#/common/libs/trans'
 const breadcrumbNameMap = () => ({
     '/components': t('components'),
     '/components/layouts': t('layouts'),
+    '/components/approval': t('Approval'),
+    '/components/approval/detail': t('Detail'),
 })
 
 function LinkRouter(props) {

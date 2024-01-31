@@ -4,6 +4,7 @@ import HistoryTable from '#/components/approval/HistoryTable/index.jsx'
 import Typography from '@mui/material/Typography'
 import SearchFilter from '#/components/approval/SearchFilter/index.jsx'
 import CommonPagination from '#/components/common/pagination/CommonPagination.jsx'
+import { useNavigate } from 'react-router-dom'
 
 const ApprovalHistoryPage = () => {
     const [dummyData, setDummyData] = useState([

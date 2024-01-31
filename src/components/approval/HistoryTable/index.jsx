@@ -10,14 +10,10 @@ import {
 import Typography from '@mui/material/Typography'
 import { useModalActions } from '#/store/useModalStore.js'
 import { MODAL_TITLE } from '#/contents/constant.js'
+import { useNavigate } from 'react-router-dom'
 
 const HistoryTable = ({ dummyData, headers }) => {
-    const { openModal } = useModalActions()
-    const handleClickTableRow = ({ target }) => {
-        if (target.tagName === 'TD') {
-            openModal(MODAL_TITLE.detail, target.parentElement.id)
-        }
-    }
+    const navigator = useNavigate()
 
     return (
         <>
@@ -39,7 +35,9 @@ const HistoryTable = ({ dummyData, headers }) => {
                                         key={data.id}
                                         id={data.id}
                                         hover
-                                        onClick={handleClickTableRow}
+                                        onClick={() =>
+                                            navigator('/components/approval/detail/' + data.id)
+                                        }
                                     >
                                         <TableCell>{dummyData.length - index}</TableCell>
                                         <TableCell>{data.name}</TableCell>

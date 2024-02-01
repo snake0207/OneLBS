@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { InfoWindow, Marker, useGoogleMap } from '@react-google-maps/api'
 import { Box, Typography } from '@mui/material'
 
@@ -8,11 +8,6 @@ import { Box, Typography } from '@mui/material'
 const ClickMarker = ({ clickedCoord, setClickedCoord }) => {
     const map = useGoogleMap()
     const [marker, setMarker] = useState(null)
-    const [infoWindow, setInfoWindow] = useState(null)
-    useEffect(() => {
-        if (infoWindow) infoWindow.close()
-        if (marker && infoWindow && clickedCoord.lat) infoWindow.open({ anchor: marker, map: map })
-    }, [infoWindow, clickedCoord])
     return (
         clickedCoord.lat && (
             <Marker
@@ -26,10 +21,7 @@ const ClickMarker = ({ clickedCoord, setClickedCoord }) => {
             >
                 <InfoWindow
                     onLoad={(info) => {
-                        setInfoWindow(info)
-                    }}
-                    onUnmount={() => {
-                        setInfoWindow(null)
+                        info.open({ anchor: marker, map: map })
                     }}
                     onCloseClick={() => {
                         setClickedCoord({ lat: null, lng: null })

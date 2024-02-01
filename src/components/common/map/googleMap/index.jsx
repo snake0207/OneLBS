@@ -1,6 +1,6 @@
 import { GoogleMap, useJsApiLoader } from '@react-google-maps/api'
 import { useCallback, useState } from 'react'
-import ClickMarker from '#/components/common/map/googleMap/ClickMarker/index.jsx'
+import ClickMarker from '#/components/common/map/googleMap/marker/ClickMarker/index.jsx'
 import CustomControl from '#/components/common/map/googleMap/CustomControl/index.jsx'
 import CurrentLocation from '#/components/common/map/googleMap/CustomControl/CurrentLocation/index.jsx'
 import CalculateDistance from '#/components/common/map/googleMap/CustomControl/CalculateDistance/index.jsx'

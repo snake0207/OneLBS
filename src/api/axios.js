@@ -31,7 +31,7 @@ export const postAPI = ({ endPoint, data, axiosOption }) => {
 }
 
 export const putAPI = ({ endPoint, data, axiosOption }) => {
-    return axiosInstance.post(endPoint, data, axiosOption)
+    return axiosInstance.put(endPoint, data, axiosOption)
 }
 
 export const deleteAPI = ({ endPoint, data, axiosOption }) => {

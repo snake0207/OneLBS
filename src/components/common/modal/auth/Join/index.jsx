@@ -9,7 +9,7 @@ import { joinSchema } from '#/contents/validationSchema'
 import EmailVerifyInput from '#/components/common/modal/auth/Join/EmailVerifyInput/index.jsx'
 import VerifyCodeInput from '#/components/common/modal/auth/Join/VerifyCodeInput'
 import JoinSuccessModal from '#/components/common/modal/auth/JoinSuccess'
-import PrivacyPolicyModal from '#/components/common/modal/auth/PrivacyPolicy'
+import PrivacyPolicyModal from '#/components/common/modal/auth/Join/PrivacyPolicy'
 import IpInputGroup from '#/components/common/modal/auth/Join/IpInputGroup'
 
 import t from '#/common/libs/trans'
@@ -41,7 +41,7 @@ const JoinModal = () => {
             company: '',
             team: '',
             role: 'GUEST',
-            terms: 'Y',
+            terms: 'N',
             ipAddress1_0: '',
             ipAddress2_0: '',
             ipAddress3_0: '',

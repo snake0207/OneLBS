@@ -48,9 +48,9 @@ const MapPage = () => {
                 </Box>
                 <Box sx={{ mr: 2 }}>
                     <Typography>Map List Component with No Result</Typography>
-                    <MapSearchList isResultNon={true} />
+                    <MapSearchList searchResultArr={[]} />
                     <Typography>Map List Component with Result (스크롤 TOP 버튼 존재)</Typography>
-                    <MapSearchList isResultNon={false} />
+                    <MapSearchList searchResultArr={markerSampleData} />
                 </Box>
                 <Box sx={{ mr: 2 }}>
                     <Typography>Map POI Detail Component</Typography>

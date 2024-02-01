@@ -1,12 +1,17 @@
+import { useState } from 'react'
 import SearchFilter from '#/components/users/list/SearchFilter'
 import UserTable from '#/components/users/list/UserTable'
 import users from './list.json'
 
 import { getPopupMessage } from '#/common/libs/permission'
 import { usePopupActions } from '#/store/usePopupStore'
+import UserDetail from '#/components/users/list/UserDetail'
 
 function UserListPage() {
     const actions = usePopupActions()
+    const [open, setOpen] = useState(false)
+    const [selectedUser, setSelectedUser] = useState(null)
+
     const handleSearch = (values) => {
         console.log('handleSearch', values)
     }
@@ -36,24 +41,24 @@ function UserListPage() {
         // refresh table
     }
 
-    const handleDeactivate = (row) => {
-        console.log('handleDeactivate', row)
+    const handleWithdraw = (row) => {
+        console.log('handleWithdraw', row)
 
         actions.showPopup(
             'confirm',
             getPopupMessage(10),
-            handleConfirmDeactivate,
-            handleCancelDeactivate,
+            handleConfirmWithdraw,
+            handleCancelWithdraw,
         )
     }
 
-    const handleConfirmDeactivate = () => {
-        console.log('handleConfirmDeactivate')
+    const handleConfirmWithdraw = () => {
+        console.log('handleConfirmWithdraw')
 
         actions.showPopup('alert', getPopupMessage(11))
     }
 
-    const handleCancelDeactivate = () => {
+    const handleCancelWithdraw = () => {
         // refresh table
     }
 
@@ -110,6 +115,23 @@ function UserListPage() {
         // refresh table
     }
 
+    const handleSelectRow = (row) => {
+        console.log('handleSelectRow', row)
+        setSelectedUser(row)
+        setOpen(true)
+    }
+
+    const handleOpenUserDetail = () => {
+        console.log('handleOpenUserDetail')
+        setSelectedUser(users[0])
+        setOpen(true)
+    }
+
+    const handleClose = () => {
+        console.log('handleClose')
+        setOpen(false)
+    }
+
     return (
         <div>
             <h1>User List Page</h1>
@@ -123,7 +145,20 @@ function UserListPage() {
                 onChangeStatus={handleChangeStatus}
                 onChangeRemark={handleChangeRemark}
                 onResetPassword={handleResetPassword}
-                onDeactivate={handleDeactivate}
+                onWithdraw={handleWithdraw}
+                onSelectRow={handleSelectRow}
+            />
+            <h2>User Detail</h2>
+            <button onClick={handleOpenUserDetail}>Open User Detail</button>
+            <UserDetail
+                user={selectedUser}
+                open={open}
+                onClose={handleClose}
+                onApprove={handleChangeStatus}
+                onResume={handleChangeStatus}
+                onDeactivate={handleChangeStatus}
+                onResetPassword={handleResetPassword}
+                onChangePermission={handleChangePermission}
             />
         </div>
     )

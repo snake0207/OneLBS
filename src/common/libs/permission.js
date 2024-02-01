@@ -1,5 +1,14 @@
 import t from '#/common/libs/trans'
 
+export const getPermissionList = () => [
+    { key: 0, value: 0, label: t('all', 'users') },
+    { key: 1, value: 1, label: t('general_user', 'users') },
+    { key: 2, value: 2, label: t('request_user', 'users') },
+    { key: 3, value: 3, label: t('reviewer', 'users') },
+    { key: 4, value: 4, label: t('approver', 'users') },
+    { key: 5, value: 5, label: t('admin', 'users') },
+]
+
 export const gstStatusLabel = (status) => {
     switch (status) {
         case 0:
@@ -9,7 +18,7 @@ export const gstStatusLabel = (status) => {
         case 2:
             return t('pause', 'users')
         case 3:
-            return t('deactivate', 'users')
+            return t('withdraw', 'users')
         default:
             return t('unknown', 'users')
     }
@@ -41,8 +50,8 @@ export const getAgainstStatus = (status) => {
     "popup_confirm_save_success": "저장되었습니다.",
     "popup_confirm_reset_password": "비밀번호를 초기화 하시겠습니까?",
     "popup_confirm_reset_password_success": "비밀번호가 초기화 되었습니다.",
-    "popup_confirm_deactivate": "탈퇴 처리 하시겠습니까?",
-    "popup_confirm_deactivate_success": "탈퇴 처리 되었습니다."
+    "popup_confirm_withdraw": "탈퇴 처리 하시겠습니까?",
+    "popup_confirm_withdraw_success": "탈퇴 처리 되었습니다."
 */
 export const getPopupMessage = (status) => {
     switch (status) {
@@ -67,9 +76,9 @@ export const getPopupMessage = (status) => {
         case 9:
             return t('popup_confirm_reset_password_success', 'users')
         case 10:
-            return t('popup_confirm_deactivate', 'users')
+            return t('popup_confirm_withdraw', 'users')
         case 11:
-            return t('popup_confirm_deactivate_success', 'users')
+            return t('popup_confirm_withdraw_success', 'users')
         default:
             return t('unknown', 'users')
     }

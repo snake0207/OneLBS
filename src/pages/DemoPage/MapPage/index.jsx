@@ -9,77 +9,17 @@ import MapPoiDetail from '#/components/common/map/MapPoiDetail/index.jsx'
 import MapGpssDetail from '#/components/common/map/MapGpssDetail/index.jsx'
 import GoogleMapComponent from '#/components/common/map/googleMap/index.jsx'
 
-const mapSampleData = [
+const markerSampleData = [
     {
-        poiId: 'ChIJm8fw1mfJwoARNzsUmsgD-Ig',
-        address: '2268 Firestone Blvd, Los Angeles, CA 90002, USA',
+        poiId: 'ChIJsTbYQbjLwoARpbZRYUbnEP4',
+        address: '12021 Wilmington Ave, Los Angeles, CA 90059, USA',
         position: {
             center: {
-                lat: 33.9578479,
-                lon: -118.23168319999998,
+                lat: 33.9243791,
+                lon: -118.23941569999998,
             },
         },
-        title: 'Blink Charging Station',
-        category: 'ev',
-    },
-    {
-        poiId: 'ChIJSblb29_LwoARUQWFAR785F4',
-        address: '2365 E Century Blvd, Los Angeles, CA 90002, USA',
-        position: {
-            center: {
-                lat: 33.946781099999995,
-                lon: -118.22994750000001,
-            },
-        },
-        title: 'EVCS Charging Station',
-        category: 'ev',
-    },
-    {
-        poiId: 'ChIJ5xP4utnLwoARR5thyWQMcI0',
-        address: '10320 Wilmington Ave, Los Angeles, CA 90002, USA',
-        position: {
-            center: {
-                lat: 33.942737099999995,
-                lon: -118.2389758,
-            },
-        },
-        title: 'Electric Circuit Charging Station',
-        category: 'ev',
-    },
-    {
-        poiId: 'ChIJS-pkdn7JwoARzkOPLkLB0LM',
-        address: '1501 E Century Blvd, Los Angeles, CA 90002, USA',
-        position: {
-            center: {
-                lat: 33.945758000000005,
-                lon: -118.246968,
-            },
-        },
-        title: 'Flo Charging Station',
-        category: 'ev',
-    },
-    {
-        poiId: 'ChIJMS-G-n3JwoAR2TPD7A6yXoY',
-        address: '10104 Compton Ave, Los Angeles, CA 90002, USA',
-        position: {
-            center: {
-                lat: 33.9448115,
-                lon: -118.246128,
-            },
-        },
-        title: 'ChargePoint Charging Station',
-        category: 'ev',
-    },
-    {
-        poiId: 'ChIJm6KTpoiIdnLwoARwSZzuHOvyOU',
-        address: '10455 Wilmington Ave, Los Angeles, CA 90002, USA',
-        position: {
-            center: {
-                lat: 33.941035899999996,
-                lon: -118.239077,
-            },
-        },
-        title: 'Electric Circuit Charging Station',
+        title: 'PowerFlex Charging Station',
         category: 'ev',
     },
 ]
@@ -131,7 +71,7 @@ const MapPage = () => {
                 <Box sx={{ mr: 2 }}>
                     <Typography>Google Map Component</Typography>
                     <Box sx={{ width: '1600px', height: '900px' }}>
-                        <GoogleMapComponent searchResultArr={mapSampleData} isPoiSearch={true} />
+                        <GoogleMapComponent markerDataArr={markerSampleData} isPoiSearch={true} />
                     </Box>
                 </Box>
             </Box>

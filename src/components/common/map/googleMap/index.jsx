@@ -7,6 +7,82 @@ import CalculateDistance from '#/components/common/map/googleMap/CustomControl/C
 import MapSearch from '#/components/common/map/MapSearch/index.jsx'
 import MapSearchList from '#/components/common/map/MapSearchList/index.jsx'
 import MapPoiDetail from '#/components/common/map/MapPoiDetail/index.jsx'
+import DisplayMarker from '#/components/common/map/googleMap/marker/DisplayMarker/index.jsx'
+
+const mapSampleData = [
+    {
+        poiId: 'ChIJm8fw1mfJwoARNzsUmsgD-Ig',
+        address: '2268 Firestone Blvd, Los Angeles, CA 90002, USA',
+        position: {
+            center: {
+                lat: 33.9578479,
+                lon: -118.23168319999998,
+            },
+        },
+        title: 'Blink Charging Station',
+        category: 'ev',
+    },
+    {
+        poiId: 'ChIJSblb29_LwoARUQWFAR785F4',
+        address: '2365 E Century Blvd, Los Angeles, CA 90002, USA',
+        position: {
+            center: {
+                lat: 33.946781099999995,
+                lon: -118.22994750000001,
+            },
+        },
+        title: 'EVCS Charging Station',
+        category: 'ev',
+    },
+    {
+        poiId: 'ChIJ5xP4utnLwoARR5thyWQMcI0',
+        address: '10320 Wilmington Ave, Los Angeles, CA 90002, USA',
+        position: {
+            center: {
+                lat: 33.942737099999995,
+                lon: -118.2389758,
+            },
+        },
+        title: 'Electric Circuit Charging Station',
+        category: 'ev',
+    },
+    {
+        poiId: 'ChIJS-pkdn7JwoARzkOPLkLB0LM',
+        address: '1501 E Century Blvd, Los Angeles, CA 90002, USA',
+        position: {
+            center: {
+                lat: 33.945758000000005,
+                lon: -118.246968,
+            },
+        },
+        title: 'Flo Charging Station',
+        category: 'ev',
+    },
+    {
+        poiId: 'ChIJMS-G-n3JwoAR2TPD7A6yXoY',
+        address: '10104 Compton Ave, Los Angeles, CA 90002, USA',
+        position: {
+            center: {
+                lat: 33.9448115,
+                lon: -118.246128,
+            },
+        },
+        title: 'ChargePoint Charging Station',
+        category: 'ev',
+    },
+    {
+        poiId: 'ChIJm6KTpoiIdnLwoARwSZzuHOvyOU',
+        address: '10455 Wilmington Ave, Los Angeles, CA 90002, USA',
+        position: {
+            center: {
+                lat: 33.941035899999996,
+                lon: -118.239077,
+            },
+        },
+        title: 'Electric Circuit Charging Station',
+        category: 'ev',
+    },
+]
 
 const mapStyle = {
     width: '100%',
@@ -24,13 +100,18 @@ const seoul = {
  * 둘 다 false 거나 둘 중 하나만 true로 사용
  * 사용법 ex :
  * <Box sx={{ width: '1200px', height: '900px' }}>
- *     <GoogleMapComponent searchResultArr={sampleDataArr} isPoiSearch={true} isGpssSearch={false}/>
+ *     <GoogleMapComponent markerDataArr={sampleDataArr} isPoiSearch={true} isGpssSearch={false}/>
  * </Box>
- * @param searchResultArr 마커 데이터 array
+ * @param markerDataArr 마커 데이터 array
  * @param isPoiSearch 서치 페이지에서 사용여부 false 일 때, 검색 / 검색결과 컴포넌트 비노출
  * @param isGpssSearch gpss 페이지에서 사용여부 false 일 때, 검색 / 검색결과 컴포넌트 비노출
  */
-const GoogleMapComponent = ({ searchResultArr, isPoiSearch = false, isGpssSearch = false }) => {
+const GoogleMapComponent = ({
+    markerDataArr = null,
+    isPoiSearch = false,
+    isGpssSearch = false,
+}) => {
+    // const [searchResultArr, setSearchResultArr] = useState()
     const [map, setMap] = useState(null)
     const [clickedCoord, setClickedCoord] = useState({
         lat: null,
@@ -38,6 +119,8 @@ const GoogleMapComponent = ({ searchResultArr, isPoiSearch = false, isGpssSearch
     })
     const [distanceCoordArr, setDistanceCoordArr] = useState([])
     const [isDistanceFunctionOn, setIsDistanceFunctionOn] = useState(false)
+
+    // 구글지도 라이브러리 init
     const { isLoaded } = useJsApiLoader({
         id: 'google-map',
         googleMapsApiKey: import.meta.env.VITE_GOOGLE_MAP_KEY,
@@ -110,7 +193,7 @@ const GoogleMapComponent = ({ searchResultArr, isPoiSearch = false, isGpssSearch
                             position="TOP_LEFT"
                             style={{ left: '0px !important', top: '320px !important' }}
                         >
-                            <MapSearchList searchResultArr={searchResultArr} />
+                            <MapSearchList searchResultArr={mapSampleData} />
                         </CustomControl>
                         {/* poi 상세 */}
                         <CustomControl position="TOP_LEFT" style={{ left: '355px !important' }}>

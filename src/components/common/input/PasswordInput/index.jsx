@@ -4,13 +4,20 @@ import VisibilityOff from '@mui/icons-material/VisibilityOff'
 import Visibility from '@mui/icons-material/Visibility'
 import Close from '@mui/icons-material/Close'
 
+/**
+ * 비밀번호 공통 Input
+ * @param {string} name input formik name
+ * @param {string} placeholder input placeholder
+ * @param {object} formik useformik return object
+ * @param {string} inputRule 입력에 대한 가이드
+ * @returns ReactNode
+ */
 const PasswordInput = ({ name, placeholder, formik, inputRule = null }) => {
     const [isPasswordVisible, setIsPasswordVisible] = useState(false)
     return (
         <>
             <Box
                 sx={{
-                    height: 60,
                     flex: 1,
                 }}
             >

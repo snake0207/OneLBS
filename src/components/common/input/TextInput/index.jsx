@@ -1,12 +1,20 @@
 import { Box, IconButton, InputAdornment, TextField, Typography } from '@mui/material'
 import Close from '@mui/icons-material/Close'
 
+/**
+ * 일반 text 공통 Input
+ * @param {string} name input formik name
+ * @param {string} placeholder input placeholder
+ * @param {object} formik useformik return object
+ * @param {string} inputRule 입력에 대한 가이드
+ * @param {boolean} IsDisabled input disabled 여부
+ * @returns ReactNode
+ */
 const TextInput = ({ name, formik, placeholder = null, inputRule = null, IsDisabled = false }) => {
     return (
         <>
             <Box
                 sx={{
-                    height: 60,
                     flex: 1,
                 }}
             >

@@ -16,6 +16,7 @@ export const formatJoinData = (form) => {
         )
         ipList.push({ address, desc: form[`ipDescription_${i}`] })
     }
+
     return {
         email: form.email,
         password: encryptPasswordSHA256(form.password),

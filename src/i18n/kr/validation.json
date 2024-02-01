@@ -24,5 +24,6 @@
     "lat_input": "위도를 입력해 주세요",
     "lng_input": "경도를 입력해 주세요",
     "ip_required": "IP 입력해 주세요.",
-    "ip_not_match": "IP 형식이 맞지 않습니다."
+    "ip_not_match": "IP 형식이 맞지 않습니다.",
+    "terms_disagree": "약관에 동의하지 않는 경우 회원가입이 되지 않습니다. 약관에 동의해 주세요."
 }

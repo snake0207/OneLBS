@@ -1,30 +1,13 @@
 import InfoIcon from '@mui/icons-material/Info'
 import { useModalActions } from '#/store/useModalStore'
-import {
-    Button,
-    Dialog,
-    DialogActions,
-    DialogContent,
-    DialogTitle,
-    IconButton,
-    Typography,
-} from '@mui/material'
-import CloseIcon from '@mui/icons-material/Close'
+import { Button, DialogActions, DialogContent, Typography } from '@mui/material'
 
 import t from '#/common/libs/trans'
 
-const JoinSuccessModal = ({ isOpen, onClose }) => {
+const JoinSuccessModal = () => {
     const { closeModal } = useModalActions()
     return (
-        <Dialog open={isOpen} onClose={onClose}>
-            <DialogTitle
-                sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}
-            >
-                {t('join_completed', 'auth')}
-                <IconButton onClick={onClose}>
-                    <CloseIcon />
-                </IconButton>
-            </DialogTitle>
+        <>
             <DialogContent
                 dividers
                 sx={{
@@ -41,7 +24,7 @@ const JoinSuccessModal = ({ isOpen, onClose }) => {
                     {t('ok', 'auth')}
                 </Button>
             </DialogActions>
-        </Dialog>
+        </>
     )
 }
 

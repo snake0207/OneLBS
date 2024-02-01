@@ -5,15 +5,16 @@ import ErrorOutlineIcon from '@mui/icons-material/ErrorOutline'
 import TextInput from '#/components/common/input/TextInput'
 import { useFormik } from 'formik'
 import Select from '#/components/common/Select'
-import { gstStatusLabel, getAgainstStatus } from '#/common/libs/permission'
+import { getPermissionList, gstStatusLabel, getAgainstStatus } from '#/common/libs/permission'
 
 function Row({
     row,
+    onClick,
     onChangePermission,
     onChangeStatus,
     onChangeRemark,
     onResetPassword,
-    onDeactivate,
+    onWithdraw,
 }) {
     const formik = useFormik({
         initialValues: {
@@ -23,15 +24,6 @@ function Row({
     })
 
     const [editable, setEditable] = useState(false)
-    const getPermissionList = () => [
-        { key: 0, value: 0, label: t('all', 'users') },
-        { key: 1, value: 1, label: t('general_user', 'users') },
-        { key: 2, value: 2, label: t('request_user', 'users') },
-        { key: 3, value: 3, label: t('reviewer', 'users') },
-        { key: 4, value: 4, label: t('approver', 'users') },
-        { key: 5, value: 5, label: t('admin', 'users') },
-    ]
-
     const handleChangePermission = (item) => {
         onChangePermission(row, item)
     }
@@ -40,7 +32,8 @@ function Row({
         onChangeStatus(row, status)
     }
 
-    const handleEditable = () => {
+    const handleEditable = (event) => {
+        event.stopPropagation()
         setEditable(!editable)
 
         if (editable) {
@@ -50,24 +43,27 @@ function Row({
 
     const handleResetPassword = (event) => {
         event.preventDefault()
+        event.stopPropagation()
+
         if (onResetPassword) onResetPassword(row)
     }
 
-    const handleDeactivate = (event) => {
+    const handleWithdraw = (event) => {
         event.preventDefault()
-        if (onDeactivate) onDeactivate(row)
+        event.stopPropagation()
+        if (onWithdraw) onWithdraw(row)
     }
 
     return (
         <TableRow>
-            <TableCell>{row?.id}</TableCell>
-            <TableCell>{row?.email}</TableCell>
-            <TableCell>{row?.name}</TableCell>
-            <TableCell>{row?.company}</TableCell>
-            <TableCell>{row?.team}</TableCell>
-            <TableCell>{row?.register_date}</TableCell>
-            <TableCell>{row?.approve_date}</TableCell>
-            <TableCell>{row?.last_login_date}</TableCell>
+            <TableCell onClick={onClick}>{row?.id}</TableCell>
+            <TableCell onClick={onClick}>{row?.email}</TableCell>
+            <TableCell onClick={onClick}>{row?.name}</TableCell>
+            <TableCell onClick={onClick}>{row?.company}</TableCell>
+            <TableCell onClick={onClick}>{row?.team}</TableCell>
+            <TableCell onClick={onClick}>{row?.register_date}</TableCell>
+            <TableCell onClick={onClick}>{row?.approve_date}</TableCell>
+            <TableCell onClick={onClick}>{row?.last_login_date}</TableCell>
             <TableCell>
                 <Select
                     name="permission"
@@ -93,7 +89,7 @@ function Row({
             <TableCell>
                 <Stack direction={'row'}>
                     <Button onClick={handleResetPassword}>{t('reset_password', 'users')}</Button>
-                    <Button onClick={handleDeactivate}>{t('deactivate', 'users')}</Button>
+                    <Button onClick={handleWithdraw}>{t('withdraw', 'users')}</Button>
                 </Stack>
             </TableCell>
         </TableRow>

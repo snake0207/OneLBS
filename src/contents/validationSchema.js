@@ -25,7 +25,7 @@ const HELPER_TEXT = {
     otpNotMatch: t('otp_not_match', 'validation'),
     searchCountry: t('country_select', 'validation'),
     searchLat: t('lat_input', 'validation'),
-    searchLng: t('lng_input', 'validation'),
+    searchLng: t('lon_input', 'validation'),
     ipRequired: t('ip_required', 'validation'),
     ipNotMatch: t('ip_not_match', 'validation'),
     ipDescRequired: t('ip_desc_required', 'validation'),
@@ -132,7 +132,7 @@ export const mapSearchSchema = yup.object({
         .string()
         .matches(REGEXP.coordinates, HELPER_TEXT.searchLat)
         .required(HELPER_TEXT.searchLat),
-    lng: yup
+    lon: yup
         .string()
         .matches(REGEXP.coordinates, HELPER_TEXT.searchLng)
         .required(HELPER_TEXT.searchLng),

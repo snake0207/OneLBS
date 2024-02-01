@@ -8,7 +8,7 @@
   "company": "회사",
   "country": "국가",
   "lat": "위도",
-  "lng": "경도",
+  "lon": "경도",
   "language": "언어",
   "category": "카테고리"
 }

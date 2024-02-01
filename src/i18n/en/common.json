@@ -8,7 +8,7 @@
   "company": "company",
   "country": "country",
   "lat": "latitude",
-  "lng": "longitude",
+  "lon": "longitude",
   "language": "language",
   "category": "category"
 }

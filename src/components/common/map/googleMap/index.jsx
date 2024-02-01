@@ -26,7 +26,7 @@ const seoul = {
  * <Box sx={{ width: '1200px', height: '900px' }}>
  *     <GoogleMapComponent markerDataArr={sampleDataArr} isPoiSearch={true} isGpssSearch={false}/>
  * </Box>
- * @param markerDataArr 마커 데이터 array - 예상형식 {idx: 데이터idx 혹은 시퀀스, lat: 위도, lng: 경도, name: poi명}
+ * @param markerDataArr 마커 데이터 array
  * @param isPoiSearch 서치 페이지에서 사용여부 false 일 때, 검색 / 검색결과 컴포넌트 비노출
  * @param isGpssSearch gpss 페이지에서 사용여부 false 일 때, 검색 / 검색결과 컴포넌트 비노출
  */

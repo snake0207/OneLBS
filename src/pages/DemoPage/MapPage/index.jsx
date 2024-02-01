@@ -55,7 +55,9 @@ const MapPage = () => {
             <Box sx={{ display: 'flex' }}>
                 <Box sx={{ mr: 2 }}>
                     <Typography>Google Map Component</Typography>
-                    <GoogleMapComponent />
+                    <Box sx={{ width: '1600px', height: '900px' }}>
+                        <GoogleMapComponent isPoiSearch={true} />
+                    </Box>
                 </Box>
             </Box>
         </div>

@@ -59,6 +59,7 @@ const MapSearchList = ({ searchResultArr }) => {
                         {searchResultArr.map((data, idx) => (
                             <MapPoiContent
                                 key={data.poiId}
+                                idx={data.poiId}
                                 name={data.title}
                                 address={data.address}
                                 selectedPoi={selectedPoi}

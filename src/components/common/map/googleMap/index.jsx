@@ -16,7 +16,19 @@ const seoul = {
     lng: 127.008098,
 }
 
-const GoogleMapComponent = () => {
+/**
+ * 지도 컴포넌트는 지도 외부 div의 width / height만 선언하면 됨
+ * isSearch 와 isGpss는 둘 다 true면 안됨
+ * 둘 다 false 거나 둘 중 하나만 true로 사용
+ * 사용법 ex :
+ * <Box sx={{ width: '1200px', height: '900px' }}>
+ *     <GoogleMapComponent markerDataArr={sampleDataArr} isPoiSearch={true} isGpssSearch={false}/>
+ * </Box>
+ * @param markerDataArr 마커 데이터 array - 예상형식 {idx: 데이터idx 혹은 시퀀스, lat: 위도, lng: 경도, name: poi명}
+ * @param isPoiSearch 서치 페이지에서 사용여부 false 일 때, 검색 / 검색결과 컴포넌트 비노출
+ * @param isGpssSearch gpss 페이지에서 사용여부 false 일 때, 검색 / 검색결과 컴포넌트 비노출
+ */
+const GoogleMapComponent = ({ markerDataArr, isPoiSearch = false, isGpssSearch = false }) => {
     const [map, setMap] = useState(null)
     const [clickedCoord, setClickedCoord] = useState({
         lat: null,

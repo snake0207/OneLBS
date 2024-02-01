@@ -1,9 +1,10 @@
 import { Box, FormHelperText, TextField, Typography } from '@mui/material'
 
 /**
- * @param {string} ipName 아이피 주소에 대한 값
- * @param {string} ipDescription 아이피 주소에 대한 설명
- * @param {object} formik useFormik 반환 객체
+ * 공통 IP Input
+ * @param {string} ipName ip 1 ~ 4 formik name
+ * @param {string} ipDescription ip 설명 formik name
+ * @param {object} formik useformik return object
  * @returns ReactNode
  */
 const IpInput = ({ ipName1, ipName2, ipName3, ipName4, ipDescription, formik }) => {

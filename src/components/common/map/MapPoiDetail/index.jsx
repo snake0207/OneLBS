@@ -16,11 +16,12 @@ import t from '#/common/libs/trans.js'
 
 const MapPoiDetail = () => {
     return (
-        <Box sx={{ display: 'flex' }}>
+        <Box sx={{ display: 'flex', margin: '10px' }}>
             <Box
                 sx={{
                     width: '350px',
                     padding: '16px',
+                    background: '#ffffff',
                     borderRadius: '8px',
                     border: '1px solid #D1D1D1',
                 }}

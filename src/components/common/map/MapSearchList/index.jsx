@@ -60,10 +60,12 @@ const MapSearchList = ({ isResultNon }) => {
             sx={{
                 width: '350px',
                 padding: '2px',
+                margin: '10px',
+                background: '#ffffff',
                 borderRadius: '8px',
                 border: '1px solid #D1D1D1',
                 minHeight: '130px',
-                maxHeight: '400px',
+                maxHeight: '550px',
                 display: isResultNon === true ? 'flex' : '',
                 justifyContent: isResultNon === true ? 'center' : '',
                 alignItems: isResultNon === true ? 'center' : '',

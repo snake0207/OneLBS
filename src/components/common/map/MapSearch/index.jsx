@@ -285,8 +285,10 @@ const MapSearch = () => {
             sx={{
                 width: '350px',
                 padding: '16px',
+                margin: '10px',
                 borderRadius: '8px',
                 border: '1px solid #D1D1D1',
+                background: '#ffffff',
             }}
         >
             <Box>

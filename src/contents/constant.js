@@ -10,6 +10,7 @@ export const AUTH_STEP = {
 export const MODAL_TITLE = {
     demo: 'Demo',
     join: t('join', 'auth'),
+    joinSuccess: t('join_completed', 'auth'),
     detail: '상세정보',
 }
 

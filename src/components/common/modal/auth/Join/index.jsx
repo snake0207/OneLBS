@@ -8,12 +8,13 @@ import RadioInput from '#/components/common/Radio'
 import { joinSchema } from '#/contents/validationSchema'
 import EmailVerifyInput from '#/components/common/modal/auth/Join/EmailVerifyInput/index.jsx'
 import VerifyCodeInput from '#/components/common/modal/auth/Join/VerifyCodeInput'
-import JoinSuccessModal from '#/components/common/modal/auth/JoinSuccess'
 import PrivacyPolicyModal from '#/components/common/modal/auth/Join/PrivacyPolicy'
 import IpInputGroup from '#/components/common/modal/auth/Join/IpInputGroup'
 
 import t from '#/common/libs/trans'
 import { formatJoinData } from '#/common/libs/formatData'
+import { useModalActions } from '#/store/useModalStore'
+import { MODAL_TITLE } from '#/contents/constant'
 
 const JoinModal = () => {
     const dummyAuthorityArr = [
@@ -27,8 +28,8 @@ const JoinModal = () => {
         { value: 'Y', label: '개인정보 수집이용동의' },
         { value: 'N', label: '동의하지 않음' },
     ]
+    const { openModal } = useModalActions()
     const { mutate } = usePostJoin()
-    const [isJoinSuccess, setIsJoinSuccess] = useState(false)
     const [isOpenPrivacyPolicy, setIsOpenPrivacyPolicy] = useState(false)
 
     const formik = useFormik({
@@ -60,13 +61,17 @@ const JoinModal = () => {
         },
         validationSchema: joinSchema,
         onSubmit: (form) => {
-            console.log(form)
             const data = formatJoinData(form)
             console.log(data)
-            setIsJoinSuccess(true)
             // mutate(form)
+            openModal(MODAL_TITLE.joinSuccess)
         },
     })
+
+    const handleClosePrivacyPolicyDetail = () => {
+        setIsOpenPrivacyPolicy(false)
+        formik.setFieldValue('terms', 'Y')
+    }
 
     return (
         <>
@@ -159,10 +164,9 @@ const JoinModal = () => {
                     {t('join', 'auth')}
                 </Button>
             </DialogActions>
-            <JoinSuccessModal isOpen={isJoinSuccess} onClose={() => setIsJoinSuccess(false)} />
             <PrivacyPolicyModal
                 isOpen={isOpenPrivacyPolicy}
-                onClose={() => setIsOpenPrivacyPolicy(false)}
+                onClose={handleClosePrivacyPolicyDetail}
             />
         </>
     )

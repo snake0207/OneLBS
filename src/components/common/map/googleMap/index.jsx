@@ -201,6 +201,12 @@ const GoogleMapComponent = ({
                         </CustomControl>
                     </>
                 )}
+                {/* gpss 조회 */}
+                {/* 검색결과 마커 출력 */}
+                {markerDataArr &&
+                    markerDataArr.map((data) => (
+                        <DisplayMarker key={data.poiId} markerData={data} />
+                    ))}
             </GoogleMap>
         )
     )

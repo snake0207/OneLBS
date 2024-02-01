@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { useFormik } from 'formik'
-import { Box, Button, DialogActions, DialogContent, IconButton, Typography } from '@mui/material'
+import { Box, Button, DialogActions, DialogContent, Typography } from '@mui/material'
 import { usePostJoin } from '#/hooks/queries/auth'
 import TextInput from '#/components/common/input/TextInput'
 import PasswordInput from '#/components/common/input/PasswordInput'
@@ -10,11 +10,10 @@ import EmailVerifyInput from '#/components/common/modal/auth/Join/EmailVerifyInp
 import VerifyCodeInput from '#/components/common/modal/auth/Join/VerifyCodeInput'
 import JoinSuccessModal from '#/components/common/modal/auth/JoinSuccess'
 import PrivacyPolicyModal from '#/components/common/modal/auth/PrivacyPolicy'
-import Info from '@mui/icons-material/Info'
-import IpInput from '#/components/common/input/IpInput'
-import { formatJoinData } from '#/common/libs/formatData'
+import IpInputGroup from '#/components/common/modal/auth/Join/IpInputGroup'
 
 import t from '#/common/libs/trans'
+import { formatJoinData } from '#/common/libs/formatData'
 
 const JoinModal = () => {
     const dummyAuthorityArr = [
@@ -31,7 +30,6 @@ const JoinModal = () => {
     const { mutate } = usePostJoin()
     const [isJoinSuccess, setIsJoinSuccess] = useState(false)
     const [isOpenPrivacyPolicy, setIsOpenPrivacyPolicy] = useState(false)
-    const [ipInputCount, setIpInputCount] = useState(1)
 
     const formik = useFormik({
         initialValues: {
@@ -69,10 +67,6 @@ const JoinModal = () => {
             // mutate(form)
         },
     })
-
-    const handleClickAddIPInput = () => {
-        setIpInputCount((prev) => prev + 1)
-    }
 
     return (
         <>
@@ -137,42 +131,7 @@ const JoinModal = () => {
                     placeholder={t('placeholder.team', 'auth')}
                     formik={formik}
                 />
-                {formik.values.role === 'GUEST' && (
-                    <>
-                        <Box
-                            sx={{
-                                display: 'flex',
-                                justifyContent: 'space-between',
-                                alignItems: 'center',
-                            }}
-                        >
-                            <Typography variant="h6">
-                                <span style={{ color: 'red' }}>*</span>IP
-                            </Typography>
-                            <IconButton
-                                onClick={handleClickAddIPInput}
-                                disabled={3 === ipInputCount}
-                            >
-                                <Info />
-                            </IconButton>
-                        </Box>
-                        <Typography variant="body2">
-                            <span style={{ color: 'red' }}>*</span>
-                            {t('guide.ip_input_guide', 'auth')}
-                        </Typography>
-                        {Array.from({ length: ipInputCount }).map((_, idx) => (
-                            <IpInput
-                                key={idx}
-                                ipName1={`ipAddress1_${idx}`}
-                                ipName2={`ipAddress2_${idx}`}
-                                ipName3={`ipAddress3_${idx}`}
-                                ipName4={`ipAddress4_${idx}`}
-                                ipDescription={`ipDescription_${idx}`}
-                                formik={formik}
-                            />
-                        ))}
-                    </>
-                )}
+                {formik.values.role === 'GUEST' && <IpInputGroup formik={formik} />}
                 <Typography variant="h6">
                     <span style={{ color: 'red' }}>*</span>
                     {t('role', 'auth')}
@@ -187,6 +146,7 @@ const JoinModal = () => {
                         {t('read_more', 'auth')}
                     </Button>
                 </Box>
+                <Typography>{t('guide.terms_guide', 'auth')}</Typography>
                 <RadioInput
                     radioList={dummyTermsArr}
                     name={'terms'}

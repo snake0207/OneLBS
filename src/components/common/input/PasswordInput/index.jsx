@@ -11,6 +11,7 @@ const PasswordInput = ({ name, placeholder, formik, inputRule = null }) => {
             <Box
                 sx={{
                     height: 60,
+                    flex: 1,
                 }}
             >
                 <TextField

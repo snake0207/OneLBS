@@ -24,13 +24,13 @@ const seoul = {
  * 둘 다 false 거나 둘 중 하나만 true로 사용
  * 사용법 ex :
  * <Box sx={{ width: '1200px', height: '900px' }}>
- *     <GoogleMapComponent markerDataArr={sampleDataArr} isPoiSearch={true} isGpssSearch={false}/>
+ *     <GoogleMapComponent searchResultArr={sampleDataArr} isPoiSearch={true} isGpssSearch={false}/>
  * </Box>
- * @param markerDataArr 마커 데이터 array
+ * @param searchResultArr 마커 데이터 array
  * @param isPoiSearch 서치 페이지에서 사용여부 false 일 때, 검색 / 검색결과 컴포넌트 비노출
  * @param isGpssSearch gpss 페이지에서 사용여부 false 일 때, 검색 / 검색결과 컴포넌트 비노출
  */
-const GoogleMapComponent = ({ markerDataArr, isPoiSearch = false, isGpssSearch = false }) => {
+const GoogleMapComponent = ({ searchResultArr, isPoiSearch = false, isGpssSearch = false }) => {
     const [map, setMap] = useState(null)
     const [clickedCoord, setClickedCoord] = useState({
         lat: null,
@@ -110,11 +110,7 @@ const GoogleMapComponent = ({ markerDataArr, isPoiSearch = false, isGpssSearch =
                             position="TOP_LEFT"
                             style={{ left: '0px !important', top: '320px !important' }}
                         >
-                            {markerDataArr ? (
-                                <MapSearchList isResultNon={false} />
-                            ) : (
-                                <MapSearchList isResultNon={true} />
-                            )}
+                            <MapSearchList searchResultArr={searchResultArr} />
                         </CustomControl>
                         {/* poi 상세 */}
                         <CustomControl position="TOP_LEFT" style={{ left: '355px !important' }}>

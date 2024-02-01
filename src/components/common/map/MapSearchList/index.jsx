@@ -4,34 +4,8 @@ import List from '@mui/material/List'
 import { useEffect, useRef, useState } from 'react'
 import t from '#/common/libs/trans.js'
 
-const sampleData = [
-    {
-        name: 'Times Square',
-        address: '10036 New York, Manhattan, United States',
-    },
-    {
-        name: 'Times Square',
-        address: '10036 New York, Manhattan, United States',
-    },
-    {
-        name: 'Times Square',
-        address: '10036 New York, Manhattan, United States',
-    },
-    {
-        name: 'Times Square',
-        address: '10036 New York, Manhattan, United States',
-    },
-    {
-        name: 'Times Square',
-        address: '10036 New York, Manhattan, United States',
-    },
-    {
-        name: 'Times Square',
-        address: '10036 New York, Manhattan, United States',
-    },
-]
-
-const MapSearchList = ({ isResultNon }) => {
+const MapSearchList = ({ searchResultArr }) => {
+    const [isResultNon, setIsResultNon] = useState(true)
     const [selectedPoi, setSelectedPoi] = useState(null)
     const [isTopBtnVisible, setIsTopBtnVisible] = useState(false)
     const poiList = useRef()
@@ -41,6 +15,10 @@ const MapSearchList = ({ isResultNon }) => {
             behavior: 'smooth',
         })
     }
+    useEffect(() => {
+        if (searchResultArr && searchResultArr.length === 0) setIsResultNon(true)
+        else setIsResultNon(false)
+    }, [searchResultArr])
 
     useEffect(() => {
         const poiListCurrent = poiList.current
@@ -66,27 +44,26 @@ const MapSearchList = ({ isResultNon }) => {
                 border: '1px solid #D1D1D1',
                 minHeight: '130px',
                 maxHeight: '550px',
-                display: isResultNon === true ? 'flex' : '',
-                justifyContent: isResultNon === true ? 'center' : '',
-                alignItems: isResultNon === true ? 'center' : '',
+                display: isResultNon ? 'flex' : '',
+                justifyContent: isResultNon ? 'center' : '',
+                alignItems: isResultNon ? 'center' : '',
                 overflow: 'auto',
             }}
             ref={poiList}
         >
-            {isResultNon === true ? (
+            {isResultNon ? (
                 <Typography>{t('search_no_result', 'common')}</Typography>
             ) : (
-                sampleData && (
+                searchResultArr && (
                     <List sx={{ width: '100%' }}>
-                        {sampleData.map((data, idx) => (
+                        {searchResultArr.map((data, idx) => (
                             <MapPoiContent
-                                key={idx}
-                                idx={idx}
-                                name={data.name}
+                                key={data.poiId}
+                                name={data.title}
                                 address={data.address}
                                 selectedPoi={selectedPoi}
                                 setSelectedPoi={setSelectedPoi}
-                                isLast={sampleData.length - 1 === idx}
+                                isLast={searchResultArr.length - 1 === idx}
                             />
                         ))}
                         <Box

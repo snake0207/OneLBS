@@ -28,7 +28,8 @@ function UserTable({
     onChangeStatus,
     onChangeRemark,
     onResetPassword,
-    onDeactivate,
+    onWithdraw,
+    onSelectRow,
 }) {
     const handleChangePermission = (row, value) => {
         // console.log('handleChangePermission', row, value)
@@ -54,10 +55,10 @@ function UserTable({
         if (onResetPassword) onResetPassword(row)
     }
 
-    const handleDeactivate = (row) => {
-        // console.log('handleDeactivate', row)
+    const handleWithdraw = (row) => {
+        // console.log('handleWithdraw', row)
 
-        if (onDeactivate) onDeactivate(row)
+        if (onWithdraw) onWithdraw(row)
     }
 
     const handleNextPage = (page) => {
@@ -90,11 +91,12 @@ function UserTable({
                         <Row
                             key={row?.id}
                             row={row}
+                            onClick={() => onSelectRow(row)}
                             onChangePermission={handleChangePermission}
                             onChangeStatus={handleChangeStatus}
                             onChangeRemark={handleChangeRemark}
                             onResetPassword={handleResetPassword}
-                            onDeactivate={handleDeactivate}
+                            onWithdraw={handleWithdraw}
                         />
                     ))}
                 </TableBody>

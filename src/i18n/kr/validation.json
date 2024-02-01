@@ -24,6 +24,5 @@
     "lat_input": "위도를 입력해 주세요",
     "lng_input": "경도를 입력해 주세요",
     "ip_required": "IP 입력해 주세요.",
-    "ip_not_match": "IP 형식이 맞지 않습니다.",
-    "ip_desc_required": "설명을 입력해 주세요."
+    "ip_not_match": "IP 형식이 맞지 않습니다."
 }

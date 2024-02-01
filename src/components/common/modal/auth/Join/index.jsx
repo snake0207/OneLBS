@@ -136,7 +136,9 @@ const JoinModal = () => {
                     placeholder={t('placeholder.team', 'auth')}
                     formik={formik}
                 />
-                {formik.values.role === 'GUEST' && <IpInputGroup formik={formik} />}
+                {formik.values.role !== 'GUEST' && formik.values.role !== 'USER' && (
+                    <IpInputGroup formik={formik} />
+                )}
                 <Typography variant="h6">
                     <span style={{ color: 'red' }}>*</span>
                     {t('role', 'auth')}

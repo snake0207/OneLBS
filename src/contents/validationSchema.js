@@ -28,7 +28,6 @@ const HELPER_TEXT = {
     searchLng: t('lng_input', 'validation'),
     ipRequired: t('ip_required', 'validation'),
     ipNotMatch: t('ip_not_match', 'validation'),
-    ipDescRequired: t('ip_desc_required', 'validation'),
 }
 
 const REGEXP = {
@@ -72,7 +71,7 @@ export const joinSchema = yup.object().shape({
     company: yup.string().min(2, HELPER_TEXT.companyLength).required(HELPER_TEXT.companyRequired),
     team: yup.string().min(2, HELPER_TEXT.teamLength).required(HELPER_TEXT.teamRequired),
     ipAddress1_0: yup.string().when('role', {
-        is: (value) => value === 'GUEST',
+        is: (value) => value !== ('GUEST' || 'USER'),
         then: () =>
             yup
                 .string()
@@ -103,10 +102,7 @@ export const joinSchema = yup.object().shape({
                 .matches(REGEXP.ipNumber, HELPER_TEXT.ipNotMatch)
                 .required(HELPER_TEXT.ipRequired),
     }),
-    ipDescription_0: yup.string().when('role', {
-        is: (value) => value === 'GUEST',
-        then: () => yup.string().required(HELPER_TEXT.ipDescRequired),
-    }),
+    ipDescription_0: yup.string(),
     ipAddress1_1: yup.string().matches(REGEXP.ipNumber, HELPER_TEXT.ipNotMatch),
     ipAddress2_1: yup.string().matches(REGEXP.ipNumber, HELPER_TEXT.ipNotMatch),
     ipAddress3_1: yup.string().matches(REGEXP.ipNumber, HELPER_TEXT.ipNotMatch),

@@ -50,6 +50,7 @@ const JoinModal = () => {
             ipAddress3_2: '',
             ipAddress4_2: '',
             ipDescription_2: '',
+            isIpAutoAdd: true,
         },
         validationSchema: joinSchema,
         onSubmit: (form) => {

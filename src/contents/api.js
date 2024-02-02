@@ -3,8 +3,8 @@ export const API_PATH = {
         login: '/',
         join: '/userAuth/api/v1/user/register',
         confirm_eamil: '/userAuth/api/v1/user/confirm-email',
+        verify_email: '/userAuth/api/v1/user/verify-email',
         get_ip: '/userAuth/api/v1/user/get-ip',
-        verifyEmailCode: '/',
     },
     gpss: {
         reviewer: '/reviewer',

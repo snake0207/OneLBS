@@ -3,13 +3,18 @@ import Close from '@mui/icons-material/Close'
 import { Box, Button, IconButton, InputAdornment, TextField } from '@mui/material'
 
 import t from '#/common/libs/trans'
+import { usePostEmailVerify } from '#/hooks/queries/auth'
 
 const EmailVerifyInput = ({ name, formik }) => {
+    const { mutate } = usePostEmailVerify()
     const { setTime } = useTimeActions()
+
     const handleClickSendEmail = () => {
         if (!formik.errors[name]) console.log(formik.values[name])
+        mutate({ email: formik.values[name] })
         setTime(180)
     }
+
     return (
         <Box
             sx={{

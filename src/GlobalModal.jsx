@@ -4,10 +4,12 @@ import { MODAL_TITLE } from './contents/constant'
 import { useModalActions, useModalTitleState } from './store/useModalStore'
 import ApprovalDetailModal from '#/components/common/modal/approval/ApprovalDetailModal.jsx'
 import DemoModal from '#/components/common/modal/Demo'
+import JoinSuccessModal from '#/components/common/modal/auth/JoinSuccess'
 
 const MODAL_COMPONENT_ARR = [
     { type: MODAL_TITLE.demo, component: <DemoModal /> },
     { type: MODAL_TITLE.join, component: <JoinModal /> },
+    { type: MODAL_TITLE.joinSuccess, component: <JoinSuccessModal /> },
     { type: MODAL_TITLE.detail, component: <ApprovalDetailModal /> },
 ]
 

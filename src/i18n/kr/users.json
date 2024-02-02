@@ -12,6 +12,7 @@
     "admin": "운영자",
     "search": "검색",
     "name": "이름",
+    "ip": "IP",
     "ip_address": "IP 주소",
     "login_date": "로그인 일시",
     "update_date": "변경 일시",

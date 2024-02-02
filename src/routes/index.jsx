@@ -18,6 +18,7 @@ import UserManagementPage from '#/pages/DemoPage/UserManagementPage'
 import UserLoginHistoryPage from '#/pages/DemoPage/UserManagementPage/UserLoginHistoryPage'
 import UserPermissionPage from '#/pages/DemoPage/UserManagementPage/UserPermissionPage'
 import UserListPage from '#/pages/DemoPage/UserManagementPage/UserListPage'
+import IPManagePage from '#/pages/DemoPage/UserManagementPage/IPManagePage'
 
 const Routes = () => {
     return useRoutes([
@@ -49,6 +50,7 @@ const Routes = () => {
                 { path: '/components/users/list', element: <UserListPage /> },
                 { path: '/components/users/login-history', element: <UserLoginHistoryPage /> },
                 { path: '/components/users/permission-history', element: <UserPermissionPage /> },
+                { path: '/components/users/ip-management', element: <IPManagePage /> },
             ],
         },
     ])

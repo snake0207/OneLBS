@@ -1,5 +1,5 @@
 import JoinSuccessModal from '#/components/common/modal/auth/JoinSuccess'
-import PrivacyPolicyModal from '#/components/common/modal/auth/PrivacyPolicy'
+import PrivacyPolicyModal from '#/components/common/modal/auth/Join/PrivacyPolicy'
 import { MODAL_TITLE } from '#/contents/constant'
 import { useModalActions } from '#/store/useModalStore'
 import { useState } from 'react'

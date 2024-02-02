@@ -1,17 +1,22 @@
 import Typography from '@mui/material/Typography'
-import { Table, TableBody, TableCell, TableHead, TableRow } from '@mui/material'
-import { tokens } from '#/theme/index.js'
+import { Table, TableBody, TableCell, TableHead, TableRow, useTheme } from '@mui/material'
+import t from '#/common/libs/trans.js'
 
 const HistoryTable = ({ historyList }) => {
+    const theme = useTheme()
+
     return (
         <>
-            <Typography>총 {historyList?.length || 0}건</Typography>
+            <Typography>
+                {t('total', 'approval')} {historyList?.length || 0}
+                {t('case', 'approval')}
+            </Typography>
             <Table size={'small'} border={1} sx={{ borderColor: 'divider' }}>
-                <TableHead sx={{ backgroundColor: tokens.grey[100] }}>
+                <TableHead sx={{ backgroundColor: theme.palette.grey[100] }}>
                     <TableRow>
-                        <TableCell align={'center'}>일시</TableCell>
-                        <TableCell align={'center'}>상태</TableCell>
-                        <TableCell align={'center'}>이력</TableCell>
+                        <TableCell align={'center'}>{t('date', 'approval')}</TableCell>
+                        <TableCell align={'center'}>{t('state', 'approval')}</TableCell>
+                        <TableCell align={'center'}>{t('history', 'approval')}</TableCell>
                     </TableRow>
                 </TableHead>
                 <TableBody>

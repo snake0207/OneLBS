@@ -1,12 +1,24 @@
 import Typography from '@mui/material/Typography'
-import { Box, Card } from '@mui/material'
-import { tokens } from '#/theme/index.js'
+import { Box, Card, useTheme } from '@mui/material'
+import t from '#/common/libs/trans.js'
 
 const ApprovalLine = ({ type, content }) => {
+    const theme = useTheme()
+    const [title, process] = (() => {
+        switch (type) {
+            case '요청':
+                return [t('requester', 'approval'), t('status.request', 'approval')]
+            case '검토':
+                return [t('reviewer', 'approval'), t('status.reviewed', 'approval')]
+            case '승인':
+                return [t('approver', 'approval'), t('status.approved', 'approval')]
+        }
+    })()
+
     return (
         <Box>
             <Typography align={'center'} variant="subtitle1">
-                {type}
+                {title}
             </Typography>
             <Card
                 sx={{
@@ -20,16 +32,16 @@ const ApprovalLine = ({ type, content }) => {
                 <Typography
                     variant="subtitle2"
                     sx={{
-                        backgroundColor: tokens.primary[500],
+                        backgroundColor: content.status
+                            ? theme.palette.primary.main
+                            : theme.palette.grey[300],
                         borderRadius: 1,
                     }}
                 >
-                    {content.title}
+                    {process}
                 </Typography>
                 <Box p={1}>
-                    <Typography variant="body2" sx={{}}>
-                        {content.team}
-                    </Typography>
+                    <Typography variant="body2">{content.team}</Typography>
                     <Typography>{content.name}</Typography>
                     <Typography variant="caption">{content.date}</Typography>
                 </Box>

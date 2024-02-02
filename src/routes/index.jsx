@@ -13,11 +13,13 @@ import LoginDemoPage from '#/pages/DemoPage/LoginPage'
 import PopupPage from '#/pages/DemoPage/PopupPage'
 import InputPage from '#/pages/DemoPage/InputPage'
 import ModalPage from '#/pages/DemoPage/ModalPage'
-import ApprovalHistoryPage from '#/pages/DemoPage/ApprovalHistoryPage/index.jsx'
 import UserManagementPage from '#/pages/DemoPage/UserManagementPage'
 import UserLoginHistoryPage from '#/pages/DemoPage/UserManagementPage/UserLoginHistoryPage'
 import UserPermissionPage from '#/pages/DemoPage/UserManagementPage/UserPermissionPage'
-import ApprovalDetailPage from '#/pages/DemoPage/ApprovalHistoryPage/ApprovalDetailPage/index.jsx'
+import ApprovalDetailPage from '#/pages/DemoPage/ApprovalPage/ApprovalDetailPage/index.jsx'
+import ApprovalPage from '#/pages/DemoPage/ApprovalPage/index.jsx'
+import FullApprovalHistoryPage from '#/pages/DemoPage/ApprovalPage/FullHistoryPage/index.jsx'
+import RequestHistoryPage from '#/pages/DemoPage/ApprovalPage/RequestHistoryPage/index.jsx'
 
 const Routes = () => {
     return useRoutes([
@@ -44,8 +46,10 @@ const Routes = () => {
                 { path: '/components/logins', element: <LoginDemoPage /> },
                 { path: '/components/modals', element: <ModalPage /> },
                 { path: '/components/popup', element: <PopupPage /> },
-                { path: '/components/approval', element: <ApprovalHistoryPage /> },
-                { path: '/components/approval/detail/:id', element: <ApprovalDetailPage /> },
+                { path: '/components/approval', element: <ApprovalPage /> },
+                { path: '/components/approval/all', element: <FullApprovalHistoryPage /> },
+                { path: '/components/approval/request', element: <RequestHistoryPage /> },
+                { path: '/components/approval/:type/detail/:id', element: <ApprovalDetailPage /> },
                 { path: '/components/users', element: <UserManagementPage /> },
                 { path: '/components/users/login-history', element: <UserLoginHistoryPage /> },
                 { path: '/components/users/permission-history', element: <UserPermissionPage /> },

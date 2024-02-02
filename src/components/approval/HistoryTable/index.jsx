@@ -8,16 +8,18 @@ import {
     TableRow,
 } from '@mui/material'
 import Typography from '@mui/material/Typography'
-import { useModalActions } from '#/store/useModalStore.js'
-import { MODAL_TITLE } from '#/contents/constant.js'
 import { useNavigate } from 'react-router-dom'
+import t from '#/common/libs/trans.js'
 
 const HistoryTable = ({ dummyData, headers }) => {
     const navigator = useNavigate()
 
     return (
         <>
-            <Typography>총 {dummyData?.length || 0}건</Typography>
+            <Typography>
+                {t('total', 'approval')} {dummyData?.length || 0}
+                {t('case', 'approval')}
+            </Typography>
             <TableContainer component={Paper}>
                 <Table sx={{ minWidth: 'max-content' }}>
                     <TableHead>
@@ -36,7 +38,9 @@ const HistoryTable = ({ dummyData, headers }) => {
                                         id={data.id}
                                         hover
                                         onClick={() =>
-                                            navigator('/components/approval/detail/' + data.id)
+                                            navigator(
+                                                `/components/approval/request/detail/${data.id}`,
+                                            )
                                         }
                                     >
                                         <TableCell>{dummyData.length - index}</TableCell>
@@ -47,11 +51,8 @@ const HistoryTable = ({ dummyData, headers }) => {
                                         <TableCell>{data.approver}</TableCell>
                                         <TableCell>{data.request_date}</TableCell>
                                         <TableCell>{data.review_date}</TableCell>
-                                        <TableCell>{data.reject_date}</TableCell>
                                         <TableCell>{data.approval_date}</TableCell>
                                         <TableCell>{data.status}</TableCell>
-                                        <TableCell>{data.request_reason}</TableCell>
-                                        <TableCell>{data.reject_reason}</TableCell>
                                         <TableCell>{data.history}</TableCell>
                                     </TableRow>
                                 )

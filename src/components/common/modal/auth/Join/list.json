@@ -1,0 +1,13 @@
+{
+    "roleList": [
+        { "value": "GUEST", "label": "일반 사용자" },
+        { "value": "USER", "label": "요청자" },
+        { "value": "REVIEWER", "label": "검토자" },
+        { "value": "MANAGER", "label": "승인자" },
+        { "value": "ADMIN", "label": "운영자" }
+    ],
+    "termsList": [
+        { "value": "Y", "label": "개인정보 수집이용동의" },
+        { "value": "N", "label": "동의하지 않음" }
+    ]
+}

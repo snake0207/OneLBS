@@ -8,7 +8,6 @@ import t from '#/common/libs/trans'
 
 const IpInputGroup = ({ formik }) => {
     const [ipInputCount, setIpInputCount] = useState(0)
-    const [isAutoInput, setIsAutoInput] = useState(true)
 
     // const { data } = useGetUserIp()
     const data = '123.123.123.123'
@@ -18,13 +17,17 @@ const IpInputGroup = ({ formik }) => {
     }
 
     useEffect(() => {
-        if (isAutoInput) {
+        if (formik.values.isIpAutoAdd) {
             const ipAddressList = data.split('.')
             ipAddressList.forEach((ip, idx) => {
                 formik.setFieldValue(`ipAddress${idx + 1}_0`, ip)
             })
+        } else {
+            for (let idx = 0; idx < 4; idx++) {
+                formik.setFieldValue(`ipAddress${idx + 1}_0`, '')
+            }
         }
-    }, [isAutoInput])
+    }, [formik.values.isIpAutoAdd])
 
     return (
         <>
@@ -58,8 +61,10 @@ const IpInputGroup = ({ formik }) => {
                 <FormControlLabel
                     control={
                         <Checkbox
-                            checked={isAutoInput}
-                            onChange={() => setIsAutoInput((prev) => !prev)}
+                            name="isIpAutoAdd"
+                            value={formik.values.isIpAutoAdd}
+                            onChange={formik.handleChange}
+                            checked={formik.values.isIpAutoAdd}
                         />
                     }
                     label={t('auto_input', 'auth')}

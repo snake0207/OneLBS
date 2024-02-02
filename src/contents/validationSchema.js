@@ -70,32 +70,32 @@ export const joinSchema = yup.object().shape({
     name: yup.string().min(2, HELPER_TEXT.nameLength).required(HELPER_TEXT.nameRequired),
     company: yup.string().min(2, HELPER_TEXT.companyLength).required(HELPER_TEXT.companyRequired),
     team: yup.string().min(2, HELPER_TEXT.teamLength).required(HELPER_TEXT.teamRequired),
-    ipAddress1_0: yup.string().when('role', {
-        is: (value) => value !== 'GUEST' && value !== 'USER',
+    ipAddress1_0: yup.string().when(['role', 'isIpAutoAdd'], {
+        is: (role, isIpAutoAdd) => role !== 'GUEST' && role !== 'USER' && !isIpAutoAdd,
         then: () =>
             yup
                 .string()
                 .matches(REGEXP.ipNumber, HELPER_TEXT.ipNotMatch)
                 .required(HELPER_TEXT.ipRequired),
     }),
-    ipAddress2_0: yup.string().when('role', {
-        is: (value) => value !== 'GUEST' && value !== 'USER',
+    ipAddress2_0: yup.string().when(['role', 'isIpAutoAdd'], {
+        is: (role, isIpAutoAdd) => role !== 'GUEST' && role !== 'USER' && !isIpAutoAdd,
         then: () =>
             yup
                 .string()
                 .matches(REGEXP.ipNumber, HELPER_TEXT.ipNotMatch)
                 .required(HELPER_TEXT.ipRequired),
     }),
-    ipAddress3_0: yup.string().when('role', {
-        is: (value) => value !== 'GUEST' && value !== 'USER',
+    ipAddress3_0: yup.string().when(['role', 'isIpAutoAdd'], {
+        is: (role, isIpAutoAdd) => role !== 'GUEST' && role !== 'USER' && !isIpAutoAdd,
         then: () =>
             yup
                 .string()
                 .matches(REGEXP.ipNumber, HELPER_TEXT.ipNotMatch)
                 .required(HELPER_TEXT.ipRequired),
     }),
-    ipAddress4_0: yup.string().when('role', {
-        is: (value) => value !== 'GUEST' && value !== 'USER',
+    ipAddress4_0: yup.string().when(['role', 'isIpAutoAdd'], {
+        is: (role, isIpAutoAdd) => role !== 'GUEST' && role !== 'USER' && !isIpAutoAdd,
         then: () =>
             yup
                 .string()

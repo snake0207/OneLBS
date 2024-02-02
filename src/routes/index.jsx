@@ -20,6 +20,8 @@ import ApprovalDetailPage from '#/pages/DemoPage/ApprovalPage/ApprovalDetailPage
 import ApprovalPage from '#/pages/DemoPage/ApprovalPage/index.jsx'
 import FullApprovalHistoryPage from '#/pages/DemoPage/ApprovalPage/FullHistoryPage/index.jsx'
 import RequestHistoryPage from '#/pages/DemoPage/ApprovalPage/RequestHistoryPage/index.jsx'
+import FullHistoryDetailPage from '#/pages/DemoPage/ApprovalPage/FullHistoryPage/DetailPage/index.jsx'
+import RequestHistoryDetailPage from '#/pages/DemoPage/ApprovalPage/RequestHistoryPage/DetailPage/index.jsx'
 
 const Routes = () => {
     return useRoutes([
@@ -48,8 +50,12 @@ const Routes = () => {
                 { path: '/components/popup', element: <PopupPage /> },
                 { path: '/components/approval', element: <ApprovalPage /> },
                 { path: '/components/approval/all', element: <FullApprovalHistoryPage /> },
+                { path: '/components/approval/all/detail/:id', element: <FullHistoryDetailPage /> },
                 { path: '/components/approval/request', element: <RequestHistoryPage /> },
-                { path: '/components/approval/:type/detail/:id', element: <ApprovalDetailPage /> },
+                {
+                    path: '/components/approval/request/detail/:id',
+                    element: <RequestHistoryDetailPage />,
+                },
                 { path: '/components/users', element: <UserManagementPage /> },
                 { path: '/components/users/login-history', element: <UserLoginHistoryPage /> },
                 { path: '/components/users/permission-history', element: <UserPermissionPage /> },

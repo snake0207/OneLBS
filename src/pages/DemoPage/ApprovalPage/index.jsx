@@ -11,6 +11,12 @@ const ApprovalPage = () => {
             <ListItemButton component="a" href="/components/approval/request">
                 <ListItemText primary="요청자 이력페이지" />
             </ListItemButton>
+            <ListItemButton component="a" href="/components/approval/request">
+                <ListItemText primary="검토자 이력페이지" />
+            </ListItemButton>
+            <ListItemButton component="a" href="/components/approval/request">
+                <ListItemText primary="승인자 이력페이지" />
+            </ListItemButton>
         </List>
     )
 }

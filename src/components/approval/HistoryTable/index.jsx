@@ -13,6 +13,7 @@ import t from '#/common/libs/trans.js'
 
 const HistoryTable = ({ dummyData, headers }) => {
     const navigator = useNavigate()
+    const url = window.location.pathname
 
     return (
         <>
@@ -37,11 +38,7 @@ const HistoryTable = ({ dummyData, headers }) => {
                                         key={data.id}
                                         id={data.id}
                                         hover
-                                        onClick={() =>
-                                            navigator(
-                                                `/components/approval/request/detail/${data.id}`,
-                                            )
-                                        }
+                                        onClick={() => navigator(`${url}/detail/${data.id}`)}
                                     >
                                         <TableCell>{dummyData.length - index}</TableCell>
                                         <TableCell>{data.name}</TableCell>

@@ -2,7 +2,7 @@ import { useParams } from 'react-router-dom'
 import Typography from '@mui/material/Typography'
 import t from '#/common/libs/trans.js'
 import TitleBar from '#/components/common/menu/TitleBar/index.jsx'
-import { Box, Card, Divider, Table, TableBody, TableCell, TableRow, useTheme } from '@mui/material'
+import { Box, Button, Card, Divider, useTheme } from '@mui/material'
 import Grid from '@mui/material/Unstable_Grid2'
 import { ArrowForwardIos } from '@mui/icons-material'
 import ApprovalLine from '#/components/approval/Detail/ApprovalLine/index.jsx'
@@ -12,13 +12,16 @@ import { useEffect, useState } from 'react'
 import { useFormik } from 'formik'
 import SaveIcon from '@mui/icons-material/Save.js'
 import EditIcon from '@mui/icons-material/Edit.js'
-import TextInput from '#/components/common/input/TextInput/index.jsx'
 import CategoryTable from '#/components/approval/Detail/CategoryTable/index.jsx'
+import { usePopupActions } from '#/store/usePopupStore.js'
+import ActionButtons from '#/components/approval/Detail/ActionButtons/index.jsx'
 
 const ApprovalDetailPage = () => {
     const params = useParams()
     const theme = useTheme()
+    const userType = params.type
     const dummyData = {
+        status: '임시저장',
         approvalLineContents: {
             requester: {
                 team: '콘텐츠플랫폼개발팀',
@@ -91,7 +94,7 @@ const ApprovalDetailPage = () => {
     })
 
     useEffect(() => {
-        console.log(params)
+        console.log(params, userType)
     }, [params])
 
     const RenderEditIcons = (type) => {
@@ -118,6 +121,18 @@ const ApprovalDetailPage = () => {
         console.log(formik.values)
     }
 
+    const handleClickSaveButtons = () => {
+        popupActions.showPopup('confirm')
+    }
+
+    const handleClickRejectButtons = () => {
+        popupActions.showPopup('confirm', '')
+    }
+
+    const handleClickApprovalButtons = () => {
+        popupActions.showPopup('confirm')
+    }
+
     return (
         <>
             <TitleBar title={t('history_detail', 'approval')} />
@@ -126,34 +141,10 @@ const ApprovalDetailPage = () => {
                     {/* 결제라인 */}
                     <Box>
                         <RenderTitle title={t('line', 'approval')} />
-                        <Grid container flexWrap={'nowrap'} sx={{ justifyContent: 'center' }}>
-                            <Grid xs={4}>
-                                <ApprovalLine
-                                    type={'요청'}
-                                    content={dummyData.approvalLineContents.requester}
-                                />
-                            </Grid>
-                            <ArrowForwardIos
-                                fontSize="large"
-                                sx={{ transform: 'translateY(4rem)' }}
-                            />
-                            <Grid xs={4}>
-                                <ApprovalLine
-                                    type={'검토'}
-                                    content={dummyData.approvalLineContents.reviewer}
-                                />
-                            </Grid>
-                            <ArrowForwardIos
-                                fontSize="large"
-                                sx={{ transform: 'translateY(4rem)' }}
-                            />
-                            <Grid xs={4}>
-                                <ApprovalLine
-                                    type={'승인'}
-                                    content={dummyData.approvalLineContents.approver}
-                                />
-                            </Grid>
-                        </Grid>
+                        <ApprovalLine
+                            status={'승인자반려'}
+                            content={dummyData.approvalLineContents}
+                        />
                     </Box>
                     {/* 정보 탭 */}
                     <Box>
@@ -204,6 +195,8 @@ const ApprovalDetailPage = () => {
                             <HistoryTable historyList={dummyData.historyList} />
                         </Box>
                     </Box>
+                    {/* 버튼 */}
+                    <ActionButtons type={userType} status={dummyData.status} />
                 </Grid>
 
                 {/* 지도 영역 */}

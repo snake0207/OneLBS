@@ -8,7 +8,7 @@ import SaveIcon from '@mui/icons-material/Save'
 import TextInput from '#/components/common/input/TextInput/index.jsx'
 import { useFormik } from 'formik'
 
-const InfoTab = ({ data, isShowInputs, RenderEditIcons, formik }) => {
+const InfoTab = ({ data, formik, isEditable }) => {
     const theme = useTheme()
     const [activeTab, setActiveTab] = useState('1')
     const inputNames = ['name', 'address', 'lat', 'lon']
@@ -19,6 +19,32 @@ const InfoTab = ({ data, isShowInputs, RenderEditIcons, formik }) => {
         key4: 'value4',
         key5: 'value5',
         key6: 'value6',
+    }
+    const [isShowInputs, setIsShowInputs] = useState({
+        name: false,
+        address: false,
+        lat: false,
+        lon: false,
+    })
+    const [isDisableInputs, setIsDisableInputs] = useState({
+        name: true,
+        address: true,
+        lat: true,
+        lon: true,
+    })
+
+    const RenderEditIcons = (type) => {
+        return !isDisableInputs[type] ? (
+            <SaveIcon fontSize={'small'} onClick={() => handleShowEditInputs(type)} />
+        ) : (
+            <EditIcon fontSize={'small'} onClick={() => handleShowEditInputs(type)} />
+        )
+    }
+
+    const handleShowEditInputs = (type) => {
+        setIsShowInputs({ ...isShowInputs, [type]: true })
+        setIsDisableInputs({ ...isDisableInputs, [type]: !isDisableInputs[type] })
+        console.log(formik.values)
     }
 
     return (
@@ -60,14 +86,15 @@ const InfoTab = ({ data, isShowInputs, RenderEditIcons, formik }) => {
                                                 <Typography variant={'body2'}>
                                                     {data[name]}
                                                 </Typography>
-                                                {RenderEditIcons(name)}
+                                                {isEditable && RenderEditIcons(name)}
                                             </Box>
                                             {isShowInputs[name] && (
                                                 <Box mt={1}>
                                                     <TextInput
                                                         formik={formik}
                                                         name={name}
-                                                        placeholder={'명칭을 입력하세요'}
+                                                        IsDisabled={isDisableInputs[name]}
+                                                        // placeholder={'명칭을 입력하세요'}
                                                     />
                                                 </Box>
                                             )}

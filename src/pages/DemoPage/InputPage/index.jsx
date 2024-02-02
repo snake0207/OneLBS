@@ -3,7 +3,7 @@ import TextInput from '#/components/common/input/TextInput'
 import { useFormik } from 'formik'
 import * as yup from 'yup'
 import RadioInput from '#/components/common/Radio'
-import IpInput from '#/components/common/input/IpInput'
+import { IpInput } from '#/components/common/input/IpInput'
 import { Box, Button } from '@mui/material'
 import DatePickerInput from '#/components/common/input/DatePickerInput/index.jsx'
 import CheckBoxInput from '#/components/common/input/CheckBoxInput/index.jsx'
@@ -22,6 +22,15 @@ const InputPage = () => {
             demoCheck1: false, // checkbox 기본값
             demoCheck2: false,
             demoCheck3: false,
+            demoIp1: '',
+            demoIp2: '',
+            demoIp3: '',
+            demoIp4: '',
+            demoIp5: '',
+            demoIp6: '',
+            demoIp7: '',
+            demoIp8: '',
+            demoIpDescription: '',
         },
         validationSchema: yup.object({
             demoInput: yup.string().required('this is required'),
@@ -30,7 +39,10 @@ const InputPage = () => {
             demoIp2: yup.string().required('IP 입력해 주세요'),
             demoIp3: yup.string().required('IP 입력해 주세요'),
             demoIp4: yup.string().required('IP 입력해 주세요'),
-            demoIpDescription: yup.string().required('설명 입력해 주세요'),
+            demoIp5: yup.string().required('IP 입력해 주세요'),
+            demoIp6: yup.string().required('IP 입력해 주세요'),
+            demoIp7: yup.string().required('IP 입력해 주세요'),
+            demoIp8: yup.string().required('IP 입력해 주세요'),
             demoCheck1: yup.boolean().isTrue(t('required', 'inputs')),
             demoCheck2: yup.boolean().isTrue(t('required', 'inputs')),
         }),
@@ -79,14 +91,24 @@ const InputPage = () => {
             </div>
             <h2>IPInput</h2>
             <div style={{ width: 600 }}>
+                <p>Main Component</p>
                 <IpInput
                     ipName1={'demoIp1'}
                     ipName2={'demoIp2'}
                     ipName3={'demoIp3'}
                     ipName4={'demoIp4'}
-                    ipDescription={'demoIpDescription'}
                     formik={formik}
                 />
+                <p>with Sub Component</p>
+                <IpInput
+                    ipName1={'demoIp5'}
+                    ipName2={'demoIp6'}
+                    ipName3={'demoIp7'}
+                    ipName4={'demoIp8'}
+                    formik={formik}
+                >
+                    <IpInput.IpDescription formik={formik} ipDescName={'demoIpDescription'} />
+                </IpInput>
             </div>
             <h2>Radio</h2>
             <div style={{ display: 'flex', gap: 100 }}>

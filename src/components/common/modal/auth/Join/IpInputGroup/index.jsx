@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { Box, FormControlLabel, Checkbox, IconButton, Typography } from '@mui/material'
-import IpInput from '#/components/common/input/IpInput'
+import { IpInput } from '#/components/common/input/IpInput'
 import Info from '@mui/icons-material/Info'
 import { useGetUserIp } from '#/hooks/queries/auth'
 
@@ -55,9 +55,10 @@ const IpInputGroup = ({ formik }) => {
                     ipName2={'ipAddress2_0'}
                     ipName3={'ipAddress3_0'}
                     ipName4={'ipAddress4_0'}
-                    ipDescription={'ipDescription_0'}
                     formik={formik}
-                />
+                >
+                    <IpInput.IpDescription formik={formik} ipDescName={'ipDescription_0'} />
+                </IpInput>
                 <FormControlLabel
                     control={
                         <Checkbox
@@ -78,9 +79,13 @@ const IpInputGroup = ({ formik }) => {
                     ipName2={`ipAddress2_${idx + 1}`}
                     ipName3={`ipAddress3_${idx + 1}`}
                     ipName4={`ipAddress4_${idx + 1}`}
-                    ipDescription={`ipDescription_${idx + 1}`}
                     formik={formik}
-                />
+                >
+                    <IpInput.IpDescription
+                        formik={formik}
+                        ipDescName={`ipDescription_${idx + 1}`}
+                    />
+                </IpInput>
             ))}
         </>
     )

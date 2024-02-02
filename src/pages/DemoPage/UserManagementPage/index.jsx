@@ -12,6 +12,9 @@ function UserManagementPage() {
                 <li>
                     <a href="/components/users/permission-history">User Permission History</a>
                 </li>
+                <li>
+                    <a href="/components/users/ip-management">User IP Access Management</a>
+                </li>
             </ul>
         </div>
     )

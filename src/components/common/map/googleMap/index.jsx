@@ -233,7 +233,7 @@ const GoogleMapComponent = ({
                         </CustomControl>
                         {/* poi 상세 */}
                         <CustomControl position="TOP_LEFT" style={{ left: '355px !important' }}>
-                            <MapPoiDetail />
+                            <MapPoiDetail selectedPoi={selectedPoi} />
                         </CustomControl>
                     </>
                 )}

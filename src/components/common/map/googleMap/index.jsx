@@ -211,7 +211,11 @@ const GoogleMapComponent = ({
                             position="TOP_LEFT"
                             style={{ left: '0px !important', top: '320px !important' }}
                         >
-                            <MapSearchList searchResultArr={mapSampleData} />
+                            <MapSearchList
+                                searchResultArr={mapSampleData}
+                                selectedPoi={selectedPoi}
+                                setSelectedPoi={setSelectedPoi}
+                            />
                         </CustomControl>
                         {/* poi 상세 */}
                         <CustomControl position="TOP_LEFT" style={{ left: '355px !important' }}>

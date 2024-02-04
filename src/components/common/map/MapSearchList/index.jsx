@@ -4,9 +4,8 @@ import List from '@mui/material/List'
 import { useEffect, useRef, useState } from 'react'
 import t from '#/common/libs/trans.js'
 
-const MapSearchList = ({ searchResultArr }) => {
+const MapSearchList = ({ searchResultArr, selectedPoi, setSelectedPoi }) => {
     const [isResultNon, setIsResultNon] = useState(true)
-    const [selectedPoi, setSelectedPoi] = useState(null)
     const [isTopBtnVisible, setIsTopBtnVisible] = useState(false)
     const poiList = useRef()
     const scrollToTop = () => {

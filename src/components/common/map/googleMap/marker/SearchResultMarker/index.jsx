@@ -9,10 +9,12 @@ const SearchResultMarker = ({ poiData, selectedPoi, setSelectedPoi }) => {
     const { poiId, position } = poiData
     const { lat, lon } = position.center
     useEffect(() => {
+        // poi가 같으면 단일 infoWindow만 엶
         if (selectedPoi === poiId && infoWindow.length !== 0) {
             const resultWindow = infoWindow.filter((info) => info.content.outerText !== '')[0]
             resultWindow.open({ anchor: marker, map: map })
         }
+        // poi가 다르면 모든 infoWindow를 닫음
         if (selectedPoi !== poiId && infoWindow.length !== 0) {
             infoWindow.map((info) => info.close())
             setInfoWindow([])

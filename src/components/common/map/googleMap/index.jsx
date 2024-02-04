@@ -143,6 +143,15 @@ const GoogleMapComponent = ({
         })
     }, [])
 
+    // poi 선택시 해당 poi 위치로 이동및 줌
+    useEffect(() => {
+        const poiArr = mapSampleData.filter((poiData) => poiData.poiId === selectedPoi)
+        if (poiArr.length === 0) return
+        const { lat, lon } = poiArr[0].position.center
+        map.panTo({ lat: lat, lng: lon })
+        map.setZoom(15)
+    }, [selectedPoi])
+
     // 구글지도 라이브러리 init
     const { isLoaded } = useJsApiLoader({
         id: 'google-map',

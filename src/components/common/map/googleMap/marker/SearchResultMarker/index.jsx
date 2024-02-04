@@ -1,11 +1,13 @@
 import { InfoWindow, Marker, useGoogleMap } from '@react-google-maps/api'
 import MapInfoWindow from '#/components/common/map/MapInfoWindow/index.jsx'
 import { useEffect, useState } from 'react'
+import useMapStore from '#/store/useMapStore.js'
 
 const SearchResultMarker = ({ poiData, selectedPoi, setSelectedPoi }) => {
     const map = useGoogleMap()
     const [marker, setMarker] = useState(null)
     const [infoWindow, setInfoWindow] = useState([])
+    const { hoveredPoi } = useMapStore()
     const { poiId, position } = poiData
     const { lat, lon } = position.center
     useEffect(() => {
@@ -29,6 +31,7 @@ const SearchResultMarker = ({ poiData, selectedPoi, setSelectedPoi }) => {
             onClick={() => {
                 setSelectedPoi(poiId)
             }}
+            animation={hoveredPoi === poiId && window.google.maps.Animation.BOUNCE}
         >
             {selectedPoi === poiId && (
                 <InfoWindow

@@ -1,5 +1,5 @@
 import { GoogleMap, useJsApiLoader } from '@react-google-maps/api'
-import { useCallback, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import ClickMarker from '#/components/common/map/googleMap/marker/ClickMarker/index.jsx'
 import CustomControl from '#/components/common/map/googleMap/CustomControl/index.jsx'
 import CurrentLocation from '#/components/common/map/googleMap/CustomControl/CurrentLocation/index.jsx'
@@ -8,6 +8,7 @@ import MapSearch from '#/components/common/map/MapSearch/index.jsx'
 import MapSearchList from '#/components/common/map/MapSearchList/index.jsx'
 import MapPoiDetail from '#/components/common/map/MapPoiDetail/index.jsx'
 import DisplayMarker from '#/components/common/map/googleMap/marker/DisplayMarker/index.jsx'
+import SearchResultMarker from '#/components/common/map/googleMap/marker/SearchResultMarker/index.jsx'
 
 const mapSampleData = [
     {
@@ -90,8 +91,8 @@ const mapStyle = {
 }
 
 const seoul = {
-    lat: 37.501919,
-    lng: 127.008098,
+    lat: 33.9326825,
+    lng: -118.2727244,
 }
 
 /**
@@ -111,7 +112,8 @@ const GoogleMapComponent = ({
     isPoiSearch = false,
     isGpssSearch = false,
 }) => {
-    // const [searchResultArr, setSearchResultArr] = useState()
+    const [searchResultArr, setSearchResultArr] = useState([])
+    const [selectedPoi, setSelectedPoi] = useState(null)
     const [map, setMap] = useState(null)
     const [clickedCoord, setClickedCoord] = useState({
         lat: null,
@@ -119,6 +121,22 @@ const GoogleMapComponent = ({
     })
     const [distanceCoordArr, setDistanceCoordArr] = useState([])
     const [isDistanceFunctionOn, setIsDistanceFunctionOn] = useState(false)
+
+    // searchResultArr 샘플용 더미데이터 푸시 추후 삭제
+    useEffect(() => {
+        setSearchResultArr(...searchResultArr, {
+            poiId: 'ChIJm6KTpoiIdnLwoARwSZzuHOvyOU',
+            address: '10455 Wilmington Ave, Los Angeles, CA 90002, USA',
+            position: {
+                center: {
+                    lat: 33.941035899999996,
+                    lon: -118.239077,
+                },
+            },
+            title: 'Electric Circuit Charging Station',
+            category: 'ev',
+        })
+    }, [])
 
     // 구글지도 라이브러리 init
     const { isLoaded } = useJsApiLoader({
@@ -162,7 +180,7 @@ const GoogleMapComponent = ({
                 }}
                 mapContainerStyle={mapStyle}
                 center={seoul}
-                zoom={4}
+                zoom={12}
                 onLoad={onLoad}
                 onUnmount={onUnmount}
             >
@@ -202,10 +220,21 @@ const GoogleMapComponent = ({
                     </>
                 )}
                 {/* gpss 조회 */}
-                {/* 검색결과 마커 출력 */}
+                {/* 외부 마커 데이터 출력 */}
                 {markerDataArr &&
                     markerDataArr.map((data) => (
                         <DisplayMarker key={data.poiId} markerData={data} />
+                    ))}
+                {/* 지도 검색 결과 마커 데이터 출력*/}
+                {(isPoiSearch || isGpssSearch) &&
+                    searchResultArr &&
+                    mapSampleData.map((poiData) => (
+                        <SearchResultMarker
+                            key={poiData.poiId}
+                            poiData={poiData}
+                            selectedPoi={selectedPoi}
+                            setSelectedPoi={setSelectedPoi}
+                        />
                     ))}
             </GoogleMap>
         )

@@ -4,7 +4,6 @@ import { useState } from 'react'
 
 const DisplayMarker = ({ markerData }) => {
     const { lat, lon } = markerData.position.center
-    console.log(markerData.position.center)
     const map = useGoogleMap()
     const [marker, setMarker] = useState(null)
     const [infoWindow, setInfoWindow] = useState(null)

@@ -112,14 +112,19 @@ const GoogleMapComponent = ({
     isPoiSearch = false,
     isGpssSearch = false,
 }) => {
-    const [searchResultArr, setSearchResultArr] = useState([])
-    const [selectedPoi, setSelectedPoi] = useState(null)
     const [map, setMap] = useState(null)
+    // 구글 검색 결과
+    const [searchResultArr, setSearchResultArr] = useState([])
+    // 선택한 poi
+    const [selectedPoi, setSelectedPoi] = useState(null)
+    // 왼쪽 클릭
     const [clickedCoord, setClickedCoord] = useState({
         lat: null,
         lng: null,
     })
+    // 오른쪽 클릭
     const [distanceCoordArr, setDistanceCoordArr] = useState([])
+    // 거리측정 기능 활성 여부
     const [isDistanceFunctionOn, setIsDistanceFunctionOn] = useState(false)
 
     // searchResultArr 샘플용 더미데이터 푸시 추후 삭제

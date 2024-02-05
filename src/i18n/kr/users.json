@@ -36,6 +36,7 @@
     "detail": "상세 정보",
     "edit": "수정",
     "delete": "삭제",
+    "register": "등록",
     "popup_confirm_permission": "권한 변경 하시겠습니까?",
     "popup_confirm_permission_success": "변경되었습니다.",
     "popup_confirm_approval": "승인 하시겠습니까?",

@@ -6,8 +6,9 @@ import TextInput from '#/components/common/input/TextInput/index.jsx'
 import Select from '#/components/common/Select/index.jsx'
 import DatePickerInput from '#/components/common/input/DatePickerInput/index.jsx'
 import t from '#/common/libs/trans.js'
+import { useMemo } from 'react'
 
-const SearchFilter = ({ handleSubmitFilter }) => {
+const SearchFilter = ({ type, handleSubmitFilter }) => {
     const formik = useFormik({
         initialValues: {
             tempFilter1: '',
@@ -48,14 +49,30 @@ const SearchFilter = ({ handleSubmitFilter }) => {
         { key: 1, value: 1, label: 'NA' },
         { key: 2, value: 2, label: 'EU' },
     ]
-    const statusItems = [
-        { key: 0, value: 0, label: t('entire', 'approval') },
-        { key: 1, value: 1, label: t('status.temporary', 'approval') },
-        { key: 2, value: 2, label: t('status.request', 'approval') },
-        { key: 3, value: 3, label: t('status.reviewed', 'approval') },
-        { key: 4, value: 4, label: t('status.approved', 'approval') },
-        { key: 5, value: 5, label: t('status.rejected', 'approval') },
-    ]
+    const statusItems = useMemo(() => {
+        const base = [
+            { key: 3, value: 3, label: t('status.reviewed', 'approval') },
+            { key: 4, value: 4, label: t('status.approved', 'approval') },
+            { key: 5, value: 5, label: t('status.rejected', 'approval') },
+        ]
+        switch (type) {
+            case 'requester':
+                return [
+                    { key: 0, value: 0, label: t('entire', 'approval') },
+                    { key: 1, value: 1, label: t('status.temporary', 'approval') },
+                    { key: 2, value: 2, label: t('status.request', 'approval') },
+                    ...base,
+                ]
+            case 'reviewer':
+                return [
+                    { key: 0, value: 0, label: t('entire', 'approval') },
+                    { key: 2, value: 2, label: t('status.request', 'approval') },
+                    ...base,
+                ]
+            case 'approver':
+                return [{ key: 0, value: 0, label: t('entire', 'approval') }, ...base]
+        }
+    })
 
     return (
         <>
@@ -116,45 +133,57 @@ const SearchFilter = ({ handleSubmitFilter }) => {
                             </TableCell>
                         </TableRow>
                         <TableRow>
-                            <TableCell
-                                component="th"
-                                sx={{ borderInline: '1px solid #e0e0e0', minWidth: '6rem' }}
-                            >
-                                {t('requester', 'approval')}
-                            </TableCell>
-                            <TableCell>
-                                <TextInput
-                                    formik={formik}
-                                    name={'tempFilter4'}
-                                    placeholder={'신청자를 입력하세요'}
-                                />
-                            </TableCell>
-                            <TableCell
-                                component="th"
-                                sx={{ borderInline: '1px solid #e0e0e0', minWidth: '6rem' }}
-                            >
-                                {t('reviewer', 'approval')}
-                            </TableCell>
-                            <TableCell>
-                                <TextInput
-                                    formik={formik}
-                                    name={'tempFilter5'}
-                                    placeholder={'검토자를 입력하세요'}
-                                />
-                            </TableCell>
-                            <TableCell
-                                component="th"
-                                sx={{ borderInline: '1px solid #e0e0e0', minWidth: '6rem' }}
-                            >
-                                {t('approver', 'approval')}
-                            </TableCell>
-                            <TableCell>
-                                <TextInput
-                                    formik={formik}
-                                    name={'tempFilter6'}
-                                    placeholder={'승인자를 입력하세요'}
-                                />
-                            </TableCell>
+                            {type !== 'requester' && (
+                                <>
+                                    <TableCell
+                                        component="th"
+                                        sx={{ borderInline: '1px solid #e0e0e0', minWidth: '6rem' }}
+                                    >
+                                        {t('requester', 'approval')}
+                                    </TableCell>
+                                    <TableCell>
+                                        <TextInput
+                                            formik={formik}
+                                            name={'tempFilter4'}
+                                            placeholder={'요청자를 입력하세요'}
+                                        />
+                                    </TableCell>
+                                </>
+                            )}
+                            {type !== 'reviewer' && (
+                                <>
+                                    <TableCell
+                                        component="th"
+                                        sx={{ borderInline: '1px solid #e0e0e0', minWidth: '6rem' }}
+                                    >
+                                        {t('reviewer', 'approval')}
+                                    </TableCell>
+                                    <TableCell>
+                                        <TextInput
+                                            formik={formik}
+                                            name={'tempFilter5'}
+                                            placeholder={'검토자를 입력하세요'}
+                                        />
+                                    </TableCell>
+                                </>
+                            )}
+                            {type !== 'approver' && (
+                                <>
+                                    <TableCell
+                                        component="th"
+                                        sx={{ borderInline: '1px solid #e0e0e0', minWidth: '6rem' }}
+                                    >
+                                        {t('approver', 'approval')}
+                                    </TableCell>
+                                    <TableCell>
+                                        <TextInput
+                                            formik={formik}
+                                            name={'tempFilter6'}
+                                            placeholder={'승인자를 입력하세요'}
+                                        />
+                                    </TableCell>
+                                </>
+                            )}
                         </TableRow>
                         <TableRow>
                             <TableCell

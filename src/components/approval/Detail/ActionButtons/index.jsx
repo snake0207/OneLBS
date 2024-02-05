@@ -14,7 +14,7 @@ const ActionButtons = ({ type, status, confirmAction, isEditable }) => {
     }
     const buttonText = useRef({
         request: ['임시저장', '회수', '재상신'],
-        review: status === '검토완료' ? ['회수'] : ['반려', '승인'],
+        review: status === '검토완료' ? ['회수'] : ['승인', '반려'],
         approval: ['승인', '반려'],
     })
 
@@ -40,7 +40,13 @@ const ActionButtons = ({ type, status, confirmAction, isEditable }) => {
         case 'requester':
             return <>{isEditable && MakeButtons(buttonText.current.request)}</>
         case 'reviewer':
-            return <>{isEditable && MakeButtons(buttonText.current.review)}</>
+            return (
+                <>
+                    {status === '검토완료'
+                        ? MakeButtons(buttonText.current.review)
+                        : isEditable && MakeButtons(buttonText.current.review)}
+                </>
+            )
         case 'approver':
             return <>{isEditable && MakeButtons(buttonText.current.approval)}</>
         default:

@@ -11,9 +11,21 @@ import Typography from '@mui/material/Typography'
 import { useNavigate } from 'react-router-dom'
 import t from '#/common/libs/trans.js'
 
-const HistoryTable = ({ dummyData, headers }) => {
+const HistoryTable = ({ type, dummyData }) => {
     const navigator = useNavigate()
     const url = window.location.pathname
+    let headers = [
+        'No.',
+        t('name', 'approval'),
+        t('country', 'approval'),
+        type === 'requester' ? null : t('requester', 'approval'),
+        type === 'reviewer' ? null : t('reviewer', 'approval'),
+        type === 'approver' ? null : t('approver', 'approval'),
+        t('request_date', 'approval'),
+        t('review_date', 'approval'),
+        t('approval_date', 'approval'),
+        t('state', 'approval'),
+    ]
 
     return (
         <>
@@ -25,9 +37,9 @@ const HistoryTable = ({ dummyData, headers }) => {
                 <Table sx={{ minWidth: 'max-content' }}>
                     <TableHead>
                         <TableRow>
-                            {headers.map((header, index) => (
-                                <TableCell key={index}>{header}</TableCell>
-                            ))}
+                            {headers.map((header, index) =>
+                                header === null ? '' : <TableCell key={index}>{header}</TableCell>,
+                            )}
                         </TableRow>
                     </TableHead>
                     <TableBody>
@@ -43,9 +55,15 @@ const HistoryTable = ({ dummyData, headers }) => {
                                         <TableCell>{dummyData.length - index}</TableCell>
                                         <TableCell>{data.name}</TableCell>
                                         <TableCell>{data.region}</TableCell>
-                                        <TableCell>{data.requester}</TableCell>
-                                        <TableCell>{data.reviewer}</TableCell>
-                                        <TableCell>{data.approver}</TableCell>
+                                        {type === 'requester' ? null : (
+                                            <TableCell>{data.requester}</TableCell>
+                                        )}
+                                        {type === 'reviewer' ? null : (
+                                            <TableCell>{data.reviewer}</TableCell>
+                                        )}
+                                        {type === 'approver' ? null : (
+                                            <TableCell>{data.approver}</TableCell>
+                                        )}
                                         <TableCell>{data.request_date}</TableCell>
                                         <TableCell>{data.review_date}</TableCell>
                                         <TableCell>{data.approval_date}</TableCell>

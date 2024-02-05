@@ -6,7 +6,7 @@ import TextInput from '#/components/common/input/TextInput'
 import { useFormik } from 'formik'
 import { IpInput } from '#/components/common/input/IpInput'
 
-function Row({ row }) {
+function Row({ row, onEdit, onDelete }) {
     const formik = useFormik({
         initialValues: {
             ip1: '',
@@ -21,15 +21,34 @@ function Row({ row }) {
     const [editable, setEditable] = useState({ index: -1, status: false })
 
     const handleEditable = (index) => {
-        // set value to formik
-        formik.setValues({
-            ip1: row?.ip_addresses[index]?.ip_address.split('.')[0],
-            ip2: row?.ip_addresses[index]?.ip_address.split('.')[1],
-            ip3: row?.ip_addresses[index]?.ip_address.split('.')[2],
-            ip4: row?.ip_addresses[index]?.ip_address.split('.')[3],
-            description: row?.ip_addresses[index]?.description,
-        })
+        if (!editable.status) {
+            // set value to formik
+            formik.setValues({
+                ip1: row?.ip_addresses[index]?.ip_address.split('.')[0],
+                ip2: row?.ip_addresses[index]?.ip_address.split('.')[1],
+                ip3: row?.ip_addresses[index]?.ip_address.split('.')[2],
+                ip4: row?.ip_addresses[index]?.ip_address.split('.')[3],
+                description: row?.ip_addresses[index]?.description,
+            })
+        } else {
+            if (onEdit)
+                onEdit({
+                    id: row?.id,
+                    index: index,
+                    ip_address: `${formik.values.ip1}.${formik.values.ip2}.${formik.values.ip3}.${formik.values.ip4}`,
+                    description: formik.values.description,
+                })
+        }
         setEditable({ index, status: !editable.status })
+    }
+
+    const handleDelete = (index) => {
+        if (onDelete)
+            onDelete({
+                id: row?.id,
+                index: index,
+                ip_address: row?.ip_addresses[index]?.ip_address,
+            })
     }
 
     return (
@@ -67,7 +86,9 @@ function Row({ row }) {
                             <Button onClick={() => handleEditable(index)}>
                                 {t('edit', 'users')}
                             </Button>
-                            <Button>{t('delete', 'users')}</Button>
+                            <Button onClick={() => handleDelete(index)}>
+                                {t('delete', 'users')}
+                            </Button>
                         </Stack>
                     </TableCell>
                 </TableRow>

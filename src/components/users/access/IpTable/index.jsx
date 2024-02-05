@@ -2,7 +2,15 @@ import { Box, Table, TableHead, TableRow, TableCell, TableBody } from '@mui/mate
 import t from '#/common/libs/trans'
 import Row from './Row'
 
-function IpTabel({ rows }) {
+function IpTabel({ rows, onEdit, onDelete }) {
+    const handleEdit = (values) => {
+        if (onEdit) onEdit(values)
+    }
+
+    const handleDelete = (values) => {
+        if (onDelete) onDelete(values)
+    }
+
     return (
         <Box>
             <Table>
@@ -20,7 +28,12 @@ function IpTabel({ rows }) {
                 </TableHead>
                 <TableBody>
                     {rows?.map((row) => (
-                        <Row key={row?.id} row={row} />
+                        <Row
+                            key={row?.id}
+                            row={row}
+                            onEdit={(values) => handleEdit(values)}
+                            onDelete={(values) => handleDelete(values)}
+                        />
                     ))}
                 </TableBody>
             </Table>

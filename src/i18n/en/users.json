@@ -49,5 +49,7 @@
     "popup_confirm_deactivate": "비활성화 처리 하시겠습니까?",
     "popup_confirm_deactivate_success": "비활성화 처리 되었습니다.",
     "popup_confirm_withdraw": "탈퇴 처리 하시겠습니까?",
-    "popup_confirm_withdraw_success": "탈퇴 처리 되었습니다."
+    "popup_confirm_withdraw_success": "탈퇴 처리 되었습니다.",
+    "popup_confirm_delete": "삭제 하시겠습니까?",
+    "popup_confirm_delete_success": "삭제되었습니다."
 }

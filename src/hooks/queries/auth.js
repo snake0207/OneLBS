@@ -20,7 +20,7 @@ export const usePostEmailVerify = () => {
     })
 }
 
-export const usePostVerifyCode = () => {
+export const usePostConfirmEmail = () => {
     return useMutation({
         mutationFn: auth.postConfirmEmail,
     })

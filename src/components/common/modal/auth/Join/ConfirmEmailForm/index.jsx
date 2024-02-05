@@ -2,13 +2,28 @@ import { useEffect } from 'react'
 import useTimerStore from '#/store/useTimerStore'
 import Close from '@mui/icons-material/Close'
 import { Box, Button, IconButton, InputAdornment, TextField, Typography } from '@mui/material'
+import { useFormik } from 'formik'
+import { EmailCodeSchema } from '#/contents/validationSchema'
+import { usePostConfirmEmail } from '#/hooks/queries/auth'
+
 import t from '#/common/libs/trans'
 
-const ConfirmEmailForm = ({ name, formik }) => {
+// 메일 인증 코드
+const ConfirmEmailForm = ({ formik }) => {
     const { time, actions } = useTimerStore()
-    const handleClickSendVerifyCode = () => {
-        if (!formik.errors.emailverifyCode) console.log(formik.values.emailverifyCode)
-    }
+    const { mutate } = usePostConfirmEmail()
+
+    const codeFormik = useFormik({
+        initialValues: { code: '' },
+        validationSchema: EmailCodeSchema,
+        onSubmit: (form) => {
+            formik.setFieldTouched('email')
+            if (formik.values.email && !formik.errors.email) {
+                console.log({ email: formik.values.email, ...form })
+                mutate({ email: formik.values.email, ...form })
+            }
+        },
+    })
 
     useEffect(() => {
         let timer
@@ -31,23 +46,23 @@ const ConfirmEmailForm = ({ name, formik }) => {
             }}
         >
             <TextField
-                name={name}
-                value={formik.values[name]}
-                onChange={formik.handleChange}
-                onBlur={formik.handleBlur}
-                error={formik.touched[name] && !!formik.errors[name]}
+                name="code"
+                value={codeFormik.values.code}
+                onChange={codeFormik.handleChange}
+                onBlur={codeFormik.handleBlur}
+                error={codeFormik.touched.code && !!codeFormik.errors.code}
                 fullWidth
                 size="small"
                 type="text"
                 placeholder={t('placeholder.confirm_email', 'auth')}
-                helperText={formik.touched[name] && formik.errors[name]}
+                helperText={codeFormik.touched.code && codeFormik.errors.code}
                 InputProps={{
                     endAdornment: (
                         <InputAdornment position="end" sx={{ gap: 2 }}>
-                            {formik.values[name] && (
+                            {codeFormik.values.code && (
                                 <IconButton
                                     edge="end"
-                                    onClick={() => formik.setFieldValue(name, '')}
+                                    onClick={() => codeFormik.setFieldValue('code', '')}
                                 >
                                     <Close />
                                 </IconButton>
@@ -66,7 +81,7 @@ const ConfirmEmailForm = ({ name, formik }) => {
             />
             <Button
                 variant="contained"
-                onClick={handleClickSendVerifyCode}
+                onClick={codeFormik.handleSubmit}
                 type="button"
                 sx={{ flex: '0 0 auto' }}
             >

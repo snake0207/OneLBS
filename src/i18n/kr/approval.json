@@ -1,6 +1,6 @@
 {
     "list_all": "전체 이력 조회",
-    "list_requester": "이력 조회(신청자)",
+    "list_requester": "이력 조회(요청자)",
     "list_reviewer": "이력 조회(검토자)",
     "list_approver": "이력 조회(승인자)",
     "detail": "이력 조회 상세",

@@ -6,6 +6,7 @@ import { useMapActions } from '#/store/useMapStore.js'
 
 const MapPoiContent = ({ idx, name, address, isLast, selectedPoi, setSelectedPoi }) => {
     const { setHoveredPoi } = useMapActions()
+    // 주석 추가
     return (
         <>
             <ListItem>

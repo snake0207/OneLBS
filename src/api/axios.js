@@ -28,7 +28,6 @@ export const getAPI = ({ endPoint, axiosOption }) => {
 }
 
 export const postAPI = ({ endPoint, data, axiosOption }) => {
-    console.log(qs.stringify(data))
     return axiosInstance.post(endPoint, qs.stringify(data), axiosOption)
 }
 

@@ -7,7 +7,7 @@ import PasswordInput from '#/components/common/input/PasswordInput'
 import RadioInput from '#/components/common/Radio'
 import { joinSchema } from '#/contents/validationSchema'
 import VerifyEmailForm from '#/components/common/modal/auth/Join/VerifyEmailForm'
-import VerifyCodeInput from '#/components/common/modal/auth/Join/ConfirmEmailForm'
+import ConfirmEmailForm from '#/components/common/modal/auth/Join/ConfirmEmailForm'
 import PrivacyPolicyModal from '#/components/common/modal/auth/Join/PrivacyPolicy'
 import IpInputGroup from '#/components/common/modal/auth/Join/IpInputGroup'
 import { useModalActions } from '#/store/useModalStore'
@@ -27,7 +27,6 @@ const JoinModal = () => {
     const formik = useFormik({
         initialValues: {
             email: '',
-            confirmEmailCode: '',
             password: '',
             confirmPassword: '',
             name: '',
@@ -81,12 +80,12 @@ const JoinModal = () => {
                     <span style={{ color: 'red' }}>*</span>
                     {t('email', 'auth')}
                 </Typography>
-                <VerifyEmailForm name={'email'} formik={formik} />
+                <VerifyEmailForm formik={formik} />
                 <Typography variant="h6">
                     <span style={{ color: 'red' }}>*</span>
                     {t('confirm_email_code', 'auth')}
                 </Typography>
-                <VerifyCodeInput name={'confirmEmailCode'} formik={formik} />
+                <ConfirmEmailForm formik={formik} />
                 <Typography variant="h6">
                     <span style={{ color: 'red' }}>*</span>
                     {t('password', 'auth')}

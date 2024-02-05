@@ -5,13 +5,14 @@ import { usePostEmailVerify } from '#/hooks/queries/auth'
 
 import t from '#/common/libs/trans'
 
-const VerifyEmailForm = ({ name, formik }) => {
+// 인증 메일 전송
+const VerifyEmailForm = ({ formik }) => {
     const { mutate } = usePostEmailVerify()
     const { setTime } = useTimeActions()
 
     const handleClickSendEmail = () => {
-        formik.setFieldTouched(name)
-        if (formik.values[name] && !formik.errors[name]) {
+        formik.setFieldTouched('email')
+        if (formik.values.email && !formik.errors.email) {
             mutate({ email: formik.values[name] })
             setTime(180)
         }
@@ -28,23 +29,23 @@ const VerifyEmailForm = ({ name, formik }) => {
             }}
         >
             <TextField
-                name={name}
-                value={formik.values[name]}
+                name={'email'}
+                value={formik.values.email}
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
-                error={formik.touched[name] && !!formik.errors[name]}
+                error={formik.touched.email && !!formik.errors.email}
                 fullWidth
                 size="small"
                 type="text"
                 placeholder={t('placeholder.email', 'auth')}
-                helperText={formik.touched[name] && formik.errors[name]}
+                helperText={formik.touched.email && formik.errors.email}
                 InputProps={{
                     endAdornment: (
                         <InputAdornment position="end">
-                            {formik.values[name] && (
+                            {formik.values.email && (
                                 <IconButton
                                     edge="end"
-                                    onClick={() => formik.setFieldValue(name, '')}
+                                    onClick={() => formik.setFieldValue('email', '')}
                                 >
                                     <Close />
                                 </IconButton>

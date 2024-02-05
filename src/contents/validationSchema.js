@@ -74,7 +74,7 @@ export const joinSchema = yup.object().shape({
     company: yup.string().min(2, HELPER_TEXT.companyLength).required(HELPER_TEXT.companyRequired),
     team: yup.string().min(2, HELPER_TEXT.teamLength).required(HELPER_TEXT.teamRequired),
     ipAddress1_0: yup.string().when(['role', 'isIpAutoAdd'], {
-        is: (role, isIpAutoAdd) => role !== '25' && role !== '26' && !isIpAutoAdd,
+        is: (role, isIpAutoAdd) => role !== 25 && role !== 26 && !isIpAutoAdd,
         then: () =>
             yup
                 .string()
@@ -82,7 +82,7 @@ export const joinSchema = yup.object().shape({
                 .required(HELPER_TEXT.ipRequired),
     }),
     ipAddress2_0: yup.string().when(['role', 'isIpAutoAdd'], {
-        is: (role, isIpAutoAdd) => role !== '25' && role !== '26' && !isIpAutoAdd,
+        is: (role, isIpAutoAdd) => role !== 25 && role !== 26 && !isIpAutoAdd,
         then: () =>
             yup
                 .string()
@@ -90,7 +90,7 @@ export const joinSchema = yup.object().shape({
                 .required(HELPER_TEXT.ipRequired),
     }),
     ipAddress3_0: yup.string().when(['role', 'isIpAutoAdd'], {
-        is: (role, isIpAutoAdd) => role !== '25' && role !== '26' && !isIpAutoAdd,
+        is: (role, isIpAutoAdd) => role !== 25 && role !== 26 && !isIpAutoAdd,
         then: () =>
             yup
                 .string()
@@ -98,7 +98,7 @@ export const joinSchema = yup.object().shape({
                 .required(HELPER_TEXT.ipRequired),
     }),
     ipAddress4_0: yup.string().when(['role', 'isIpAutoAdd'], {
-        is: (role, isIpAutoAdd) => role !== '25' && role !== '26' && !isIpAutoAdd,
+        is: (role, isIpAutoAdd) => role !== 25 && role !== 26 && !isIpAutoAdd,
         then: () =>
             yup
                 .string()

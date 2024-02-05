@@ -19,7 +19,7 @@ export const formatIpAddress = (addr1, addr2, addr3, addr4) => {
  * @returns API body 데이터
  */
 export const formatJoinData = (form) => {
-    if (form.role === '25' || form.role === '26')
+    if (form.role === 25 || form.role === 26)
         return {
             email: form.email,
             password: encryptPasswordSHA256(form.password),

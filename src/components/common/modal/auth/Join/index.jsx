@@ -32,7 +32,7 @@ const JoinModal = () => {
             name: '',
             company: '',
             team: '',
-            role: '25',
+            role: 25,
             terms: 'N',
             ipAddress1_0: '',
             ipAddress2_0: '',
@@ -132,7 +132,7 @@ const JoinModal = () => {
                     placeholder={t('placeholder.team', 'auth')}
                     formik={formik}
                 />
-                {formik.values.role !== '25' && formik.values.role !== '26' && (
+                {formik.values.role !== 25 && formik.values.role !== 26 && (
                     <IpInputGroup formik={formik} />
                 )}
                 <Typography variant="h6">

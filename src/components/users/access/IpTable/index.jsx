@@ -1,14 +1,19 @@
 import { Box, Table, TableHead, TableRow, TableCell, TableBody } from '@mui/material'
 import t from '#/common/libs/trans'
 import Row from './Row'
+import CommonPagination from '#/components/common/pagination/CommonPagination'
 
-function IpTabel({ rows, onEdit, onDelete }) {
+function IpTabel({ rows, onNextPage, onEdit, onDelete }) {
     const handleEdit = (values) => {
         if (onEdit) onEdit(values)
     }
 
     const handleDelete = (values) => {
         if (onDelete) onDelete(values)
+    }
+
+    const handleNextPage = (page) => {
+        if (onNextPage) onNextPage(page)
     }
 
     return (
@@ -37,6 +42,7 @@ function IpTabel({ rows, onEdit, onDelete }) {
                     ))}
                 </TableBody>
             </Table>
+            <CommonPagination dataLength={rows?.length} onChangePageFunction={handleNextPage} />
         </Box>
     )
 }

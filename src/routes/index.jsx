@@ -19,6 +19,7 @@ import UserLoginHistoryPage from '#/pages/DemoPage/UserManagementPage/UserLoginH
 import UserPermissionPage from '#/pages/DemoPage/UserManagementPage/UserPermissionPage'
 import UserListPage from '#/pages/DemoPage/UserManagementPage/UserListPage'
 import IPManagePage from '#/pages/DemoPage/UserManagementPage/IPManagePage'
+import TablePage from '#/pages/DemoPage/TablePage'
 
 const Routes = () => {
     return useRoutes([
@@ -45,6 +46,7 @@ const Routes = () => {
                 { path: '/components/logins', element: <LoginDemoPage /> },
                 { path: '/components/modals', element: <ModalPage /> },
                 { path: '/components/popup', element: <PopupPage /> },
+                { path: '/components/tables', element: <TablePage /> },
                 { path: '/components/approval', element: <ApprovalHistoryPage /> },
                 { path: '/components/users', element: <UserManagementPage /> },
                 { path: '/components/users/list', element: <UserListPage /> },

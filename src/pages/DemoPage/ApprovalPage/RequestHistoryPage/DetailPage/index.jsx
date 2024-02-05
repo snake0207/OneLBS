@@ -2,22 +2,23 @@ import { useParams } from 'react-router-dom'
 import Typography from '@mui/material/Typography'
 import t from '#/common/libs/trans.js'
 import TitleBar from '#/components/common/menu/TitleBar/index.jsx'
-import { Box, Card, TextField, useTheme } from '@mui/material'
+import { Box, Card, TextField } from '@mui/material'
 import Grid from '@mui/material/Unstable_Grid2'
 import ApprovalLine from '#/components/approval/Detail/ApprovalLine/index.jsx'
 import InfoTab from '#/components/approval/Detail/InfoTab/index.jsx'
 import HistoryTable from '#/components/approval/Detail/HistoryTable/index.jsx'
-import { useEffect, useRef } from 'react'
+import { useRef } from 'react'
 import { useFormik } from 'formik'
 import CategoryTable from '#/components/approval/Detail/CategoryTable/index.jsx'
 import ActionButtons from '#/components/approval/Detail/ActionButtons/index.jsx'
 import dummyData from '../../detailData.json'
 import Headline from '#/components/approval/Detail/Headline/index.jsx'
-import TextInput from '#/components/common/input/TextInput/index.jsx'
 import Comment from '#/components/approval/Detail/Comment/index.jsx'
+import { usePopupActions } from '#/store/usePopupStore.js'
 
 const RequestHistoryDetailPage = () => {
     const params = useParams()
+    const popupActions = usePopupActions()
     const userType = 'request' // TODO: 전체이력 페이지면 all, 아니면 권한
     const formik = useFormik({
         initialValues: {
@@ -28,11 +29,22 @@ const RequestHistoryDetailPage = () => {
             brand: '',
             request_reason: '위.경도 좌표 수정',
         },
+        onSubmit: (form) => {
+            console.log('form >> ', form)
+        },
     })
-    const isEditable = useRef(dummyData.status === '검토완료' || dummyData.status === '승인완료')
+    const isEditable = useRef(!(dummyData.status === '검토완료' || dummyData.status === '승인완료'))
 
     const confirmPopupFunction = (action) => {
-        console.log('api request', action, params.id)
+        console.log('ACTION >> ', action, params.id)
+        if (formik.values['request_reason'] === '') {
+            popupActions.showPopup('alert', '승인 요청 이유를 입력해 주세요')
+            return false
+        } else {
+            // TODO: 기능구분
+            formik.handleSubmit
+            return true
+        }
     }
 
     return (
@@ -58,9 +70,7 @@ const RequestHistoryDetailPage = () => {
                     <Box>
                         <Headline title={t('request_reason', 'approval')} />
                         <Box>
-                            {isEditable.current ? (
-                                <Typography>{formik.values['request_reason']}</Typography>
-                            ) : (
+                            {userType === 'request' && isEditable.current ? (
                                 <TextField
                                     id="outlined-multiline-static"
                                     name="request_reason"
@@ -68,8 +78,11 @@ const RequestHistoryDetailPage = () => {
                                     hiddenLabel
                                     multiline
                                     rows={3}
-                                    defaultValue={formik.values['request_reason']}
+                                    value={formik.values['request_reason']}
+                                    onChange={formik.handleChange}
                                 />
+                            ) : (
+                                <Typography>{formik.values['request_reason']}</Typography>
                             )}
                         </Box>
                     </Box>

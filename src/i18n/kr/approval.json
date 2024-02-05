@@ -29,7 +29,7 @@
     "country": "국가",
     "request_date": "요청일",
     "review_date": "검토일",
-    "approval_date": "반려/승인일",
+    "approval_date": "승인/반려일",
     "approval": "요청 이력",
     "status": {
         "temporary": "임시저장",

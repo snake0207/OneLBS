@@ -8,13 +8,13 @@ const ApprovalPage = () => {
             <ListItemButton component="a" href="/components/approval/all">
                 <ListItemText primary="전체이력페이지" />
             </ListItemButton>
-            <ListItemButton component="a" href="/components/approval/request">
+            <ListItemButton component="a" href="/components/approval/requester">
                 <ListItemText primary="요청자 이력페이지" />
             </ListItemButton>
-            <ListItemButton component="a" href="/components/approval/request">
+            <ListItemButton component="a" href="/components/approval/reviewer">
                 <ListItemText primary="검토자 이력페이지" />
             </ListItemButton>
-            <ListItemButton component="a" href="/components/approval/request">
+            <ListItemButton component="a" href="/components/approval/approver">
                 <ListItemText primary="승인자 이력페이지" />
             </ListItemButton>
         </List>

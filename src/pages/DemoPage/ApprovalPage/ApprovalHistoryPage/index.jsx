@@ -7,7 +7,7 @@ import dummyData from '../approvalData.json'
 import t from '#/common/libs/trans.js'
 import TitleBar from '#/components/common/menu/TitleBar/index.jsx'
 
-const RequestHistoryPage = () => {
+const ApprovalHistoryPage = () => {
     // 페이지네이션 컴포넌트에 넘겨 페이지 변경 시 실행될 함수
     const handlePageChange = (page) => {
         // TODO: API GET
@@ -39,6 +39,7 @@ const RequestHistoryPage = () => {
                         t('review_date', 'approval'),
                         t('approval_date', 'approval'),
                         t('state', 'approval'),
+                        t('history', 'approval'),
                     ]}
                 />
                 <CommonPagination
@@ -50,4 +51,4 @@ const RequestHistoryPage = () => {
     )
 }
 
-export default RequestHistoryPage
+export default ApprovalHistoryPage

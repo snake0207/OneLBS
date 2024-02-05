@@ -9,7 +9,6 @@ import Headline from '#/components/approval/Detail/Headline/index.jsx'
 
 const CategoryTable = ({ data, formik, isEditable }) => {
     const theme = useTheme()
-
     const [isShowInputs, setIsShowInputs] = useState({
         brand: false,
     })

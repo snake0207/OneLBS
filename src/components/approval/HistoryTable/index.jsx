@@ -50,7 +50,6 @@ const HistoryTable = ({ dummyData, headers }) => {
                                         <TableCell>{data.review_date}</TableCell>
                                         <TableCell>{data.approval_date}</TableCell>
                                         <TableCell>{data.status}</TableCell>
-                                        <TableCell>{data.history}</TableCell>
                                     </TableRow>
                                 )
                             })

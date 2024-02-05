@@ -14,9 +14,12 @@ import ActionButtons from '#/components/approval/Detail/ActionButtons/index.jsx'
 import dummyData from '../../detailData.json'
 import Headline from '#/components/approval/Detail/Headline/index.jsx'
 import Comment from '#/components/approval/Detail/Comment/index.jsx'
+import { usePopupActions } from '#/store/usePopupStore.js'
 
-const FullHistoryDetailPage = () => {
+const ReviewHistoryDetailPage = () => {
     const params = useParams()
+    const popupActions = usePopupActions()
+    const userType = 'reviewer' // TODO: 전체이력 페이지면 all, 아니면 권한(url or token get..)
     const formik = useFormik({
         initialValues: {
             name: '',
@@ -25,12 +28,22 @@ const FullHistoryDetailPage = () => {
             lon: '',
             brand: '',
             request_reason: '위.경도 좌표 수정',
+            reviewer_comment: dummyData.comment.reviewer,
+            approver_comment: dummyData.comment.approver,
         },
     })
-    const isEditable = useRef(false)
+    const isEditable = useRef(dummyData.status !== '승인완료')
 
     const confirmPopupFunction = (action) => {
-        console.log('api request', action, params.id)
+        console.log('ACTION >> ', action, params.id)
+        if (formik.values['request_reason'] === '') {
+            popupActions.showPopup('alert', '승인 요청 이유를 입력해 주세요')
+            return false
+        } else {
+            // TODO: 기능구분
+            formik.handleSubmit
+            return true
+        }
     }
 
     return (
@@ -56,20 +69,35 @@ const FullHistoryDetailPage = () => {
                     <Box>
                         <Headline title={t('request_reason', 'approval')} />
                         <Box>
-                            <Typography>{formik.values['request_reason']}</Typography>
+                            {userType === 'requester' && isEditable.current ? (
+                                <TextField
+                                    id="outlined-multiline-static"
+                                    name="request_reason"
+                                    fullWidth
+                                    hiddenLabel
+                                    multiline
+                                    rows={3}
+                                    value={formik.values['request_reason']}
+                                    onChange={formik.handleChange}
+                                />
+                            ) : (
+                                <Typography>{formik.values['request_reason']}</Typography>
+                            )}
                         </Box>
                     </Box>
                     {/* Comment */}
                     <Comment
                         comments={dummyData.comment}
-                        userType={'all'}
+                        userType={userType}
                         isEditable={isEditable.current}
+                        formik={formik}
                     />
                     {/* 이력 */}
                     <HistoryTable historyList={dummyData.historyList} />
                     {/* 버튼 */}
                     <ActionButtons
-                        type={'all'}
+                        type={userType}
+                        status={dummyData.status}
                         confirmAction={confirmPopupFunction}
                         isEditable={isEditable.current}
                     />
@@ -92,4 +120,4 @@ const FullHistoryDetailPage = () => {
     )
 }
 
-export default FullHistoryDetailPage
+export default ReviewHistoryDetailPage

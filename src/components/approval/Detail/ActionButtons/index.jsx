@@ -2,12 +2,11 @@ import { Box, Button } from '@mui/material'
 import { useRef } from 'react'
 import { usePopupActions } from '#/store/usePopupStore.js'
 
-const ActionButtons = ({ type, confirmAction, isEditable }) => {
+const ActionButtons = ({ type, status, confirmAction, isEditable }) => {
     const popupActions = usePopupActions()
 
     const openAlertPopup = (action) => {
-        confirmAction(action)
-        popupActions.showPopup('alert', `${action} 되었습니다`)
+        if (confirmAction(action)) popupActions.showPopup('alert', `${action} 되었습니다`)
     }
 
     const handleShowConfirmPopup = (action) => {
@@ -15,7 +14,7 @@ const ActionButtons = ({ type, confirmAction, isEditable }) => {
     }
     const buttonText = useRef({
         request: ['임시저장', '회수', '재상신'],
-        review: ['회수', '반려', '승인'],
+        review: status === '검토완료' ? ['회수'] : ['반려', '승인'],
         approval: ['승인', '반려'],
     })
 
@@ -38,11 +37,11 @@ const ActionButtons = ({ type, confirmAction, isEditable }) => {
     }
 
     switch (type) {
-        case 'request':
+        case 'requester':
             return <>{isEditable && MakeButtons(buttonText.current.request)}</>
-        case 'review':
+        case 'reviewer':
             return <>{isEditable && MakeButtons(buttonText.current.review)}</>
-        case 'approval':
+        case 'approver':
             return <>{isEditable && MakeButtons(buttonText.current.approval)}</>
         default:
             return <></>

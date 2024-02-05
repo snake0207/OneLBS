@@ -5,7 +5,7 @@ import { usePostEmailVerify } from '#/hooks/queries/auth'
 
 import t from '#/common/libs/trans'
 
-const EmailVerifyInput = ({ name, formik }) => {
+const VerifyEmailForm = ({ name, formik }) => {
     const { mutate } = usePostEmailVerify()
     const { setTime } = useTimeActions()
 
@@ -65,4 +65,4 @@ const EmailVerifyInput = ({ name, formik }) => {
     )
 }
 
-export default EmailVerifyInput
+export default VerifyEmailForm

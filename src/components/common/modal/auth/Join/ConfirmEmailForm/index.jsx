@@ -4,7 +4,7 @@ import Close from '@mui/icons-material/Close'
 import { Box, Button, IconButton, InputAdornment, TextField, Typography } from '@mui/material'
 import t from '#/common/libs/trans'
 
-const VerifyCodeInput = ({ name, formik }) => {
+const ConfirmEmailForm = ({ name, formik }) => {
     const { time, actions } = useTimerStore()
     const handleClickSendVerifyCode = () => {
         if (!formik.errors.emailverifyCode) console.log(formik.values.emailverifyCode)
@@ -76,4 +76,4 @@ const VerifyCodeInput = ({ name, formik }) => {
     )
 }
 
-export default VerifyCodeInput
+export default ConfirmEmailForm

@@ -7,7 +7,7 @@ import Grid from '@mui/material/Unstable_Grid2'
 import ApprovalLine from '#/components/approval/Detail/ApprovalLine/index.jsx'
 import InfoTab from '#/components/approval/Detail/InfoTab/index.jsx'
 import HistoryTable from '#/components/approval/Detail/HistoryTable/index.jsx'
-import { useRef } from 'react'
+import { useMemo, useRef } from 'react'
 import { useFormik } from 'formik'
 import CategoryTable from '#/components/approval/Detail/CategoryTable/index.jsx'
 import ActionButtons from '#/components/approval/Detail/ActionButtons/index.jsx'
@@ -19,7 +19,7 @@ import { usePopupActions } from '#/store/usePopupStore.js'
 const ApprovalHistoryDetailPage = () => {
     const params = useParams()
     const popupActions = usePopupActions()
-    const userType = 'approver' // TODO: 전체이력 페이지면 all, 아니면 권한(url or token get..)
+    const userType = params.type // TODO: 전체이력 페이지면 all, 아니면 권한(url or token get..)
     const formik = useFormik({
         initialValues: {
             name: '',
@@ -32,7 +32,19 @@ const ApprovalHistoryDetailPage = () => {
             approver_comment: dummyData.comment.approver,
         },
     })
-    const isEditable = useRef(dummyData.status === '검토완료')
+
+    const isEditable = useMemo(() => {
+        switch (userType) {
+            case 'requester':
+                return !(dummyData.status === '검토완료' || dummyData.status === '승인완료')
+            case 'reviewer':
+                return dummyData.status === '검토요청'
+            case 'approver':
+                return dummyData.status === '검토완료'
+            default:
+                return false
+        }
+    })
 
     const confirmPopupFunction = (action) => {
         console.log('ACTION >> ', action, params.id)
@@ -57,22 +69,18 @@ const ApprovalHistoryDetailPage = () => {
                         content={dummyData.approvalLineContents}
                     />
                     {/* 정보 탭 */}
-                    <InfoTab
-                        data={dummyData.info}
-                        formik={formik}
-                        isEditable={isEditable.current}
-                    />
+                    <InfoTab data={dummyData.info} formik={formik} isEditable={isEditable} />
                     {/* 카테고리 */}
                     <CategoryTable
                         data={dummyData.category}
                         formik={formik}
-                        isEditable={isEditable.current}
+                        isEditable={isEditable}
                     />
                     {/* 승인 요청 이유*/}
                     <Box>
                         <Headline title={t('request_reason', 'approval')} />
                         <Box>
-                            {userType === 'requester' && isEditable.current ? (
+                            {userType === 'requester' && isEditable ? (
                                 <TextField
                                     id="outlined-multiline-static"
                                     name="request_reason"
@@ -92,7 +100,7 @@ const ApprovalHistoryDetailPage = () => {
                     <Comment
                         comments={dummyData.comment}
                         userType={userType}
-                        isEditable={isEditable.current}
+                        isEditable={isEditable}
                         formik={formik}
                     />
                     {/* 이력 */}
@@ -102,7 +110,7 @@ const ApprovalHistoryDetailPage = () => {
                         type={userType}
                         status={dummyData.status}
                         confirmAction={confirmPopupFunction}
-                        isEditable={isEditable.current}
+                        isEditable={isEditable}
                     />
                 </Grid>
 

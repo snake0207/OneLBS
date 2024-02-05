@@ -17,12 +17,6 @@ import UserManagementPage from '#/pages/DemoPage/UserManagementPage'
 import UserLoginHistoryPage from '#/pages/DemoPage/UserManagementPage/UserLoginHistoryPage'
 import UserPermissionPage from '#/pages/DemoPage/UserManagementPage/UserPermissionPage'
 import ApprovalPage from '#/pages/DemoPage/ApprovalPage/index.jsx'
-import FullApprovalHistoryPage from '#/pages/DemoPage/ApprovalPage/FullHistoryPage/index.jsx'
-import RequestHistoryPage from '#/pages/DemoPage/ApprovalPage/RequestHistoryPage/index.jsx'
-import FullHistoryDetailPage from '#/pages/DemoPage/ApprovalPage/FullHistoryPage/DetailPage/index.jsx'
-import RequestHistoryDetailPage from '#/pages/DemoPage/ApprovalPage/RequestHistoryPage/DetailPage/index.jsx'
-import ReviewHistoryPage from '#/pages/DemoPage/ApprovalPage/ReviewHistoryPage/index.jsx'
-import ReviewHistoryDetailPage from '#/pages/DemoPage/ApprovalPage/ReviewHistoryPage/DetailPage/index.jsx'
 import ApprovalHistoryPage from '#/pages/DemoPage/ApprovalPage/ApprovalHistoryPage/index.jsx'
 import ApprovalHistoryDetailPage from '#/pages/DemoPage/ApprovalPage/ApprovalHistoryPage/DetailPage/index.jsx'
 
@@ -52,21 +46,9 @@ const Routes = () => {
                 { path: '/components/modals', element: <ModalPage /> },
                 { path: '/components/popup', element: <PopupPage /> },
                 { path: '/components/approval', element: <ApprovalPage /> },
-                { path: '/components/approval/all', element: <FullApprovalHistoryPage /> },
-                { path: '/components/approval/all/detail/:id', element: <FullHistoryDetailPage /> },
-                { path: '/components/approval/requester', element: <RequestHistoryPage /> },
+                { path: '/components/approval/:type', element: <ApprovalHistoryPage /> },
                 {
-                    path: '/components/approval/requester/detail/:id',
-                    element: <RequestHistoryDetailPage />,
-                },
-                { path: '/components/approval/reviewer', element: <ReviewHistoryPage /> },
-                {
-                    path: '/components/approval/reviewer/detail/:id',
-                    element: <ReviewHistoryDetailPage />,
-                },
-                { path: '/components/approval/approver', element: <ApprovalHistoryPage /> },
-                {
-                    path: '/components/approval/approver/detail/:id',
+                    path: '/components/approval/:type/detail/:id',
                     element: <ApprovalHistoryDetailPage />,
                 },
                 { path: '/components/users', element: <UserManagementPage /> },

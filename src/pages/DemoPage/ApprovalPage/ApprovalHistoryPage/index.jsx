@@ -1,13 +1,17 @@
 import { Box, Container } from '@mui/material'
 import HistoryTable from '#/components/approval/HistoryTable/index.jsx'
-import Typography from '@mui/material/Typography'
 import SearchFilter from '#/components/approval/SearchFilter/index.jsx'
 import CommonPagination from '#/components/common/pagination/CommonPagination.jsx'
 import dummyData from '../approvalData.json'
 import t from '#/common/libs/trans.js'
 import TitleBar from '#/components/common/menu/TitleBar/index.jsx'
+import { useParams } from 'react-router-dom'
 
 const ApprovalHistoryPage = () => {
+    const params = useParams()
+    const userType = params.type
+    console.log(userType)
+
     // 페이지네이션 컴포넌트에 넘겨 페이지 변경 시 실행될 함수
     const handlePageChange = (page) => {
         // TODO: API GET
@@ -21,27 +25,12 @@ const ApprovalHistoryPage = () => {
 
     return (
         <Box sx={{ display: 'flex', flexDirection: 'column', gap: '2rem' }}>
-            <TitleBar title={t('list_requester', 'approval')} />
+            <TitleBar title={t(`list_${userType}`, 'approval')} />
             <Container>
-                <SearchFilter handleSubmitFilter={handleSubmitFilter} />
+                <SearchFilter type={userType} handleSubmitFilter={handleSubmitFilter} />
             </Container>
             <Container>
-                <HistoryTable
-                    dummyData={dummyData}
-                    headers={[
-                        'No.',
-                        t('name', 'approval'),
-                        t('country', 'approval'),
-                        t('requester', 'approval'),
-                        t('reviewer', 'approval'),
-                        t('approver', 'approval'),
-                        t('request_date', 'approval'),
-                        t('review_date', 'approval'),
-                        t('approval_date', 'approval'),
-                        t('state', 'approval'),
-                        t('history', 'approval'),
-                    ]}
-                />
+                <HistoryTable type={userType} dummyData={dummyData} />
                 <CommonPagination
                     dataLength={dummyData.length} // total element count
                     onChangePageFunction={handlePageChange} // 페이지 변경 시 실행 함수

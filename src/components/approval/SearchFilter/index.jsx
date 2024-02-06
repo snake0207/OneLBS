@@ -56,13 +56,6 @@ const SearchFilter = ({ type, handleSubmitFilter }) => {
             { key: 5, value: 5, label: t('status.rejected', 'approval') },
         ]
         switch (type) {
-            case 'requester':
-                return [
-                    { key: 0, value: 0, label: t('entire', 'approval') },
-                    { key: 1, value: 1, label: t('status.temporary', 'approval') },
-                    { key: 2, value: 2, label: t('status.request', 'approval') },
-                    ...base,
-                ]
             case 'reviewer':
                 return [
                     { key: 0, value: 0, label: t('entire', 'approval') },
@@ -71,8 +64,15 @@ const SearchFilter = ({ type, handleSubmitFilter }) => {
                 ]
             case 'approver':
                 return [{ key: 0, value: 0, label: t('entire', 'approval') }, ...base]
+            default:
+                return [
+                    { key: 0, value: 0, label: t('entire', 'approval') },
+                    { key: 1, value: 1, label: t('status.temporary', 'approval') },
+                    { key: 2, value: 2, label: t('status.request', 'approval') },
+                    ...base,
+                ]
         }
-    })
+    }, [type])
 
     return (
         <>

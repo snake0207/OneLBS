@@ -10,11 +10,12 @@ import {
 import Typography from '@mui/material/Typography'
 import { useNavigate } from 'react-router-dom'
 import t from '#/common/libs/trans.js'
+import { useRef } from 'react'
 
 const HistoryTable = ({ type, dummyData }) => {
     const navigator = useNavigate()
     const url = window.location.pathname
-    let headers = [
+    const headers = [
         'No.',
         t('name', 'approval'),
         t('country', 'approval'),
@@ -27,11 +28,39 @@ const HistoryTable = ({ type, dummyData }) => {
         t('state', 'approval'),
     ]
 
+    const totalContentCount = useRef({
+        temporary: 0,
+        request: 0,
+        reviewed: 0,
+        approved: 0,
+        rejected: 0,
+    })
+
+    const renderCountText = (text, isLast) => {
+        return (
+            <Typography variant={'body2'} component={'span'}>
+                {t(`status.${text}`, 'approval')} {totalContentCount.current[text]}
+                {t('case', 'approval')}
+                {isLast ? '' : ', '}
+            </Typography>
+        )
+    }
+
     return (
         <>
-            <Typography>
+            <Typography variant={'body2'} component={'span'}>
                 {t('total', 'approval')} {dummyData?.length || 0}
                 {t('case', 'approval')}
+            </Typography>
+            <Typography variant={'body2'} component={'span'}>
+                {'( '}
+                {!(type === 'reviewer' || type === 'approver') &&
+                    renderCountText('temporary', false)}
+                {type !== 'approver' && renderCountText('request', false)}
+                {renderCountText('reviewed', false)}
+                {renderCountText('approved', false)}
+                {renderCountText('rejected', true)}
+                {' )'}
             </Typography>
             <TableContainer component={Paper}>
                 <Table sx={{ minWidth: 'max-content' }}>
@@ -45,6 +74,7 @@ const HistoryTable = ({ type, dummyData }) => {
                     <TableBody>
                         {dummyData?.length ? (
                             dummyData.map((data, index) => {
+                                ++totalContentCount.current[data.status]
                                 return (
                                     <TableRow
                                         key={data.id}

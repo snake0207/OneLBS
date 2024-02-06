@@ -15,8 +15,8 @@ import { MODAL_TITLE } from '#/contents/constant'
 import joinList from './list.json'
 import { usePopupActions } from '#/store/usePopupStore'
 
-import t from '#/common/libs/trans'
 import { formatJoinData } from '#/common/libs/formatData'
+import t from '#/common/libs/trans'
 
 const JoinModal = () => {
     const { openModal } = useModalActions()
@@ -27,6 +27,7 @@ const JoinModal = () => {
     const formik = useFormik({
         initialValues: {
             email: '',
+            code: '',
             password: '',
             confirmPassword: '',
             name: '',
@@ -59,7 +60,7 @@ const JoinModal = () => {
             }
             const data = formatJoinData(form)
             console.log(data)
-            // mutate(form)
+            // mutate(data)
             openModal(MODAL_TITLE.joinSuccess)
         },
     })

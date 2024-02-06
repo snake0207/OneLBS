@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { useFormik } from 'formik'
-import { Box, Button, DialogActions, DialogContent, IconButton, Typography } from '@mui/material'
+import { Box, Button, DialogActions, DialogContent, Typography } from '@mui/material'
 import { usePostJoin } from '#/hooks/queries/auth'
 import TextInput from '#/components/common/input/TextInput'
 import PasswordInput from '#/components/common/input/PasswordInput'
@@ -8,30 +8,21 @@ import RadioInput from '#/components/common/Radio'
 import { joinSchema } from '#/contents/validationSchema'
 import EmailVerifyInput from '#/components/common/modal/auth/Join/EmailVerifyInput/index.jsx'
 import VerifyCodeInput from '#/components/common/modal/auth/Join/VerifyCodeInput'
-import JoinSuccessModal from '#/components/common/modal/auth/JoinSuccess'
-import PrivacyPolicyModal from '#/components/common/modal/auth/PrivacyPolicy'
-import Info from '@mui/icons-material/Info'
-import IpInput from '#/components/common/input/IpInput'
-import { formatJoinData } from '#/common/libs/formatData'
+import PrivacyPolicyModal from '#/components/common/modal/auth/Join/PrivacyPolicy'
+import IpInputGroup from '#/components/common/modal/auth/Join/IpInputGroup'
+import { useModalActions } from '#/store/useModalStore'
+import { MODAL_TITLE } from '#/contents/constant'
+import joinList from './list.json'
+import { usePopupActions } from '#/store/usePopupStore'
 
 import t from '#/common/libs/trans'
+import { formatJoinData } from '#/common/libs/formatData'
 
 const JoinModal = () => {
-    const dummyAuthorityArr = [
-        { value: 'GUEST', label: '일반 사용자' },
-        { value: 'USER', label: '요청자' },
-        { value: 'REVIEWER', label: '검토자' },
-        { value: 'MANAGER', label: '승인자' },
-        { value: 'ADMIN', label: '운영자' },
-    ]
-    const dummyTermsArr = [
-        { value: 'Y', label: '개인정보 수집이용동의' },
-        { value: 'N', label: '동의하지 않음' },
-    ]
+    const { openModal } = useModalActions()
+    const { showPopup } = usePopupActions()
     const { mutate } = usePostJoin()
-    const [isJoinSuccess, setIsJoinSuccess] = useState(false)
     const [isOpenPrivacyPolicy, setIsOpenPrivacyPolicy] = useState(false)
-    const [ipInputCount, setIpInputCount] = useState(1)
 
     const formik = useFormik({
         initialValues: {
@@ -43,7 +34,7 @@ const JoinModal = () => {
             company: '',
             team: '',
             role: 'GUEST',
-            terms: 'Y',
+            terms: 'N',
             ipAddress1_0: '',
             ipAddress2_0: '',
             ipAddress3_0: '',
@@ -59,19 +50,24 @@ const JoinModal = () => {
             ipAddress3_2: '',
             ipAddress4_2: '',
             ipDescription_2: '',
+            isIpAutoAdd: true,
         },
         validationSchema: joinSchema,
         onSubmit: (form) => {
-            console.log(form)
+            if (form.terms === 'N') {
+                showPopup('alert', t('terms_disagree', 'validation'))
+                return
+            }
             const data = formatJoinData(form)
             console.log(data)
-            setIsJoinSuccess(true)
             // mutate(form)
+            openModal(MODAL_TITLE.joinSuccess)
         },
     })
 
-    const handleClickAddIPInput = () => {
-        setIpInputCount((prev) => prev + 1)
+    const handleClosePrivacyPolicyDetail = () => {
+        setIsOpenPrivacyPolicy(false)
+        formik.setFieldValue('terms', 'Y')
     }
 
     return (
@@ -137,47 +133,14 @@ const JoinModal = () => {
                     placeholder={t('placeholder.team', 'auth')}
                     formik={formik}
                 />
-                {formik.values.role === 'GUEST' && (
-                    <>
-                        <Box
-                            sx={{
-                                display: 'flex',
-                                justifyContent: 'space-between',
-                                alignItems: 'center',
-                            }}
-                        >
-                            <Typography variant="h6">
-                                <span style={{ color: 'red' }}>*</span>IP
-                            </Typography>
-                            <IconButton
-                                onClick={handleClickAddIPInput}
-                                disabled={3 === ipInputCount}
-                            >
-                                <Info />
-                            </IconButton>
-                        </Box>
-                        <Typography variant="body2">
-                            <span style={{ color: 'red' }}>*</span>
-                            {t('guide.ip_input_guide', 'auth')}
-                        </Typography>
-                        {Array.from({ length: ipInputCount }).map((_, idx) => (
-                            <IpInput
-                                key={idx}
-                                ipName1={`ipAddress1_${idx}`}
-                                ipName2={`ipAddress2_${idx}`}
-                                ipName3={`ipAddress3_${idx}`}
-                                ipName4={`ipAddress4_${idx}`}
-                                ipDescription={`ipDescription_${idx}`}
-                                formik={formik}
-                            />
-                        ))}
-                    </>
+                {formik.values.role !== 'GUEST' && formik.values.role !== 'USER' && (
+                    <IpInputGroup formik={formik} />
                 )}
                 <Typography variant="h6">
                     <span style={{ color: 'red' }}>*</span>
                     {t('role', 'auth')}
                 </Typography>
-                <RadioInput radioList={dummyAuthorityArr} name={'role'} formik={formik} />
+                <RadioInput radioList={joinList.roleList} name={'role'} formik={formik} />
                 <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
                     <Typography variant="h6">
                         <span style={{ color: 'red' }}>*</span>
@@ -187,8 +150,9 @@ const JoinModal = () => {
                         {t('read_more', 'auth')}
                     </Button>
                 </Box>
+                <Typography>{t('guide.terms_guide', 'auth')}</Typography>
                 <RadioInput
-                    radioList={dummyTermsArr}
+                    radioList={joinList.termsList}
                     name={'terms'}
                     formik={formik}
                     isDisabled={true}
@@ -199,10 +163,9 @@ const JoinModal = () => {
                     {t('join', 'auth')}
                 </Button>
             </DialogActions>
-            <JoinSuccessModal isOpen={isJoinSuccess} onClose={() => setIsJoinSuccess(false)} />
             <PrivacyPolicyModal
                 isOpen={isOpenPrivacyPolicy}
-                onClose={() => setIsOpenPrivacyPolicy(false)}
+                onClose={handleClosePrivacyPolicyDetail}
             />
         </>
     )

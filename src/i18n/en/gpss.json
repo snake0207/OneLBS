@@ -1,6 +1,6 @@
 {
   "lat_input": "please enter latitude",
-  "lng_input": "please enter longitude",
+  "lon_input": "please enter longitude",
   "country_select": "please select country",
   "address_input": "please enter address",
   "info": "info",

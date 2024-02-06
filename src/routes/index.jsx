@@ -19,6 +19,9 @@ import UserPermissionPage from '#/pages/DemoPage/UserManagementPage/UserPermissi
 import ApprovalPage from '#/pages/DemoPage/ApprovalPage/index.jsx'
 import ApprovalHistoryPage from '#/pages/DemoPage/ApprovalPage/ApprovalHistoryPage/index.jsx'
 import ApprovalHistoryDetailPage from '#/pages/DemoPage/ApprovalPage/ApprovalHistoryPage/DetailPage/index.jsx'
+import UserListPage from '#/pages/DemoPage/UserManagementPage/UserListPage'
+import IPManagePage from '#/pages/DemoPage/UserManagementPage/IPManagePage'
+import TablePage from '#/pages/DemoPage/TablePage'
 
 const Routes = () => {
     return useRoutes([
@@ -51,9 +54,12 @@ const Routes = () => {
                     path: '/components/approval/:type/detail/:id',
                     element: <ApprovalHistoryDetailPage />,
                 },
+                { path: '/components/tables', element: <TablePage /> },
                 { path: '/components/users', element: <UserManagementPage /> },
+                { path: '/components/users/list', element: <UserListPage /> },
                 { path: '/components/users/login-history', element: <UserLoginHistoryPage /> },
                 { path: '/components/users/permission-history', element: <UserPermissionPage /> },
+                { path: '/components/users/ip-management', element: <IPManagePage /> },
             ],
         },
     ])

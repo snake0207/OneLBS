@@ -1,5 +1,13 @@
 import { FormControl, FormControlLabel, Radio, RadioGroup } from '@mui/material'
 
+/**
+ * 공통 Radio Group Input
+ * @param {[{value: string, label: string}]} radioList radio item list
+ * @param {[{value: string, label: string}]} name radio formik name
+ * @param {object} formik useformik return object
+ * @param {boolean} isDisabledinput radio disabled 여부
+ * @returns ReactNode
+ */
 const RadioInput = ({ radioList, name, formik, isDisabled = false }) => {
     return (
         <FormControl>

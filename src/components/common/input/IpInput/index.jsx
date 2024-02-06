@@ -1,14 +1,15 @@
 import { Box, FormHelperText, TextField, Typography } from '@mui/material'
 
 /**
- * @param {string} ipName 아이피 주소에 대한 값
- * @param {string} ipDescription 아이피 주소에 대한 설명
- * @param {object} formik useFormik 반환 객체
+ * 공통 IP Input 메인 컴포넌트
+ * @param {ReactNode} children 서브 컴포넌트
+ * @param {string} ipName ip 1 ~ 4 formik name
+ * @param {object} formik useformik return object
  * @returns ReactNode
  */
-const IpInput = ({ ipName1, ipName2, ipName3, ipName4, ipDescription, formik }) => {
+const IpInputMain = ({ children, ipName1, ipName2, ipName3, ipName4, formik }) => {
     return (
-        <>
+        <Box>
             <Box sx={{ display: 'flex', alignItems: 'flex-end', gap: 1 }}>
                 <TextField
                     name={ipName1}
@@ -18,7 +19,7 @@ const IpInput = ({ ipName1, ipName2, ipName3, ipName4, ipDescription, formik }) 
                     error={formik.touched[ipName1] && !!formik.errors[ipName1]}
                     size="small"
                     type="text"
-                    sx={{ width: 60 }}
+                    sx={{ width: 60, minWidth: 60 }}
                 />
                 <Typography sx={{ fontWeight: 700 }}>.</Typography>
                 <TextField
@@ -29,7 +30,7 @@ const IpInput = ({ ipName1, ipName2, ipName3, ipName4, ipDescription, formik }) 
                     error={formik.touched[ipName2] && !!formik.errors[ipName2]}
                     size="small"
                     type="text"
-                    sx={{ width: 60 }}
+                    sx={{ width: 60, minWidth: 60 }}
                 />
                 <Typography sx={{ fontWeight: 700 }}>.</Typography>
                 <TextField
@@ -40,7 +41,7 @@ const IpInput = ({ ipName1, ipName2, ipName3, ipName4, ipDescription, formik }) 
                     error={formik.touched[ipName3] && !!formik.errors[ipName3]}
                     size="small"
                     type="text"
-                    sx={{ width: 60 }}
+                    sx={{ width: 60, minWidth: 60 }}
                 />
                 <Typography sx={{ fontWeight: 700 }}>.</Typography>
                 <TextField
@@ -51,27 +52,39 @@ const IpInput = ({ ipName1, ipName2, ipName3, ipName4, ipDescription, formik }) 
                     error={formik.touched[ipName4] && !!formik.errors[ipName4]}
                     size="small"
                     type="text"
-                    sx={{ width: 60 }}
+                    sx={{ width: 60, minWidth: 60 }}
                 />
-                <TextField
-                    name={ipDescription}
-                    value={formik.values[ipDescription]}
-                    onChange={formik.handleChange}
-                    onBlur={formik.handleBlur}
-                    error={formik.touched[ipDescription] && !!formik.errors[ipDescription]}
-                    size="small"
-                    type="text"
-                />
+                {children}
             </Box>
             <FormHelperText sx={{ mt: 1, ml: 2 }} error>
                 {(formik.touched[ipName1] && formik.errors[ipName1]) ||
                     (formik.touched[ipName2] && formik.errors[ipName2]) ||
                     (formik.touched[ipName3] && formik.errors[ipName3]) ||
-                    (formik.touched[ipName4] && formik.errors[ipName4]) ||
-                    (formik.touched[ipDescription] && formik.errors[ipDescription])}
+                    (formik.touched[ipName4] && formik.errors[ipName4])}
             </FormHelperText>
-        </>
+        </Box>
     )
 }
 
-export default IpInput
+/**
+ * IP 설명 Input 서브 컴포넌트
+ * @param {object} formik useformik return object
+ * @param {string} ipDescription ip 설명 formik name
+ * @returns ReactNode
+ */
+const IpDescriptionInput = ({ formik, ipDescName }) => {
+    return (
+        <TextField
+            name={ipDescName}
+            value={formik.values[ipDescName]}
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
+            error={formik.touched[ipDescName] && !!formik.errors[ipDescName]}
+            size="small"
+            type="text"
+            fullWidth
+        />
+    )
+}
+
+export const IpInput = Object.assign(IpInputMain, { IpDescription: IpDescriptionInput })

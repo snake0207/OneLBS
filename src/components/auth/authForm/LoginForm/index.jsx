@@ -59,7 +59,7 @@ const LoginForm = () => {
                 <Button
                     variant="contained"
                     type="button"
-                    onClick={() => openModal(MODAL_TITLE.join)}
+                    onClick={() => openModal(MODAL_TITLE.join, 'md')}
                 >
                     {t('join', 'auth')}
                 </Button>

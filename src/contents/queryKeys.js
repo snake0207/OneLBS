@@ -3,4 +3,7 @@ export const QUERY_KEYS = {
         reviewer: 'gpss_reviewer',
         approver: 'gpss_approver',
     },
+    auth: {
+        getIp: 'get-ip',
+    },
 }

@@ -266,7 +266,7 @@ const MapSearch = () => {
         initialValues: {
             country: '',
             lat: '',
-            lng: '',
+            lon: '',
             category: [],
             searchValue: '',
             language: 'ENG',
@@ -285,8 +285,10 @@ const MapSearch = () => {
             sx={{
                 width: '350px',
                 padding: '16px',
+                margin: '10px',
                 borderRadius: '8px',
                 border: '1px solid #D1D1D1',
+                background: '#ffffff',
             }}
         >
             <Box>
@@ -354,20 +356,20 @@ const MapSearch = () => {
                         xs={3}
                         sx={{ display: 'flex', justifyContent: 'start', alignItems: 'center' }}
                     >
-                        <Typography>{t('lng', 'common')}</Typography>
+                        <Typography>{t('lon', 'common')}</Typography>
                     </Grid>
                     <Grid item xs={9}>
                         <TextField
                             sx={{ width: '100%' }}
                             size="small"
-                            placeholder={t('lng_input', 'gpss')}
-                            name={'lng'}
+                            placeholder={t('lon_input', 'gpss')}
+                            name={'lon'}
                             onChange={formik.handleChange}
                             onBlur={formik.handleBlur}
-                            value={formik.values.lng}
-                            error={formik.touched.lng && !!formik.errors.lng}
+                            value={formik.values.lon}
+                            error={formik.touched.lon && !!formik.errors.lon}
                             helperText={
-                                formik.touched.lng && !!formik.errors.lng ? formik.errors.lng : ''
+                                formik.touched.lon && !!formik.errors.lon ? formik.errors.lon : ''
                             }
                         />
                     </Grid>

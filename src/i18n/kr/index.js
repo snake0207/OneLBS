@@ -6,6 +6,7 @@ import common from './common.json'
 import gpss from './gpss.json'
 import validation from './validation.json'
 import approval from './approval.json'
+import error from './error.json'
 
 const kr = {
     layout,
@@ -16,6 +17,7 @@ const kr = {
     gpss,
     validation,
     approval,
+    error,
 }
 
 export default kr

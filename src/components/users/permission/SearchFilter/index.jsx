@@ -7,7 +7,7 @@ import DatePickerInput from '#/components/common/input/DatePickerInput'
 
 function SearchFilter({ onSearch }) {
     const getPermissionList = () => [
-        { key: 0, value: 0, label: t('select', 'users') },
+        { key: 0, value: 0, label: t('all', 'users') },
         { key: 1, value: 1, label: t('general_user', 'users') },
         { key: 2, value: 2, label: t('request_user', 'users') },
         { key: 3, value: 3, label: t('reviewer', 'users') },

@@ -7,6 +7,22 @@ import MapSearchList from '#/components/common/map/MapSearchList/index.jsx'
 import MapInfoWindow from '#/components/common/map/MapInfoWindow/index.jsx'
 import MapPoiDetail from '#/components/common/map/MapPoiDetail/index.jsx'
 import MapGpssDetail from '#/components/common/map/MapGpssDetail/index.jsx'
+import GoogleMapComponent from '#/components/common/map/googleMap/index.jsx'
+
+const markerSampleData = [
+    {
+        poiId: 'ChIJsTbYQbjLwoARpbZRYUbnEP4',
+        address: '12021 Wilmington Ave, Los Angeles, CA 90059, USA',
+        position: {
+            center: {
+                lat: 33.9243791,
+                lon: -118.23941569999998,
+            },
+        },
+        title: 'PowerFlex Charging Station',
+        category: 'ev',
+    },
+]
 
 const MapPage = () => {
     return (
@@ -32,9 +48,9 @@ const MapPage = () => {
                 </Box>
                 <Box sx={{ mr: 2 }}>
                     <Typography>Map List Component with No Result</Typography>
-                    <MapSearchList isResultNon={true} />
+                    <MapSearchList searchResultArr={[]} />
                     <Typography>Map List Component with Result (스크롤 TOP 버튼 존재)</Typography>
-                    <MapSearchList isResultNon={false} />
+                    <MapSearchList searchResultArr={markerSampleData} />
                 </Box>
                 <Box sx={{ mr: 2 }}>
                     <Typography>Map POI Detail Component</Typography>
@@ -49,6 +65,14 @@ const MapPage = () => {
                 <Box sx={{ mr: 2 }}>
                     <Typography>Map InfoWindow Component</Typography>
                     <MapInfoWindow />
+                </Box>
+            </Box>
+            <Box sx={{ display: 'flex' }}>
+                <Box sx={{ mr: 2 }}>
+                    <Typography>Google Map Component</Typography>
+                    <Box sx={{ width: '1600px', height: '900px' }}>
+                        <GoogleMapComponent markerDataArr={markerSampleData} isPoiSearch={true} />
+                    </Box>
                 </Box>
             </Box>
         </div>

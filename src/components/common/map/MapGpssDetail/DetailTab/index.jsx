@@ -35,7 +35,7 @@ const MapGpssDetailTab = () => {
         initialValues: {
             address: '',
             lat: '',
-            lng: '',
+            lon: '',
             reason: '',
             reviewer: '',
             approver: '',
@@ -230,13 +230,13 @@ const MapGpssDetailTab = () => {
                             {isLngSave ? <SaveIcon /> : <EditIcon />}
                         </IconButton>
                     </Box>
-                    {(isLngSave || (!isLngSave && formik.values.lng !== '')) && (
+                    {(isLngSave || (!isLngSave && formik.values.lon !== '')) && (
                         <Box sx={{ height: '40px' }}>
                             <TextInput
                                 formik={formik}
-                                name={'lng'}
+                                name={'lon'}
                                 IsDisabled={!isLngSave}
-                                placeholder={t('lng_input', 'gpss')}
+                                placeholder={t('lon_input', 'gpss')}
                             />
                         </Box>
                     )}

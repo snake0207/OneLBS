@@ -25,10 +25,9 @@ const HELPER_TEXT = {
     otpNotMatch: t('otp_not_match', 'validation'),
     searchCountry: t('country_select', 'validation'),
     searchLat: t('lat_input', 'validation'),
-    searchLng: t('lng_input', 'validation'),
+    searchLng: t('lon_input', 'validation'),
     ipRequired: t('ip_required', 'validation'),
     ipNotMatch: t('ip_not_match', 'validation'),
-    ipDescRequired: t('ip_desc_required', 'validation'),
 }
 
 const REGEXP = {
@@ -71,42 +70,39 @@ export const joinSchema = yup.object().shape({
     name: yup.string().min(2, HELPER_TEXT.nameLength).required(HELPER_TEXT.nameRequired),
     company: yup.string().min(2, HELPER_TEXT.companyLength).required(HELPER_TEXT.companyRequired),
     team: yup.string().min(2, HELPER_TEXT.teamLength).required(HELPER_TEXT.teamRequired),
-    ipAddress1_0: yup.string().when('role', {
-        is: (value) => value === 'GUEST',
+    ipAddress1_0: yup.string().when(['role', 'isIpAutoAdd'], {
+        is: (role, isIpAutoAdd) => role !== 'GUEST' && role !== 'USER' && !isIpAutoAdd,
         then: () =>
             yup
                 .string()
                 .matches(REGEXP.ipNumber, HELPER_TEXT.ipNotMatch)
                 .required(HELPER_TEXT.ipRequired),
     }),
-    ipAddress2_0: yup.string().when('role', {
-        is: (value) => value === 'GUEST',
+    ipAddress2_0: yup.string().when(['role', 'isIpAutoAdd'], {
+        is: (role, isIpAutoAdd) => role !== 'GUEST' && role !== 'USER' && !isIpAutoAdd,
         then: () =>
             yup
                 .string()
                 .matches(REGEXP.ipNumber, HELPER_TEXT.ipNotMatch)
                 .required(HELPER_TEXT.ipRequired),
     }),
-    ipAddress3_0: yup.string().when('role', {
-        is: (value) => value === 'GUEST',
+    ipAddress3_0: yup.string().when(['role', 'isIpAutoAdd'], {
+        is: (role, isIpAutoAdd) => role !== 'GUEST' && role !== 'USER' && !isIpAutoAdd,
         then: () =>
             yup
                 .string()
                 .matches(REGEXP.ipNumber, HELPER_TEXT.ipNotMatch)
                 .required(HELPER_TEXT.ipRequired),
     }),
-    ipAddress4_0: yup.string().when('role', {
-        is: (value) => value === 'GUEST',
+    ipAddress4_0: yup.string().when(['role', 'isIpAutoAdd'], {
+        is: (role, isIpAutoAdd) => role !== 'GUEST' && role !== 'USER' && !isIpAutoAdd,
         then: () =>
             yup
                 .string()
                 .matches(REGEXP.ipNumber, HELPER_TEXT.ipNotMatch)
                 .required(HELPER_TEXT.ipRequired),
     }),
-    ipDescription_0: yup.string().when('role', {
-        is: (value) => value === 'GUEST',
-        then: () => yup.string().required(HELPER_TEXT.ipDescRequired),
-    }),
+    ipDescription_0: yup.string(),
     ipAddress1_1: yup.string().matches(REGEXP.ipNumber, HELPER_TEXT.ipNotMatch),
     ipAddress2_1: yup.string().matches(REGEXP.ipNumber, HELPER_TEXT.ipNotMatch),
     ipAddress3_1: yup.string().matches(REGEXP.ipNumber, HELPER_TEXT.ipNotMatch),
@@ -132,7 +128,7 @@ export const mapSearchSchema = yup.object({
         .string()
         .matches(REGEXP.coordinates, HELPER_TEXT.searchLat)
         .required(HELPER_TEXT.searchLat),
-    lng: yup
+    lon: yup
         .string()
         .matches(REGEXP.coordinates, HELPER_TEXT.searchLng)
         .required(HELPER_TEXT.searchLng),

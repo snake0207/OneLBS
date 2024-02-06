@@ -44,15 +44,12 @@ export const loginSchema = yup.object({
     password: yup.string().required(HELPER_TEXT.passwordRequired),
 })
 
-export const EmailCodeSchema = yup.object({
+export const joinSchema = yup.object().shape({
+    email: yup.string().email(HELPER_TEXT.emailNotMatch).required(HELPER_TEXT.emailRequired),
     code: yup
         .string()
         .matches(REGEXP.verifyCode, HELPER_TEXT.emailCodeNotMatch)
         .required(HELPER_TEXT.emailCodeRequired),
-})
-
-export const joinSchema = yup.object().shape({
-    email: yup.string().email(HELPER_TEXT.emailNotMatch).required(HELPER_TEXT.emailRequired),
     password: yup
         .string()
         .min(8, HELPER_TEXT.passwordMinLength)

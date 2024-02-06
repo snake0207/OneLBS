@@ -13,10 +13,12 @@ import LoginDemoPage from '#/pages/DemoPage/LoginPage'
 import PopupPage from '#/pages/DemoPage/PopupPage'
 import InputPage from '#/pages/DemoPage/InputPage'
 import ModalPage from '#/pages/DemoPage/ModalPage'
-import ApprovalHistoryPage from '#/pages/DemoPage/ApprovalHistoryPage/index.jsx'
 import UserManagementPage from '#/pages/DemoPage/UserManagementPage'
 import UserLoginHistoryPage from '#/pages/DemoPage/UserManagementPage/UserLoginHistoryPage'
 import UserPermissionPage from '#/pages/DemoPage/UserManagementPage/UserPermissionPage'
+import ApprovalPage from '#/pages/DemoPage/ApprovalPage/index.jsx'
+import ApprovalHistoryPage from '#/pages/DemoPage/ApprovalPage/ApprovalHistoryPage/index.jsx'
+import ApprovalHistoryDetailPage from '#/pages/DemoPage/ApprovalPage/ApprovalHistoryPage/DetailPage/index.jsx'
 import UserListPage from '#/pages/DemoPage/UserManagementPage/UserListPage'
 import IPManagePage from '#/pages/DemoPage/UserManagementPage/IPManagePage'
 import TablePage from '#/pages/DemoPage/TablePage'
@@ -46,8 +48,13 @@ const Routes = () => {
                 { path: '/components/logins', element: <LoginDemoPage /> },
                 { path: '/components/modals', element: <ModalPage /> },
                 { path: '/components/popup', element: <PopupPage /> },
+                { path: '/components/approval', element: <ApprovalPage /> },
+                { path: '/components/approval/:type', element: <ApprovalHistoryPage /> },
+                {
+                    path: '/components/approval/:type/detail/:id',
+                    element: <ApprovalHistoryDetailPage />,
+                },
                 { path: '/components/tables', element: <TablePage /> },
-                { path: '/components/approval', element: <ApprovalHistoryPage /> },
                 { path: '/components/users', element: <UserManagementPage /> },
                 { path: '/components/users/list', element: <UserListPage /> },
                 { path: '/components/users/login-history', element: <UserLoginHistoryPage /> },

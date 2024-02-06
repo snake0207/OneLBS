@@ -1,0 +1,57 @@
+{
+    "status": "검토요청",
+    "approvalLineContents": {
+        "requester": {
+            "team": "콘텐츠플랫폼개발팀",
+            "name": "박다정 책임",
+            "date": "2024-01-19 12:10:02"
+        },
+        "reviewer": {
+            "team": "콘텐츠플랫폼개발팀",
+            "name": "박다정 책임",
+            "date": "2024-01-19 12:10:02"
+        },
+        "approver": {
+            "title": "승인 완료",
+            "team": "콘텐츠플랫폼개발팀",
+            "name": "박다정 책임",
+            "date": "2024-01-19 12:10:02"
+        }
+    },
+    "historyList": [
+        {
+            "date": "2024-01-19 12:10:02",
+            "status": "temporary",
+            "history": "위.경도 수정 요청"
+        },
+        {
+            "date": "2024-01-19 12:10:02",
+            "status": "reject",
+            "history": "위.경도 수정 요청 반려"
+        },
+        {
+            "date": "2024-01-19 12:10:02",
+            "status": "reviewed",
+            "history": "위.경도 수정 재 승인 요청"
+        },
+        {
+            "date": "2024-01-19 12:10:02",
+            "status": "approved",
+            "history": "승인 완료"
+        }
+    ],
+    "info": {
+        "name": "Phillips 66",
+        "address": "Phillips 66Phillips 66",
+        "lat": "45.123123",
+        "lon": "-103.34234"
+    },
+    "category": {
+        "brand": null,
+        "name": "evCharging"
+    },
+    "comment": {
+        "reviewer": "위.경도 재확인 후 요청하라",
+        "approver": null
+    }
+}

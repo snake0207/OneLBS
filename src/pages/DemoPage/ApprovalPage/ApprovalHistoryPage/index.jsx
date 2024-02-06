@@ -10,7 +10,6 @@ import { useParams } from 'react-router-dom'
 const ApprovalHistoryPage = () => {
     const params = useParams()
     const userType = params.type
-    console.log(userType)
 
     // 페이지네이션 컴포넌트에 넘겨 페이지 변경 시 실행될 함수
     const handlePageChange = (page) => {

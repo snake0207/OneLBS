@@ -1,6 +1,7 @@
-import { Box, Container, Divider, Stack } from '@mui/material'
+import { Box, Container, Stack } from '@mui/material'
 import CarouselOverview from '#/components/auth/CarouselOverview'
 import AuthFormContainer from '#/components/auth/authForm/AuthFormContainer'
+import { BrowserView, MobileView, isBrowser } from 'react-device-detect'
 
 function LoginPage() {
     const dummyImageList = [
@@ -25,38 +26,43 @@ function LoginPage() {
     ]
     return (
         <Container
-            maxWidth={'lg'}
+            maxWidth={isBrowser && 'lg'}
             sx={{
                 display: 'flex',
                 alignItems: 'center',
+                justifyContent: 'center',
                 height: '100vh',
             }}
         >
-            <Stack
-                //divider={<Divider orientation="vertical" flexItem />}
-                sx={{
-                    justifyContent: 'space-between',
-                    flexDirection: 'row',
-                    border: '1px solid rgba(0, 0, 0, 0.12)',
-                }}
-            >
-                <Box sx={{ flex: 1 }}>
-                    <CarouselOverview dummyImageList={dummyImageList} />
-                </Box>
-                <Box
+            <BrowserView>
+                <Stack
                     sx={{
-                        display: 'flex',
-                        flexDirection: 'column',
-                        height: '100%',
-                        width: '600px',
-                        pt: 10,
-                        pl: 16,
-                        pr: 16,
+                        justifyContent: 'space-between',
+                        flexDirection: 'row',
+                        border: '1px solid rgba(0, 0, 0, 0.12)',
                     }}
                 >
-                    <AuthFormContainer />
-                </Box>
-            </Stack>
+                    <Box sx={{ flex: 1 }}>
+                        <CarouselOverview dummyImageList={dummyImageList} />
+                    </Box>
+                    <Box
+                        sx={{
+                            display: 'flex',
+                            flexDirection: 'column',
+                            height: '100%',
+                            width: '600px',
+                            pt: 10,
+                            pl: 16,
+                            pr: 16,
+                        }}
+                    >
+                        <AuthFormContainer />
+                    </Box>
+                </Stack>
+            </BrowserView>
+            <MobileView>
+                <AuthFormContainer />
+            </MobileView>
         </Container>
     )
 }

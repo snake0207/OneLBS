@@ -6,17 +6,14 @@ import IconButton from '@mui/material/IconButton'
 import MenuIcon from '@mui/icons-material/Menu'
 import Container from '@mui/material/Container'
 import Avatar from '@mui/material/Avatar'
-import Tooltip from '@mui/material/Tooltip'
 import FullscreenIcon from '@mui/icons-material/Fullscreen'
-import NotificationsIcon from '@mui/icons-material/Notifications'
 import useLayoutStore from '#/store/useLayoutStore'
-
-import Badge from '@mui/material/Badge'
 
 import t from '#/common/libs/trans'
 import Dropdown from '#/components/common/button/Dropdown'
 import useFullScreen from '#/hooks/useFullScreen'
 import Settings from '#/components/layout/Settings'
+import Notify from '#/components/layout/Notify'
 
 const userMenus = [
     { key: 'profile', label: t('profile') },
@@ -67,13 +64,7 @@ function Header() {
                     </Box>
                     <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}></Box>
                     <Box sx={{ flexGrow: 0 }}>
-                        <Tooltip title="Open notifications">
-                            <IconButton color="inherit" size="large">
-                                <Badge badgeContent={4} color="error">
-                                    <NotificationsIcon />
-                                </Badge>
-                            </IconButton>
-                        </Tooltip>
+                        <Notify />
                         <IconButton sx={{ p: 0 }}>
                             <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
                         </IconButton>

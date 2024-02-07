@@ -7,7 +7,7 @@ import Grid from '@mui/material/Unstable_Grid2'
 import ApprovalLine from '#/components/approval/Detail/ApprovalLine/index.jsx'
 import InfoTab from '#/components/approval/Detail/InfoTab/index.jsx'
 import HistoryTable from '#/components/approval/Detail/HistoryTable/index.jsx'
-import { useMemo, useRef } from 'react'
+import { useMemo } from 'react'
 import { useFormik } from 'formik'
 import CategoryTable from '#/components/approval/Detail/CategoryTable/index.jsx'
 import ActionButtons from '#/components/approval/Detail/ActionButtons/index.jsx'
@@ -60,7 +60,7 @@ const ApprovalHistoryDetailPage = () => {
 
     return (
         <>
-            <TitleBar title={t('history_detail', 'approval')} />
+            <TitleBar title={t('detail', 'approval')} />
             <Card variant="outlined" sx={{ mt: 4, display: 'flex' }}>
                 <Grid container xs={6} sx={{ p: 2, flexDirection: 'column', gap: 4 }}>
                     {/* 결제라인 */}

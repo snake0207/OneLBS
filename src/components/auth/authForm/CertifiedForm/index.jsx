@@ -1,7 +1,7 @@
 import { useFormik } from 'formik'
 import TextInput from '#/components/common/input/TextInput'
 import { otpSchema } from '#/contents/validationSchema'
-import { Box, Button, Divider, Link, Typography } from '@mui/material'
+import { Box, Button, Link, Typography } from '@mui/material'
 import AuthStepper from '#/components/auth/AuthStepper'
 import FlexEndButtonContainer from '#/components/common/button/FlexEndButtonContainer'
 import { Icon } from '@mui/material'
@@ -10,6 +10,7 @@ import LoginIcon from '#/assets/loginIcon.svg'
 import t from '#/common/libs/trans'
 
 import style from './style.module'
+import { BrowserView } from 'react-device-detect'
 
 const CertifiedForm = () => {
     const formik = useFormik({
@@ -31,7 +32,9 @@ const CertifiedForm = () => {
                     LOGIN
                 </Typography>
             </Box>
-            <AuthStepper />
+            <BrowserView>
+                <AuthStepper />
+            </BrowserView>
             <Typography variant="subtitle2" sx={style.subText}>
                 {t('guide.otp_registration_guide', 'auth')}
             </Typography>

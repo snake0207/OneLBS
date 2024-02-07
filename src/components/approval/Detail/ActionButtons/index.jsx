@@ -1,34 +1,33 @@
 import { Box, Button } from '@mui/material'
-import { useRef } from 'react'
 import { usePopupActions } from '#/store/usePopupStore.js'
+import t from '#/common/libs/trans.js'
 
 const ActionButtons = ({ type, status, confirmAction, isEditable }) => {
     const popupActions = usePopupActions()
 
     const openAlertPopup = (action) => {
-        if (confirmAction(action)) popupActions.showPopup('alert', `${action} 되었습니다`)
+        if (confirmAction(action))
+            popupActions.showPopup('alert', t(`confirmed.${action.toLowerCase()}`, 'approval'))
     }
 
     const handleShowConfirmPopup = (action) => {
-        popupActions.showPopup('confirm', `${action} 하시겠습니까?`, () => openAlertPopup(action))
+        console.log(action, t(`modal.${action}`, 'approval'))
+        popupActions.showPopup('confirm', t(`modal.${action.toLowerCase()}`, 'approval'), () =>
+            openAlertPopup(action),
+        )
     }
-    const buttonText = useRef({
-        request: ['임시저장', '회수', '재상신'],
-        review: status === '검토완료' ? ['회수'] : ['승인', '반려'],
-        approval: ['승인', '반려'],
-    })
 
-    const MakeButtons = (data) => {
+    const MakeButtons = (actions) => {
         return (
             <Box>
-                {data.map((text, index) => {
+                {actions.map((action, index) => {
                     return (
                         <Button
                             key={index}
                             variant="contained"
-                            onClick={() => handleShowConfirmPopup(text)}
+                            onClick={() => handleShowConfirmPopup(action)}
                         >
-                            {text}
+                            {t(`actions.${action}`, 'approval')}
                         </Button>
                     )
                 })}
@@ -38,17 +37,17 @@ const ActionButtons = ({ type, status, confirmAction, isEditable }) => {
 
     switch (type) {
         case 'requester':
-            return <>{isEditable && MakeButtons(buttonText.current.request)}</>
+            return <>{isEditable && MakeButtons(['temporary', 'retrieve', 're_request'])}</>
         case 'reviewer':
             return (
                 <>
                     {status === '검토완료'
-                        ? MakeButtons(buttonText.current.review)
-                        : isEditable && MakeButtons(buttonText.current.review)}
+                        ? MakeButtons(['retrieve'])
+                        : isEditable && MakeButtons(['approval', 'reject'])}
                 </>
             )
         case 'approver':
-            return <>{isEditable && MakeButtons(buttonText.current.approval)}</>
+            return <>{isEditable && MakeButtons(['approval', 'reject'])}</>
         default:
             return <></>
     }

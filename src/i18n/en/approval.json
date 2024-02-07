@@ -14,20 +14,54 @@
     "address": "Address",
     "lat": "Lat",
     "lon": "Lon",
-    "category": "category",
+    "category": "Category",
     "brand": "Brand",
-    "request_reason": "request_reason",
+    "request_reason": "Request reason",
     "comment": "Comment",
-    "history": "history",
-    "total": "total",
+    "history": "History",
+    "total": "Total",
     "case": "",
-    "date": "date",
-    "state": "state",
+    "date": "Date",
+    "state": "State",
+    "entire": "Entire",
+    "search": "Search",
+    "country": "Country",
+    "request_date": "Request date",
+    "review_date": "Review date",
+    "approval_date": "Approval/Reject date",
+    "approval": "Approval history",
     "status": {
-        "temporary": "temporary",
-        "request": "request",
-        "reviewed": "reviewed",
-        "approved": "approved",
+        "temporary": "Temporary",
+        "request": "Request",
+        "reviewed": "Reviewed",
+        "approved": "Approved",
         "rejected": "Rejected"
+    },
+    "actions": {
+        "temporary": "Temporary save",
+        "retrieve": "Retrieve",
+        "re_request": "Re-request",
+        "approval": "Approval",
+        "reject": "Reject"
+    },
+    "modal": {
+        "temporary": "Do you want to temporary save it?",
+        "retrieve": "Do you want to retrieve it?",
+        "re_request": "Do you want to request it again?",
+        "approval": "Do you want to approve it?",
+        "reject": "Do you want to reject it?"
+    },
+    "confirmed": {
+        "temporary": "Confirmed",
+        "retrieve": "Confirmed",
+        "re_request": "Confirmed",
+        "approval": "Confirmed",
+        "reject": "Confirmed"
+    },
+    "valid": {
+        "name": "name",
+        "requester": "requester",
+        "reviewer": "reviewer",
+        "approver": "approver"
     }
 }

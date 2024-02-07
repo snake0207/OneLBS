@@ -6,7 +6,7 @@ import TextInput from '#/components/common/input/TextInput/index.jsx'
 import Select from '#/components/common/Select/index.jsx'
 import DatePickerInput from '#/components/common/input/DatePickerInput/index.jsx'
 import t from '#/common/libs/trans.js'
-import { useMemo } from 'react'
+import { useMemo, useRef } from 'react'
 
 const SearchFilter = ({ type, handleSubmitFilter }) => {
     const formik = useFormik({
@@ -49,7 +49,7 @@ const SearchFilter = ({ type, handleSubmitFilter }) => {
         { key: 1, value: 1, label: 'NA' },
         { key: 2, value: 2, label: 'EU' },
     ]
-    const statusItems = useMemo(() => {
+    const statusItems = () => {
         const base = [
             { key: 3, value: 3, label: t('status.reviewed', 'approval') },
             { key: 4, value: 4, label: t('status.approved', 'approval') },
@@ -72,7 +72,7 @@ const SearchFilter = ({ type, handleSubmitFilter }) => {
                     ...base,
                 ]
         }
-    }, [type])
+    }
 
     return (
         <>
@@ -100,7 +100,7 @@ const SearchFilter = ({ type, handleSubmitFilter }) => {
                                 <TextInput
                                     formik={formik}
                                     name={'tempFilter1'}
-                                    placeholder={'명칭을 입력하세요'}
+                                    placeholder={t('valid.name', 'approval')}
                                 />
                             </TableCell>
                             <TableCell
@@ -127,7 +127,7 @@ const SearchFilter = ({ type, handleSubmitFilter }) => {
                                 <Select
                                     name={'tempFilter3'}
                                     formik={formik}
-                                    items={statusItems}
+                                    items={statusItems()}
                                     sx={{ width: 200 }}
                                 />
                             </TableCell>
@@ -145,7 +145,7 @@ const SearchFilter = ({ type, handleSubmitFilter }) => {
                                         <TextInput
                                             formik={formik}
                                             name={'tempFilter4'}
-                                            placeholder={'요청자를 입력하세요'}
+                                            placeholder={t('valid.requester', 'approval')}
                                         />
                                     </TableCell>
                                 </>
@@ -162,7 +162,7 @@ const SearchFilter = ({ type, handleSubmitFilter }) => {
                                         <TextInput
                                             formik={formik}
                                             name={'tempFilter5'}
-                                            placeholder={'검토자를 입력하세요'}
+                                            placeholder={t('valid.reviewer', 'approval')}
                                         />
                                     </TableCell>
                                 </>
@@ -179,7 +179,7 @@ const SearchFilter = ({ type, handleSubmitFilter }) => {
                                         <TextInput
                                             formik={formik}
                                             name={'tempFilter6'}
-                                            placeholder={'승인자를 입력하세요'}
+                                            placeholder={t('valid.approver', 'approval')}
                                         />
                                     </TableCell>
                                 </>

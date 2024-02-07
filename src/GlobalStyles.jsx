@@ -1,6 +1,7 @@
 import { Global, css } from '@emotion/react'
 
 const globalStyles = css`
+    @import url('http://fonts.googleapis.com/earlyaccess/notosanskr.css');
     :root {
         font-size: 16px;
 

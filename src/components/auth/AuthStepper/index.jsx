@@ -1,24 +1,55 @@
 import { useAuthStepState } from '#/store/useAuthStepStore'
-import { Step, StepLabel, Stepper } from '@mui/material'
+import { Stack, Box, Typography, Icon } from '@mui/material'
+import infoIcon from '#/assets/stepcomponent1.svg'
+import certIcon from '#/assets/stepcomponent2.svg'
+import LoginIcon from '#/assets/stepcomponent3.svg'
+import arrwoIcon from '#/assets/stepArrow.svg'
 
-import t from '#/common/libs/trans'
+import style from './style.module'
 
 const AuthStepper = () => {
     const authStep = useAuthStepState()
-    const steps = [t('input_infomation', 'auth'), t('certified', 'auth'), t('login', 'auth')]
     return (
-        <Stepper
-            activeStep={authStep}
-            alternativeLabel
-            nonLinear
-            sx={{ height: 120, alignItems: 'center' }}
-        >
-            {steps.map((label) => (
-                <Step key={label}>
-                    <StepLabel>{label}</StepLabel>
-                </Step>
-            ))}
-        </Stepper>
+        <Stack sx={style.stepWrap}>
+            <Box sx={style.stepItem}>
+                <Icon sx={{ display: 'flex', width: 50, height: 50, alignItems: 'center' }}>
+                    <img src={infoIcon} />
+                </Icon>
+                <Typography variant="h5" sx={style.stepTitle}>
+                    1. 정보입력
+                </Typography>
+            </Box>
+            <Box sx={style.stepArrwo}>
+                <img src={arrwoIcon} />
+            </Box>
+            <Box sx={style.stepItem}>
+                <Icon
+                    sx={{
+                        display: 'flex',
+                        width: 50,
+                        height: 50,
+                        alignItems: 'center',
+                        flexDirection: 'column',
+                    }}
+                >
+                    <img src={certIcon} />
+                </Icon>
+                <Typography variant="h5" sx={style.stepTitle}>
+                    2. 인증
+                </Typography>
+            </Box>
+            <Box sx={style.stepArrwo}>
+                <img src={arrwoIcon} />
+            </Box>
+            <Box sx={style.stepItem}>
+                <Icon sx={{ display: 'flex', width: 50, height: 50, alignItems: 'center' }}>
+                    <img src={LoginIcon} />
+                </Icon>
+                <Typography variant="h5" sx={style.stepTitle}>
+                    3. 로그인
+                </Typography>
+            </Box>
+        </Stack>
     )
 }
 

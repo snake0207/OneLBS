@@ -1,10 +1,12 @@
 import { useEffect, useState } from 'react'
-import { Box, FormControlLabel, Checkbox, IconButton, Typography } from '@mui/material'
+import { Box, FormControlLabel, Checkbox, IconButton, Typography, Button } from '@mui/material'
 import { IpInput } from '#/components/common/input/IpInput'
 import Info from '@mui/icons-material/Info'
 import { useGetUserIp } from '#/hooks/queries/auth'
 
 import t from '#/common/libs/trans'
+
+import style from './style.module'
 
 const IpInputGroup = ({ formik }) => {
     const [ipInputCount, setIpInputCount] = useState(0)
@@ -38,17 +40,18 @@ const IpInputGroup = ({ formik }) => {
                     alignItems: 'center',
                 }}
             >
-                <Typography variant="h6">
+                <Typography variant="button" component="p" sx={{ mt: 1 }}>
                     <span style={{ color: 'red' }}>*</span>IP
                 </Typography>
-                <IconButton onClick={handleClickAddIPInput} disabled={2 === ipInputCount}>
-                    <Info />
-                </IconButton>
+                <Button
+                    onClick={handleClickAddIPInput}
+                    disabled={2 === ipInputCount}
+                    sx={style.btnDetaile}
+                >
+                    {t('add', 'auth')}
+                </Button>
             </Box>
-            <Typography variant="body2">
-                <span style={{ color: 'red' }}>*</span>
-                {t('guide.ip_input_guide', 'auth')}
-            </Typography>
+            <Typography variant="body2">{t('guide.ip_input_guide', 'auth')}</Typography>
             <Box sx={{ display: 'flex', gap: 1 }}>
                 <IpInput
                     ipName1={'ipAddress1_0'}

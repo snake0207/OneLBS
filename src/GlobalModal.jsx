@@ -7,6 +7,8 @@ import DemoModal from '#/components/common/modal/Demo'
 import JoinSuccessModal from '#/components/common/modal/auth/JoinSuccess'
 import AccountCircleIcon from '@mui/icons-material/AccountCircle'
 import { getLayoutState } from '#/store/useLayoutStore'
+import { Icon } from '@mui/material'
+import AncestorUserIcon from '#/assets/joinIcon.svg'
 
 /**
  * type: modal title
@@ -25,7 +27,11 @@ const MODAL_COMPONENT_ARR = [
         type: MODAL_TITLE.join,
         component: <JoinModal />,
         darkIcon: <AccountCircleIcon />,
-        lightIcon: <AccountCircleIcon />,
+        lightIcon: (
+            <Icon>
+                <img src={AncestorUserIcon} style={{ display: 'flex', width: '100%' }} />
+            </Icon>
+        ),
     },
     {
         type: MODAL_TITLE.joinSuccess,

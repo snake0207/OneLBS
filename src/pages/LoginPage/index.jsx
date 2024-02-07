@@ -5,19 +5,19 @@ import AuthFormContainer from '#/components/auth/authForm/AuthFormContainer'
 function LoginPage() {
     const dummyImageList = [
         {
-            imgUrl: '',
+            imgUrl: './assets/login-img1.svg',
             title: 'AutoEver Global Search Info Service Management 1',
             description:
                 'Enhancing the efficiency and effectiveness of global Search info service optimization',
         },
         {
-            imgUrl: '',
+            imgUrl: './assets/login-img2.svg',
             title: 'AutoEver Global Search Info Service Management 2',
             description:
                 'Enhancing the efficiency and effectiveness of global Search info service optimization',
         },
         {
-            imgUrl: '',
+            imgUrl: './assets/login-img3.svg',
             title: 'AutoEver Global Search Info Service Management 3',
             description:
                 'Enhancing the efficiency and effectiveness of global Search info service optimization',
@@ -33,14 +33,26 @@ function LoginPage() {
             }}
         >
             <Stack
-                divider={<Divider orientation="vertical" flexItem />}
-                sx={{ flexDirection: 'row', border: '3px double gray', height: 630 }}
+                //divider={<Divider orientation="vertical" flexItem />}
+                sx={{
+                    justifyContent: 'space-between',
+                    flexDirection: 'row',
+                    border: '1px solid rgba(0, 0, 0, 0.12)',
+                }}
             >
                 <Box sx={{ flex: 1 }}>
                     <CarouselOverview dummyImageList={dummyImageList} />
                 </Box>
                 <Box
-                    sx={{ flex: 1, display: 'flex', flexDirection: 'column', height: '100%', p: 4 }}
+                    sx={{
+                        display: 'flex',
+                        flexDirection: 'column',
+                        height: '100%',
+                        width: '600px',
+                        pt: 10,
+                        pl: 16,
+                        pr: 16,
+                    }}
                 >
                     <AuthFormContainer />
                 </Box>

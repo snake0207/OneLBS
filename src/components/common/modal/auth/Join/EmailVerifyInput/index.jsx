@@ -4,12 +4,15 @@ import { Box, Button, IconButton, InputAdornment, TextField } from '@mui/materia
 
 import t from '#/common/libs/trans'
 
+import style from './style.module'
+
 const EmailVerifyInput = ({ name, formik }) => {
     const { setTime } = useTimeActions()
     const handleClickSendEmail = () => {
         if (!formik.errors[name]) console.log(formik.values[name])
         setTime(180)
     }
+
     return (
         <Box
             sx={{
@@ -50,7 +53,8 @@ const EmailVerifyInput = ({ name, formik }) => {
                 variant="contained"
                 onClick={handleClickSendEmail}
                 type="button"
-                sx={{ flex: '0 0 auto' }}
+                // sx={{ flex: '0 0 auto' }}
+                sx={style.btn}
             >
                 {t('send_mail_certified', 'auth')}
             </Button>

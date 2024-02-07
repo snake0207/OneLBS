@@ -18,6 +18,8 @@ import { usePopupActions } from '#/store/usePopupStore'
 import t from '#/common/libs/trans'
 import { formatJoinData } from '#/common/libs/formatData'
 
+import style from './style.module'
+
 const JoinModal = () => {
     const { openModal } = useModalActions()
     const { showPopup } = usePopupActions()
@@ -72,22 +74,22 @@ const JoinModal = () => {
 
     return (
         <>
-            <DialogContent dividers>
-                <Typography>
+            <DialogContent>
+                <Typography sx={style.subTitle}>
                     <span style={{ color: 'red' }}>*</span>
                     {t('guide.required', 'auth')}
                 </Typography>
-                <Typography variant="h6">
+                <Typography variant="h6" sx={{ fontSize: 14 }}>
                     <span style={{ color: 'red' }}>*</span>
                     {t('email', 'auth')}
                 </Typography>
                 <EmailVerifyInput name={'email'} formik={formik} />
-                <Typography variant="h6">
+                <Typography variant="h6" sx={{ fontSize: 14 }}>
                     <span style={{ color: 'red' }}>*</span>
                     {t('confirm_email_code', 'auth')}
                 </Typography>
                 <VerifyCodeInput name={'confirmEmailCode'} formik={formik} />
-                <Typography variant="h6">
+                <Typography variant="h6" sx={{ fontSize: 14 }}>
                     <span style={{ color: 'red' }}>*</span>
                     {t('password', 'auth')}
                 </Typography>
@@ -97,7 +99,7 @@ const JoinModal = () => {
                     inputRule={t('guide.password_input_guide', 'auth')}
                     formik={formik}
                 />
-                <Typography variant="h6">
+                <Typography variant="h6" sx={style.labelText}>
                     <span style={{ color: 'red' }}>*</span>
                     {t('confirm_password', 'auth')}
                 </Typography>
@@ -106,7 +108,7 @@ const JoinModal = () => {
                     placeholder={t('confirm_password', 'auth')}
                     formik={formik}
                 />
-                <Typography variant="h6">
+                <Typography variant="h6" sx={style.labelText}>
                     <span style={{ color: 'red' }}>*</span>
                     {t('name', 'auth')}
                 </Typography>
@@ -115,7 +117,7 @@ const JoinModal = () => {
                     placeholder={t('placeholder.name', 'auth')}
                     formik={formik}
                 />
-                <Typography variant="h6">
+                <Typography variant="h6" sx={style.labelText}>
                     <span style={{ color: 'red' }}>*</span>
                     {t('company', 'auth')}
                 </Typography>
@@ -124,7 +126,7 @@ const JoinModal = () => {
                     placeholder={t('placeholder.company', 'auth')}
                     formik={formik}
                 />
-                <Typography variant="h6">
+                <Typography variant="h6" sx={style.labelText}>
                     <span style={{ color: 'red' }}>*</span>
                     {t('team', 'auth')}
                 </Typography>
@@ -136,21 +138,27 @@ const JoinModal = () => {
                 {formik.values.role !== 'GUEST' && formik.values.role !== 'USER' && (
                     <IpInputGroup formik={formik} />
                 )}
-                <Typography variant="h6">
+                <Typography variant="h6" sx={style.labelText}>
                     <span style={{ color: 'red' }}>*</span>
                     {t('role', 'auth')}
                 </Typography>
                 <RadioInput radioList={joinList.roleList} name={'role'} formik={formik} />
-                <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
-                    <Typography variant="h6">
+                <Box sx={{ display: 'flex', justifyContent: 'space-between', mt: 2 }}>
+                    <Typography variant="h6" sx={{ fontSize: 14 }}>
                         <span style={{ color: 'red' }}>*</span>
                         {t('consent_terms', 'auth')}
                     </Typography>
-                    <Button variant="contained" onClick={() => setIsOpenPrivacyPolicy(true)}>
+                    <Button
+                        variant="contained"
+                        onClick={() => setIsOpenPrivacyPolicy(true)}
+                        sx={style.btnDetaile}
+                    >
                         {t('read_more', 'auth')}
                     </Button>
                 </Box>
-                <Typography>{t('guide.terms_guide', 'auth')}</Typography>
+                <Typography variant="overline" component="p" sx={style.infoText}>
+                    {t('guide.terms_guide', 'auth')}
+                </Typography>
                 <RadioInput
                     radioList={joinList.termsList}
                     name={'terms'}
@@ -159,7 +167,13 @@ const JoinModal = () => {
                 />
             </DialogContent>
             <DialogActions>
-                <Button variant="contained" onClick={formik.handleSubmit} type="submit">
+                <Button
+                    variant="contained"
+                    onClick={formik.handleSubmit}
+                    type="submit"
+                    className="{classes.btn}"
+                    sx={style.btnLarge}
+                >
                     {t('join', 'auth')}
                 </Button>
             </DialogActions>

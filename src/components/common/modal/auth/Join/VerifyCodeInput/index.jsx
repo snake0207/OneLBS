@@ -3,6 +3,7 @@ import useTimerStore from '#/store/useTimerStore'
 import Close from '@mui/icons-material/Close'
 import { Box, Button, IconButton, InputAdornment, TextField, Typography } from '@mui/material'
 import t from '#/common/libs/trans'
+import style from './style.module'
 
 const VerifyCodeInput = ({ name, formik }) => {
     const { time, actions } = useTimerStore()
@@ -53,7 +54,7 @@ const VerifyCodeInput = ({ name, formik }) => {
                                 </IconButton>
                             )}
                             {time !== null && (
-                                <Typography>
+                                <Typography sx={style.timeText}>
                                     {parseInt(time / 60)}:
                                     {parseInt(time % 60)
                                         .toString()
@@ -68,7 +69,7 @@ const VerifyCodeInput = ({ name, formik }) => {
                 variant="contained"
                 onClick={handleClickSendVerifyCode}
                 type="button"
-                sx={{ flex: '0 0 auto' }}
+                sx={style.btn}
             >
                 {t('to_authenticate', 'auth')}
             </Button>

@@ -54,7 +54,7 @@ const PasswordInput = ({ name, placeholder, formik, inputRule = null }) => {
                     }}
                 />
             </Box>
-            {inputRule && <Typography sx={{ my: 1 }}>{inputRule}</Typography>}
+            {inputRule && <Typography sx={{ my: 1, fontSize: 11, mt: 0 }}><span style={{ color: 'red', fontSize: 14, verticalAlign:'middle' }}>*</span>{inputRule}</Typography>}
         </>
     )
 }

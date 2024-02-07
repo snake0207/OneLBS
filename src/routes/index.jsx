@@ -19,6 +19,7 @@ import UserLoginHistoryPage from '#/pages/DemoPage/UserManagementPage/UserLoginH
 import UserPermissionPage from '#/pages/DemoPage/UserManagementPage/UserPermissionPage'
 import UserListPage from '#/pages/DemoPage/UserManagementPage/UserListPage'
 import IPManagePage from '#/pages/DemoPage/UserManagementPage/IPManagePage'
+import ProfilePage from '#/pages/ProfilePage'
 
 const Routes = () => {
     return useRoutes([
@@ -26,6 +27,7 @@ const Routes = () => {
             element: <MainLayout />,
             children: [
                 { path: '/', element: <MainPage /> },
+                { path: '/mypage/profile', element: <ProfilePage />},
                 { path: '/poi-map', element: <PoiMapPage /> },
             ],
         },

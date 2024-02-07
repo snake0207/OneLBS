@@ -6,8 +6,8 @@ import TextInput from '#/components/common/input/TextInput'
 import PasswordInput from '#/components/common/input/PasswordInput'
 import RadioInput from '#/components/common/Radio'
 import { joinSchema } from '#/contents/validationSchema'
-import EmailVerifyInput from '#/components/common/modal/auth/Join/EmailVerifyInput/index.jsx'
-import VerifyCodeInput from '#/components/common/modal/auth/Join/VerifyCodeInput'
+import VerifyEmailForm from '#/components/common/modal/auth/Join/VerifyEmailForm'
+import ConfirmEmailForm from '#/components/common/modal/auth/Join/ConfirmEmailForm'
 import PrivacyPolicyModal from '#/components/common/modal/auth/Join/PrivacyPolicy'
 import IpInputGroup from '#/components/common/modal/auth/Join/IpInputGroup'
 import { useModalActions } from '#/store/useModalStore'
@@ -15,8 +15,8 @@ import { MODAL_TITLE } from '#/contents/constant'
 import joinList from './list.json'
 import { usePopupActions } from '#/store/usePopupStore'
 
-import t from '#/common/libs/trans'
 import { formatJoinData } from '#/common/libs/formatData'
+import t from '#/common/libs/trans'
 
 import style from './style.module'
 
@@ -29,13 +29,13 @@ const JoinModal = () => {
     const formik = useFormik({
         initialValues: {
             email: '',
-            confirmEmailCode: '',
+            code: '',
             password: '',
             confirmPassword: '',
             name: '',
             company: '',
             team: '',
-            role: 'GUEST',
+            role: 25,
             terms: 'N',
             ipAddress1_0: '',
             ipAddress2_0: '',
@@ -62,7 +62,7 @@ const JoinModal = () => {
             }
             const data = formatJoinData(form)
             console.log(data)
-            // mutate(form)
+            // mutate(data)
             openModal(MODAL_TITLE.joinSuccess)
         },
     })
@@ -83,12 +83,12 @@ const JoinModal = () => {
                     <span style={{ color: 'red' }}>*</span>
                     {t('email', 'auth')}
                 </Typography>
-                <EmailVerifyInput name={'email'} formik={formik} />
+                <VerifyEmailForm formik={formik} />
                 <Typography variant="h6" sx={{ fontSize: 14 }}>
                     <span style={{ color: 'red' }}>*</span>
                     {t('confirm_email_code', 'auth')}
                 </Typography>
-                <VerifyCodeInput name={'confirmEmailCode'} formik={formik} />
+                <ConfirmEmailForm formik={formik} />
                 <Typography variant="h6" sx={{ fontSize: 14 }}>
                     <span style={{ color: 'red' }}>*</span>
                     {t('password', 'auth')}
@@ -135,7 +135,7 @@ const JoinModal = () => {
                     placeholder={t('placeholder.team', 'auth')}
                     formik={formik}
                 />
-                {formik.values.role !== 'GUEST' && formik.values.role !== 'USER' && (
+                {formik.values.role !== 25 && formik.values.role !== 26 && (
                     <IpInputGroup formik={formik} />
                 )}
                 <Typography variant="h6" sx={style.labelText}>

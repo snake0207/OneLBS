@@ -1,0 +1,33 @@
+{
+    "list_all": "Approval history list(All)",
+    "list_requester": "Approval history list(Requester)",
+    "list_reviewer": "Approval history list(Reviewer)",
+    "list_approver": "Approval history list(Approver)",
+    "detail": "Approval history Detail",
+    "line": "Approval line",
+    "requester": "Requester",
+    "reviewer": "Reviewer",
+    "approver": "Approver",
+    "info": "Info",
+    "final_info": "Final Info",
+    "name": "Name",
+    "address": "Address",
+    "lat": "Lat",
+    "lon": "Lon",
+    "category": "category",
+    "brand": "Brand",
+    "request_reason": "request_reason",
+    "comment": "Comment",
+    "history": "history",
+    "total": "total",
+    "case": "",
+    "date": "date",
+    "state": "state",
+    "status": {
+        "temporary": "temporary",
+        "request": "request",
+        "reviewed": "reviewed",
+        "approved": "approved",
+        "rejected": "Rejected"
+    }
+}

@@ -5,6 +5,7 @@ import auth from './auth.json'
 import common from './common.json'
 import gpss from './gpss.json'
 import validation from './validation.json'
+import approval from './approval.json'
 import error from './error.json'
 
 const kr = {
@@ -15,6 +16,7 @@ const kr = {
     common,
     gpss,
     validation,
+    approval,
     error,
 }
 

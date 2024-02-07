@@ -16,13 +16,13 @@ export const usePostJoin = () => {
 
 export const usePostEmailVerify = () => {
     return useMutation({
-        mutationFn: auth.postEmailVerify,
+        mutationFn: auth.postVerifyEmail,
     })
 }
 
-export const usePostVerifyCode = () => {
+export const usePostConfirmEmail = () => {
     return useMutation({
-        mutationFn: auth.postVerifyCode,
+        mutationFn: auth.postConfirmEmail,
     })
 }
 

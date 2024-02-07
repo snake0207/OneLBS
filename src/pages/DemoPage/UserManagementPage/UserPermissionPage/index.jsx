@@ -32,7 +32,7 @@ function UserPermissionPage() {
             <GeneralTable
                 columns={createColumns()}
                 rows={permissionHistory}
-                onNextPage={handlePageChange}
+                onPageChange={handlePageChange}
             />
         </div>
     )

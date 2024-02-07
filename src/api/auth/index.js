@@ -9,12 +9,12 @@ const postJoin = (data) => {
     return postAPI({ endPoint: API_PATH.auth.join, data })
 }
 
-const postEmailVerify = (data) => {
-    return postAPI({ endPoint: API_PATH.auth.emailVerify, data })
+const postVerifyEmail = (data) => {
+    return postAPI({ endPoint: API_PATH.auth.verify_email, data })
 }
 
-const postVerifyCode = (data) => {
-    return postAPI({ endPoint: API_PATH.auth.verifyEmailCode, data })
+const postConfirmEmail = (data) => {
+    return postAPI({ endPoint: API_PATH.auth.confirm_eamil, data })
 }
 
 const getUserIp = () => {
@@ -24,7 +24,7 @@ const getUserIp = () => {
 export default {
     postLogin,
     postJoin,
-    postEmailVerify,
-    postVerifyCode,
+    postVerifyEmail,
+    postConfirmEmail,
     getUserIp,
 }

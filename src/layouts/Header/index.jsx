@@ -15,6 +15,8 @@ import useFullScreen from '#/hooks/useFullScreen'
 import Settings from '#/components/layout/Settings'
 import Notify from '#/components/layout/Notify'
 
+import notifications from './notifications.json'
+
 const userMenus = [
     { key: 'profile', label: t('profile') },
     { key: 'logout', label: t('logout') },
@@ -64,7 +66,7 @@ function Header() {
                     </Box>
                     <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}></Box>
                     <Box sx={{ flexGrow: 0 }}>
-                        <Notify />
+                        <Notify notifications={notifications} />
                         <IconButton sx={{ p: 0 }}>
                             <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
                         </IconButton>

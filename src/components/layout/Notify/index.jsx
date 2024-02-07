@@ -4,13 +4,13 @@ import Box from '@mui/material/Box'
 import Badge from '@mui/material/Badge'
 import Popover from '@mui/material/Popover'
 import IconButton from '@mui/material/IconButton'
-import Tooltip from '@mui/material/Tooltip'
 import NotificationsIcon from '@mui/icons-material/Notifications'
 
 import t from '#/common/libs/trans'
 import { Button } from '@mui/material'
+import NotifyItem from './NotifyItem'
 
-function Notify() {
+function Notify({ notifications }) {
     const [anchorEl, setAnchorEl] = useState(null)
 
     const handleClick = (event) => {
@@ -21,13 +21,22 @@ function Notify() {
         setAnchorEl(null)
     }
 
+    const handleReadAll = () => {
+        setAnchorEl(null)
+    }
+
+    const handleItemClick = (item) => {
+        console.log('handleItemClick', item)
+        setAnchorEl(null)
+    }
+
     const open = Boolean(anchorEl)
     const id = open ? 'notify-popover' : undefined
 
     return (
         <>
             <IconButton aria-describedby={id} size="large" color="inherit" onClick={handleClick}>
-                <Badge badgeContent={4} color="error">
+                <Badge badgeContent={notifications.length} color="error">
                     <NotificationsIcon />
                 </Badge>
             </IconButton>
@@ -37,17 +46,20 @@ function Notify() {
                 anchorEl={anchorEl}
                 anchorOrigin={{
                     vertical: 'bottom',
-                    horizontal: 'left',
+                    horizontal: 'right',
                 }}
                 transformOrigin={{
                     vertical: 'top',
-                    horizontal: 'left',
+                    horizontal: 'right',
                 }}
                 sx={{ mt: 2 }}
                 onClose={handleClose}
             >
                 <Box p={2}>
-                    <Button onClick={handleClose}>전체읽음</Button>
+                    <Button onClick={handleReadAll}>{t('read_all')}</Button>
+                    {notifications.map((item, index) => (
+                        <NotifyItem key={index} item={item} onClick={handleItemClick} />
+                    ))}
                 </Box>
             </Popover>
         </>

@@ -22,6 +22,7 @@ import ApprovalHistoryDetailPage from '#/pages/DemoPage/ApprovalPage/ApprovalHis
 import UserListPage from '#/pages/DemoPage/UserManagementPage/UserListPage'
 import IPManagePage from '#/pages/DemoPage/UserManagementPage/IPManagePage'
 import TablePage from '#/pages/DemoPage/TablePage'
+import ProfilePage from '#/pages/ProfilePage'
 
 const Routes = () => {
     return useRoutes([
@@ -29,6 +30,7 @@ const Routes = () => {
             element: <MainLayout />,
             children: [
                 { path: '/', element: <MainPage /> },
+                { path: '/mypage/profile', element: <ProfilePage /> },
                 { path: '/poi-map', element: <PoiMapPage /> },
             ],
         },

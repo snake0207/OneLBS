@@ -5,6 +5,8 @@ import t from '#/common/libs/trans'
 import Select from '#/components/common/Select'
 import DatePickerInput from '#/components/common/input/DatePickerInput'
 
+import style from './style.module'
+
 function SearchFilter({ onSearch }) {
     const getPermissionList = () => [
         { key: 0, value: 0, label: t('all', 'users') },
@@ -38,7 +40,7 @@ function SearchFilter({ onSearch }) {
     })
 
     return (
-        <Box>
+        <Box sx={style.searchBox}>
             <Table>
                 <TableHead>
                     <TableRow>

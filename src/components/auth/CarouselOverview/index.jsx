@@ -26,33 +26,53 @@ const CarouselOverview = ({ dummyImageList }) => {
         }
     }, [emblaApi])
     return (
-        <Box ref={emblaRef} sx={{ overflow: 'hidden' }}>
+        <Box ref={emblaRef} sx={{ overflow: 'hidden', width: '600px' }}>
             <Box sx={{ display: 'flex' }}>
                 {dummyImageList.map((slideItem, index) => (
-                    <Box key={index} sx={{ flex: '0 0 100%', minWidth: 0 }}>
+                    <Box key={index} sx={{ position: 'relative', flex: '0 0 100%', minWidth: 0 }}>
                         <Box
                             component={'img'}
                             src={slideItem.imgUrl}
-                            sx={{ width: '100%', height: 400 }}
+                            sx={{
+                                width: '100%',
+                                position: 'absolute',
+                                top: 0,
+                                zIndex: 1,
+                            }}
                         />
-                        <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2, p: 4 }}>
-                            <Typography variant="h6">{slideItem.title}</Typography>
-                            <Typography>{slideItem.description}</Typography>
+                        <Box
+                            sx={{
+                                display: 'flex',
+                                flexDirection: 'column',
+                                gap: 0.5,
+                                justifyContent: 'flex-start',
+                                height: 62,
+                                color: 'white',
+                                position: 'relative',
+                                zIndex: 2,
+                                mt: '541px',
+                                pl: '40px',
+                            }}
+                        >
+                            <Typography variant="h6" sx={{ fontSize: 16 }}>
+                                {slideItem.title}
+                            </Typography>
+                            <Typography sx={{ fontSize: 11 }}>{slideItem.description}</Typography>
                         </Box>
                     </Box>
                 ))}
             </Box>
-            <Box sx={{ height: 40 }}>
+            <Box sx={{ position: 'relative', height: '72px', zIndex: 5 }}>
                 {dummyImageList.length > 1 && (
-                    <Stack sx={{ flexDirection: 'row', justifyContent: 'center', gap: 1 }}>
+                    <Stack sx={{ flexDirection: 'row', justifyContent: 'center', gap: 0.5 }}>
                         {dummyImageList.map((_, index) => (
                             <Box
                                 key={index}
                                 onClick={() => handleClickScrollTo(index)}
                                 sx={{
-                                    width: 15,
-                                    height: 15,
-                                    borderRadius: '50%',
+                                    width: 6,
+                                    height: 6,
+                                    borderRadius: '10px',
                                     bgcolor: index === selectedIndex ? 'gray' : 'lightgray',
                                     cursor: 'pointer',
                                 }}

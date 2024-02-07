@@ -9,6 +9,12 @@ import { FormControl, FormControlLabel, Radio, RadioGroup } from '@mui/material'
  * @returns ReactNode
  */
 const RadioInput = ({ radioList, name, formik, isDisabled = false }) => {
+    const formControlLabelStyle = {
+        "& .MuiFormControlLabel-label": {
+          fontSize: '13px'
+        }
+      }
+
     return (
         <FormControl>
             <RadioGroup
@@ -25,6 +31,7 @@ const RadioInput = ({ radioList, name, formik, isDisabled = false }) => {
                         control={<Radio name={name} />}
                         label={radio.label}
                         disabled={isDisabled}
+                        sx={{...formControlLabelStyle}}
                     />
                 ))}
             </RadioGroup>

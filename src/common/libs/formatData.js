@@ -26,7 +26,7 @@ export const formatJoinData = (form) => {
             name: form.name,
             company: form.company,
             team: form.team,
-            role: form.role,
+            role: parseInt(form.role),
             terms: form.terms,
         }
 
@@ -47,7 +47,7 @@ export const formatJoinData = (form) => {
         name: form.name,
         company: form.company,
         team: form.team,
-        role: form.role,
+        role: parseInt(form.role),
         terms: form.terms,
         ip: ipList.filter((item) => item.address !== ''),
     }

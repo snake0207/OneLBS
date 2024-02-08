@@ -6,10 +6,22 @@ import dummyData from '../approvalData.json'
 import t from '#/common/libs/trans.js'
 import TitleBar from '#/components/common/menu/TitleBar/index.jsx'
 import { useParams } from 'react-router-dom'
+import { BrowserView, MobileView } from 'react-device-detect'
+import HistoryTableMobile from '#/components/approval/HistoryTable/Mobile/index.jsx'
+import { useRef } from 'react'
+import TotalCount from '#/components/approval/HistoryTable/TotalCount/index.jsx'
 
 const ApprovalHistoryPage = () => {
     const params = useParams()
     const userType = params.type
+    const totalCounts = useRef({
+        total: dummyData?.length,
+        temporary: 1,
+        request: 1,
+        reviewed: 1,
+        approved: 1,
+        rejected: 7,
+    })
 
     // 페이지네이션 컴포넌트에 넘겨 페이지 변경 시 실행될 함수
     const handlePageChange = (page) => {
@@ -28,13 +40,18 @@ const ApprovalHistoryPage = () => {
             <Container>
                 <SearchFilter type={userType} handleSubmitFilter={handleSubmitFilter} />
             </Container>
-            <Container>
+            <MobileView>
+                <TotalCount type={userType} counts={totalCounts.current} />
+                <HistoryTableMobile type={userType} dummyData={dummyData} />
+            </MobileView>
+            <BrowserView>
+                <TotalCount type={userType} counts={totalCounts.current} />
                 <HistoryTable type={userType} dummyData={dummyData} />
                 <CommonPagination
                     dataLength={dummyData.length} // total element count
                     onChangePageFunction={handlePageChange} // 페이지 변경 시 실행 함수
                 />
-            </Container>
+            </BrowserView>
         </Box>
     )
 }

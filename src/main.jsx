@@ -7,13 +7,13 @@ import GlobalStyles from './GlobalStyles.jsx'
 import { CookiesProvider } from 'react-cookie'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
-    <React.StrictMode>
-        <QueryProvider>
-            <CookiesProvider>
-                <CssBaseline />
-                <GlobalStyles />
-                <App />
-            </CookiesProvider>
-        </QueryProvider>
-    </React.StrictMode>,
+    // <React.StrictMode>
+    <QueryProvider>
+        <CookiesProvider>
+            <CssBaseline />
+            <GlobalStyles />
+            <App />
+        </CookiesProvider>
+    </QueryProvider>,
+    // </React.StrictMode>,
 )

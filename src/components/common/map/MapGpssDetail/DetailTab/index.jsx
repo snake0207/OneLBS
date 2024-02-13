@@ -21,15 +21,13 @@ const dummyData = [
     { id: 'zxcv@acrofuture.com', name: '아*로3', company: '회사3', userSeq: 3 },
 ]
 
-const MapGpssDetailTab = () => {
+const MapGpssDetailTab = ({ poiData }) => {
     const formik = useFormik({
         initialValues: {
-            address: '',
-            lat: '',
-            lon: '',
             reason: '',
             reviewer: '',
             approver: '',
+            ...poiData,
         },
         onSubmit: (form) => {
             console.log(form)

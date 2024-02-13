@@ -6,7 +6,7 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
 import EvStationIcon from '@mui/icons-material/EvStation'
 import t from '#/common/libs/trans.js'
 
-const MapGpssHistoryTab = () => {
+const MapGpssHistoryTab = ({ poiData }) => {
     return (
         <Box sx={{ paddingTop: '16px' }}>
             <Box>

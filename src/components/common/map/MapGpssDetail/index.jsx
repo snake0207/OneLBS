@@ -5,7 +5,7 @@ import MapGpssHistoryTab from '#/components/common/map/MapGpssDetail/HistoryTab/
 import { useEffect, useState } from 'react'
 import t from '#/common/libs/trans.js'
 
-const MapGpssDetail = ({ selectedPoi }) => {
+const MapGpssDetail = ({ selectedPoi, poiData }) => {
     const [isOpen, setIsOpen] = useState(false)
     const [tabSelected, setTabSelected] = useState('info')
     useEffect(() => {
@@ -33,7 +33,11 @@ const MapGpssDetail = ({ selectedPoi }) => {
                             <Tab label={t('last_modified_info', 'gpss')} value="last-modified" />
                         </Tabs>
                     </Box>
-                    {tabSelected === 'info' ? <MapGpssDetailTab /> : <MapGpssHistoryTab />}
+                    {tabSelected === 'info' ? (
+                        <MapGpssDetailTab poiData={poiData} />
+                    ) : (
+                        <MapGpssHistoryTab poiData={poiData} />
+                    )}
                 </Box>
                 <Button
                     variant={'contained'}

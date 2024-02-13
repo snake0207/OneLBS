@@ -86,6 +86,143 @@ const mapSampleData = [
     },
 ]
 
+const detailSampleData = {
+    data: {
+        result: [
+            {
+                poiId: 'here:pds:place:276u0yjhfsftw-aGVyZS1ldjplY29tb3ZlbWVudDo3MTIyMDkzNDQ',
+                cpType: ['HERE_API'],
+                title: 'E.ON',
+                country: 'Germany',
+                postalCode: '60327',
+                address: 'E.ON, Friedrich-Ebert-Anlage 49, 60327 Frankfurt, Germany',
+                distance: 120,
+                phone: '+4980012189555',
+                category: '700-7600-0322',
+                carPay: 1,
+                chains: {
+                    chains: 'Hyundai Motor Company',
+                },
+                position: {
+                    center: {
+                        lat: 12.123131,
+                        lon: 0.123131,
+                    },
+                    guide: {
+                        lat: 12.123131,
+                        lon: 0.123131,
+                    },
+                },
+                evCharging: {
+                    brand: 'EIT',
+                    maxWatt: '100kw',
+                    stationStatus: 0,
+                    status: [
+                        {
+                            connectorType: 1,
+                            speed: 1,
+                            possibleCount: 3,
+                            watt: 0,
+                        },
+                    ],
+                    price: [
+                        {
+                            price: 12.5,
+                            priceUnit: 'kwh',
+                            currencyCode: 'EUR',
+                            currency: '€',
+                        },
+                        {
+                            price: 10.0,
+                            priceUnit: 'kwh',
+                            currencyCode: 'EUR',
+                            currency: '€',
+                        },
+                    ],
+                    openingHours: [
+                        {
+                            week: 0,
+                            open: '6:00',
+                            close: '22:00',
+                        },
+                        {
+                            week: 1,
+                            open: '6:00',
+                            close: '22:00',
+                        },
+                        {
+                            week: 2,
+                            open: '6:00',
+                            close: '22:00',
+                        },
+                        {
+                            week: 3,
+                            open: '6:00',
+                            close: '22:00',
+                        },
+                    ],
+                    charger: [
+                        {
+                            id: '123',
+                            speed: 1,
+                            watt: '7kw',
+                            status: 1,
+                            timestamp: 2021231231123,
+                            connectorType: 2,
+                        },
+                        {
+                            id: '456',
+                            speed: 2,
+                            watt: '7kw',
+                            status: 2,
+                            timestamp: 2021231231123,
+                            connectorType: 3,
+                        },
+                    ],
+                },
+                fuel: {
+                    brand: 'AutoGas',
+                    status: [
+                        {
+                            type: 'G',
+                            price: {
+                                price: 12.5,
+                                priceUnit: 'kwh',
+                                currencyCode: 'EUR',
+                                currency: '€',
+                            },
+                        },
+                    ],
+                },
+                parking: {
+                    compnay: 'APCOA Parking (UK) Limited',
+                    parkingType: '0',
+                    price: {
+                        price: '12.5',
+                        priceUnit: 'kwh',
+                        currencyCode: 'EUR',
+                        currency: '€',
+                    },
+                },
+                h2Charging: {
+                    brand: 'EIT',
+                    possibleCount: 3,
+                    stationStatus: 'PLANNED',
+                },
+                dealerPoi: {
+                    dealerType: '5511',
+                    brand: 'H',
+                    staticUpdateTime: 1702345585,
+                },
+            },
+        ],
+        status: 'string',
+        total: 0,
+        resultID: 0,
+        resCode: 0,
+    },
+}
+
 const mapStyle = {
     width: '100%',
     height: '100%',
@@ -130,18 +267,19 @@ const GoogleMapComponent = ({
 
     // searchResultArr 샘플용 더미데이터 푸시 추후 삭제
     useEffect(() => {
-        setSearchResultArr(...searchResultArr, {
-            poiId: 'ChIJm6KTpoiIdnLwoARwSZzuHOvyOU',
-            address: '10455 Wilmington Ave, Los Angeles, CA 90002, USA',
-            position: {
-                center: {
-                    lat: 33.941035899999996,
-                    lon: -118.239077,
+        if (searchResultArr.length === 0)
+            setSearchResultArr(...searchResultArr, {
+                poiId: 'ChIJm6KTpoiIdnLwoARwSZzuHOvyOU',
+                address: '10455 Wilmington Ave, Los Angeles, CA 90002, USA',
+                position: {
+                    center: {
+                        lat: 33.941035899999996,
+                        lon: -118.239077,
+                    },
                 },
-            },
-            title: 'Electric Circuit Charging Station',
-            category: 'ev',
-        })
+                title: 'Electric Circuit Charging Station',
+                category: 'ev',
+            })
     }, [])
 
     // poi 선택시 해당 poi 위치로 이동및 줌
@@ -240,7 +378,12 @@ const GoogleMapComponent = ({
                     {/* poi 상세  */}
                     {isPoiSearch && <MapPoiDetail selectedPoi={selectedPoi} />}
                     {/* gpss 상세 */}
-                    {isGpssSearch && <MapGpssDetail selectedPoi={selectedPoi} />}
+                    {isGpssSearch && detailSampleData && (
+                        <MapGpssDetail
+                            selectedPoi={selectedPoi}
+                            poiData={detailSampleData.data.result[0]}
+                        />
+                    )}
                 </CustomControl>
 
                 {/* 외부 마커 데이터 출력 */}

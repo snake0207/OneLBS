@@ -1,11 +1,12 @@
 import { useState } from 'react'
 import SearchFilter from '#/components/users/list/SearchFilter'
 import UserTable from '#/components/users/list/UserTable'
-import users from './list.json'
 
 import { getPopupMessage } from '#/common/libs/permission'
 import { usePopupActions } from '#/store/usePopupStore'
 import UserDetail from '#/components/users/list/UserDetail'
+
+import users from '#/mock/data/user_list.json'
 
 function UserListPage() {
     const actions = usePopupActions()

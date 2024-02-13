@@ -1,7 +1,8 @@
 import SearchFilter from '#/components/users/logins/SearchFilter'
-import loginHistory from './history.json'
 import GeneralTable from '#/components/common/table/GeneralTable'
 import t from '#/common/libs/trans'
+
+import loginHistory from '#/mock/data/user_login_history.json'
 
 function UserLoginHistoryPage() {
     const handleSearch = (values) => {

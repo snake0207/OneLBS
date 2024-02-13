@@ -1,7 +1,8 @@
-import { FormControl, InputLabel, MenuItem, Select } from '@mui/material'
+import { FormControl, InputLabel, MenuItem } from '@mui/material'
+import SelectBase from '@mui/material/Select'
 import KeyboardArrowDownRoundedIcon from '@mui/icons-material/KeyboardArrowDownRounded'
 
-function SelectBase({ name, formik, value, items, label, onChange, ...props }) {
+function Select({ name, formik, value, items, label, onChange, ...props }) {
     const handleChange = (event) => {
         // find item by value
         const selectedItem = items.find((item) => item.value === event.target.value)
@@ -14,7 +15,7 @@ function SelectBase({ name, formik, value, items, label, onChange, ...props }) {
     return (
         <FormControl sx={{ bgcolor: 'white' }}>
             <InputLabel id="select-label">{label}</InputLabel>
-            <Select
+            <SelectBase
                 id="select"
                 name={name}
                 labelId="select-label"
@@ -28,9 +29,9 @@ function SelectBase({ name, formik, value, items, label, onChange, ...props }) {
                         {item.label}
                     </MenuItem>
                 ))}
-            </Select>
+            </SelectBase>
         </FormControl>
     )
 }
 
-export default SelectBase
+export default Select

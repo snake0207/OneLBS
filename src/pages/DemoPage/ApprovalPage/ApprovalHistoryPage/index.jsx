@@ -6,7 +6,7 @@ import dummyData from '../approvalData.json'
 import t from '#/common/libs/trans.js'
 import TitleBar from '#/components/common/menu/TitleBar/index.jsx'
 import { useParams } from 'react-router-dom'
-import { BrowserView, MobileView } from 'react-device-detect'
+import { BrowserView, MobileView, isMobile } from 'react-device-detect'
 import HistoryTableMobile from '#/components/approval/HistoryTable/Mobile/index.jsx'
 import { useRef, useState } from 'react'
 import TotalCount from '#/components/approval/HistoryTable/TotalCount/index.jsx'
@@ -81,7 +81,11 @@ const ApprovalHistoryPage = () => {
         <Box sx={{ display: 'flex', flexDirection: 'column', gap: '2rem' }}>
             <TitleBar title={t(`list_${userType}`, 'approval')} />
             <Container>
-                <SearchFilter type={userType} handleSubmitFilter={handleSubmitFilter} />
+                <SearchFilter
+                    type={userType}
+                    handleSubmitFilter={handleSubmitFilter}
+                    isMobile={isMobile}
+                />
             </Container>
             <MobileView>
                 <TotalCount type={userType} counts={totalCounts.current} />

@@ -102,10 +102,6 @@ const MapGpssDetailTab = ({ poiData }) => {
 
     return (
         <Box sx={{ paddingTop: '16px' }}>
-            <Box>
-                <Typography variant={'h6'}>Times Square</Typography>
-            </Box>
-            <Divider />
             {/* 상세 기본 정보 */}
             <BasicInfo formik={formik} poiData={poiData} />
             <Box>

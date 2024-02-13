@@ -27,6 +27,10 @@ const BasicInfo = ({ formik, poiData }) => {
     }
     return (
         <FormikProvider value={formik}>
+            <Box>
+                <Typography variant={'h6'}>{poiData.title}</Typography>
+            </Box>
+            <Divider />
             <Box sx={{ marginTop: '8px', marginBottom: '16px' }}>
                 <Box
                     sx={{
@@ -40,7 +44,7 @@ const BasicInfo = ({ formik, poiData }) => {
                             <PlaceIcon />
                         </Box>
                         <Box>
-                            <Typography>10036 New York, Manhattan, United States</Typography>
+                            <Typography>{poiData.address}</Typography>
                         </Box>
                         <IconButton
                             sx={{
@@ -78,7 +82,7 @@ const BasicInfo = ({ formik, poiData }) => {
                             <LanguageIcon />
                         </Box>
                         <Box>
-                            <Typography>40.758077</Typography>
+                            <Typography>{poiData.position.center.lat}</Typography>
                         </Box>
                         <IconButton
                             sx={{
@@ -111,7 +115,7 @@ const BasicInfo = ({ formik, poiData }) => {
                             <LanguageIcon />
                         </Box>
                         <Box>
-                            <Typography>-73.985480</Typography>
+                            <Typography>{poiData.position.center.lon}</Typography>
                         </Box>
                         <IconButton
                             sx={{

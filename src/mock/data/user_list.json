@@ -10,7 +10,7 @@
         "last_login_date": "2021-09-01 12:00:00",
         "permission": 0,
         "status": 0,
-        "remark": "비고"
+        "remark": "-"
     },
     {
         "id": 2,
@@ -23,7 +23,7 @@
         "last_login_date": "2021-09-01 12:00:00",
         "permission": 1,
         "status": 3,
-        "remark": "비고"
+        "remark": "-"
     },
     {
         "id": 3,
@@ -36,6 +36,6 @@
         "last_login_date": "2021-09-01 12:00:00",
         "permission": 3,
         "status": 1,
-        "remark": "비고"
+        "remark": "-"
     }
 ]

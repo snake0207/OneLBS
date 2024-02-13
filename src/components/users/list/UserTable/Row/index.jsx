@@ -6,6 +6,10 @@ import TextInput from '#/components/common/input/TextInput'
 import { useFormik } from 'formik'
 import Select from '#/components/common/Select'
 import { getPermissionList, gstStatusLabel, getAgainstStatus } from '#/common/libs/permission'
+import { Icon } from '@mui/material'
+import ResetIcon from '#/assets/resetIcon.svg'
+
+import style from './style.module'
 
 function Row({
     row,
@@ -70,26 +74,47 @@ function Row({
                     formik={formik}
                     items={getPermissionList()}
                     onChange={handleChangePermission}
+                    sx={style.select}
                 />
             </TableCell>
             <TableCell>
                 {gstStatusLabel(row?.status)}
                 {row?.status !== 3 && row?.status !== 1 && (
-                    <Button onClick={() => handleChangeStatus(getAgainstStatus(row?.status))}>
+                    <Button
+                        onClick={() => handleChangeStatus(getAgainstStatus(row?.status))}
+                        sx={style.lineButton}
+                    >
                         {gstStatusLabel(getAgainstStatus(row?.status))}
                     </Button>
                 )}
             </TableCell>
             <TableCell>
-                <Stack direction={'row'}>
+                <Stack direction={'row'} sx={{ display: 'flex', justifyContent: 'space-between' }}>
                     {editable ? <TextInput name="remark" formik={formik} /> : row?.remark}
-                    <ErrorOutlineIcon onClick={handleEditable} />
+                    <Button onClick={handleEditable} sx={style.lightButton}>
+                        {t('register_input', 'users')}
+                    </Button>
                 </Stack>
             </TableCell>
             <TableCell>
-                <Stack direction={'row'}>
-                    <Button onClick={handleResetPassword}>{t('reset_password', 'users')}</Button>
-                    <Button onClick={handleWithdraw}>{t('withdraw', 'users')}</Button>
+                <Stack direction={'row'} sx={{ display: 'flex', justifyContent: 'center', gap: 1 }}>
+                    <Button onClick={handleResetPassword} sx={style.resetButton}>
+                        <Icon
+                            sx={{
+                                display: 'flex',
+                                width: 20,
+                                height: 20,
+                                mr: 0.5,
+                                alignItems: 'center',
+                            }}
+                        >
+                            <img src={ResetIcon} />
+                        </Icon>
+                        {t('reset_password', 'users')}
+                    </Button>
+                    <Button onClick={handleWithdraw} sx={style.lineButton}>
+                        {t('withdraw', 'users')}
+                    </Button>
                 </Stack>
             </TableCell>
         </TableRow>

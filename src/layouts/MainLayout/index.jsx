@@ -28,7 +28,7 @@ const MainLayout = () => {
                 }}
             >
                 {sidebar && <SideMenu open={open} toggleDrawer={toggleDrawer} />}
-                <Container maxWidth="lg" sx={{ ml: 10, mt: 12, mb: 4 }}>
+                <Container maxWidth="xl" sx={{ ml: 6.5, mt: 12, mb: 4 }}>
                     <Outlet />
                 </Container>
             </Box>

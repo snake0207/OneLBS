@@ -6,6 +6,8 @@ import TextInput from '#/components/common/input/TextInput'
 import { useFormik } from 'formik'
 import { IpInput } from '#/components/common/input/IpInput'
 
+import style from './style.module'
+
 function Row({ row, onEdit, onDelete }) {
     const formik = useFormik({
         initialValues: {
@@ -82,11 +84,14 @@ function Row({ row, onEdit, onDelete }) {
                     </TableCell>
 
                     <TableCell>
-                        <Stack direction="row">
-                            <Button onClick={() => handleEditable(index)}>
+                        <Stack
+                            direction="row"
+                            sx={{ display: 'flex', justifyContent: 'center', gap: 1 }}
+                        >
+                            <Button onClick={() => handleEditable(index)} sx={style.lineButton}>
                                 {t('edit', 'users')}
                             </Button>
-                            <Button onClick={() => handleDelete(index)}>
+                            <Button onClick={() => handleDelete(index)} sx={style.lightButton}>
                                 {t('delete', 'users')}
                             </Button>
                         </Stack>

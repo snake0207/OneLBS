@@ -44,6 +44,7 @@ const TextInput = ({ name, formik, placeholder = null, inputRule = null, IsDisab
                         ),
                     }}
                     disabled={IsDisabled}
+                    sx={{ bgcolor: 'white' }}
                 />
             </Box>
             {inputRule && <Typography sx={{ my: 1 }}>{inputRule}</Typography>}

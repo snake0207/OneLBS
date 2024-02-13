@@ -2,6 +2,8 @@ import { Box, Table, TableHead, TableBody, TableRow, TableCell } from '@mui/mate
 import t from '#/common/libs/trans'
 import Row from './Row'
 
+import style from './style.module'
+
 import CommonPagination from '#/components/common/pagination/CommonPagination'
 /*
 [
@@ -68,8 +70,8 @@ function UserTable({
     }
 
     return (
-        <Box>
-            <Table>
+        <Box sx={style.contentBox}>
+            <Table sx={style.tableBox}>
                 <TableHead>
                     <TableRow>
                         <TableCell>{t('no', 'users')}</TableCell>

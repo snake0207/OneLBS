@@ -2,6 +2,8 @@ import { Box, Table, TableHead, TableRow, TableCell, TableBody } from '@mui/mate
 import CommonPagination from '../../pagination/CommonPagination'
 import Row from './Row'
 
+import style from './style.module'
+
 function GeneralTable({ columns, rows, onItemClick, onPageChange }) {
     const handleItemClick = (row) => {
         if (onItemClick) onItemClick(row)
@@ -12,8 +14,8 @@ function GeneralTable({ columns, rows, onItemClick, onPageChange }) {
     }
 
     return (
-        <Box>
-            <Table>
+        <Box sx={style.contentBox}>
+            <Table sx={style.tableBox}>
                 <TableHead>
                     <TableRow>
                         {columns?.map((column) => (

@@ -9,6 +9,7 @@ import MapSearchList from '#/components/common/map/MapSearchList/index.jsx'
 import MapPoiDetail from '#/components/common/map/MapPoiDetail/index.jsx'
 import DisplayMarker from '#/components/common/map/googleMap/marker/DisplayMarker/index.jsx'
 import SearchResultMarker from '#/components/common/map/googleMap/marker/SearchResultMarker/index.jsx'
+import MapGpssDetail from '#/components/common/map/MapGpssDetail/index.jsx'
 
 const mapSampleData = [
     {
@@ -213,8 +214,8 @@ const GoogleMapComponent = ({
                         setDistanceCoordArr={setDistanceCoordArr}
                     />
                 </CustomControl>
-                {/* poi 조회  */}
-                {isPoiSearch && (
+                {/* poi / gpss 조회 공통 */}
+                {(isPoiSearch || isGpssSearch) && (
                     <>
                         {/* 지도 검색 */}
                         <CustomControl position="TOP_LEFT" style={{ left: '0px !important' }}>
@@ -231,13 +232,17 @@ const GoogleMapComponent = ({
                                 setSelectedPoi={setSelectedPoi}
                             />
                         </CustomControl>
-                        {/* poi 상세 */}
-                        <CustomControl position="TOP_LEFT" style={{ left: '355px !important' }}>
-                            <MapPoiDetail selectedPoi={selectedPoi} />
-                        </CustomControl>
                     </>
                 )}
-                {/* gpss 조회 */}
+
+                {/* 상세정보 */}
+                <CustomControl position="TOP_LEFT" style={{ left: '355px !important' }}>
+                    {/* poi 상세  */}
+                    {isPoiSearch && <MapPoiDetail selectedPoi={selectedPoi} />}
+                    {/* gpss 상세 */}
+                    {isGpssSearch && <MapGpssDetail selectedPoi={selectedPoi} />}
+                </CustomControl>
+
                 {/* 외부 마커 데이터 출력 */}
                 {markerDataArr &&
                     markerDataArr.map((data) => (

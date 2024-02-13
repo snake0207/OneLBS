@@ -18,8 +18,12 @@ import { useFormik } from 'formik'
 import TextInput from '#/components/common/input/TextInput'
 import IPManage from './IPManage'
 import * as yup from 'yup'
+import { usePopupActions } from '#/store/usePopupStore'
+import { useNavigate } from 'react-router'
 
 function ProfilePage() {
+    const navigate = useNavigate()
+    const popupActions = usePopupActions()
     const formik = useFormik({
         initialValues: {
             email: user?.email,
@@ -47,18 +51,27 @@ function ProfilePage() {
         }),
         onSubmit: (values) => {
             console.log('onSubmit', values)
+            popupActions.showPopup('alert', t('popup_modify', 'profile'))
         },
         onReset: (values) => {
             console.log('onReset', values)
         },
     })
 
-    const handleEdit = (values, index) => {
-        console.log('handleEdit', values, index)
+    const handleEdit = () => {
+        console.log('handleEdit')
+        formik.handleSubmit()
     }
 
-    const handleDelete = (values, index) => {
-        console.log('handleDelete', values, index)
+    const handleWithdraw = () => {
+        console.log('handleWithdraw')
+
+        formik.handleReset()
+        popupActions.showPopup('confirm', t('popup_withdraw_confirm', 'profile'), () => {
+            // TODO: 회원탈퇴 API 호출
+            popupActions.showPopup('alert', t('popup_withdraw', 'profile'))
+            navigate('/login')
+        })
     }
 
     return (
@@ -113,11 +126,7 @@ function ProfilePage() {
                             <TextInput name="team" formik={formik} />
                         </TableCell>
                     </TableRow>
-                    <IPManage
-                        ipAddresses={user?.ip_addresses}
-                        onEdit={handleEdit}
-                        onDelete={handleDelete}
-                    />
+                    <IPManage ipAddresses={user?.ip_addresses} />
                     <TableRow>
                         <TableCell>{t('permission', 'profile')}</TableCell>
                         <TableCell>{user?.permission}</TableCell>
@@ -126,10 +135,10 @@ function ProfilePage() {
             </Table>
             <Box>
                 <Stack spacing={2} direction="row">
-                    <Button type="submit" onClick={formik.handleSubmit}>
+                    <Button type="submit" onClick={handleEdit}>
                         {t('modify', 'profile')}
                     </Button>
-                    <Button onClick={formik.handleReset}>{t('withdraw', 'profile')}</Button>
+                    <Button onClick={handleWithdraw}>{t('withdraw', 'profile')}</Button>
                 </Stack>
             </Box>
         </Box>

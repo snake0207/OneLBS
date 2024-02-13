@@ -21,5 +21,11 @@
     "password_not_match": "비밀번호가 일치하지 않습니다.",
     "add": "입력",
     "delete": "삭제",
-    "edit": "수정"
+    "edit": "수정",
+    "duplicate_ip_message": "이미 등록된 IP입니다.",
+    "popup_withdraw_confirm": "회원 탈퇴시 계정은 즉시 삭제됩니다. 회원 탈퇴 하시겠습니까?",
+    "popup_withdraw": "회원 탈퇴가 완료 되었습니다.",
+    "popup_delete_confirm": "삭제하시겠습니까?",
+    "popup_delete": "삭제 되었습니다.",
+    "popup_modify": "수정 되었습니다."
 }

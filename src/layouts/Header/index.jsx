@@ -16,10 +16,11 @@ import Settings from '#/components/layout/Settings'
 import Notify from '#/components/layout/Notify'
 
 import notifications from './notifications.json'
+import { useNavigate } from 'react-router-dom'
 
 const userMenus = [
-    { key: 'profile', label: t('profile') },
-    { key: 'logout', label: t('logout') },
+    { key: 'profile', label: t('profile'), value: '/mypage/profile' },
+    { key: 'logout', label: t('logout'), value: '/login' },
 ]
 const languages = [
     { key: 'kr', label: t('KOR'), value: 'kr' },
@@ -30,9 +31,16 @@ function Header() {
     const { language, setLanguage } = useLayoutStore()
     const [, setAnchorElNav] = React.useState(null)
     const [, toggleFullScreen] = useFullScreen()
+    const navigate = useNavigate()
 
     const handleSelectUserMenu = (item) => {
         console.log(item)
+
+        if (item.value === '/logout') {
+            // clear auth token & user data
+        }
+
+        navigate(item.value)
     }
 
     const handleOpenNavMenu = (event) => {

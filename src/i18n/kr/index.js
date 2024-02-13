@@ -1,4 +1,5 @@
 import layout from './layout.json'
+import profile from './profile.json'
 import users from './users.json'
 import inputs from './inputs.json'
 import auth from './auth.json'
@@ -10,6 +11,7 @@ import error from './error.json'
 
 const kr = {
     layout,
+    profile,
     users,
     inputs,
     auth,

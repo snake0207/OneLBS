@@ -15,7 +15,7 @@ import t from '#/common/libs/trans'
 const menuItems = {
     search_management: [{ label: t('top_menu.map'), link: '/map' }],
     poi_search: [{ label: t('top_menu.map'), link: '/poi' }],
-    permi_history: [
+    permit_history: [
         { label: t('top_menu.all_history'), link: '/permit' },
         { label: t('top_menu.user_history'), link: '/permit' },
         { label: t('top_menu.reviewer_history'), link: '/permit' },
@@ -48,7 +48,7 @@ export const mainListItems = () => (
         <ExpandMenuItem
             label={t('top_menu.permit_history')}
             iconNode={<LayersIcon />}
-            items={menuItems['permi_history']}
+            items={menuItems['permit_history']}
         />
         <ExpandMenuItem
             label={t('top_menu.mcp_poi_statistics')}

@@ -4,12 +4,15 @@ import { useFormik } from 'formik'
 import * as yup from 'yup'
 
 import t from '#/common/libs/trans'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import CheckBox from '#/components/common/input/CheckBox'
-import { useGetUserIp } from '#/hooks/queries/auth'
+//import { useGetUserIp } from '#/hooks/queries/auth'
+import { usePopupActions } from '#/store/usePopupStore'
 
-function IPRecord({ ip, onAdd, onEdit, onDelete }) {
-    const { data } = useGetUserIp()
+function IPRecord({ ip, ipAddresses, onAdd, onEdit, onDelete, onAutoInput }) {
+    //const { data: userIp } = useGetUserIp()
+    const [checkAuto, setCheckAuto] = useState(false)
+    const popupActions = usePopupActions()
     const formik = useFormik({
         initialValues: {
             ip1: ip?.ip_address.split('.')[0],
@@ -38,6 +41,14 @@ function IPRecord({ ip, onAdd, onEdit, onDelete }) {
                 ip4: '',
                 ip_description: '',
             })
+        } else {
+            formik.setValues({
+                ip1: ip?.ip_address.split('.')[0],
+                ip2: ip?.ip_address.split('.')[1],
+                ip3: ip?.ip_address.split('.')[2],
+                ip4: ip?.ip_address.split('.')[3],
+                ip_description: ip?.description,
+            })
         }
     }, [ip?.ip_address, ip?.description])
 
@@ -50,14 +61,24 @@ function IPRecord({ ip, onAdd, onEdit, onDelete }) {
     }
 
     const handleAutoInput = (event) => {
-        console.log('data', data)
+        // console.log('userIp', userIp)
         if (event.target.checked) {
+            // duplicate check
+            const tempIp = '192.168.0.1'
+
+            const currentIp = `${formik.values.ip1}.${formik.values.ip2}.${formik.values.ip3}.${formik.values.ip4}`
+
+            const isDuplicate = ipAddresses.find((item) => item.ip_address === tempIp)
+            if (isDuplicate && currentIp !== tempIp) {
+                popupActions.showPopup('alert', t('duplicate_ip_message', 'profile'))
+                return
+            }
+
             // formik.setValues({
-            //     ip1: data?.ip_address.split('.')[0],
-            //     ip2: data?.ip_address.split('.')[1],
-            //     ip3: data?.ip_address.split('.')[2],
-            //     ip4: data?.ip_address.split('.')[3],
-            //     ip_description: data?.description,
+            //     ip1: userIp?.ip_address.split('.')[0],
+            //     ip2: userIp?.ip_address.split('.')[1],
+            //     ip3: userIp?.ip_address.split('.')[2],
+            //     ip4: userIp?.ip_address.split('.')[3],
             // })
             formik.setValues({
                 ...formik.values,
@@ -66,6 +87,11 @@ function IPRecord({ ip, onAdd, onEdit, onDelete }) {
                 ip3: '0',
                 ip4: '1',
             })
+            if (onAutoInput) onAutoInput(tempIp)
+
+            setCheckAuto(true)
+        } else {
+            setCheckAuto(false)
         }
     }
 
@@ -84,7 +110,11 @@ function IPRecord({ ip, onAdd, onEdit, onDelete }) {
                 </IpInput>
             </TableCell>
             <TableCell>
-                <CheckBox label={t('auto', 'profile')} onChange={handleAutoInput} />
+                <CheckBox
+                    label={t('auto', 'profile')}
+                    checked={checkAuto}
+                    onChange={handleAutoInput}
+                />
                 <Button onClick={handleAdd}>{t('add', 'profile')}</Button>
                 <Button onClick={formik.handleSubmit}>{t('edit', 'profile')}</Button>
                 <Button onClick={handleDelete}>{t('delete', 'profile')}</Button>

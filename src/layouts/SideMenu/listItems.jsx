@@ -18,7 +18,8 @@ const menuItems = {
     permi_history: [
         { label: t('top_menu.all_history'), link: '/permit' },
         { label: t('top_menu.user_history'), link: '/permit' },
-        { label: t('top_menu.admin_history'), link: '/permit' },
+        { label: t('top_menu.reviewer_history'), link: '/permit' },
+        { label: t('top_menu.manager_history'), link: '/permit' },
     ],
     mcp_poi_statistics: [
         { label: t('top_menu.time_statistics'), link: '/mcp' },

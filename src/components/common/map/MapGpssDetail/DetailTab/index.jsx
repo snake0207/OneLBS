@@ -1,12 +1,7 @@
 import { Box, Button, TextField, Typography } from '@mui/material'
 import Divider from '@mui/material/Divider'
-import PlaceIcon from '@mui/icons-material/Place'
-import LanguageIcon from '@mui/icons-material/Language'
-import EditIcon from '@mui/icons-material/Edit'
 import { useFormik } from 'formik'
 import { useState } from 'react'
-import IconButton from '@mui/material/IconButton'
-import SaveIcon from '@mui/icons-material/Save'
 import TextInput from '#/components/common/input/TextInput/index.jsx'
 import UserSearchTable from '#/components/common/map/MapGpssDetail/UserSearchTable/index.jsx'
 import { GPSS_TABLE_TYPE } from '#/contents/constant.js'
@@ -14,6 +9,7 @@ import { useGetApprover, useGetReviewer } from '#/hooks/queries/gpss.js'
 import { usePopupActions } from '#/store/usePopupStore.js'
 import t from '#/common/libs/trans.js'
 import EvCharging from '#/components/common/map/MapGpssDetail/DetailTab/EvCharging/index.jsx'
+import BasicInfo from '#/components/common/map/MapGpssDetail/DetailTab/BasicInfo/index.jsx'
 
 const dummyData = [
     { id: 'qwer@acrofuture.com', name: '아*로1', company: '회사1', userSeq: 1 },
@@ -22,6 +18,9 @@ const dummyData = [
 ]
 
 const MapGpssDetailTab = ({ poiData }) => {
+    const popupAction = usePopupActions()
+    const [initPoiData, setInitPoiData] = useState(poiData)
+
     const formik = useFormik({
         initialValues: {
             reason: '',
@@ -33,29 +32,16 @@ const MapGpssDetailTab = ({ poiData }) => {
             console.log(form)
         },
     })
-    const popupAction = usePopupActions()
+
     const { data: reviewerData, refetch: getReviewer } = useGetReviewer(formik.values.reviewer)
     const { data: approverData, refetch: getApprover } = useGetApprover(formik.values.approver)
-    // 데이터 수정
-    const [isAddressSave, setIsAddressSave] = useState(false)
-    const [isLatSave, setIsLatSave] = useState(false)
-    const [isLngSave, setIsLngSave] = useState(false)
+
     // 검토자 승인자 검색
     const [isReviewerSearchClick, setIsReviewerSearchClick] = useState(false)
     const [isApproverSearchClick, setIsApproverSearchClick] = useState(false)
     // 검토자 승인자 선택
     const [selectedReviewer, setSelectedReviewer] = useState(null)
     const [selectedApprover, setSelectedApprover] = useState(null)
-
-    const handleClickSetAddressState = () => {
-        setIsAddressSave(!isAddressSave)
-    }
-    const handleClickSetLatState = () => {
-        setIsLatSave(!isLatSave)
-    }
-    const handleClickSetLngSate = () => {
-        setIsLngSave(!isLngSave)
-    }
 
     // 검토자 검색
     const handleClickGetReviewer = () => {
@@ -71,6 +57,7 @@ const MapGpssDetailTab = ({ poiData }) => {
     }
     // 임시저장
     const handleClickTempSaveBtn = () => {
+        formik.handleSubmit()
         popupAction.showPopup('confirm', t('pop_up.temporary_save', 'gpss'), gpssTempSave)
     }
     const gpssTempSave = () => {
@@ -119,118 +106,8 @@ const MapGpssDetailTab = ({ poiData }) => {
                 <Typography variant={'h6'}>Times Square</Typography>
             </Box>
             <Divider />
-            <Box sx={{ marginTop: '8px', marginBottom: '16px' }}>
-                <Box
-                    sx={{
-                        display: 'flex',
-                        flexDirection: 'column',
-                        gap: '6px',
-                    }}
-                >
-                    <Box sx={{ display: 'flex', alignItems: 'center' }}>
-                        <Box sx={{ paddingTop: '5px' }}>
-                            <PlaceIcon />
-                        </Box>
-                        <Box>
-                            <Typography>10036 New York, Manhattan, United States</Typography>
-                        </Box>
-                        <IconButton
-                            sx={{
-                                ml: 'auto',
-                                minWidth: '15px',
-                                width: '30px',
-                                minHeight: '15px',
-                                height: '30px',
-                            }}
-                            onClick={handleClickSetAddressState}
-                        >
-                            {isAddressSave ? <SaveIcon /> : <EditIcon />}
-                        </IconButton>
-                    </Box>
-                    {(isAddressSave || (!isAddressSave && formik.values.address !== '')) && (
-                        <Box sx={{ height: '40px' }}>
-                            <TextInput
-                                formik={formik}
-                                name={'address'}
-                                IsDisabled={!isAddressSave}
-                                placeholder={t('address_input', 'gpss')}
-                            />
-                        </Box>
-                    )}
-                </Box>
-                <Divider sx={{ marginY: '5px' }} />
-                <Box
-                    sx={{
-                        display: 'flex',
-                        flexDirection: 'column',
-                        gap: '6px',
-                    }}
-                >
-                    <Box sx={{ display: 'flex', alignItems: 'center' }}>
-                        <Box sx={{ paddingTop: '5px' }}>
-                            <LanguageIcon />
-                        </Box>
-                        <Box>
-                            <Typography>40.758077</Typography>
-                        </Box>
-                        <IconButton
-                            sx={{
-                                ml: 'auto',
-                                minWidth: '15px',
-                                width: '30px',
-                                minHeight: '15px',
-                                height: '30px',
-                            }}
-                            onClick={handleClickSetLatState}
-                        >
-                            {isLatSave ? <SaveIcon /> : <EditIcon />}
-                        </IconButton>
-                    </Box>
-                    {(isLatSave || (!isLatSave && formik.values.lat !== '')) && (
-                        <Box sx={{ height: '40px' }}>
-                            <TextInput
-                                formik={formik}
-                                name={'lat'}
-                                IsDisabled={!isLatSave}
-                                placeholder={t('lat_input', 'gpss')}
-                            />
-                        </Box>
-                    )}
-                </Box>
-                <Divider sx={{ marginY: '5px' }} />
-                <Box sx={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
-                    <Box sx={{ display: 'flex', alignItems: 'center' }}>
-                        <Box sx={{ paddingTop: '5px' }}>
-                            <LanguageIcon />
-                        </Box>
-                        <Box>
-                            <Typography>-73.985480</Typography>
-                        </Box>
-                        <IconButton
-                            sx={{
-                                ml: 'auto',
-                                minWidth: '15px',
-                                width: '30px',
-                                minHeight: '15px',
-                                height: '30px',
-                            }}
-                            onClick={handleClickSetLngSate}
-                        >
-                            {isLngSave ? <SaveIcon /> : <EditIcon />}
-                        </IconButton>
-                    </Box>
-                    {(isLngSave || (!isLngSave && formik.values.lon !== '')) && (
-                        <Box sx={{ height: '40px' }}>
-                            <TextInput
-                                formik={formik}
-                                name={'lon'}
-                                IsDisabled={!isLngSave}
-                                placeholder={t('lon_input', 'gpss')}
-                            />
-                        </Box>
-                    )}
-                </Box>
-            </Box>
+            {/* 상세 기본 정보 */}
+            <BasicInfo formik={formik} poiData={poiData} />
             <Box>
                 <Typography>{t('category', 'common')}</Typography>
             </Box>

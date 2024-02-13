@@ -1,7 +1,8 @@
 import SearchFilter from '#/components/users/permission/SearchFilter'
-import permissionHistory from './history.json'
 import GeneralTable from '#/components/common/table/GeneralTable'
 import t from '#/common/libs/trans'
+
+import permissionHistory from '#/mock/data/user_permission_history.json'
 
 function UserPermissionPage() {
     const handleSearch = (values) => {

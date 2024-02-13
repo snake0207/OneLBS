@@ -1,11 +1,11 @@
 import IpTabel from '#/components/users/access/IpTable'
 import SearchFilter from '#/components/users/access/SearchFilter'
-import users from './list.json'
 import t from '#/common/libs/trans'
 
 import { usePopupActions } from '#/store/usePopupStore'
 import AddIpDialog from '#/components/users/access/AddIpDialog'
 import { useState } from 'react'
+import users from '#/mock/data/user_ip_list.json'
 
 function IPManagePage() {
     const actions = usePopupActions()

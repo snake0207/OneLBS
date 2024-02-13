@@ -17,9 +17,10 @@
         "user_permission_history": "유저 권한 이력"
     },
     "home": "Home",
+    "mypage": "마이페이지",
     "components": "Components",
     "layouts": "Layouts",
-    "profile": "프로필",
+    "profile": "내 정보",
     "logout": "로그아웃",
     "kor": "KOR",
     "eng": "ENG",

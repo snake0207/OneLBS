@@ -1,4 +1,4 @@
-import { Box, Button, Stack } from '@mui/material'
+import { Button, Stack } from '@mui/material'
 import Grid from '@mui/material/Unstable_Grid2'
 import { useFormik } from 'formik'
 import * as yup from 'yup'
@@ -75,13 +75,7 @@ const SearchFilter = ({ type, handleSubmitFilter }) => {
     }
 
     return (
-        <>
-            <Box sx={{ display: 'flex', justifyContent: 'flex-end', mb: 1 }}>
-                <Button variant={'contained'} onClick={formik.handleSubmit}>
-                    {t('search', 'approval')}
-                </Button>
-            </Box>
-
+        <Stack direction={'row'} alignItems={'flex-end'}>
             <Grid container spacing={2}>
                 <Grid md={4} xs={12} container alignItems={'center'}>
                     <Grid xs={3} md={4} sx={{ wordBreak: 'break-word' }}>
@@ -200,7 +194,17 @@ const SearchFilter = ({ type, handleSubmitFilter }) => {
                     </Grid>
                 </Grid>
             </Grid>
-        </>
+
+            <Stack direction={'row'}>
+                {/* TODO: 새로고침 클릭 시 액션 정의 필요 (인풋클리어 / 인풋클리어 + 리스트초기화) */}
+                <Button variant={'contained'} onClick={formik.resetForm}>
+                    새로
+                </Button>
+                <Button variant={'contained'} onClick={formik.handleSubmit}>
+                    {t('search', 'approval')}
+                </Button>
+            </Stack>
+        </Stack>
     )
 }
 

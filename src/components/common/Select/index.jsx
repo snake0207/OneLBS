@@ -1,4 +1,5 @@
 import { FormControl, InputLabel, MenuItem, Select } from '@mui/material'
+import KeyboardArrowDownRoundedIcon from '@mui/icons-material/KeyboardArrowDownRounded'
 
 function SelectBase({ name, formik, value, items, label, onChange, ...props }) {
     const handleChange = (event) => {
@@ -11,7 +12,7 @@ function SelectBase({ name, formik, value, items, label, onChange, ...props }) {
     }
 
     return (
-        <FormControl>
+        <FormControl sx={{ bgcolor: 'white' }}>
             <InputLabel id="select-label">{label}</InputLabel>
             <Select
                 id="select"
@@ -19,6 +20,7 @@ function SelectBase({ name, formik, value, items, label, onChange, ...props }) {
                 labelId="select-label"
                 value={formik ? formik?.values[name] : value}
                 onChange={handleChange}
+                IconComponent={KeyboardArrowDownRoundedIcon}
                 {...props}
             >
                 {items.map((item) => (

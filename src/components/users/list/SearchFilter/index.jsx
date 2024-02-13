@@ -41,34 +41,18 @@ function SearchFilter({ onSearch }) {
 
     return (
         <Box sx={style.searchBox}>
-            <Table>
+            <Table sx={style.tableBox}>
                 <TableHead>
                     <TableRow>
-                        <TableCell />
-                        <TableCell />
-                        <TableCell />
-                        <TableCell />
-                        <TableCell />
-                        <TableCell align="right">
-                            <Button
-                                variant="contained"
-                                color="primary"
-                                onClick={formik.handleSubmit}
-                            >
-                                {t('search', 'users')}
-                            </Button>
-                        </TableCell>
-                    </TableRow>
-                    <TableRow>
-                        <TableCell>{t('email', 'users')}</TableCell>
+                        <TableCell sx={{ width: 70 }}>{t('email', 'users')}</TableCell>
                         <TableCell>
                             <TextInput name="email" formik={formik} sx={{ width: 200 }} />
                         </TableCell>
-                        <TableCell>{t('name', 'users')}</TableCell>
+                        <TableCell sx={{ width: 70 }}>{t('name', 'users')}</TableCell>
                         <TableCell>
                             <TextInput name="name" formik={formik} sx={{ width: 200 }} />
                         </TableCell>
-                        <TableCell>{t('permission', 'users')}</TableCell>
+                        <TableCell sx={{ width: 70 }}>{t('permission', 'users')}</TableCell>
                         <TableCell>
                             <Select
                                 name={'permission'}
@@ -77,6 +61,7 @@ function SearchFilter({ onSearch }) {
                                 sx={{ width: 200, height: 40 }}
                             />
                         </TableCell>
+                        <TableCell />
                     </TableRow>
                     <TableRow>
                         <TableCell>{t('status', 'users')}</TableCell>
@@ -92,12 +77,22 @@ function SearchFilter({ onSearch }) {
                         <TableCell>
                             <Stack direction="row" spacing={1}>
                                 <DatePickerInput name="start_date" formik={formik} />
-                                <Box> ~ </Box>
+                                <Box sx={style.inputDash}> ~ </Box>
                                 <DatePickerInput name="end_date" formik={formik} />
                             </Stack>
                         </TableCell>
                         <TableCell />
                         <TableCell />
+                        <TableCell align="right">
+                            <Button
+                                variant="contained"
+                                color="primary"
+                                onClick={formik.handleSubmit}
+                                sx={style.searchButton}
+                            >
+                                {t('search', 'users')}
+                            </Button>
+                        </TableCell>
                     </TableRow>
                 </TableHead>
             </Table>

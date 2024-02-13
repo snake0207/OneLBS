@@ -17,7 +17,7 @@ const ModalLayout = ({ children, isOpen, onClose, title, icon }) => {
                     mt: 3.8,
                     ml: 2.5,
                     mr: 2.5,
-                    mb: 1,
+                    mb: 1.3,
                     height: 42,
                     pl: 1,
                     pr: 1,

@@ -3,6 +3,8 @@ import t from '#/common/libs/trans'
 import Row from './Row'
 import CommonPagination from '#/components/common/pagination/CommonPagination'
 
+import style from './style.module'
+
 function IpTabel({ rows, onNextPage, onEdit, onDelete }) {
     const handleEdit = (values) => {
         if (onEdit) onEdit(values)
@@ -17,8 +19,8 @@ function IpTabel({ rows, onNextPage, onEdit, onDelete }) {
     }
 
     return (
-        <Box>
-            <Table>
+        <Box sx={style.contentBox}>
+            <Table sx={style.tableBox}>
                 <TableHead>
                     <TableRow>
                         <TableCell>{t('no', 'users')}</TableCell>

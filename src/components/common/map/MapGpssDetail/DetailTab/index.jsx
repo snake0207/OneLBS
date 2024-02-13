@@ -1,17 +1,7 @@
-import {
-    Accordion,
-    AccordionDetails,
-    AccordionSummary,
-    Box,
-    Button,
-    TextField,
-    Typography,
-} from '@mui/material'
+import { Box, Button, TextField, Typography } from '@mui/material'
 import Divider from '@mui/material/Divider'
 import PlaceIcon from '@mui/icons-material/Place'
 import LanguageIcon from '@mui/icons-material/Language'
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
-import EvStationIcon from '@mui/icons-material/EvStation'
 import EditIcon from '@mui/icons-material/Edit'
 import { useFormik } from 'formik'
 import { useState } from 'react'
@@ -23,6 +13,7 @@ import { GPSS_TABLE_TYPE } from '#/contents/constant.js'
 import { useGetApprover, useGetReviewer } from '#/hooks/queries/gpss.js'
 import { usePopupActions } from '#/store/usePopupStore.js'
 import t from '#/common/libs/trans.js'
+import EvCharging from '#/components/common/map/MapGpssDetail/DetailTab/EvCharging/index.jsx'
 
 const dummyData = [
     { id: 'qwer@acrofuture.com', name: '아*로1', company: '회사1', userSeq: 1 },
@@ -246,17 +237,8 @@ const MapGpssDetailTab = () => {
                 <Typography>{t('category', 'common')}</Typography>
             </Box>
             <Divider />
-            <Box sx={{ display: 'flex', marginBottom: '16px' }}>
-                <Accordion elevation={0} sx={{ padding: 0 }}>
-                    <AccordionSummary expandIcon={<ExpandMoreIcon />} sx={{ padding: '0px' }}>
-                        <EvStationIcon /> EV Charging
-                    </AccordionSummary>
-                    <AccordionDetails sx={{ padding: 0 }}>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
-                        malesuada lacus ex, sit amet blandit leo lobortis eget.
-                    </AccordionDetails>
-                </Accordion>
-            </Box>
+            {/* EV Charging */}
+            <EvCharging />
             <Box>
                 <Box>
                     <Typography>{t('reason_for_approval', 'gpss')}</Typography>

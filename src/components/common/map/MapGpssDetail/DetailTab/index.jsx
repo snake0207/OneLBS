@@ -1,6 +1,6 @@
 import { Box, Button, TextField, Typography } from '@mui/material'
 import Divider from '@mui/material/Divider'
-import { useFormik } from 'formik'
+import { FormikProvider, useFormik } from 'formik'
 import { useState } from 'react'
 import TextInput from '#/components/common/input/TextInput/index.jsx'
 import UserSearchTable from '#/components/common/map/MapGpssDetail/UserSearchTable/index.jsx'
@@ -101,143 +101,145 @@ const MapGpssDetailTab = ({ poiData }) => {
     }
 
     return (
-        <Box sx={{ paddingTop: '16px' }}>
-            {/* 상세 기본 정보 */}
-            <BasicInfo formik={formik} poiData={poiData} />
-            <Box>
-                <Typography>{t('category', 'common')}</Typography>
-            </Box>
-            <Divider />
-            {/* EV Charging */}
-            <EvCharging />
-            <Box>
+        <FormikProvider value={formik}>
+            <Box sx={{ paddingTop: '16px' }}>
+                {/* 상세 기본 정보 */}
+                <BasicInfo formik={formik} poiData={poiData} />
                 <Box>
-                    <Typography>{t('reason_for_approval', 'gpss')}</Typography>
+                    <Typography>{t('category', 'common')}</Typography>
                 </Box>
                 <Divider />
-                <TextField
-                    sx={{ marginBottom: '16px', marginTop: '8px' }}
-                    size={'small'}
-                    multiline
-                    fullWidth
-                    placeholder={t('reason_for_approval_input', 'gpss')}
-                    name={'reason'}
-                    onChange={formik.handleChange}
-                    onBlur={formik.handleBlur}
-                    value={formik.values[name]}
-                ></TextField>
-            </Box>
-            <Box>
+                {/* EV Charging */}
+                <EvCharging />
                 <Box>
-                    <Typography>{t('reviewer', 'users')}</Typography>
+                    <Box>
+                        <Typography>{t('reason_for_approval', 'gpss')}</Typography>
+                    </Box>
+                    <Divider />
+                    <TextField
+                        sx={{ marginBottom: '16px', marginTop: '8px' }}
+                        size={'small'}
+                        multiline
+                        fullWidth
+                        placeholder={t('reason_for_approval_input', 'gpss')}
+                        name={'reason'}
+                        onChange={formik.handleChange}
+                        onBlur={formik.handleBlur}
+                        value={formik.values[name]}
+                    ></TextField>
                 </Box>
-                <Divider />
-                <Box
-                    sx={{
-                        display: 'flex',
-                        alignItems: 'flex-start',
-                        gap: '6px',
-                        mt: '8px',
-                        height: '40px',
-                    }}
-                >
-                    <TextInput
-                        formik={formik}
-                        name={'reviewer'}
-                        placeholder={t('input_keyword', 'common')}
-                    />
-                    <Button variant={'contained'} onClick={handleClickGetReviewer}>
-                        {t('search', 'common')}
-                    </Button>
-                </Box>
-                <Box
-                    sx={{
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                        flexDirection: 'column',
-                        mt: '8px',
-                    }}
-                >
-                    {isReviewerSearchClick && (
-                        <>
-                            <Typography sx={{ marginY: '16px' }}>
-                                {t('search_no_result', 'common')}
-                            </Typography>
-                            <UserSearchTable
-                                data={dummyData}
-                                tableType={GPSS_TABLE_TYPE.reviewer}
-                                selectedReviewer={selectedReviewer}
-                                setSelectedReviewer={setSelectedReviewer}
-                            />
-                        </>
-                    )}
-                </Box>
-            </Box>
-            <Box>
                 <Box>
-                    <Typography>{t('approver', 'users')}</Typography>
+                    <Box>
+                        <Typography>{t('reviewer', 'users')}</Typography>
+                    </Box>
+                    <Divider />
+                    <Box
+                        sx={{
+                            display: 'flex',
+                            alignItems: 'flex-start',
+                            gap: '6px',
+                            mt: '8px',
+                            height: '40px',
+                        }}
+                    >
+                        <TextInput
+                            formik={formik}
+                            name={'reviewer'}
+                            placeholder={t('input_keyword', 'common')}
+                        />
+                        <Button variant={'contained'} onClick={handleClickGetReviewer}>
+                            {t('search', 'common')}
+                        </Button>
+                    </Box>
+                    <Box
+                        sx={{
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                            flexDirection: 'column',
+                            mt: '8px',
+                        }}
+                    >
+                        {isReviewerSearchClick && (
+                            <>
+                                <Typography sx={{ marginY: '16px' }}>
+                                    {t('search_no_result', 'common')}
+                                </Typography>
+                                <UserSearchTable
+                                    data={dummyData}
+                                    tableType={GPSS_TABLE_TYPE.reviewer}
+                                    selectedReviewer={selectedReviewer}
+                                    setSelectedReviewer={setSelectedReviewer}
+                                />
+                            </>
+                        )}
+                    </Box>
                 </Box>
-                <Divider />
-                <Box
-                    sx={{
-                        display: 'flex',
-                        alignItems: 'flex-start',
-                        gap: '6px',
-                        mt: '8px',
-                        height: '40px',
-                    }}
-                >
-                    <TextInput
-                        formik={formik}
-                        name={'approver'}
-                        placeholder={t('input_keyword', 'common')}
-                    />
-                    <Button variant={'contained'} onClick={handleClickGetApprover}>
-                        {t('search', 'common')}
-                    </Button>
+                <Box>
+                    <Box>
+                        <Typography>{t('approver', 'users')}</Typography>
+                    </Box>
+                    <Divider />
+                    <Box
+                        sx={{
+                            display: 'flex',
+                            alignItems: 'flex-start',
+                            gap: '6px',
+                            mt: '8px',
+                            height: '40px',
+                        }}
+                    >
+                        <TextInput
+                            formik={formik}
+                            name={'approver'}
+                            placeholder={t('input_keyword', 'common')}
+                        />
+                        <Button variant={'contained'} onClick={handleClickGetApprover}>
+                            {t('search', 'common')}
+                        </Button>
+                    </Box>
+                    <Box
+                        sx={{
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                            flexDirection: 'column',
+                            mt: '8px',
+                        }}
+                    >
+                        {isApproverSearchClick && (
+                            <>
+                                <Typography sx={{ marginY: '16px' }}>
+                                    {t('search_no_result', 'common')}
+                                </Typography>
+                                <UserSearchTable
+                                    data={dummyData}
+                                    tableType={GPSS_TABLE_TYPE.approver}
+                                    selectedApprover={selectedApprover}
+                                    setSelectedApprover={setSelectedApprover}
+                                />
+                            </>
+                        )}
+                    </Box>
                 </Box>
-                <Box
-                    sx={{
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                        flexDirection: 'column',
-                        mt: '8px',
-                    }}
-                >
-                    {isApproverSearchClick && (
-                        <>
-                            <Typography sx={{ marginY: '16px' }}>
-                                {t('search_no_result', 'common')}
-                            </Typography>
-                            <UserSearchTable
-                                data={dummyData}
-                                tableType={GPSS_TABLE_TYPE.approver}
-                                selectedApprover={selectedApprover}
-                                setSelectedApprover={setSelectedApprover}
-                            />
-                        </>
-                    )}
-                </Box>
-            </Box>
 
-            <Box sx={{ display: 'flex', justifyContent: 'end', gap: '6px' }}>
-                <Button
-                    variant={'contained'}
-                    onClick={handleClickTempSaveBtn}
-                    sx={{ whiteSpace: 'nowrap' }}
-                >
-                    {t('temporary_save', 'gpss')}
-                </Button>
-                <Button variant={'contained'} onClick={handleClickEditBtn}>
-                    {t('edit_request', 'gpss')}
-                </Button>
-                <Button variant={'contained'} onClick={handleClickDeleteBtn}>
-                    {t('delete_request', 'gpss')}
-                </Button>
+                <Box sx={{ display: 'flex', justifyContent: 'end', gap: '6px' }}>
+                    <Button
+                        variant={'contained'}
+                        onClick={handleClickTempSaveBtn}
+                        sx={{ whiteSpace: 'nowrap' }}
+                    >
+                        {t('temporary_save', 'gpss')}
+                    </Button>
+                    <Button variant={'contained'} onClick={handleClickEditBtn}>
+                        {t('edit_request', 'gpss')}
+                    </Button>
+                    <Button variant={'contained'} onClick={handleClickDeleteBtn}>
+                        {t('delete_request', 'gpss')}
+                    </Button>
+                </Box>
             </Box>
-        </Box>
+        </FormikProvider>
     )
 }
 

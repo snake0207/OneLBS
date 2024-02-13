@@ -7,7 +7,6 @@ import t from '#/common/libs/trans.js'
 import Divider from '@mui/material/Divider'
 import LanguageIcon from '@mui/icons-material/Language.js'
 import { useState } from 'react'
-import { FormikProvider } from 'formik'
 import FormikInput from '#/components/common/input/FormikInput/index.jsx'
 
 const BasicInfo = ({ formik, poiData }) => {
@@ -26,7 +25,7 @@ const BasicInfo = ({ formik, poiData }) => {
         setIsLngSave(!isLngSave)
     }
     return (
-        <FormikProvider value={formik}>
+        <Box>
             <Box>
                 <Typography variant={'h6'}>{poiData.title}</Typography>
             </Box>
@@ -141,7 +140,7 @@ const BasicInfo = ({ formik, poiData }) => {
                     )}
                 </Box>
             </Box>
-        </FormikProvider>
+        </Box>
     )
 }
 

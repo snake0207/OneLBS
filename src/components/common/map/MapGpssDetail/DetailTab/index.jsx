@@ -102,7 +102,14 @@ const MapGpssDetailTab = ({ poiData }) => {
 
     return (
         <FormikProvider value={formik}>
-            <Box sx={{ paddingTop: '16px' }}>
+            <Box
+                sx={{
+                    paddingTop: '16px',
+                    // TODO maxHeight의 경우 샘플컴포넌트 구성을 위해 넣은 값입니다. 추후에 실제 적용시에는 지도가 한 화면을 가득 사용할 것이므로 알맞게 수정되어야합니다
+                    maxHeight: '800px',
+                    overflow: 'auto',
+                }}
+            >
                 {/* 상세 기본 정보 */}
                 <BasicInfo formik={formik} poiData={poiData} />
                 <Box>

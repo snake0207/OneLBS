@@ -9,6 +9,16 @@ import { useField } from 'formik'
  * @param {string} inputRule 입력에 대한 가이드
  * @param {boolean} IsDisabled input disabled 여부
  * @returns ReactNode
+ *
+ * 사용예
+ * const formik = useFormik({
+ *     initialValues: {},
+ *     onSubmit: (form) => {
+ *     },
+ * })
+ * <FormikProvider value={formik}>
+ *     <FormikInput name={'name'} ... />
+ * </FormikProvider>
  */
 const FormikInput = ({ name, placeholder = null, inputRule = null, IsDisabled = false }) => {
     const [field, meta, helpers] = useField(name)

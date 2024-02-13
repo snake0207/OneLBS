@@ -6,91 +6,92 @@ const HistoryTableMobile = ({ type, dummyData }) => {
     return (
         <>
             {dummyData?.length ? (
-                // dummyData.map(() => {
-                //
-                // })
-                <Stack direction={'column'} spacing={2}>
-                    <Stack direction={'row'} spacing={1}>
-                        <Box>
-                            <Typography>{t('name', 'approval')}</Typography>
-                        </Box>
-                        <Box>
-                            <Typography>value</Typography>
-                        </Box>
-                    </Stack>
-                    <Stack direction={'row'} spacing={1}>
-                        <Box>
-                            <Typography>{t('country', 'approval')}</Typography>
-                        </Box>
-                        <Box>
-                            <Typography>value</Typography>
-                        </Box>
-                        {type !== 'requester' && (
-                            <>
+                dummyData.map((data, index) => {
+                    return (
+                        <Stack key={index} direction={'column'} spacing={2} mt={2}>
+                            <Stack direction={'row'} spacing={1}>
                                 <Box>
-                                    <Typography>{t('requester', 'approval')}</Typography>
+                                    <Typography>{t('name', 'approval')}</Typography>
                                 </Box>
                                 <Box>
-                                    <Typography>value</Typography>
+                                    <Typography>{data.name}</Typography>
                                 </Box>
-                            </>
-                        )}
-                    </Stack>
-                    <Stack direction={'row'} spacing={1}>
-                        {type !== 'reviewer' && (
-                            <>
+                            </Stack>
+                            <Stack direction={'row'} spacing={1}>
                                 <Box>
-                                    <Typography>{t('reviewer', 'approval')}</Typography>
+                                    <Typography>{t('country', 'approval')}</Typography>
                                 </Box>
                                 <Box>
-                                    <Typography>value</Typography>
+                                    <Typography>{data.region}</Typography>
                                 </Box>
-                            </>
-                        )}
-                        {type !== 'approver' && (
-                            <>
+                                {type !== 'requester' && (
+                                    <>
+                                        <Box>
+                                            <Typography>{t('requester', 'approval')}</Typography>
+                                        </Box>
+                                        <Box>
+                                            <Typography>{data.requester}</Typography>
+                                        </Box>
+                                    </>
+                                )}
+                            </Stack>
+                            <Stack direction={'row'} spacing={1}>
+                                {type !== 'reviewer' && (
+                                    <>
+                                        <Box>
+                                            <Typography>{t('reviewer', 'approval')}</Typography>
+                                        </Box>
+                                        <Box>
+                                            <Typography>{data.reviewer}</Typography>
+                                        </Box>
+                                    </>
+                                )}
+                                {type !== 'approver' && (
+                                    <>
+                                        <Box>
+                                            <Typography>{t('approver', 'approval')}</Typography>
+                                        </Box>
+                                        <Box>
+                                            <Typography>{data.approver}</Typography>
+                                        </Box>
+                                    </>
+                                )}
+                            </Stack>
+                            <Stack direction={'row'} spacing={1}>
                                 <Box>
-                                    <Typography>{t('approver', 'approval')}</Typography>
+                                    <Typography>{t('request_date', 'approval')}</Typography>
                                 </Box>
                                 <Box>
-                                    <Typography>value</Typography>
+                                    <Typography>{data.request_date}</Typography>
                                 </Box>
-                            </>
-                        )}
-                    </Stack>
-                    <Stack direction={'row'} spacing={1}>
-                        <Box>
-                            <Typography>{t('request_date', 'approval')}</Typography>
-                        </Box>
-                        <Box>
-                            <Typography>value</Typography>
-                        </Box>
-                    </Stack>
-                    <Stack direction={'row'} spacing={1}>
-                        <Box>
-                            <Typography>{t('review_date', 'approval')}</Typography>
-                        </Box>
-                        <Box>
-                            <Typography>value</Typography>
-                        </Box>
-                    </Stack>
-                    <Stack direction={'row'} spacing={1}>
-                        <Box>
-                            <Typography>{t('approval_date', 'approval')}</Typography>
-                        </Box>
-                        <Box>
-                            <Typography>value</Typography>
-                        </Box>
-                    </Stack>
-                    <Stack direction={'row'} spacing={1}>
-                        <Box>
-                            <Typography>{t('state', 'approval')}</Typography>
-                        </Box>
-                        <Box>
-                            <Typography>value</Typography>
-                        </Box>
-                    </Stack>
-                </Stack>
+                            </Stack>
+                            <Stack direction={'row'} spacing={1}>
+                                <Box>
+                                    <Typography>{t('review_date', 'approval')}</Typography>
+                                </Box>
+                                <Box>
+                                    <Typography>{data.review_date}</Typography>
+                                </Box>
+                            </Stack>
+                            <Stack direction={'row'} spacing={1}>
+                                <Box>
+                                    <Typography>{t('approval_date', 'approval')}</Typography>
+                                </Box>
+                                <Box>
+                                    <Typography>{data.approval_date}</Typography>
+                                </Box>
+                            </Stack>
+                            <Stack direction={'row'} spacing={1}>
+                                <Box>
+                                    <Typography>{t('state', 'approval')}</Typography>
+                                </Box>
+                                <Box>
+                                    <Typography>{data.status}</Typography>
+                                </Box>
+                            </Stack>
+                        </Stack>
+                    )
+                })
             ) : (
                 <Typography align={'center'}>NO DATA</Typography>
             )}

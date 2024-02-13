@@ -2,8 +2,7 @@ import { useParams } from 'react-router-dom'
 import Typography from '@mui/material/Typography'
 import t from '#/common/libs/trans.js'
 import TitleBar from '#/components/common/menu/TitleBar/index.jsx'
-import { Box, Card, TextField } from '@mui/material'
-import Grid from '@mui/material/Unstable_Grid2'
+import { Box, Card, Stack, TextField } from '@mui/material'
 import ApprovalLine from '#/components/approval/Detail/ApprovalLine/index.jsx'
 import InfoTab from '#/components/approval/Detail/InfoTab/index.jsx'
 import HistoryTable from '#/components/approval/Detail/HistoryTable/index.jsx'
@@ -44,7 +43,7 @@ const ApprovalHistoryDetailPage = () => {
             default:
                 return false
         }
-    })
+    }, [userType])
 
     const confirmPopupFunction = (action) => {
         console.log('ACTION >> ', action, params.id)
@@ -61,8 +60,18 @@ const ApprovalHistoryDetailPage = () => {
     return (
         <>
             <TitleBar title={t('detail', 'approval')} />
-            <Card variant="outlined" sx={{ mt: 4, display: 'flex' }}>
-                <Grid container xs={6} sx={{ p: 2, flexDirection: 'column', gap: 4 }}>
+            <Card variant="outlined" sx={{ mt: 4, position: 'relative', height: '45rem' }}>
+                <Stack
+                    sx={{
+                        p: 2,
+                        m: 2,
+                        gap: 4,
+                        position: 'absolute',
+                        backgroundColor: '#fff',
+                        overflowY: 'auto',
+                        height: '100%',
+                    }}
+                >
                     {/* 결제라인 */}
                     <ApprovalLine
                         status={dummyData.status}
@@ -112,20 +121,18 @@ const ApprovalHistoryDetailPage = () => {
                         confirmAction={confirmPopupFunction}
                         isEditable={isEditable}
                     />
-                </Grid>
+                </Stack>
 
                 {/* 지도 영역 */}
-                <Grid
-                    xs={6}
+                <Box
                     sx={{
-                        minHeight: 700,
-                        flex: 1,
+                        height: '100%',
                         backgroundColor: 'gray',
                         textAlign: 'center',
                     }}
                 >
                     지도 영역
-                </Grid>
+                </Box>
             </Card>
         </>
     )

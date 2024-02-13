@@ -1,12 +1,15 @@
-import { Button, Checkbox, TableCell } from '@mui/material'
+import { Button, TableCell } from '@mui/material'
 import { IpInput } from '#/components/common/input/IpInput'
 import { useFormik } from 'formik'
 import * as yup from 'yup'
 
 import t from '#/common/libs/trans'
 import { useEffect } from 'react'
+import CheckBox from '#/components/common/input/CheckBox'
+import { useGetUserIp } from '#/hooks/queries/auth'
 
 function IPRecord({ ip, onAdd, onEdit, onDelete }) {
+    const { data } = useGetUserIp()
     const formik = useFormik({
         initialValues: {
             ip1: ip?.ip_address.split('.')[0],
@@ -46,6 +49,26 @@ function IPRecord({ ip, onAdd, onEdit, onDelete }) {
         if (onDelete) onDelete()
     }
 
+    const handleAutoInput = (event) => {
+        console.log('data', data)
+        if (event.target.checked) {
+            // formik.setValues({
+            //     ip1: data?.ip_address.split('.')[0],
+            //     ip2: data?.ip_address.split('.')[1],
+            //     ip3: data?.ip_address.split('.')[2],
+            //     ip4: data?.ip_address.split('.')[3],
+            //     ip_description: data?.description,
+            // })
+            formik.setValues({
+                ...formik.values,
+                ip1: '192',
+                ip2: '168',
+                ip3: '0',
+                ip4: '1',
+            })
+        }
+    }
+
     return (
         <>
             <TableCell>
@@ -61,7 +84,7 @@ function IPRecord({ ip, onAdd, onEdit, onDelete }) {
                 </IpInput>
             </TableCell>
             <TableCell>
-                <Checkbox />
+                <CheckBox label={t('auto', 'profile')} onChange={handleAutoInput} />
                 <Button onClick={handleAdd}>{t('add', 'profile')}</Button>
                 <Button onClick={formik.handleSubmit}>{t('edit', 'profile')}</Button>
                 <Button onClick={handleDelete}>{t('delete', 'profile')}</Button>

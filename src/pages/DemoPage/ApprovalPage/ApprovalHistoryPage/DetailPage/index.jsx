@@ -35,26 +35,31 @@ const ApprovalHistoryDetailPage = () => {
     const isEditable = useMemo(() => {
         switch (userType) {
             case 'requester':
-                return !(dummyData.status === '검토완료' || dummyData.status === '승인완료')
+                return !(dummyData.status === 'reviewed' || dummyData.status === 'approved')
             case 'reviewer':
-                return dummyData.status === '검토요청'
+                return dummyData.status === 'request'
             case 'approver':
-                return dummyData.status === '검토완료'
+                return dummyData.status === 'reviewed'
             default:
                 return false
         }
     }, [userType])
 
-    const confirmPopupFunction = (action) => {
-        console.log('ACTION >> ', action, params.id)
+    const openAlertPopup = (action) => {
         if (formik.values['request_reason'] === '') {
             popupActions.showPopup('alert', '승인 요청 이유를 입력해 주세요')
-            return false
         } else {
             // TODO: 기능구분
+            popupActions.showPopup('alert', t(`confirmed.${action.toLowerCase()}`, 'approval'))
             formik.handleSubmit
-            return true
         }
+    }
+
+    const handleShowConfirmPopup = (action, id) => {
+        console.log(action, t(`modal.${action}`, 'approval'), id)
+        popupActions.showPopup('confirm', t(`modal.${action.toLowerCase()}`, 'approval'), () =>
+            openAlertPopup(action),
+        )
     }
 
     return (
@@ -118,8 +123,8 @@ const ApprovalHistoryDetailPage = () => {
                     <ActionButtons
                         type={userType}
                         status={dummyData.status}
-                        confirmAction={confirmPopupFunction}
-                        isEditable={isEditable}
+                        clickAction={handleShowConfirmPopup}
+                        id={params.id}
                     />
                 </Stack>
 

@@ -57,29 +57,30 @@ const ApprovalLine = ({ status, content }) => {
         const active = theme.palette.primary.main
         const danger = theme.palette.error.main
         switch (status) {
-            case '검토요청':
+            case 'request':
                 colors.current.request = active
                 break
-            case '검토완료':
+            case 'reviewed':
                 colors.current.request = active
                 colors.current.review = active
                 break
-            case '승인완료':
+            case 'approved':
                 colors.current.request = active
                 colors.current.review = active
                 colors.current.approval = active
                 break
-            case '검토자반려':
+            // TODO: 검토자반려 / 승인자반려 구분필요
+            case 'rejected':
                 colors.current.request = active
                 colors.current.review = danger
                 isReject.current.review = true
                 break
-            case '승인자반려':
-                colors.current.request = active
-                colors.current.review = active
-                colors.current.approval = danger
-                isReject.current.approval = true
-                break
+            // case 'rejected':
+            //     colors.current.request = active
+            //     colors.current.review = active
+            //     colors.current.approval = danger
+            //     isReject.current.approval = true
+            //     break
         }
     }, [])
 

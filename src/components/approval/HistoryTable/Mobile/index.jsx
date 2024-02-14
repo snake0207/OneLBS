@@ -1,14 +1,21 @@
 import { Box, Stack } from '@mui/material'
 import Typography from '@mui/material/Typography'
 import t from '#/common/libs/trans.js'
+import ActionButtons from '#/components/approval/Detail/ActionButtons/index.jsx'
 
-const HistoryTableMobile = ({ type, dummyData }) => {
+const HistoryTableMobile = ({ type, dummyData, onClickButtonFunction, onClickRowFunction }) => {
     return (
         <>
             {dummyData?.length ? (
                 dummyData.map((data, index) => {
                     return (
-                        <Stack key={index} direction={'column'} spacing={2} mt={2}>
+                        <Stack
+                            key={index}
+                            direction={'column'}
+                            spacing={2}
+                            mt={2}
+                            onClick={onClickRowFunction}
+                        >
                             <Stack direction={'row'} spacing={1}>
                                 <Box>
                                     <Typography>{t('name', 'approval')}</Typography>
@@ -88,6 +95,12 @@ const HistoryTableMobile = ({ type, dummyData }) => {
                                 <Box>
                                     <Typography>{data.status}</Typography>
                                 </Box>
+                                <ActionButtons
+                                    type={type}
+                                    status={data.status}
+                                    clickAction={onClickButtonFunction}
+                                    id={data.id}
+                                />
                             </Stack>
                         </Stack>
                     )

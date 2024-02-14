@@ -14,7 +14,7 @@ import useFullScreen from '#/hooks/useFullScreen'
 import Settings from '#/components/layout/Settings'
 import Notify from '#/components/layout/Notify'
 
-import notifications from './notifications.json'
+import notifications from '#/mock/data/notifications.json'
 import { useNavigate } from 'react-router-dom'
 import { BrowserView, MobileView } from 'react-device-detect'
 import AccountCircleIcon from '@mui/icons-material/AccountCircle'

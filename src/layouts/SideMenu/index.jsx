@@ -1,3 +1,4 @@
+import React from 'react'
 import List from '@mui/material/List'
 import Divider from '@mui/material/Divider'
 import IconButton from '@mui/material/IconButton'
@@ -6,7 +7,16 @@ import { Toolbar } from '@mui/material'
 import MuiDrawer from '@mui/material/Drawer'
 import { styled } from '@mui/material/styles'
 
-import { mainListItems } from './listItems'
+import AppRegistrationIcon from '@mui/icons-material/AppRegistration'
+import ListItemButton from '@mui/material/ListItemButton'
+import ListItemIcon from '@mui/material/ListItemIcon'
+import ListItemText from '@mui/material/ListItemText'
+import Link from '@mui/material/Link'
+import { getMenuIcon } from './listItems'
+import ExpandMenuItem from '#/components/common/menu/ExpandMenuItem'
+import t from '#/common/libs/trans'
+
+import { data } from '#/mock/data/side_menu.json'
 
 const drawerWidth = 240
 
@@ -49,6 +59,36 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
     }),
 )
 
+const createMenuItems = (menuItems) => {
+    console.log('menuItems', menuItems)
+    return (
+        <React.Fragment>
+            {menuItems.map((item, index) => {
+                if (item.label !== null) {
+                    return (
+                        <ExpandMenuItem
+                            key={index}
+                            label={t(`top_menu.${item.label}`)}
+                            iconNode={getMenuIcon(item.label)}
+                            items={item.children}
+                        />
+                    )
+                }
+            })}
+            <>
+                <Link href="/components" color="inherit" underline="none">
+                    <ListItemButton>
+                        <ListItemIcon>
+                            <AppRegistrationIcon />
+                        </ListItemIcon>
+                        <ListItemText primary="Components" />
+                    </ListItemButton>
+                </Link>
+            </>
+        </React.Fragment>
+    )
+}
+
 const SideMenu = ({ open, toggleDrawer }) => {
     return (
         <Drawer variant="permanent" open={open}>
@@ -65,7 +105,7 @@ const SideMenu = ({ open, toggleDrawer }) => {
                 </IconButton>
             </Toolbar>
             <Divider />
-            <List component="nav">{mainListItems()}</List>
+            <List component="nav">{createMenuItems(data.menuTree)}</List>
         </Drawer>
     )
 }

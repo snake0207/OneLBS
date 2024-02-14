@@ -191,7 +191,7 @@
                         "rootMenuId": 160,
                         "menuUrl": "/user-management/ip-access",
                         "iconName": null,
-                        "label": null,
+                        "label": "user_ip_access_management",
                         "children": []
                     }
                 ]

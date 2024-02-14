@@ -9,6 +9,7 @@ import Collapse from '@mui/material/Collapse'
 
 import ExpandLess from '@mui/icons-material/ExpandLess'
 import ExpandMore from '@mui/icons-material/ExpandMore'
+import t from '#/common/libs/trans'
 
 function ExpandMenuItem({ label, iconNode, items }) {
     const [open, setOpen] = useState(false)
@@ -30,12 +31,12 @@ function ExpandMenuItem({ label, iconNode, items }) {
                         return (
                             <Link
                                 key={item?.label}
-                                href={item?.link}
+                                href={item?.menuUrl}
                                 color="inherit"
                                 underline="none"
                             >
                                 <ListItemButton sx={{ pl: 4 }}>
-                                    <ListItemText primary={item?.label} />
+                                    <ListItemText primary={t(`top_menu.${item?.label}`)} />
                                 </ListItemButton>
                             </Link>
                         )

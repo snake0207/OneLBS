@@ -1,34 +1,49 @@
 import { useEffect, useState } from 'react'
-import { useTimeActions, useTimeState } from '#/store/useTimerStore'
+import useTimerStore from '#/store/useTimerStore'
 import Close from '@mui/icons-material/Close'
 import { Box, Button, FormHelperText, IconButton, InputAdornment, TextField } from '@mui/material'
 import { usePostEmailVerify } from '#/hooks/queries/auth'
 
 import t from '#/common/libs/trans'
 
+import style from './style.module'
+
 // 인증 메일 전송
 const VerifyEmailForm = ({ formik }) => {
     const { mutate } = usePostEmailVerify()
-    const { setTime } = useTimeActions()
+    const { time, actions } = useTimerStore()
     const [isButtonDisabled, setIsButtonDisabled] = useState(false)
     const [isReSend, setIsReSend] = useState(false)
-    const time = useTimeState()
 
     const handleClickSendEmail = () => {
         formik.setFieldTouched('email')
         if (formik.values.email && !formik.errors.email) {
             setIsButtonDisabled(true)
-            setTime(180)
+            actions.setTime(180)
             // mutate(
             //     { email: formik.values.email },
             //     {
             //         onSuccess: () => {
             //             setIsButtonDisabled(true)
-            //             setTime(180)
+            //             action.setTime(180)
             //         },
             //     },
             // )
         }
+    }
+
+    const customHelperText = () => {
+        if (isButtonDisabled)
+            return (
+                <FormHelperText sx={{ ml: 2 }}>{t('email_code_send', 'validation')}</FormHelperText>
+            )
+
+        if (formik.touched.email && formik.errors.email)
+            return (
+                <FormHelperText sx={{ ml: 2 }} error>
+                    {formik.errors.email}
+                </FormHelperText>
+            )
     }
 
     useEffect(() => {
@@ -73,18 +88,7 @@ const VerifyEmailForm = ({ formik }) => {
                         ),
                     }}
                 />
-                {isButtonDisabled ? (
-                    <FormHelperText sx={{ ml: 2 }}>
-                        {t('email_code_send', 'validation')}
-                    </FormHelperText>
-                ) : (
-                    formik.touched.email &&
-                    formik.errors.email && (
-                        <FormHelperText sx={{ ml: 2 }} error>
-                            {formik.errors.email}
-                        </FormHelperText>
-                    )
-                )}
+                {customHelperText()}
             </Box>
             <Button
                 variant="contained"

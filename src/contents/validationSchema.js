@@ -122,6 +122,39 @@ export const otpSchema = yup.object({
         .required(HELPER_TEXT.otpRequired),
 })
 
+export const emailAuthSchema = yup.object({
+    email: yup.string().email(HELPER_TEXT.emailNotMatch).required(HELPER_TEXT.emailRequired),
+    code: yup
+        .string()
+        .matches(REGEXP.verifyCode, HELPER_TEXT.emailCodeNotMatch)
+        .required(HELPER_TEXT.emailCodeRequired),
+})
+
+export const passwordResetSchema = yup.object({
+    email: yup.string().email(HELPER_TEXT.emailNotMatch).required(HELPER_TEXT.emailRequired),
+    password: yup
+        .string()
+        .min(8, HELPER_TEXT.passwordMinLength)
+        .max(16, HELPER_TEXT.passwordMaxLength)
+        .matches(REGEXP.passwordIncludeChar, HELPER_TEXT.passwordNotIncludeChar)
+        .matches(REGEXP.passwordIncludeUppercase, HELPER_TEXT.passwordNotIncludeUppercase)
+        .matches(REGEXP.passwordIncludeNumber, HELPER_TEXT.passwordNotIncludeNumber)
+        .required(HELPER_TEXT.passwordRequired),
+    confirmPassword: yup
+        .string()
+        .min(8, HELPER_TEXT.passwordMinLength)
+        .max(16, HELPER_TEXT.passwordMaxLength)
+        .matches(REGEXP.passwordIncludeChar, HELPER_TEXT.passwordNotIncludeChar)
+        .matches(REGEXP.passwordIncludeUppercase, HELPER_TEXT.passwordNotIncludeUppercase)
+        .matches(REGEXP.passwordIncludeNumber, HELPER_TEXT.passwordNotIncludeNumber)
+        .oneOf([yup.ref('password'), null], HELPER_TEXT.confirmPasswordNotMatch)
+        .required(HELPER_TEXT.passwordRequired),
+    otp: yup
+        .string()
+        .matches(REGEXP.verifyCode, HELPER_TEXT.otpNotMatch)
+        .required(HELPER_TEXT.otpRequired),
+})
+
 export const mapSearchSchema = yup.object({
     country: yup.string().required(HELPER_TEXT.searchCountry),
     lat: yup

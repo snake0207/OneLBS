@@ -7,7 +7,7 @@ import LanguageIcon from '#/assets/languageIcon.svg'
 import GpsIcon from '#/assets/gpsIcon.svg'
 import EvStationIcon from '#/assets/evStationIcon.svg'
 
-const MapGpssHistoryTab = () => {
+const MapGpssHistoryTab = ({ poiData }) => {
     return (
         <Box sx={{ paddingTop: '20px' }}>
             <Box>

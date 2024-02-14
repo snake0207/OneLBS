@@ -71,7 +71,7 @@ const MapPage = () => {
                 <Box sx={{ mr: 2 }}>
                     <Typography>Google Map Component</Typography>
                     <Box sx={{ width: '1600px', height: '900px' }}>
-                        <GoogleMapComponent markerDataArr={markerSampleData} isPoiSearch={true} />
+                        <GoogleMapComponent markerDataArr={markerSampleData} isGpssSearch={true} />
                     </Box>
                 </Box>
             </Box>

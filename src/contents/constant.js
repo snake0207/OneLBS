@@ -1,10 +1,11 @@
 import t from '#/common/libs/trans'
 
 export const AUTH_STEP = {
-    imfomation: 0,
+    information: 0,
     certified: 1,
     login: 2,
     passwordReset: -1,
+    emailAuth: -2,
 }
 
 export const MODAL_TITLE = {

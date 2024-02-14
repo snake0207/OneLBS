@@ -1,30 +1,15 @@
-import {
-    Accordion,
-    AccordionDetails,
-    AccordionSummary,
-    Box,
-    Button,
-    TextField,
-    Typography,
-} from '@mui/material'
+import { Box, Button, TextField, Typography } from '@mui/material'
 import Divider from '@mui/material/Divider'
-import PlaceIcon from '@mui/icons-material/Place'
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
-import EditIcon from '@mui/icons-material/Edit'
-import { useFormik } from 'formik'
+import { FormikProvider, useFormik } from 'formik'
 import { useState } from 'react'
-import IconButton from '@mui/material/IconButton'
-import SaveIcon from '@mui/icons-material/Save'
 import TextInput from '#/components/common/input/TextInput/index.jsx'
 import UserSearchTable from '#/components/common/map/MapGpssDetail/UserSearchTable/index.jsx'
 import { GPSS_TABLE_TYPE } from '#/contents/constant.js'
 import { useGetApprover, useGetReviewer } from '#/hooks/queries/gpss.js'
 import { usePopupActions } from '#/store/usePopupStore.js'
 import t from '#/common/libs/trans.js'
-import PointBlueIcon from '#/assets/pointBlueIcon.svg'
-import LanguageIcon from '#/assets/languageIcon.svg'
-import GpsIcon from '#/assets/gpsIcon.svg'
-import EvStationIcon from '#/assets/evStationIcon.svg'
+import EvCharging from '#/components/common/map/MapGpssDetail/DetailTab/EvCharging/index.jsx'
+import BasicInfo from '#/components/common/map/MapGpssDetail/DetailTab/BasicInfo/index.jsx'
 
 const dummyData = [
     { id: 'qwer@acrofuture.com', name: '아*로1', company: '회사1', userSeq: 1 },
@@ -32,43 +17,31 @@ const dummyData = [
     { id: 'zxcv@acrofuture.com', name: '아*로3', company: '회사3', userSeq: 3 },
 ]
 
-const MapGpssDetailTab = () => {
+const MapGpssDetailTab = ({ poiData }) => {
+    const popupAction = usePopupActions()
+    const [initPoiData, setInitPoiData] = useState(poiData)
+
     const formik = useFormik({
         initialValues: {
-            address: '',
-            lat: '',
-            lon: '',
             reason: '',
             reviewer: '',
             approver: '',
+            ...poiData,
         },
         onSubmit: (form) => {
             console.log(form)
         },
     })
-    const popupAction = usePopupActions()
+
     const { data: reviewerData, refetch: getReviewer } = useGetReviewer(formik.values.reviewer)
     const { data: approverData, refetch: getApprover } = useGetApprover(formik.values.approver)
-    // 데이터 수정
-    const [isAddressSave, setIsAddressSave] = useState(false)
-    const [isLatSave, setIsLatSave] = useState(false)
-    const [isLngSave, setIsLngSave] = useState(false)
+
     // 검토자 승인자 검색
     const [isReviewerSearchClick, setIsReviewerSearchClick] = useState(false)
     const [isApproverSearchClick, setIsApproverSearchClick] = useState(false)
     // 검토자 승인자 선택
     const [selectedReviewer, setSelectedReviewer] = useState(null)
     const [selectedApprover, setSelectedApprover] = useState(null)
-
-    const handleClickSetAddressState = () => {
-        setIsAddressSave(!isAddressSave)
-    }
-    const handleClickSetLatState = () => {
-        setIsLatSave(!isLatSave)
-    }
-    const handleClickSetLngSate = () => {
-        setIsLngSave(!isLngSave)
-    }
 
     // 검토자 검색
     const handleClickGetReviewer = () => {
@@ -84,6 +57,7 @@ const MapGpssDetailTab = () => {
     }
     // 임시저장
     const handleClickTempSaveBtn = () => {
+        formik.handleSubmit()
         popupAction.showPopup('confirm', t('pop_up.temporary_save', 'gpss'), gpssTempSave)
     }
     const gpssTempSave = () => {
@@ -127,274 +101,152 @@ const MapGpssDetailTab = () => {
     }
 
     return (
-        <Box sx={{ paddingTop: '20px' }}>
-            <Box>
-                <Typography variant={'h6'} sx={{ fontSize: '20px', fontWeight: 600 }}>
-                    <img
-                        src={PointBlueIcon}
-                        style={{ verticalAlign: 'middle', paddingRight: '4px' }}
-                    />
-                    Times Square
-                </Typography>
-            </Box>
-            <Box sx={{ marginTop: '8px', marginBottom: '16px' }}>
+        <FormikProvider value={formik}>
+            <Box
+                sx={{
+                    paddingTop: '16px',
+                    // TODO maxHeight의 경우 샘플컴포넌트 구성을 위해 넣은 값입니다. 추후에 실제 적용시에는 지도가 한 화면을 가득 사용할 것이므로 알맞게 수정되어야합니다
+                    maxHeight: '800px',
+                    overflow: 'auto',
+                }}
+            >
+                {/* 상세 기본 정보 */}
+                <BasicInfo formik={formik} poiData={poiData} />
                 <Box>
-                    <Box sx={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
-                        <Box sx={{ paddingTop: '5px' }}>
-                            <img src={LanguageIcon} />
-                        </Box>
-                        <Box>
-                            <Typography>10036 New York, Manhattan, United States</Typography>
-                        </Box>
-                        <IconButton
-                            sx={{
-                                ml: 'auto',
-                                minWidth: '15px',
-                                width: '30px',
-                                minHeight: '15px',
-                                height: '30px',
-                            }}
-                            onClick={handleClickSetAddressState}
-                        >
-                            {isAddressSave ? <SaveIcon /> : <EditIcon />}
-                        </IconButton>
-                    </Box>
-                    {(isAddressSave || (!isAddressSave && formik.values.address !== '')) && (
-                        <Box sx={{ height: '40px' }}>
-                            <TextInput
-                                formik={formik}
-                                name={'address'}
-                                IsDisabled={!isAddressSave}
-                                placeholder={t('address_input', 'gpss')}
-                            />
-                        </Box>
-                    )}
+                    <Typography>{t('category', 'common')}</Typography>
                 </Box>
-                <Divider sx={{ marginY: '5px' }} />
-                <Box
-                    sx={{
-                        display: 'flex',
-                        flexDirection: 'column',
-                        gap: '6px',
-                    }}
-                >
-                    <Box sx={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
-                        <Box sx={{ paddingTop: '5px' }}>
-                            <img src={GpsIcon} />
-                        </Box>
-                        <Box>
-                            <Typography>40.758077</Typography>
-                        </Box>
-                        <IconButton
-                            sx={{
-                                ml: 'auto',
-                                minWidth: '15px',
-                                width: '30px',
-                                minHeight: '15px',
-                                height: '30px',
-                            }}
-                            onClick={handleClickSetLatState}
-                        >
-                            {isLatSave ? <SaveIcon /> : <EditIcon />}
-                        </IconButton>
+                <Divider />
+                {/* EV Charging */}
+                <EvCharging />
+                <Box>
+                    <Box>
+                        <Typography>{t('reason_for_approval', 'gpss')}</Typography>
                     </Box>
-                    {(isLatSave || (!isLatSave && formik.values.lat !== '')) && (
-                        <Box sx={{ height: '40px' }}>
-                            <TextInput
-                                formik={formik}
-                                name={'lat'}
-                                IsDisabled={!isLatSave}
-                                placeholder={t('lat_input', 'gpss')}
-                            />
-                        </Box>
-                    )}
+                    <Divider />
+                    <TextField
+                        sx={{ marginBottom: '16px', marginTop: '8px' }}
+                        size={'small'}
+                        multiline
+                        fullWidth
+                        placeholder={t('reason_for_approval_input', 'gpss')}
+                        name={'reason'}
+                        onChange={formik.handleChange}
+                        onBlur={formik.handleBlur}
+                        value={formik.values[name]}
+                    ></TextField>
                 </Box>
-                <Divider sx={{ marginY: '5px' }} />
-                <Box sx={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
-                    <Box sx={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
-                        <Box sx={{ paddingTop: '5px' }}>
-                            <img src={GpsIcon} />
-                        </Box>
-                        <Box>
-                            <Typography>-73.985480</Typography>
-                        </Box>
-                        <IconButton
-                            sx={{
-                                ml: 'auto',
-                                minWidth: '15px',
-                                width: '30px',
-                                minHeight: '15px',
-                                height: '30px',
-                            }}
-                            onClick={handleClickSetLngSate}
-                        >
-                            {isLngSave ? <SaveIcon /> : <EditIcon />}
-                        </IconButton>
+                <Box>
+                    <Box>
+                        <Typography>{t('reviewer', 'users')}</Typography>
                     </Box>
-                    {(isLngSave || (!isLngSave && formik.values.lon !== '')) && (
-                        <Box sx={{ height: '40px' }}>
-                            <TextInput
-                                formik={formik}
-                                name={'lon'}
-                                IsDisabled={!isLngSave}
-                                placeholder={t('lon_input', 'gpss')}
-                            />
-                        </Box>
-                    )}
-                </Box>
-                <Divider sx={{ marginY: '5px' }} />
-            </Box>
-            <Box>
-                <Typography sx={{ fontSize: 20, fontWeight: 600, color: '#00418D' }}>
-                    {t('category', 'common')}
-                </Typography>
-            </Box>
-            <Box sx={{ display: 'flex', marginBottom: '16px' }}>
-                <Accordion elevation={0} sx={{ padding: 0 }}>
-                    <AccordionSummary
-                        expandIcon={<ExpandMoreIcon />}
-                        sx={{ padding: '0px', fontSize: '18px', fontWeight: 500 }}
+                    <Divider />
+                    <Box
+                        sx={{
+                            display: 'flex',
+                            alignItems: 'flex-start',
+                            gap: '6px',
+                            mt: '8px',
+                            height: '40px',
+                        }}
                     >
-                        <img
-                            src={EvStationIcon}
-                            style={{ verticalAlign: 'middle', paddingRight: '4px' }}
+                        <TextInput
+                            formik={formik}
+                            name={'reviewer'}
+                            placeholder={t('input_keyword', 'common')}
                         />
-                        EV Charging
-                    </AccordionSummary>
-                    <AccordionDetails sx={{ padding: 0 }}>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
-                        malesuada lacus ex, sit amet blandit leo lobortis eget.
-                    </AccordionDetails>
-                </Accordion>
-            </Box>
-            <Box>
+                        <Button variant={'contained'} onClick={handleClickGetReviewer}>
+                            {t('search', 'common')}
+                        </Button>
+                    </Box>
+                    <Box
+                        sx={{
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                            flexDirection: 'column',
+                            mt: '8px',
+                        }}
+                    >
+                        {isReviewerSearchClick && (
+                            <>
+                                <Typography sx={{ marginY: '16px' }}>
+                                    {t('search_no_result', 'common')}
+                                </Typography>
+                                <UserSearchTable
+                                    data={dummyData}
+                                    tableType={GPSS_TABLE_TYPE.reviewer}
+                                    selectedReviewer={selectedReviewer}
+                                    setSelectedReviewer={setSelectedReviewer}
+                                />
+                            </>
+                        )}
+                    </Box>
+                </Box>
                 <Box>
-                    <Typography>{t('reason_for_approval', 'gpss')}</Typography>
+                    <Box>
+                        <Typography>{t('approver', 'users')}</Typography>
+                    </Box>
+                    <Divider />
+                    <Box
+                        sx={{
+                            display: 'flex',
+                            alignItems: 'flex-start',
+                            gap: '6px',
+                            mt: '8px',
+                            height: '40px',
+                        }}
+                    >
+                        <TextInput
+                            formik={formik}
+                            name={'approver'}
+                            placeholder={t('input_keyword', 'common')}
+                        />
+                        <Button variant={'contained'} onClick={handleClickGetApprover}>
+                            {t('search', 'common')}
+                        </Button>
+                    </Box>
+                    <Box
+                        sx={{
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                            flexDirection: 'column',
+                            mt: '8px',
+                        }}
+                    >
+                        {isApproverSearchClick && (
+                            <>
+                                <Typography sx={{ marginY: '16px' }}>
+                                    {t('search_no_result', 'common')}
+                                </Typography>
+                                <UserSearchTable
+                                    data={dummyData}
+                                    tableType={GPSS_TABLE_TYPE.approver}
+                                    selectedApprover={selectedApprover}
+                                    setSelectedApprover={setSelectedApprover}
+                                />
+                            </>
+                        )}
+                    </Box>
                 </Box>
-                <Divider />
-                <TextField
-                    sx={{ marginBottom: '16px', marginTop: '8px' }}
-                    size={'small'}
-                    multiline
-                    fullWidth
-                    placeholder={t('reason_for_approval_input', 'gpss')}
-                    name={'reason'}
-                    onChange={formik.handleChange}
-                    onBlur={formik.handleBlur}
-                    value={formik.values[name]}
-                ></TextField>
-            </Box>
-            <Box>
-                <Box>
-                    <Typography>{t('reviewer', 'users')}</Typography>
-                </Box>
-                <Divider />
-                <Box
-                    sx={{
-                        display: 'flex',
-                        alignItems: 'flex-start',
-                        gap: '6px',
-                        mt: '8px',
-                        height: '40px',
-                    }}
-                >
-                    <TextInput
-                        formik={formik}
-                        name={'reviewer'}
-                        placeholder={t('input_keyword', 'common')}
-                    />
-                    <Button variant={'contained'} onClick={handleClickGetReviewer}>
-                        {t('search', 'common')}
-                    </Button>
-                </Box>
-                <Box
-                    sx={{
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                        flexDirection: 'column',
-                        mt: '8px',
-                    }}
-                >
-                    {isReviewerSearchClick && (
-                        <>
-                            <Typography sx={{ marginY: '16px' }}>
-                                {t('search_no_result', 'common')}
-                            </Typography>
-                            <UserSearchTable
-                                data={dummyData}
-                                tableType={GPSS_TABLE_TYPE.reviewer}
-                                selectedReviewer={selectedReviewer}
-                                setSelectedReviewer={setSelectedReviewer}
-                            />
-                        </>
-                    )}
-                </Box>
-            </Box>
-            <Box>
-                <Box>
-                    <Typography>{t('approver', 'users')}</Typography>
-                </Box>
-                <Divider />
-                <Box
-                    sx={{
-                        display: 'flex',
-                        alignItems: 'flex-start',
-                        gap: '6px',
-                        mt: '8px',
-                        height: '40px',
-                    }}
-                >
-                    <TextInput
-                        formik={formik}
-                        name={'approver'}
-                        placeholder={t('input_keyword', 'common')}
-                    />
-                    <Button variant={'contained'} onClick={handleClickGetApprover}>
-                        {t('search', 'common')}
-                    </Button>
-                </Box>
-                <Box
-                    sx={{
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                        flexDirection: 'column',
-                        mt: '8px',
-                    }}
-                >
-                    {isApproverSearchClick && (
-                        <>
-                            <Typography sx={{ marginY: '16px' }}>
-                                {t('search_no_result', 'common')}
-                            </Typography>
-                            <UserSearchTable
-                                data={dummyData}
-                                tableType={GPSS_TABLE_TYPE.approver}
-                                selectedApprover={selectedApprover}
-                                setSelectedApprover={setSelectedApprover}
-                            />
-                        </>
-                    )}
-                </Box>
-            </Box>
 
-            <Box sx={{ display: 'flex', justifyContent: 'end', gap: '6px' }}>
-                <Button
-                    variant={'contained'}
-                    onClick={handleClickTempSaveBtn}
-                    sx={{ whiteSpace: 'nowrap' }}
-                >
-                    {t('temporary_save', 'gpss')}
-                </Button>
-                <Button variant={'contained'} onClick={handleClickEditBtn}>
-                    {t('edit_request', 'gpss')}
-                </Button>
-                <Button variant={'contained'} onClick={handleClickDeleteBtn}>
-                    {t('delete_request', 'gpss')}
-                </Button>
+                <Box sx={{ display: 'flex', justifyContent: 'end', gap: '6px' }}>
+                    <Button
+                        variant={'contained'}
+                        onClick={handleClickTempSaveBtn}
+                        sx={{ whiteSpace: 'nowrap' }}
+                    >
+                        {t('temporary_save', 'gpss')}
+                    </Button>
+                    <Button variant={'contained'} onClick={handleClickEditBtn}>
+                        {t('edit_request', 'gpss')}
+                    </Button>
+                    <Button variant={'contained'} onClick={handleClickDeleteBtn}>
+                        {t('delete_request', 'gpss')}
+                    </Button>
+                </Box>
             </Box>
-        </Box>
+        </FormikProvider>
     )
 }
 

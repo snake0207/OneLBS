@@ -17,11 +17,17 @@ import LanguageIcon from '#/assets/languageIcon.svg'
 import GpsIcon from '#/assets/gpsIcon.svg'
 import EvStationIcon from '#/assets/evStationIcon.svg'
 
-const MapPoiDetail = ({ selectedPoi }) => {
+const MapPoiDetail = ({ selectedPoi, setSelectedPoi, poiData }) => {
     const [isOpen, setIsOpen] = useState(false)
     useEffect(() => {
         if (selectedPoi) setIsOpen(true)
+        else setIsOpen(false)
     }, [selectedPoi])
+
+    const handleClickDetailClose = () => {
+        setIsOpen(false)
+        setSelectedPoi(null)
+    }
     return (
         isOpen && (
             <Box sx={{ display: 'flex', margin: '10px' }}>
@@ -104,7 +110,7 @@ const MapPoiDetail = ({ selectedPoi }) => {
                         width: '35px',
                         height: '35px',
                     }}
-                    onClick={() => setIsOpen(false)}
+                    onClick={handleClickDetailClose}
                 >
                     <CloseIcon />
                 </IconButton>

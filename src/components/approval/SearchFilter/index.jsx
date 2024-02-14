@@ -1,4 +1,4 @@
-import { Box, Button, Table, TableBody, TableCell, TableContainer, TableRow } from '@mui/material'
+import { Button, Stack } from '@mui/material'
 import Grid from '@mui/material/Unstable_Grid2'
 import { useFormik } from 'formik'
 import * as yup from 'yup'
@@ -6,9 +6,10 @@ import TextInput from '#/components/common/input/TextInput/index.jsx'
 import Select from '#/components/common/Select/index.jsx'
 import DatePickerInput from '#/components/common/input/DatePickerInput/index.jsx'
 import t from '#/common/libs/trans.js'
-import { useMemo, useRef } from 'react'
+import Typography from '@mui/material/Typography'
+import { useState } from 'react'
 
-const SearchFilter = ({ type, handleSubmitFilter }) => {
+const SearchFilter = ({ type, handleSubmitFilter, isMobile }) => {
     const formik = useFormik({
         initialValues: {
             tempFilter1: '',
@@ -73,181 +74,146 @@ const SearchFilter = ({ type, handleSubmitFilter }) => {
                 ]
         }
     }
+    const [isFilterShow, setIsFilterShow] = useState(true)
 
     return (
-        <>
-            <Box sx={{ display: 'flex', justifyContent: 'flex-end', mb: 1 }}>
+        <Stack
+            direction={'row'}
+            alignItems={'flex-end'}
+            sx={{ flexDirection: isMobile && 'column-reverse' }}
+        >
+            {isFilterShow && (
+                <Grid container spacing={2}>
+                    <Grid md={4} xs={12} container alignItems={'center'}>
+                        <Grid xs={3} md={4} sx={{ wordBreak: 'break-word' }}>
+                            {t('name', 'approval')}
+                        </Grid>
+                        <Grid xs={9} md={8}>
+                            <TextInput
+                                formik={formik}
+                                name={'tempFilter1'}
+                                placeholder={t('valid.name', 'approval')}
+                            />
+                        </Grid>
+                    </Grid>
+                    <Grid md={4} xs={12} container alignItems={'center'}>
+                        <Grid xs={3} md={4} sx={{ wordBreak: 'break-word' }}>
+                            {t('country', 'approval')}
+                        </Grid>
+                        <Grid xs={9} md={8}>
+                            <Select
+                                name={'tempFilter2'}
+                                formik={formik}
+                                items={regionItems}
+                                sx={{ width: 200 }}
+                            />
+                        </Grid>
+                    </Grid>
+                    <Grid md={4} xs={12} container alignItems={'center'}>
+                        <Grid xs={3} md={4} sx={{ wordBreak: 'break-word' }}>
+                            {t('state', 'approval')}
+                        </Grid>
+                        <Grid xs={9} md={8}>
+                            <Select
+                                name={'tempFilter3'}
+                                formik={formik}
+                                items={statusItems()}
+                                sx={{ width: 200 }}
+                            />
+                        </Grid>
+                    </Grid>
+                    {type !== 'requester' && (
+                        <Grid md={4} xs={12} container alignItems={'center'}>
+                            <Grid xs={3} md={4} sx={{ wordBreak: 'break-word' }}>
+                                {t('requester', 'approval')}
+                            </Grid>
+                            <Grid xs={9} md={8}>
+                                <TextInput
+                                    formik={formik}
+                                    name={'tempFilter4'}
+                                    placeholder={t('valid.requester', 'approval')}
+                                />
+                            </Grid>
+                        </Grid>
+                    )}
+                    {type !== 'reviewer' && (
+                        <Grid md={4} xs={12} container alignItems={'center'}>
+                            <Grid xs={3} md={4} sx={{ wordBreak: 'break-word' }}>
+                                {t('reviewer', 'approval')}
+                            </Grid>
+                            <Grid xs={9} md={8}>
+                                <TextInput
+                                    formik={formik}
+                                    name={'tempFilter5'}
+                                    placeholder={t('valid.reviewer', 'approval')}
+                                />
+                            </Grid>
+                        </Grid>
+                    )}
+                    {type !== 'approver' && (
+                        <Grid md={4} xs={12} container alignItems={'center'}>
+                            <Grid xs={3} md={4} sx={{ wordBreak: 'break-word' }}>
+                                {t('approver', 'approval')}
+                            </Grid>
+                            <Grid xs={9} md={8}>
+                                <TextInput
+                                    formik={formik}
+                                    name={'tempFilter6'}
+                                    placeholder={t('valid.approver', 'approval')}
+                                />
+                            </Grid>
+                        </Grid>
+                    )}
+                    <Grid md={4} xs={12} container alignItems={'center'}>
+                        <Grid xs={3} md={4} sx={{ wordBreak: 'break-word' }}>
+                            {t('request_date', 'approval')}
+                        </Grid>
+                        <Grid xs={9} md={8}>
+                            <Stack direction={'row'} spacing={0.5} alignItems={'center'}>
+                                <DatePickerInput name={'tempFilter7_1'} formik={formik} />
+                                <Typography>-</Typography>
+                                <DatePickerInput name={'tempFilter7_2'} formik={formik} />
+                            </Stack>
+                        </Grid>
+                    </Grid>
+                    <Grid md={4} xs={12} container alignItems={'center'}>
+                        <Grid xs={3} md={4} sx={{ wordBreak: 'break-word' }}>
+                            {t('review_date', 'approval')}
+                        </Grid>
+                        <Grid xs={9} md={8}>
+                            <Stack direction={'row'} spacing={0.5} alignItems={'center'}>
+                                <DatePickerInput name={'tempFilter8_1'} formik={formik} />
+                                <Typography>-</Typography>
+                                <DatePickerInput name={'tempFilter8_2'} formik={formik} />
+                            </Stack>
+                        </Grid>
+                    </Grid>
+                    <Grid md={4} xs={12} container alignItems={'center'}>
+                        <Grid xs={3} md={4} sx={{ wordBreak: 'break-word' }}>
+                            {t('approval_date', 'approval')}
+                        </Grid>
+                        <Grid xs={9} md={8}>
+                            <Stack direction={'row'} spacing={0.5} alignItems={'center'}>
+                                <DatePickerInput name={'tempFilter9_1'} formik={formik} />
+                                <Typography>-</Typography>
+                                <DatePickerInput name={'tempFilter9_2'} formik={formik} />
+                            </Stack>
+                        </Grid>
+                    </Grid>
+                </Grid>
+            )}
+
+            <Stack direction={'row'}>
+                {isMobile && <Button onClick={() => setIsFilterShow(!isFilterShow)}>필터</Button>}
+                {/* TODO: 새로고침 클릭 시 액션 정의 필요 (인풋클리어 / 인풋클리어 + 리스트초기화) */}
+                <Button variant={'contained'} onClick={formik.resetForm}>
+                    새로
+                </Button>
                 <Button variant={'contained'} onClick={formik.handleSubmit}>
                     {t('search', 'approval')}
                 </Button>
-            </Box>
-            <TableContainer>
-                <Table
-                    size="small"
-                    sx={{
-                        border: '1px solid #e0e0e0',
-                    }}
-                >
-                    <TableBody>
-                        <TableRow>
-                            <TableCell
-                                component="th"
-                                sx={{ borderInline: '1px solid #e0e0e0', minWidth: '6rem' }}
-                            >
-                                {t('name', 'approval')}
-                            </TableCell>
-                            <TableCell>
-                                <TextInput
-                                    formik={formik}
-                                    name={'tempFilter1'}
-                                    placeholder={t('valid.name', 'approval')}
-                                />
-                            </TableCell>
-                            <TableCell
-                                component="th"
-                                sx={{ borderInline: '1px solid #e0e0e0', minWidth: '6rem' }}
-                            >
-                                {t('country', 'approval')}
-                            </TableCell>
-                            <TableCell>
-                                <Select
-                                    name={'tempFilter2'}
-                                    formik={formik}
-                                    items={regionItems}
-                                    sx={{ width: 200 }}
-                                />
-                            </TableCell>
-                            <TableCell
-                                component="th"
-                                sx={{ borderInline: '1px solid #e0e0e0', minWidth: '6rem' }}
-                            >
-                                {t('state', 'approval')}
-                            </TableCell>
-                            <TableCell>
-                                <Select
-                                    name={'tempFilter3'}
-                                    formik={formik}
-                                    items={statusItems()}
-                                    sx={{ width: 200 }}
-                                />
-                            </TableCell>
-                        </TableRow>
-                        <TableRow>
-                            {type !== 'requester' && (
-                                <>
-                                    <TableCell
-                                        component="th"
-                                        sx={{ borderInline: '1px solid #e0e0e0', minWidth: '6rem' }}
-                                    >
-                                        {t('requester', 'approval')}
-                                    </TableCell>
-                                    <TableCell>
-                                        <TextInput
-                                            formik={formik}
-                                            name={'tempFilter4'}
-                                            placeholder={t('valid.requester', 'approval')}
-                                        />
-                                    </TableCell>
-                                </>
-                            )}
-                            {type !== 'reviewer' && (
-                                <>
-                                    <TableCell
-                                        component="th"
-                                        sx={{ borderInline: '1px solid #e0e0e0', minWidth: '6rem' }}
-                                    >
-                                        {t('reviewer', 'approval')}
-                                    </TableCell>
-                                    <TableCell>
-                                        <TextInput
-                                            formik={formik}
-                                            name={'tempFilter5'}
-                                            placeholder={t('valid.reviewer', 'approval')}
-                                        />
-                                    </TableCell>
-                                </>
-                            )}
-                            {type !== 'approver' && (
-                                <>
-                                    <TableCell
-                                        component="th"
-                                        sx={{ borderInline: '1px solid #e0e0e0', minWidth: '6rem' }}
-                                    >
-                                        {t('approver', 'approval')}
-                                    </TableCell>
-                                    <TableCell>
-                                        <TextInput
-                                            formik={formik}
-                                            name={'tempFilter6'}
-                                            placeholder={t('valid.approver', 'approval')}
-                                        />
-                                    </TableCell>
-                                </>
-                            )}
-                        </TableRow>
-                        <TableRow>
-                            <TableCell
-                                component="th"
-                                sx={{ borderInline: '1px solid #e0e0e0', minWidth: '6rem' }}
-                            >
-                                {t('request_date', 'approval')}
-                            </TableCell>
-                            <TableCell>
-                                <Grid container alignItems={'center'} columns={15}>
-                                    <Grid md={7}>
-                                        <DatePickerInput name={'tempFilter7_1'} formik={formik} />
-                                    </Grid>
-                                    <Grid md={1} textAlign={'center'}>
-                                        -
-                                    </Grid>
-                                    <Grid md={7}>
-                                        <DatePickerInput name={'tempFilter7_2'} formik={formik} />
-                                    </Grid>
-                                </Grid>
-                            </TableCell>
-                            <TableCell
-                                component="th"
-                                sx={{ borderInline: '1px solid #e0e0e0', minWidth: '6rem' }}
-                            >
-                                {t('review_date', 'approval')}
-                            </TableCell>
-                            <TableCell>
-                                <Grid container alignItems={'center'} columns={{ md: 15 }}>
-                                    <Grid md={7}>
-                                        <DatePickerInput name={'tempFilter8_1'} formik={formik} />
-                                    </Grid>
-                                    <Grid md={1} textAlign={'center'}>
-                                        -
-                                    </Grid>
-                                    <Grid md={7}>
-                                        <DatePickerInput name={'tempFilter8_2'} formik={formik} />
-                                    </Grid>
-                                </Grid>
-                            </TableCell>
-                            <TableCell
-                                component="th"
-                                sx={{ borderInline: '1px solid #e0e0e0', minWidth: '6rem' }}
-                            >
-                                {t('approval_date', 'approval')}
-                            </TableCell>
-                            <TableCell>
-                                <Grid container alignItems={'center'} columns={{ md: 15 }}>
-                                    <Grid md={7}>
-                                        <DatePickerInput name={'tempFilter9_1'} formik={formik} />
-                                    </Grid>
-                                    <Grid md={1} textAlign={'center'}>
-                                        -
-                                    </Grid>
-                                    <Grid md={7}>
-                                        <DatePickerInput name={'tempFilter9_2'} formik={formik} />
-                                    </Grid>
-                                </Grid>
-                            </TableCell>
-                        </TableRow>
-                    </TableBody>
-                </Table>
-            </TableContainer>
-        </>
+            </Stack>
+        </Stack>
     )
 }
 

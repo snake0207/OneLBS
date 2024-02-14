@@ -7,6 +7,8 @@ import Typography from '@mui/material/Typography'
 import t from '#/common/libs/trans'
 
 const breadcrumbNameMap = () => ({
+    '/mypage': t('mypage'),
+    '/mypage/profile': t('profile'),
     '/components': t('components'),
     '/components/layouts': t('layouts'),
     '/components/approval': t('approval', 'approval'),
@@ -19,6 +21,12 @@ const breadcrumbNameMap = () => ({
     '/components/approval/reviewer/detail': t('detail', 'approval'),
     '/components/approval/approver/detail': t('detail', 'approval'),
 })
+
+function isAvailablePath(path) {
+    // Exclude paths
+    const excludePaths = ['/mypage']
+    return !excludePaths.includes(path)
+}
 
 function LinkRouter(props) {
     return <Link {...props} component={RouterLink} />
@@ -41,10 +49,14 @@ function RouterBreadcrumbs() {
                     <Typography color="text.primary" key={to}>
                         {breadcrumbNameMap()[to]}
                     </Typography>
-                ) : (
+                ) : isAvailablePath(to) ? (
                     <LinkRouter underline="hover" color="inherit" to={to} key={to}>
                         {breadcrumbNameMap()[to]}
                     </LinkRouter>
+                ) : (
+                    <Typography color="text.primary" key={to}>
+                        {breadcrumbNameMap()[to]}
+                    </Typography>
                 )
             })}
         </Breadcrumbs>

@@ -1,4 +1,3 @@
-import * as React from 'react'
 import AppBar from '@mui/material/AppBar'
 import Box from '@mui/material/Box'
 import Toolbar from '@mui/material/Toolbar'
@@ -17,6 +16,8 @@ import Notify from '#/components/layout/Notify'
 
 import notifications from './notifications.json'
 import { useNavigate } from 'react-router-dom'
+import { BrowserView, MobileView } from 'react-device-detect'
+import AccountCircleIcon from '@mui/icons-material/AccountCircle'
 
 const userMenus = [
     { key: 'profile', label: t('profile'), value: '/mypage/profile' },
@@ -27,9 +28,8 @@ const languages = [
     { key: 'en', label: t('ENG'), value: 'en' },
 ]
 
-function Header() {
+function Header({ toggleDrawer }) {
     const { language, setLanguage } = useLayoutStore()
-    const [, setAnchorElNav] = React.useState(null)
     const [, toggleFullScreen] = useFullScreen()
     const navigate = useNavigate()
 
@@ -41,10 +41,6 @@ function Header() {
         }
 
         navigate(item.value)
-    }
-
-    const handleOpenNavMenu = (event) => {
-        setAnchorElNav(event.currentTarget)
     }
 
     const handleSelectLangMenu = (item) => {
@@ -63,36 +59,56 @@ function Header() {
                     <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
                         <IconButton
                             size="large"
-                            aria-label="account of current user"
+                            aria-label="open side menu"
                             aria-controls="menu-appbar"
                             aria-haspopup="true"
-                            onClick={handleOpenNavMenu}
+                            onClick={toggleDrawer}
                             color="inherit"
                         >
                             <MenuIcon />
                         </IconButton>
                     </Box>
                     <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}></Box>
-                    <Box sx={{ flexGrow: 0 }}>
-                        <Notify notifications={notifications} />
-                        <IconButton sx={{ p: 0 }}>
-                            <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
-                        </IconButton>
-                        <Dropdown items={userMenus} onSelect={handleSelectUserMenu}>
-                            James
-                        </Dropdown>
-                        <Dropdown
-                            items={languages}
-                            selectable={true}
-                            onSelect={handleSelectLangMenu}
-                        >
-                            {findLanguage(language)?.label}
-                        </Dropdown>
-                        <IconButton sx={{ p: 0 }} onClick={() => toggleFullScreen()}>
-                            <FullscreenIcon />
-                        </IconButton>
-                        <Settings />
-                    </Box>
+                    <BrowserView>
+                        <Box sx={{ flexGrow: 0 }}>
+                            <Notify notifications={notifications} />
+                            <IconButton sx={{ p: 0 }}>
+                                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+                            </IconButton>
+                            <Dropdown items={userMenus} onSelect={handleSelectUserMenu}>
+                                James
+                            </Dropdown>
+                            <Dropdown
+                                items={languages}
+                                selectable={true}
+                                onSelect={handleSelectLangMenu}
+                            >
+                                {findLanguage(language)?.label}
+                            </Dropdown>
+                            <IconButton sx={{ p: 0 }} onClick={() => toggleFullScreen()}>
+                                <FullscreenIcon />
+                            </IconButton>
+                            <Settings />
+                        </Box>
+                    </BrowserView>
+                    <MobileView>
+                        <Box sx={{ flexGrow: 0 }}>
+                            <Notify notifications={notifications} />
+                            <Dropdown
+                                items={userMenus}
+                                onSelect={handleSelectUserMenu}
+                                iconNode={<AccountCircleIcon />}
+                            />
+                            <Dropdown
+                                items={languages}
+                                selectable={true}
+                                onSelect={handleSelectLangMenu}
+                            >
+                                {findLanguage(language)?.label}
+                            </Dropdown>
+                            <Settings />
+                        </Box>
+                    </MobileView>
                 </Toolbar>
             </Container>
         </AppBar>

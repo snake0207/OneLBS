@@ -5,6 +5,8 @@ import t from '#/common/libs/trans'
 import Select from '#/components/common/Select'
 import DatePickerInput from '#/components/common/input/DatePickerInput'
 
+import style from './style.module'
+
 function SearchFilter({ onSearch }) {
     const getPermissionList = () => [
         { key: 0, value: 0, label: t('all', 'users') },
@@ -29,23 +31,9 @@ function SearchFilter({ onSearch }) {
     })
 
     return (
-        <Box>
-            <Table>
+        <Box sx={style.searchBox}>
+            <Table sx={style.tableBox}>
                 <TableHead>
-                    <TableRow>
-                        <TableCell />
-                        <TableCell />
-                        <TableCell />
-                        <TableCell align="right">
-                            <Button
-                                variant="contained"
-                                color="primary"
-                                onClick={formik.handleSubmit}
-                            >
-                                {t('search', 'users')}
-                            </Button>
-                        </TableCell>
-                    </TableRow>
                     <TableRow>
                         <TableCell>{t('email', 'users')}</TableCell>
                         <TableCell>
@@ -55,6 +43,7 @@ function SearchFilter({ onSearch }) {
                         <TableCell>
                             <TextInput name="name" formik={formik} sx={{ width: 200 }} />
                         </TableCell>
+                        <TableCell />
                     </TableRow>
                     <TableRow>
                         <TableCell>{t('permission', 'users')}</TableCell>
@@ -73,6 +62,16 @@ function SearchFilter({ onSearch }) {
                                 <Box> ~ </Box>
                                 <DatePickerInput name="end_date" formik={formik} />
                             </Stack>
+                        </TableCell>
+                        <TableCell align="right">
+                            <Button
+                                variant="contained"
+                                color="primary"
+                                onClick={formik.handleSubmit}
+                                sx={style.searchButton}
+                            >
+                                {t('search', 'users')}
+                            </Button>
                         </TableCell>
                     </TableRow>
                 </TableHead>

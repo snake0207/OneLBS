@@ -1,0 +1,276 @@
+{
+    "data": {
+        "menuTree": [
+            {
+                "menuId": 120,
+                "name": "Search Management",
+                "menuOrder": 1,
+                "rootMenuId": null,
+                "menuUrl": "",
+                "iconName": null,
+                "label": "search_management",
+                "children": [
+                    {
+                        "menuId": 121,
+                        "name": "Map",
+                        "menuOrder": 1,
+                        "rootMenuId": 120,
+                        "menuUrl": "/search-management/map",
+                        "iconName": null,
+                        "label": "map",
+                        "children": []
+                    }
+                ]
+            },
+            {
+                "menuId": 130,
+                "name": "POI View",
+                "menuOrder": 2,
+                "rootMenuId": null,
+                "menuUrl": "",
+                "iconName": null,
+                "label": "poi_search",
+                "children": [
+                    {
+                        "menuId": 131,
+                        "name": "Map",
+                        "menuOrder": 1,
+                        "rootMenuId": 130,
+                        "menuUrl": "/poi-view/map",
+                        "iconName": null,
+                        "label": "map",
+                        "children": []
+                    }
+                ]
+            },
+            {
+                "menuId": 140,
+                "name": "Approval History Management",
+                "menuOrder": 3,
+                "rootMenuId": null,
+                "menuUrl": "",
+                "iconName": null,
+                "label": "permit_history",
+                "children": [
+                    {
+                        "menuId": 141,
+                        "name": "Full History View",
+                        "menuOrder": 1,
+                        "rootMenuId": 140,
+                        "menuUrl": "/approval",
+                        "iconName": null,
+                        "label": "all_history",
+                        "children": []
+                    },
+                    {
+                        "menuId": 142,
+                        "name": "User History View",
+                        "menuOrder": 2,
+                        "rootMenuId": 140,
+                        "menuUrl": "/approval/user-history",
+                        "iconName": null,
+                        "label": "user_history",
+                        "children": []
+                    },
+                    {
+                        "menuId": 143,
+                        "name": "Reviewer History View",
+                        "menuOrder": 3,
+                        "rootMenuId": 140,
+                        "menuUrl": "/approval/reviewer-history",
+                        "iconName": null,
+                        "label": "reviewer_history",
+                        "children": []
+                    },
+                    {
+                        "menuId": 144,
+                        "name": "Manager History View",
+                        "menuOrder": 4,
+                        "rootMenuId": 140,
+                        "menuUrl": "/approval/manager-history",
+                        "iconName": null,
+                        "label": "manager_history",
+                        "children": []
+                    }
+                ]
+            },
+            {
+                "menuId": 150,
+                "name": "MCP POI Statistics",
+                "menuOrder": 4,
+                "rootMenuId": null,
+                "menuUrl": "",
+                "iconName": null,
+                "label": "mcp_poi_statistics",
+                "children": [
+                    {
+                        "menuId": 151,
+                        "name": "Hourly Statistics",
+                        "menuOrder": 1,
+                        "rootMenuId": 150,
+                        "menuUrl": "/mcp-poi/statistics/hourly",
+                        "iconName": null,
+                        "label": "time_statistics",
+                        "children": []
+                    },
+                    {
+                        "menuId": 152,
+                        "name": "Regional Statistics",
+                        "menuOrder": 2,
+                        "rootMenuId": 150,
+                        "menuUrl": "/mcp-poi/statistics/regional",
+                        "iconName": null,
+                        "label": "area_statistics",
+                        "children": []
+                    },
+                    {
+                        "menuId": 153,
+                        "name": "Content Provider Statistics",
+                        "menuOrder": 3,
+                        "rootMenuId": 150,
+                        "menuUrl": "/mcp-poi/statistics/content-provider",
+                        "iconName": null,
+                        "label": "cp_statistics",
+                        "children": []
+                    },
+                    {
+                        "menuId": 154,
+                        "name": "User Statistics",
+                        "menuOrder": 4,
+                        "rootMenuId": 150,
+                        "menuUrl": "/mcp-poi/statistics/user",
+                        "iconName": null,
+                        "label": "user_statistics",
+                        "children": []
+                    }
+                ]
+            },
+            {
+                "menuId": 160,
+                "name": "User Management",
+                "menuOrder": 5,
+                "rootMenuId": null,
+                "menuUrl": "",
+                "iconName": null,
+                "label": "user_management",
+                "children": [
+                    {
+                        "menuId": 161,
+                        "name": "User List",
+                        "menuOrder": 1,
+                        "rootMenuId": 160,
+                        "menuUrl": "/user-management/user-list",
+                        "iconName": null,
+                        "label": "user_list",
+                        "children": []
+                    },
+                    {
+                        "menuId": 162,
+                        "name": "User Login History",
+                        "menuOrder": 2,
+                        "rootMenuId": 160,
+                        "menuUrl": "/user-management/login-history",
+                        "iconName": null,
+                        "label": "user_login_history",
+                        "children": []
+                    },
+                    {
+                        "menuId": 163,
+                        "name": "User Role History",
+                        "menuOrder": 3,
+                        "rootMenuId": 160,
+                        "menuUrl": "/user-management/role-history",
+                        "iconName": null,
+                        "label": "user_permission_history",
+                        "children": []
+                    },
+                    {
+                        "menuId": 164,
+                        "name": "IP Access Management",
+                        "menuOrder": 4,
+                        "rootMenuId": 160,
+                        "menuUrl": "/user-management/ip-access",
+                        "iconName": null,
+                        "label": null,
+                        "children": []
+                    }
+                ]
+            },
+            {
+                "menuId": 170,
+                "name": "Permission Management",
+                "menuOrder": 6,
+                "rootMenuId": null,
+                "menuUrl": "",
+                "iconName": null,
+                "label": null,
+                "children": [
+                    {
+                        "menuId": 171,
+                        "name": "Permissions List",
+                        "menuOrder": 1,
+                        "rootMenuId": 170,
+                        "menuUrl": "/permission-management/permissions-list",
+                        "iconName": null,
+                        "label": null,
+                        "children": []
+                    }
+                ]
+            },
+            {
+                "menuId": 180,
+                "name": "Common",
+                "menuOrder": 7,
+                "rootMenuId": null,
+                "menuUrl": null,
+                "iconName": null,
+                "label": null,
+                "children": [
+                    {
+                        "menuId": 181,
+                        "name": "Category Code Management",
+                        "menuOrder": 1,
+                        "rootMenuId": 180,
+                        "menuUrl": "/common/category-code-management",
+                        "iconName": null,
+                        "label": null,
+                        "children": []
+                    },
+                    {
+                        "menuId": 182,
+                        "name": "Country Code Management",
+                        "menuOrder": 2,
+                        "rootMenuId": 180,
+                        "menuUrl": "/common/country-code-management",
+                        "iconName": null,
+                        "label": null,
+                        "children": []
+                    },
+                    {
+                        "menuId": 183,
+                        "name": "Language Code Management",
+                        "menuOrder": 3,
+                        "rootMenuId": 180,
+                        "menuUrl": "/common/language-code-management",
+                        "iconName": null,
+                        "label": null,
+                        "children": []
+                    },
+                    {
+                        "menuId": 184,
+                        "name": "Login Page Image Management",
+                        "menuOrder": 4,
+                        "rootMenuId": 180,
+                        "menuUrl": "/common/login-page-image-management",
+                        "iconName": null,
+                        "label": null,
+                        "children": []
+                    }
+                ]
+            }
+        ]
+    },
+    "code": 200,
+    "subCode": 0,
+    "error": "Success"
+}

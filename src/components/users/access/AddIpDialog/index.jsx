@@ -9,6 +9,7 @@ import {
     TableRow,
     TableCell,
     IconButton,
+    Box,
 } from '@mui/material'
 
 import CloseIcon from '@mui/icons-material/Close'
@@ -19,6 +20,9 @@ import t from '#/common/libs/trans'
 import TextInput from '#/components/common/input/TextInput'
 import { IpInput } from '#/components/common/input/IpInput'
 import { useEffect } from 'react'
+import DetailviewIconIcon from '#/assets/detailviewIcon.svg'
+
+import style from './style.module'
 
 function AddIpDialog({ user, open, onClose, onRegister }) {
     const formik = useFormik({
@@ -48,45 +52,65 @@ function AddIpDialog({ user, open, onClose, onRegister }) {
 
     return (
         <Dialog open={open} onClose={onClose}>
-            <DialogTitle>{t('detail', 'users')}</DialogTitle>
+            <DialogTitle
+                sx={{
+                    display: 'flex',
+                    justifyContent: 'space-between',
+                    alignItems: 'center',
+                    fontSize: 16,
+                    backgroundColor: 'primary.lightBlue',
+                    borderRadius: 20,
+                    mt: 3.8,
+                    ml: 2.5,
+                    mr: 2.5,
+                    mb: 1.3,
+                    height: 42,
+                    pl: 1,
+                    pr: 1,
+                }}
+            >
+                <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+                    <img src={DetailviewIconIcon} style={{ width: '24px' }} />
+                    {t('detail', 'users')}
+                </Box>
+            </DialogTitle>
             <IconButton
                 aria-label="close"
                 onClick={onClose}
                 sx={{
                     position: 'absolute',
-                    right: 8,
-                    top: 8,
-                    color: (theme) => theme.palette.grey[500],
+                    right: 24,
+                    top: 30,
                 }}
             >
                 <CloseIcon />
             </IconButton>
-            <DialogContent>
-                <Table>
+            <DialogContent sx={{ pt: 0 }}>
+                <Table style={{ marginBottom: '20px' }} sx={style.tableBox}>
                     <TableHead>
                         <TableRow>
                             <TableCell>{t('email', 'users')}</TableCell>
-                            <TableCell>{user?.email}</TableCell>
+                            <TableCell component="td">{user?.email}</TableCell>
                         </TableRow>
                         <TableRow>
                             <TableCell>{t('name', 'users')}</TableCell>
-                            <TableCell>{user?.name}</TableCell>
+                            <TableCell component="td">{user?.name}</TableCell>
                         </TableRow>
                         <TableRow>
                             <TableCell>{t('company_name', 'users')}</TableCell>
-                            <TableCell>{user?.company}</TableCell>
+                            <TableCell component="td">{user?.company}</TableCell>
                         </TableRow>
                         <TableRow>
                             <TableCell>{t('team_name', 'users')}</TableCell>
-                            <TableCell>{user?.team}</TableCell>
+                            <TableCell component="td">{user?.team}</TableCell>
                         </TableRow>
                     </TableHead>
                 </Table>
-                <Table>
+                <Table sx={style.tableBox}>
                     <TableHead>
                         <TableRow>
                             <TableCell>{t('ip', 'users')}</TableCell>
-                            <TableCell>
+                            <TableCell component="td">
                                 <IpInput
                                     name="ip_address"
                                     ipName1="ip1"
@@ -99,15 +123,20 @@ function AddIpDialog({ user, open, onClose, onRegister }) {
                         </TableRow>
                         <TableRow>
                             <TableCell>{t('description', 'users')}</TableCell>
-                            <TableCell>
+                            <TableCell component="td">
                                 <TextInput name="description" formik={formik} />
                             </TableCell>
                         </TableRow>
                     </TableHead>
                 </Table>
             </DialogContent>
-            <DialogActions>
-                <Button variant="contained" color="primary" onClick={formik.handleSubmit}>
+            <DialogActions sx={style.btnBox}>
+                <Button
+                    variant="contained"
+                    color="primary"
+                    onClick={formik.handleSubmit}
+                    sx={style.btnLarge}
+                >
                     {t('register', 'users')}
                 </Button>
             </DialogActions>

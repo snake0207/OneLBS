@@ -6,7 +6,8 @@
         "permit_history": "결제 이력관리",
         "all_history": "전체 이력 조회",
         "user_history": "이력 조회(신청자)",
-        "admin_history": "이력 조회(관리자)",
+        "reviewer_history": "이력 조회(검토자)",
+        "manager_history": "이력 조회(승인자)",
         "mcp_poi_statistics": "MCP POI 통계",
         "time_statistics": "시간별 통계",
         "area_statistics": "지역별 통계",
@@ -17,9 +18,10 @@
         "user_permission_history": "유저 권한 이력"
     },
     "home": "Home",
+    "mypage": "마이페이지",
     "components": "Components",
     "layouts": "Layouts",
-    "profile": "프로필",
+    "profile": "내 정보",
     "logout": "로그아웃",
     "kor": "KOR",
     "eng": "ENG",
@@ -35,5 +37,6 @@
     "reset": "설정 초기화",
     "ok": "확인",
     "yes": "예",
-    "no": "아니오"
+    "no": "아니오",
+    "read_all": "전체 읽음"
 }

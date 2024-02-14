@@ -4,7 +4,6 @@
     "list_reviewer": "이력 조회(검토자)",
     "list_approver": "이력 조회(승인자)",
     "detail": "이력 조회 상세",
-    "history_detail": "이력 조회 상세",
     "line": "결제라인",
     "requester": "요청자",
     "reviewer": "검토자",
@@ -37,5 +36,32 @@
         "reviewed": "검토완료",
         "approved": "승인완료",
         "rejected": "반려"
+    },
+    "actions": {
+        "temporary": "임시저장",
+        "retrieve": "회수",
+        "re_request": "재상신",
+        "approval": "승인",
+        "reject": "반려"
+    },
+    "modal": {
+        "temporary": "임시저장 하시겠습니까?",
+        "retrieve": "회수 하시겠습니까?",
+        "re_request": "재상신 하시겠습니까?",
+        "approval": "승인 하시겠습니까?",
+        "reject": "반려 하시겠습니까?"
+    },
+    "confirmed": {
+        "temporary": "임시저장 되었습니다",
+        "retrieve": "회수 되었습니다",
+        "re_request": "재상신 되었습니다",
+        "approval": "승인 되었습니다",
+        "reject": "반려 되었습니다"
+    },
+    "valid": {
+        "name": "명칭",
+        "requester": "요청자",
+        "reviewer": "검토자",
+        "approver": "승인자"
     }
 }

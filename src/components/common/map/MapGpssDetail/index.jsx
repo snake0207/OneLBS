@@ -34,8 +34,12 @@ const MapGpssDetail = ({ selectedPoi, setSelectedPoi, poiData }) => {
                 >
                     <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
                         <Tabs value={tabSelected} onChange={handleClickTabChange} sx={style.tabs}>
-                            <Tab label={t('info', 'gpss')} value="info" sx={style.tabMenu}/>
-                            <Tab label={t('last_modified_info', 'gpss')} value="last-modified" sx={style.tabMenu}/>
+                            <Tab label={t('info', 'gpss')} value="info" sx={style.tabMenu} />
+                            <Tab
+                                label={t('last_modified_info', 'gpss')}
+                                value="last-modified"
+                                sx={style.tabMenu}
+                            />
                         </Tabs>
                     </Box>
                     {tabSelected === 'info' ? (
@@ -44,33 +48,19 @@ const MapGpssDetail = ({ selectedPoi, setSelectedPoi, poiData }) => {
                         <MapGpssHistoryTab poiData={poiData} />
                     )}
                 </Box>
-                <Button
+                <IconButton
                     variant={'contained'}
                     sx={{
-                        ml: 1,
-                        minWidth: '22px',
+                        inWidth: '22px',
                         minHeight: '22px',
                         width: '35px',
                         height: '35px',
-                        borderRadius: '8px',
                     }}
                     onClick={handleClickDetailClose}
                 >
                     <CloseIcon />
-                </Button>
+                </IconButton>
             </Box>
-            <IconButton
-                variant={'contained'}
-                sx={{
-                    inWidth: '22px',
-                    minHeight: '22px',
-                    width: '35px',
-                    height: '35px',
-                }}
-            >
-                <CloseIcon />
-            </IconButton>
-        </Box>
         )
     )
 }

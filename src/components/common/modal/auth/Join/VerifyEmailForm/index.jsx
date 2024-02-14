@@ -32,6 +32,20 @@ const VerifyEmailForm = ({ formik }) => {
         }
     }
 
+    const customHelperText = () => {
+        if (isButtonDisabled)
+            return (
+                <FormHelperText sx={{ ml: 2 }}>{t('email_code_send', 'validation')}</FormHelperText>
+            )
+
+        if (formik.touched.email && formik.errors.email)
+            return (
+                <FormHelperText sx={{ ml: 2 }} error>
+                    {formik.errors.email}
+                </FormHelperText>
+            )
+    }
+
     useEffect(() => {
         if (time === 0) {
             setIsButtonDisabled(false)
@@ -74,18 +88,7 @@ const VerifyEmailForm = ({ formik }) => {
                         ),
                     }}
                 />
-                {isButtonDisabled ? (
-                    <FormHelperText sx={{ ml: 2 }}>
-                        {t('email_code_send', 'validation')}
-                    </FormHelperText>
-                ) : (
-                    formik.touched.email &&
-                    formik.errors.email && (
-                        <FormHelperText sx={{ ml: 2 }} error>
-                            {formik.errors.email}
-                        </FormHelperText>
-                    )
-                )}
+                {customHelperText()}
             </Box>
             <Button
                 variant="contained"

@@ -45,6 +45,29 @@ const ConfirmEmailForm = ({ formik }) => {
         }
     }
 
+    const customHelperText = () => {
+        if (isAuthCompleted)
+            return (
+                <FormHelperText sx={{ ml: 2 }}>
+                    {t('email_code_complete', 'validation')}
+                </FormHelperText>
+            )
+
+        if (time === 0)
+            return (
+                <FormHelperText sx={{ ml: 2 }} error>
+                    {t('email_code_timeout', 'validation')}
+                </FormHelperText>
+            )
+
+        if (formik.touched.code && formik.errors.code)
+            return (
+                <FormHelperText sx={{ ml: 2 }} error>
+                    {formik.errors.code}
+                </FormHelperText>
+            )
+    }
+
     useEffect(() => {
         let timer
         if (time > 0) {
@@ -102,18 +125,7 @@ const ConfirmEmailForm = ({ formik }) => {
                         ),
                     }}
                 />
-                {time === 0 ? (
-                    <FormHelperText sx={{ ml: 2 }} error>
-                        {t('email_code_timeout', 'validation')}
-                    </FormHelperText>
-                ) : (
-                    formik.touched.code &&
-                    formik.errors.code && (
-                        <FormHelperText sx={{ ml: 2 }} error>
-                            {formik.errors.code}
-                        </FormHelperText>
-                    )
-                )}
+                {customHelperText()}
             </Box>
             <Button
                 variant="contained"

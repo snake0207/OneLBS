@@ -7,6 +7,7 @@ const useTimerStore = create(
         actions: {
             setTime: (time) => set({ time }),
             decreseTime: () => set((state) => ({ time: state.time - 1 })),
+            reset: () => set({ time: null }),
         },
     })),
 )

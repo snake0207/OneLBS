@@ -122,6 +122,14 @@ export const otpSchema = yup.object({
         .required(HELPER_TEXT.otpRequired),
 })
 
+export const emailAuthSchema = yup.object({
+    email: yup.string().email(HELPER_TEXT.emailNotMatch).required(HELPER_TEXT.emailRequired),
+    code: yup
+        .string()
+        .matches(REGEXP.verifyCode, HELPER_TEXT.emailCodeNotMatch)
+        .required(HELPER_TEXT.emailCodeRequired),
+})
+
 export const mapSearchSchema = yup.object({
     country: yup.string().required(HELPER_TEXT.searchCountry),
     lat: yup

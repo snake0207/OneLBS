@@ -13,7 +13,6 @@ import { Icon } from '@mui/material'
 import LoginIcon from '#/assets/loginIcon.svg'
 import { BrowserView } from 'react-device-detect'
 
-import useLayoutStore from '#/store/useLayoutStore'
 import t from '#/common/libs/trans'
 
 import style from './style.module'

@@ -7,17 +7,15 @@ import {
     TableHead,
     TableRow,
 } from '@mui/material'
-import { useNavigate } from 'react-router-dom'
 import t from '#/common/libs/trans.js'
+import ActionButtons from '#/components/approval/Detail/ActionButtons/index.jsx'
 
-const HistoryTable = ({ type, dummyData }) => {
-    const navigator = useNavigate()
-    const url = window.location.pathname
+const HistoryTable = ({ type, dummyData, onClickButtonFunction, onClickRowFunction }) => {
     const headers = [
         'No.',
         t('name', 'approval'),
         t('country', 'approval'),
-        type === 'requester' ? null : t('requester', 'approval'),
+        type === 'requester' ? null : t('requester', 'approval'), // 권한별 컬럼노출여부
         type === 'reviewer' ? null : t('reviewer', 'approval'),
         type === 'approver' ? null : t('approver', 'approval'),
         t('request_date', 'approval'),
@@ -33,7 +31,16 @@ const HistoryTable = ({ type, dummyData }) => {
                     <TableHead>
                         <TableRow>
                             {headers.map((header, index) =>
-                                header === null ? '' : <TableCell key={index}>{header}</TableCell>,
+                                header === null ? (
+                                    ''
+                                ) : headers.length === index + 1 ? (
+                                    // 상태컬럼 colspan 설정
+                                    <TableCell colSpan={2} key={index}>
+                                        {header}
+                                    </TableCell>
+                                ) : (
+                                    <TableCell key={index}>{header}</TableCell>
+                                ),
                             )}
                         </TableRow>
                     </TableHead>
@@ -45,7 +52,7 @@ const HistoryTable = ({ type, dummyData }) => {
                                         key={data.id}
                                         id={data.id}
                                         hover
-                                        onClick={() => navigator(`${url}/detail/${data.id}`)}
+                                        onClick={(e) => onClickRowFunction(e.target, data.id)}
                                     >
                                         <TableCell>{dummyData.length - index}</TableCell>
                                         <TableCell>{data.name}</TableCell>
@@ -63,6 +70,14 @@ const HistoryTable = ({ type, dummyData }) => {
                                         <TableCell>{data.review_date}</TableCell>
                                         <TableCell>{data.approval_date}</TableCell>
                                         <TableCell>{data.status}</TableCell>
+                                        <TableCell>
+                                            <ActionButtons
+                                                type={type}
+                                                status={data.status}
+                                                clickAction={onClickButtonFunction}
+                                                id={data.id}
+                                            />
+                                        </TableCell>
                                     </TableRow>
                                 )
                             })

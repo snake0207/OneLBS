@@ -5,15 +5,17 @@ import {
     Box,
     Button,
     Typography,
+    IconButton,
 } from '@mui/material'
 import Divider from '@mui/material/Divider'
-import LanguageIcon from '@mui/icons-material/Language'
 import CloseIcon from '@mui/icons-material/Close'
-import PlaceIcon from '@mui/icons-material/Place'
-import EvStationIcon from '@mui/icons-material/EvStation'
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
 import t from '#/common/libs/trans.js'
 import { useEffect, useState } from 'react'
+import PointBlueIcon from '#/assets/pointBlueIcon.svg'
+import LanguageIcon from '#/assets/languageIcon.svg'
+import GpsIcon from '#/assets/gpsIcon.svg'
+import EvStationIcon from '#/assets/evStationIcon.svg'
 
 const MapPoiDetail = ({ selectedPoi, setSelectedPoi, poiData }) => {
     const [isOpen, setIsOpen] = useState(false)
@@ -35,17 +37,22 @@ const MapPoiDetail = ({ selectedPoi, setSelectedPoi, poiData }) => {
                         padding: '16px',
                         background: '#ffffff',
                         borderRadius: '8px',
-                        border: '1px solid #D1D1D1',
+                        boxShadow: '0 3px 14px rgb(0 0 0 / 24%)',
                     }}
                 >
                     <Box>
-                        <Typography variant={'h6'}>Times Square</Typography>
+                        <Typography variant={'h6'} sx={{ fontSize: '20px', fontWeight: 600 }}>
+                            <img
+                                src={PointBlueIcon}
+                                style={{ verticalAlign: 'middle', paddingRight: '4px' }}
+                            />
+                            Times Square
+                        </Typography>
                     </Box>
-                    <Divider />
-                    <Box sx={{ marginY: '16px' }}>
+                    <Box sx={{ marginTop: '8px', marginBottom: '16px' }}>
                         <Box sx={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
                             <Box sx={{ paddingTop: '5px' }}>
-                                <PlaceIcon />
+                                <img src={LanguageIcon} />
                             </Box>
                             <Box>
                                 <Typography>10036 New York, Manhattan, United States</Typography>
@@ -54,7 +61,7 @@ const MapPoiDetail = ({ selectedPoi, setSelectedPoi, poiData }) => {
                         <Divider sx={{ marginY: '5px' }} />
                         <Box sx={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
                             <Box sx={{ paddingTop: '5px' }}>
-                                <LanguageIcon />
+                                <img src={GpsIcon} />
                             </Box>
                             <Box>
                                 <Typography>40.758077</Typography>
@@ -63,24 +70,30 @@ const MapPoiDetail = ({ selectedPoi, setSelectedPoi, poiData }) => {
                         <Divider sx={{ marginY: '5px' }} />
                         <Box sx={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
                             <Box sx={{ paddingTop: '5px' }}>
-                                <LanguageIcon />
+                                <img src={GpsIcon} />
                             </Box>
                             <Box>
                                 <Typography>-73.985480</Typography>
                             </Box>
                         </Box>
+                        <Divider sx={{ marginY: '5px' }} />
                     </Box>
                     <Box>
-                        <Typography>{t('category', 'common')}</Typography>
+                        <Typography sx={{ fontSize: 20, fontWeight: 600, color: '#00418D' }}>
+                            {t('category', 'common')}
+                        </Typography>
                     </Box>
-                    <Divider />
                     <Box sx={{ display: 'flex' }}>
                         <Accordion elevation={0}>
                             <AccordionSummary
                                 expandIcon={<ExpandMoreIcon />}
                                 sx={{ padding: '0px' }}
                             >
-                                <EvStationIcon /> EV Charging
+                                <img
+                                    src={EvStationIcon}
+                                    style={{ verticalAlign: 'middle', paddingRight: '4px' }}
+                                />{' '}
+                                EV Charging
                             </AccordionSummary>
                             <AccordionDetails sx={{ padding: 0 }}>
                                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
@@ -89,20 +102,18 @@ const MapPoiDetail = ({ selectedPoi, setSelectedPoi, poiData }) => {
                         </Accordion>
                     </Box>
                 </Box>
-                <Button
+                <IconButton
                     variant={'contained'}
                     sx={{
-                        ml: 1,
                         minWidth: '22px',
                         minHeight: '22px',
                         width: '35px',
                         height: '35px',
-                        borderRadius: '8px',
                     }}
                     onClick={handleClickDetailClose}
                 >
                     <CloseIcon />
-                </Button>
+                </IconButton>
             </Box>
         )
     )

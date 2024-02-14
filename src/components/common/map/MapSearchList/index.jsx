@@ -3,6 +3,7 @@ import MapPoiContent from '#/components/common/map/MapSearchList/MapPoiContent/i
 import List from '@mui/material/List'
 import { useEffect, useRef, useState } from 'react'
 import t from '#/common/libs/trans.js'
+import TopIcon from '#/assets/topIcon.svg'
 
 const MapSearchList = ({ searchResultArr, selectedPoi, setSelectedPoi }) => {
     const [isResultNon, setIsResultNon] = useState(true)
@@ -36,22 +37,23 @@ const MapSearchList = ({ searchResultArr, selectedPoi, setSelectedPoi }) => {
         <Box
             sx={{
                 width: '350px',
-                padding: '2px',
                 margin: '10px',
                 background: '#ffffff',
                 borderRadius: '8px',
-                border: '1px solid #D1D1D1',
                 minHeight: '130px',
                 maxHeight: '550px',
                 display: isResultNon ? 'flex' : '',
                 justifyContent: isResultNon ? 'center' : '',
                 alignItems: isResultNon ? 'center' : '',
                 overflow: 'auto',
+                boxShadow: '0 3px 14px rgb(0 0 0 / 24%)',
             }}
             ref={poiList}
         >
             {isResultNon ? (
-                <Typography>{t('search_no_result', 'common')}</Typography>
+                <Typography sx={{ fontSize: 15, color: '#444' }}>
+                    {t('search_no_result', 'common')}
+                </Typography>
             ) : (
                 searchResultArr && (
                     <List sx={{ width: '100%' }}>
@@ -69,21 +71,20 @@ const MapSearchList = ({ searchResultArr, selectedPoi, setSelectedPoi }) => {
                         <Box
                             sx={{
                                 position: 'sticky',
-                                width: '100px',
-                                height: '30px',
+                                width: '40px',
+                                height: '40px',
                                 left: '35%',
                                 bottom: '1%',
-                                borderRadius: '8px',
-                                border: '1px solid #D1D1D1',
+                                borderRadius: '50px',
                                 display: isTopBtnVisible ? 'flex' : 'none',
                                 justifyContent: 'center',
                                 alignItems: 'center',
-                                background: '#D1D1D1',
+                                background: '#05141F',
                                 cursor: 'pointer',
                             }}
                             onClick={scrollToTop}
                         >
-                            TOP
+                            <img src={TopIcon} />
                         </Box>
                     </List>
                 )

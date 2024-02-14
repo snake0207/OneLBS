@@ -131,7 +131,13 @@ const ConfirmEmailForm = ({ formik }) => {
                 variant="contained"
                 onClick={handleSubmitEmailCode}
                 type="button"
-                sx={style.btn}
+                sx={{
+                    flex: '0 0 auto',
+                    bgcolor: 'button.gray',
+                    '&:hover': {
+                        backgroundColor: 'button.gray',
+                    },
+                }}
                 disabled={isAuthCompleted}
             >
                 {isAuthCompleted

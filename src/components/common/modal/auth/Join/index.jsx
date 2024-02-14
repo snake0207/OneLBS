@@ -84,12 +84,12 @@ const JoinModal = () => {
                     {t('email', 'auth')}
                 </Typography>
                 <VerifyEmailForm formik={formik} />
-                <Typography variant="h6" sx={{ fontSize: 14 }}>
+                <Typography variant="h6" sx={{ fontSize: 14, mt: 2 }}>
                     <span style={{ color: 'red' }}>*</span>
                     {t('confirm_email_code', 'auth')}
                 </Typography>
                 <ConfirmEmailForm formik={formik} />
-                <Typography variant="h6" sx={{ fontSize: 14 }}>
+                <Typography variant="h6" sx={{ fontSize: 14, mt: 2 }}>
                     <span style={{ color: 'red' }}>*</span>
                     {t('password', 'auth')}
                 </Typography>

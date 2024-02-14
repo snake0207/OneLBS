@@ -28,9 +28,21 @@ const CommonPagination = ({ dataLength, onChangePageFunction }) => {
                 showLastButton
                 onChange={handleChangeCurrentPage}
                 sx={{
+                    '& .css-dfpu2-MuiButtonBase-root-MuiPaginationItem-root': {
+                        borderRadius: '50%',
+                        backgroundColor: 'white',
+                        border: '1px solid #D1D1D1',
+                        color: '#A9A9A9',
+                        '&:hover': {
+                            backgroundColor: 'rgba(0, 0, 0, 0.9)',
+                            border: '1px solid rgba(0, 0, 0, 0.9)',
+                            color: 'white',
+                        },
+                    },
                     '& .css-dfpu2-MuiButtonBase-root-MuiPaginationItem-root.Mui-selected': {
                         borderRadius: '50%',
                         backgroundColor: 'rgba(0, 0, 0, 0.9)',
+                        border: '1px solid rgba(0, 0, 0, 0.9)',
                         color: 'white',
                         '&:hover': {
                             backgroundColor: 'rgba(0, 0, 0, 0.9)',
@@ -38,6 +50,7 @@ const CommonPagination = ({ dataLength, onChangePageFunction }) => {
                     },
                     '$ .css-dfpu2-MuiButtonBase-root-MuiPaginationItem-root.Mui-disabled': {
                         minWidth: '20px',
+                        border: '1px solid #ffffff',
                     },
                 }}
                 renderItem={(item) => (

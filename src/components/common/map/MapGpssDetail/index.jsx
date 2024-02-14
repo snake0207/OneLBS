@@ -1,10 +1,10 @@
-import { Box, Button, Tab, Tabs } from '@mui/material'
+import { Box, IconButton, Tab, Tabs } from '@mui/material'
 import CloseIcon from '@mui/icons-material/Close'
 import MapGpssDetailTab from '#/components/common/map/MapGpssDetail/DetailTab/index.jsx'
 import MapGpssHistoryTab from '#/components/common/map/MapGpssDetail/HistoryTab/index.jsx'
 import { useEffect, useState } from 'react'
 import t from '#/common/libs/trans.js'
-
+import style from './style.module'
 const MapGpssDetail = ({ selectedPoi, setSelectedPoi, poiData }) => {
     const [isOpen, setIsOpen] = useState(false)
     const [tabSelected, setTabSelected] = useState('info')
@@ -29,13 +29,13 @@ const MapGpssDetail = ({ selectedPoi, setSelectedPoi, poiData }) => {
                         background: '#ffffff',
                         paddingBottom: '16px',
                         borderRadius: '8px',
-                        border: '1px solid #D1D1D1',
+                        boxShadow: '0 3px 14px rgb(0 0 0 / 24%)',
                     }}
                 >
                     <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
-                        <Tabs value={tabSelected} onChange={handleClickTabChange}>
-                            <Tab label={t('info', 'gpss')} value="info" />
-                            <Tab label={t('last_modified_info', 'gpss')} value="last-modified" />
+                        <Tabs value={tabSelected} onChange={handleClickTabChange} sx={style.tabs}>
+                            <Tab label={t('info', 'gpss')} value="info" sx={style.tabMenu}/>
+                            <Tab label={t('last_modified_info', 'gpss')} value="last-modified" sx={style.tabMenu}/>
                         </Tabs>
                     </Box>
                     {tabSelected === 'info' ? (
@@ -59,6 +59,18 @@ const MapGpssDetail = ({ selectedPoi, setSelectedPoi, poiData }) => {
                     <CloseIcon />
                 </Button>
             </Box>
+            <IconButton
+                variant={'contained'}
+                sx={{
+                    inWidth: '22px',
+                    minHeight: '22px',
+                    width: '35px',
+                    height: '35px',
+                }}
+            >
+                <CloseIcon />
+            </IconButton>
+        </Box>
         )
     )
 }

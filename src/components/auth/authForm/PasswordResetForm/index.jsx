@@ -1,9 +1,9 @@
+import { useFormik } from 'formik/dist'
+import { Button, Typography, Box, Icon } from '@mui/material'
 import FlexEndButtonContainer from '#/components/common/button/FlexEndButtonContainer'
 import PasswordInput from '#/components/common/input/PasswordInput'
 import TextInput from '#/components/common/input/TextInput'
-import { Button, Divider, Typography, Box } from '@mui/material'
-import { useFormik } from 'formik/dist'
-import { Icon } from '@mui/material'
+import { passwordResetSchema } from '#/contents/validationSchema'
 import LoginIcon from '#/assets/loginIcon.svg'
 
 import t from '#/common/libs/trans'
@@ -13,11 +13,12 @@ import style from './style.module'
 const PasswordResetForm = () => {
     const formik = useFormik({
         initialValues: {
-            userMail: '',
+            email: '',
             password: '',
             confirmPassword: '',
             otp: '',
         },
+        validationSchema: passwordResetSchema,
         onSubmit: (form) => {
             console.log(form)
         },
@@ -29,7 +30,7 @@ const PasswordResetForm = () => {
                     <img src={LoginIcon} />
                 </Icon>
                 <Typography variant="h5" sx={style.passwordTitle}>
-                    비밀번호 확인
+                    {t('reset_password', 'auth')}
                 </Typography>
             </Box>
             <Typography variant="h6" sx={style.labelText}>
@@ -37,7 +38,7 @@ const PasswordResetForm = () => {
             </Typography>
             <TextInput
                 formik={formik}
-                name={'userMail'}
+                name={'email'}
                 placeholder={t('placeholder.email', 'auth')}
             />
             <Typography variant="h6" sx={style.labelText}>

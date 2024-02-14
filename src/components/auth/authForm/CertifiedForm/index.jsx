@@ -1,19 +1,30 @@
+import { useState } from 'react'
 import { useFormik } from 'formik'
+import { Box, Button, TextField, Typography, Icon } from '@mui/material'
+import { BrowserView } from 'react-device-detect'
+import CopyToClipboard from 'react-copy-to-clipboard'
+import LoginIcon from '#/assets/loginIcon.svg'
 import TextInput from '#/components/common/input/TextInput'
 import { otpSchema } from '#/contents/validationSchema'
-import { Box, Button, TextField, Typography } from '@mui/material'
 import AuthStepper from '#/components/auth/AuthStepper'
 import FlexEndButtonContainer from '#/components/common/button/FlexEndButtonContainer'
-import { Icon } from '@mui/material'
-import LoginIcon from '#/assets/loginIcon.svg'
+import OtpGuideModal from '#/components/auth/authForm/CertifiedForm/otpGuideModal'
 
 import t from '#/common/libs/trans'
 
 import style from './style.module'
-import { BrowserView } from 'react-device-detect'
-import CopyToClipboard from 'react-copy-to-clipboard'
 
 const CertifiedForm = () => {
+    const [isOtpGuideOpen, setIsOtpGuideOpen] = useState(false)
+
+    const handleClickOtpGuideClose = () => {
+        setIsOtpGuideOpen(false)
+    }
+
+    const handleClickOtpGuideOpen = () => {
+        setIsOtpGuideOpen(true)
+    }
+
     const formik = useFormik({
         initialValues: {
             otp: '',
@@ -59,7 +70,7 @@ const CertifiedForm = () => {
                             <Button variant="contained">{t('copy', 'auth')}</Button>
                         </CopyToClipboard>
                     </Box>
-                    <Button sx={style.linklText}>
+                    <Button onClick={handleClickOtpGuideOpen} sx={style.linklText}>
                         {t('guide.otp_registration_button', 'auth')}
                     </Button>
                 </Box>
@@ -77,6 +88,7 @@ const CertifiedForm = () => {
                     {t('certified', 'auth')}
                 </Button>
             </FlexEndButtonContainer>
+            <OtpGuideModal isOpen={isOtpGuideOpen} handleClose={handleClickOtpGuideClose} />
         </>
     )
 }

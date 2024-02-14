@@ -32,7 +32,7 @@ const ConfirmEmailForm = ({ formik }) => {
             !formik.errors.email
         ) {
             setIsAuthCompleted(true)
-            actions.setTime(null)
+            actions.reset()
             // mutate(
             //     { email: formik.values.email, code: formik.values.code },
             //     {
@@ -54,6 +54,10 @@ const ConfirmEmailForm = ({ formik }) => {
         }
         return () => clearInterval(timer)
     }, [time])
+
+    useEffect(() => {
+        actions.reset()
+    }, [])
 
     return (
         <Box

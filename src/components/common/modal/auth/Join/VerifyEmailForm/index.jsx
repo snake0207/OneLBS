@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { useTimeActions, useTimeState } from '#/store/useTimerStore'
+import useTimerStore from '#/store/useTimerStore'
 import Close from '@mui/icons-material/Close'
 import { Box, Button, FormHelperText, IconButton, InputAdornment, TextField } from '@mui/material'
 import { usePostEmailVerify } from '#/hooks/queries/auth'
@@ -11,22 +11,21 @@ import style from './style.module'
 // 인증 메일 전송
 const VerifyEmailForm = ({ formik }) => {
     const { mutate } = usePostEmailVerify()
-    const { setTime } = useTimeActions()
+    const { time, actions } = useTimerStore()
     const [isButtonDisabled, setIsButtonDisabled] = useState(false)
     const [isReSend, setIsReSend] = useState(false)
-    const time = useTimeState()
 
     const handleClickSendEmail = () => {
         formik.setFieldTouched('email')
         if (formik.values.email && !formik.errors.email) {
             setIsButtonDisabled(true)
-            setTime(180)
+            actions.setTime(180)
             // mutate(
             //     { email: formik.values.email },
             //     {
             //         onSuccess: () => {
             //             setIsButtonDisabled(true)
-            //             setTime(180)
+            //             action.setTime(180)
             //         },
             //     },
             // )

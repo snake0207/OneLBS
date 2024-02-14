@@ -1,7 +1,7 @@
 import { useFormik } from 'formik'
 import TextInput from '#/components/common/input/TextInput'
 import { otpSchema } from '#/contents/validationSchema'
-import { Box, Button, Link, Typography } from '@mui/material'
+import { Box, Button, TextField, Typography } from '@mui/material'
 import AuthStepper from '#/components/auth/AuthStepper'
 import FlexEndButtonContainer from '#/components/common/button/FlexEndButtonContainer'
 import { Icon } from '@mui/material'
@@ -11,6 +11,7 @@ import t from '#/common/libs/trans'
 
 import style from './style.module'
 import { BrowserView } from 'react-device-detect'
+import CopyToClipboard from 'react-copy-to-clipboard'
 
 const CertifiedForm = () => {
     const formik = useFormik({
@@ -22,6 +23,7 @@ const CertifiedForm = () => {
             console.log(form)
         },
     })
+
     return (
         <>
             <Box sx={{ display: 'flex', justifyContent: 'flex-start', mb: 5 }}>
@@ -51,9 +53,15 @@ const CertifiedForm = () => {
                     <Typography variant="subtitle2" sx={style.cntText}>
                         {t('guide.otp_input_guide', 'auth')}
                     </Typography>
-                    <Link href="#" sx={style.linklText}>
+                    <Box sx={{ display: 'flex', gap: 2 }}>
+                        <TextField size="small" value={'123123'} />
+                        <CopyToClipboard text="123123">
+                            <Button variant="contained">{t('copy', 'auth')}</Button>
+                        </CopyToClipboard>
+                    </Box>
+                    <Button sx={style.linklText}>
                         {t('guide.otp_registration_button', 'auth')}
-                    </Link>
+                    </Button>
                 </Box>
             </Box>
             <Typography variant="h6" sx={style.labelText}>

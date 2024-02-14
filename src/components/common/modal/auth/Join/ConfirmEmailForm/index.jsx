@@ -14,6 +14,8 @@ import { usePostConfirmEmail } from '#/hooks/queries/auth'
 
 import t from '#/common/libs/trans'
 
+import style from './style.module'
+
 // 메일 인증 코드
 const ConfirmEmailForm = ({ formik }) => {
     const { time, actions } = useTimerStore()
@@ -30,7 +32,7 @@ const ConfirmEmailForm = ({ formik }) => {
             !formik.errors.email
         ) {
             setIsAuthCompleted(true)
-            actions.setTime(null)
+            actions.reset()
             // mutate(
             //     { email: formik.values.email, code: formik.values.code },
             //     {
@@ -43,6 +45,29 @@ const ConfirmEmailForm = ({ formik }) => {
         }
     }
 
+    const customHelperText = () => {
+        if (isAuthCompleted)
+            return (
+                <FormHelperText sx={{ ml: 2 }}>
+                    {t('email_code_complete', 'validation')}
+                </FormHelperText>
+            )
+
+        if (time === 0)
+            return (
+                <FormHelperText sx={{ ml: 2 }} error>
+                    {t('email_code_timeout', 'validation')}
+                </FormHelperText>
+            )
+
+        if (formik.touched.code && formik.errors.code)
+            return (
+                <FormHelperText sx={{ ml: 2 }} error>
+                    {formik.errors.code}
+                </FormHelperText>
+            )
+    }
+
     useEffect(() => {
         let timer
         if (time > 0) {
@@ -52,6 +77,10 @@ const ConfirmEmailForm = ({ formik }) => {
         }
         return () => clearInterval(timer)
     }, [time])
+
+    useEffect(() => {
+        actions.reset()
+    }, [])
 
     return (
         <Box
@@ -85,7 +114,7 @@ const ConfirmEmailForm = ({ formik }) => {
                                     </IconButton>
                                 )}
                                 {time !== null && (
-                                    <Typography>
+                                    <Typography sx={style.timeText}>
                                         {parseInt(time / 60)}:
                                         {parseInt(time % 60)
                                             .toString()
@@ -96,24 +125,13 @@ const ConfirmEmailForm = ({ formik }) => {
                         ),
                     }}
                 />
-                {time === 0 ? (
-                    <FormHelperText sx={{ ml: 2 }} error>
-                        {t('email_code_timeout', 'validation')}
-                    </FormHelperText>
-                ) : (
-                    formik.touched.code &&
-                    formik.errors.code && (
-                        <FormHelperText sx={{ ml: 2 }} error>
-                            {formik.errors.code}
-                        </FormHelperText>
-                    )
-                )}
+                {customHelperText()}
             </Box>
             <Button
                 variant="contained"
                 onClick={handleSubmitEmailCode}
                 type="button"
-                sx={{ flex: '0 0 auto' }}
+                sx={style.btn}
                 disabled={isAuthCompleted}
             >
                 {isAuthCompleted

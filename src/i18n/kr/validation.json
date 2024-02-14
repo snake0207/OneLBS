@@ -13,6 +13,7 @@
     "email_code_timeout": "입력 시간이 초과 하였습니다. 재 인증해 주세요.",
     "email_code_not_match": "6자리 숫자를 입력해 주세요.",
     "email_code_send": "인증번호가 전송되었습니다. 이메일을 확인해 주세요.",
+    "email_code_complete": "인증이 완료 되었습니다.",
     "company_required": "회사명을 입력해 주세요.",
     "company_length": "한 글자 이상 입력해 주세요.",
     "team_required": "팀명을 입력해 주세요.",

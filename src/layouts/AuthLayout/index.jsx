@@ -1,5 +1,6 @@
 import { Outlet } from 'react-router-dom'
 import { Box } from '@mui/material'
+import AuthHeader from '#/layouts/AuthLayout/AuthHeader'
 
 const AuthLayout = () => {
     return (
@@ -15,6 +16,7 @@ const AuthLayout = () => {
                     height: '100vh',
                 }}
             >
+                <AuthHeader />
                 <Outlet />
             </Box>
         </Box>

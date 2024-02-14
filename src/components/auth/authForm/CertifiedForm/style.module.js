@@ -29,6 +29,7 @@ const style = {
         color: 'text.gray',
         textDecoration: 'underline',
         textUnderlinePosition: 'under',
+        p: 0,
     },
 }
 

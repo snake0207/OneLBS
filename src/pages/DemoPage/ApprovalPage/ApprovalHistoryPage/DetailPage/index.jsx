@@ -11,6 +11,7 @@ import { useFormik } from 'formik'
 import CategoryTable from '#/components/approval/Detail/CategoryTable/index.jsx'
 import ActionButtons from '#/components/approval/Detail/ActionButtons/index.jsx'
 import dummyData from '../../detailData.json'
+import poiDummyData from '../../poiDetailData.json'
 import Headline from '#/components/approval/Detail/Headline/index.jsx'
 import Comment from '#/components/approval/Detail/Comment/index.jsx'
 import { usePopupActions } from '#/store/usePopupStore.js'
@@ -19,6 +20,7 @@ const ApprovalHistoryDetailPage = () => {
     const params = useParams()
     const popupActions = usePopupActions()
     const userType = params.type // TODO: 전체이력 페이지면 all, 아니면 권한(url or token get..)
+    const dealerCategory = poiDummyData.result[0]
     const formik = useFormik({
         initialValues: {
             name: '',
@@ -85,11 +87,7 @@ const ApprovalHistoryDetailPage = () => {
                     {/* 정보 탭 */}
                     <InfoTab data={dummyData.info} formik={formik} isEditable={isEditable} />
                     {/* 카테고리 */}
-                    <CategoryTable
-                        data={dummyData.category}
-                        formik={formik}
-                        isEditable={isEditable}
-                    />
+                    <CategoryTable data={dealerCategory} formik={formik} isEditable={isEditable} />
                     {/* 승인 요청 이유*/}
                     <Box>
                         <Headline title={t('request_reason', 'approval')} />

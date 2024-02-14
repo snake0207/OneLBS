@@ -7,7 +7,7 @@ const style = {
         mb: '10px',
         p: '16px 20px',
         backgroundColor: 'grey.lightgray',
-        boxShadow: '0 14px 3px rgb(0 0 0 / 24%)',
+        boxShadow: '0 3px 14px rgb(0 0 0 / 24%)',
     },
     tableBox: {
         width: '100%',

@@ -4,7 +4,7 @@ const style = {
         borderRadius: '8px',
         p: '18px 20px',
         backgroundColor: 'white',
-        boxShadow: '0 14px 3px rgb(0 0 0 / 24%)',
+        boxShadow: '0 3px 14px rgb(0 0 0 / 24%)',
     },
     tableBox: {
         width: '100%',

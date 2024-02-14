@@ -90,7 +90,13 @@ const VerifyEmailForm = ({ formik }) => {
                 variant="contained"
                 onClick={handleClickSendEmail}
                 type="button"
-                sx={{ flex: '0 0 auto' }}
+                sx={{
+                    flex: '0 0 auto',
+                    bgcolor: 'button.gray',
+                    '&:hover': {
+                        backgroundColor: 'button.gray',
+                    },
+                }}
                 disabled={isButtonDisabled}
             >
                 {isReSend ? t('re_send_mail', 'auth') : t('send_mail_certified', 'auth')}

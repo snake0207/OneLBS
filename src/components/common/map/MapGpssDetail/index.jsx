@@ -1,9 +1,11 @@
-import { Box, Button, Tab, Tabs } from '@mui/material'
+import { Box, IconButton, Tab, Tabs } from '@mui/material'
 import CloseIcon from '@mui/icons-material/Close'
 import MapGpssDetailTab from '#/components/common/map/MapGpssDetail/DetailTab/index.jsx'
 import MapGpssHistoryTab from '#/components/common/map/MapGpssDetail/HistoryTab/index.jsx'
 import { useState } from 'react'
 import t from '#/common/libs/trans.js'
+
+import style from './style.module'
 
 const MapGpssDetail = () => {
     const [tabSelected, setTabSelected] = useState('info')
@@ -15,33 +17,36 @@ const MapGpssDetail = () => {
             <Box
                 sx={{
                     width: '350px',
-                    paddingX: '16px',
                     paddingBottom: '16px',
+                    paddingLeft: '16px',
+                    paddingRight: '16px',
                     borderRadius: '8px',
-                    border: '1px solid #D1D1D1',
+                    boxShadow: '0 3px 14px rgb(0 0 0 / 24%)',
                 }}
             >
-                <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
-                    <Tabs value={tabSelected} onChange={handleChange}>
-                        <Tab label={t('info', 'gpss')} value="info" />
-                        <Tab label={t('last_modified_info', 'gpss')} value="last-modified" />
+                <Box>
+                    <Tabs value={tabSelected} onChange={handleChange} sx={style.tabs}>
+                        <Tab label={t('info', 'gpss')} value="info" sx={style.tabMenu} />
+                        <Tab
+                            label={t('last_modified_info', 'gpss')}
+                            value="last-modified"
+                            sx={style.tabMenu}
+                        />
                     </Tabs>
                 </Box>
                 {tabSelected === 'info' ? <MapGpssDetailTab /> : <MapGpssHistoryTab />}
             </Box>
-            <Button
+            <IconButton
                 variant={'contained'}
                 sx={{
-                    ml: 1,
-                    minWidth: '22px',
+                    inWidth: '22px',
                     minHeight: '22px',
                     width: '35px',
                     height: '35px',
-                    borderRadius: '8px',
                 }}
             >
                 <CloseIcon />
-            </Button>
+            </IconButton>
         </Box>
     )
 }

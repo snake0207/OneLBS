@@ -14,6 +14,8 @@ import { usePostConfirmEmail } from '#/hooks/queries/auth'
 
 import t from '#/common/libs/trans'
 
+import style from './style.module'
+
 // 메일 인증 코드
 const ConfirmEmailForm = ({ formik }) => {
     const { time, actions } = useTimerStore()
@@ -85,7 +87,7 @@ const ConfirmEmailForm = ({ formik }) => {
                                     </IconButton>
                                 )}
                                 {time !== null && (
-                                    <Typography>
+                                    <Typography sx={style.timeText}>
                                         {parseInt(time / 60)}:
                                         {parseInt(time % 60)
                                             .toString()
@@ -113,7 +115,7 @@ const ConfirmEmailForm = ({ formik }) => {
                 variant="contained"
                 onClick={handleSubmitEmailCode}
                 type="button"
-                sx={{ flex: '0 0 auto' }}
+                sx={style.btn}
                 disabled={isAuthCompleted}
             >
                 {isAuthCompleted

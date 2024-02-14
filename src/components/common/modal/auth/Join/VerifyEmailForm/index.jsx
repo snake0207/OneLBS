@@ -6,6 +6,8 @@ import { usePostEmailVerify } from '#/hooks/queries/auth'
 
 import t from '#/common/libs/trans'
 
+import style from './style.module'
+
 // 인증 메일 전송
 const VerifyEmailForm = ({ formik }) => {
     const { mutate } = usePostEmailVerify()
@@ -90,7 +92,7 @@ const VerifyEmailForm = ({ formik }) => {
                 variant="contained"
                 onClick={handleClickSendEmail}
                 type="button"
-                sx={{ flex: '0 0 auto' }}
+                sx={style.btn}
                 disabled={isButtonDisabled}
             >
                 {isReSend ? t('re_send_mail', 'auth') : t('send_mail_certified', 'auth')}

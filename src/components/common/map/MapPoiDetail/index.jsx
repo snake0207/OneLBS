@@ -15,11 +15,17 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
 import t from '#/common/libs/trans.js'
 import { useEffect, useState } from 'react'
 
-const MapPoiDetail = ({ selectedPoi }) => {
+const MapPoiDetail = ({ selectedPoi, setSelectedPoi, poiData }) => {
     const [isOpen, setIsOpen] = useState(false)
     useEffect(() => {
         if (selectedPoi) setIsOpen(true)
+        else setIsOpen(false)
     }, [selectedPoi])
+
+    const handleClickDetailClose = () => {
+        setIsOpen(false)
+        setSelectedPoi(null)
+    }
     return (
         isOpen && (
             <Box sx={{ display: 'flex', margin: '10px' }}>
@@ -93,7 +99,7 @@ const MapPoiDetail = ({ selectedPoi }) => {
                         height: '35px',
                         borderRadius: '8px',
                     }}
-                    onClick={() => setIsOpen(false)}
+                    onClick={handleClickDetailClose}
                 >
                     <CloseIcon />
                 </Button>

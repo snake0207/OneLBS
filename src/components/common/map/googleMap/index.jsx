@@ -376,11 +376,14 @@ const GoogleMapComponent = ({
                 {/* 상세정보 */}
                 <CustomControl position="TOP_LEFT" style={{ left: '355px !important' }}>
                     {/* poi 상세  */}
-                    {isPoiSearch && <MapPoiDetail selectedPoi={selectedPoi} />}
+                    {isPoiSearch && (
+                        <MapPoiDetail selectedPoi={selectedPoi} setSelectedPoi={setSelectedPoi} />
+                    )}
                     {/* gpss 상세 */}
                     {isGpssSearch && detailSampleData && (
                         <MapGpssDetail
                             selectedPoi={selectedPoi}
+                            setSelectedPoi={setSelectedPoi}
                             poiData={detailSampleData.data.result[0]}
                         />
                     )}

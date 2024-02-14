@@ -5,18 +5,23 @@ import MapGpssHistoryTab from '#/components/common/map/MapGpssDetail/HistoryTab/
 import { useEffect, useState } from 'react'
 import t from '#/common/libs/trans.js'
 
-const MapGpssDetail = ({ selectedPoi, poiData }) => {
+const MapGpssDetail = ({ selectedPoi, setSelectedPoi, poiData }) => {
     const [isOpen, setIsOpen] = useState(false)
     const [tabSelected, setTabSelected] = useState('info')
     useEffect(() => {
         if (selectedPoi) setIsOpen(true)
+        else setIsOpen(false)
     }, [selectedPoi])
-    const handleChange = (event, newValue) => {
+    const handleClickTabChange = (event, newValue) => {
         setTabSelected(newValue)
     }
+    const handleClickDetailClose = () => {
+        setIsOpen(false)
+        setSelectedPoi(null)
+    }
     return (
-        isOpen && (
-            <Box sx={{ display: 'flex', margin: '10px' }}>
+        poiData && (
+            <Box sx={{ display: isOpen ? 'flex' : 'none', margin: '10px' }}>
                 <Box
                     sx={{
                         width: '350px',
@@ -28,7 +33,7 @@ const MapGpssDetail = ({ selectedPoi, poiData }) => {
                     }}
                 >
                     <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
-                        <Tabs value={tabSelected} onChange={handleChange}>
+                        <Tabs value={tabSelected} onChange={handleClickTabChange}>
                             <Tab label={t('info', 'gpss')} value="info" />
                             <Tab label={t('last_modified_info', 'gpss')} value="last-modified" />
                         </Tabs>
@@ -49,7 +54,7 @@ const MapGpssDetail = ({ selectedPoi, poiData }) => {
                         height: '35px',
                         borderRadius: '8px',
                     }}
-                    onClick={() => setIsOpen(false)}
+                    onClick={handleClickDetailClose}
                 >
                     <CloseIcon />
                 </Button>

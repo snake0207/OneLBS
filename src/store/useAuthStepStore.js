@@ -2,14 +2,14 @@ import { create } from 'zustand'
 import { AUTH_STEP } from '../contents/constant'
 
 const useAuthStepStore = create((set) => ({
-    authStep: AUTH_STEP.imfomation,
+    authStep: AUTH_STEP.information,
     actions: {
         changeAuthStep: (newStep) => set({ authStep: newStep }),
         decreaseAuthStep: () =>
             set((state) => ({
-                authStep: state.authStep > 0 ? state.authStep - 1 : AUTH_STEP.imfomation,
+                authStep: state.authStep > 0 ? state.authStep - 1 : AUTH_STEP.information,
             })),
-        initAuthStep: () => set({ authStep: AUTH_STEP.imfomation }),
+        initAuthStep: () => set({ authStep: AUTH_STEP.information }),
     },
 }))
 

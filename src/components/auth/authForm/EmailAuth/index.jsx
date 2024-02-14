@@ -32,6 +32,7 @@ const EmailAuthForm = () => {
         onSubmit: (form) => {
             console.log(form)
             setIsAuthCompleted(true)
+            actions.reset()
         },
     })
 

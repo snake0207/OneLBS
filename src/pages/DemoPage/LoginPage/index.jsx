@@ -3,6 +3,7 @@ import CarouselOverview from '#/components/auth/CarouselOverview'
 import CertifiedForm from '#/components/auth/authForm/CertifiedForm'
 import LoginForm from '#/components/auth/authForm/LoginForm'
 import PasswordResetForm from '#/components/auth/authForm/PasswordResetForm'
+import EmailAuth from '#/components/auth/authForm/EmailAuth'
 
 const LoginDemoPage = () => {
     const dummyImageList = [
@@ -68,6 +69,17 @@ const LoginDemoPage = () => {
                     }}
                 >
                     <PasswordResetForm />
+                </div>
+                <div
+                    style={{
+                        display: 'flex',
+                        flexDirection: 'column',
+                        flexShrink: 0,
+                        width: 600,
+                        height: '100%',
+                    }}
+                >
+                    <EmailAuth />
                 </div>
             </div>
         </div>

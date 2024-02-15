@@ -61,13 +61,23 @@ const CertifiedForm = () => {
                         alignItems: 'flex-start',
                     }}
                 >
-                    <Typography variant="subtitle2" sx={style.cntText}>
+                    <Typography variant="subtitle2" sx={style.contentText}>
                         {t('guide.otp_input_guide', 'auth')}
                     </Typography>
-                    <Box sx={{ display: 'flex', gap: 2 }}>
+                    <Box sx={{ display: 'flex', gap: 1 }}>
                         <TextField size="small" value={'123123'} />
                         <CopyToClipboard text="123123">
-                            <Button variant="contained">{t('copy', 'auth')}</Button>
+                            <Button
+                                variant="contained"
+                                sx={{
+                                    bgcolor: 'button.gray',
+                                    '&:hover': {
+                                        backgroundColor: 'button.gray',
+                                    },
+                                }}
+                            >
+                                {t('copy', 'auth')}
+                            </Button>
                         </CopyToClipboard>
                     </Box>
                     <Button onClick={handleClickOtpGuideOpen} sx={style.linklText}>

@@ -80,7 +80,7 @@ const JoinFormMobile = () => {
     }
 
     return (
-        <Box sx={{ mt: 32 }}>
+        <Box sx={{ height: '100vh', mt: 20 }}>
             <Typography sx={style.subTitle}>
                 <span style={{ color: 'red' }}>*</span>
                 {t('guide.required', 'auth')}
@@ -138,9 +138,7 @@ const JoinFormMobile = () => {
                 {t('role', 'auth')}
             </Typography>
             <RadioInput radioList={joinList.roleList} name={'role'} formik={formik} />
-            {formik.values.role !== '25' && formik.values.role !== '26' && (
-                <IpInputGroup formik={formik} />
-            )}
+            {formik.values.role === '29' && <IpInputGroup formik={formik} />}
             <Box sx={{ display: 'flex', justifyContent: 'space-between', mt: 2 }}>
                 <Typography variant="h6" sx={{ fontSize: 14 }}>
                     <span style={{ color: 'red' }}>*</span>

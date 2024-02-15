@@ -198,9 +198,7 @@ const JoinModal = ({ isOpen, onClose }) => {
                     {t('role', 'auth')}
                 </Typography>
                 <RadioInput radioList={joinList.roleList} name={'role'} formik={formik} />
-                {formik.values.role !== '25' && formik.values.role !== '26' && (
-                    <IpInputGroup formik={formik} />
-                )}
+                {formik.values.role === '29' && <IpInputGroup formik={formik} />}
                 <Box sx={{ display: 'flex', justifyContent: 'space-between', mt: 2 }}>
                     <Typography variant="h6" sx={{ fontSize: 14 }}>
                         <span style={{ color: 'red' }}>*</span>

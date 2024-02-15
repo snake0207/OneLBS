@@ -1,5 +1,7 @@
 {
     "top_menu": {
+        "mypage": "마이페이지",
+        "profile": "내 정보",
         "search_management": "검색 관리",
         "map": "지도",
         "poi_search": "POI 조회",

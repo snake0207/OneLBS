@@ -3,7 +3,7 @@ import List from '@mui/material/List'
 import Divider from '@mui/material/Divider'
 import IconButton from '@mui/material/IconButton'
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft'
-import { Drawer, Toolbar, Box, Typography } from '@mui/material'
+import { Drawer, Toolbar } from '@mui/material'
 import MuiDrawer from '@mui/material/Drawer'
 import { styled } from '@mui/material/styles'
 
@@ -11,15 +11,20 @@ import AppRegistrationIcon from '@mui/icons-material/AppRegistration'
 import ListItemButton from '@mui/material/ListItemButton'
 import ListItemIcon from '@mui/material/ListItemIcon'
 import ListItemText from '@mui/material/ListItemText'
-import LogoutIcon from '@mui/icons-material/Logout'
+
+import DashboardIcon from '@mui/icons-material/Dashboard'
+import BarChartIcon from '@mui/icons-material/BarChart'
+import LayersIcon from '@mui/icons-material/Layers'
+import RememberMeIcon from '@mui/icons-material/RememberMe'
+
 import Link from '@mui/material/Link'
-import { getMenuIcon } from './listItems'
 import ExpandMenuItem from '#/components/common/menu/ExpandMenuItem'
+import UserInfo from './UserInfo'
 import t from '#/common/libs/trans'
 
 import { BrowserView, MobileView } from 'react-device-detect'
 import { data } from '#/mock/data/side_menu.json'
-import user from '#/mock/data/user.json'
+import { filterMobileMenuItems } from '#/common/libs/menuTools'
 
 const drawerWidth = 240
 
@@ -62,6 +67,25 @@ const VariantDrawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 
     }),
 )
 
+const getMenuIcon = (key) => {
+    switch (key) {
+        case 'mypage':
+            return <RememberMeIcon />
+        case 'search_management':
+            return <DashboardIcon />
+        case 'poi_search':
+            return <BarChartIcon />
+        case 'permit_history':
+            return <LayersIcon />
+        case 'mcp_poi_statistics':
+            return <LayersIcon />
+        case 'user_management':
+            return <LayersIcon />
+        default:
+            return null
+    }
+}
+
 const createMenuItems = (menuItems) => {
     return (
         <React.Fragment>
@@ -91,24 +115,6 @@ const createMenuItems = (menuItems) => {
     )
 }
 
-const UserInfo = ({ user }) => {
-    return (
-        <Box>
-            <Box>
-                <Typography variant="h6" component="div">
-                    {user?.name}
-                    <IconButton>
-                        <LogoutIcon />
-                    </IconButton>
-                </Typography>
-                <Typography variant="subtitle1" component="div">
-                    {user?.permission}
-                </Typography>
-            </Box>
-        </Box>
-    )
-}
-
 const SideMenu = ({ open, toggleDrawer }) => {
     return (
         <>
@@ -132,8 +138,10 @@ const SideMenu = ({ open, toggleDrawer }) => {
             </BrowserView>
             <MobileView>
                 <Drawer open={open} onClose={toggleDrawer}>
-                    <UserInfo user={user} />
-                    <List component="nav">{createMenuItems(data.menuTree)}</List>
+                    <UserInfo />
+                    <List component="nav">
+                        {createMenuItems(filterMobileMenuItems(data.menuTree))}
+                    </List>
                 </Drawer>
             </MobileView>
         </>

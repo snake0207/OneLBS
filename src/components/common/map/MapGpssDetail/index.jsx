@@ -34,8 +34,10 @@ const MapGpssDetail = ({ selectedPoi, setSelectedPoi, poiData }) => {
                         </Tabs>
                     </Box>
                     {tabSelected === 'info' ? (
+                        // 상세정보
                         <MapGpssDetailTab poiData={poiData} />
                     ) : (
+                        // 최종수정정보
                         <MapGpssHistoryTab poiData={poiData} />
                     )}
                 </Box>

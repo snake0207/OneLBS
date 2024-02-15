@@ -16,6 +16,9 @@ import LoginIcon from '#/assets/loginIcon.svg'
 import t from '#/common/libs/trans'
 import useTimerStore from '#/store/useTimerStore'
 import { emailAuthSchema } from '#/contents/validationSchema'
+import FlexEndButtonContainer from '#/components/common/button/FlexEndButtonContainer'
+
+import style from './style.module'
 
 const EmailAuthForm = () => {
     const { time, actions } = useTimerStore()
@@ -95,13 +98,15 @@ const EmailAuthForm = () => {
 
     return (
         <>
-            <Box sx={{ display: 'flex', justifyContent: 'flex-start', mb: 5 }}>
+            <Box sx={{ display: 'flex', justifyContent: 'flex-start', marginBottom: '16px' }}>
                 <Icon sx={{ display: 'flex', width: 20, height: 20, alignItems: 'center' }}>
                     <img src={LoginIcon} />
                 </Icon>
-                <Typography variant="h5">{t('email_auth', 'auth')}</Typography>
+                <Typography variant="h5" sx={style.loginTitle}>
+                    {t('email_auth', 'auth')}
+                </Typography>
             </Box>
-            <Typography>{t('email', 'auth')}</Typography>
+            <Typography sx={style.labelText}>{t('email', 'auth')}</Typography>
             <Box
                 sx={{
                     display: 'flex',
@@ -140,13 +145,19 @@ const EmailAuthForm = () => {
                     onClick={handleClickSendEmail}
                     type="button"
                     disabled={isButtonDisabled}
-                    sx={{ flex: '0 0 auto' }}
+                    sx={{
+                        flex: '0 0 auto',
+                        bgcolor: 'button.gray',
+                        '&:hover': {
+                            backgroundColor: 'button.gray',
+                        },
+                    }}
                 >
                     {isReSend ? t('re_send_mail', 'auth') : t('send_mail_certified', 'auth')}
                 </Button>
             </Box>
             {customEmailHelperText()}
-            <Typography>{t('email_confirm_code', 'auth')}</Typography>
+            <Typography sx={style.labelText}>{t('email_confirm_code', 'auth')}</Typography>
             <Box
                 sx={{
                     display: 'flex',
@@ -193,7 +204,13 @@ const EmailAuthForm = () => {
                     onClick={formik.handleSubmit}
                     type="button"
                     disabled={isAuthCompleted}
-                    sx={{ flex: '0 0 auto' }}
+                    sx={{
+                        flex: '0 0 auto',
+                        bgcolor: 'button.gray',
+                        '&:hover': {
+                            backgroundColor: 'button.gray',
+                        },
+                    }}
                 >
                     {isAuthCompleted
                         ? t('authentication_completed', 'auth')
@@ -201,6 +218,14 @@ const EmailAuthForm = () => {
                 </Button>
             </Box>
             {customCodeHelperText()}
+            <FlexEndButtonContainer>
+                <Button
+                    variant="contained"
+                    sx={{ bgcolor: 'button.main', width: '100%', fontWeight: 400 }}
+                >
+                    {t('certified', 'auth')}
+                </Button>
+            </FlexEndButtonContainer>
         </>
     )
 }

@@ -10,12 +10,13 @@ const style = {
         fontSize: 12,
         fontWeight: 400,
         mb: 1,
-        color: 'grey.contrastText',
+        color: '#444',
     },
     labelText: {
         fontSize: 13,
         fontWeight: 500,
         mt: 2,
+        color: '#05141F',
     },
     TextInput: {
         flex: 0,

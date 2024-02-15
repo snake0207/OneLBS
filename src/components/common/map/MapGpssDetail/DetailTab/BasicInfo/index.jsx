@@ -31,7 +31,7 @@ const BasicInfo = ({ formik, poiData }) => {
         setIsLngSave(!isLngSave)
     }
     return (
-        <Box sx={{ paddingTop: '20px' }}>
+        <Box>
             <Box>
                 <Typography variant={'h6'} sx={{ fontSize: '20px', fontWeight: 600 }}>
                     <img

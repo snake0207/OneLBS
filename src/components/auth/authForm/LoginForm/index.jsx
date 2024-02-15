@@ -51,9 +51,12 @@ const LoginForm = () => {
             </Box>
             <BrowserView>
                 <AuthStepper />
-                <Typography variant="subtitle2" sx={style.subText}>
-                    {t('guide.login_input_guide', 'auth')}
-                </Typography>
+                <Box sx={{ display: 'flex', justifyContent: 'flex-start' }}>
+                    <Typography sx={{ color: 'red' }}>*</Typography>
+                    <Typography variant="subtitle2" sx={style.subText}>
+                        {t('guide.login_input_guide', 'auth')}
+                    </Typography>
+                </Box>
             </BrowserView>
             <Typography variant="h6" sx={style.labelText}>
                 {t('email', 'auth')}

@@ -11,6 +11,8 @@ import TextInput from '#/components/common/input/TextInput'
 import IpInputGroup from '#/components/auth/authForm/joinForm/JoinModal/IpInputGroup'
 import RadioInput from '#/components/common/Radio'
 import PrivacyPolicyModal from '#/components/auth/authForm/joinForm/JoinModal/PrivacyPolicyModal'
+import JoinSuccessModal from '#/components/auth/authForm/joinForm/JoinSuccessModal'
+import { useAuthStepActions } from '#/store/useAuthStepStore'
 
 import t from '#/common/libs/trans'
 import { formatJoinData } from '#/common/libs/formatData'
@@ -18,8 +20,6 @@ import { formatJoinData } from '#/common/libs/formatData'
 import style from './style.module'
 
 import joinList from './list.json'
-import JoinSuccessModal from '#/components/auth/authForm/joinForm/JoinSuccessModal'
-import { useAuthStepActions } from '#/store/useAuthStepStore'
 
 const JoinFormMobile = () => {
     const { showPopup } = usePopupActions()
@@ -80,7 +80,7 @@ const JoinFormMobile = () => {
     }
 
     return (
-        <Box sx={{ mt: 30 }}>
+        <Box sx={{ mt: 32 }}>
             <Typography sx={style.subTitle}>
                 <span style={{ color: 'red' }}>*</span>
                 {t('guide.required', 'auth')}

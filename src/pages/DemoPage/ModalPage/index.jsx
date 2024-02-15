@@ -1,5 +1,5 @@
 import JoinSuccessModal from '#/components/auth/authForm/joinForm/JoinSuccessModal'
-import PrivacyPolicyModal from '#/components/auth/authForm/joinForm/JoinModal/PrivacyPolicy'
+import PrivacyPolicyModal from '#/components/auth/authForm/joinForm/JoinModal/PrivacyPolicyModal'
 import { useState } from 'react'
 import JoinModal from '#/components/auth/authForm/joinForm/JoinModal'
 

@@ -10,7 +10,7 @@ import PasswordInput from '#/components/common/input/PasswordInput'
 import TextInput from '#/components/common/input/TextInput'
 import IpInputGroup from '#/components/auth/authForm/joinForm/JoinModal/IpInputGroup'
 import RadioInput from '#/components/common/Radio'
-import PrivacyPolicyModal from '#/components/auth/authForm/joinForm/JoinModal/PrivacyPolicy'
+import PrivacyPolicyModal from '#/components/auth/authForm/joinForm/JoinModal/PrivacyPolicyModal'
 
 import t from '#/common/libs/trans'
 import { formatJoinData } from '#/common/libs/formatData'

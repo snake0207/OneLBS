@@ -16,6 +16,8 @@ import DashboardIcon from '@mui/icons-material/Dashboard'
 import BarChartIcon from '@mui/icons-material/BarChart'
 import LayersIcon from '@mui/icons-material/Layers'
 import RememberMeIcon from '@mui/icons-material/RememberMe'
+import RuleIcon from '@mui/icons-material/Rule'
+import ViewModuleIcon from '@mui/icons-material/ViewModule'
 
 import Link from '@mui/material/Link'
 import ExpandMenuItem from '#/components/common/menu/ExpandMenuItem'
@@ -81,6 +83,10 @@ const getMenuIcon = (key) => {
             return <LayersIcon />
         case 'user_management':
             return <LayersIcon />
+        case 'permission_management':
+            return <RuleIcon />
+        case 'common':
+            return <ViewModuleIcon />
         default:
             return null
     }

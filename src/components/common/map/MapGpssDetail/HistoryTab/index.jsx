@@ -9,7 +9,7 @@ import EvStationIcon from '#/assets/evStationIcon.svg'
 
 const MapGpssHistoryTab = ({ poiData }) => {
     return (
-        <Box sx={{ paddingTop: '20px' }}>
+        <Box sx={{ paddingTop: '20px', paddingRight: '16px' }}>
             <Box>
                 <Typography variant={'h6'} sx={{ fontSize: '20px', fontWeight: 600 }}>
                     <img

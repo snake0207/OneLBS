@@ -5,16 +5,21 @@ import CommonPagination from '#/components/common/pagination/CommonPagination.js
 import dummyData from '../approvalData.json'
 import t from '#/common/libs/trans.js'
 import TitleBar from '#/components/common/menu/TitleBar/index.jsx'
-import { useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import { BrowserView, MobileView, isMobile } from 'react-device-detect'
 import HistoryTableMobile from '#/components/approval/HistoryTable/Mobile/index.jsx'
 import { useRef, useState } from 'react'
 import TotalCount from '#/components/approval/HistoryTable/TotalCount/index.jsx'
 import ViewMoreButton from '#/components/approval/HistoryTable/Mobile/ViewMoreButton/index.jsx'
+import { usePopupActions } from '#/store/usePopupStore.js'
 
 const ApprovalHistoryPage = () => {
+    // TODO: 임시상태값 - temporary, request, reviewed, approved, rejected(승인자/검토자 구분필요),
     const params = useParams()
+    const popupActions = usePopupActions()
+    const navigator = useNavigate()
     const userType = params.type
+    const url = window.location.pathname
     const totalCounts = useRef({
         total: dummyData?.length,
         temporary: 1,
@@ -73,8 +78,28 @@ const ApprovalHistoryPage = () => {
                 history: '위, 경도 수정',
             },
         ]
-
         moreData.length ? setDummyList([...dummyList, ...moreData]) : setIsLastView(true)
+    }
+
+    const handleClickRow = (target, id) => {
+        console.log(target, id)
+        if (target.tagName === 'BUTTON') return
+        navigator(`${url}/detail/${id}`)
+    }
+
+    const handleClickButton = (action, id) => {
+        console.log('ACTION >> ', action, id)
+        if (action === 'retrieve')
+            popupActions.showPopup('confirm', t(`modal.${action.toLowerCase()}`, 'approval'), () =>
+                openAlertPopup(action),
+            )
+        else navigator(`${url}/detail/${id}`)
+    }
+
+    const openAlertPopup = (action) => {
+        // TODO: API
+        console.log('API')
+        popupActions.showPopup('alert', t(`confirmed.${action.toLowerCase()}`, 'approval'))
     }
 
     return (
@@ -89,12 +114,22 @@ const ApprovalHistoryPage = () => {
             </Container>
             <MobileView>
                 <TotalCount type={userType} counts={totalCounts.current} />
-                <HistoryTableMobile type={userType} dummyData={dummyList} />
+                <HistoryTableMobile
+                    type={userType}
+                    dummyData={dummyList}
+                    onClickButtonFunction={handleClickButton}
+                    onClickRowFunction={handleClickRow}
+                />
                 {!isLastView && <ViewMoreButton onChangePageFunction={handleViewChange} />}
             </MobileView>
             <BrowserView>
                 <TotalCount type={userType} counts={totalCounts.current} />
-                <HistoryTable type={userType} dummyData={dummyData} />
+                <HistoryTable
+                    type={userType}
+                    dummyData={dummyData}
+                    onClickButtonFunction={handleClickButton}
+                    onClickRowFunction={handleClickRow}
+                />
                 <CommonPagination
                     dataLength={dummyData.length} // total element count
                     onChangePageFunction={handlePageChange} // 페이지 변경 시 실행 함수

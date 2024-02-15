@@ -21,7 +21,7 @@ import joinList from './list.json'
 import JoinSuccessModal from '#/components/auth/authForm/joinForm/JoinSuccessModal'
 import { useAuthStepActions } from '#/store/useAuthStepStore'
 
-const JoinForm = () => {
+const JoinFormMobile = () => {
     const { showPopup } = usePopupActions()
     const actions = useAuthStepActions()
     const { mutate } = usePostJoin()
@@ -187,4 +187,4 @@ const JoinForm = () => {
     )
 }
 
-export default JoinForm
+export default JoinFormMobile

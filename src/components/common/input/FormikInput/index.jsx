@@ -31,12 +31,12 @@ const FormikInput = ({ name, placeholder = null, inputRule = null, IsDisabled = 
             >
                 <TextField
                     {...field}
-                    error={meta.touched && meta.errors}
+                    error={!!meta.error}
                     fullWidth
                     size="small"
                     type="text"
                     placeholder={placeholder}
-                    helperText={meta.touched && meta.errors}
+                    helperText={meta.touched && meta.error}
                     InputProps={{
                         endAdornment: (
                             <InputAdornment position="end">

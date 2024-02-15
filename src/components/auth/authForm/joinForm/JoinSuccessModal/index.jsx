@@ -13,8 +13,10 @@ import CloseIcon from '@mui/icons-material/Close'
 import AccountCircleIcon from '@mui/icons-material/AccountCircle'
 
 import t from '#/common/libs/trans'
+import useLayoutStore from '#/store/useLayoutStore'
 
 const JoinSuccessModal = ({ isOpen, onClose }) => {
+    const { themeMode } = useLayoutStore()
     return (
         <Dialog open={isOpen} onClose={onClose}>
             <DialogTitle
@@ -35,7 +37,7 @@ const JoinSuccessModal = ({ isOpen, onClose }) => {
                 }}
             >
                 <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-                    <AccountCircleIcon />
+                    {themeMode === 'light' ? <AccountCircleIcon /> : <AccountCircleIcon />}
                     {t('join_completed', 'auth')}
                 </Box>
                 <IconButton onClick={onClose}>

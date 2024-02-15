@@ -18,11 +18,14 @@ import RadioInput from '#/components/common/Radio'
 import { joinSchema } from '#/contents/validationSchema'
 import VerifyEmailForm from '#/components/auth/authForm/joinForm/JoinModal/VerifyEmailForm'
 import ConfirmEmailForm from '#/components/auth/authForm/joinForm/JoinModal/ConfirmEmailForm'
-import PrivacyPolicyModal from '#/components/auth/authForm/joinForm/JoinModal/PrivacyPolicy'
+import PrivacyPolicyModal from '#/components/auth/authForm/joinForm/JoinModal/PrivacyPolicyModal'
 import IpInputGroup from '#/components/auth/authForm/joinForm/JoinModal/IpInputGroup'
 import { usePopupActions } from '#/store/usePopupStore'
 import AncestorUserIcon from '#/assets/joinIcon.svg'
 import CloseIcon from '@mui/icons-material/Close'
+import JoinSuccessModal from '#/components/auth/authForm/joinForm/JoinSuccessModal'
+import { getLayoutState } from '#/store/useLayoutStore'
+import AccountCircleIcon from '@mui/icons-material/AccountCircle'
 
 import { formatJoinData } from '#/common/libs/formatData'
 import t from '#/common/libs/trans'
@@ -30,10 +33,10 @@ import t from '#/common/libs/trans'
 import style from './style.module'
 
 import joinList from './list.json'
-import JoinSuccessModal from '#/components/auth/authForm/joinForm/JoinSuccessModal'
 
 const JoinModal = ({ isOpen, onClose }) => {
     const { showPopup } = usePopupActions()
+    const { themeMode } = getLayoutState()
     const { mutate } = usePostJoin()
     const [isOpenPrivacyPolicyModal, setIsOpenPrivacyPolicyModal] = useState(false)
     const [isOpenJoinSuccessModal, setIsOpenJoinSuccessModal] = useState(false)
@@ -113,9 +116,16 @@ const JoinModal = ({ isOpen, onClose }) => {
                 }}
             >
                 <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-                    <Icon>
-                        <img src={AncestorUserIcon} style={{ display: 'flex', width: '100%' }} />
-                    </Icon>
+                    {themeMode === 'light' ? (
+                        <Icon>
+                            <img
+                                src={AncestorUserIcon}
+                                style={{ display: 'flex', width: '100%' }}
+                            />
+                        </Icon>
+                    ) : (
+                        <AccountCircleIcon />
+                    )}
                     {t('join', 'auth')}
                 </Box>
                 <IconButton onClick={onClose}>

@@ -115,7 +115,9 @@ const MapGpssDetailTab = ({ poiData }) => {
                 {/* 상세 기본 정보 */}
                 <BasicInfo formik={formik} poiData={poiData} />
                 <Box>
-                    <Typography>{t('category', 'common')}</Typography>
+                    <Typography sx={{ fontSize: 20, fontWeight: 600, color: '#00418D' }}>
+                        {t('category', 'common')}
+                    </Typography>
                 </Box>
                 <Divider />
                 {/* EV Charging */}

@@ -1,15 +1,18 @@
+import { forwardRef } from 'react'
 import { Box, Dialog, DialogContent, DialogTitle, IconButton, Slide } from '@mui/material'
+import { isMobile } from 'react-device-detect'
 import CloseIcon from '@mui/icons-material/Close'
+import AccountCircleIcon from '@mui/icons-material/AccountCircle'
 
 import t from '#/common/libs/trans'
-import { isMobile } from 'react-device-detect'
-import { forwardRef } from 'react'
+import useLayoutStore from '#/store/useLayoutStore'
 
 const Transition = forwardRef(function Transition(props, ref) {
     return <Slide direction="up" ref={ref} {...props} />
 })
 
 const PrivacyPolicyModal = ({ isOpen, onClose }) => {
+    const { themeMode } = useLayoutStore()
     return (
         <Dialog
             open={isOpen}
@@ -34,6 +37,7 @@ const PrivacyPolicyModal = ({ isOpen, onClose }) => {
                     pr: 1,
                 }}
             >
+                {themeMode === 'light' ? <AccountCircleIcon /> : <AccountCircleIcon />}
                 {t('collect_personal_information', 'auth')}
                 <IconButton onClick={onClose}>
                     <CloseIcon />

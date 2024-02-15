@@ -1,5 +1,5 @@
 import CertifiedForm from '#/components/auth/authForm/CertifiedForm'
-import EmailAuthForm from '#/components/auth/authForm/EmailAuth'
+import EmailAuthForm from '#/components/auth/authForm/EmailAuthForm'
 import LoginForm from '#/components/auth/authForm/LoginForm'
 import PasswordResetForm from '#/components/auth/authForm/PasswordResetForm'
 import { AUTH_STEP } from '#/contents/constant'

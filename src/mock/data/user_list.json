@@ -1,0 +1,41 @@
+[
+    {
+        "id": 1,
+        "email": "admin@email.com",
+        "name": "김**",
+        "company": "현대자동차",
+        "team": "기술연구소",
+        "register_date": "2021-09-01 12:00:00",
+        "approve_date": "2021-09-01 12:00:00",
+        "last_login_date": "2021-09-01 12:00:00",
+        "permission": 0,
+        "status": 0,
+        "remark": "-"
+    },
+    {
+        "id": 2,
+        "email": "admin@email.com",
+        "name": "이**",
+        "company": "현대오토에버",
+        "team": "컨텐츠 플랫폼 개발팀",
+        "register_date": "2021-09-01 12:00:00",
+        "approve_date": "2021-09-01 12:00:00",
+        "last_login_date": "2021-09-01 12:00:00",
+        "permission": 1,
+        "status": 3,
+        "remark": "-"
+    },
+    {
+        "id": 3,
+        "email": "admin@email.com",
+        "name": "나**",
+        "company": "기아자동차",
+        "team": "품질관리",
+        "register_date": "2021-09-01 12:00:00",
+        "approve_date": "2021-09-01 12:00:00",
+        "last_login_date": "2021-09-01 12:00:00",
+        "permission": 3,
+        "status": 1,
+        "remark": "-"
+    }
+]

@@ -1,10 +1,14 @@
-import React from 'react'
+import { useState } from 'react'
 import { Outlet } from 'react-router-dom'
 import { Box, Container } from '@mui/material'
 import Header from '#/layouts/Header'
 import SideMenu from '../SideMenu'
+import useLayoutStore from '#/store/useLayoutStore'
+import { isMobile } from 'react-device-detect'
+
 const MainLayout = () => {
-    const [open, setOpen] = React.useState(false)
+    const { sidebar } = useLayoutStore()
+    const [open, setOpen] = useState(false)
 
     const toggleDrawer = () => {
         setOpen(!open)
@@ -12,7 +16,7 @@ const MainLayout = () => {
 
     return (
         <Box sx={{ display: 'flex' }}>
-            <Header />
+            <Header toggleDrawer={toggleDrawer} />
             <Box
                 sx={{
                     backgroundColor: (theme) =>
@@ -24,8 +28,15 @@ const MainLayout = () => {
                     height: '100vh',
                 }}
             >
-                <SideMenu open={open} toggleDrawer={toggleDrawer} />
-                <Container maxWidth="lg" sx={{ ml: 10, mt: 12, mb: 4 }}>
+                {sidebar && <SideMenu open={open} toggleDrawer={toggleDrawer} />}
+                <Container
+                    maxWidth="xl"
+                    sx={{
+                        ml: isMobile ? 0 : 6.5,
+                        mt: 12,
+                        mb: 4,
+                    }}
+                >
                     <Outlet />
                 </Container>
             </Box>

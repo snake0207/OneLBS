@@ -1,0 +1,67 @@
+{
+    "list_all": "Approval history list(All)",
+    "list_requester": "Approval history list(Requester)",
+    "list_reviewer": "Approval history list(Reviewer)",
+    "list_approver": "Approval history list(Approver)",
+    "detail": "Approval history Detail",
+    "line": "Approval line",
+    "requester": "Requester",
+    "reviewer": "Reviewer",
+    "approver": "Approver",
+    "info": "Info",
+    "final_info": "Final Info",
+    "name": "Name",
+    "address": "Address",
+    "lat": "Lat",
+    "lon": "Lon",
+    "category": "Category",
+    "brand": "Brand",
+    "request_reason": "Request reason",
+    "comment": "Comment",
+    "history": "History",
+    "total": "Total",
+    "case": "",
+    "date": "Date",
+    "state": "State",
+    "entire": "Entire",
+    "search": "Search",
+    "country": "Country",
+    "request_date": "Request date",
+    "review_date": "Review date",
+    "approval_date": "Approval/Reject date",
+    "approval": "Approval history",
+    "status": {
+        "temporary": "Temporary",
+        "request": "Request",
+        "reviewed": "Reviewed",
+        "approved": "Approved",
+        "rejected": "Rejected"
+    },
+    "actions": {
+        "temporary": "Temporary save",
+        "retrieve": "Retrieve",
+        "re_request": "Re-request",
+        "approval": "Approval",
+        "reject": "Reject"
+    },
+    "modal": {
+        "temporary": "Do you want to temporary save it?",
+        "retrieve": "Do you want to retrieve it?",
+        "re_request": "Do you want to request it again?",
+        "approval": "Do you want to approve it?",
+        "reject": "Do you want to reject it?"
+    },
+    "confirmed": {
+        "temporary": "Confirmed",
+        "retrieve": "Confirmed",
+        "re_request": "Confirmed",
+        "approval": "Confirmed",
+        "reject": "Confirmed"
+    },
+    "valid": {
+        "name": "name",
+        "requester": "requester",
+        "reviewer": "reviewer",
+        "approver": "approver"
+    }
+}

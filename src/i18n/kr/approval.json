@@ -1,0 +1,67 @@
+{
+    "list_all": "전체 이력 조회",
+    "list_requester": "이력 조회(요청자)",
+    "list_reviewer": "이력 조회(검토자)",
+    "list_approver": "이력 조회(승인자)",
+    "detail": "이력 조회 상세",
+    "line": "결제라인",
+    "requester": "요청자",
+    "reviewer": "검토자",
+    "approver": "승인자",
+    "info": "정보",
+    "final_info": "최종수정정보",
+    "name": "명칭",
+    "address": "주소",
+    "lat": "위도",
+    "lon": "경도",
+    "category": "카테고리",
+    "brand": "Brand",
+    "request_reason": "승인 요청 이유",
+    "comment": "Comment",
+    "history": "이력",
+    "total": "총",
+    "case": "건",
+    "date": "일시",
+    "state": "상태",
+    "entire": "전체",
+    "search": "검색",
+    "country": "국가",
+    "request_date": "요청일",
+    "review_date": "검토일",
+    "approval_date": "승인/반려일",
+    "approval": "요청 이력",
+    "status": {
+        "temporary": "임시저장",
+        "request": "검토요청",
+        "reviewed": "검토완료",
+        "approved": "승인완료",
+        "rejected": "반려"
+    },
+    "actions": {
+        "temporary": "임시저장",
+        "retrieve": "회수",
+        "re_request": "재상신",
+        "approval": "승인",
+        "reject": "반려"
+    },
+    "modal": {
+        "temporary": "임시저장 하시겠습니까?",
+        "retrieve": "회수 하시겠습니까?",
+        "re_request": "재상신 하시겠습니까?",
+        "approval": "승인 하시겠습니까?",
+        "reject": "반려 하시겠습니까?"
+    },
+    "confirmed": {
+        "temporary": "임시저장 되었습니다",
+        "retrieve": "회수 되었습니다",
+        "re_request": "재상신 되었습니다",
+        "approval": "승인 되었습니다",
+        "reject": "반려 되었습니다"
+    },
+    "valid": {
+        "name": "명칭",
+        "requester": "요청자",
+        "reviewer": "검토자",
+        "approver": "승인자"
+    }
+}

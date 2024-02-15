@@ -1,0 +1,58 @@
+[
+    {
+        "id": 1,
+        "email": "admin@email.com",
+        "name": "김**",
+        "company": "현대자동차",
+        "team": "기술연구소",
+        "permission": 0,
+        "ip_addresses": [
+            { "ip_address": "1.237.86.248", "description": "PC" },
+            { "ip_address": "1.237.86.247", "description": "APP" }
+        ]
+    },
+    {
+        "id": 2,
+        "email": "admin@email.com",
+        "name": "이**",
+        "company": "현대오토에버",
+        "team": "컨텐츠 플랫폼 개발팀",
+        "permission": 1,
+        "ip_addresses": [
+            { "ip_address": "1.237.86.248", "description": "PC" },
+            { "ip_address": "1.237.86.247", "description": "APP" },
+            { "ip_address": "1.237.86.247", "description": "PC" }
+        ]
+    },
+    {
+        "id": 3,
+        "email": "admin@email.com",
+        "name": "나**",
+        "company": "기아자동차",
+        "team": "품질관리",
+        "permission": 0,
+        "ip_addresses": [
+            { "ip_address": "1.237.86.248", "description": "PC" },
+            { "ip_address": "1.237.86.247", "description": "APP" },
+            { "ip_address": "1.237.86.247", "description": "PC" }
+        ]
+    },
+    {
+        "id": 4,
+        "email": "admin@email.com",
+        "name": "강**",
+        "company": "현대오토에버",
+        "team": "컨텐츠 플랫폼 개발팀",
+        "permission": 0,
+        "ip_addresses": [{ "ip_address": "1.237.86.248", "description": "PC" }]
+    },
+    {
+        "id": 5,
+        "email": "admin@email.com",
+        "name": "노**",
+        "company": "현대오토에버",
+        "team": "컨텐츠 플랫폼 개발팀",
+        "permission": 0,
+        "ip_addresses": [{ "ip_address": "1.237.86.247", "description": "APP" }]
+    }
+]

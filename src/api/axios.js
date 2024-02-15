@@ -1,10 +1,10 @@
 import axios from 'axios'
+import qs from 'qs'
 
 export const axiosInstance = axios.create({
-    baseURL: '',
+    baseURL: 'http://192.168.0.235:8081',
     headers: {
-        'Content-Type': 'application/json',
-        Accept: 'application/json',
+        'Content-Type': 'application/x-www-form-urlencoded',
     },
     withCredentials: true,
 })
@@ -28,11 +28,11 @@ export const getAPI = ({ endPoint, axiosOption }) => {
 }
 
 export const postAPI = ({ endPoint, data, axiosOption }) => {
-    return axiosInstance.post(endPoint, data, axiosOption)
+    return axiosInstance.post(endPoint, qs.stringify(data), axiosOption)
 }
 
 export const putAPI = ({ endPoint, data, axiosOption }) => {
-    return axiosInstance.post(endPoint, data, axiosOption)
+    return axiosInstance.put(endPoint, data, axiosOption)
 }
 
 export const deleteAPI = ({ endPoint, data, axiosOption }) => {

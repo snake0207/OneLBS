@@ -1,26 +1,26 @@
 import AuthStepper from '#/components/auth/AuthStepper'
 import CarouselOverview from '#/components/auth/CarouselOverview'
 import CertifiedForm from '#/components/auth/authForm/CertifiedForm'
+import EmailAuthForm from '#/components/auth/authForm/EmailAuthForm'
 import LoginForm from '#/components/auth/authForm/LoginForm'
 import PasswordResetForm from '#/components/auth/authForm/PasswordResetForm'
-import EmailAuth from '#/components/auth/authForm/EmailAuth'
 
 const LoginDemoPage = () => {
     const dummyImageList = [
         {
-            imgUrl: '',
+            imgUrl: './assets/login-img1.svg',
             title: 'AutoEver Global Search Info Service Management 1',
             description:
                 'Enhancing the efficiency and effectiveness of global Search info service optimization',
         },
         {
-            imgUrl: '',
+            imgUrl: './assets/login-img2.svg',
             title: 'AutoEver Global Search Info Service Management 2',
             description:
                 'Enhancing the efficiency and effectiveness of global Search info service optimization',
         },
         {
-            imgUrl: '',
+            imgUrl: './assets/login-img3.svg',
             title: 'AutoEver Global Search Info Service Management 3',
             description:
                 'Enhancing the efficiency and effectiveness of global Search info service optimization',
@@ -42,7 +42,7 @@ const LoginDemoPage = () => {
                         display: 'flex',
                         flexDirection: 'column',
                         flexShrink: 0,
-                        width: 600,
+                        width: 400,
                         height: '100%',
                     }}
                 >
@@ -53,7 +53,7 @@ const LoginDemoPage = () => {
                         display: 'flex',
                         flexDirection: 'column',
                         flexShrink: 0,
-                        width: 600,
+                        width: 400,
                         height: '100%',
                     }}
                 >
@@ -64,7 +64,7 @@ const LoginDemoPage = () => {
                         display: 'flex',
                         flexDirection: 'column',
                         flexShrink: 0,
-                        width: 600,
+                        width: 400,
                         height: '100%',
                     }}
                 >
@@ -75,11 +75,11 @@ const LoginDemoPage = () => {
                         display: 'flex',
                         flexDirection: 'column',
                         flexShrink: 0,
-                        width: 600,
+                        width: 400,
                         height: '100%',
                     }}
                 >
-                    <EmailAuth />
+                    <EmailAuthForm />
                 </div>
             </div>
         </div>

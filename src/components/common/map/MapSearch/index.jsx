@@ -289,6 +289,8 @@ const MapSearch = () => {
         <Box
             sx={{
                 width: '350px',
+                maxHeight: '300px',
+                overflow: 'auto',
                 padding: '16px',
                 margin: '10px 10px 6px 10px',
                 borderRadius: '8px',

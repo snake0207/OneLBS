@@ -114,7 +114,12 @@ const LoginForm = () => {
                         variant="contained"
                         onClick={handleClickPasswordReset}
                         type="button"
-                        sx={{ bgcolor: 'button.light', width: '100%', fontWeight: 400 }}
+                        sx={{
+                            bgcolor: 'button.light',
+                            width: '100%',
+                            fontWeight: 400,
+                            textWrap: 'nowrap',
+                        }}
                     >
                         {t('reset_password', 'auth')}
                     </Button>

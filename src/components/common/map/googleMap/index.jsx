@@ -354,23 +354,18 @@ const GoogleMapComponent = ({
                 </CustomControl>
                 {/* poi / gpss 조회 공통 */}
                 {(isPoiSearch || isGpssSearch) && (
-                    <>
+                    <CustomControl position="TOP_LEFT" style={{ left: '0px !important' }}>
+                        {/*<Box sx={{ display: 'flex', flexDirection: 'column', flex: 1 }}>*/}
                         {/* 지도 검색 */}
-                        <CustomControl position="TOP_LEFT" style={{ left: '0px !important' }}>
-                            <MapSearch />
-                        </CustomControl>
+                        <MapSearch />
                         {/* 검색 결과 */}
-                        <CustomControl
-                            position="TOP_LEFT"
-                            style={{ left: '0px !important', top: '320px !important' }}
-                        >
-                            <MapSearchList
-                                searchResultArr={mapSampleData}
-                                selectedPoi={selectedPoi}
-                                setSelectedPoi={setSelectedPoi}
-                            />
-                        </CustomControl>
-                    </>
+                        <MapSearchList
+                            searchResultArr={mapSampleData}
+                            selectedPoi={selectedPoi}
+                            setSelectedPoi={setSelectedPoi}
+                        />
+                        {/*</Box>*/}
+                    </CustomControl>
                 )}
 
                 {/* 상세정보 */}

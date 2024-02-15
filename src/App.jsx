@@ -8,7 +8,6 @@ import useLayoutStore from '#/store/useLayoutStore'
 import './i18n/index'
 
 import Routes from './routes'
-import GlobalModal from '#/GlobalModal'
 import { useTranslation } from 'react-i18next'
 import CommonPopup from '#/components/common/popup/CommonPopup'
 
@@ -24,7 +23,6 @@ function App() {
 
     return (
         <ThemeProvider theme={theme}>
-            <GlobalModal />
             <BrowserRouter>
                 <Routes />
             </BrowserRouter>

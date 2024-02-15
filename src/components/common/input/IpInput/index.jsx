@@ -1,4 +1,5 @@
 import { Box, FormHelperText, TextField, Typography } from '@mui/material'
+import { isMobile } from 'react-device-detect'
 
 /**
  * 공통 IP Input 메인 컴포넌트
@@ -10,7 +11,14 @@ import { Box, FormHelperText, TextField, Typography } from '@mui/material'
 const IpInputMain = ({ children, ipName1, ipName2, ipName3, ipName4, formik }) => {
     return (
         <Box>
-            <Box sx={{ display: 'flex', alignItems: 'flex-end', gap: 1 }}>
+            <Box
+                sx={{
+                    display: 'flex',
+                    alignItems: 'flex-end',
+                    gap: 1,
+                    flexWrap: isMobile ? 'wrap' : '',
+                }}
+            >
                 <TextField
                     name={ipName1}
                     value={formik.values[ipName1]}

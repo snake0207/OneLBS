@@ -1,30 +1,45 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useFormik } from 'formik'
-import { Box, Button, DialogActions, DialogContent, Typography } from '@mui/material'
+import {
+    Box,
+    Button,
+    Dialog,
+    DialogActions,
+    DialogContent,
+    DialogTitle,
+    Icon,
+    IconButton,
+    Typography,
+} from '@mui/material'
 import { usePostJoin } from '#/hooks/queries/auth'
 import TextInput from '#/components/common/input/TextInput'
 import PasswordInput from '#/components/common/input/PasswordInput'
 import RadioInput from '#/components/common/Radio'
 import { joinSchema } from '#/contents/validationSchema'
-import VerifyEmailForm from '#/components/common/modal/auth/Join/VerifyEmailForm'
-import ConfirmEmailForm from '#/components/common/modal/auth/Join/ConfirmEmailForm'
-import PrivacyPolicyModal from '#/components/common/modal/auth/Join/PrivacyPolicy'
-import IpInputGroup from '#/components/common/modal/auth/Join/IpInputGroup'
-import { useModalActions } from '#/store/useModalStore'
-import { MODAL_TITLE } from '#/contents/constant'
-import joinList from './list.json'
+import VerifyEmailForm from '#/components/auth/authForm/joinForm/JoinModal/VerifyEmailForm'
+import ConfirmEmailForm from '#/components/auth/authForm/joinForm/JoinModal/ConfirmEmailForm'
+import PrivacyPolicyModal from '#/components/auth/authForm/joinForm/JoinModal/PrivacyPolicyModal'
+import IpInputGroup from '#/components/auth/authForm/joinForm/JoinModal/IpInputGroup'
 import { usePopupActions } from '#/store/usePopupStore'
+import AncestorUserIcon from '#/assets/joinIcon.svg'
+import CloseIcon from '@mui/icons-material/Close'
+import JoinSuccessModal from '#/components/auth/authForm/joinForm/JoinSuccessModal'
+import { getLayoutState } from '#/store/useLayoutStore'
+import AccountCircleIcon from '@mui/icons-material/AccountCircle'
 
 import { formatJoinData } from '#/common/libs/formatData'
 import t from '#/common/libs/trans'
 
 import style from './style.module'
 
-const JoinModal = () => {
-    const { openModal } = useModalActions()
+import joinList from './list.json'
+
+const JoinModal = ({ isOpen, onClose }) => {
     const { showPopup } = usePopupActions()
+    const { themeMode } = getLayoutState()
     const { mutate } = usePostJoin()
-    const [isOpenPrivacyPolicy, setIsOpenPrivacyPolicy] = useState(false)
+    const [isOpenPrivacyPolicyModal, setIsOpenPrivacyPolicyModal] = useState(false)
+    const [isOpenJoinSuccessModal, setIsOpenJoinSuccessModal] = useState(false)
 
     const formik = useFormik({
         initialValues: {
@@ -63,17 +78,60 @@ const JoinModal = () => {
             const data = formatJoinData(form)
             console.log(data)
             // mutate(data)
-            openModal(MODAL_TITLE.joinSuccess)
+            setIsOpenJoinSuccessModal(true)
         },
     })
 
-    const handleClosePrivacyPolicyDetail = () => {
-        setIsOpenPrivacyPolicy(false)
+    const handleClosePrivacyPolicyModal = () => {
+        setIsOpenPrivacyPolicyModal(false)
         formik.setFieldValue('terms', 'Y')
     }
 
+    const handleCloseJoinSuccessModal = () => {
+        setIsOpenJoinSuccessModal(false)
+        onClose()
+    }
+
+    useEffect(() => {
+        formik.resetForm()
+    }, [isOpen])
+
     return (
-        <>
+        <Dialog open={isOpen} onClose={onClose} maxWidth="md">
+            <DialogTitle
+                sx={{
+                    display: 'flex',
+                    justifyContent: 'space-between',
+                    alignItems: 'center',
+                    fontSize: 16,
+                    backgroundColor: 'primary.lightBlue',
+                    borderRadius: 20,
+                    mt: 3.8,
+                    ml: 2.5,
+                    mr: 2.5,
+                    mb: 1.3,
+                    height: 42,
+                    pl: 1,
+                    pr: 1,
+                }}
+            >
+                <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+                    {themeMode === 'light' ? (
+                        <Icon>
+                            <img
+                                src={AncestorUserIcon}
+                                style={{ display: 'flex', width: '100%' }}
+                            />
+                        </Icon>
+                    ) : (
+                        <AccountCircleIcon />
+                    )}
+                    {t('join', 'auth')}
+                </Box>
+                <IconButton onClick={onClose}>
+                    <CloseIcon />
+                </IconButton>
+            </DialogTitle>
             <DialogContent>
                 <Typography sx={style.subTitle}>
                     <span style={{ color: 'red' }}>*</span>
@@ -135,14 +193,14 @@ const JoinModal = () => {
                     placeholder={t('placeholder.team', 'auth')}
                     formik={formik}
                 />
-                {formik.values.role !== '25' && formik.values.role !== '26' && (
-                    <IpInputGroup formik={formik} />
-                )}
                 <Typography variant="h6" sx={style.labelText}>
                     <span style={{ color: 'red' }}>*</span>
                     {t('role', 'auth')}
                 </Typography>
                 <RadioInput radioList={joinList.roleList} name={'role'} formik={formik} />
+                {formik.values.role !== '25' && formik.values.role !== '26' && (
+                    <IpInputGroup formik={formik} />
+                )}
                 <Box sx={{ display: 'flex', justifyContent: 'space-between', mt: 2 }}>
                     <Typography variant="h6" sx={{ fontSize: 14 }}>
                         <span style={{ color: 'red' }}>*</span>
@@ -150,7 +208,7 @@ const JoinModal = () => {
                     </Typography>
                     <Button
                         variant="contained"
-                        onClick={() => setIsOpenPrivacyPolicy(true)}
+                        onClick={() => setIsOpenPrivacyPolicyModal(true)}
                         sx={style.btnDetaile}
                     >
                         {t('read_more', 'auth')}
@@ -178,10 +236,14 @@ const JoinModal = () => {
                 </Button>
             </DialogActions>
             <PrivacyPolicyModal
-                isOpen={isOpenPrivacyPolicy}
-                onClose={handleClosePrivacyPolicyDetail}
+                isOpen={isOpenPrivacyPolicyModal}
+                onClose={handleClosePrivacyPolicyModal}
             />
-        </>
+            <JoinSuccessModal
+                isOpen={isOpenJoinSuccessModal}
+                onClose={handleCloseJoinSuccessModal}
+            />
+        </Dialog>
     )
 }
 

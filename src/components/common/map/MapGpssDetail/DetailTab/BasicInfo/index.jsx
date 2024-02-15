@@ -8,12 +8,7 @@ import FormikInput from '#/components/common/input/FormikInput/index.jsx'
 import PointBlueIcon from '#/assets/pointBlueIcon.svg'
 import LanguageIcon from '#/assets/languageIcon.svg'
 import GpsIcon from '#/assets/gpsIcon.svg'
-import EvStationIcon from '#/assets/evStationIcon.svg'
-import PlaceIcon from '@mui/icons-material/Place'
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
 import EditIcon from '@mui/icons-material/Edit'
-import TextInput from '#/components/common/input/TextInput/index.jsx'
-import { Accordion, AccordionSummary, AccordionDetails } from '@mui/material'
 
 const BasicInfo = ({ formik, poiData }) => {
     // 데이터 수정
@@ -63,10 +58,11 @@ const BasicInfo = ({ formik, poiData }) => {
                             {isAddressSave ? <SaveIcon /> : <EditIcon />}
                         </IconButton>
                     </Box>
-                    {(isAddressSave || (!isAddressSave && formik.values.address !== '')) && (
+                    {(isAddressSave ||
+                        (!isAddressSave &&
+                            formik.values.address !== formik.initialValues.address)) && (
                         <Box sx={{ height: '40px' }}>
-                            <TextInput
-                                formik={formik}
+                            <FormikInput
                                 name={'address'}
                                 IsDisabled={!isAddressSave}
                                 placeholder={t('address_input', 'gpss')}
@@ -97,16 +93,19 @@ const BasicInfo = ({ formik, poiData }) => {
                                 minHeight: '15px',
                                 height: '30px',
                             }}
+                            disabled={!!formik.errors.position?.center?.lat}
                             onClick={handleClickSetLatState}
                         >
                             {isLatSave ? <SaveIcon /> : <EditIcon />}
                         </IconButton>
                     </Box>
-                    {(isLatSave || (!isLatSave && formik.values.lat !== '')) && (
-                        <Box sx={{ height: '40px' }}>
-                            <TextInput
-                                formik={formik}
-                                name={'lat'}
+                    {(isLatSave ||
+                        (!isLatSave &&
+                            parseFloat(formik.values.position.center.lat) !==
+                                formik.initialValues.position.center.lat)) && (
+                        <Box sx={{ height: 'auto' }}>
+                            <FormikInput
+                                name={'position.center.lat'}
                                 IsDisabled={!isLatSave}
                                 placeholder={t('lat_input', 'gpss')}
                             />
@@ -130,16 +129,19 @@ const BasicInfo = ({ formik, poiData }) => {
                                 minHeight: '15px',
                                 height: '30px',
                             }}
+                            disabled={!!formik.errors.position?.center?.lon}
                             onClick={handleClickSetLngSate}
                         >
                             {isLngSave ? <SaveIcon /> : <EditIcon />}
                         </IconButton>
                     </Box>
-                    {(isLngSave || (!isLngSave && formik.values.lon !== '')) && (
-                        <Box sx={{ height: '40px' }}>
-                            <TextInput
-                                formik={formik}
-                                name={'lon'}
+                    {(isLngSave ||
+                        (!isLngSave &&
+                            parseFloat(formik.values.position.center.lon) !==
+                                formik.initialValues.position.center.lon)) && (
+                        <Box sx={{ height: 'auto' }}>
+                            <FormikInput
+                                name={'position.center.lon'}
                                 IsDisabled={!isLngSave}
                                 placeholder={t('lon_input', 'gpss')}
                             />

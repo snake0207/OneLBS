@@ -12,13 +12,14 @@ import PrivacyPolicyModal from '#/components/common/modal/auth/Join/PrivacyPolic
 import IpInputGroup from '#/components/common/modal/auth/Join/IpInputGroup'
 import { useModalActions } from '#/store/useModalStore'
 import { MODAL_TITLE } from '#/contents/constant'
-import joinList from './list.json'
 import { usePopupActions } from '#/store/usePopupStore'
 
 import { formatJoinData } from '#/common/libs/formatData'
 import t from '#/common/libs/trans'
 
 import style from './style.module'
+
+import joinList from './list.json'
 
 const JoinModal = () => {
     const { openModal } = useModalActions()
@@ -135,14 +136,14 @@ const JoinModal = () => {
                     placeholder={t('placeholder.team', 'auth')}
                     formik={formik}
                 />
-                {formik.values.role !== '25' && formik.values.role !== '26' && (
-                    <IpInputGroup formik={formik} />
-                )}
                 <Typography variant="h6" sx={style.labelText}>
                     <span style={{ color: 'red' }}>*</span>
                     {t('role', 'auth')}
                 </Typography>
                 <RadioInput radioList={joinList.roleList} name={'role'} formik={formik} />
+                {formik.values.role !== '25' && formik.values.role !== '26' && (
+                    <IpInputGroup formik={formik} />
+                )}
                 <Box sx={{ display: 'flex', justifyContent: 'space-between', mt: 2 }}>
                     <Typography variant="h6" sx={{ fontSize: 14 }}>
                         <span style={{ color: 'red' }}>*</span>

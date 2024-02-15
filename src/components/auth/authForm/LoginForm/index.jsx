@@ -11,7 +11,7 @@ import { usePostLogin } from '#/hooks/queries/auth'
 import { useModalActions } from '#/store/useModalStore'
 import { Icon } from '@mui/material'
 import LoginIcon from '#/assets/loginIcon.svg'
-import { BrowserView } from 'react-device-detect'
+import { BrowserView, isBrowser, isMobile } from 'react-device-detect'
 
 import t from '#/common/libs/trans'
 
@@ -37,6 +37,12 @@ const LoginForm = () => {
 
     const handleClickPasswordReset = () => {
         changeAuthStep(AUTH_STEP.passwordReset)
+    }
+
+    const handleClickJoin = () => {
+        if (isBrowser) openModal(MODAL_TITLE.join, 'md')
+
+        if (isMobile) changeAuthStep(AUTH_STEP.join)
     }
 
     return (
@@ -91,7 +97,7 @@ const LoginForm = () => {
                     <Button
                         variant="contained"
                         type="button"
-                        onClick={() => openModal(MODAL_TITLE.join, 'md')}
+                        onClick={handleClickJoin}
                         sx={{ bgcolor: 'button.light', width: '100%', fontWeight: 400 }}
                     >
                         {t('join', 'auth')}

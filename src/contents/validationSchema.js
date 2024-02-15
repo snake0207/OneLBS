@@ -166,3 +166,12 @@ export const mapSearchSchema = yup.object({
         .matches(REGEXP.coordinates, HELPER_TEXT.searchLng)
         .required(HELPER_TEXT.searchLng),
 })
+
+export const poiDetailSchema = yup.object({
+    position: yup.object().shape({
+        center: yup.object().shape({
+            lat: yup.string().matches(REGEXP.coordinates, HELPER_TEXT.searchLat),
+            lon: yup.string().matches(REGEXP.coordinates, HELPER_TEXT.searchLng),
+        }),
+    }),
+})

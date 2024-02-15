@@ -10,6 +10,7 @@ import { usePopupActions } from '#/store/usePopupStore.js'
 import t from '#/common/libs/trans.js'
 import EvCharging from '#/components/common/map/MapGpssDetail/DetailTab/EvCharging/index.jsx'
 import BasicInfo from '#/components/common/map/MapGpssDetail/DetailTab/BasicInfo/index.jsx'
+import { poiDetailSchema } from '#/contents/validationSchema.js'
 
 const dummyData = [
     { id: 'qwer@acrofuture.com', name: '아*로1', company: '회사1', userSeq: 1 },
@@ -28,6 +29,7 @@ const MapGpssDetailTab = ({ poiData }) => {
             approver: '',
             ...poiData,
         },
+        validationSchema: poiDetailSchema,
         onSubmit: (form) => {
             console.log(form)
         },

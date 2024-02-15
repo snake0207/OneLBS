@@ -1,11 +1,22 @@
-import { Box, Dialog, DialogContent, DialogTitle, IconButton } from '@mui/material'
+import { Box, Dialog, DialogContent, DialogTitle, IconButton, Slide } from '@mui/material'
 import CloseIcon from '@mui/icons-material/Close'
 
 import t from '#/common/libs/trans'
+import { isMobile } from 'react-device-detect'
+import { forwardRef } from 'react'
+
+const Transition = forwardRef(function Transition(props, ref) {
+    return <Slide direction="up" ref={ref} {...props} />
+})
 
 const PrivacyPolicyModal = ({ isOpen, onClose }) => {
     return (
-        <Dialog open={isOpen} onClose={onClose} maxWidth="sm">
+        <Dialog
+            open={isOpen}
+            onClose={onClose}
+            fullScreen={isMobile}
+            TransitionComponent={isMobile ? Transition : undefined}
+        >
             <DialogTitle
                 sx={{
                     display: 'flex',

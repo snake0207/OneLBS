@@ -1,20 +1,18 @@
-import JoinSuccessModal from '#/components/common/modal/auth/JoinSuccess'
-import PrivacyPolicyModal from '#/components/common/modal/auth/Join/PrivacyPolicy'
-import { MODAL_TITLE } from '#/contents/constant'
-import { useModalActions } from '#/store/useModalStore'
+import JoinSuccessModal from '#/components/auth/authForm/joinForm/JoinSuccessModal'
+import PrivacyPolicyModal from '#/components/auth/authForm/joinForm/JoinModal/PrivacyPolicy'
 import { useState } from 'react'
+import JoinModal from '#/components/auth/authForm/joinForm/JoinModal'
 
 const ModalPage = () => {
-    const { openModal } = useModalActions()
+    const [isOpenJoinModal, setIsOpenJoinModal] = useState(false)
     const [isOpenPrivacyPolicyModal, setIsOpenPrivacyPolicyModal] = useState(false)
     const [isOpenJoinSuccessModal, setIsOpenJoinSuccessModal] = useState(false)
     return (
         <div>
             <h1>Modal</h1>
-            <h2>DemoModal</h2>
-            <button onClick={() => openModal(MODAL_TITLE.demo)}>DemoModal</button>
             <h2>JoinModal</h2>
-            <button onClick={() => openModal(MODAL_TITLE.join)}>JoinModal</button>
+            <button onClick={() => setIsOpenJoinModal(true)}>JoinModal</button>
+            <JoinModal isOpen={isOpenJoinModal} onClose={() => setIsOpenJoinModal(false)} />
             <h2>JoinSuccessModal</h2>
             <button onClick={() => setIsOpenJoinSuccessModal(true)}>PrivacyPolicyModal</button>
             <JoinSuccessModal

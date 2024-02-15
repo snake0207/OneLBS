@@ -1,18 +1,16 @@
 import { useState } from 'react'
 import { useFormik } from 'formik'
 import { joinSchema } from '#/contents/validationSchema'
-import { useModalActions } from '#/store/useModalStore'
 import { usePopupActions } from '#/store/usePopupStore'
-import { MODAL_TITLE } from '#/contents/constant'
 import { usePostJoin } from '#/hooks/queries/auth'
 import { Box, Button, Typography } from '@mui/material'
-import VerifyEmailForm from '#/components/common/modal/auth/Join/VerifyEmailForm'
-import ConfirmEmailForm from '#/components/common/modal/auth/Join/ConfirmEmailForm'
+import VerifyEmailForm from '#/components/auth/authForm/joinForm/JoinModal/VerifyEmailForm'
+import ConfirmEmailForm from '#/components/auth/authForm/joinForm/JoinModal/ConfirmEmailForm'
 import PasswordInput from '#/components/common/input/PasswordInput'
 import TextInput from '#/components/common/input/TextInput'
-import IpInputGroup from '#/components/common/modal/auth/Join/IpInputGroup'
+import IpInputGroup from '#/components/auth/authForm/joinForm/JoinModal/IpInputGroup'
 import RadioInput from '#/components/common/Radio'
-import PrivacyPolicyModal from '#/components/common/modal/auth/Join/PrivacyPolicy'
+import PrivacyPolicyModal from '#/components/auth/authForm/joinForm/JoinModal/PrivacyPolicy'
 
 import t from '#/common/libs/trans'
 import { formatJoinData } from '#/common/libs/formatData'
@@ -20,12 +18,15 @@ import { formatJoinData } from '#/common/libs/formatData'
 import style from './style.module'
 
 import joinList from './list.json'
+import JoinSuccessModal from '#/components/auth/authForm/joinForm/JoinSuccessModal'
+import { useAuthStepActions } from '#/store/useAuthStepStore'
 
 const JoinForm = () => {
-    const { openModal } = useModalActions()
     const { showPopup } = usePopupActions()
+    const actions = useAuthStepActions()
     const { mutate } = usePostJoin()
     const [isOpenPrivacyPolicy, setIsOpenPrivacyPolicy] = useState(false)
+    const [isOpenJoinSuccessModal, setIsOpenJoinSuccessModal] = useState(false)
 
     const formik = useFormik({
         initialValues: {
@@ -64,13 +65,18 @@ const JoinForm = () => {
             const data = formatJoinData(form)
             console.log(data)
             // mutate(data)
-            openModal(MODAL_TITLE.joinSuccess)
+            setIsOpenJoinSuccessModal(true)
         },
     })
 
     const handleClosePrivacyPolicyDetail = () => {
         setIsOpenPrivacyPolicy(false)
         formik.setFieldValue('terms', 'Y')
+    }
+
+    const handleCloseJoinSuccessModal = () => {
+        setIsOpenJoinSuccessModal(false)
+        actions.initAuthStep()
     }
 
     return (
@@ -172,6 +178,10 @@ const JoinForm = () => {
             <PrivacyPolicyModal
                 isOpen={isOpenPrivacyPolicy}
                 onClose={handleClosePrivacyPolicyDetail}
+            />
+            <JoinSuccessModal
+                isOpen={isOpenJoinSuccessModal}
+                onClose={handleCloseJoinSuccessModal}
             />
         </Box>
     )

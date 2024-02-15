@@ -5,10 +5,9 @@ import PasswordInput from '#/components/common/input/PasswordInput'
 import FlexEndButtonContainer from '#/components/common/button/FlexEndButtonContainer'
 import AuthStepper from '#/components/auth/AuthStepper'
 import { useAuthStepActions } from '#/store/useAuthStepStore'
-import { AUTH_STEP, MODAL_TITLE } from '#/contents/constant'
+import { AUTH_STEP } from '#/contents/constant'
 import { loginSchema } from '#/contents/validationSchema'
 import { usePostLogin } from '#/hooks/queries/auth'
-import { useModalActions } from '#/store/useModalStore'
 import { Icon } from '@mui/material'
 import LoginIcon from '#/assets/loginIcon.svg'
 import { BrowserView, isBrowser, isMobile } from 'react-device-detect'
@@ -16,11 +15,13 @@ import { BrowserView, isBrowser, isMobile } from 'react-device-detect'
 import t from '#/common/libs/trans'
 
 import style from './style.module'
+import JoinModal from '#/components/auth/authForm/joinForm/JoinModal'
+import { useState } from 'react'
 
 const LoginForm = () => {
     const { changeAuthStep } = useAuthStepActions()
-    const { openModal } = useModalActions()
     const { mutate } = usePostLogin()
+    const [isOpenJoinModal, setIsOpenJoinModal] = useState(false)
 
     const formik = useFormik({
         initialValues: {
@@ -40,9 +41,13 @@ const LoginForm = () => {
     }
 
     const handleClickJoin = () => {
-        if (isBrowser) openModal(MODAL_TITLE.join, 'md')
+        if (isBrowser) setIsOpenJoinModal(true)
 
         if (isMobile) changeAuthStep(AUTH_STEP.join)
+    }
+
+    const handleCloseJoinModal = () => {
+        setIsOpenJoinModal(false)
     }
 
     return (
@@ -112,6 +117,7 @@ const LoginForm = () => {
                     </Button>
                 </Box>
             </FlexEndButtonContainer>
+            <JoinModal isOpen={isOpenJoinModal} onClose={handleCloseJoinModal} />
         </>
     )
 }

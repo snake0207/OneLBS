@@ -43,7 +43,7 @@ const BasicInfo = ({ formik, poiData }) => {
                             <img src={LanguageIcon} />
                         </Box>
                         <Box>
-                            <Typography>10036 New York, Manhattan, United States</Typography>
+                            <Typography>{poiData.address}</Typography>
                         </Box>
                         <IconButton
                             sx={{
@@ -83,7 +83,7 @@ const BasicInfo = ({ formik, poiData }) => {
                             <img src={GpsIcon} />
                         </Box>
                         <Box>
-                            <Typography>40.758077</Typography>
+                            <Typography>{poiData.position.center.lat}</Typography>
                         </Box>
                         <IconButton
                             sx={{
@@ -119,7 +119,7 @@ const BasicInfo = ({ formik, poiData }) => {
                             <img src={GpsIcon} />
                         </Box>
                         <Box>
-                            <Typography>-73.985480</Typography>
+                            <Typography>{poiData.position.center.lon}</Typography>
                         </Box>
                         <IconButton
                             sx={{

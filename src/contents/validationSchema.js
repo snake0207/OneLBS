@@ -156,7 +156,7 @@ export const passwordResetSchema = yup.object({
 })
 
 export const mapSearchSchema = yup.object({
-    country: yup.string().required(HELPER_TEXT.searchCountry),
+    country: yup.array().of(yup.string()).min(1, HELPER_TEXT.searchCountry),
     lat: yup
         .string()
         .matches(REGEXP.coordinates, HELPER_TEXT.searchLat)

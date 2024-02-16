@@ -33,7 +33,7 @@ const BasicInfo = ({ formik, poiData }) => {
                         src={PointBlueIcon}
                         style={{ verticalAlign: 'middle', paddingRight: '4px' }}
                     />
-                    Times Square
+                    {poiData.title}
                 </Typography>
             </Box>
             <Box sx={{ marginTop: '8px', marginBottom: '16px' }}>

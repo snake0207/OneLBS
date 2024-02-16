@@ -45,12 +45,12 @@ const SearchFilter = ({ type, handleSubmitFilter, isMobile }) => {
             handleSubmitFilter(form)
         },
     })
-    const regionItems = [
+    const regionSelectItems = [
         { key: 0, value: 0, label: t('entire', 'approval') },
         { key: 1, value: 1, label: 'NA' },
         { key: 2, value: 2, label: 'EU' },
     ]
-    const statusItems = () => {
+    const statusSelectItems = () => {
         const base = [
             { key: 3, value: 3, label: t('status.reviewed', 'approval') },
             { key: 4, value: 4, label: t('status.approved', 'approval') },
@@ -104,7 +104,7 @@ const SearchFilter = ({ type, handleSubmitFilter, isMobile }) => {
                             <Select
                                 name={'tempFilter2'}
                                 formik={formik}
-                                items={regionItems}
+                                items={regionSelectItems}
                                 sx={{ width: 200 }}
                             />
                         </Grid>
@@ -117,7 +117,7 @@ const SearchFilter = ({ type, handleSubmitFilter, isMobile }) => {
                             <Select
                                 name={'tempFilter3'}
                                 formik={formik}
-                                items={statusItems()}
+                                items={statusSelectItems()}
                                 sx={{ width: 200 }}
                             />
                         </Grid>

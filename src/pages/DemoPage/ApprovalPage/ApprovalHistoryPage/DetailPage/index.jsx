@@ -6,15 +6,15 @@ import { Box, Card, Stack, TextField } from '@mui/material'
 import ApprovalLine from '#/components/approval/Detail/ApprovalLine/index.jsx'
 import InfoTab from '#/components/approval/Detail/InfoTab/index.jsx'
 import HistoryTable from '#/components/approval/Detail/HistoryTable/index.jsx'
-import { useMemo } from 'react'
+import { useMemo, useRef } from 'react'
 import { useFormik } from 'formik'
-import CategoryTable from '#/components/approval/Detail/CategoryTable/index.jsx'
 import ActionButtons from '#/components/approval/Detail/ActionButtons/index.jsx'
 import dummyData from '../../detailData.json'
 import poiDummyData from '../../poiDetailData.json'
 import Headline from '#/components/approval/Detail/Headline/index.jsx'
 import Comment from '#/components/approval/Detail/Comment/index.jsx'
 import { usePopupActions } from '#/store/usePopupStore.js'
+import CategoryInfo from '#/components/approval/Detail/CategoryInfo/index.jsx'
 
 const ApprovalHistoryDetailPage = () => {
     const params = useParams()
@@ -23,11 +23,15 @@ const ApprovalHistoryDetailPage = () => {
     const dealerCategory = poiDummyData.result[0]
     const formik = useFormik({
         initialValues: {
-            name: '',
-            address: '',
-            lat: '',
-            lon: '',
-            brand: '',
+            name: poiDummyData.result[0].title,
+            address: poiDummyData.result[0].address,
+            lat: poiDummyData.result[0].position.center.lat,
+            lon: poiDummyData.result[0].position.center.lon,
+            evCharging: {
+                brand: poiDummyData.result[0].evCharging.brand,
+                maxWatt: poiDummyData.result[0].evCharging.maxWatt,
+                stationStatus: 0,
+            },
             request_reason: '위.경도 좌표 수정',
             reviewer_comment: dummyData.comment.reviewer,
             approver_comment: dummyData.comment.approver,
@@ -87,7 +91,7 @@ const ApprovalHistoryDetailPage = () => {
                     {/* 정보 탭 */}
                     <InfoTab data={dummyData.info} formik={formik} isEditable={isEditable} />
                     {/* 카테고리 */}
-                    <CategoryTable data={dealerCategory} formik={formik} isEditable={isEditable} />
+                    <CategoryInfo data={dealerCategory} formik={formik} isEditable={isEditable} />
                     {/* 승인 요청 이유*/}
                     <Box>
                         <Headline title={t('request_reason', 'approval')} />

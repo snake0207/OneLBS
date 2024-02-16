@@ -17,16 +17,14 @@ const DisplayMarker = ({ markerData }) => {
             }}
             position={{ lat: lat, lng: lon }}
         >
-            {marker && (
-                <InfoWindow
-                    onLoad={(info) => {
-                        setInfoWindow(info)
-                        info.open({ anchor: marker, map: map })
-                    }}
-                >
-                    <MapInfoWindow markerData={markerData} />
-                </InfoWindow>
-            )}
+            <InfoWindow
+                onLoad={(info) => {
+                    setInfoWindow(info)
+                    info.open({ anchor: marker, map: map })
+                }}
+            >
+                <MapInfoWindow markerData={markerData} />
+            </InfoWindow>
         </Marker>
     )
 }

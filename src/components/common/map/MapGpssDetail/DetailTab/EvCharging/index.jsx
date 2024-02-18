@@ -1,8 +1,9 @@
 import { Accordion, AccordionDetails, AccordionSummary, Box } from '@mui/material'
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore.js'
 import EvStationIcon from '#/assets/evStationIcon.svg'
+import GpssOpeningHours from '#/components/common/map/detailCommon/GpssOpeningHours/index.jsx'
 
-const EvCharging = () => {
+const EvCharging = ({ evChargingData }) => {
     return (
         <Box sx={{ display: 'flex', marginBottom: '16px' }}>
             <Accordion elevation={0} sx={{ padding: 0 }}>
@@ -17,8 +18,9 @@ const EvCharging = () => {
                     EV Charging
                 </AccordionSummary>
                 <AccordionDetails sx={{ padding: 0 }}>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada
-                    lacus ex, sit amet blandit leo lobortis eget.
+                    {evChargingData.openingHours && (
+                        <GpssOpeningHours openingHoursData={evChargingData.openingHours} />
+                    )}
                 </AccordionDetails>
             </Accordion>
         </Box>

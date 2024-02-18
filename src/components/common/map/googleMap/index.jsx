@@ -142,22 +142,22 @@ const detailSampleData = {
                     openingHours: [
                         {
                             week: 0,
-                            open: '6:00',
+                            open: '08:00',
                             close: '22:00',
                         },
                         {
                             week: 1,
-                            open: '6:00',
+                            open: '06:00',
                             close: '22:00',
                         },
                         {
                             week: 2,
-                            open: '6:00',
+                            open: '09:00',
                             close: '22:00',
                         },
                         {
                             week: 3,
-                            open: '6:00',
+                            open: '10:00',
                             close: '22:00',
                         },
                     ],

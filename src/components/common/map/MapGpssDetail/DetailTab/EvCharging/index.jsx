@@ -2,6 +2,7 @@ import { Accordion, AccordionDetails, AccordionSummary, Box } from '@mui/materia
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore.js'
 import EvStationIcon from '#/assets/evStationIcon.svg'
 import GpssOpeningHours from '#/components/common/map/detailCommon/GpssOpeningHours/index.jsx'
+import GpssPrices from '#/components/common/map/detailCommon/GpssPrices/index.jsx'
 
 const EvCharging = ({ evChargingData, formik }) => {
     return (
@@ -18,11 +19,20 @@ const EvCharging = ({ evChargingData, formik }) => {
                     EV Charging
                 </AccordionSummary>
                 <AccordionDetails sx={{ padding: 0 }}>
+                    {/* 이용 시간 */}
                     {evChargingData.openingHours && (
                         <GpssOpeningHours
                             openingHoursData={evChargingData.openingHours}
                             dataType={'evCharging'}
                             formik={formik}
+                        />
+                    )}
+                    {/* 가격 정보 */}
+                    {evChargingData.price && (
+                        <GpssPrices
+                            formik={formik}
+                            dataType={'evCharging'}
+                            pricesData={evChargingData.price}
                         />
                     )}
                 </AccordionDetails>

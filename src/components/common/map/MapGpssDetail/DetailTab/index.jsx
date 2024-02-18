@@ -122,7 +122,7 @@ const MapGpssDetailTab = ({ poiData }) => {
                 </Box>
                 <Divider />
                 {/* EV Charging */}
-                {!!evCharging && <EvCharging evChargingData={evCharging} />}
+                {!!evCharging && <EvCharging evChargingData={evCharging} formik={formik} />}
                 <Box>
                     <Box>
                         <Typography>{t('reason_for_approval', 'gpss')}</Typography>

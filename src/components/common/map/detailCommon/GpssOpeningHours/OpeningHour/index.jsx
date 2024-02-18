@@ -32,7 +32,7 @@ const convertDayNumToString = (num) => {
     }
     return dayStr
 }
-const OpeningHour = ({ hour, index }) => {
+const OpeningHour = ({ hour, index, dataType, formik }) => {
     const [isHourSave, setIsHourSave] = useState(false)
     return (
         <>
@@ -58,15 +58,21 @@ const OpeningHour = ({ hour, index }) => {
                     {isHourSave ? <SaveIcon /> : <EditIcon />}
                 </IconButton>
             </Box>
-            {isHourSave && (
+            {(isHourSave ||
+                (!isHourSave &&
+                    (formik.values[`${dataType}`].openingHours[`${index}`].open !==
+                        formik.initialValues[`${dataType}`].openingHours[`${index}`].open ||
+                        formik.values[`${dataType}`].openingHours[`${index}`].close !==
+                            formik.initialValues[`${dataType}`].openingHours[`${index}`]
+                                .close))) && (
                 <Box sx={{ display: 'flex', height: '40px' }}>
                     <FormikInput
-                        name={`evCharging.openingHours.${index}.open`}
+                        name={`${dataType}.openingHours.${index}.open`}
                         IsDisabled={!isHourSave}
                     />
                     <Typography>~</Typography>
                     <FormikInput
-                        name={`evCharging.openingHours.${index}.close`}
+                        name={`${dataType}.openingHours.${index}.close`}
                         IsDisabled={!isHourSave}
                     />
                 </Box>

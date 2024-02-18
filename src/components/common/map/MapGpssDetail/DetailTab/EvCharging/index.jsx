@@ -3,9 +3,9 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore.js'
 import EvStationIcon from '#/assets/evStationIcon.svg'
 import GpssOpeningHours from '#/components/common/map/detailCommon/GpssOpeningHours/index.jsx'
 
-const EvCharging = ({ evChargingData }) => {
+const EvCharging = ({ evChargingData, formik }) => {
     return (
-        <Box sx={{ display: 'flex', marginBottom: '16px' }}>
+        <Box sx={{ marginBottom: '16px' }}>
             <Accordion elevation={0} sx={{ padding: 0 }}>
                 <AccordionSummary
                     expandIcon={<ExpandMoreIcon />}
@@ -19,7 +19,11 @@ const EvCharging = ({ evChargingData }) => {
                 </AccordionSummary>
                 <AccordionDetails sx={{ padding: 0 }}>
                     {evChargingData.openingHours && (
-                        <GpssOpeningHours openingHoursData={evChargingData.openingHours} />
+                        <GpssOpeningHours
+                            openingHoursData={evChargingData.openingHours}
+                            dataType={'evCharging'}
+                            formik={formik}
+                        />
                     )}
                 </AccordionDetails>
             </Accordion>

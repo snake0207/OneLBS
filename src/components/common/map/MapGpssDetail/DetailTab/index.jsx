@@ -21,6 +21,7 @@ const dummyData = [
 const MapGpssDetailTab = ({ poiData }) => {
     const popupAction = usePopupActions()
     const [initPoiData, setInitPoiData] = useState(poiData)
+    const { evCharging, fuel, parking, h2Charging, dealerPoi } = poiData
 
     const formik = useFormik({
         initialValues: {
@@ -121,7 +122,7 @@ const MapGpssDetailTab = ({ poiData }) => {
                 </Box>
                 <Divider />
                 {/* EV Charging */}
-                <EvCharging />
+                {!!evCharging && <EvCharging evChargingData={evCharging} />}
                 <Box>
                     <Box>
                         <Typography>{t('reason_for_approval', 'gpss')}</Typography>

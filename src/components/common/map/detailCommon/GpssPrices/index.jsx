@@ -6,7 +6,13 @@ const GpssPrices = ({ dataType, pricesData, formik }) => {
         <Box>
             <Typography> 가격 </Typography>
             {pricesData.map((price, idx) => (
-                <Price dataType={dataType} index={idx} price={price} formik={formik} key={idx} />
+                <Price
+                    dataType={dataType}
+                    index={idx}
+                    priceData={price}
+                    formik={formik}
+                    key={idx}
+                />
             ))}
         </Box>
     )

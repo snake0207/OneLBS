@@ -6,6 +6,9 @@ import { useState } from 'react'
 import SaveIcon from '@mui/icons-material/Save.js'
 import EditIcon from '@mui/icons-material/Edit.js'
 import Headline from '#/components/approval/Detail/Headline/index.jsx'
+import EvStationIcon from '#/assets/evStationIcon.svg'
+
+import style from './style.module'
 
 const CategoryTable = ({ data, formik, isEditable }) => {
     const theme = useTheme()
@@ -34,15 +37,17 @@ const CategoryTable = ({ data, formik, isEditable }) => {
         <Box>
             <Headline title={t('category', 'approval')} />
             <Box>
-                <Typography>{data.name}</Typography>
-                <Table size={'small'} border={1} sx={{ borderColor: 'divider' }}>
+                <Typography sx={{ fontSize: '18px', fontWeight: 500, color: '#05141F', mb: '4px' }}>
+                    <img
+                        src={EvStationIcon}
+                        style={{ verticalAlign: 'middle', paddingRight: '4px' }}
+                    />
+                    {data.name}
+                </Typography>
+                <Table size={'small'} sx={style.tableBox}>
                     <TableBody>
                         <TableRow>
-                            <TableCell
-                                component="th"
-                                align={'center'}
-                                sx={{ backgroundColor: theme.palette.grey[100], width: '8rem' }}
-                            >
+                            <TableCell component="th" align={'center'} sx={{ width: '8rem' }}>
                                 {t('brand', 'approval')}
                             </TableCell>
                             <TableCell>

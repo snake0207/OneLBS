@@ -8,6 +8,8 @@ import SaveIcon from '@mui/icons-material/Save'
 import TextInput from '#/components/common/input/TextInput/index.jsx'
 import { useFormik } from 'formik'
 
+import style from './style.module'
+
 const InfoTab = ({ data, formik, isEditable }) => {
     const theme = useTheme()
     const [activeTab, setActiveTab] = useState('1')
@@ -50,18 +52,14 @@ const InfoTab = ({ data, formik, isEditable }) => {
     return (
         <Box sx={{ typography: 'body1' }}>
             <TabContext value={activeTab}>
-                <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
-                    <TabList onChange={(e, tabValue) => setActiveTab(tabValue)}>
-                        <Tab label={t('info', 'approval')} value="1" sx={{ border: 1, p: 1 }} />
-                        <Tab
-                            label={t('final_info', 'approval')}
-                            value="2"
-                            sx={{ border: 1, p: 1 }}
-                        />
+                <Box sx={{ position: 'relative' }}>
+                    <TabList onChange={(e, tabValue) => setActiveTab(tabValue)} sx={style.tabs}>
+                        <Tab label={t('info', 'approval')} value="1" sx={style.tabMenu} />
+                        <Tab label={t('final_info', 'approval')} value="2" sx={style.tabMenu} />
                     </TabList>
                 </Box>
-                <TabPanel value="1" sx={{ padding: '0.8rem 0' }}>
-                    <Table size={'small'} border={1} sx={{ borderColor: 'divider' }}>
+                <TabPanel value="1" sx={{ padding: '4px 0 0 0' }}>
+                    <Table size={'small'} sx={style.tableBox}>
                         <TableBody>
                             {inputNames.map((name, index) => {
                                 return (
@@ -106,7 +104,7 @@ const InfoTab = ({ data, formik, isEditable }) => {
                     </Table>
                 </TabPanel>
 
-                <TabPanel value="2" sx={{ padding: '0.8rem 0' }}>
+                <TabPanel value="2" sx={{ padding: '4px 0 0 0' }}>
                     <Typography
                         variant={'body1'}
                         sx={{ whiteSpace: 'pre-wrap', wordBreak: 'break-word' }}

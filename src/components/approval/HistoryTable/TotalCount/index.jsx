@@ -20,11 +20,24 @@ const TotalCount = ({ type, counts }) => {
 
     return (
         <>
-            <Typography variant={'body2'} component={'span'}>
+            <Typography
+                variant={'body2'}
+                component={'span'}
+                sx={{
+                    display: 'inline-flex',
+                    fontSize: '13px',
+                    color: '#444',
+                    marginBottom: '6px',
+                }}
+            >
                 {t('total', 'approval')} {counts.total || 0}
                 {t('case', 'approval')}
             </Typography>
-            <Typography variant={'body2'} component={'span'}>
+            <Typography
+                variant={'body2'}
+                component={'span'}
+                sx={{ fontSize: '13px', color: '#444', marginBottom: '6px' }}
+            >
                 ( {renderCountText()} )
             </Typography>
         </>

@@ -1,8 +1,7 @@
 import { useEffect, useState } from 'react'
-import { Box, FormControlLabel, Checkbox, IconButton, Typography, Button } from '@mui/material'
+import { Box, FormControlLabel, Checkbox, Typography, Button } from '@mui/material'
 import { IpInput } from '#/components/common/input/IpInput'
-import Info from '@mui/icons-material/Info'
-import { useGetUserIp } from '#/hooks/queries/auth'
+import { BrowserView } from 'react-device-detect'
 
 import t from '#/common/libs/trans'
 
@@ -62,18 +61,20 @@ const IpInputGroup = ({ formik }) => {
                 >
                     <IpInput.IpDescription formik={formik} ipDescName={'ipDescription_0'} />
                 </IpInput>
-                <FormControlLabel
-                    control={
-                        <Checkbox
-                            name="isIpAutoAdd"
-                            value={formik.values.isIpAutoAdd}
-                            onChange={formik.handleChange}
-                            checked={formik.values.isIpAutoAdd}
-                        />
-                    }
-                    label={t('auto_input', 'auth')}
-                    sx={{ mb: 'auto' }}
-                />
+                <BrowserView>
+                    <FormControlLabel
+                        control={
+                            <Checkbox
+                                name="isIpAutoAdd"
+                                value={formik.values.isIpAutoAdd}
+                                onChange={formik.handleChange}
+                                checked={formik.values.isIpAutoAdd}
+                            />
+                        }
+                        label={t('auto_input', 'auth')}
+                        sx={{ mb: 'auto' }}
+                    />
+                </BrowserView>
             </Box>
             {Array.from({ length: ipInputCount }).map((_, idx) => (
                 <IpInput

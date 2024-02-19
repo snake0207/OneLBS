@@ -73,7 +73,7 @@ const MapSearchList = ({ searchResultArr, selectedPoi, setSelectedPoi }) => {
                                 position: 'sticky',
                                 width: '40px',
                                 height: '40px',
-                                left: '35%',
+                                left: '45%',
                                 bottom: '1%',
                                 borderRadius: '50px',
                                 display: isTopBtnVisible ? 'flex' : 'none',

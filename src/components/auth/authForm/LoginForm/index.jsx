@@ -5,22 +5,23 @@ import PasswordInput from '#/components/common/input/PasswordInput'
 import FlexEndButtonContainer from '#/components/common/button/FlexEndButtonContainer'
 import AuthStepper from '#/components/auth/AuthStepper'
 import { useAuthStepActions } from '#/store/useAuthStepStore'
-import { AUTH_STEP, MODAL_TITLE } from '#/contents/constant'
+import { AUTH_STEP } from '#/contents/constant'
 import { loginSchema } from '#/contents/validationSchema'
 import { usePostLogin } from '#/hooks/queries/auth'
-import { useModalActions } from '#/store/useModalStore'
 import { Icon } from '@mui/material'
 import LoginIcon from '#/assets/loginIcon.svg'
-import { BrowserView } from 'react-device-detect'
+import { BrowserView, isBrowser, isMobile } from 'react-device-detect'
 
 import t from '#/common/libs/trans'
 
 import style from './style.module'
+import JoinModal from '#/components/auth/authForm/joinForm/JoinModal'
+import { useState } from 'react'
 
 const LoginForm = () => {
     const { changeAuthStep } = useAuthStepActions()
-    const { openModal } = useModalActions()
     const { mutate } = usePostLogin()
+    const [isOpenJoinModal, setIsOpenJoinModal] = useState(false)
 
     const formik = useFormik({
         initialValues: {
@@ -37,6 +38,16 @@ const LoginForm = () => {
 
     const handleClickPasswordReset = () => {
         changeAuthStep(AUTH_STEP.passwordReset)
+    }
+
+    const handleClickJoin = () => {
+        if (isBrowser) setIsOpenJoinModal(true)
+
+        if (isMobile) changeAuthStep(AUTH_STEP.join)
+    }
+
+    const handleCloseJoinModal = () => {
+        setIsOpenJoinModal(false)
     }
 
     return (
@@ -94,7 +105,7 @@ const LoginForm = () => {
                     <Button
                         variant="contained"
                         type="button"
-                        onClick={() => openModal(MODAL_TITLE.join, 'md')}
+                        onClick={handleClickJoin}
                         sx={{ bgcolor: 'button.light', width: '100%', fontWeight: 400 }}
                     >
                         {t('join', 'auth')}
@@ -103,12 +114,18 @@ const LoginForm = () => {
                         variant="contained"
                         onClick={handleClickPasswordReset}
                         type="button"
-                        sx={{ bgcolor: 'button.light', width: '100%', fontWeight: 400 }}
+                        sx={{
+                            bgcolor: 'button.light',
+                            width: '100%',
+                            fontWeight: 400,
+                            textWrap: 'nowrap',
+                        }}
                     >
                         {t('reset_password', 'auth')}
                     </Button>
                 </Box>
             </FlexEndButtonContainer>
+            <JoinModal isOpen={isOpenJoinModal} onClose={handleCloseJoinModal} />
         </>
     )
 }

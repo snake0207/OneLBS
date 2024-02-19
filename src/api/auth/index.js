@@ -21,10 +21,15 @@ const getUserIp = () => {
     return getAPI({ endPoint: API_PATH.auth.get_ip })
 }
 
+const postRefreshToken = (data) => {
+    return postAPI({ endPoint: API_PATH.auth.refresh_token, data })
+}
+
 export default {
     postLogin,
     postJoin,
     postVerifyEmail,
     postConfirmEmail,
     getUserIp,
+    postRefreshToken,
 }

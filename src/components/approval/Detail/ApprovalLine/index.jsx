@@ -6,8 +6,8 @@ import { ArrowBackIosNew, ArrowForwardIos } from '@mui/icons-material'
 import { useMemo, useRef } from 'react'
 import Headline from '#/components/approval/Detail/Headline/index.jsx'
 import dummyData from '#/pages/DemoPage/ApprovalPage/detailData.json'
-import ArrowBack from '#/assets/ArrowBackIos.svg'
-import ArrowForward from '#/assets/ArrowForwardIos.svg'
+import ArrowBack from '#/assets/arrowBackIos.svg'
+import ArrowForward from '#/assets/arrowForwardIos.svg'
 
 import style from './style.module'
 

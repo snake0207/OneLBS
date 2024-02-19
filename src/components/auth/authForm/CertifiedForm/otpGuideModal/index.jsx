@@ -41,7 +41,14 @@ const OtpGuideModal = ({ isOpen, handleClose }) => {
                     <CloseIcon />
                 </IconButton>
             </DialogTitle>
-            <DialogContent sx={{ pb: 3.5 }}>
+            <DialogContent
+                sx={{
+                    pt: '20px !important',
+                    m: '0 24px 24px 24px',
+                    borderRadius: '8px',
+                    border: '1px solid #d7d7d7',
+                }}
+            >
                 <Typography variant="h6" sx={{ fontSize: 14, mb: 0.5 }}>
                     1. {t('otp_guide_desc.title1', 'auth')}
                 </Typography>

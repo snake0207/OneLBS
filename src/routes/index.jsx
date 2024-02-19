@@ -1,6 +1,7 @@
 import { useRoutes } from 'react-router-dom'
 import AuthLayout from '#/layouts/AuthLayout'
 import MainLayout from '#/layouts/MainLayout'
+import DetailLayout from '#/layouts/DetailLayout'
 import MainPage from '#/pages/MainPage'
 import LoginPage from '#/pages/LoginPage'
 import DemoPage from '#/pages/DemoPage'
@@ -37,6 +38,10 @@ const Routes = () => {
         {
             element: <AuthLayout />,
             children: [{ path: '/login', element: <LoginPage /> }],
+        },
+        {
+            element: <DetailLayout />,
+            children: [{ path: '/components/layouts/detail', element: <MainPage /> }],
         },
         {
             element: <MainLayout />,

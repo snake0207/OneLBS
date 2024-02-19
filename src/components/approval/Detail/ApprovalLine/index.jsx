@@ -6,35 +6,31 @@ import { ArrowBackIosNew, ArrowForwardIos } from '@mui/icons-material'
 import { useMemo, useRef } from 'react'
 import Headline from '#/components/approval/Detail/Headline/index.jsx'
 import dummyData from '#/pages/DemoPage/ApprovalPage/detailData.json'
+import ArrowBack from '#/assets/arrowBackIos.svg'
+import ArrowForward from '#/assets/arrowForwardIos.svg'
+
+import style from './style.module'
 
 const ApprovalLineContent = ({ title, color, process, content }) => {
     return (
-        <Box>
-            <Typography align={'center'} variant="subtitle1">
+        <Box sx={style.cardBox}>
+            <Typography variant="subtitle1" sx={style.cardTitle}>
                 {title}
             </Typography>
-            <Card
-                sx={{
-                    textAlign: 'center',
-                    display: 'flex',
-                    flexDirection: 'column',
-                    gap: 0.5,
-                    p: 0.5,
-                }}
-            >
-                <Typography
-                    variant="subtitle2"
-                    sx={{
-                        backgroundColor: color,
-                        borderRadius: 1,
-                    }}
-                >
+            <Card sx={style.cardContBox}>
+                <Typography variant="subtitle2" sx={style.cardText}>
                     {process}
                 </Typography>
-                <Box p={1}>
-                    <Typography variant="body2">{content.team}</Typography>
-                    <Typography>{content.name}</Typography>
-                    <Typography variant="caption">{content.date}</Typography>
+                <Box p={1} sx={{ pb: 0 }}>
+                    <Typography sx={{ fontSize: 14, fontWeight: 500 }} variant="body2">
+                        {content.team}
+                    </Typography>
+                    <Typography sx={{ fontSize: 18, fontWeight: 600, color: '#05141F' }}>
+                        {content.name}
+                    </Typography>
+                    <Typography sx={{ fontSize: 14 }} variant="caption">
+                        {content.date}
+                    </Typography>
                 </Box>
             </Card>
         </Box>
@@ -97,9 +93,13 @@ const ApprovalLine = ({ status, content }) => {
                     />
                 </Grid>
                 {isReject.current.review ? (
-                    <ArrowBackIosNew fontSize="large" sx={{ transform: 'translateY(4rem)' }} />
+                    <Box sx={style.ArrowIos}>
+                        <img src={ArrowForward} width={30} height={30} />
+                    </Box>
                 ) : (
-                    <ArrowForwardIos fontSize="large" sx={{ transform: 'translateY(4rem)' }} />
+                    <Box sx={style.ArrowIos}>
+                        <img src={ArrowForward} width={30} height={30} />
+                    </Box>
                 )}
                 <Grid xs={4}>
                     <ApprovalLineContent
@@ -112,9 +112,13 @@ const ApprovalLine = ({ status, content }) => {
                     />
                 </Grid>
                 {isReject.current.approval ? (
-                    <ArrowBackIosNew fontSize="large" sx={{ transform: 'translateY(4rem)' }} />
+                    <Box sx={style.ArrowIos}>
+                        <img src={ArrowBack} width={30} height={30} />
+                    </Box>
                 ) : (
-                    <ArrowForwardIos fontSize="large" sx={{ transform: 'translateY(4rem)' }} />
+                    <Box sx={style.ArrowIos}>
+                        <img src={ArrowForward} width={30} height={30} />
+                    </Box>
                 )}
                 <Grid xs={4}>
                     <ApprovalLineContent

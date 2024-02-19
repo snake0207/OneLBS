@@ -1,4 +1,4 @@
-import { Box, Typography } from '@mui/material'
+import { Box, Table, TableCell, TableRow, Typography } from '@mui/material'
 import t from '#/common/libs/trans.js'
 import { useState } from 'react'
 import IconButton from '@mui/material/IconButton'
@@ -35,49 +35,47 @@ const convertDayNumToString = (num) => {
 const OpeningHour = ({ hour, index, dataType, formik }) => {
     const [isHourSave, setIsHourSave] = useState(false)
     return (
-        <>
-            <Box sx={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
-                <Box>
-                    <Typography>{convertDayNumToString(hour.week)}</Typography>
-                </Box>
-                <Box>
+        <TableRow>
+            <TableCell>{convertDayNumToString(hour.week)}</TableCell>
+            <TableCell component="td">
+                <Box sx={{ display: 'flex' }}>
                     <Typography>
                         {hour.open} ~ {hour.close}
                     </Typography>
+                    <IconButton
+                        sx={{
+                            ml: 'auto',
+                            minWidth: '15px',
+                            width: '30px',
+                            minHeight: '15px',
+                            height: '30px',
+                        }}
+                        onClick={() => setIsHourSave(!isHourSave)}
+                    >
+                        {isHourSave ? <SaveIcon /> : <EditIcon />}
+                    </IconButton>
                 </Box>
-                <IconButton
-                    sx={{
-                        ml: 'auto',
-                        minWidth: '15px',
-                        width: '30px',
-                        minHeight: '15px',
-                        height: '30px',
-                    }}
-                    onClick={() => setIsHourSave(!isHourSave)}
-                >
-                    {isHourSave ? <SaveIcon /> : <EditIcon />}
-                </IconButton>
-            </Box>
-            {(isHourSave ||
-                (!isHourSave &&
-                    (formik.values[`${dataType}`].openingHours[`${index}`].open !==
-                        formik.initialValues[`${dataType}`].openingHours[`${index}`].open ||
-                        formik.values[`${dataType}`].openingHours[`${index}`].close !==
-                            formik.initialValues[`${dataType}`].openingHours[`${index}`]
-                                .close))) && (
-                <Box sx={{ display: 'flex', height: '40px' }}>
-                    <FormikInput
-                        name={`${dataType}.openingHours.${index}.open`}
-                        IsDisabled={!isHourSave}
-                    />
-                    <Typography>~</Typography>
-                    <FormikInput
-                        name={`${dataType}.openingHours.${index}.close`}
-                        IsDisabled={!isHourSave}
-                    />
-                </Box>
-            )}
-        </>
+                {(isHourSave ||
+                    (!isHourSave &&
+                        (formik.values[`${dataType}`].openingHours[`${index}`].open !==
+                            formik.initialValues[`${dataType}`].openingHours[`${index}`].open ||
+                            formik.values[`${dataType}`].openingHours[`${index}`].close !==
+                                formik.initialValues[`${dataType}`].openingHours[`${index}`]
+                                    .close))) && (
+                    <Box sx={{ display: 'flex', height: '40px' }}>
+                        <FormikInput
+                            name={`${dataType}.openingHours.${index}.open`}
+                            IsDisabled={!isHourSave}
+                        />
+                        <Typography>~</Typography>
+                        <FormikInput
+                            name={`${dataType}.openingHours.${index}.close`}
+                            IsDisabled={!isHourSave}
+                        />
+                    </Box>
+                )}
+            </TableCell>
+        </TableRow>
     )
 }
 

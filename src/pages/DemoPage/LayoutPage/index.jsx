@@ -4,6 +4,7 @@ import useLayoutStore from '#/store/useLayoutStore'
 import useFullScreen from '#/hooks/useFullScreen'
 import TitleBar from '#/components/common/menu/TitleBar'
 import Settings from '#/components/layout/Settings'
+import { Link } from 'react-router-dom'
 
 function LayoutPage() {
     const { language, themeMode, setLanguage, setThemeMode } = useLayoutStore()
@@ -34,6 +35,8 @@ function LayoutPage() {
             <TitleBar title={t('layouts')} />
             <h2>Settings</h2>
             <Settings />
+            <h2>Detail Layout</h2>
+            <Link to="/components/layouts/detail">Go to Detail</Link>
         </div>
     )
 }

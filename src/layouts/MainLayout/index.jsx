@@ -30,11 +30,12 @@ const MainLayout = () => {
             >
                 {sidebar && <SideMenu open={open} toggleDrawer={toggleDrawer} />}
                 <Container
-                    maxWidth="xl"
                     sx={{
                         ml: isMobile ? 0 : 6.5,
-                        mt: 12,
+                        mt: '64px',
                         mb: 4,
+                        pt: '70px',
+                        maxWidth: 'calc(100% - 53px) !important',
                     }}
                 >
                     <Outlet />

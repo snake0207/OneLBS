@@ -10,7 +10,10 @@ const Comment = ({ comments, userType, isEditable, formik }) => {
         <Box>
             <Headline title={t('comment', 'approval')} />
             <Box>
-                <Typography variant={'subtitle1'} fontWeight={'bold'}>
+                <Typography
+                    variant={'subtitle1'}
+                    sx={{ fontSize: 16, fontWeight: 600, color: '#05141F' }}
+                >
                     {t('reviewer', 'approval')}
                 </Typography>
                 {userType === 'reviewer' && isEditable ? (
@@ -25,11 +28,14 @@ const Comment = ({ comments, userType, isEditable, formik }) => {
                         onChange={formik.handleChange}
                     />
                 ) : (
-                    <Typography>{comments.reviewer || '-'}</Typography>
+                    <Typography sx={{ fontSize: 15 }}>{comments.reviewer || '-'}</Typography>
                 )}
             </Box>
             <Box>
-                <Typography variant={'subtitle1'} fontWeight={'bold'}>
+                <Typography
+                    variant={'subtitle1'}
+                    sx={{ fontSize: 16, fontWeight: 600, color: '#05141F' }}
+                >
                     {t('approver', 'approval')}
                 </Typography>
                 {userType === 'approver' && isEditable ? (

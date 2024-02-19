@@ -103,38 +103,57 @@ const ApprovalHistoryPage = () => {
     }
 
     return (
-        <Box sx={{ display: 'flex', flexDirection: 'column', gap: '2rem' }}>
+        <Box sx={{ display: 'flex', flexDirection: 'column' }}>
             <TitleBar title={t(`list_${userType}`, 'approval')} />
-            <Container>
+            <Container
+                sx={{
+                    m: '0 0 16px 0',
+                    p: '0 !important',
+                    borderRadius: '8px',
+                    maxWidth: 'calc(100% - 0px) !important',
+                    backgroundColor: 'grey.lightgray',
+                    boxShadow: '0 3px 14px rgb(0 0 0 / 24%)',
+                }}
+            >
                 <SearchFilter
                     type={userType}
                     handleSubmitFilter={handleSubmitFilter}
                     isMobile={isMobile}
                 />
             </Container>
-            <MobileView>
-                <TotalCount type={userType} counts={totalCounts.current} />
-                <HistoryTableMobile
-                    type={userType}
-                    dummyData={dummyList}
-                    onClickButtonFunction={handleClickButton}
-                    onClickRowFunction={handleClickRow}
-                />
-                {!isLastView && <ViewMoreButton onChangePageFunction={handleViewChange} />}
-            </MobileView>
-            <BrowserView>
-                <TotalCount type={userType} counts={totalCounts.current} />
-                <HistoryTable
-                    type={userType}
-                    dummyData={dummyData}
-                    onClickButtonFunction={handleClickButton}
-                    onClickRowFunction={handleClickRow}
-                />
-                <CommonPagination
-                    dataLength={dummyData.length} // total element count
-                    onChangePageFunction={handlePageChange} // 페이지 변경 시 실행 함수
-                />
-            </BrowserView>
+            <Box
+                sx={{
+                    width: '100%',
+                    borderRadius: '8px',
+                    p: '18px 20px',
+                    backgroundColor: 'white',
+                    boxShadow: '0 3px 14px rgb(0 0 0 / 24%)',
+                }}
+            >
+                <MobileView>
+                    <TotalCount type={userType} counts={totalCounts.current} />
+                    <HistoryTableMobile
+                        type={userType}
+                        dummyData={dummyList}
+                        onClickButtonFunction={handleClickButton}
+                        onClickRowFunction={handleClickRow}
+                    />
+                    {!isLastView && <ViewMoreButton onChangePageFunction={handleViewChange} />}
+                </MobileView>
+                <BrowserView>
+                    <TotalCount type={userType} counts={totalCounts.current} />
+                    <HistoryTable
+                        type={userType}
+                        dummyData={dummyData}
+                        onClickButtonFunction={handleClickButton}
+                        onClickRowFunction={handleClickRow}
+                    />
+                    <CommonPagination
+                        dataLength={dummyData.length} // total element count
+                        onChangePageFunction={handlePageChange} // 페이지 변경 시 실행 함수
+                    />
+                </BrowserView>
+            </Box>
         </Box>
     )
 }

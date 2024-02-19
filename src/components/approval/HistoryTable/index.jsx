@@ -10,6 +10,8 @@ import {
 import t from '#/common/libs/trans.js'
 import ActionButtons from '#/components/approval/Detail/ActionButtons/index.jsx'
 
+import style from './style.module'
+
 const HistoryTable = ({ type, dummyData, onClickButtonFunction, onClickRowFunction }) => {
     const headers = [
         'No.',
@@ -26,8 +28,8 @@ const HistoryTable = ({ type, dummyData, onClickButtonFunction, onClickRowFuncti
 
     return (
         <>
-            <TableContainer component={Paper}>
-                <Table sx={{ minWidth: 'max-content' }}>
+            <TableContainer component={Paper} sx={style.contentBox}>
+                <Table sx={style.tableBox}>
                     <TableHead>
                         <TableRow>
                             {headers.map((header, index) =>

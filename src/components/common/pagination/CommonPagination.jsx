@@ -17,7 +17,7 @@ const CommonPagination = ({ dataLength, onChangePageFunction }) => {
     }
 
     return (
-        <Box sx={{ display: 'flex', justifyContent: 'center', pt: 6 }}>
+        <Box sx={{ display: 'flex', justifyContent: 'center', pt: '16px' }}>
             <Pagination
                 count={Math.ceil(dataLength / 10)} // 총 페이지 수
                 page={currentPage}
@@ -28,6 +28,22 @@ const CommonPagination = ({ dataLength, onChangePageFunction }) => {
                 showLastButton
                 onChange={handleChangeCurrentPage}
                 sx={{
+                    '& .MuiButtonBase-root.MuiPaginationItem-previousNext': {
+                        border: 'none',
+                        '&:hover': {
+                            backgroundColor: 'transparent',
+                            border: 'none',
+                            color: '#A9A9A9',
+                        },
+                    },
+                    '& .MuiButtonBase-root.MuiPaginationItem-firstLast': {
+                        border: 'none',
+                        '&:hover': {
+                            backgroundColor: 'transparent',
+                            border: 'none',
+                            color: '#A9A9A9',
+                        },
+                    },
                     '& .css-dfpu2-MuiButtonBase-root-MuiPaginationItem-root': {
                         borderRadius: '50%',
                         backgroundColor: 'white',

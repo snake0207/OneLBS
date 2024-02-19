@@ -38,7 +38,12 @@ function RouterBreadcrumbs() {
 
     return (
         <Breadcrumbs aria-label="breadcrumb">
-            <LinkRouter underline="hover" color="inherit" to="/">
+            <LinkRouter
+                underline="hover"
+                color="inherit"
+                to="/"
+                sx={{ fontSize: '13px', color: '#888' }}
+            >
                 {t('home')}
             </LinkRouter>
             {pathnames.map((value, index) => {
@@ -46,15 +51,29 @@ function RouterBreadcrumbs() {
                 const to = `/${pathnames.slice(0, index + 1).join('/')}`
 
                 return last ? (
-                    <Typography color="text.primary" key={to}>
+                    <Typography
+                        color="text.primary"
+                        key={to}
+                        sx={{ fontSize: '13px', color: '#888' }}
+                    >
                         {breadcrumbNameMap()[to]}
                     </Typography>
                 ) : isAvailablePath(to) ? (
-                    <LinkRouter underline="hover" color="inherit" to={to} key={to}>
+                    <LinkRouter
+                        underline="hover"
+                        color="inherit"
+                        to={to}
+                        key={to}
+                        sx={{ fontSize: '13px', color: '#888' }}
+                    >
                         {breadcrumbNameMap()[to]}
                     </LinkRouter>
                 ) : (
-                    <Typography color="text.primary" key={to}>
+                    <Typography
+                        color="text.primary"
+                        key={to}
+                        sx={{ fontSize: '13px', color: '#888' }}
+                    >
                         {breadcrumbNameMap()[to]}
                     </Typography>
                 )

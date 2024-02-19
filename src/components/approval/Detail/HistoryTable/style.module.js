@@ -1,11 +1,4 @@
 const style = {
-    contentBox: {
-        width: '100%',
-        borderRadius: '8px',
-        p: '18px 20px',
-        backgroundColor: 'white',
-        boxShadow: '0 3px 14px rgb(0 0 0 / 24%)',
-    },
     tableBox: {
         width: '100%',
         th: {
@@ -14,28 +7,19 @@ const style = {
             fontSize: 15,
             fontWeight: 500,
             textAlign: 'center',
-            backgroundColor: '#009ACC',
-            borderLeft: '1px solid #33aed6',
+            color: '#444',
+            backgroundColor: '#e2e2e2',
+            borderLeft: '1px solid #d1d1d1',
             '&:first-of-type': { borderLeft: '0' },
         },
         td: {
             color: '#05141F',
-            p: '6px 10px',
+            p: '8px 10px',
             border: '1px solid #d1d1d1',
             '&:first-of-type': { borderLeft: '0' },
             '&:last-of-type': { borderRight: '0' },
             select: {
                 p: '6px 0px',
-            },
-        },
-        input: {
-            fontSize: 14,
-            p: '6px 8px',
-        },
-        tr: {
-            backgroundColor: '#FFF',
-            '&:hover': {
-                backgroundColor: '#e6e7e9',
             },
         },
     },

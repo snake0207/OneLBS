@@ -4,6 +4,7 @@ import EditIcon from '@mui/icons-material/Edit.js'
 import IconButton from '@mui/material/IconButton'
 import { useState } from 'react'
 import FormikInput from '#/components/common/input/FormikInput/index.jsx'
+import t from '#/common/libs/trans.js'
 
 const Price = ({ dataType, formik, priceData, index }) => {
     // 데이터 수정
@@ -37,7 +38,7 @@ const Price = ({ dataType, formik, priceData, index }) => {
         >
             <TableHead>
                 <TableRow>
-                    <TableCell>가격</TableCell>
+                    <TableCell>{t('price.price', 'gpss')}</TableCell>
                     <TableCell component="td">
                         <Box sx={{ display: 'flex' }}>
                             <Typography>{priceData.price}</Typography>
@@ -69,7 +70,7 @@ const Price = ({ dataType, formik, priceData, index }) => {
                     </TableCell>
                 </TableRow>
                 <TableRow>
-                    <TableCell>가격 단위</TableCell>
+                    <TableCell>{t('price.price_unit', 'gpss')}</TableCell>
                     <TableCell component="td">
                         <Box sx={{ display: 'flex' }}>
                             <Typography>{priceData.priceUnit}</Typography>
@@ -101,7 +102,7 @@ const Price = ({ dataType, formik, priceData, index }) => {
                     </TableCell>
                 </TableRow>
                 <TableRow>
-                    <TableCell>통화 코드</TableCell>
+                    <TableCell>{t('price.currency_code', 'gpss')}</TableCell>
                     <TableCell component="td">
                         <Box sx={{ display: 'flex' }}>
                             <Typography>{priceData.currencyCode}</Typography>
@@ -133,7 +134,7 @@ const Price = ({ dataType, formik, priceData, index }) => {
                     </TableCell>
                 </TableRow>
                 <TableRow>
-                    <TableCell>통화 단위 </TableCell>
+                    <TableCell>{t('price.currency', 'gpss')}</TableCell>
                     <TableCell component="td">
                         <Box sx={{ display: 'flex' }}>
                             <Typography>{priceData.currency}</Typography>

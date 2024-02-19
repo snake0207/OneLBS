@@ -1,5 +1,6 @@
 import { Box, Table, TableHead, Typography } from '@mui/material'
 import OpeningHour from '#/components/common/map/detailCommon/GpssOpeningHours/OpeningHour/index.jsx'
+import t from '#/common/libs/trans.js'
 
 /**
  * dataType: 날짜 데이터 표시 분류 evCharging, h2Charging, parking ...
@@ -8,7 +9,7 @@ import OpeningHour from '#/components/common/map/detailCommon/GpssOpeningHours/O
 const GpssOpeningHours = ({ dataType, openingHoursData, formik }) => {
     return (
         <Box>
-            <Typography> 이용시간 </Typography>
+            <Typography>{t('opening_hours', 'gpss')}</Typography>
             <Table
                 sx={{
                     th: {

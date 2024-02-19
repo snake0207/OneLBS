@@ -9,6 +9,14 @@
   "temporary_save": "임시저장",
   "edit_request": "수정요청",
   "delete_request": "삭제요청",
+  "opening_hours": "이용 시간",
+  "price" : {
+    "title": "가격",
+    "price": "가격",
+    "price_unit": "가격 단위",
+    "currency_code": "통화 코드",
+    "currency": "통화 단위"
+  },
   "pop_up": {
     "temporary_save": "임시저장 하시겠습니까?",
     "edit_request": "수정요청 상신하시겠습니까?",

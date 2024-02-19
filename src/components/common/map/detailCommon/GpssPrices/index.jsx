@@ -1,10 +1,11 @@
 import { Box, Typography } from '@mui/material'
 import Price from '#/components/common/map/detailCommon/GpssPrices/Price/index.jsx'
+import t from '#/common/libs/trans.js'
 
 const GpssPrices = ({ dataType, pricesData, formik }) => {
     return (
         <Box>
-            <Typography> 가격 </Typography>
+            <Typography>{t('price.title', 'gpss')}</Typography>
             {pricesData.map((price, idx) => (
                 <Price
                     dataType={dataType}

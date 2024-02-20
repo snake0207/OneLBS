@@ -26,6 +26,10 @@ import TablePage from '#/pages/DemoPage/TablePage'
 import ProfilePage from '#/pages/ProfilePage'
 import EmptyLayout from '#/layouts/EmptyLayout'
 import NotFoundPage from '#/pages/NotFoundPage'
+import UserListPage from '#/pages/users/UserListPage'
+import LoginHistoryPage from '#/pages/users/LoginHistoryPage'
+import PermissionHistoryPage from '#/pages/users/PermissionHistoryPage'
+import IpManagePage from '#/pages/users/IpManagePage'
 
 const Routes = () => {
     return useRoutes([
@@ -35,6 +39,11 @@ const Routes = () => {
                 { path: '/', element: <MainPage /> },
                 { path: '/mypage/profile', element: <ProfilePage /> },
                 { path: '/poi-map', element: <PoiMapPage /> },
+                // user management
+                { path: '/user-management/user-list', element: <UserListPage /> },
+                { path: '/user-management/login-history', element: <LoginHistoryPage /> },
+                { path: '/user-management/role-history', element: <PermissionHistoryPage /> },
+                { path: '/user-management/ip-access', element: <IpManagePage /> },
             ],
         },
         {

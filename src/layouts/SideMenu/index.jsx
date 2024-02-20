@@ -19,7 +19,6 @@ import RememberMeIcon from '@mui/icons-material/RememberMe'
 import RuleIcon from '@mui/icons-material/Rule'
 import ViewModuleIcon from '@mui/icons-material/ViewModule'
 
-import Link from '@mui/material/Link'
 import ExpandMenuItem from '#/components/common/menu/ExpandMenuItem'
 import UserInfo from './UserInfo'
 import t from '#/common/libs/trans'
@@ -27,6 +26,7 @@ import t from '#/common/libs/trans'
 import { BrowserView, MobileView } from 'react-device-detect'
 import { data } from '#/mock/data/side_menu.json'
 import { filterMobileMenuItems } from '#/common/libs/menuTools'
+import LinkRouter from '#/components/common/menu/LinkRouter'
 
 const drawerWidth = 240
 
@@ -108,14 +108,14 @@ const createMenuItems = (menuItems) => {
                 }
             })}
             <>
-                <Link href="/components" color="inherit" underline="none">
+                <LinkRouter to="/components" color="inherit" underline="none">
                     <ListItemButton>
                         <ListItemIcon>
                             <AppRegistrationIcon />
                         </ListItemIcon>
                         <ListItemText primary="Components" />
                     </ListItemButton>
-                </Link>
+                </LinkRouter>
             </>
         </React.Fragment>
     )

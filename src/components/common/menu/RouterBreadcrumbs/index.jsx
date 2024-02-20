@@ -1,8 +1,8 @@
-import { Link as RouterLink, useLocation } from 'react-router-dom'
+import { useLocation } from 'react-router-dom'
 
-import Link from '@mui/material/Link'
 import Breadcrumbs from '@mui/material/Breadcrumbs'
 import Typography from '@mui/material/Typography'
+import LinkRouter from '../LinkRouter'
 
 import t from '#/common/libs/trans'
 
@@ -26,10 +26,6 @@ function isAvailablePath(path) {
     // Exclude paths
     const excludePaths = ['/mypage']
     return !excludePaths.includes(path)
-}
-
-function LinkRouter(props) {
-    return <Link {...props} component={RouterLink} />
 }
 
 function RouterBreadcrumbs() {

@@ -1,4 +1,4 @@
-function UserManagementPage() {
+function UserManagementDemo() {
     return (
         <div>
             <h1>User Management Page</h1>
@@ -20,4 +20,4 @@ function UserManagementPage() {
     )
 }
 
-export default UserManagementPage
+export default UserManagementDemo

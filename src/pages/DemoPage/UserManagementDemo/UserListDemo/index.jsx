@@ -8,7 +8,7 @@ import UserDetail from '#/components/users/list/UserDetail'
 
 import users from '#/mock/data/user_list.json'
 
-function UserListPage() {
+function UserListDemo() {
     const actions = usePopupActions()
     const [open, setOpen] = useState(false)
     const [selectedUser, setSelectedUser] = useState(null)
@@ -165,4 +165,4 @@ function UserListPage() {
     )
 }
 
-export default UserListPage
+export default UserListDemo

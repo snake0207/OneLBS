@@ -7,7 +7,7 @@ import AddIpDialog from '#/components/users/access/AddIpDialog'
 import { useState } from 'react'
 import users from '#/mock/data/user_ip_list.json'
 
-function IPManagePage() {
+function IPManageDemo() {
     const actions = usePopupActions()
     const [open, setOpen] = useState(false)
     const [selectedUser, setSelectedUser] = useState(null)
@@ -80,4 +80,4 @@ function IPManagePage() {
     )
 }
 
-export default IPManagePage
+export default IPManageDemo

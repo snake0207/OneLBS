@@ -24,6 +24,8 @@ import UserListPage from '#/pages/DemoPage/UserManagementPage/UserListPage'
 import IPManagePage from '#/pages/DemoPage/UserManagementPage/IPManagePage'
 import TablePage from '#/pages/DemoPage/TablePage'
 import ProfilePage from '#/pages/ProfilePage'
+import EmptyLayout from '#/layouts/EmptyLayout'
+import NotFoundPage from '#/pages/NotFoundPage'
 
 const Routes = () => {
     return useRoutes([
@@ -68,6 +70,10 @@ const Routes = () => {
                 { path: '/components/users/permission-history', element: <UserPermissionPage /> },
                 { path: '/components/users/ip-management', element: <IPManagePage /> },
             ],
+        },
+        {
+            element: <EmptyLayout />,
+            children: [{ path: '*', element: <NotFoundPage /> }],
         },
     ])
 }

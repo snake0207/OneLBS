@@ -1,14 +1,20 @@
-import { Link as RouterLink, useLocation } from 'react-router-dom'
+import { useLocation } from 'react-router-dom'
 
-import Link from '@mui/material/Link'
 import Breadcrumbs from '@mui/material/Breadcrumbs'
 import Typography from '@mui/material/Typography'
+import LinkRouter from '../LinkRouter'
 
 import t from '#/common/libs/trans'
 
 const breadcrumbNameMap = () => ({
     '/mypage': t('mypage'),
     '/mypage/profile': t('profile'),
+    // user management
+    '/user-management': t('top_menu.user_management'),
+    '/user-management/user-list': t('top_menu.user_list'),
+    '/user-management/login-history': t('top_menu.user_login_history'),
+    '/user-management/role-history': t('top_menu.user_permission_history'),
+    '/user-management/ip-access': t('top_menu.user_ip_access_management'),
     '/components': t('components'),
     '/components/layouts': t('layouts'),
     '/components/approval': t('approval', 'approval'),
@@ -24,12 +30,8 @@ const breadcrumbNameMap = () => ({
 
 function isAvailablePath(path) {
     // Exclude paths
-    const excludePaths = ['/mypage']
+    const excludePaths = ['/mypage', '/user-management']
     return !excludePaths.includes(path)
-}
-
-function LinkRouter(props) {
-    return <Link {...props} component={RouterLink} />
 }
 
 function RouterBreadcrumbs() {

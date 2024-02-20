@@ -5,8 +5,12 @@ import UserTable from '#/components/users/list/UserTable'
 import { getPopupMessage } from '#/common/libs/permission'
 import { usePopupActions } from '#/store/usePopupStore'
 import UserDetail from '#/components/users/list/UserDetail'
+import { Box } from '@mui/material'
 
 import users from '#/mock/data/user_list.json'
+import TitleBar from '#/components/common/menu/TitleBar'
+
+import t from '#/common/libs/trans'
 
 function UserListPage() {
     const actions = usePopupActions()
@@ -17,8 +21,8 @@ function UserListPage() {
         console.log('handleSearch', values)
     }
 
-    const handleNextPage = (page) => {
-        console.log('handleNextPage', page)
+    const handleChangePage = (page) => {
+        console.log('handleChangePage', page)
     }
 
     const handleResetPassword = (row) => {
@@ -122,26 +126,18 @@ function UserListPage() {
         setOpen(true)
     }
 
-    const handleOpenUserDetail = () => {
-        console.log('handleOpenUserDetail')
-        setSelectedUser(users[0])
-        setOpen(true)
-    }
-
     const handleClose = () => {
         console.log('handleClose')
         setOpen(false)
     }
 
     return (
-        <div>
-            <h1>User List Page</h1>
-            <h2>Search Filter</h2>
+        <Box>
+            <TitleBar title={t('top_menu.user_list')} />
             <SearchFilter onSearch={handleSearch} />
-            <h2>User Table</h2>
             <UserTable
                 rows={users}
-                onNextPage={handleNextPage}
+                onChangePage={handleChangePage}
                 onChangePermission={handleChangePermission}
                 onChangeStatus={handleChangeStatus}
                 onChangeRemark={handleChangeRemark}
@@ -149,8 +145,6 @@ function UserListPage() {
                 onWithdraw={handleWithdraw}
                 onSelectRow={handleSelectRow}
             />
-            <h2>User Detail</h2>
-            <button onClick={handleOpenUserDetail}>Open User Detail</button>
             <UserDetail
                 user={selectedUser}
                 open={open}
@@ -161,7 +155,7 @@ function UserListPage() {
                 onResetPassword={handleResetPassword}
                 onChangePermission={handleChangePermission}
             />
-        </div>
+        </Box>
     )
 }
 

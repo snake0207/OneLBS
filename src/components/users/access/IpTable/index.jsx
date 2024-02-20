@@ -5,7 +5,7 @@ import CommonPagination from '#/components/common/pagination/CommonPagination'
 
 import style from './style.module'
 
-function IpTabel({ rows, onNextPage, onEdit, onDelete }) {
+function IpTabel({ rows, onChangePage, onEdit, onDelete }) {
     const handleEdit = (values) => {
         if (onEdit) onEdit(values)
     }
@@ -14,8 +14,8 @@ function IpTabel({ rows, onNextPage, onEdit, onDelete }) {
         if (onDelete) onDelete(values)
     }
 
-    const handleNextPage = (page) => {
-        if (onNextPage) onNextPage(page)
+    const handleChagePage = (page) => {
+        if (onChangePage) onChangePage(page)
     }
 
     return (
@@ -44,7 +44,7 @@ function IpTabel({ rows, onNextPage, onEdit, onDelete }) {
                     ))}
                 </TableBody>
             </Table>
-            <CommonPagination dataLength={rows?.length} onChangePageFunction={handleNextPage} />
+            <CommonPagination dataLength={rows?.length} onChangePageFunction={handleChagePage} />
         </Box>
     )
 }

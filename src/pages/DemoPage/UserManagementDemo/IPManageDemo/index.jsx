@@ -37,8 +37,8 @@ function IPManageDemo() {
         actions.showPopup('alert', t('popup_confirm_delete_success', 'users'))
     }
 
-    const handleNextPage = (page) => {
-        console.log('handleNextPage', page)
+    const handleChangePage = (page) => {
+        console.log('handleChangePage', page)
     }
 
     const handleOpenRegisterIp = () => {
@@ -66,7 +66,7 @@ function IPManageDemo() {
                 rows={users}
                 onEdit={handleEdit}
                 onDelete={handleDelete}
-                onNextPage={handleNextPage}
+                onChangePage={handleChangePage}
             />
             <h2>Register IP Address</h2>
             <button onClick={handleOpenRegisterIp}>Add IP Address</button>

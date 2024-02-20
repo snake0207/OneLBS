@@ -21,8 +21,8 @@ function UserListPage() {
         console.log('handleSearch', values)
     }
 
-    const handleNextPage = (page) => {
-        console.log('handleNextPage', page)
+    const handleChangePage = (page) => {
+        console.log('handleChangePage', page)
     }
 
     const handleResetPassword = (row) => {
@@ -137,7 +137,7 @@ function UserListPage() {
             <SearchFilter onSearch={handleSearch} />
             <UserTable
                 rows={users}
-                onNextPage={handleNextPage}
+                onChangePage={handleChangePage}
                 onChangePermission={handleChangePermission}
                 onChangeStatus={handleChangeStatus}
                 onChangeRemark={handleChangeRemark}

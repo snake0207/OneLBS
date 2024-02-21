@@ -1,10 +1,11 @@
-import { Box, Table, TableCell, TableRow, Typography } from '@mui/material'
+import { Box, TableCell, TableRow, Typography } from '@mui/material'
 import t from '#/common/libs/trans.js'
 import { useState } from 'react'
 import IconButton from '@mui/material/IconButton'
 import SaveIcon from '@mui/icons-material/Save'
 import EditIcon from '@mui/icons-material/Edit'
-import FormikInput from '#/components/common/input/FormikInput/index.jsx'
+import FormikTimePickerInput from '#/components/common/input/FormikTimePickerInput/index.jsx'
+
 const convertDayNumToString = (num) => {
     let dayStr = ''
     switch (num) {
@@ -63,12 +64,12 @@ const OpeningHour = ({ hour, index, dataType, formik }) => {
                                 formik.initialValues[`${dataType}`].openingHours[`${index}`]
                                     .close))) && (
                     <Box sx={{ display: 'flex', height: '40px' }}>
-                        <FormikInput
+                        <FormikTimePickerInput
                             name={`${dataType}.openingHours.${index}.open`}
                             IsDisabled={!isHourSave}
                         />
                         <Typography>~</Typography>
-                        <FormikInput
+                        <FormikTimePickerInput
                             name={`${dataType}.openingHours.${index}.close`}
                             IsDisabled={!isHourSave}
                         />

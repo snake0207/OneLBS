@@ -22,6 +22,8 @@ import { useNavigate } from 'react-router'
 
 import user from '#/mock/data/user.json'
 
+import style from './style.module'
+
 function ProfileForm() {
     const navigate = useNavigate()
     const popupActions = usePopupActions()
@@ -77,75 +79,100 @@ function ProfileForm() {
     return (
         <Box>
             <TitleBar title={t('profile')} />
-            <Typography>{t('default_info', 'profile')}</Typography>
-            <Typography color="red" fontSize="small">
-                *{t('required_field', 'profile')}
-            </Typography>
-            <Table>
-                <TableHead>
-                    <TableRow>
-                        <TableCell>{t('email', 'profile')}</TableCell>
-                        <TableCell>{user?.email}</TableCell>
-                        <TableCell></TableCell>
-                    </TableRow>
-                    <TableRow>
-                        <TableCell>*{t('password', 'profile')}</TableCell>
-                        <TableCell>
-                            <PasswordInput
-                                name="password"
-                                formik={formik}
-                                placeholder={t('input_password', 'profile')}
-                                inputRule={t('input_password_label', 'profile')}
-                            />
-                        </TableCell>
-                        <TableCell></TableCell>
-                    </TableRow>
-                    <TableRow>
-                        <TableCell>*{t('confirm_password', 'profile')}</TableCell>
-                        <TableCell>
-                            <PasswordInput
-                                name="confirm_password"
-                                formik={formik}
-                                placeholder={t('input_confirm_password', 'profile')}
-                            />
-                        </TableCell>
-                        <TableCell></TableCell>
-                    </TableRow>
-                    <TableRow>
-                        <TableCell>*{t('name', 'profile')}</TableCell>
-                        <TableCell>
-                            <TextInput name="name" formik={formik} />
-                        </TableCell>
-                    </TableRow>
-                    <TableRow>
-                        <TableCell>*{t('company_name', 'profile')}</TableCell>
-                        <TableCell>
-                            <TextInput name="company" formik={formik} />
-                        </TableCell>
-                        <TableCell></TableCell>
-                    </TableRow>
-                    <TableRow>
-                        <TableCell>*{t('team_name', 'profile')}</TableCell>
-                        <TableCell>
-                            <TextInput name="team" formik={formik} />
-                        </TableCell>
-                        <TableCell></TableCell>
-                    </TableRow>
-                    <IPManage ipAddresses={user?.ip_addresses} />
-                    <TableRow>
-                        <TableCell>{t('permission', 'profile')}</TableCell>
-                        <TableCell>{user?.permission}</TableCell>
-                        <TableCell></TableCell>
-                    </TableRow>
-                </TableHead>
-            </Table>
-            <Box>
-                <Stack spacing={2} direction="row">
-                    <Button type="submit" onClick={handleEdit}>
-                        {t('modify', 'profile')}
-                    </Button>
-                    <Button onClick={handleWithdraw}>{t('withdraw', 'profile')}</Button>
-                </Stack>
+            <Box sx={style.contentBox}>
+                <Typography
+                    sx={{ fontSize: '16px', fontWeight: 500, color: '#05141F', mb: '14px' }}
+                >
+                    {t('default_info', 'profile')}
+                </Typography>
+                <Typography fontSize="small">
+                    <span style={{ color: 'red', fontSize: '13px' }}>*</span>
+                    {t('required_field', 'profile')}
+                </Typography>
+                <Table sx={style.tableBox}>
+                    <TableHead>
+                        <TableRow>
+                            <TableCell>{t('email', 'profile')}</TableCell>
+                            <TableCell component="td">{user?.email}</TableCell>
+                            <TableCell component="td"></TableCell>
+                        </TableRow>
+                        <TableRow>
+                            <TableCell>
+                                <span style={{ color: 'red', fontSize: '14px' }}>*</span>
+                                {t('password', 'profile')}
+                            </TableCell>
+                            <TableCell component="td">
+                                <PasswordInput
+                                    name="password"
+                                    formik={formik}
+                                    placeholder={t('input_password', 'profile')}
+                                    inputRule={t('input_password_label', 'profile')}
+                                />
+                            </TableCell>
+                            <TableCell component="td"></TableCell>
+                        </TableRow>
+                        <TableRow>
+                            <TableCell>
+                                <span style={{ color: 'red', fontSize: '14px' }}>*</span>
+                                {t('confirm_password', 'profile')}
+                            </TableCell>
+                            <TableCell component="td">
+                                <PasswordInput
+                                    name="confirm_password"
+                                    formik={formik}
+                                    placeholder={t('input_confirm_password', 'profile')}
+                                />
+                            </TableCell>
+                            <TableCell component="td"></TableCell>
+                        </TableRow>
+                        <TableRow>
+                            <TableCell>
+                                <span style={{ color: 'red', fontSize: '14px' }}>*</span>
+                                {t('name', 'profile')}
+                            </TableCell>
+                            <TableCell component="td">
+                                <TextInput name="name" formik={formik} />
+                            </TableCell>
+                            <TableCell component="td"></TableCell>
+                        </TableRow>
+                        <TableRow>
+                            <TableCell>
+                                <span style={{ color: 'red', fontSize: '14px' }}>*</span>
+                                {t('company_name', 'profile')}
+                            </TableCell>
+                            <TableCell component="td">
+                                <TextInput name="company" formik={formik} />
+                            </TableCell>
+                            <TableCell component="td"></TableCell>
+                        </TableRow>
+                        <TableRow>
+                            <TableCell>
+                                <span style={{ color: 'red', fontSize: '14px' }}>*</span>
+                                {t('team_name', 'profile')}
+                            </TableCell>
+                            <TableCell component="td">
+                                <TextInput name="team" formik={formik} />
+                            </TableCell>
+                            <TableCell component="td"></TableCell>
+                        </TableRow>
+                        <IPManage ipAddresses={user?.ip_addresses} />
+                        <TableRow>
+                            <TableCell>{t('permission', 'profile')}</TableCell>
+                            <TableCell component="td">{user?.permission}</TableCell>
+                            <TableCell component="td"></TableCell>
+                        </TableRow>
+                    </TableHead>
+                </Table>
+                <Box align={'right'}>
+                    <Stack spacing={2} direction="row" sx={{ justifyContent: 'flex-end' }}>
+                        <Button type="submit" onClick={handleEdit} sx={style.bluelineButton}>
+                            {t('modify', 'profile')}
+                        </Button>
+                        <Button onClick={handleWithdraw} sx={style.lineButton}>
+                            {t('withdraw', 'profile')}
+                        </Button>
+                    </Stack>
+                </Box>
             </Box>
         </Box>
     )

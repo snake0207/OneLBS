@@ -66,7 +66,6 @@ const style = {
         width: '27%',
         height: 36,
         p: 0,
-        float: 'right',
         color: '#0A5CBA',
         border: '1px solid #0A5CBA',
         backgroundColor: 'white',

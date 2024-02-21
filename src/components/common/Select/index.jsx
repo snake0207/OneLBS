@@ -3,6 +3,9 @@ import SelectBase from '@mui/material/Select'
 import KeyboardArrowDownRoundedIcon from '@mui/icons-material/KeyboardArrowDownRounded'
 
 function Select({ name, formik, value, items, label, onChange, ...props }) {
+    const parseNameByPath = (obj, path) =>
+        path.split('.').reduce((acc, current) => (acc ? acc[current] : ''), obj)
+
     const handleChange = (event) => {
         // find item by value
         const selectedItem = items.find((item) => item.value === event.target.value)
@@ -13,13 +16,13 @@ function Select({ name, formik, value, items, label, onChange, ...props }) {
     }
 
     return (
-        <FormControl sx={{ bgcolor: 'white' }}>
+        <FormControl>
             <InputLabel id="select-label">{label}</InputLabel>
             <SelectBase
                 id="select"
                 name={name}
                 labelId="select-label"
-                value={formik ? formik?.values[name] : value}
+                value={formik ? parseNameByPath(formik.values, name) : value}
                 onChange={handleChange}
                 IconComponent={KeyboardArrowDownRoundedIcon}
                 {...props}

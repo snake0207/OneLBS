@@ -11,6 +11,10 @@ import Close from '@mui/icons-material/Close'
  * @returns ReactNode
  */
 const TextInput = ({ name, formik, placeholder = null, inputRule = null, IsDisabled = false }) => {
+    // formik 중첩구조 사용 시 value parsing 위한 함수
+    const parseNameByPath = (obj, path) =>
+        path.split('.').reduce((acc, current) => (acc ? acc[current] : ''), obj)
+
     return (
         <>
             <Box
@@ -20,7 +24,7 @@ const TextInput = ({ name, formik, placeholder = null, inputRule = null, IsDisab
             >
                 <TextField
                     name={name}
-                    value={formik.values[name]}
+                    value={parseNameByPath(formik.values, name)}
                     onChange={formik.handleChange}
                     onBlur={formik.handleBlur}
                     error={formik.touched[name] && !!formik.errors[name]}
@@ -44,7 +48,6 @@ const TextInput = ({ name, formik, placeholder = null, inputRule = null, IsDisab
                         ),
                     }}
                     disabled={IsDisabled}
-                    sx={{ bgcolor: 'white' }}
                 />
             </Box>
             {inputRule && <Typography sx={{ my: 1 }}>{inputRule}</Typography>}

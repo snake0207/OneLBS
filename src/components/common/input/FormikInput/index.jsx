@@ -3,7 +3,7 @@ import Close from '@mui/icons-material/Close'
 import { useField } from 'formik'
 
 /**
- * 일반 text 공통 Input
+ * FormikProvider text 공통 Input
  * @param {string} name input formik name
  * @param {string} placeholder input placeholder
  * @param {string} inputRule 입력에 대한 가이드

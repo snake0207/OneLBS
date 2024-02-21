@@ -97,11 +97,6 @@ function IPRecord({ ip, ipAddresses, onAdd, onEdit, onDelete, onAutoInput }) {
 
     return (
         <Box>
-            <Stack spacing={1} direction="row" justifyContent="flex-end">
-                <Button onClick={handleAdd}>{t('add', 'profile')}</Button>
-                <Button onClick={formik.handleSubmit}>{t('edit', 'profile')}</Button>
-                <Button onClick={handleDelete}>{t('delete', 'profile')}</Button>
-            </Stack>
             <IpInput
                 name="ip"
                 formik={formik}
@@ -111,7 +106,69 @@ function IPRecord({ ip, ipAddresses, onAdd, onEdit, onDelete, onAutoInput }) {
                 ipName4="ip4"
             />
             <CheckBox label={t('auto', 'profile')} checked={checkAuto} onChange={handleAutoInput} />
-            <IpInput.IpDescription formik={formik} ipDescName="ip_description" />
+            <IpInput.IpDescription
+                formik={formik}
+                ipDescName="ip_description"
+                sx={{ height: 50 }}
+            />
+            <Stack
+                spacing={1}
+                direction="row"
+                justifyContent="space-between"
+                sx={{ width: '100%', mt: '16px', mb: '16px' }}
+            >
+                <Button
+                    onClick={handleAdd}
+                    sx={{
+                        minWidth: '32%',
+                        height: 50,
+                        fontSize: 16,
+                        fontWeight: 400,
+                        color: '#fff',
+                        ml: '4px',
+                        backgroundColor: 'button.light',
+                        '&:hover': {
+                            backgroundColor: 'button.light',
+                        },
+                    }}
+                >
+                    {t('add', 'profile')}
+                </Button>
+                <Button
+                    onClick={formik.handleSubmit}
+                    sx={{
+                        minWidth: '32%',
+                        height: 50,
+                        fontSize: 16,
+                        ml: '4px',
+                        color: '#0A5CBA',
+                        border: '1px solid #0A5CBA',
+                        backgroundColor: '#E3F0FF',
+                        '&:hover': {
+                            backgroundColor: '#E3F0FF',
+                        },
+                    }}
+                >
+                    {t('edit', 'profile')}
+                </Button>
+                <Button
+                    onClick={handleDelete}
+                    sx={{
+                        minWidth: '32%',
+                        height: 50,
+                        fontSize: 16,
+                        ml: '4px',
+                        color: '#0A5CBA',
+                        border: '1px solid #0A5CBA',
+                        backgroundColor: 'white',
+                        '&:hover': {
+                            backgroundColor: 'white',
+                        },
+                    }}
+                >
+                    {t('delete', 'profile')}
+                </Button>
+            </Stack>
         </Box>
     )
 }

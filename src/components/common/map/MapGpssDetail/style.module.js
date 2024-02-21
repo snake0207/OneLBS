@@ -1,6 +1,6 @@
 const style = {
     mapDetail: {
-        width: '350px',
+        width: '410px',
         ml: 0.5,
         borderRadius: '8px',
         boxShadow: '0 3px 14px rgb(0 0 0 / 24%)',

@@ -3,7 +3,7 @@ import { useState } from 'react'
 import Box from '@mui/material/Box'
 import Popover from '@mui/material/Popover'
 import IconButton from '@mui/material/IconButton'
-import SettingsIcon from '@mui/icons-material/Settings'
+//import SettingsIcon from '@mui/icons-material/Settings'
 import Radio from '@mui/material/Radio'
 import RadioGroup from '@mui/material/RadioGroup'
 import FormControlLabel from '@mui/material/FormControlLabel'
@@ -12,6 +12,14 @@ import FormLabel from '@mui/material/FormLabel'
 import Button from '@mui/material/Button'
 import useLayoutStore from '#/store/useLayoutStore'
 import { BrowserView, MobileView } from 'react-device-detect'
+import { Icon } from '@mui/material'
+
+import SettingIcon from '#/assets/settingIcon.svg'
+import SettingIconDark from '#/assets/settingIconDark.svg'
+import SettingMobIcon from '#/assets/settingMobIcon.svg'
+import SettingMobIconDark from '#/assets/settingMobIconDark.svg'
+
+import style from './style.module'
 
 import t from '#/common/libs/trans'
 
@@ -50,7 +58,38 @@ function Settings() {
     return (
         <>
             <IconButton aria-describedby={id} sx={{ p: 0 }} onClick={handleClick}>
-                <SettingsIcon />
+                <BrowserView>
+                    <Icon
+                        sx={{
+                            display: 'flex',
+                            width: '20px',
+                            height: '20px',
+                            ml: '8px',
+                        }}
+                    >
+                        {themeMode === 'light' ? (
+                            <img src={SettingIcon} />
+                        ) : (
+                            <img src={SettingIconDark} />
+                        )}
+                    </Icon>
+                </BrowserView>
+                <MobileView>
+                    <Icon
+                        sx={{
+                            display: 'flex',
+                            width: '21px',
+                            height: '20px',
+                            ml: '8px',
+                        }}
+                    >
+                        {themeMode === 'light' ? (
+                            <img src={SettingMobIcon} />
+                        ) : (
+                            <img src={SettingMobIconDark} />
+                        )}
+                    </Icon>
+                </MobileView>
             </IconButton>
             <Popover
                 id={id}
@@ -64,10 +103,17 @@ function Settings() {
                     vertical: 'top',
                     horizontal: 'left',
                 }}
-                sx={{ mt: 2 }}
+                sx={style.settingBox}
                 onClose={handleClose}
             >
-                <Box p={2}>
+                <Box
+                    p={2}
+                    sx={{
+                        display: 'flex',
+                        justifyContent: 'space-between',
+                        flexDirection: 'column',
+                    }}
+                >
                     <FormControl>
                         <MobileView>
                             <FormLabel id="color-group-label">{t('color_mode')}</FormLabel>
@@ -146,8 +192,10 @@ function Settings() {
                             </RadioGroup>
                         </BrowserView>
                     </FormControl>
+                    <Button onClick={handleReset} sx={style.darkButton}>
+                        {t('reset')}
+                    </Button>
                 </Box>
-                <Button onClick={handleReset}>{t('reset')}</Button>
             </Popover>
         </>
     )

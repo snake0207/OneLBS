@@ -1,4 +1,4 @@
-import { Button, TableCell } from '@mui/material'
+import { Button, TableCell, Box } from '@mui/material'
 import { IpInput } from '#/components/common/input/IpInput'
 import { useFormik } from 'formik'
 import * as yup from 'yup'
@@ -97,7 +97,7 @@ function IPRecord({ ip, ipAddresses, onAdd, onEdit, onDelete, onAutoInput }) {
 
     return (
         <>
-            <TableCell>
+            <TableCell component="td" sx={{ border: 'none', p: '6px 0px 0px 10px !important' }}>
                 <IpInput
                     name="ip"
                     formik={formik}
@@ -109,15 +109,71 @@ function IPRecord({ ip, ipAddresses, onAdd, onEdit, onDelete, onAutoInput }) {
                     <IpInput.IpDescription formik={formik} ipDescName="ip_description" />
                 </IpInput>
             </TableCell>
-            <TableCell>
+            <TableCell
+                component="td"
+                sx={{
+                    display: 'flex',
+                    justifyContent: 'space-between',
+                    alignItems: 'center',
+                    border: 'none',
+                    p: '6px 0px 0px 10px !important',
+                }}
+            >
                 <CheckBox
                     label={t('auto', 'profile')}
                     checked={checkAuto}
                     onChange={handleAutoInput}
                 />
-                <Button onClick={handleAdd}>{t('add', 'profile')}</Button>
-                <Button onClick={formik.handleSubmit}>{t('edit', 'profile')}</Button>
-                <Button onClick={handleDelete}>{t('delete', 'profile')}</Button>
+                <Box>
+                    <Button
+                        onClick={handleAdd}
+                        sx={{
+                            minWidth: '44px',
+                            height: 30,
+                            fontWeight: 400,
+                            color: '#fff',
+                            ml: '4px',
+                            backgroundColor: 'button.light',
+                            '&:hover': {
+                                backgroundColor: 'button.light',
+                            },
+                        }}
+                    >
+                        {t('add', 'profile')}
+                    </Button>
+                    <Button
+                        onClick={formik.handleSubmit}
+                        sx={{
+                            minWidth: '44px',
+                            height: 30,
+                            ml: '4px',
+                            color: '#0A5CBA',
+                            border: '1px solid #0A5CBA',
+                            backgroundColor: '#E3F0FF',
+                            '&:hover': {
+                                backgroundColor: '#E3F0FF',
+                            },
+                        }}
+                    >
+                        {t('edit', 'profile')}
+                    </Button>
+                    <Button
+                        onClick={handleDelete}
+                        sx={{
+                            minWidth: '44px',
+                            height: 30,
+                            ml: '4px',
+                            color: '#0A5CBA',
+                            border: '1px solid #0A5CBA',
+                            backgroundColor: 'white',
+                            '&:hover': {
+                                backgroundColor: 'white',
+                            },
+                        }}
+                    >
+                        {t('delete', 'profile')}
+                    </Button>
+                </Box>
             </TableCell>
         </>
     )

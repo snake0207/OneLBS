@@ -16,7 +16,7 @@ function Select({ name, formik, value, items, label, onChange, ...props }) {
     }
 
     return (
-        <FormControl sx={{ bgcolor: 'white' }}>
+        <FormControl>
             <InputLabel id="select-label">{label}</InputLabel>
             <SelectBase
                 id="select"

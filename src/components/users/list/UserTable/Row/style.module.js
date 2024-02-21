@@ -19,7 +19,6 @@ const style = {
         height: '34px',
         fontWeight: 500,
         p: 0,
-        float: 'right',
         color: '#0A5CBA',
         border: '1px solid #0A5CBA',
         backgroundColor: 'white',

@@ -6,7 +6,7 @@ import { Box, Card, Stack, TextField } from '@mui/material'
 import ApprovalLine from '#/components/approval/Detail/ApprovalLine/index.jsx'
 import InfoTab from '#/components/approval/Detail/InfoTab/index.jsx'
 import HistoryTable from '#/components/approval/Detail/HistoryTable/index.jsx'
-import { useMemo, useRef } from 'react'
+import { useMemo } from 'react'
 import { useFormik } from 'formik'
 import ActionButtons from '#/components/approval/Detail/ActionButtons/index.jsx'
 import dummyData from '../../detailData.json'
@@ -15,21 +15,22 @@ import Headline from '#/components/approval/Detail/Headline/index.jsx'
 import Comment from '#/components/approval/Detail/Comment/index.jsx'
 import { usePopupActions } from '#/store/usePopupStore.js'
 import CategoryInfo from '#/components/approval/Detail/CategoryInfo/index.jsx'
+// import { detailDataMapper } from '../mapper.js'
 
 const ApprovalHistoryDetailPage = () => {
     const params = useParams()
     const popupActions = usePopupActions()
     const userType = params.type // TODO: 전체이력 페이지면 all, 아니면 권한(url or token get..)
-    const dealerCategory = poiDummyData.result[0]
+    const dealerCategory = poiDummyData.data.result[0]
     const formik = useFormik({
         initialValues: {
-            name: poiDummyData.result[0].title,
-            address: poiDummyData.result[0].address,
-            lat: poiDummyData.result[0].position.center.lat,
-            lon: poiDummyData.result[0].position.center.lon,
+            name: poiDummyData.data.result[0].title,
+            address: poiDummyData.data.result[0].address,
+            lat: poiDummyData.data.result[0].position.center.lat,
+            lon: poiDummyData.data.result[0].position.center.lon,
             evCharging: {
-                brand: poiDummyData.result[0].evCharging.brand,
-                maxWatt: poiDummyData.result[0].evCharging.maxWatt,
+                brand: poiDummyData.data.result[0].evCharging.brand,
+                maxWatt: poiDummyData.data.result[0].evCharging.maxWatt,
                 stationStatus: 0,
             },
             request_reason: '위.경도 좌표 수정',
@@ -56,6 +57,7 @@ const ApprovalHistoryDetailPage = () => {
             popupActions.showPopup('alert', '승인 요청 이유를 입력해 주세요')
         } else {
             // TODO: 기능구분
+            console.log('VALUES >> ', formik.values)
             popupActions.showPopup('alert', t(`confirmed.${action.toLowerCase()}`, 'approval'))
             formik.handleSubmit
         }

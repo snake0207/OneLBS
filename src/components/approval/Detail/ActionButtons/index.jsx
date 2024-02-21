@@ -26,7 +26,12 @@ const ActionButtons = ({ type, status, clickAction, id }) => {
             actions &&
             actions.map((action, index) => {
                 return (
-                    <Button key={index} variant="contained" onClick={() => clickAction(action, id)}>
+                    <Button
+                        key={index}
+                        variant="contained"
+                        onClick={() => clickAction(action, id)}
+                        sx={{ bgcolor: 'button.light', mr: '4px' }}
+                    >
                         {t(`actions.${action}`, 'approval')}
                     </Button>
                 )

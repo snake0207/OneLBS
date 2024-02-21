@@ -3,17 +3,19 @@ import { Box, Table, TableBody, TableCell, TableHead, TableRow, useTheme } from 
 import t from '#/common/libs/trans.js'
 import Headline from '#/components/approval/Detail/Headline/index.jsx'
 
+import style from './style.module'
+
 const HistoryTable = ({ historyList }) => {
     const theme = useTheme()
 
     return (
         <Box>
             <Headline title={t('history', 'approval')} />
-            <Typography>
+            <Typography sx={{ fontSize: 15, mb: '4px' }}>
                 {t('total', 'approval')} {historyList?.length || 0}
                 {t('case', 'approval')}
             </Typography>
-            <Table size={'small'} border={1} sx={{ borderColor: 'divider' }}>
+            <Table size={'small'} sx={style.tableBox}>
                 <TableHead sx={{ backgroundColor: theme.palette.grey[100] }}>
                     <TableRow>
                         <TableCell align={'center'}>{t('date', 'approval')}</TableCell>

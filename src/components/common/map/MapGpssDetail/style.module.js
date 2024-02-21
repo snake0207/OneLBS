@@ -1,4 +1,20 @@
 const style = {
+    mapDetail: {
+        width: '350px',
+        ml: 0.5,
+        borderRadius: '8px',
+        boxShadow: '0 3px 14px rgb(0 0 0 / 24%)',
+        '& .css-1ilmods': {
+            background: '#ffffff',
+            padding: '20px 16px 16px 16px',
+            borderRadius: '0 0 8px 8px',
+        },
+        '& .css-1fbfkr9': {
+            background: '#ffffff',
+            padding: '20px 16px 16px 16px',
+            borderRadius: '0 0 8px 8px',
+        },
+    },
     tabMenu: {
         width: '49.4%',
         fontSize: 15,
@@ -13,8 +29,7 @@ const style = {
     },
     tabs: {
         minHeight: '36px',
-        marginLeft: '-16px',
-        marginRight: '-16px',
+        marginRight: '0px',
         '& .MuiTabs-indicator': {
             backgroundColor: 'transparent',
         },

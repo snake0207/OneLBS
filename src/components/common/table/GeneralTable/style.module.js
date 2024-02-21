@@ -23,8 +23,7 @@ const style = {
             p: '6px 10px',
             border: '1px solid #d1d1d1',
             '&:first-of-type': { borderLeft: '0' },
-            '&:last-of-child': { borderRight: '0' },
-            '&:nth-of-type(11)': {},
+            '&:last-of-type': { borderRight: '0' },
             select: {
                 p: '6px 0px',
             },
@@ -34,6 +33,7 @@ const style = {
             p: '6px 8px',
         },
         tr: {
+            backgroundColor: '#FFF',
             '&:hover': {
                 backgroundColor: '#e6e7e9',
             },

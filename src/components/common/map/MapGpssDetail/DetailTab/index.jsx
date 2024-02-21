@@ -10,6 +10,7 @@ import { usePopupActions } from '#/store/usePopupStore.js'
 import t from '#/common/libs/trans.js'
 import EvCharging from '#/components/common/map/MapGpssDetail/DetailTab/EvCharging/index.jsx'
 import BasicInfo from '#/components/common/map/MapGpssDetail/DetailTab/BasicInfo/index.jsx'
+import { poiDetailSchema } from '#/contents/validationSchema.js'
 
 const dummyData = [
     { id: 'qwer@acrofuture.com', name: '아*로1', company: '회사1', userSeq: 1 },
@@ -20,6 +21,7 @@ const dummyData = [
 const MapGpssDetailTab = ({ poiData }) => {
     const popupAction = usePopupActions()
     const [initPoiData, setInitPoiData] = useState(poiData)
+    const { evCharging, fuel, parking, h2Charging, dealerPoi } = poiData
 
     const formik = useFormik({
         initialValues: {
@@ -28,6 +30,7 @@ const MapGpssDetailTab = ({ poiData }) => {
             approver: '',
             ...poiData,
         },
+        validationSchema: poiDetailSchema,
         onSubmit: (form) => {
             console.log(form)
         },
@@ -113,11 +116,13 @@ const MapGpssDetailTab = ({ poiData }) => {
                 {/* 상세 기본 정보 */}
                 <BasicInfo formik={formik} poiData={poiData} />
                 <Box>
-                    <Typography>{t('category', 'common')}</Typography>
+                    <Typography sx={{ fontSize: 20, fontWeight: 600, color: '#00418D' }}>
+                        {t('category', 'common')}
+                    </Typography>
                 </Box>
                 <Divider />
                 {/* EV Charging */}
-                <EvCharging />
+                {!!evCharging && <EvCharging evChargingData={evCharging} formik={formik} />}
                 <Box>
                     <Box>
                         <Typography>{t('reason_for_approval', 'gpss')}</Typography>

@@ -1,6 +1,7 @@
 import { useRoutes } from 'react-router-dom'
 import AuthLayout from '#/layouts/AuthLayout'
 import MainLayout from '#/layouts/MainLayout'
+import DetailLayout from '#/layouts/DetailLayout'
 import MainPage from '#/pages/MainPage'
 import LoginPage from '#/pages/LoginPage'
 import DemoPage from '#/pages/DemoPage'
@@ -13,16 +14,22 @@ import LoginDemoPage from '#/pages/DemoPage/LoginPage'
 import PopupPage from '#/pages/DemoPage/PopupPage'
 import InputPage from '#/pages/DemoPage/InputPage'
 import ModalPage from '#/pages/DemoPage/ModalPage'
-import UserManagementPage from '#/pages/DemoPage/UserManagementPage'
-import UserLoginHistoryPage from '#/pages/DemoPage/UserManagementPage/UserLoginHistoryPage'
-import UserPermissionPage from '#/pages/DemoPage/UserManagementPage/UserPermissionPage'
+import UserManagementDemo from '#/pages/DemoPage/UserManagementDemo'
+import UserLoginHistoryDemo from '#/pages/DemoPage/UserManagementDemo/UserLoginHistoryDemo'
+import UserPermissionDemo from '#/pages/DemoPage/UserManagementDemo/UserPermissionDemo'
 import ApprovalPage from '#/pages/DemoPage/ApprovalPage/index.jsx'
 import ApprovalHistoryPage from '#/pages/DemoPage/ApprovalPage/ApprovalHistoryPage/index.jsx'
 import ApprovalHistoryDetailPage from '#/pages/DemoPage/ApprovalPage/ApprovalHistoryPage/DetailPage/index.jsx'
-import UserListPage from '#/pages/DemoPage/UserManagementPage/UserListPage'
-import IPManagePage from '#/pages/DemoPage/UserManagementPage/IPManagePage'
+import UserListDemo from '#/pages/DemoPage/UserManagementDemo/UserListDemo'
+import IPManageDemo from '#/pages/DemoPage/UserManagementDemo/IPManageDemo'
 import TablePage from '#/pages/DemoPage/TablePage'
 import ProfilePage from '#/pages/ProfilePage'
+import EmptyLayout from '#/layouts/EmptyLayout'
+import NotFoundPage from '#/pages/NotFoundPage'
+import UserListPage from '#/pages/users/UserListPage'
+import LoginHistoryPage from '#/pages/users/LoginHistoryPage'
+import PermissionHistoryPage from '#/pages/users/PermissionHistoryPage'
+import IpManagePage from '#/pages/users/IpManagePage'
 
 const Routes = () => {
     return useRoutes([
@@ -32,11 +39,20 @@ const Routes = () => {
                 { path: '/', element: <MainPage /> },
                 { path: '/mypage/profile', element: <ProfilePage /> },
                 { path: '/poi-map', element: <PoiMapPage /> },
+                // user management
+                { path: '/user-management/user-list', element: <UserListPage /> },
+                { path: '/user-management/login-history', element: <LoginHistoryPage /> },
+                { path: '/user-management/role-history', element: <PermissionHistoryPage /> },
+                { path: '/user-management/ip-access', element: <IpManagePage /> },
             ],
         },
         {
             element: <AuthLayout />,
             children: [{ path: '/login', element: <LoginPage /> }],
+        },
+        {
+            element: <DetailLayout />,
+            children: [{ path: '/components/layouts/detail', element: <MainPage /> }],
         },
         {
             element: <MainLayout />,
@@ -57,12 +73,16 @@ const Routes = () => {
                     element: <ApprovalHistoryDetailPage />,
                 },
                 { path: '/components/tables', element: <TablePage /> },
-                { path: '/components/users', element: <UserManagementPage /> },
-                { path: '/components/users/list', element: <UserListPage /> },
-                { path: '/components/users/login-history', element: <UserLoginHistoryPage /> },
-                { path: '/components/users/permission-history', element: <UserPermissionPage /> },
-                { path: '/components/users/ip-management', element: <IPManagePage /> },
+                { path: '/components/users', element: <UserManagementDemo /> },
+                { path: '/components/users/list', element: <UserListDemo /> },
+                { path: '/components/users/login-history', element: <UserLoginHistoryDemo /> },
+                { path: '/components/users/permission-history', element: <UserPermissionDemo /> },
+                { path: '/components/users/ip-management', element: <IPManageDemo /> },
             ],
+        },
+        {
+            element: <EmptyLayout />,
+            children: [{ path: '*', element: <NotFoundPage /> }],
         },
     ])
 }

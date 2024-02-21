@@ -3,7 +3,7 @@ import List from '@mui/material/List'
 import Divider from '@mui/material/Divider'
 import IconButton from '@mui/material/IconButton'
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft'
-import { Toolbar } from '@mui/material'
+import { Drawer, Toolbar } from '@mui/material'
 import MuiDrawer from '@mui/material/Drawer'
 import { styled } from '@mui/material/styles'
 
@@ -11,12 +11,22 @@ import AppRegistrationIcon from '@mui/icons-material/AppRegistration'
 import ListItemButton from '@mui/material/ListItemButton'
 import ListItemIcon from '@mui/material/ListItemIcon'
 import ListItemText from '@mui/material/ListItemText'
-import Link from '@mui/material/Link'
-import { getMenuIcon } from './listItems'
+
+import DashboardIcon from '@mui/icons-material/Dashboard'
+import BarChartIcon from '@mui/icons-material/BarChart'
+import LayersIcon from '@mui/icons-material/Layers'
+import RememberMeIcon from '@mui/icons-material/RememberMe'
+import RuleIcon from '@mui/icons-material/Rule'
+import ViewModuleIcon from '@mui/icons-material/ViewModule'
+
 import ExpandMenuItem from '#/components/common/menu/ExpandMenuItem'
+import UserInfo from './UserInfo'
 import t from '#/common/libs/trans'
 
+import { BrowserView, MobileView } from 'react-device-detect'
 import { data } from '#/mock/data/side_menu.json'
+import { filterMobileMenuItems } from '#/common/libs/menuTools'
+import LinkRouter from '#/components/common/menu/LinkRouter'
 
 const drawerWidth = 240
 
@@ -42,7 +52,7 @@ const closedMixin = (theme) => ({
     },
 })
 
-const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' })(
+const VariantDrawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' })(
     ({ theme, open }) => ({
         width: drawerWidth,
         flexShrink: 0,
@@ -59,8 +69,30 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
     }),
 )
 
+const getMenuIcon = (key) => {
+    switch (key) {
+        case 'mypage':
+            return <RememberMeIcon />
+        case 'search_management':
+            return <DashboardIcon />
+        case 'poi_search':
+            return <BarChartIcon />
+        case 'permit_history':
+            return <LayersIcon />
+        case 'mcp_poi_statistics':
+            return <LayersIcon />
+        case 'user_management':
+            return <LayersIcon />
+        case 'permission_management':
+            return <RuleIcon />
+        case 'common':
+            return <ViewModuleIcon />
+        default:
+            return null
+    }
+}
+
 const createMenuItems = (menuItems) => {
-    console.log('menuItems', menuItems)
     return (
         <React.Fragment>
             {menuItems.map((item, index) => {
@@ -76,14 +108,14 @@ const createMenuItems = (menuItems) => {
                 }
             })}
             <>
-                <Link href="/components" color="inherit" underline="none">
+                <LinkRouter to="/components" color="inherit" underline="none">
                     <ListItemButton>
                         <ListItemIcon>
                             <AppRegistrationIcon />
                         </ListItemIcon>
                         <ListItemText primary="Components" />
                     </ListItemButton>
-                </Link>
+                </LinkRouter>
             </>
         </React.Fragment>
     )
@@ -91,22 +123,34 @@ const createMenuItems = (menuItems) => {
 
 const SideMenu = ({ open, toggleDrawer }) => {
     return (
-        <Drawer variant="permanent" open={open}>
-            <Toolbar
-                sx={{
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'flex-end',
-                    px: [1],
-                }}
-            >
-                <IconButton onClick={toggleDrawer}>
-                    <ChevronLeftIcon />
-                </IconButton>
-            </Toolbar>
-            <Divider />
-            <List component="nav">{createMenuItems(data.menuTree)}</List>
-        </Drawer>
+        <>
+            <BrowserView>
+                <VariantDrawer variant="permanent" open={open}>
+                    <Toolbar
+                        sx={{
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'flex-end',
+                            px: [1],
+                        }}
+                    >
+                        <IconButton onClick={toggleDrawer}>
+                            <ChevronLeftIcon />
+                        </IconButton>
+                    </Toolbar>
+                    <Divider />
+                    <List component="nav">{createMenuItems(data.menuTree)}</List>
+                </VariantDrawer>
+            </BrowserView>
+            <MobileView>
+                <Drawer open={open} onClose={toggleDrawer}>
+                    <UserInfo />
+                    <List component="nav">
+                        {createMenuItems(filterMobileMenuItems(data.menuTree))}
+                    </List>
+                </Drawer>
+            </MobileView>
+        </>
     )
 }
 

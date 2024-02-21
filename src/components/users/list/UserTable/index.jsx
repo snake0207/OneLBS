@@ -25,7 +25,7 @@ import CommonPagination from '#/components/common/pagination/CommonPagination'
 
 function UserTable({
     rows,
-    onNextPage,
+    onChangePage,
     onChangePermission,
     onChangeStatus,
     onChangeRemark,
@@ -63,10 +63,10 @@ function UserTable({
         if (onWithdraw) onWithdraw(row)
     }
 
-    const handleNextPage = (page) => {
-        //console.log('handleNextPage', page)
+    const handleChagePage = (page) => {
+        //console.log('onChangePage', page)
 
-        onNextPage(page)
+        onChangePage(page)
     }
 
     return (
@@ -103,7 +103,7 @@ function UserTable({
                     ))}
                 </TableBody>
             </Table>
-            <CommonPagination dataLength={rows?.length} onChangePageFunction={handleNextPage} />
+            <CommonPagination dataLength={rows?.length} onChangePageFunction={handleChagePage} />
         </Box>
     )
 }

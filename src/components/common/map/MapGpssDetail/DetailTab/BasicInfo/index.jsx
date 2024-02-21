@@ -8,12 +8,7 @@ import FormikInput from '#/components/common/input/FormikInput/index.jsx'
 import PointBlueIcon from '#/assets/pointBlueIcon.svg'
 import LanguageIcon from '#/assets/languageIcon.svg'
 import GpsIcon from '#/assets/gpsIcon.svg'
-import EvStationIcon from '#/assets/evStationIcon.svg'
-import PlaceIcon from '@mui/icons-material/Place'
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
 import EditIcon from '@mui/icons-material/Edit'
-import TextInput from '#/components/common/input/TextInput/index.jsx'
-import { Accordion, AccordionSummary, AccordionDetails } from '@mui/material'
 
 const BasicInfo = ({ formik, poiData }) => {
     // 데이터 수정
@@ -31,14 +26,14 @@ const BasicInfo = ({ formik, poiData }) => {
         setIsLngSave(!isLngSave)
     }
     return (
-        <Box sx={{ paddingTop: '20px' }}>
+        <Box>
             <Box>
                 <Typography variant={'h6'} sx={{ fontSize: '20px', fontWeight: 600 }}>
                     <img
                         src={PointBlueIcon}
                         style={{ verticalAlign: 'middle', paddingRight: '4px' }}
                     />
-                    Times Square
+                    {poiData.title}
                 </Typography>
             </Box>
             <Box sx={{ marginTop: '8px', marginBottom: '16px' }}>
@@ -48,7 +43,7 @@ const BasicInfo = ({ formik, poiData }) => {
                             <img src={LanguageIcon} />
                         </Box>
                         <Box>
-                            <Typography>10036 New York, Manhattan, United States</Typography>
+                            <Typography>{poiData.address}</Typography>
                         </Box>
                         <IconButton
                             sx={{
@@ -63,10 +58,11 @@ const BasicInfo = ({ formik, poiData }) => {
                             {isAddressSave ? <SaveIcon /> : <EditIcon />}
                         </IconButton>
                     </Box>
-                    {(isAddressSave || (!isAddressSave && formik.values.address !== '')) && (
+                    {(isAddressSave ||
+                        (!isAddressSave &&
+                            formik.values.address !== formik.initialValues.address)) && (
                         <Box sx={{ height: '40px' }}>
-                            <TextInput
-                                formik={formik}
+                            <FormikInput
                                 name={'address'}
                                 IsDisabled={!isAddressSave}
                                 placeholder={t('address_input', 'gpss')}
@@ -87,7 +83,7 @@ const BasicInfo = ({ formik, poiData }) => {
                             <img src={GpsIcon} />
                         </Box>
                         <Box>
-                            <Typography>40.758077</Typography>
+                            <Typography>{poiData.position.center.lat}</Typography>
                         </Box>
                         <IconButton
                             sx={{
@@ -97,16 +93,19 @@ const BasicInfo = ({ formik, poiData }) => {
                                 minHeight: '15px',
                                 height: '30px',
                             }}
+                            disabled={!!formik.errors.position?.center?.lat}
                             onClick={handleClickSetLatState}
                         >
                             {isLatSave ? <SaveIcon /> : <EditIcon />}
                         </IconButton>
                     </Box>
-                    {(isLatSave || (!isLatSave && formik.values.lat !== '')) && (
-                        <Box sx={{ height: '40px' }}>
-                            <TextInput
-                                formik={formik}
-                                name={'lat'}
+                    {(isLatSave ||
+                        (!isLatSave &&
+                            parseFloat(formik.values.position.center.lat) !==
+                                formik.initialValues.position.center.lat)) && (
+                        <Box sx={{ height: 'auto' }}>
+                            <FormikInput
+                                name={'position.center.lat'}
                                 IsDisabled={!isLatSave}
                                 placeholder={t('lat_input', 'gpss')}
                             />
@@ -120,7 +119,7 @@ const BasicInfo = ({ formik, poiData }) => {
                             <img src={GpsIcon} />
                         </Box>
                         <Box>
-                            <Typography>-73.985480</Typography>
+                            <Typography>{poiData.position.center.lon}</Typography>
                         </Box>
                         <IconButton
                             sx={{
@@ -130,16 +129,19 @@ const BasicInfo = ({ formik, poiData }) => {
                                 minHeight: '15px',
                                 height: '30px',
                             }}
+                            disabled={!!formik.errors.position?.center?.lon}
                             onClick={handleClickSetLngSate}
                         >
                             {isLngSave ? <SaveIcon /> : <EditIcon />}
                         </IconButton>
                     </Box>
-                    {(isLngSave || (!isLngSave && formik.values.lon !== '')) && (
-                        <Box sx={{ height: '40px' }}>
-                            <TextInput
-                                formik={formik}
-                                name={'lon'}
+                    {(isLngSave ||
+                        (!isLngSave &&
+                            parseFloat(formik.values.position.center.lon) !==
+                                formik.initialValues.position.center.lon)) && (
+                        <Box sx={{ height: 'auto' }}>
+                            <FormikInput
+                                name={'position.center.lon'}
                                 IsDisabled={!isLngSave}
                                 placeholder={t('lon_input', 'gpss')}
                             />
@@ -147,29 +149,6 @@ const BasicInfo = ({ formik, poiData }) => {
                     )}
                 </Box>
                 <Divider sx={{ marginY: '5px' }} />
-            </Box>
-            <Box>
-                <Typography sx={{ fontSize: 20, fontWeight: 600, color: '#00418D' }}>
-                    {t('category', 'common')}
-                </Typography>
-            </Box>
-            <Box sx={{ display: 'flex', marginBottom: '16px' }}>
-                <Accordion elevation={0} sx={{ padding: 0 }}>
-                    <AccordionSummary
-                        expandIcon={<ExpandMoreIcon />}
-                        sx={{ padding: '0px', fontSize: '18px', fontWeight: 500 }}
-                    >
-                        <img
-                            src={EvStationIcon}
-                            style={{ verticalAlign: 'middle', paddingRight: '4px' }}
-                        />
-                        EV Charging
-                    </AccordionSummary>
-                    <AccordionDetails sx={{ padding: 0 }}>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
-                        malesuada lacus ex, sit amet blandit leo lobortis eget.
-                    </AccordionDetails>
-                </Accordion>
             </Box>
         </Box>
     )

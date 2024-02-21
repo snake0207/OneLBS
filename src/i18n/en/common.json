@@ -10,5 +10,14 @@
   "lat": "latitude",
   "lon": "longitude",
   "language": "language",
-  "category": "category"
+  "category": "category",
+  "day_of_week" : {
+    "sun" : "SUN",
+    "mon" : "MON",
+    "tue" : "TUE",
+    "wed" : "WED",
+    "thu" : "THU",
+    "fri" : "FRI",
+    "sat" : "SAT"
+  }
 }

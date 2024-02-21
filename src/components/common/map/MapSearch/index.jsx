@@ -268,7 +268,7 @@ const MapSearch = () => {
     const popupAction = usePopupActions()
     const formik = useFormik({
         initialValues: {
-            country: '',
+            country: [],
             lat: '',
             lon: '',
             category: [],
@@ -289,6 +289,8 @@ const MapSearch = () => {
         <Box
             sx={{
                 width: '350px',
+                maxHeight: '300px',
+                overflow: 'auto',
                 padding: '16px',
                 margin: '10px 10px 6px 10px',
                 borderRadius: '8px',
@@ -309,17 +311,17 @@ const MapSearch = () => {
                     </Grid>
                     <Grid item xs={9}>
                         <Autocomplete
+                            multiple
                             disablePortal
                             options={countryCodeArr}
                             size="small"
                             name={'country'}
-                            sx={{ borderRadius: '8px', bgcolor: 'white' }}
+                            sx={{ borderRadius: '8px', background: 'white' }}
                             onChange={(event, value) => {
                                 formik.setFieldValue(
                                     'country',
                                     value !== null ? value : formik.initialValues.country,
                                 )
-                                console.log(formik)
                             }}
                             renderInput={(params) => (
                                 <TextField

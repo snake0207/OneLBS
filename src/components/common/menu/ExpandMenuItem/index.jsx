@@ -1,6 +1,5 @@
 import { useState } from 'react'
 
-import Link from '@mui/material/Link'
 import List from '@mui/material/List'
 import ListItemButton from '@mui/material/ListItemButton'
 import ListItemIcon from '@mui/material/ListItemIcon'
@@ -10,6 +9,7 @@ import Collapse from '@mui/material/Collapse'
 import ExpandLess from '@mui/icons-material/ExpandLess'
 import ExpandMore from '@mui/icons-material/ExpandMore'
 import t from '#/common/libs/trans'
+import LinkRouter from '../LinkRouter'
 
 function ExpandMenuItem({ label, iconNode, items }) {
     const [open, setOpen] = useState(false)
@@ -29,16 +29,16 @@ function ExpandMenuItem({ label, iconNode, items }) {
                 <List component="div" disablePadding>
                     {items.map((item) => {
                         return (
-                            <Link
+                            <LinkRouter
                                 key={item?.label}
-                                href={item?.menuUrl}
+                                to={item?.menuUrl}
                                 color="inherit"
                                 underline="none"
                             >
                                 <ListItemButton sx={{ pl: 4 }}>
                                     <ListItemText primary={t(`top_menu.${item?.label}`)} />
                                 </ListItemButton>
-                            </Link>
+                            </LinkRouter>
                         )
                     })}
                 </List>

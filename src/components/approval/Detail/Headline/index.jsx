@@ -4,10 +4,17 @@ import { Divider } from '@mui/material'
 const Headline = ({ title }) => {
     return (
         <>
-            <Typography variant={'h6'} fontWeight={'bold'}>
+            <Typography
+                variant={'h6'}
+                sx={{
+                    fontSize: 20,
+                    fontWeight: 700,
+                    color: '#05141F',
+                }}
+            >
                 {title}
             </Typography>
-            <Divider sx={{ marginBottom: 2 }} />
+            <Divider sx={{ marginBottom: '4px' }} />
         </>
     )
 }

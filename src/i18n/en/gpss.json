@@ -1,15 +1,22 @@
 {
   "lat_input": "please enter latitude",
   "lon_input": "please enter longitude",
-  "country_select": "please select country",
   "address_input": "please enter address",
   "info": "info",
   "last_modified_info": "last modified info",
-  "reason_for_approval": "reason for approval",
+  "reason_for_approval": "Reason for approval",
   "reason_for_approval_input": "please enter reason for approval",
   "temporary_save": "temporary save",
   "edit_request": "edit",
   "delete_request": "delete",
+  "opening_hours": "Opening hours",
+  "price" : {
+    "title": "Price",
+    "price": "price",
+    "price_unit": "price unit",
+    "currency_code": "currency code",
+    "currency": "currency"
+  },
   "pop_up": {
     "temporary_save": "would you like to temporarily save above data?",
     "edit_request": "would you like to submit edit request?",

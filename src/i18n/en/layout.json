@@ -1,5 +1,7 @@
 {
     "top_menu": {
+        "mypage": "마이페이지",
+        "profile": "내 정보",
         "search_management": "검색 관리",
         "map": "지도",
         "poi_search": "POI Search",
@@ -17,7 +19,14 @@
         "user_list": "유저 목록",
         "user_login_history": "유저 로그인 이력",
         "user_permission_history": "유저 권한 이력",
-        "user_ip_access_management": "IP 접근 관리"
+        "user_ip_access_management": "IP 접근 관리",
+        "permission_management": "권한 관리",
+        "permission_list": "권한 목록",
+        "common": "Common",
+        "category_code_management": "카테고리 코드 관리",
+        "country_code_management": "국가 코드 관리",
+        "language_code_management": "언어 코드 관리",
+        "login_page_image_management": "로그인 페이지 사진 관리"
     },
     "home": "Home",
     "mypage": "마이페이지",
@@ -40,5 +49,7 @@
     "ok": "확인",
     "yes": "예",
     "no": "아니오",
-    "read_all": "전체 읽음"
+    "read_all": "전체 읽음",
+    "page_not_found": "페이지를 찾을 수 없습니다.",
+    "page_not_found_message": "페이지가 존재하지 않거나, 사용할 수 없는 페이지 입니다. 입력하신 주소가 정확한지 다시 한번 확인해 주시기 바랍니다."
 }

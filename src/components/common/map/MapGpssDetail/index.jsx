@@ -22,17 +22,8 @@ const MapGpssDetail = ({ selectedPoi, setSelectedPoi, poiData }) => {
     return (
         poiData && (
             <Box sx={{ display: isOpen ? 'flex' : 'none', margin: '10px' }}>
-                <Box
-                    sx={{
-                        width: '350px',
-                        paddingX: '16px',
-                        background: '#ffffff',
-                        paddingBottom: '16px',
-                        borderRadius: '8px',
-                        boxShadow: '0 3px 14px rgb(0 0 0 / 24%)',
-                    }}
-                >
-                    <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
+                <Box sx={style.mapDetail}>
+                    <Box>
                         <Tabs value={tabSelected} onChange={handleClickTabChange} sx={style.tabs}>
                             <Tab label={t('info', 'gpss')} value="info" sx={style.tabMenu} />
                             <Tab
@@ -43,8 +34,10 @@ const MapGpssDetail = ({ selectedPoi, setSelectedPoi, poiData }) => {
                         </Tabs>
                     </Box>
                     {tabSelected === 'info' ? (
+                        // 상세정보
                         <MapGpssDetailTab poiData={poiData} />
                     ) : (
+                        // 최종수정정보
                         <MapGpssHistoryTab poiData={poiData} />
                     )}
                 </Box>

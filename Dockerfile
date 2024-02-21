@@ -15,9 +15,13 @@ COPY ./nginx.conf /etc/nginx/conf.d
 EXPOSE 80
 
 CMD ["nginx", "-g", "daemon off;"]
-# ec2 용으로 빌드
+# 사내 ec2 용으로 빌드
 # docker build -t acrofuture1/gpss-admin --platform linux/amd64 .
 # 도커허브 로그인 필요함
-# id acrofuture1
-# pw Acro@0720
 # docker push acrofuture1/gpss-admin
+
+# 현대 원격 ecr 용 빌드
+# aws ecr get-login-password --region eu-central-1 | docker login --username AWS --password-stdin 343821710662.dkr.ecr.eu-central-1.amazonaws.com
+# docker build -t admin-front-service .
+# docker tag admin-front-service:latest 343821710662.dkr.ecr.eu-central-1.amazonaws.com/admin-front-service:latest
+# docker push 343821710662.dkr.ecr.eu-central-1.amazonaws.com/admin-front-service:latest

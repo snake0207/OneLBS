@@ -71,7 +71,7 @@ export const joinSchema = yup.object().shape({
     company: yup.string().min(2, HELPER_TEXT.companyLength).required(HELPER_TEXT.companyRequired),
     team: yup.string().min(2, HELPER_TEXT.teamLength).required(HELPER_TEXT.teamRequired),
     ipAddress1_0: yup.string().when(['role', 'isIpAutoAdd'], {
-        is: (role, isIpAutoAdd) => role !== '25' && role !== '26' && !isIpAutoAdd,
+        is: (role, isIpAutoAdd) => role === '29' && !isIpAutoAdd,
         then: () =>
             yup
                 .string()
@@ -79,7 +79,7 @@ export const joinSchema = yup.object().shape({
                 .required(HELPER_TEXT.ipRequired),
     }),
     ipAddress2_0: yup.string().when(['role', 'isIpAutoAdd'], {
-        is: (role, isIpAutoAdd) => role !== '25' && role !== '26' && !isIpAutoAdd,
+        is: (role, isIpAutoAdd) => role === '29' && !isIpAutoAdd,
         then: () =>
             yup
                 .string()
@@ -87,7 +87,7 @@ export const joinSchema = yup.object().shape({
                 .required(HELPER_TEXT.ipRequired),
     }),
     ipAddress3_0: yup.string().when(['role', 'isIpAutoAdd'], {
-        is: (role, isIpAutoAdd) => role !== '25' && role !== '26' && !isIpAutoAdd,
+        is: (role, isIpAutoAdd) => role === '29' && !isIpAutoAdd,
         then: () =>
             yup
                 .string()
@@ -95,7 +95,7 @@ export const joinSchema = yup.object().shape({
                 .required(HELPER_TEXT.ipRequired),
     }),
     ipAddress4_0: yup.string().when(['role', 'isIpAutoAdd'], {
-        is: (role, isIpAutoAdd) => role !== '25' && role !== '26' && !isIpAutoAdd,
+        is: (role, isIpAutoAdd) => role === '29' && !isIpAutoAdd,
         then: () =>
             yup
                 .string()
@@ -156,7 +156,7 @@ export const passwordResetSchema = yup.object({
 })
 
 export const mapSearchSchema = yup.object({
-    country: yup.string().required(HELPER_TEXT.searchCountry),
+    country: yup.array().of(yup.string()).min(1, HELPER_TEXT.searchCountry),
     lat: yup
         .string()
         .matches(REGEXP.coordinates, HELPER_TEXT.searchLat)
@@ -165,4 +165,13 @@ export const mapSearchSchema = yup.object({
         .string()
         .matches(REGEXP.coordinates, HELPER_TEXT.searchLng)
         .required(HELPER_TEXT.searchLng),
+})
+
+export const poiDetailSchema = yup.object({
+    position: yup.object().shape({
+        center: yup.object().shape({
+            lat: yup.string().matches(REGEXP.coordinates, HELPER_TEXT.searchLat),
+            lon: yup.string().matches(REGEXP.coordinates, HELPER_TEXT.searchLng),
+        }),
+    }),
 })

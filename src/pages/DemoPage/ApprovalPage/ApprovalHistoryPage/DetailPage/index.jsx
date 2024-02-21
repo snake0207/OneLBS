@@ -8,24 +8,31 @@ import InfoTab from '#/components/approval/Detail/InfoTab/index.jsx'
 import HistoryTable from '#/components/approval/Detail/HistoryTable/index.jsx'
 import { useMemo } from 'react'
 import { useFormik } from 'formik'
-import CategoryTable from '#/components/approval/Detail/CategoryTable/index.jsx'
 import ActionButtons from '#/components/approval/Detail/ActionButtons/index.jsx'
 import dummyData from '../../detailData.json'
+import poiDummyData from '../../poiDetailData.json'
 import Headline from '#/components/approval/Detail/Headline/index.jsx'
 import Comment from '#/components/approval/Detail/Comment/index.jsx'
 import { usePopupActions } from '#/store/usePopupStore.js'
+import CategoryInfo from '#/components/approval/Detail/CategoryInfo/index.jsx'
+// import { detailDataMapper } from '../mapper.js'
 
 const ApprovalHistoryDetailPage = () => {
     const params = useParams()
     const popupActions = usePopupActions()
     const userType = params.type // TODO: 전체이력 페이지면 all, 아니면 권한(url or token get..)
+    const dealerCategory = poiDummyData.data.result[0]
     const formik = useFormik({
         initialValues: {
-            name: '',
-            address: '',
-            lat: '',
-            lon: '',
-            brand: '',
+            name: poiDummyData.data.result[0].title,
+            address: poiDummyData.data.result[0].address,
+            lat: poiDummyData.data.result[0].position.center.lat,
+            lon: poiDummyData.data.result[0].position.center.lon,
+            evCharging: {
+                brand: poiDummyData.data.result[0].evCharging.brand,
+                maxWatt: poiDummyData.data.result[0].evCharging.maxWatt,
+                stationStatus: 0,
+            },
             request_reason: '위.경도 좌표 수정',
             reviewer_comment: dummyData.comment.reviewer,
             approver_comment: dummyData.comment.approver,
@@ -50,6 +57,7 @@ const ApprovalHistoryDetailPage = () => {
             popupActions.showPopup('alert', '승인 요청 이유를 입력해 주세요')
         } else {
             // TODO: 기능구분
+            console.log('VALUES >> ', formik.values)
             popupActions.showPopup('alert', t(`confirmed.${action.toLowerCase()}`, 'approval'))
             formik.handleSubmit
         }
@@ -85,11 +93,7 @@ const ApprovalHistoryDetailPage = () => {
                     {/* 정보 탭 */}
                     <InfoTab data={dummyData.info} formik={formik} isEditable={isEditable} />
                     {/* 카테고리 */}
-                    <CategoryTable
-                        data={dummyData.category}
-                        formik={formik}
-                        isEditable={isEditable}
-                    />
+                    <CategoryInfo data={dealerCategory} formik={formik} isEditable={isEditable} />
                     {/* 승인 요청 이유*/}
                     <Box>
                         <Headline title={t('request_reason', 'approval')} />

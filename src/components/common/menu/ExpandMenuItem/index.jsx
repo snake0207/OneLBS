@@ -20,7 +20,26 @@ function ExpandMenuItem({ label, iconNode, items }) {
 
     return (
         <>
-            <ListItemButton onClick={handleClick}>
+            <ListItemButton
+                onClick={handleClick}
+                sx={{
+                    backgroundColor: open ? 'lnb.weblnbdeps' : 'weblnb',
+                    borderRadius: '350px',
+                    '&:hover': {
+                        backgroundColor: 'lnb.weblnbhover',
+                    },
+                    '&:focus:not(:focus-visible)': {
+                        backgroundColor: 'lnb.weblnbdeps',
+                        borderRadius: '350px',
+                    },
+                    '@media (max-width:1024px)': {
+                        backgroundColor: open ? 'lnb.mobilelnbdeps' : 'lnb.mobilelnb',
+                        '&:focus:not(:focus-visible)': {
+                            backgroundColor: 'lnb.mobilelnbdeps',
+                        },
+                    },
+                }}
+            >
                 <ListItemIcon>{iconNode}</ListItemIcon>
                 <ListItemText primary={label} />
                 {open ? <ExpandLess /> : <ExpandMore />}
@@ -34,6 +53,7 @@ function ExpandMenuItem({ label, iconNode, items }) {
                                 href={item?.menuUrl}
                                 color="inherit"
                                 underline="none"
+                                sx={{ color: 'text.lnb' }}
                             >
                                 <ListItemButton sx={{ pl: 4 }}>
                                     <ListItemText primary={t(`top_menu.${item?.label}`)} />

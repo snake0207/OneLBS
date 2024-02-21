@@ -64,7 +64,12 @@ function IPManage({ ipAddresses }) {
 
     return ipList?.map((ip, index) => (
         <TableRow key={index}>
-            {index === 0 && <TableCell rowSpan={ipList.length}>*{t('ip', 'profile')}</TableCell>}
+            {index === 0 && (
+                <TableCell rowSpan={ipList.length}>
+                    <span style={{ color: 'red', fontSize: '14px' }}>*</span>
+                    {t('ip', 'profile')}
+                </TableCell>
+            )}
             <IPRecord
                 ip={ip}
                 ipAddresses={ipList}

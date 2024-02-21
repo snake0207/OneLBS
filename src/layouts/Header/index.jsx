@@ -2,11 +2,11 @@ import AppBar from '@mui/material/AppBar'
 import Box from '@mui/material/Box'
 import Toolbar from '@mui/material/Toolbar'
 import IconButton from '@mui/material/IconButton'
-import MenuIcon from '@mui/icons-material/Menu'
 import Container from '@mui/material/Container'
 import Avatar from '@mui/material/Avatar'
-import FullscreenIcon from '@mui/icons-material/Fullscreen'
+//import FullscreenIcon from '@mui/icons-material/Fullscreen'
 import useLayoutStore from '#/store/useLayoutStore'
+import { Icon } from '@mui/material'
 
 import t from '#/common/libs/trans'
 import Dropdown from '#/components/common/button/Dropdown'
@@ -19,6 +19,17 @@ import { useNavigate } from 'react-router-dom'
 import { BrowserView, MobileView } from 'react-device-detect'
 import AccountCircleIcon from '@mui/icons-material/AccountCircle'
 
+import MenuIcon from '#/assets/menuIcon.svg'
+import MenuIconDark from '#/assets/menuIconDark.svg'
+import UserIcon from '#/assets/userIcon.svg'
+import UserIconDark from '#/assets/userIconDark.svg'
+import LanguagesIcon from '#/assets/languagesIcon.svg'
+import LanguagesIconDark from '#/assets/languagesIconDark.svg'
+import FullscreenIcon from '#/assets/fullscreenIcon.svg'
+import FullscreenIconDark from '#/assets/fullscreenIconDark.svg'
+
+import style from './style.module'
+
 const userMenus = [
     { key: 'profile', label: t('profile'), value: '/mypage/profile' },
     { key: 'logout', label: t('logout'), value: '/login' },
@@ -29,7 +40,7 @@ const languages = [
 ]
 
 function Header({ toggleDrawer }) {
-    const { language, setLanguage } = useLayoutStore()
+    const { language, setLanguage, themeMode } = useLayoutStore()
     const [, toggleFullScreen] = useFullScreen()
     const navigate = useNavigate()
 
@@ -53,7 +64,7 @@ function Header({ toggleDrawer }) {
     }
 
     return (
-        <AppBar position="absolute">
+        <AppBar position="absolute" sx={style.header}>
             <Container maxWidth="xl">
                 <Toolbar disableGutters>
                     <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
@@ -63,30 +74,76 @@ function Header({ toggleDrawer }) {
                             aria-controls="menu-appbar"
                             aria-haspopup="true"
                             onClick={toggleDrawer}
-                            color="inherit"
                         >
-                            <MenuIcon />
+                            {themeMode === 'light' ? (
+                                <img src={MenuIcon} />
+                            ) : (
+                                <img src={MenuIconDark} />
+                            )}
                         </IconButton>
                     </Box>
                     <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}></Box>
                     <BrowserView>
                         <Box sx={{ flexGrow: 0 }}>
                             <Notify notifications={notifications} />
-                            <IconButton sx={{ p: 0 }}>
-                                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
-                            </IconButton>
-                            <Dropdown items={userMenus} onSelect={handleSelectUserMenu}>
-                                James
+                            <Dropdown
+                                items={userMenus}
+                                onSelect={handleSelectUserMenu}
+                                sx={style.dropdownText}
+                            >
+                                <Icon
+                                    sx={{
+                                        display: 'flex',
+                                        width: '20px',
+                                        height: '20px',
+                                        mr: '8px',
+                                    }}
+                                >
+                                    {themeMode === 'light' ? (
+                                        <img src={UserIcon} />
+                                    ) : (
+                                        <img src={UserIconDark} />
+                                    )}
+                                </Icon>
+                                김승일
                             </Dropdown>
                             <Dropdown
                                 items={languages}
                                 selectable={true}
                                 onSelect={handleSelectLangMenu}
+                                sx={style.languagText}
                             >
+                                <Icon
+                                    sx={{
+                                        display: 'flex',
+                                        width: '21px',
+                                        height: '20px',
+                                        mr: '8px',
+                                    }}
+                                >
+                                    {themeMode === 'light' ? (
+                                        <img src={LanguagesIcon} />
+                                    ) : (
+                                        <img src={LanguagesIconDark} />
+                                    )}
+                                </Icon>
                                 {findLanguage(language)?.label}
                             </Dropdown>
                             <IconButton sx={{ p: 0 }} onClick={() => toggleFullScreen()}>
-                                <FullscreenIcon />
+                                <Icon
+                                    sx={{
+                                        display: 'flex',
+                                        width: '17px',
+                                        height: '16px',
+                                        mr: '16px',
+                                    }}
+                                >
+                                    {themeMode === 'light' ? (
+                                        <img src={FullscreenIcon} />
+                                    ) : (
+                                        <img src={FullscreenIconDark} />
+                                    )}
+                                </Icon>
                             </IconButton>
                             <Settings />
                         </Box>
@@ -97,14 +154,40 @@ function Header({ toggleDrawer }) {
                             <Dropdown
                                 items={userMenus}
                                 onSelect={handleSelectUserMenu}
-                                iconNode={<AccountCircleIcon />}
-                            />
+                                sx={style.dropdownMobText}
+                            >
+                                <Icon
+                                    sx={{
+                                        display: 'flex',
+                                        width: '20px',
+                                        height: '20px',
+                                    }}
+                                >
+                                    {themeMode === 'light' ? (
+                                        <img src={UserIcon} />
+                                    ) : (
+                                        <img src={UserIconDark} />
+                                    )}
+                                </Icon>
+                            </Dropdown>
                             <Dropdown
                                 items={languages}
-                                selectable={true}
                                 onSelect={handleSelectLangMenu}
+                                sx={style.languagMobText}
                             >
-                                {findLanguage(language)?.label}
+                                <Icon
+                                    sx={{
+                                        display: 'flex',
+                                        width: '21px',
+                                        height: '20px',
+                                    }}
+                                >
+                                    {themeMode === 'light' ? (
+                                        <img src={LanguagesIcon} />
+                                    ) : (
+                                        <img src={LanguagesIconDark} />
+                                    )}
+                                </Icon>
                             </Dropdown>
                             <Settings />
                         </Box>

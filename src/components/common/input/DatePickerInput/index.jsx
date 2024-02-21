@@ -25,7 +25,7 @@ const DatePickerInput = ({ name, formik, disabled = false }) => {
                 onError={(newError) => setDateError(newError)}
                 format="YYYY-MM-DD"
                 disabled={disabled}
-                sx={{ width: '100%', bgcolor: 'white' }}
+                sx={{ width: '100%' }}
                 slots={{ openPickerIcon: MuiIcon }}
                 slotProps={{
                     field: { clearable: true, onClear: () => handleChangeDate(null) },

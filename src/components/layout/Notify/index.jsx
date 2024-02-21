@@ -4,14 +4,18 @@ import Box from '@mui/material/Box'
 import Badge from '@mui/material/Badge'
 import Popover from '@mui/material/Popover'
 import IconButton from '@mui/material/IconButton'
-import NotificationsIcon from '@mui/icons-material/Notifications'
+import { Icon } from '@mui/material'
+import useLayoutStore from '#/store/useLayoutStore'
 
 import t from '#/common/libs/trans'
 import { Button } from '@mui/material'
 import NotifyItem from './NotifyItem'
+import AlramIcon from '#/assets/alramIcon.svg'
+import AlramIconDark from '#/assets/alramIconDark.svg'
 
 function Notify({ notifications }) {
     const [anchorEl, setAnchorEl] = useState(null)
+    const { themeMode } = useLayoutStore()
 
     const handleClick = (event) => {
         setAnchorEl(event.currentTarget)
@@ -36,8 +40,25 @@ function Notify({ notifications }) {
     return (
         <>
             <IconButton aria-describedby={id} size="large" color="inherit" onClick={handleClick}>
-                <Badge badgeContent={notifications.length} color="error">
-                    <NotificationsIcon />
+                <Badge
+                    badgeContent={notifications.length}
+                    color="error"
+                    sx={{ width: '20px', height: '20px' }}
+                >
+                    <Icon
+                        sx={{
+                            display: 'flex',
+                            width: '20px',
+                            height: '20px',
+                            mr: '8px',
+                        }}
+                    >
+                        {themeMode === 'light' ? (
+                            <img src={AlramIcon} />
+                        ) : (
+                            <img src={AlramIconDark} />
+                        )}
+                    </Icon>
                 </Badge>
             </IconButton>
             <Popover

@@ -40,8 +40,12 @@ export const tokens = {
     },
     background: {
         light: '#2d2d34',
-        main: '#1f2025',
-        gray: '#EFEFEF',
+        main: '#05141f',
+        100: '#ffffff',
+        200: '#EFEFEF',
+        300: '#D1D1D1',
+        800: '#142532',
+        900: '#05141f',
     },
     button: {
         400: '#00418D',
@@ -53,6 +57,21 @@ export const tokens = {
         400: '#fff',
         500: '#888',
         600: '#444',
+        700: '#05141f',
+    },
+    lnb: {
+        100: '#fff',
+        200: '#002C5F',
+        300: '#00418d',
+        400: '#007fa8',
+        500: '#05141f',
+        600: '#f5f5f5',
+    },
+    border: {
+        100: '#fff',
+        200: '#f1f1f1',
+        300: '#1e3343',
+        400: '#00418d',
     },
 }
 
@@ -97,11 +116,25 @@ export const getThemeSettings = (mode) => ({
                       main: tokens.text[500],
                       light: tokens.text[400],
                       gray: tokens.text[600],
+                      darkgray: tokens.text[700],
                   },
                   background: {
-                      default: tokens.background.main,
+                      default: tokens.background[100],
                       light: tokens.background.light,
-                      gray: tokens.background.gray,
+                      contents: tokens.background[100],
+                      gray: tokens.background[200],
+                      mobile: tokens.background[100],
+                      web: tokens.background[300],
+                  },
+                  lnb: {
+                      mobilelnb: tokens.lnb[100],
+                      mobilelnbdeps: tokens.lnb[300],
+                      weblnb: tokens.lnb[500],
+                      weblnbdeps: tokens.lnb[400],
+                  },
+                  border: {
+                      main: tokens.border[200],
+                      lnb: tokens.border[200],
                   },
               }
             : {
@@ -128,8 +161,8 @@ export const getThemeSettings = (mode) => ({
                   button: {
                       ...tokens.button,
                       main: tokens.button[500],
-                      light: tokens.button[600],
-                      gray: tokens.button[400],
+                      light: tokens.button[400],
+                      gray: tokens.button[600],
                       lightgray: tokens.button[700],
                   },
                   text: {
@@ -137,10 +170,26 @@ export const getThemeSettings = (mode) => ({
                       main: tokens.text[400],
                       light: tokens.text[500],
                       gray: tokens.text[400],
+                      darkgray: tokens.text[400],
+                      lnb: tokens.text[400],
                   },
                   background: {
                       default: tokens.background.main,
                       light: tokens.background.light,
+                      contents: tokens.background[800],
+                      gray: tokens.background[900],
+                      mobile: tokens.background[900],
+                      web: tokens.background[900],
+                  },
+                  lnb: {
+                      mobilelnb: tokens.lnb[200],
+                      mobilelnbdeps: tokens.lnb[300],
+                      weblnb: tokens.lnb[500],
+                      weblnbdeps: tokens.lnb[400],
+                  },
+                  border: {
+                      main: tokens.border[300],
+                      lnb: tokens.border[400],
                   },
               }),
     },

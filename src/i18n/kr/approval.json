@@ -35,7 +35,8 @@
         "request": "검토요청",
         "reviewed": "검토완료",
         "approved": "승인완료",
-        "rejected": "반려"
+        "rejected_review": "반려",
+        "rejected_approval": "반려"
     },
     "actions": {
         "temporary": "임시저장",

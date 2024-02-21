@@ -188,8 +188,9 @@
                 }
             }
         ],
-        "resultID": "string",
-        "status": "string",
+        "approvalStatus": "request",
+        "resultID": "searchResultId",
+        "status": "success",
         "total": 0,
         "resCode": 0
     }

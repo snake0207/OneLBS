@@ -6,11 +6,11 @@ import t from '#/common/libs/trans.js'
 import EditIcon from '@mui/icons-material/Edit'
 import SaveIcon from '@mui/icons-material/Save'
 import TextInput from '#/components/common/input/TextInput/index.jsx'
-import { useFormik } from 'formik'
 
 import style from './style.module'
 
 const InfoTab = ({ data, formik, isEditable }) => {
+    console.log(data)
     const theme = useTheme()
     const [activeTab, setActiveTab] = useState('1')
     const inputNames = ['name', 'address', 'lat', 'lon']
@@ -46,7 +46,6 @@ const InfoTab = ({ data, formik, isEditable }) => {
     const handleShowEditInputs = (type) => {
         setIsShowInputs({ ...isShowInputs, [type]: true })
         setIsDisableInputs({ ...isDisableInputs, [type]: !isDisableInputs[type] })
-        console.log(formik.values)
     }
 
     return (

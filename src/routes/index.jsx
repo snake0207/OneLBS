@@ -30,6 +30,7 @@ import UserListPage from '#/pages/users/UserListPage'
 import LoginHistoryPage from '#/pages/users/LoginHistoryPage'
 import PermissionHistoryPage from '#/pages/users/PermissionHistoryPage'
 import IpManagePage from '#/pages/users/IpManagePage'
+import DashboardPage from '#/pages/DemoPage/DashboardPage'
 
 const Routes = () => {
     return useRoutes([
@@ -78,6 +79,7 @@ const Routes = () => {
                 { path: '/components/users/login-history', element: <UserLoginHistoryDemo /> },
                 { path: '/components/users/permission-history', element: <UserPermissionDemo /> },
                 { path: '/components/users/ip-management', element: <IPManageDemo /> },
+                { path: '/components/dashboard', element: <DashboardPage /> },
             ],
         },
         {

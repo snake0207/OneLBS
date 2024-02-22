@@ -11,7 +11,6 @@ import EvStationIcon from '#/assets/evStationIcon.svg'
 import style from './style.module'
 
 const CategoryTable = ({ data, formik, isEditable }) => {
-    const theme = useTheme()
     const [isShowInputs, setIsShowInputs] = useState({
         brand: false,
     })

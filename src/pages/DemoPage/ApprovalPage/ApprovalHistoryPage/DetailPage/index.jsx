@@ -15,13 +15,16 @@ import Headline from '#/components/approval/Detail/Headline/index.jsx'
 import Comment from '#/components/approval/Detail/Comment/index.jsx'
 import { usePopupActions } from '#/store/usePopupStore.js'
 import CategoryInfo from '#/components/approval/Detail/CategoryInfo/index.jsx'
-// import { detailDataMapper } from '../mapper.js'
+import poiDetailData from '../../poiDetailData.json'
+import { detailResponseDataMapper } from '#/pages/DemoPage/ApprovalPage/ApprovalHistoryPage/mapper.js'
 
 const ApprovalHistoryDetailPage = () => {
     const params = useParams()
     const popupActions = usePopupActions()
     const userType = params.type // TODO: 전체이력 페이지면 all, 아니면 권한(url or token get..)
     const dealerCategory = poiDummyData.data.result[0]
+    const parsedData = detailResponseDataMapper(poiDetailData)
+    console.log('PARSED >> ', parsedData)
     const formik = useFormik({
         initialValues: {
             name: poiDummyData.data.result[0].title,

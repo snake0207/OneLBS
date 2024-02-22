@@ -14,7 +14,7 @@ import ViewMoreButton from '#/components/approval/HistoryTable/Mobile/ViewMoreBu
 import { usePopupActions } from '#/store/usePopupStore.js'
 
 const ApprovalHistoryPage = () => {
-    // TODO: 임시상태값 - temporary, request, reviewed, approved, rejected(승인자/검토자 구분필요),
+    // TODO: 임시상태값 - temporary, request, reviewed, approved, rejected_review, rejected_approval,
     const params = useParams()
     const popupActions = usePopupActions()
     const navigator = useNavigate()
@@ -81,25 +81,8 @@ const ApprovalHistoryPage = () => {
         moreData.length ? setDummyList([...dummyList, ...moreData]) : setIsLastView(true)
     }
 
-    const handleClickRow = (target, id) => {
-        console.log(target, id)
-        if (target.tagName === 'BUTTON') return
+    const handleClickRow = (id) => {
         navigator(`${url}/detail/${id}`)
-    }
-
-    const handleClickButton = (action, id) => {
-        console.log('ACTION >> ', action, id)
-        if (action === 'retrieve')
-            popupActions.showPopup('confirm', t(`modal.${action.toLowerCase()}`, 'approval'), () =>
-                openAlertPopup(action),
-            )
-        else navigator(`${url}/detail/${id}`)
-    }
-
-    const openAlertPopup = (action) => {
-        // TODO: API
-        console.log('API')
-        popupActions.showPopup('alert', t(`confirmed.${action.toLowerCase()}`, 'approval'))
     }
 
     return (
@@ -135,7 +118,6 @@ const ApprovalHistoryPage = () => {
                     <HistoryTableMobile
                         type={userType}
                         dummyData={dummyList}
-                        onClickButtonFunction={handleClickButton}
                         onClickRowFunction={handleClickRow}
                     />
                     {!isLastView && <ViewMoreButton onChangePageFunction={handleViewChange} />}
@@ -145,7 +127,6 @@ const ApprovalHistoryPage = () => {
                     <HistoryTable
                         type={userType}
                         dummyData={dummyData}
-                        onClickButtonFunction={handleClickButton}
                         onClickRowFunction={handleClickRow}
                     />
                     <CommonPagination

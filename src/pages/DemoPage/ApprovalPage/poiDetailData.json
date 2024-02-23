@@ -28,6 +28,7 @@
                 "evCharging": {
                     "brand": "EIT",
                     "maxWatt": "100kw",
+                    "pFee": "0",
                     "stationStatus": "1",
                     "status": [
                         {
@@ -189,6 +190,11 @@
             }
         ],
         "approvalStatus": "request",
+        "approvalInfo": {
+            "request_reason": "위.경도 좌표 수정",
+            "reviewer_comment": "위.경도 재확인 후 요청하라",
+            "approver_comment": null
+        },
         "resultID": "searchResultId",
         "status": "success",
         "total": 0,

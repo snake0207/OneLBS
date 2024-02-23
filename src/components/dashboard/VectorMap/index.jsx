@@ -2,9 +2,18 @@ import { Box } from '@mui/material'
 import { useState } from 'react'
 import { ComposableMap, Geographies, Geography, ZoomableGroup } from 'react-simple-maps'
 import geoJson from '#/assets/data/vectorMapGeo.json'
-import CountryTooltip from '#/components/dashboard/VectorMap/CountryTooltip'
+import CountryTooltip from '#/components/dashboard/CountryTooltip'
+import InfoIcon from '@mui/icons-material/Info'
 
 const VectorMap = () => {
+    const mockData = [
+        { icon: <InfoIcon />, category: 'evCharging', count: '001' },
+        { icon: <InfoIcon />, category: 'fuel', count: '002' },
+        { icon: <InfoIcon />, category: 'parking', count: '003' },
+        { icon: <InfoIcon />, category: 'h2Charging', count: '004' },
+        { icon: <InfoIcon />, category: 'dealerPoi', count: '005' },
+    ]
+
     const [selected, setSelected] = useState(null)
 
     const handleEnterVectorMap = (id) => {
@@ -51,7 +60,15 @@ const VectorMap = () => {
                     </Geographies>
                 </ZoomableGroup>
             </ComposableMap>
-            <CountryTooltip id={selected} />
+            <Box
+                sx={{
+                    position: 'absolute',
+                    top: 10,
+                    right: 10,
+                }}
+            >
+                <CountryTooltip categoryCountList={mockData} title={'국가명'} />
+            </Box>
         </Box>
     )
 }

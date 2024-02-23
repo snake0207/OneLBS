@@ -2,7 +2,7 @@ import { Box } from '@mui/material'
 import { useState } from 'react'
 import { ComposableMap, Geographies, Geography, ZoomableGroup } from 'react-simple-maps'
 import geoJson from '#/assets/data/vectorMapGeo.json'
-import CountryTooltip from '#/components/dashboard/VectorMap/CountryTooltip'
+import CountryTooltip from '#/components/dashboard/CountryTooltip'
 import InfoIcon from '@mui/icons-material/Info'
 
 const VectorMap = () => {

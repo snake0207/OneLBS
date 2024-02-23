@@ -1,6 +1,6 @@
 import ShortCutBanner from '#/components/dashboard/ShortCutBanner'
 import VectorMap from '#/components/dashboard/VectorMap'
-import CountryTooltip from '#/components/dashboard/VectorMap/CountryTooltip'
+import CountryTooltip from '#/components/dashboard/CountryTooltip'
 import { Box } from '@mui/material'
 import InfoIcon from '@mui/icons-material/Info'
 import CategoryCount from '#/components/dashboard/CategoryCount'

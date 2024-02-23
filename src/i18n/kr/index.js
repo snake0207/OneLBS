@@ -8,6 +8,7 @@ import gpss from './gpss.json'
 import validation from './validation.json'
 import approval from './approval.json'
 import error from './error.json'
+import dashboard from './dashboard.json'
 
 const kr = {
     layout,
@@ -20,6 +21,7 @@ const kr = {
     validation,
     approval,
     error,
+    dashboard,
 }
 
 export default kr

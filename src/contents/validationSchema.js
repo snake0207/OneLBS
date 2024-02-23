@@ -175,3 +175,31 @@ export const poiDetailSchema = yup.object({
         }),
     }),
 })
+
+export const passwordChangeSchema = yup.object({
+    currentPassword: yup
+        .string()
+        .min(8, HELPER_TEXT.passwordMinLength)
+        .max(16, HELPER_TEXT.passwordMaxLength)
+        .matches(REGEXP.passwordIncludeChar, HELPER_TEXT.passwordNotIncludeChar)
+        .matches(REGEXP.passwordIncludeUppercase, HELPER_TEXT.passwordNotIncludeUppercase)
+        .matches(REGEXP.passwordIncludeNumber, HELPER_TEXT.passwordNotIncludeNumber)
+        .required(HELPER_TEXT.passwordRequired),
+    password: yup
+        .string()
+        .min(8, HELPER_TEXT.passwordMinLength)
+        .max(16, HELPER_TEXT.passwordMaxLength)
+        .matches(REGEXP.passwordIncludeChar, HELPER_TEXT.passwordNotIncludeChar)
+        .matches(REGEXP.passwordIncludeUppercase, HELPER_TEXT.passwordNotIncludeUppercase)
+        .matches(REGEXP.passwordIncludeNumber, HELPER_TEXT.passwordNotIncludeNumber)
+        .required(HELPER_TEXT.passwordRequired),
+    confirmPassword: yup
+        .string()
+        .min(8, HELPER_TEXT.passwordMinLength)
+        .max(16, HELPER_TEXT.passwordMaxLength)
+        .matches(REGEXP.passwordIncludeChar, HELPER_TEXT.passwordNotIncludeChar)
+        .matches(REGEXP.passwordIncludeUppercase, HELPER_TEXT.passwordNotIncludeUppercase)
+        .matches(REGEXP.passwordIncludeNumber, HELPER_TEXT.passwordNotIncludeNumber)
+        .oneOf([yup.ref('password'), null], HELPER_TEXT.confirmPasswordNotMatch)
+        .required(HELPER_TEXT.passwordRequired),
+})

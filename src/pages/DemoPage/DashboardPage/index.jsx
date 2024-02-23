@@ -4,20 +4,29 @@ import CountryTooltip from '#/components/dashboard/VectorMap/CountryTooltip'
 import { Box } from '@mui/material'
 import InfoIcon from '@mui/icons-material/Info'
 import CategoryCount from '#/components/dashboard/CategoryCount'
+import UserTooltip from '#/components/dashboard/UserTooltip'
 
 const DashboardPage = () => {
+    const CountryTooltipMockData = [
+        { icon: <InfoIcon />, category: 'evCharging', count: '001' },
+        { icon: <InfoIcon />, category: 'fuel', count: '002' },
+        { icon: <InfoIcon />, category: 'parking', count: '003' },
+        { icon: <InfoIcon />, category: 'h2Charging', count: '004' },
+        { icon: <InfoIcon />, category: 'dealerPoi', count: '005' },
+    ]
+
     return (
         <Box>
             <h1>DashboardPage</h1>
             <h2>Tooltip</h2>
             <p>Count UI</p>
             <div style={{ width: 90 }}>
-                <CategoryCount icon={<InfoIcon />} categoryName={'국가명'} count={'123'} />
+                <CategoryCount icon={<InfoIcon />} categoryName={'카테고리'} count={'123'} />
             </div>
             <p>Country Tooltip</p>
-            <div style={{ position: 'relative', width: 500, height: 200 }}>
-                <CountryTooltip />
-            </div>
+            <CountryTooltip categoryCountList={CountryTooltipMockData} title={'국가명'} />
+            <p>User Tooltip</p>
+            <UserTooltip />
             <h2>VectorMap</h2>
             <VectorMap />
             <h2>ShortCut Banner</h2>

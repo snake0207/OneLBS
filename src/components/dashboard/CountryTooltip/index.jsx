@@ -1,6 +1,6 @@
 import { Box, Divider, Typography } from '@mui/material'
-import InfoIcon from '@mui/icons-material/Info'
 import CategoryCount from '#/components/dashboard/CategoryCount'
+import LanguageIcon from '@mui/icons-material/Language'
 
 const CountryTooltip = ({ title, categoryCountList }) => {
     return (
@@ -14,7 +14,7 @@ const CountryTooltip = ({ title, categoryCountList }) => {
                     padding: 2,
                 }}
             >
-                <InfoIcon />
+                <LanguageIcon />
                 <Typography>{title}</Typography>
             </Box>
             <Divider sx={{ borderColor: 'black' }} />

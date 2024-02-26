@@ -82,14 +82,14 @@ function Header({ toggleDrawer }) {
                     </Box>
                     <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}></Box>
                     <BrowserView>
-                        <Box sx={{ flexGrow: 0 }}>
+                        <Box sx={{ flexGrow: 0, display: 'flex', alignItems: 'center' }}>
                             <Notify notifications={notifications} />
                             <Icon
                                 sx={{
                                     display: 'flex',
                                     width: '20px',
                                     height: '20px',
-                                    mr: '8px',
+                                    ml: '16px',
                                 }}
                             >
                                 {themeMode === 'light' ? (
@@ -110,7 +110,7 @@ function Header({ toggleDrawer }) {
                                     display: 'flex',
                                     width: '21px',
                                     height: '20px',
-                                    mr: '8px',
+                                    mr: '6px',
                                 }}
                             >
                                 {themeMode === 'light' ? (
@@ -133,7 +133,7 @@ function Header({ toggleDrawer }) {
                                         display: 'flex',
                                         width: '17px',
                                         height: '16px',
-                                        mr: '16px',
+                                        mr: '12px',
                                     }}
                                 >
                                     {themeMode === 'light' ? (

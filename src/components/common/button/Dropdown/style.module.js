@@ -1,6 +1,7 @@
 const style = {
     dropdownBox: {
         '& .MuiPaper-root': {
+            fontSize: 14,
             top: '50px !important',
             boxShadow: 'none',
             border: '1px solid',
@@ -16,6 +17,12 @@ const style = {
             mt: '20px',
             '& .MuiPaper-root': {
                 top: '40px !important',
+                '& .MuiButtonBase-root': {
+                    minHeight: 'auto',
+                    '& .MuiTypography-root': {
+                        fontSize: 14,
+                    },
+                },
             },
         },
     },

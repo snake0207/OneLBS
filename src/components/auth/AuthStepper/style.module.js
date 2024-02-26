@@ -9,7 +9,8 @@ const style = {
         flexDirection: 'column',
         alignItems: 'center',
         m: '0 auto',
-        color: 'primary.dark',
+        color: (theme) =>
+            theme.palette.mode === 'light' ? theme.palette.color[5001] : theme.palette.grey[100],
     },
     stepTitle: {
         height: 36,

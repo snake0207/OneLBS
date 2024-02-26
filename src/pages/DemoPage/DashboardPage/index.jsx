@@ -5,14 +5,15 @@ import { Box } from '@mui/material'
 import InfoIcon from '@mui/icons-material/Info'
 import CategoryCount from '#/components/dashboard/CategoryCount'
 import UserTooltip from '#/components/dashboard/UserTooltip'
+import VectorMapTooltip from '#/components/dashboard/VectorMap/VectorMapTooltip'
 
 const DashboardPage = () => {
     const CountryTooltipMockData = [
-        { icon: <InfoIcon />, category: 'evCharging', count: '001' },
-        { icon: <InfoIcon />, category: 'fuel', count: '002' },
-        { icon: <InfoIcon />, category: 'parking', count: '003' },
-        { icon: <InfoIcon />, category: 'h2Charging', count: '004' },
-        { icon: <InfoIcon />, category: 'dealerPoi', count: '005' },
+        { lightIcon: <InfoIcon />, darkIcon: <InfoIcon />, category: 'evCharging', count: '001' },
+        { lightIcon: <InfoIcon />, darkIcon: <InfoIcon />, category: 'fuel', count: '002' },
+        { lightIcon: <InfoIcon />, darkIcon: <InfoIcon />, category: 'parking', count: '003' },
+        { lightIcon: <InfoIcon />, darkIcon: <InfoIcon />, category: 'h2Charging', count: '004' },
+        { lightIcon: <InfoIcon />, darkIcon: <InfoIcon />, category: 'dealerPoi', count: '005' },
     ]
 
     return (
@@ -27,6 +28,8 @@ const DashboardPage = () => {
             <CountryTooltip categoryCountList={CountryTooltipMockData} title={'국가명'} />
             <p>User Tooltip</p>
             <UserTooltip />
+            <p>VectorMap Tooltip</p>
+            <VectorMapTooltip categoryCountList={CountryTooltipMockData} title={'국가명'} />
             <h2>VectorMap</h2>
             <VectorMap />
             <h2>ShortCut Banner</h2>

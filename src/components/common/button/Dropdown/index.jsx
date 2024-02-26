@@ -4,6 +4,7 @@ import Typography from '@mui/material/Typography'
 import Menu from '@mui/material/Menu'
 import MenuItem from '@mui/material/MenuItem'
 import Icon from '@mui/material/Icon'
+import style from './style.module'
 
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown'
 
@@ -64,7 +65,8 @@ function Dropdown({
                 </Button>
             )}
             <Menu
-                sx={{ mt: '45px' }}
+                sx={style.dropdownBox}
+                style={{ mt: '43px' }}
                 id="menu-appbar"
                 anchorEl={anchorEl}
                 anchorOrigin={{

@@ -15,33 +15,19 @@ import AccountCircleIcon from '@mui/icons-material/AccountCircle'
 import t from '#/common/libs/trans'
 import useLayoutStore from '#/store/useLayoutStore'
 
+import style from './style.module'
+
 const JoinSuccessModal = ({ isOpen, onClose }) => {
     const { themeMode } = useLayoutStore()
     return (
-        <Dialog open={isOpen} onClose={onClose}>
-            <DialogTitle
-                sx={{
-                    display: 'flex',
-                    justifyContent: 'space-between',
-                    alignItems: 'center',
-                    fontSize: 16,
-                    backgroundColor: 'primary.lightBlue',
-                    borderRadius: 20,
-                    mt: 3.8,
-                    ml: 2.5,
-                    mr: 2.5,
-                    mb: 1.3,
-                    height: 42,
-                    pl: 1,
-                    pr: 1,
-                }}
-            >
+        <Dialog open={isOpen} onClose={onClose} sx={style.dialogBox}>
+            <DialogTitle sx={style.title}>
                 <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
                     {themeMode === 'light' ? <AccountCircleIcon /> : <AccountCircleIcon />}
                     {t('join_completed', 'auth')}
                 </Box>
                 <IconButton onClick={onClose}>
-                    <CloseIcon />
+                    <CloseIcon sx={style.close} />
                 </IconButton>
             </DialogTitle>
             <DialogContent

@@ -17,6 +17,11 @@ import { useMemo, useRef, useState } from 'react'
 import Headline from '#/components/approval/Detail/Headline/index.jsx'
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore.js'
 import Select from '#/components/common/Select/index.jsx'
+import EvStationIcon from '#/assets/evStationIcon.svg'
+import EvStationIconDark from '#/assets/evStationIconDark.svg'
+
+import { getLayoutState } from '#/store/useLayoutStore'
+import style from './style.module'
 
 const CategoryInfo = ({ data, formik, isEditable }) => {
     const theme = useTheme()
@@ -64,22 +69,17 @@ const CategoryInfo = ({ data, formik, isEditable }) => {
         })
         setTableData({ ...tableData, [category]: changeDisableData })
     }
+    const { themeMode } = getLayoutState()
 
     const renderInputTable = (category, keys) => {
         console.log('SELECT >> ', category, selectItems.current)
         return (
-            <Table size={'small'} border={1} sx={{ borderColor: 'divider' }}>
+            <Table size={'small'} sx={style.tableBox}>
                 <TableBody>
                     {keys.map(({ title, name, isDisable, isSelect }, index) => {
                         return (
                             <TableRow key={index}>
-                                <TableCell
-                                    component="th"
-                                    sx={{
-                                        backgroundColor: theme.palette.grey[100],
-                                        width: '8rem',
-                                    }}
-                                >
+                                <TableCell component="th" sx={{ width: '8rem' }}>
                                     {title}
                                 </TableCell>
                                 <TableCell>
@@ -135,9 +135,20 @@ const CategoryInfo = ({ data, formik, isEditable }) => {
             <Box>
                 {}
                 {category === 'evCharging' && (
-                    <Accordion>
+                    <Accordion sx={style.evCharging}>
                         <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-                            ev Charging
+                            {themeMode === 'light' ? (
+                                <img
+                                    src={EvStationIcon}
+                                    style={{ verticalAlign: 'middle', paddingRight: '4px' }}
+                                />
+                            ) : (
+                                <img
+                                    src={EvStationIconDark}
+                                    style={{ verticalAlign: 'middle', paddingRight: '4px' }}
+                                />
+                            )}
+                            EV Charging
                         </AccordionSummary>
                         <AccordionDetails>
                             <Typography>상태 정보</Typography>

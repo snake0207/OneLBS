@@ -32,6 +32,7 @@ const PasswordInput = ({ name, placeholder, formik, inputRule = null }) => {
                     type={isPasswordVisible ? 'text' : 'password'}
                     placeholder={placeholder}
                     helperText={formik.touched[name] && formik.errors[name]}
+                    sx={{ backgroundColor: 'form.main', borderRadius: '4px' }}
                     InputProps={{
                         endAdornment: (
                             <InputAdornment position="end">

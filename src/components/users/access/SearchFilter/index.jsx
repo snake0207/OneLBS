@@ -55,7 +55,12 @@ function SearchFilter({ onSearch }) {
                                 name={'permission'}
                                 formik={formik}
                                 items={getPermissionList()}
-                                sx={{ width: 200, height: 40 }}
+                                sx={{
+                                    width: 200,
+                                    height: 40,
+                                    backgroundColor: 'form.main',
+                                    borderRadius: '4px',
+                                }}
                             />
                         </TableCell>
                         <TableCell />

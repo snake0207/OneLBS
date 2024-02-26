@@ -10,13 +10,13 @@ const style = {
         fontSize: 11,
         fontWeight: 400,
         mt: 1,
-        color: 'text.gray',
+        color: 'text.main',
     },
     contentText: {
         fontSize: 13,
         fontWeight: 400,
         mb: '6px',
-        color: 'text.gray',
+        color: 'text.main',
     },
     labelText: {
         fontSize: 13,
@@ -27,7 +27,7 @@ const style = {
     linklText: {
         fontSize: 14,
         fontWeight: 400,
-        color: 'text.gray',
+        color: 'text.main',
         textDecoration: 'underline',
         textUnderlinePosition: 'under',
         p: '6px 0 0 0',

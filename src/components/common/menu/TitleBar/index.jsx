@@ -10,7 +10,7 @@ function TitleBar({ title }) {
                 <Box
                     display={'flex'}
                     sx={{
-                        backgroundColor: '#f5f5f5',
+                        backgroundColor: 'background.titleBar',
                         mb: '10px',
                         ml: '-10px',
                         height: '45px',
@@ -20,6 +20,9 @@ function TitleBar({ title }) {
                         top: '50px',
                         width: 'calc(100% - 57px)',
                         zIndex: 3,
+                        borderBottom: '1px solid',
+                        borderColor: 'table.viewBorderTh',
+                        color: 'text.darkgray',
                     }}
                 >
                     <Typography
@@ -31,7 +34,7 @@ function TitleBar({ title }) {
                             fontWeight: 600,
                         }}
                     >
-                        {title}
+                        aa {title}
                     </Typography>
                     <RouterBreadcrumbs />
                 </Box>
@@ -40,7 +43,7 @@ function TitleBar({ title }) {
                 <Box
                     display={'flex'}
                     sx={{
-                        backgroundColor: '#f5f5f5',
+                        backgroundColor: 'background.titleBar',
                         mb: '20px',
                         ml: '-24px',
                         height: '54px',
@@ -49,8 +52,10 @@ function TitleBar({ title }) {
                         position: 'fixed',
                         top: '60px',
                         width: '100%',
-                        borderBottom: '1px solid #D1D1D1',
                         zIndex: 3,
+                        color: 'text.main',
+                        borderBottom: '1px solid',
+                        borderColor: 'border.main',
                     }}
                 >
                     <Typography

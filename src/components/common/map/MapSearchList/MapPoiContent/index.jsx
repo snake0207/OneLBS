@@ -9,7 +9,14 @@ const MapPoiContent = ({ idx, name, address, isLast, selectedPoi, setSelectedPoi
     const { setHoveredPoi } = useMapActions()
     return (
         <>
-            <ListItem sx={{ padding: 0 }}>
+            <ListItem
+                sx={{
+                    padding: 0,
+                    '&:hover': {
+                        backgroundColor: 'primary.lightBlue',
+                    },
+                }}
+            >
                 <ListItemButton selected={idx === selectedPoi} onClick={() => setSelectedPoi(idx)}>
                     <ListItemText
                         onMouseOver={() => setHoveredPoi(idx)}
@@ -17,7 +24,12 @@ const MapPoiContent = ({ idx, name, address, isLast, selectedPoi, setSelectedPoi
                         primary={
                             <Typography
                                 variant={'h6'}
-                                sx={{ color: '#05141F', fontWeight: 600, fontSize: 18, mb: '4px' }}
+                                sx={{
+                                    color: 'text.main',
+                                    fontWeight: 600,
+                                    fontSize: 18,
+                                    mb: '4px',
+                                }}
                             >
                                 <img
                                     src={PointBlueIcon}
@@ -27,7 +39,7 @@ const MapPoiContent = ({ idx, name, address, isLast, selectedPoi, setSelectedPoi
                             </Typography>
                         }
                         secondary={
-                            <Typography sx={{ color: '#444444', fontWeight: 400, fontSize: 14 }}>
+                            <Typography sx={{ color: 'text.main', fontWeight: 400, fontSize: 14 }}>
                                 {address}
                             </Typography>
                         }

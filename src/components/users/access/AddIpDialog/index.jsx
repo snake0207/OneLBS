@@ -20,11 +20,14 @@ import t from '#/common/libs/trans'
 import TextInput from '#/components/common/input/TextInput'
 import { IpInput } from '#/components/common/input/IpInput'
 import { useEffect } from 'react'
-import DetailviewIconIcon from '#/assets/detailviewIcon.svg'
+import DetailviewIcon from '#/assets/detailviewIcon.svg'
+import DetailviewIconDark from '#/assets/detailviewIconDark.svg'
+import useLayoutStore from '#/store/useLayoutStore'
 
 import style from './style.module'
 
 function AddIpDialog({ user, open, onClose, onRegister }) {
+    const { themeMode } = useLayoutStore()
     const formik = useFormik({
         initialValues: {
             ip1: '',
@@ -51,26 +54,14 @@ function AddIpDialog({ user, open, onClose, onRegister }) {
     }, [open])
 
     return (
-        <Dialog open={open} onClose={onClose}>
-            <DialogTitle
-                sx={{
-                    display: 'flex',
-                    justifyContent: 'space-between',
-                    alignItems: 'center',
-                    fontSize: 16,
-                    backgroundColor: 'primary.lightBlue',
-                    borderRadius: 20,
-                    mt: 3.8,
-                    ml: 2.5,
-                    mr: 2.5,
-                    mb: 1.3,
-                    height: 42,
-                    pl: 1,
-                    pr: 1,
-                }}
-            >
+        <Dialog open={open} onClose={onClose} sx={style.dialogBox}>
+            <DialogTitle sx={style.title}>
                 <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-                    <img src={DetailviewIconIcon} style={{ width: '24px' }} />
+                    {themeMode === 'light' ? (
+                        <img src={DetailviewIcon} style={{ width: '24px' }} />
+                    ) : (
+                        <img src={DetailviewIconDark} />
+                    )}
                     {t('detail', 'users')}
                 </Box>
             </DialogTitle>
@@ -80,10 +71,10 @@ function AddIpDialog({ user, open, onClose, onRegister }) {
                 sx={{
                     position: 'absolute',
                     right: 24,
-                    top: 30,
+                    top: 32,
                 }}
             >
-                <CloseIcon />
+                <CloseIcon sx={style.close} />
             </IconButton>
             <DialogContent sx={{ pt: 0 }}>
                 <Table style={{ marginBottom: '20px' }} sx={style.tableBox}>

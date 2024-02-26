@@ -4,6 +4,7 @@ const style = {
     },
     tableBox: {
         width: '100%',
+        backgroundColor: 'table.td',
         th: {
             p: '6px 0px',
             color: 'white',
@@ -11,23 +12,20 @@ const style = {
             fontWeight: 500,
             textAlign: 'center',
             backgroundColor: '#009ACC',
-            borderLeft: '1px solid #33aed6',
+            borderLeft: '1px solid',
+            borderColor: 'table.borderTh',
             '&:first-of-type': { borderLeft: '0' },
         },
         td: {
-            color: '#05141F',
             p: '8px 10px',
-            border: '1px solid #d1d1d1',
+            border: '1px solid',
+            borderColor: 'table.border',
             '&:first-of-type': { borderLeft: '0' },
             '&:last-of-type': { borderRight: '0' },
-            select: {
-                p: '6px 0px',
-            },
         },
         tr: {
-            backgroundColor: '#FFF',
             '&:hover': {
-                backgroundColor: '#e6e7e9',
+                backgroundColor: 'table.hover',
             },
         },
     },

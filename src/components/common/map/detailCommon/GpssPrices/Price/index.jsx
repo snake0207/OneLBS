@@ -6,32 +6,13 @@ import { useState } from 'react'
 import FormikInput from '#/components/common/input/FormikInput/index.jsx'
 import t from '#/common/libs/trans.js'
 
+import style from './style.module'
+
 const Price = ({ dataType, formik, priceData, index }) => {
     // 데이터 수정
     const [isPriceSave, setIsPriceSave] = useState(false)
     return (
-        <Table
-            sx={{
-                th: {
-                    width: '130px',
-                    color: '#444444',
-                    fontWeight: 500,
-                    pt: '6px',
-                    pb: '6px',
-                    backgroundColor: '#e2e2e2',
-                    borderTop: '1px solid #d1d1d1',
-                    borderBottom: '1px solid #d1d1d1',
-                    textAlign: 'center',
-                },
-                td: {
-                    color: '#444444',
-                    fontWeight: 400,
-                    p: '6px 0px 6px 10px',
-                    textAlign: 'left',
-                    borderTop: '1px solid #d1d1d1',
-                },
-            }}
-        >
+        <Table sx={style.tableBox}>
             <TableHead>
                 <TableRow>
                     <TableCell>{t('price.price', 'gpss')}</TableCell>

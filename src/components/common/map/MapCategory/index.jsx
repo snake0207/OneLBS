@@ -24,7 +24,7 @@ const MapCategory = ({ categoryName, children }) => {
                 {children}
                 <Typography
                     sx={{
-                        fontSize: '16px',
+                        fontSize: '20px',
                         fontStyle: 'normal',
                         fontWeight: 400,
                         lineHeight: 'normal',

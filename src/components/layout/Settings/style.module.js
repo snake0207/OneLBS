@@ -3,8 +3,10 @@ const style = {
         mt: '26px',
         '& .MuiPaper-root': {
             boxShadow: 'none',
-            border: '1px solid #888',
+            border: '1px solid',
+            borderColor: 'border.main',
             borderRadius: '8px',
+            backgroundColor: 'dialog.main',
             '& .MuiFormLabel-root': {
                 color: 'text.gray',
                 fontWeight: 500,

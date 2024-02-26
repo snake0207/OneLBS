@@ -102,6 +102,7 @@ const ConfirmEmailForm = ({ formik }) => {
                     size="small"
                     type="text"
                     placeholder={t('placeholder.confirm_email', 'auth')}
+                    sx={{ backgroundColor: 'form.main', borderRadius: '4px' }}
                     InputProps={{
                         endAdornment: (
                             <InputAdornment position="end" sx={{ gap: 2 }}>

@@ -27,7 +27,12 @@ const IpInputMain = ({ children, ipName1, ipName2, ipName3, ipName4, formik }) =
                     error={formik.touched[ipName1] && !!formik.errors[ipName1]}
                     size="small"
                     type="text"
-                    sx={{ width: 60, minWidth: 60 }}
+                    sx={{
+                        width: 60,
+                        minWidth: 60,
+                        backgroundColor: 'form.main',
+                        borderRadius: '4px',
+                    }}
                 />
                 <Typography sx={{ fontWeight: 700 }}>.</Typography>
                 <TextField
@@ -38,7 +43,12 @@ const IpInputMain = ({ children, ipName1, ipName2, ipName3, ipName4, formik }) =
                     error={formik.touched[ipName2] && !!formik.errors[ipName2]}
                     size="small"
                     type="text"
-                    sx={{ width: 60, minWidth: 60 }}
+                    sx={{
+                        width: 60,
+                        minWidth: 60,
+                        backgroundColor: 'form.main',
+                        borderRadius: '4px',
+                    }}
                 />
                 <Typography sx={{ fontWeight: 700 }}>.</Typography>
                 <TextField
@@ -49,7 +59,12 @@ const IpInputMain = ({ children, ipName1, ipName2, ipName3, ipName4, formik }) =
                     error={formik.touched[ipName3] && !!formik.errors[ipName3]}
                     size="small"
                     type="text"
-                    sx={{ width: 60, minWidth: 60 }}
+                    sx={{
+                        width: 60,
+                        minWidth: 60,
+                        backgroundColor: 'form.main',
+                        borderRadius: '4px',
+                    }}
                 />
                 <Typography sx={{ fontWeight: 700 }}>.</Typography>
                 <TextField
@@ -60,7 +75,12 @@ const IpInputMain = ({ children, ipName1, ipName2, ipName3, ipName4, formik }) =
                     error={formik.touched[ipName4] && !!formik.errors[ipName4]}
                     size="small"
                     type="text"
-                    sx={{ width: 60, minWidth: 60 }}
+                    sx={{
+                        width: 60,
+                        minWidth: 60,
+                        backgroundColor: 'form.main',
+                        borderRadius: '4px',
+                    }}
                 />
                 {children}
             </Box>
@@ -91,6 +111,7 @@ const IpDescriptionInput = ({ formik, ipDescName }) => {
             size="small"
             type="text"
             fullWidth
+            sx={{ backgroundColor: 'form.main', borderRadius: '4px' }}
         />
     )
 }

@@ -16,7 +16,15 @@ function Select({ name, formik, value, items, label, onChange, ...props }) {
     }
 
     return (
-        <FormControl>
+        <FormControl
+            sx={{
+                '& .MuiInputBase-root': {
+                    '& .MuiSvgIcon-root': {
+                        color: 'text.lightblue',
+                    },
+                },
+            }}
+        >
             <InputLabel id="select-label">{label}</InputLabel>
             <SelectBase
                 id="select"
@@ -25,6 +33,11 @@ function Select({ name, formik, value, items, label, onChange, ...props }) {
                 value={formik ? parseNameByPath(formik.values, name) : value}
                 onChange={handleChange}
                 IconComponent={KeyboardArrowDownRoundedIcon}
+                sx={{
+                    backgroundColor: 'form.main',
+                    borderRadius: '4px',
+                    opacity: '95%',
+                }}
                 {...props}
             >
                 {items.map((item) => (

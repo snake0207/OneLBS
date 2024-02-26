@@ -44,7 +44,7 @@ function RouterBreadcrumbs() {
                 underline="hover"
                 color="inherit"
                 to="/"
-                sx={{ fontSize: '13px', color: '#888' }}
+                sx={{ fontSize: '13px', color: 'text.gray' }}
             >
                 {t('home')}
             </LinkRouter>
@@ -56,7 +56,7 @@ function RouterBreadcrumbs() {
                     <Typography
                         color="text.primary"
                         key={to}
-                        sx={{ fontSize: '13px', color: '#888' }}
+                        sx={{ fontSize: '13px', color: 'text.gray' }}
                     >
                         {breadcrumbNameMap()[to]}
                     </Typography>
@@ -66,7 +66,7 @@ function RouterBreadcrumbs() {
                         color="inherit"
                         to={to}
                         key={to}
-                        sx={{ fontSize: '13px', color: '#888' }}
+                        sx={{ fontSize: '13px', color: 'text.gray' }}
                     >
                         {breadcrumbNameMap()[to]}
                     </LinkRouter>
@@ -74,7 +74,7 @@ function RouterBreadcrumbs() {
                     <Typography
                         color="text.primary"
                         key={to}
-                        sx={{ fontSize: '13px', color: '#888' }}
+                        sx={{ fontSize: '13px', color: 'text.gray' }}
                     >
                         {breadcrumbNameMap()[to]}
                     </Typography>

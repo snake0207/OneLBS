@@ -52,14 +52,19 @@ function SearchFilter({ onSearch }) {
                                 name={'permission'}
                                 formik={formik}
                                 items={getPermissionList()}
-                                sx={{ width: 200, height: 40 }}
+                                sx={{
+                                    width: 200,
+                                    height: 40,
+                                    backgroundColor: 'form.main',
+                                    borderRadius: '4px',
+                                }}
                             />
                         </TableCell>
                         <TableCell>{t('period', 'users')}</TableCell>
                         <TableCell>
                             <Stack direction="row" spacing={1}>
                                 <DatePickerInput name="start_date" formik={formik} />
-                                <Box> ~ </Box>
+                                <Box sx={style.inputDash}> ~ </Box>
                                 <DatePickerInput name="end_date" formik={formik} />
                             </Stack>
                         </TableCell>

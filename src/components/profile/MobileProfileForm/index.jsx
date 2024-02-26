@@ -12,7 +12,9 @@ import * as yup from 'yup'
 import t from '#/common/libs/trans'
 import user from '#/mock/data/user.json'
 import IPManage from './IPManage'
-import TitleIcon from '#/assets/title_profile_Icon.svg'
+import TitleIcon from '#/assets/userIcon.svg'
+import TitleIconDark from '#/assets/userIconDark.svg'
+import useLayoutStore from '#/store/useLayoutStore'
 
 import style from './style.module'
 
@@ -68,6 +70,7 @@ function MobileProfileForm() {
             navigate('/login')
         })
     }
+    const { themeMode } = useLayoutStore()
     return (
         <Box>
             <Icon
@@ -78,7 +81,11 @@ function MobileProfileForm() {
                     zIndex: '4',
                 }}
             >
-                <img src={TitleIcon} />
+                {themeMode === 'light' ? (
+                    <img src={TitleIcon} style={{ display: 'flex', width: '24px' }} />
+                ) : (
+                    <img src={TitleIconDark} style={{ display: 'flex', width: '24px' }} />
+                )}
             </Icon>
             <TitleBar title={t('profile')} />
             <Typography sx={{ color: 'text.darkgray', fontSize: 18, fontWeight: 500, mb: '18px' }}>

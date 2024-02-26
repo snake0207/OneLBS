@@ -6,8 +6,10 @@ import { mapSearchSchema } from '#/contents/validationSchema.js'
 import t from '#/common/libs/trans.js'
 import { usePopupActions } from '#/store/usePopupStore.js'
 import SearchIcon from '#/assets/searchIcon.svg'
+import SearchIconDark from '#/assets/searchIconLightDark.svg'
 import KeyboardArrowDownRoundedIcon from '@mui/icons-material/KeyboardArrowDownRounded'
 
+import { getLayoutState } from '#/store/useLayoutStore'
 import style from './style.module'
 
 const countryCodeArr = [
@@ -284,6 +286,7 @@ const MapSearch = () => {
             }
         },
     })
+    const { themeMode } = getLayoutState()
 
     return (
         <Box
@@ -294,8 +297,9 @@ const MapSearch = () => {
                 padding: '16px',
                 margin: '10px 10px 6px 10px',
                 borderRadius: '8px',
-                background: '#EFEFEF',
+                backgroundColor: 'dialog.main',
                 boxShadow: '0 3px 14px rgb(0 0 0 / 24%)',
+                opacity: '95%',
             }}
         >
             <Box>
@@ -316,7 +320,15 @@ const MapSearch = () => {
                             options={countryCodeArr}
                             size="small"
                             name={'country'}
-                            sx={{ borderRadius: '8px', background: 'white' }}
+                            sx={{
+                                backgroundColor: 'form.main',
+                                borderRadius: '4px',
+                                '& .MuiFormControl-root': {
+                                    '& .MuiFormHelperText-root': {
+                                        backgroundColor: 'dialog.main',
+                                    },
+                                },
+                            }}
                             onChange={(event, value) => {
                                 formik.setFieldValue(
                                     'country',
@@ -333,7 +345,6 @@ const MapSearch = () => {
                                     sx={{ m: 0 }}
                                     FormHelperTextProps={{
                                         style: {
-                                            backgroundColor: '#EFEFEF',
                                             margin: '0',
                                             paddingLeft: '14px',
                                             paddingTop: '4px',
@@ -349,7 +360,11 @@ const MapSearch = () => {
                                         endAdornment: (
                                             <InputAdornment position="end">
                                                 <KeyboardArrowDownRoundedIcon
-                                                    sx={{ position: 'absolute', right: '8px' }}
+                                                    sx={{
+                                                        position: 'absolute',
+                                                        right: '8px',
+                                                        color: 'text.lightblue',
+                                                    }}
                                                 />
                                             </InputAdornment>
                                         ),
@@ -379,7 +394,8 @@ const MapSearch = () => {
                             error={formik.touched.lat && !!formik.errors.lat}
                             sx={{
                                 input: {
-                                    background: 'white',
+                                    backgroundColor: 'form.main',
+                                    borderRadius: '4px',
                                 },
                             }}
                             helperText={
@@ -408,7 +424,8 @@ const MapSearch = () => {
                             error={formik.touched.lon && !!formik.errors.lon}
                             sx={{
                                 input: {
-                                    background: 'white',
+                                    backgroundColor: 'form.main',
+                                    borderRadius: '4px',
                                 },
                             }}
                             helperText={
@@ -444,13 +461,20 @@ const MapSearch = () => {
                                     {...params}
                                     placeholder={t('select', 'common')}
                                     name={'language'}
-                                    sx={{ borderRadius: '8px', background: 'white' }}
+                                    sx={{
+                                        backgroundColor: 'form.main',
+                                        borderRadius: '4px',
+                                    }}
                                     InputProps={{
                                         ...params.InputProps,
                                         endAdornment: (
                                             <InputAdornment position="end">
                                                 <KeyboardArrowDownRoundedIcon
-                                                    sx={{ position: 'absolute', right: '8px' }}
+                                                    sx={{
+                                                        position: 'absolute',
+                                                        right: '8px',
+                                                        color: 'text.lightblue',
+                                                    }}
                                                 />
                                             </InputAdornment>
                                         ),
@@ -487,13 +511,20 @@ const MapSearch = () => {
                                     {...params}
                                     placeholder={t('select', 'common')}
                                     name={'category'}
-                                    sx={{ borderRadius: '8px', background: 'white' }}
+                                    sx={{
+                                        backgroundColor: 'form.main',
+                                        borderRadius: '4px',
+                                    }}
                                     InputProps={{
                                         ...params.InputProps,
                                         endAdornment: (
                                             <InputAdornment position="end">
                                                 <KeyboardArrowDownRoundedIcon
-                                                    sx={{ position: 'absolute', right: '8px' }}
+                                                    sx={{
+                                                        position: 'absolute',
+                                                        right: '8px',
+                                                        color: 'text.lightblue',
+                                                    }}
                                                 />
                                             </InputAdornment>
                                         ),
@@ -506,14 +537,25 @@ const MapSearch = () => {
                         <TextField
                             placeholder={t('input_keyword', 'common')}
                             size="small"
-                            sx={{ width: '100%', background: 'white' }}
+                            sx={{
+                                width: '100%',
+                                backgroundColor: 'form.main',
+                                borderRadius: '4px',
+                            }}
                             name={'searchValue'}
                             onChange={formik.handleChange}
                             value={formik.values.searchValue}
                             InputProps={{
                                 endAdornment: (
                                     <InputAdornment position="end">
-                                        <img src={SearchIcon} onClick={formik.handleSubmit} />
+                                        {themeMode === 'light' ? (
+                                            <img src={SearchIcon} onClick={formik.handleSubmit} />
+                                        ) : (
+                                            <img
+                                                src={SearchIconDark}
+                                                onClick={formik.handleSubmit}
+                                            />
+                                        )}
                                     </InputAdornment>
                                 ),
                             }}

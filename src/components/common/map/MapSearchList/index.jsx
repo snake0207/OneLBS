@@ -38,7 +38,7 @@ const MapSearchList = ({ searchResultArr, selectedPoi, setSelectedPoi }) => {
             sx={{
                 width: '350px',
                 margin: '10px',
-                background: '#ffffff',
+                backgroundColor: 'dialog.main',
                 borderRadius: '8px',
                 minHeight: '130px',
                 maxHeight: '550px',
@@ -47,6 +47,7 @@ const MapSearchList = ({ searchResultArr, selectedPoi, setSelectedPoi }) => {
                 alignItems: isResultNon ? 'center' : '',
                 overflow: 'auto',
                 boxShadow: '0 3px 14px rgb(0 0 0 / 24%)',
+                opacity: '95%',
             }}
             ref={poiList}
         >
@@ -79,7 +80,7 @@ const MapSearchList = ({ searchResultArr, selectedPoi, setSelectedPoi }) => {
                                 display: isTopBtnVisible ? 'flex' : 'none',
                                 justifyContent: 'center',
                                 alignItems: 'center',
-                                background: '#05141F',
+                                backgroundColor: 'primary.darkBlue',
                                 cursor: 'pointer',
                             }}
                             onClick={scrollToTop}

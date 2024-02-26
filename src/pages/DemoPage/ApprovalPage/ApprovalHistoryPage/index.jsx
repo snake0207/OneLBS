@@ -94,7 +94,7 @@ const ApprovalHistoryPage = () => {
                     p: '0 !important',
                     borderRadius: '8px',
                     maxWidth: 'calc(100% - 0px) !important',
-                    backgroundColor: 'grey.lightgray',
+                    backgroundColor: 'grey.search',
                     boxShadow: '0 3px 14px rgb(0 0 0 / 24%)',
                 }}
             >
@@ -109,7 +109,7 @@ const ApprovalHistoryPage = () => {
                     width: '100%',
                     borderRadius: '8px',
                     p: '18px 20px',
-                    backgroundColor: 'white',
+                    backgroundColor: 'background.contents',
                     boxShadow: '0 3px 14px rgb(0 0 0 / 24%)',
                 }}
             >

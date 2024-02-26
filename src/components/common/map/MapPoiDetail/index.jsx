@@ -13,9 +13,13 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
 import t from '#/common/libs/trans.js'
 import { useEffect, useState } from 'react'
 import PointBlueIcon from '#/assets/pointBlueIcon.svg'
-import LanguageIcon from '#/assets/languageIcon.svg'
+import LanguageIcon from '#/assets/languagesIcon.svg'
+import LanguageIconDark from '#/assets/languagesIconDark.svg'
 import GpsIcon from '#/assets/gpsIcon.svg'
+import GpsIconDark from '#/assets/gpsIconDark.svg'
 import EvStationIcon from '#/assets/evStationIcon.svg'
+import EvStationIconDark from '#/assets/evStationIconDark.svg'
+import { getLayoutState } from '#/store/useLayoutStore'
 
 const MapPoiDetail = ({ selectedPoi, setSelectedPoi, poiData }) => {
     const [isOpen, setIsOpen] = useState(false)
@@ -28,6 +32,7 @@ const MapPoiDetail = ({ selectedPoi, setSelectedPoi, poiData }) => {
         setIsOpen(false)
         setSelectedPoi(null)
     }
+    const { themeMode } = getLayoutState()
     return (
         isOpen && (
             <Box sx={{ display: 'flex', margin: '10px' }}>
@@ -52,7 +57,11 @@ const MapPoiDetail = ({ selectedPoi, setSelectedPoi, poiData }) => {
                     <Box sx={{ marginTop: '8px', marginBottom: '16px' }}>
                         <Box sx={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
                             <Box sx={{ paddingTop: '5px' }}>
-                                <img src={LanguageIcon} />
+                                {themeMode === 'light' ? (
+                                    <img src={LanguageIcon} />
+                                ) : (
+                                    <img src={LanguageIconDark} />
+                                )}
                             </Box>
                             <Box>
                                 <Typography>10036 New York, Manhattan, United States</Typography>
@@ -61,7 +70,11 @@ const MapPoiDetail = ({ selectedPoi, setSelectedPoi, poiData }) => {
                         <Divider sx={{ marginY: '5px' }} />
                         <Box sx={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
                             <Box sx={{ paddingTop: '5px' }}>
-                                <img src={GpsIcon} />
+                                {themeMode === 'light' ? (
+                                    <img src={GpsIcon} />
+                                ) : (
+                                    <img src={GpsIconDark} />
+                                )}
                             </Box>
                             <Box>
                                 <Typography>40.758077</Typography>
@@ -70,7 +83,11 @@ const MapPoiDetail = ({ selectedPoi, setSelectedPoi, poiData }) => {
                         <Divider sx={{ marginY: '5px' }} />
                         <Box sx={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
                             <Box sx={{ paddingTop: '5px' }}>
-                                <img src={GpsIcon} />
+                                {themeMode === 'light' ? (
+                                    <img src={GpsIcon} />
+                                ) : (
+                                    <img src={GpsIconDark} />
+                                )}
                             </Box>
                             <Box>
                                 <Typography>-73.985480</Typography>
@@ -89,10 +106,17 @@ const MapPoiDetail = ({ selectedPoi, setSelectedPoi, poiData }) => {
                                 expandIcon={<ExpandMoreIcon />}
                                 sx={{ padding: '0px' }}
                             >
-                                <img
-                                    src={EvStationIcon}
-                                    style={{ verticalAlign: 'middle', paddingRight: '4px' }}
-                                />{' '}
+                                {themeMode === 'light' ? (
+                                    <img
+                                        src={EvStationIcon}
+                                        style={{ verticalAlign: 'middle', paddingRight: '4px' }}
+                                    />
+                                ) : (
+                                    <img
+                                        src={EvStationIconDark}
+                                        style={{ verticalAlign: 'middle', paddingRight: '4px' }}
+                                    />
+                                )}{' '}
                                 EV Charging
                             </AccordionSummary>
                             <AccordionDetails sx={{ padding: 0 }}>
@@ -112,7 +136,7 @@ const MapPoiDetail = ({ selectedPoi, setSelectedPoi, poiData }) => {
                     }}
                     onClick={handleClickDetailClose}
                 >
-                    <CloseIcon />
+                    <CloseIcon sx={{ color: 'background.close' }} />
                 </IconButton>
             </Box>
         )

@@ -5,7 +5,7 @@ const style = {
         width: '100%',
         boxShadow: 'none',
         border: 0,
-        backgroundColor: '#EFEFEF',
+        backgroundColor: 'background.gray',
         borderRadius: '0 0 8px 8px',
     },
     cardTitle: {
@@ -24,7 +24,7 @@ const style = {
         display: 'flex',
         flexDirection: 'column',
         p: '8px 19px',
-        backgroundColor: '#EFEFEF',
+        backgroundColor: 'background.gray',
         boxShadow: 'none',
         borderRadius: '0 0 8px 8px',
     },
@@ -51,7 +51,7 @@ const style = {
         alignItems: 'center',
         justifyContent: 'center',
         width: '40px',
-        '&:img': {
+        '& .MuiIcon-root': {
             width: '30px',
             height: '30px',
         },

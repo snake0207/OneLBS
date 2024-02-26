@@ -7,7 +7,12 @@ import { useMemo, useRef } from 'react'
 import Headline from '#/components/approval/Detail/Headline/index.jsx'
 import dummyData from '#/pages/DemoPage/ApprovalPage/detailData.json'
 import ArrowBack from '#/assets/arrowBackIos.svg'
+import ArrowBackDark from '#/assets/arrowBackIosDark.svg'
 import ArrowForward from '#/assets/arrowForwardIos.svg'
+import ArrowForwardDark from '#/assets/ArrowForwardDark.svg'
+import ArrowRedBack from '#/assets/arrowRedBack.svg'
+import ArrowRedForward from '#/assets/arrowRedForward.svg'
+import { getLayoutState } from '#/store/useLayoutStore'
 
 import style from './style.module'
 
@@ -25,7 +30,7 @@ const ApprovalLineContent = ({ title, color, process, content }) => {
                     <Typography sx={{ fontSize: 14, fontWeight: 500 }} variant="body2">
                         {content.team}
                     </Typography>
-                    <Typography sx={{ fontSize: 18, fontWeight: 600, color: '#05141F' }}>
+                    <Typography sx={{ fontSize: 18, fontWeight: 600, color: 'tdxt.darkgray' }}>
                         {content.name}
                     </Typography>
                     <Typography sx={{ fontSize: 14 }} variant="caption">
@@ -48,6 +53,7 @@ const ApprovalLine = ({ status, content }) => {
         review: false,
         approval: false,
     })
+    const { themeMode } = getLayoutState()
 
     useMemo(() => {
         const active = theme.palette.primary.main
@@ -94,11 +100,19 @@ const ApprovalLine = ({ status, content }) => {
                 </Grid>
                 {isReject.current.review ? (
                     <Box sx={style.ArrowIos}>
-                        <img src={ArrowForward} width={30} height={30} />
+                        {themeMode === 'light' ? (
+                            <img src={ArrowForwardDark} width={30} height={30} />
+                        ) : (
+                            <img src={ArrowForwardDark} width={30} height={30} />
+                        )}
                     </Box>
                 ) : (
                     <Box sx={style.ArrowIos}>
-                        <img src={ArrowForward} width={30} height={30} />
+                        {themeMode === 'light' ? (
+                            <img src={ArrowForward} width={30} height={30} />
+                        ) : (
+                            <img src={ArrowForwardDark} width={30} height={30} />
+                        )}
                     </Box>
                 )}
                 <Grid xs={4}>
@@ -113,11 +127,15 @@ const ApprovalLine = ({ status, content }) => {
                 </Grid>
                 {isReject.current.approval ? (
                     <Box sx={style.ArrowIos}>
-                        <img src={ArrowBack} width={30} height={30} />
+                        <img src={ArrowRedBack} width={30} height={30} />
                     </Box>
                 ) : (
                     <Box sx={style.ArrowIos}>
-                        <img src={ArrowForward} width={30} height={30} />
+                        {themeMode === 'light' ? (
+                            <img src={ArrowBack} width={30} height={30} />
+                        ) : (
+                            <img src={ArrowBackDark} width={30} height={30} />
+                        )}
                     </Box>
                 )}
                 <Grid xs={4}>

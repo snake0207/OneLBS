@@ -2,10 +2,22 @@ import { DatePicker, LocalizationProvider } from '@mui/x-date-pickers'
 import { useState } from 'react'
 import dayjs from 'dayjs'
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
+import { Box } from '@mui/material'
 import DatePickerIcon from '#/assets/datePickerIcon.svg'
+import DatePickerIconDark from '#/assets/datePickerIconDark.svg'
+import useLayoutStore from '#/store/useLayoutStore'
 
 function MuiIcon() {
-    return <img src={DatePickerIcon} />
+    const { themeMode } = useLayoutStore()
+    return (
+        <Box sx={{}}>
+            {themeMode === 'light' ? (
+                <img src={DatePickerIcon} />
+            ) : (
+                <img src={DatePickerIconDark} />
+            )}
+        </Box>
+    )
 }
 
 const DatePickerInput = ({ name, formik, disabled = false }) => {
@@ -25,7 +37,7 @@ const DatePickerInput = ({ name, formik, disabled = false }) => {
                 onError={(newError) => setDateError(newError)}
                 format="YYYY-MM-DD"
                 disabled={disabled}
-                sx={{ width: '100%' }}
+                sx={{ width: '100%', backgroundColor: 'form.main', borderRadius: '4px' }}
                 slots={{ openPickerIcon: MuiIcon }}
                 slotProps={{
                     field: { clearable: true, onClear: () => handleChangeDate(null) },

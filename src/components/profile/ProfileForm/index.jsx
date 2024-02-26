@@ -81,11 +81,11 @@ function ProfileForm() {
             <TitleBar title={t('profile')} />
             <Box sx={style.contentBox}>
                 <Typography
-                    sx={{ fontSize: '16px', fontWeight: 500, color: '#05141F', mb: '14px' }}
+                    sx={{ fontSize: '16px', fontWeight: 500, color: 'text.darkgray', mb: '14px' }}
                 >
                     {t('default_info', 'profile')}
                 </Typography>
-                <Typography fontSize="small">
+                <Typography fontSize="small" sx={{ color: 'text.darkgray' }}>
                     <span style={{ color: 'red', fontSize: '13px' }}>*</span>
                     {t('required_field', 'profile')}
                 </Typography>

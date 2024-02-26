@@ -26,7 +26,7 @@ const TotalCount = ({ type, counts }) => {
                 sx={{
                     display: 'inline-flex',
                     fontSize: '13px',
-                    color: '#444',
+                    color: 'text.main',
                     marginBottom: '6px',
                 }}
             >
@@ -36,7 +36,7 @@ const TotalCount = ({ type, counts }) => {
             <Typography
                 variant={'body2'}
                 component={'span'}
-                sx={{ fontSize: '13px', color: '#444', marginBottom: '6px' }}
+                sx={{ fontSize: '13px', color: 'text.main', marginBottom: '6px' }}
             >
                 ( {renderCountText()} )
             </Typography>

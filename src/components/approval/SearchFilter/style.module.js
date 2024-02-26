@@ -1,5 +1,3 @@
-import { MicNoneOutlined } from '@mui/icons-material'
-
 const style = {
     searchBox: {
         width: '100%',
@@ -9,6 +7,7 @@ const style = {
     labelText: {
         fontSize: 14,
         fontWeight: 500,
+        color: 'text.darkgray',
         wordBreak: 'break-word',
         fontFamily: 'Noto Sans KR,sans-serif',
     },
@@ -29,14 +28,14 @@ const style = {
         height: '40px',
         minWidth: 'auto',
         ml: '4px',
-        backgroundColor: '#002C5F',
+        backgroundColor: 'button.main',
         padding: '6px',
     },
     ResetButton: {
         width: '40px',
         height: '40px',
         minWidth: 'auto',
-        backgroundColor: '#002C5F',
+        backgroundColor: 'button.main',
         padding: '6px',
     },
 }

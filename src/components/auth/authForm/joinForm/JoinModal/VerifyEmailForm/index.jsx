@@ -6,8 +6,6 @@ import { usePostEmailVerify } from '#/hooks/queries/auth'
 
 import t from '#/common/libs/trans'
 
-import style from './style.module'
-
 // 인증 메일 전송
 const VerifyEmailForm = ({ formik }) => {
     const { mutate } = usePostEmailVerify()
@@ -73,6 +71,7 @@ const VerifyEmailForm = ({ formik }) => {
                     size="small"
                     type="text"
                     placeholder={t('placeholder.email', 'auth')}
+                    sx={{ backgroundColor: 'form.main', borderRadius: '4px' }}
                     InputProps={{
                         endAdornment: (
                             <InputAdornment position="end">

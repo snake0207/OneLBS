@@ -4,6 +4,7 @@ const style = {
         boxShadow: 'none',
         borderBottom: '1px solid',
         borderColor: 'border.main',
+        backgroundImage: 'none',
         '& .MuiContainer-root': {
             maxWidth: '100%',
         },

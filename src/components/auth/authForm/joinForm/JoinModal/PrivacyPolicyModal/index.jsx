@@ -7,10 +7,13 @@ import {
     IconButton,
     Slide,
     Typography,
+    Icon,
 } from '@mui/material'
 import { isMobile } from 'react-device-detect'
 import CloseIcon from '@mui/icons-material/Close'
-import AccountCircleIcon from '@mui/icons-material/AccountCircle'
+import joinIcon from '#/assets/joinIcon.svg'
+import joinIconDark from '#/assets/joinIconDark.svg'
+import style from './style.module'
 
 import t from '#/common/libs/trans'
 import useLayoutStore from '#/store/useLayoutStore'
@@ -28,40 +31,25 @@ const PrivacyPolicyModal = ({ isOpen, onClose }) => {
             fullScreen={isMobile}
             TransitionComponent={isMobile ? Transition : undefined}
             maxWidth="sm"
+            sx={style.dialogBox}
         >
-            <DialogTitle
-                sx={{
-                    display: 'flex',
-                    justifyContent: 'space-between',
-                    alignItems: 'center',
-                    fontSize: 16,
-                    backgroundColor: 'primary.lightBlue',
-                    borderRadius: 20,
-                    mt: 3.8,
-                    ml: 2.5,
-                    mr: 2.5,
-                    mb: 1,
-                    height: 42,
-                    pl: 1.5,
-                    pr: 1,
-                }}
-            >
-                {themeMode === 'light' ? <AccountCircleIcon /> : <AccountCircleIcon />}
-                {t('collect_personal_information', 'auth')}
+            <DialogTitle sx={style.title}>
+                <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+                    <Icon>
+                        {themeMode === 'light' ? (
+                            <img src={joinIcon} style={{ display: 'flex', width: '24px' }} />
+                        ) : (
+                            <img src={joinIconDark} style={{ display: 'flex', width: '24px' }} />
+                        )}
+                    </Icon>
+                    {t('collect_personal_information', 'auth')}
+                </Box>
                 <IconButton onClick={onClose}>
-                    <CloseIcon />
+                    <CloseIcon sx={style.close} />
                 </IconButton>
             </DialogTitle>
             <DialogContent>
-                <Box
-                    sx={{
-                        width: '400px',
-                        p: '20px',
-                        mb: '5px',
-                        borderRadius: '8px',
-                        border: '1px solid #d7d7d7',
-                    }}
-                >
+                <Box sx={style.content}>
                     <Box>
                         <Typography variant="h6" sx={{ fontSize: 15, mb: 0.5 }}>
                             1. 개인정보의 수집, 이용 항목 및 목적

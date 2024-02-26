@@ -51,7 +51,7 @@ const MapGpssDetail = ({ selectedPoi, setSelectedPoi, poiData }) => {
                     }}
                     onClick={handleClickDetailClose}
                 >
-                    <CloseIcon />
+                    <CloseIcon sx={{ color: 'background.close' }} />
                 </IconButton>
             </Box>
         )

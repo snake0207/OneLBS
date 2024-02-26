@@ -6,7 +6,13 @@ import useLayoutStore from '#/store/useLayoutStore'
 
 import t from '#/common/libs/trans'
 import Dropdown from '#/components/common/button/Dropdown'
-import { Typography } from '@mui/material'
+import { Typography, Icon } from '@mui/material'
+
+import { BrowserView, MobileView } from 'react-device-detect'
+import LogoIcon from '#/assets/loginLogoIcon.svg'
+import LogoIconDark from '#/assets/loginLogoIconDark.svg'
+import LanguagesIcon from '#/assets/languagesIcon.svg'
+import LanguagesIconDark from '#/assets/languagesIconDark.svg'
 
 const languages = [
     { key: 'kr', label: t('KOR'), value: 'kr' },
@@ -14,7 +20,7 @@ const languages = [
 ]
 
 function AuthHeader() {
-    const { language, setLanguage } = useLayoutStore()
+    const { language, setLanguage, themeMode } = useLayoutStore()
 
     const handleSelectLangMenu = (item) => {
         console.log(item)
@@ -27,7 +33,7 @@ function AuthHeader() {
 
     return (
         <AppBar position="absolute">
-            <Container maxWidth="xl">
+            <Container maxWidth="xl" sx={{ minHeight: '60px', height: '60px' }}>
                 <Toolbar disableGutters>
                     <Box
                         sx={{
@@ -37,14 +43,78 @@ function AuthHeader() {
                             flexGrow: 1,
                         }}
                     >
-                        <Typography>Logo</Typography>
-                        <Dropdown
-                            items={languages}
-                            selectable={true}
-                            onSelect={handleSelectLangMenu}
-                        >
-                            {findLanguage(language)?.label}
-                        </Dropdown>
+                        <Typography sx={{ pt: '5px' }}>
+                            {themeMode === 'light' ? (
+                                <img src={LogoIcon} />
+                            ) : (
+                                <img src={LogoIconDark} />
+                            )}
+                        </Typography>
+                        <BrowserView>
+                            <Dropdown
+                                items={languages}
+                                selectable={true}
+                                onSelect={handleSelectLangMenu}
+                                sx={{
+                                    color: 'text.darkgray',
+                                    backgroundColor: 'transparent',
+                                    fontSize: 13,
+                                    fontWeight: 400,
+                                    p: '6px 24px 6px 12px',
+                                    '&:hover': {
+                                        backgroundColor: 'transparent',
+                                    },
+                                }}
+                            >
+                                <Icon
+                                    sx={{
+                                        display: 'flex',
+                                        width: '21px',
+                                        height: '20px',
+                                        mr: '8px',
+                                    }}
+                                >
+                                    {themeMode === 'light' ? (
+                                        <img src={LanguagesIcon} />
+                                    ) : (
+                                        <img src={LanguagesIconDark} />
+                                    )}
+                                </Icon>
+                                {findLanguage(language)?.label}
+                            </Dropdown>
+                        </BrowserView>
+                        <MobileView>
+                            <Dropdown
+                                items={languages}
+                                onSelect={handleSelectLangMenu}
+                                sx={{
+                                    color: 'text.darkgray',
+                                    backgroundColor: 'transparent',
+                                    minWidth: 'auto',
+                                    p: '6px 12px',
+                                    '&:hover': {
+                                        backgroundColor: 'transparent',
+                                    },
+                                    '& .MuiButton-endIcon': {
+                                        display: 'none',
+                                    },
+                                }}
+                            >
+                                <Icon
+                                    sx={{
+                                        display: 'flex',
+                                        width: '21px',
+                                        height: '20px',
+                                    }}
+                                >
+                                    {themeMode === 'light' ? (
+                                        <img src={LanguagesIcon} />
+                                    ) : (
+                                        <img src={LanguagesIconDark} />
+                                    )}
+                                </Icon>
+                            </Dropdown>
+                        </MobileView>
                     </Box>
                 </Toolbar>
             </Container>

@@ -32,6 +32,11 @@ function LoginPage() {
                 alignItems: 'center',
                 justifyContent: 'center',
                 height: '100vh',
+                '@media (max-width:1024px)': {
+                    alignItems: 'flex-start',
+                    mt: '120px',
+                    height: 'calc(100vh - 120px);',
+                },
             }}
         >
             <BrowserView>

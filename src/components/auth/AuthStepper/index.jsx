@@ -1,26 +1,32 @@
 import { useAuthStepState } from '#/store/useAuthStepStore'
 import { Stack, Box, Typography, Icon } from '@mui/material'
-import infoIcon from '#/assets/stepcomponent1.svg'
-import certIcon from '#/assets/stepcomponent2.svg'
+import InfoIcon from '#/assets/stepcomponent1.svg'
+import InfoIconDark from '#/assets/stepcomponent1Dark.svg'
+import CertIcon from '#/assets/stepcomponent2.svg'
+import CertIconDark from '#/assets/stepcomponent2Dark.svg'
 import LoginIcon from '#/assets/stepcomponent3.svg'
-import arrwoIcon from '#/assets/stepArrow.svg'
+import LoginIconDark from '#/assets/stepcomponent3Dark.svg'
+import ArrwoIcon from '#/assets/stepArrow.svg'
+import ArrwoIconDark from '#/assets/stepArrowDark.svg'
+import { getLayoutState } from '#/store/useLayoutStore'
 
 import style from './style.module'
 
 const AuthStepper = () => {
     const authStep = useAuthStepState()
+    const { themeMode } = getLayoutState()
     return (
         <Stack sx={style.stepWrap}>
             <Box sx={style.stepItem}>
                 <Icon sx={{ display: 'flex', width: 50, height: 50, alignItems: 'center' }}>
-                    <img src={infoIcon} />
+                    {themeMode === 'light' ? <img src={InfoIcon} /> : <img src={InfoIconDark} />}
                 </Icon>
                 <Typography variant="h5" sx={style.stepTitle}>
                     1. 정보입력
                 </Typography>
             </Box>
             <Box sx={style.stepArrwo}>
-                <img src={arrwoIcon} />
+                {themeMode === 'light' ? <img src={ArrwoIcon} /> : <img src={ArrwoIconDark} />}
             </Box>
             <Box sx={style.stepItem}>
                 <Icon
@@ -32,18 +38,18 @@ const AuthStepper = () => {
                         flexDirection: 'column',
                     }}
                 >
-                    <img src={certIcon} />
+                    {themeMode === 'light' ? <img src={CertIcon} /> : <img src={CertIconDark} />}
                 </Icon>
                 <Typography variant="h5" sx={style.stepTitle}>
                     2. 인증
                 </Typography>
             </Box>
             <Box sx={style.stepArrwo}>
-                <img src={arrwoIcon} />
+                {themeMode === 'light' ? <img src={ArrwoIcon} /> : <img src={ArrwoIconDark} />}
             </Box>
             <Box sx={style.stepItem}>
                 <Icon sx={{ display: 'flex', width: 50, height: 50, alignItems: 'center' }}>
-                    <img src={LoginIcon} />
+                    {themeMode === 'light' ? <img src={LoginIcon} /> : <img src={LoginIconDark} />}
                 </Icon>
                 <Typography variant="h5" sx={style.stepTitle}>
                     3. 로그인

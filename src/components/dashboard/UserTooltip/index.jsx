@@ -6,7 +6,7 @@ import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos'
 
 import t from '#/common/libs/trans'
 
-const staticTooltipList = [
+const userMockData = [
     { categoryName: t('request_approval', 'dashboard'), icon: <InsertDriveFileIcon /> },
     { categoryName: t('turn_back', 'dashboard'), icon: <InsertDriveFileIcon /> },
     { categoryName: t('approval_completed', 'dashboard'), icon: <InsertDriveFileIcon /> },
@@ -16,10 +16,10 @@ const data = [{ count: 123 }, { count: 321 }, { count: 555 }]
 
 const UserTooltip = () => {
     return (
-        <Box sx={{ display: 'inline-block', border: 1, bgcolor: 'white', borderRadius: 1 }}>
-            <Box sx={{ display: 'flex', padding: 1 }}>
+        <Box sx={{ display: 'inline-block', border: 1, bgcolor: 'white', borderRadius: 2 }}>
+            <Box sx={{ display: 'flex', padding: 2 }}>
                 <AccountCircleIcon />
-                <Typography variant="h5">관리자</Typography>
+                <Typography>관리자</Typography>
                 <Typography>일반 사용자</Typography>
             </Box>
             <Divider sx={{ borderColor: 'black' }} />
@@ -30,8 +30,8 @@ const UserTooltip = () => {
                 {data.map((item, idx) => (
                     <CategoryCount
                         key={idx}
-                        icon={staticTooltipList[idx].icon}
-                        categoryName={staticTooltipList[idx].categoryName}
+                        icon={userMockData[idx].icon}
+                        categoryName={userMockData[idx].categoryName}
                         count={item.count}
                     />
                 ))}

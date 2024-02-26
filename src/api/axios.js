@@ -1,20 +1,18 @@
 import axios from 'axios'
 import qs from 'qs'
+import useAuthStore from '#/store/useAuthStore'
 
 export const axiosInstance = axios.create({
     baseURL: 'http://192.168.0.235:8081',
     headers: {
         'Content-Type': 'application/x-www-form-urlencoded',
+        Authorization: `${useAuthStore.getState().accesstoken}`,
     },
     withCredentials: true,
 })
 
-const requestSuccessHandler = (config) => {
-    return config
-}
-
 axiosInstance.interceptors.request.use(
-    (config) => requestSuccessHandler(config),
+    (config) => config,
     (error) => Promise.reject(error),
 )
 

@@ -32,6 +32,8 @@ import PermissionHistoryPage from '#/pages/users/PermissionHistoryPage'
 import IpManagePage from '#/pages/users/IpManagePage'
 import DashboardPage from '#/pages/DemoPage/DashboardPage'
 import PrivateRoute from '#/routes/PrivateRoute'
+import PermissionManagementDemoPage from '#/pages/DemoPage/PermissionManagementDemoPage'
+import PermissionManagementPage from '#/pages/PermissionManagementPage'
 
 const Routes = () => {
     return useRoutes([
@@ -52,6 +54,10 @@ const Routes = () => {
                             element: <PermissionHistoryPage />,
                         },
                         { path: '/user-management/ip-access', element: <IpManagePage /> },
+                        {
+                            path: '/permission-management/permissions-list',
+                            element: <PermissionManagementPage />,
+                        },
                     ],
                 },
                 {
@@ -89,6 +95,7 @@ const Routes = () => {
                 { path: '/components/users/permission-history', element: <UserPermissionDemo /> },
                 { path: '/components/users/ip-management', element: <IPManageDemo /> },
                 { path: '/components/dashboard', element: <DashboardPage /> },
+                { path: '/components/permission', element: <PermissionManagementDemoPage /> },
             ],
         },
         {

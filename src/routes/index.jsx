@@ -31,29 +31,38 @@ import LoginHistoryPage from '#/pages/users/LoginHistoryPage'
 import PermissionHistoryPage from '#/pages/users/PermissionHistoryPage'
 import IpManagePage from '#/pages/users/IpManagePage'
 import DashboardPage from '#/pages/DemoPage/DashboardPage'
+import PrivateRoute from '#/routes/PrivateRoute'
 
 const Routes = () => {
     return useRoutes([
         {
-            element: <MainLayout />,
+            element: <PrivateRoute />,
             children: [
-                { path: '/', element: <MainPage /> },
-                { path: '/mypage/profile', element: <ProfilePage /> },
-                { path: '/poi-map', element: <PoiMapPage /> },
-                // user management
-                { path: '/user-management/user-list', element: <UserListPage /> },
-                { path: '/user-management/login-history', element: <LoginHistoryPage /> },
-                { path: '/user-management/role-history', element: <PermissionHistoryPage /> },
-                { path: '/user-management/ip-access', element: <IpManagePage /> },
+                {
+                    element: <MainLayout />,
+                    children: [
+                        { path: '/', element: <MainPage /> },
+                        { path: '/mypage/profile', element: <ProfilePage /> },
+                        { path: '/poi-map', element: <PoiMapPage /> },
+                        // user management
+                        { path: '/user-management/user-list', element: <UserListPage /> },
+                        { path: '/user-management/login-history', element: <LoginHistoryPage /> },
+                        {
+                            path: '/user-management/role-history',
+                            element: <PermissionHistoryPage />,
+                        },
+                        { path: '/user-management/ip-access', element: <IpManagePage /> },
+                    ],
+                },
+                {
+                    element: <DetailLayout />,
+                    children: [{ path: '/components/layouts/detail', element: <MainPage /> }],
+                },
             ],
         },
         {
             element: <AuthLayout />,
             children: [{ path: '/login', element: <LoginPage /> }],
-        },
-        {
-            element: <DetailLayout />,
-            children: [{ path: '/components/layouts/detail', element: <MainPage /> }],
         },
         {
             element: <MainLayout />,

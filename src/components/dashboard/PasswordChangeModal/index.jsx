@@ -9,11 +9,14 @@ import {
     IconButton,
     Typography,
 } from '@mui/material'
-import AccountCircleIcon from '@mui/icons-material/AccountCircle'
 import CloseIcon from '@mui/icons-material/Close'
 import { useFormik } from 'formik'
 import PasswordInput from '#/components/common/input/PasswordInput'
 import { passwordChangeSchema } from '#/contents/validationSchema'
+import joinIcon from '#/assets/joinIcon.svg'
+import joinIconDark from '#/assets/joinIconDark.svg'
+
+import style from './style.module'
 
 import t from '#/common/libs/trans'
 import { encryptPasswordSHA256 } from '#/common/libs/encode'
@@ -36,38 +39,26 @@ const PasswordChangeModal = ({ isOpen, onClose }) => {
     })
 
     return (
-        <Dialog open={isOpen} onClose={onClose}>
-            <DialogTitle
-                sx={{
-                    display: 'flex',
-                    justifyContent: 'space-between',
-                    alignItems: 'center',
-                    fontSize: 16,
-                    backgroundColor: 'primary.lightBlue',
-                    borderRadius: 20,
-                    mt: 3.8,
-                    ml: 2.5,
-                    mr: 2.5,
-                    mb: 1.3,
-                    height: 42,
-                    pl: 1,
-                    pr: 1,
-                }}
-            >
+        <Dialog open={isOpen} onClose={onClose} sx={style.dialogBox}>
+            <DialogTitle sx={style.title}>
                 <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-                    {themeMode === 'light' ? <AccountCircleIcon /> : <AccountCircleIcon />}
+                    {themeMode === 'light' ? (
+                        <img src={joinIcon} style={{ display: 'flex', width: '24px' }} />
+                    ) : (
+                        <img src={joinIconDark} style={{ display: 'flex', width: '24px' }} />
+                    )}
                     {t('password_change', 'auth')}
                 </Box>
                 <IconButton onClick={onClose}>
-                    <CloseIcon />
+                    <CloseIcon sx={style.close} />
                 </IconButton>
             </DialogTitle>
-            <DialogContent dividers>
-                <Typography>{t('password_change_desc', 'auth')}</Typography>
-                <Typography>
+            <DialogContent>
+                <Typography sx={style.subTitle}>{t('password_change_desc', 'auth')}</Typography>
+                <Typography sx={style.labelText}>
                     {t('email', 'auth')} : {email}
                 </Typography>
-                <Typography>
+                <Typography sx={style.labelText}>
                     <span style={{ color: 'red' }}>*</span>
                     {t('current_password', 'auth')}
                 </Typography>
@@ -76,7 +67,7 @@ const PasswordChangeModal = ({ isOpen, onClose }) => {
                     formik={formik}
                     placeholder={t('placeholder.current_password', 'auth')}
                 />
-                <Typography>
+                <Typography sx={style.labelText}>
                     <span style={{ color: 'red' }}>*</span>
                     {t('password', 'auth')}
                 </Typography>
@@ -86,7 +77,7 @@ const PasswordChangeModal = ({ isOpen, onClose }) => {
                     placeholder={t('placeholder.password', 'auth')}
                     inputRule={t('guide.password_input_guide', 'auth')}
                 />
-                <Typography>
+                <Typography sx={style.labelText}>
                     <span style={{ color: 'red' }}>*</span>
                     {t('confirm_password', 'auth')}
                 </Typography>
@@ -96,9 +87,11 @@ const PasswordChangeModal = ({ isOpen, onClose }) => {
                     placeholder={t('placeholder.confirm_password', 'auth')}
                 />
             </DialogContent>
-            <DialogActions>
-                <Button variant="contained">{t('after_change', 'auth')}</Button>
-                <Button variant="contained" onClick={formik.handleSubmit}>
+            <DialogActions sx={style.btnBox}>
+                <Button variant="contained" sx={style.lightButton}>
+                    {t('after_change', 'auth')}
+                </Button>
+                <Button variant="contained" onClick={formik.handleSubmit} sx={style.darkLarge}>
                     {t('password_change', 'auth')}
                 </Button>
             </DialogActions>

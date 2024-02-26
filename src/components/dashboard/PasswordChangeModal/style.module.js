@@ -29,29 +29,42 @@ const style = {
     close: {
         color: 'background.close',
     },
-    joinContent: {
-        textAlign: 'center',
-        fontSize: 13,
-        color: 'text.darkgray',
+    subTitle: {
+        fontSize: 14,
+        fontWeight: 400,
+        mb: 2.5,
     },
-    icons: {
-        display: 'flex',
-        justifyContent: 'center',
-        mb: '14px',
-        mt: '10px',
+    labelText: {
+        fontSize: 14,
+        fontWeight: 500,
+        mt: 2.5,
+        mb: '4px',
     },
     btnBox: {
         justifyContent: 'center',
-        p: '0 20px 30px 20px',
+        p: '10px 20px 30px 20px',
     },
     darkLarge: {
-        width: '24%',
+        width: '50%',
         height: 36,
         fontWeight: 400,
         color: 'white',
         backgroundColor: '#002C5F',
         '&:hover': {
             backgroundColor: '#002C5F',
+        },
+    },
+    lightButton: {
+        width: '50%',
+        height: 36,
+        color: '#002C5F',
+        ml: '2px',
+        backgroundColor: 'button.lightblue',
+        border: '1px solid #5b8cc5',
+        flex: 1,
+        boxShadow: 'none',
+        '&:hover': {
+            backgroundColor: 'button.lightblue',
         },
     },
 }

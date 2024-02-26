@@ -51,27 +51,12 @@ function AuthHeader() {
                             )}
                         </Typography>
                         <BrowserView>
-                            <Dropdown
-                                items={languages}
-                                selectable={true}
-                                onSelect={handleSelectLangMenu}
-                                sx={{
-                                    color: 'text.darkgray',
-                                    backgroundColor: 'transparent',
-                                    fontSize: 13,
-                                    fontWeight: 400,
-                                    p: '6px 24px 6px 12px',
-                                    '&:hover': {
-                                        backgroundColor: 'transparent',
-                                    },
-                                }}
-                            >
+                            <Box sx={{ display: 'flex', alignItems: 'center' }}>
                                 <Icon
                                     sx={{
                                         display: 'flex',
                                         width: '21px',
                                         height: '20px',
-                                        mr: '8px',
                                     }}
                                 >
                                     {themeMode === 'light' ? (
@@ -80,8 +65,24 @@ function AuthHeader() {
                                         <img src={LanguagesIconDark} />
                                     )}
                                 </Icon>
-                                {findLanguage(language)?.label}
-                            </Dropdown>
+                                <Dropdown
+                                    items={languages}
+                                    selectable={true}
+                                    onSelect={handleSelectLangMenu}
+                                    sx={{
+                                        color: 'text.darkgray',
+                                        backgroundColor: 'transparent',
+                                        fontSize: 13,
+                                        fontWeight: 400,
+                                        p: '6px 24px 6px 12px',
+                                        '&:hover': {
+                                            backgroundColor: 'transparent',
+                                        },
+                                    }}
+                                >
+                                    {findLanguage(language)?.label}
+                                </Dropdown>
+                            </Box>
                         </BrowserView>
                         <MobileView>
                             <Dropdown

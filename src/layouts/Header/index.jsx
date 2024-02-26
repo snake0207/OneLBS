@@ -84,47 +84,47 @@ function Header({ toggleDrawer }) {
                     <BrowserView>
                         <Box sx={{ flexGrow: 0 }}>
                             <Notify notifications={notifications} />
+                            <Icon
+                                sx={{
+                                    display: 'flex',
+                                    width: '20px',
+                                    height: '20px',
+                                    mr: '8px',
+                                }}
+                            >
+                                {themeMode === 'light' ? (
+                                    <img src={UserIcon} />
+                                ) : (
+                                    <img src={UserIconDark} />
+                                )}
+                            </Icon>
                             <Dropdown
                                 items={userMenus}
                                 onSelect={handleSelectUserMenu}
                                 sx={style.dropdownText}
                             >
-                                <Icon
-                                    sx={{
-                                        display: 'flex',
-                                        width: '20px',
-                                        height: '20px',
-                                        mr: '8px',
-                                    }}
-                                >
-                                    {themeMode === 'light' ? (
-                                        <img src={UserIcon} />
-                                    ) : (
-                                        <img src={UserIconDark} />
-                                    )}
-                                </Icon>
                                 김승일
                             </Dropdown>
+                            <Icon
+                                sx={{
+                                    display: 'flex',
+                                    width: '21px',
+                                    height: '20px',
+                                    mr: '8px',
+                                }}
+                            >
+                                {themeMode === 'light' ? (
+                                    <img src={LanguagesIcon} />
+                                ) : (
+                                    <img src={LanguagesIconDark} />
+                                )}
+                            </Icon>
                             <Dropdown
                                 items={languages}
                                 selectable={true}
                                 onSelect={handleSelectLangMenu}
                                 sx={style.languagText}
                             >
-                                <Icon
-                                    sx={{
-                                        display: 'flex',
-                                        width: '21px',
-                                        height: '20px',
-                                        mr: '8px',
-                                    }}
-                                >
-                                    {themeMode === 'light' ? (
-                                        <img src={LanguagesIcon} />
-                                    ) : (
-                                        <img src={LanguagesIconDark} />
-                                    )}
-                                </Icon>
                                 {findLanguage(language)?.label}
                             </Dropdown>
                             <IconButton sx={{ p: 0 }} onClick={() => toggleFullScreen()}>

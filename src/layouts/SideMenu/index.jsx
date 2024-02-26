@@ -1,6 +1,5 @@
 import React from 'react'
 import List from '@mui/material/List'
-import Divider from '@mui/material/Divider'
 import IconButton from '@mui/material/IconButton'
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft'
 import { Drawer, Toolbar, Icon, Box } from '@mui/material'
@@ -11,11 +10,6 @@ import AppRegistrationIcon from '@mui/icons-material/AppRegistration'
 import ListItemButton from '@mui/material/ListItemButton'
 import ListItemIcon from '@mui/material/ListItemIcon'
 import ListItemText from '@mui/material/ListItemText'
-
-import DashboardIcon from '@mui/icons-material/Dashboard'
-import BarChartIcon from '@mui/icons-material/BarChart'
-
-import RememberMeIcon from '@mui/icons-material/RememberMe'
 
 import ExpandMenuItem from '#/components/common/menu/ExpandMenuItem'
 import UserInfo from './UserInfo'
@@ -47,6 +41,7 @@ import LogoIcon from '#/assets/logo.svg'
 import LogoIconDark from '#/assets/logoDark.svg'
 
 import style from './style.module'
+import { useNavigate } from 'react-router-dom'
 
 const drawerWidth = 240
 
@@ -89,8 +84,7 @@ const VariantDrawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 
     }),
 )
 
-const getMenuIcon = (key) => {
-    const { themeMode } = useLayoutStore()
+const getMenuIcon = (key, themeMode) => {
     switch (key) {
         case 'mypage':
             return (
@@ -213,7 +207,7 @@ const getMenuIcon = (key) => {
     }
 }
 
-const createMenuItems = (menuItems) => {
+const createMenuItems = (menuItems, themeMode) => {
     return (
         <React.Fragment>
             {menuItems.map((item, index) => {
@@ -222,7 +216,7 @@ const createMenuItems = (menuItems) => {
                         <ExpandMenuItem
                             key={index}
                             label={t(`top_menu.${item.label}`)}
-                            iconNode={getMenuIcon(item.label)}
+                            iconNode={getMenuIcon(item.label, themeMode)}
                             items={item.children}
                         />
                     )
@@ -243,6 +237,7 @@ const createMenuItems = (menuItems) => {
 }
 
 const SideMenu = ({ open, toggleDrawer }) => {
+    const navigate = useNavigate()
     const { themeMode } = useLayoutStore()
     return (
         <>
@@ -258,27 +253,27 @@ const SideMenu = ({ open, toggleDrawer }) => {
                         }}
                     >
                         <Box sx={{ m: '24px 104px 30px 24px' }}>
-                            <img src={LogoIcon} />
+                            <img src={LogoIcon} onClick={() => navigate('/')} />
                         </Box>
                         <IconButton onClick={toggleDrawer}>
                             <ChevronLeftIcon />
                         </IconButton>
                     </Toolbar>
-                    <List component="nav">{createMenuItems(data.menuTree)}</List>
+                    <List component="nav">{createMenuItems(data.menuTree, themeMode)}</List>
                 </VariantDrawer>
             </BrowserView>
             <MobileView>
                 <Drawer open={open} onClose={toggleDrawer} sx={style.navBox}>
                     <Box sx={{ m: '56px 0 12px 24px' }}>
                         {themeMode === 'light' ? (
-                            <img src={LogoIcon} />
+                            <img src={LogoIcon} onClick={() => navigate('/')} />
                         ) : (
-                            <img src={LogoIconDark} />
+                            <img src={LogoIconDark} onClick={() => navigate('/')} />
                         )}
                     </Box>
                     <UserInfo />
                     <List component="nav">
-                        {createMenuItems(filterMobileMenuItems(data.menuTree))}
+                        {createMenuItems(filterMobileMenuItems(data.menuTree), themeMode)}
                     </List>
                 </Drawer>
             </MobileView>

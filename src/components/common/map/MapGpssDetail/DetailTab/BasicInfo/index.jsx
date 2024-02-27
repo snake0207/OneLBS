@@ -26,12 +26,16 @@ const BasicInfo = ({ formik, poiData, tabSelected, isEditable }) => {
         address: false,
         lat: false,
         lon: false,
+        guideLat: false,
+        guideLon: false,
     })
 
     const [isDisabledInputs, setIsDisabledInputs] = useState({
         address: true,
         lat: true,
         lon: true,
+        guideLat: true,
+        guideLon: true,
     })
     const handleClickInputButton = (name) => {
         setIsShowInputs({ ...isShowInputs, [name]: true })
@@ -90,7 +94,7 @@ const BasicInfo = ({ formik, poiData, tabSelected, isEditable }) => {
                             )}
                         </Box>
                         <Divider sx={style.hr} />
-                        <Box sx={{ marginBottom: '16px' }}>
+                        <Box>
                             <Accordion
                                 elevation={0}
                                 sx={{ padding: 0, backgroundColor: 'dialog.main' }}
@@ -118,7 +122,6 @@ const BasicInfo = ({ formik, poiData, tabSelected, isEditable }) => {
                                     메인 좌표
                                 </AccordionSummary>
                                 <AccordionDetails sx={{ padding: 0 }}>
-                                    {/* 이용 시간 */}
                                     <Box
                                         sx={{
                                             display: 'flex',
@@ -197,6 +200,125 @@ const BasicInfo = ({ formik, poiData, tabSelected, isEditable }) => {
                                                     formik={formik}
                                                     name={'position.center.lon'}
                                                     IsDisabled={isDisabledInputs['lon']}
+                                                    placeholder={t('lon_input', 'gpss')}
+                                                />
+                                            </Box>
+                                        )}
+                                    </Box>
+                                </AccordionDetails>
+                            </Accordion>
+                            <Divider sx={style.hr} />
+                        </Box>
+                        <Box>
+                            <Accordion
+                                elevation={0}
+                                sx={{ padding: 0, backgroundColor: 'dialog.main' }}
+                            >
+                                <AccordionSummary
+                                    expandIcon={<ExpandMoreIcon />}
+                                    sx={{
+                                        padding: '0px',
+                                        fontSize: '18px',
+                                        fontWeight: 500,
+                                        color: 'text.darkgray',
+                                    }}
+                                >
+                                    {themeMode === 'light' ? (
+                                        <img
+                                            src={GpsIcon}
+                                            style={{ verticalAlign: 'middle', paddingRight: '4px' }}
+                                        />
+                                    ) : (
+                                        <img
+                                            src={GpsIconDark}
+                                            style={{ verticalAlign: 'middle', paddingRight: '4px' }}
+                                        />
+                                    )}
+                                    가이드 좌표
+                                </AccordionSummary>
+                                <AccordionDetails sx={{ padding: 0 }}>
+                                    <Box
+                                        sx={{
+                                            display: 'flex',
+                                            flexDirection: 'column',
+                                            gap: '6px',
+                                            mb: 1,
+                                        }}
+                                    >
+                                        <Box
+                                            sx={{
+                                                display: 'flex',
+                                                alignItems: 'center',
+                                                gap: '6px',
+                                            }}
+                                        >
+                                            <Box>
+                                                <Typography sx={{ color: 'text.main' }}>
+                                                    {poiData.position.guide.lat}
+                                                </Typography>
+                                            </Box>
+                                            {isEditable && (
+                                                <Button
+                                                    sx={{ ml: 'auto' }}
+                                                    variant={'contained'}
+                                                    disabled={!!formik.errors.position?.guide?.lat}
+                                                    onClick={() =>
+                                                        handleClickInputButton('guideLat')
+                                                    }
+                                                >
+                                                    {isDisabledInputs['guideLat'] ? '수정' : '저장'}
+                                                </Button>
+                                            )}
+                                        </Box>
+                                        {isShowInputs['guideLat'] && (
+                                            <Box sx={{ height: 'auto' }}>
+                                                <TextInput
+                                                    formik={formik}
+                                                    name={'position.guide.lat'}
+                                                    IsDisabled={isDisabledInputs['guideLat']}
+                                                    placeholder={t('lat_input', 'gpss')}
+                                                />
+                                            </Box>
+                                        )}
+                                    </Box>
+                                    <Box
+                                        sx={{
+                                            display: 'flex',
+                                            flexDirection: 'column',
+                                            gap: '6px',
+                                        }}
+                                    >
+                                        <Box
+                                            sx={{
+                                                display: 'flex',
+                                                alignItems: 'center',
+                                                gap: '6px',
+                                            }}
+                                        >
+                                            <Box>
+                                                <Typography sx={{ color: 'text.main' }}>
+                                                    {poiData.position.guide.lon}
+                                                </Typography>
+                                            </Box>
+                                            {isEditable && (
+                                                <Button
+                                                    variant={'contained'}
+                                                    sx={{ ml: 'auto' }}
+                                                    disabled={!!formik.errors.position?.guide?.lon}
+                                                    onClick={() =>
+                                                        handleClickInputButton('guideLon')
+                                                    }
+                                                >
+                                                    {isDisabledInputs['guideLon'] ? '수정' : '저장'}
+                                                </Button>
+                                            )}
+                                        </Box>
+                                        {isShowInputs['guideLon'] && (
+                                            <Box sx={{ height: 'auto' }}>
+                                                <TextInput
+                                                    formik={formik}
+                                                    name={'position.guide.lon'}
+                                                    IsDisabled={isDisabledInputs['guideLon']}
                                                     placeholder={t('lon_input', 'gpss')}
                                                 />
                                             </Box>

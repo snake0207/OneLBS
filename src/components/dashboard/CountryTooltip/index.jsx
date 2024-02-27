@@ -4,7 +4,7 @@ import useLayoutStore from '#/store/useLayoutStore'
 import LanguageIcon from '#/assets/languagesIconDark.svg'
 
 import style from './style.module'
-import { BrowserView, MobileView } from 'react-device-detect'
+import { BrowserView, MobileView, isMobile } from 'react-device-detect'
 import CountryTooltipMobileCarousel from '#/components/dashboard/CountryTooltip/CountryTooltipMobileCarousel'
 
 const CountryTooltip = ({ title, categoryCountList }) => {
@@ -14,8 +14,8 @@ const CountryTooltip = ({ title, categoryCountList }) => {
             sx={{
                 display: 'inline-block',
                 borderRadius: '8px',
-                width: 'calc(65% - 10px)',
-                ml: '10px',
+                width: isMobile ? '100%' : 'calc(65% - 10px)',
+                ml: isMobile ? 0 : '10px',
             }}
         >
             <Box sx={style.Title}>
@@ -37,7 +37,9 @@ const CountryTooltip = ({ title, categoryCountList }) => {
                 </Box>
             </BrowserView>
             <MobileView>
-                <CountryTooltipMobileCarousel categoryCountList={categoryCountList} />
+                <Box>
+                    <CountryTooltipMobileCarousel categoryCountList={categoryCountList} />
+                </Box>
             </MobileView>
         </Box>
     )

@@ -14,6 +14,7 @@ import t from '#/common/libs/trans'
 import useLayoutStore from '#/store/useLayoutStore'
 
 import style from './style.module'
+import { isMobile } from 'react-device-detect'
 
 const userMockData = [
     {
@@ -38,7 +39,9 @@ const data = [{ count: 123 }, { count: 321 }, { count: 555 }]
 const UserTooltip = () => {
     const { themeMode } = useLayoutStore()
     return (
-        <Box sx={{ display: 'inline-block', borderRadius: '8px', width: '35%' }}>
+        <Box
+            sx={{ display: 'inline-block', borderRadius: '8px', width: isMobile ? '100%' : '35%' }}
+        >
             <Box sx={style.Title}>
                 <img src={UserIconDark} />
                 <Typography sx={{ fontSize: '20px', fontWeight: 500, ml: '6px' }}>

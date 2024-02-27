@@ -20,6 +20,9 @@ import Select from '#/components/common/Select/index.jsx'
 import EvStationIcon from '#/assets/evStationIcon.svg'
 import style from '#/components/approval/Detail/CategoryTable/style.module.js'
 import EvChargingInfo from '#/components/approval/Detail/CategoryInfo/EvChargingInfo/index.jsx'
+import EvStationIconDark from '#/assets/evStationIconDark.svg'
+import { getLayoutState } from '#/store/useLayoutStore'
+import style from './style.module'
 
 const CategoryInfo = ({ category, data, formik, isEditable }) => {
     console.log('DATA >> ', data)
@@ -61,22 +64,17 @@ const CategoryInfo = ({ category, data, formik, isEditable }) => {
     //     })
     //     setTableData({ ...tableData, [category]: changeDisableData })
     // }
+    const { themeMode } = getLayoutState()
 
     const renderInputTable = (category, keys) => {
         console.log('SELECT >> ', category, selectItems.current)
         return (
-            <Table size={'small'} border={1} sx={{ borderColor: 'divider' }}>
+            <Table size={'small'} sx={style.tableBox}>
                 <TableBody>
                     {keys.map(({ title, name, isDisable, isSelect }, index) => {
                         return (
                             <TableRow key={index}>
-                                <TableCell
-                                    component="th"
-                                    sx={{
-                                        backgroundColor: theme.palette.grey[100],
-                                        width: '8rem',
-                                    }}
-                                >
+                                <TableCell component="th" sx={{ width: '8rem' }}>
                                     {title}
                                 </TableCell>
                                 <TableCell>

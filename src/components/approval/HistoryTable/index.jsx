@@ -12,7 +12,7 @@ import ActionButtons from '#/components/approval/Detail/ActionButtons/index.jsx'
 
 import style from './style.module'
 
-const HistoryTable = ({ type, dummyData, onClickButtonFunction, onClickRowFunction }) => {
+const HistoryTable = ({ type, dummyData, onClickRowFunction }) => {
     const headers = [
         'No.',
         t('name', 'approval'),
@@ -33,16 +33,7 @@ const HistoryTable = ({ type, dummyData, onClickButtonFunction, onClickRowFuncti
                     <TableHead>
                         <TableRow>
                             {headers.map((header, index) =>
-                                header === null ? (
-                                    ''
-                                ) : headers.length === index + 1 ? (
-                                    // 상태컬럼 colspan 설정
-                                    <TableCell colSpan={2} key={index}>
-                                        {header}
-                                    </TableCell>
-                                ) : (
-                                    <TableCell key={index}>{header}</TableCell>
-                                ),
+                                header === null ? '' : <TableCell key={index}>{header}</TableCell>,
                             )}
                         </TableRow>
                     </TableHead>
@@ -54,7 +45,7 @@ const HistoryTable = ({ type, dummyData, onClickButtonFunction, onClickRowFuncti
                                         key={data.id}
                                         id={data.id}
                                         hover
-                                        onClick={(e) => onClickRowFunction(e.target, data.id)}
+                                        onClick={() => onClickRowFunction(data.id)}
                                     >
                                         <TableCell>{dummyData.length - index}</TableCell>
                                         <TableCell>{data.name}</TableCell>
@@ -72,14 +63,6 @@ const HistoryTable = ({ type, dummyData, onClickButtonFunction, onClickRowFuncti
                                         <TableCell>{data.review_date}</TableCell>
                                         <TableCell>{data.approval_date}</TableCell>
                                         <TableCell>{data.status}</TableCell>
-                                        <TableCell>
-                                            <ActionButtons
-                                                type={type}
-                                                status={data.status}
-                                                clickAction={onClickButtonFunction}
-                                                id={data.id}
-                                            />
-                                        </TableCell>
                                     </TableRow>
                                 )
                             })

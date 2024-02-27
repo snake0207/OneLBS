@@ -59,7 +59,11 @@ const IpInputGroup = ({ formik }) => {
                     ipName4={'ipAddress4_0'}
                     formik={formik}
                 >
-                    <IpInput.IpDescription formik={formik} ipDescName={'ipDescription_0'} />
+                    <IpInput.IpDescription
+                        formik={formik}
+                        ipDescName={'ipDescription_0'}
+                        sx={{ backgroundColor: 'form.main', borderRadius: '4px' }}
+                    />
                 </IpInput>
                 <BrowserView>
                     <FormControlLabel

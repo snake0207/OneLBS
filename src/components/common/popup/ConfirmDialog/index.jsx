@@ -6,6 +6,8 @@ import DialogContentText from '@mui/material/DialogContentText'
 import usePopupStore, { usePopupActions } from '#/store/usePopupStore'
 import t from '#/common/libs/trans'
 
+import style from './style.module'
+
 function ConfirmDialog({ open, content }) {
     const actions = usePopupActions()
     const { onOk, onCancel } = usePopupStore()
@@ -28,16 +30,21 @@ function ConfirmDialog({ open, content }) {
             open={open}
             aria-labelledby="alert-dialog-title"
             aria-describedby="alert-dialog-description"
+            sx={style.dialogBox}
         >
             <DialogContent>
-                <DialogContentText id="alert-dialog-description">{content}</DialogContentText>
+                <DialogContentText id="alert-dialog-description" sx={style.text}>
+                    {content}
+                </DialogContentText>
             </DialogContent>
             <DialogActions>
-                <DialogActions>
-                    <Button onClick={handleConfirm} autoFocus>
+                <DialogActions sx={style.btnBox}>
+                    <Button onClick={handleConfirm} autoFocus sx={style.blueButton}>
                         {t('yes')}
                     </Button>
-                    <Button onClick={handleCancel}>{t('no')}</Button>
+                    <Button onClick={handleCancel} sx={style.lightButton}>
+                        {t('no')}
+                    </Button>
                 </DialogActions>
             </DialogActions>
         </Dialog>

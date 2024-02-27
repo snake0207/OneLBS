@@ -6,6 +6,8 @@ import DialogContentText from '@mui/material/DialogContentText'
 import usePopupStore, { usePopupActions } from '#/store/usePopupStore'
 import t from '#/common/libs/trans'
 
+import style from './style.module'
+
 function AlertDialog({ open, content }) {
     const actions = usePopupActions()
     const { onOk } = usePopupStore()
@@ -20,12 +22,15 @@ function AlertDialog({ open, content }) {
             open={open}
             aria-labelledby="alert-dialog-title"
             aria-describedby="alert-dialog-description"
+            sx={style.dialogBox}
         >
             <DialogContent>
-                <DialogContentText id="alert-dialog-description">{content}</DialogContentText>
+                <DialogContentText id="alert-dialog-description" sx={style.text}>
+                    {content}
+                </DialogContentText>
             </DialogContent>
-            <DialogActions>
-                <Button onClick={handleClose} autoFocus>
+            <DialogActions sx={style.btnBox}>
+                <Button onClick={handleClose} autoFocus sx={style.blueButton}>
                     {t('ok')}
                 </Button>
             </DialogActions>

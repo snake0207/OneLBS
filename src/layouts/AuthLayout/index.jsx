@@ -7,13 +7,21 @@ const AuthLayout = () => {
         <Box sx={{ display: 'flex' }}>
             <Box
                 sx={{
-                    backgroundColor: (theme) =>
-                        theme.palette.mode === 'light'
-                            ? theme.palette.grey[0]
-                            : theme.palette.grey[900],
                     flexGrow: 1,
                     overflow: 'auto',
                     height: '100vh',
+                    backgroundColor: (theme) =>
+                        theme.palette.mode === 'light'
+                            ? theme.palette.color[100]
+                            : theme.palette.color[1001],
+                    '& .MuiPaper-elevation': {
+                        backgroundColor: 'transparent',
+                        backgroundImage: 'none',
+                        boxShadow: 'none',
+                        borderBottom: '1px solid !important',
+                        borderBottom: '1px solid',
+                        borderColor: 'color.header',
+                    },
                 }}
             >
                 <AuthHeader />

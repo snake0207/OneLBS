@@ -1,18 +1,17 @@
-import { MicNoneOutlined } from '@mui/icons-material'
-
 const style = {
     searchBox: {
         width: '100%',
         borderRadius: '8px',
         mb: '10px',
         p: '16px 20px',
-        backgroundColor: 'grey.lightgray',
+        backgroundColor: 'grey.search',
         boxShadow: '0 3px 14px rgb(0 0 0 / 24%)',
     },
     tableBox: {
         width: '100%',
         th: {
             border: 0,
+            color: 'text.darkgray',
             p: '3px 10px 3px 0',
             '&:nth-of-type(even)': {
                 pr: '20px',

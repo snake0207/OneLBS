@@ -10,10 +10,12 @@ import { loginSchema } from '#/contents/validationSchema'
 import { usePostLogin } from '#/hooks/queries/auth'
 import { Icon } from '@mui/material'
 import LoginIcon from '#/assets/loginIcon.svg'
+import LoginIconDark from '#/assets/loginIconDark.svg'
 import { BrowserView, isBrowser, isMobile } from 'react-device-detect'
 
 import t from '#/common/libs/trans'
 
+import { getLayoutState } from '#/store/useLayoutStore'
 import style from './style.module'
 import JoinModal from '#/components/auth/authForm/joinForm/JoinModal'
 import { useState } from 'react'
@@ -49,12 +51,23 @@ const LoginForm = () => {
     const handleCloseJoinModal = () => {
         setIsOpenJoinModal(false)
     }
+    const { themeMode } = getLayoutState()
 
     return (
         <>
             <Box sx={{ display: 'flex', justifyContent: 'flex-start', mb: 5 }}>
                 <Icon sx={{ display: 'flex', width: 20, height: 20, alignItems: 'center' }}>
-                    <img src={LoginIcon} />
+                    {themeMode === 'light' ? (
+                        <img
+                            src={LoginIcon}
+                            style={{ verticalAlign: 'middle', paddingRight: '4px' }}
+                        />
+                    ) : (
+                        <img
+                            src={LoginIconDark}
+                            style={{ verticalAlign: 'middle', paddingRight: '4px' }}
+                        />
+                    )}
                 </Icon>
                 <Typography variant="h5" sx={style.loginTitle}>
                     LOGIN

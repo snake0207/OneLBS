@@ -4,6 +4,7 @@ const style = {
         boxShadow: 'none',
         borderBottom: '1px solid',
         borderColor: 'border.main',
+        backgroundImage: 'none',
         '& .MuiContainer-root': {
             maxWidth: '100%',
         },
@@ -21,7 +22,7 @@ const style = {
         backgroundColor: 'transparent',
         fontSize: 13,
         fontWeight: 400,
-        p: '6px 12px 6px 16px',
+        p: '6px 24px 6px 8px',
         '&:hover': {
             backgroundColor: 'transparent',
         },
@@ -31,7 +32,7 @@ const style = {
         backgroundColor: 'transparent',
         fontSize: 13,
         fontWeight: 400,
-        p: '6px 24px 6px 12px',
+        p: '6px 24px 6px 6px',
         '&:hover': {
             backgroundColor: 'transparent',
         },
@@ -40,7 +41,7 @@ const style = {
         color: 'text.darkgray',
         backgroundColor: 'transparent',
         minWidth: 'auto',
-        p: '6px 12px',
+        p: '6px 16px',
         '&:hover': {
             backgroundColor: 'transparent',
         },

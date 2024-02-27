@@ -8,6 +8,8 @@ import KeyboardDoubleArrowRightTwoToneIcon from '@mui/icons-material/KeyboardDou
 import KeyboardArrowLeftTwoToneIcon from '@mui/icons-material/KeyboardArrowLeftTwoTone'
 import KeyboardArrowRightTwoToneIcon from '@mui/icons-material/KeyboardArrowRightTwoTone'
 
+import style from './style.module'
+
 const CommonPagination = ({ dataLength, onChangePageFunction }) => {
     const [currentPage, setCurrentPage] = useState(1)
 
@@ -28,45 +30,48 @@ const CommonPagination = ({ dataLength, onChangePageFunction }) => {
                 showLastButton
                 onChange={handleChangeCurrentPage}
                 sx={{
-                    '& .MuiButtonBase-root.MuiPaginationItem-previousNext': {
+                    '& .MuiButtonBase-root.MuiPaginationItem-root.MuiPaginationItem-previousNext': {
                         border: 'none',
+                        backgroundColor: 'transparent',
                         '&:hover': {
                             backgroundColor: 'transparent',
                             border: 'none',
-                            color: '#A9A9A9',
+                            color: 'paging.text',
                         },
                     },
-                    '& .MuiButtonBase-root.MuiPaginationItem-firstLast': {
+                    '& .MuiButtonBase-root.MuiPaginationItem-root.MuiPaginationItem-firstLast': {
                         border: 'none',
+                        backgroundColor: 'transparent',
                         '&:hover': {
                             backgroundColor: 'transparent',
                             border: 'none',
-                            color: '#A9A9A9',
+                            color: 'paging.text',
                         },
                     },
-                    '& .css-dfpu2-MuiButtonBase-root-MuiPaginationItem-root': {
-                        borderRadius: '50%',
-                        backgroundColor: 'white',
-                        border: '1px solid #D1D1D1',
-                        color: '#A9A9A9',
+                    '& .MuiButtonBase-root.MuiPaginationItem-root': {
+                        borderRadius: '30px',
+                        border: '1px solid',
+                        borderColor: 'paging.border',
+                        color: 'paging.text',
+                        fontSize: '16px',
+                        fontWeight: 500,
                         '&:hover': {
-                            backgroundColor: 'rgba(0, 0, 0, 0.9)',
-                            border: '1px solid rgba(0, 0, 0, 0.9)',
-                            color: 'white',
+                            backgroundColor: 'paging.selected',
+                            border: '1px solid',
+                            borderColor: 'paging.selected',
+                            color: 'paging.text',
                         },
                     },
-                    '& .css-dfpu2-MuiButtonBase-root-MuiPaginationItem-root.Mui-selected': {
-                        borderRadius: '50%',
-                        backgroundColor: 'rgba(0, 0, 0, 0.9)',
-                        border: '1px solid rgba(0, 0, 0, 0.9)',
-                        color: 'white',
+                    '& .MuiButtonBase-root.MuiPaginationItem-root.Mui-selected': {
+                        borderRadius: '30px',
+                        backgroundColor: 'paging.selected',
+                        border: '1px solid',
+                        borderColor: 'paging.selected',
+                        color: 'paging.textSelected',
                         '&:hover': {
-                            backgroundColor: 'rgba(0, 0, 0, 0.9)',
+                            backgroundColor: 'paging.selected',
+                            color: 'paging.textSelected',
                         },
-                    },
-                    '$ .css-dfpu2-MuiButtonBase-root-MuiPaginationItem-root.Mui-disabled': {
-                        minWidth: '20px',
-                        border: '1px solid #ffffff',
                     },
                 }}
                 renderItem={(item) => (

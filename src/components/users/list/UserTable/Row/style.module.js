@@ -42,6 +42,8 @@ const style = {
         p: 0,
         fontSize: 14,
         height: '34px',
+        backgroundColor: 'form.main',
+        borderRadius: '4px',
     },
 }
 

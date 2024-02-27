@@ -6,9 +6,14 @@ import Divider from '@mui/material/Divider'
 import { useState } from 'react'
 import FormikInput from '#/components/common/input/FormikInput/index.jsx'
 import PointBlueIcon from '#/assets/pointBlueIcon.svg'
-import LanguageIcon from '#/assets/languageIcon.svg'
+import LanguageIcon from '#/assets/languagesIcon.svg'
+import LanguageIconDark from '#/assets/languagesIconDark.svg'
 import GpsIcon from '#/assets/gpsIcon.svg'
+import GpsIconDark from '#/assets/gpsIconDark.svg'
 import EditIcon from '@mui/icons-material/Edit'
+
+import { getLayoutState } from '#/store/useLayoutStore'
+import style from './style.module'
 
 const BasicInfo = ({ formik, poiData }) => {
     console.log('POI DATA >> ', poiData)
@@ -26,10 +31,11 @@ const BasicInfo = ({ formik, poiData }) => {
     const handleClickSetLngSate = () => {
         setIsLngSave(!isLngSave)
     }
+    const { themeMode } = getLayoutState()
     return (
         <Box>
             <Box>
-                <Typography variant={'h6'} sx={{ fontSize: '20px', fontWeight: 600 }}>
+                <Typography variant={'h6'} sx={style.title}>
                     <img
                         src={PointBlueIcon}
                         style={{ verticalAlign: 'middle', paddingRight: '4px' }}
@@ -41,10 +47,14 @@ const BasicInfo = ({ formik, poiData }) => {
                 <Box>
                     <Box sx={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
                         <Box sx={{ paddingTop: '5px' }}>
-                            <img src={LanguageIcon} />
+                            {themeMode === 'light' ? (
+                                <img src={LanguageIcon} />
+                            ) : (
+                                <img src={LanguageIconDark} />
+                            )}
                         </Box>
                         <Box>
-                            <Typography>{poiData.address}</Typography>
+                            <Typography sx={{ color: 'text.main' }}>{poiData.address}</Typography>
                         </Box>
                         <IconButton
                             sx={{
@@ -71,7 +81,7 @@ const BasicInfo = ({ formik, poiData }) => {
                         </Box>
                     )}
                 </Box>
-                <Divider sx={{ marginY: '5px' }} />
+                <Divider sx={style.hr} />
                 <Box
                     sx={{
                         display: 'flex',
@@ -81,10 +91,16 @@ const BasicInfo = ({ formik, poiData }) => {
                 >
                     <Box sx={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
                         <Box sx={{ paddingTop: '5px' }}>
-                            <img src={GpsIcon} />
+                            {themeMode === 'light' ? (
+                                <img src={GpsIcon} />
+                            ) : (
+                                <img src={GpsIconDark} />
+                            )}
                         </Box>
                         <Box>
-                            <Typography>{poiData.position.center.lat}</Typography>
+                            <Typography sx={{ color: 'text.main' }}>
+                                {poiData.position.center.lat}
+                            </Typography>
                         </Box>
                         <IconButton
                             sx={{
@@ -113,14 +129,20 @@ const BasicInfo = ({ formik, poiData }) => {
                         </Box>
                     )}
                 </Box>
-                <Divider sx={{ marginY: '5px' }} />
+                <Divider sx={style.hr} />
                 <Box sx={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
                     <Box sx={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
                         <Box sx={{ paddingTop: '5px' }}>
-                            <img src={GpsIcon} />
+                            {themeMode === 'light' ? (
+                                <img src={GpsIcon} />
+                            ) : (
+                                <img src={GpsIconDark} />
+                            )}
                         </Box>
                         <Box>
-                            <Typography>{poiData.position.center.lon}</Typography>
+                            <Typography sx={{ color: 'text.main' }}>
+                                {poiData.position.center.lon}
+                            </Typography>
                         </Box>
                         <IconButton
                             sx={{
@@ -149,7 +171,7 @@ const BasicInfo = ({ formik, poiData }) => {
                         </Box>
                     )}
                 </Box>
-                <Divider sx={{ marginY: '5px' }} />
+                <Divider sx={style.hr} />
             </Box>
         </Box>
     )

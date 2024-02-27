@@ -33,6 +33,7 @@ const TextInput = ({ name, formik, placeholder = null, inputRule = null, IsDisab
                     type="text"
                     placeholder={placeholder}
                     helperText={formik.touched[name] && formik.errors[name]}
+                    sx={{ backgroundColor: 'form.main', borderRadius: '4px' }}
                     InputProps={{
                         endAdornment: (
                             <InputAdornment position="end">

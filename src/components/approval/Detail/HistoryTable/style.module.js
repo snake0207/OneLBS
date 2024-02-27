@@ -1,25 +1,33 @@
 const style = {
     tableBox: {
         width: '100%',
+        backgroundColor: 'table.td',
         th: {
             p: '6px 0px',
             color: 'white',
             fontSize: 15,
             fontWeight: 500,
             textAlign: 'center',
-            color: '#444',
-            backgroundColor: '#e2e2e2',
-            borderLeft: '1px solid #d1d1d1',
+            color: 'text.main',
+            backgroundColor: 'table.viewTh',
+            borderLeft: '1px solid',
+            borderColor: 'table.viewBorderTh',
+            borderTop: '1px solid',
+            borderTopColor: 'table.borderlight',
             '&:first-of-type': { borderLeft: '0' },
         },
         td: {
-            color: '#05141F',
+            color: 'text.main',
             p: '8px 10px',
-            border: '1px solid #d1d1d1',
+            border: '1px solid',
+            borderColor: 'table.border',
             '&:first-of-type': { borderLeft: '0' },
             '&:last-of-type': { borderRight: '0' },
-            select: {
-                p: '6px 0px',
+        },
+        '& tr:last-child': {
+            '& td': {
+                borderBottom: '1px solid',
+                borderBottomColor: 'table.borderlight',
             },
         },
     },

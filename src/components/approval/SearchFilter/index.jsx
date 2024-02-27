@@ -108,7 +108,12 @@ const SearchFilter = ({ type, handleSubmitFilter, isMobile }) => {
                                 name={'tempFilter2'}
                                 formik={formik}
                                 items={regionSelectItems}
-                                sx={{ width: 200, height: 40 }}
+                                sx={{
+                                    width: 200,
+                                    height: 40,
+                                    backgroundColor: 'form.main',
+                                    borderRadius: '4px',
+                                }}
                             />
                         </Grid>
                     </Grid>
@@ -121,7 +126,12 @@ const SearchFilter = ({ type, handleSubmitFilter, isMobile }) => {
                                 name={'tempFilter3'}
                                 formik={formik}
                                 items={statusSelectItems()}
-                                sx={{ width: 200, height: 40 }}
+                                sx={{
+                                    width: 200,
+                                    height: 40,
+                                    backgroundColor: 'form.main',
+                                    borderRadius: '4px',
+                                }}
                             />
                         </Grid>
                     </Grid>

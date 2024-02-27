@@ -40,6 +40,9 @@ function DemoPage() {
                 <li>
                     <a href="/components/users">User Management</a>
                 </li>
+                <li>
+                    <a href="/components/dashboard">Dashboard</a>
+                </li>
             </ul>
         </Box>
     )

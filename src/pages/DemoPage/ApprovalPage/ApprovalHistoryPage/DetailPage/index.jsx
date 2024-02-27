@@ -127,7 +127,8 @@ const ApprovalHistoryDetailPage = () => {
                         m: 2,
                         gap: 4,
                         position: 'absolute',
-                        backgroundColor: '#fff',
+                        backgroundColor: 'dialog.main',
+                        opacity: '95%',
                         overflowY: 'auto',
                         height: '100%',
                     }}
@@ -178,6 +179,7 @@ const ApprovalHistoryDetailPage = () => {
                                     rows={3}
                                     value={formik.values['request_reason']}
                                     onChange={formik.handleChange}
+                                    sx={{ backgroundColor: 'form.main', borderRadius: '4px' }}
                                 />
                             ) : (
                                 <Typography>{formik.values['request_reason']}</Typography>

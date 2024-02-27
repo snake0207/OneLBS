@@ -3,7 +3,6 @@ import Box from '@mui/material/Box'
 import Toolbar from '@mui/material/Toolbar'
 import IconButton from '@mui/material/IconButton'
 import Container from '@mui/material/Container'
-import Avatar from '@mui/material/Avatar'
 //import FullscreenIcon from '@mui/icons-material/Fullscreen'
 import useLayoutStore from '#/store/useLayoutStore'
 import { Icon } from '@mui/material'
@@ -17,7 +16,6 @@ import Notify from '#/components/layout/Notify'
 import notifications from '#/mock/data/notifications.json'
 import { useNavigate } from 'react-router-dom'
 import { BrowserView, MobileView } from 'react-device-detect'
-import AccountCircleIcon from '@mui/icons-material/AccountCircle'
 
 import MenuIcon from '#/assets/menuIcon.svg'
 import MenuIconDark from '#/assets/menuIconDark.svg'
@@ -84,49 +82,49 @@ function Header({ toggleDrawer }) {
                     </Box>
                     <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}></Box>
                     <BrowserView>
-                        <Box sx={{ flexGrow: 0 }}>
+                        <Box sx={{ flexGrow: 0, display: 'flex', alignItems: 'center' }}>
                             <Notify notifications={notifications} />
+                            <Icon
+                                sx={{
+                                    display: 'flex',
+                                    width: '20px',
+                                    height: '20px',
+                                    ml: '16px',
+                                }}
+                            >
+                                {themeMode === 'light' ? (
+                                    <img src={UserIcon} />
+                                ) : (
+                                    <img src={UserIconDark} />
+                                )}
+                            </Icon>
                             <Dropdown
                                 items={userMenus}
                                 onSelect={handleSelectUserMenu}
                                 sx={style.dropdownText}
                             >
-                                <Icon
-                                    sx={{
-                                        display: 'flex',
-                                        width: '20px',
-                                        height: '20px',
-                                        mr: '8px',
-                                    }}
-                                >
-                                    {themeMode === 'light' ? (
-                                        <img src={UserIcon} />
-                                    ) : (
-                                        <img src={UserIconDark} />
-                                    )}
-                                </Icon>
                                 김승일
                             </Dropdown>
+                            <Icon
+                                sx={{
+                                    display: 'flex',
+                                    width: '21px',
+                                    height: '20px',
+                                    mr: '6px',
+                                }}
+                            >
+                                {themeMode === 'light' ? (
+                                    <img src={LanguagesIcon} />
+                                ) : (
+                                    <img src={LanguagesIconDark} />
+                                )}
+                            </Icon>
                             <Dropdown
                                 items={languages}
                                 selectable={true}
                                 onSelect={handleSelectLangMenu}
                                 sx={style.languagText}
                             >
-                                <Icon
-                                    sx={{
-                                        display: 'flex',
-                                        width: '21px',
-                                        height: '20px',
-                                        mr: '8px',
-                                    }}
-                                >
-                                    {themeMode === 'light' ? (
-                                        <img src={LanguagesIcon} />
-                                    ) : (
-                                        <img src={LanguagesIconDark} />
-                                    )}
-                                </Icon>
                                 {findLanguage(language)?.label}
                             </Dropdown>
                             <IconButton sx={{ p: 0 }} onClick={() => toggleFullScreen()}>
@@ -135,7 +133,7 @@ function Header({ toggleDrawer }) {
                                         display: 'flex',
                                         width: '17px',
                                         height: '16px',
-                                        mr: '16px',
+                                        mr: '12px',
                                     }}
                                 >
                                     {themeMode === 'light' ? (

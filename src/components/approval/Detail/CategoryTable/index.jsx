@@ -7,6 +7,8 @@ import SaveIcon from '@mui/icons-material/Save.js'
 import EditIcon from '@mui/icons-material/Edit.js'
 import Headline from '#/components/approval/Detail/Headline/index.jsx'
 import EvStationIcon from '#/assets/evStationIcon.svg'
+import EvStationIconDark from '#/assets/evStationIconDark.svg'
+import { getLayoutState } from '#/store/useLayoutStore'
 
 import style from './style.module'
 
@@ -31,16 +33,26 @@ const CategoryTable = ({ data, formik, isEditable }) => {
         setIsDisableInputs({ ...isDisableInputs, [type]: !isDisableInputs[type] })
         console.log(formik.values)
     }
+    const { themeMode } = getLayoutState()
 
     return (
         <Box>
             <Headline title={t('category', 'approval')} />
             <Box>
-                <Typography sx={{ fontSize: '18px', fontWeight: 500, color: '#05141F', mb: '4px' }}>
-                    <img
-                        src={EvStationIcon}
-                        style={{ verticalAlign: 'middle', paddingRight: '4px' }}
-                    />
+                <Typography
+                    sx={{ fontSize: '18px', fontWeight: 500, color: 'text.darkgray', mb: '4px' }}
+                >
+                    {themeMode === 'light' ? (
+                        <img
+                            src={EvStationIcon}
+                            style={{ verticalAlign: 'middle', paddingRight: '4px' }}
+                        />
+                    ) : (
+                        <img
+                            src={EvStationIconDark}
+                            style={{ verticalAlign: 'middle', paddingRight: '4px' }}
+                        />
+                    )}
                     {data.name}
                 </Typography>
                 <Table size={'small'} sx={style.tableBox}>

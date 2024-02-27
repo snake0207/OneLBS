@@ -1,11 +1,17 @@
-import { Box, Button, Typography } from '@mui/material'
+import { Box, Button, Typography, Icon } from '@mui/material'
 import BrowserNotSupportedIcon from '@mui/icons-material/BrowserNotSupported'
 
 import t from '#/common/libs/trans'
 import { useNavigate } from 'react-router-dom'
 
+import ErrorIcon from '#/assets/errorIcon.svg'
+import ErrorIconDark from '#/assets/errorIconDark.svg'
+import { getLayoutState } from '#/store/useLayoutStore'
+import style from './style.module'
+
 function NotFoundPage() {
     const navigate = useNavigate()
+    const { themeMode } = getLayoutState()
 
     return (
         <Box
@@ -17,32 +23,19 @@ function NotFoundPage() {
                 height: '100vh',
             }}
         >
-            <BrowserNotSupportedIcon sx={{ fontSize: 100 }} />
-            <Typography
-                variant="h3"
-                component="h1"
-                sx={{
-                    color: 'text.primary',
-                }}
-            >
+            <Icon sx={style.img}>
+                {themeMode === 'light' ? <img src={ErrorIcon} /> : <img src={ErrorIconDark} />}
+            </Icon>
+            <Typography variant="h3" component="h1" sx={style.title}>
                 {t('page_not_found')}
             </Typography>
-            <Typography
-                variant="subtitle1"
-                component="div"
-                sx={{
-                    width: '40%',
-                    textAlign: 'center',
-                    mt: 2,
-                    color: 'text.secondary',
-                }}
-            >
+            <Typography variant="subtitle1" component="div" sx={style.detailBox}>
                 {t('page_not_found_message')}
             </Typography>
             <Button
                 variant="contained"
                 onClick={() => navigate('/login', { replace: true })}
-                sx={{ mt: 2 }}
+                sx={style.button}
             >
                 {t('login_page')}
             </Button>

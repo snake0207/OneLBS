@@ -21,14 +21,17 @@ import ConfirmEmailForm from '#/components/auth/authForm/joinForm/JoinModal/Conf
 import PrivacyPolicyModal from '#/components/auth/authForm/joinForm/JoinModal/PrivacyPolicyModal'
 import IpInputGroup from '#/components/auth/authForm/joinForm/JoinModal/IpInputGroup'
 import { usePopupActions } from '#/store/usePopupStore'
-import AncestorUserIcon from '#/assets/joinIcon.svg'
+import joinIcon from '#/assets/joinIcon.svg'
+import joinIconDark from '#/assets/joinIconDark.svg'
 import CloseIcon from '@mui/icons-material/Close'
 import JoinSuccessModal from '#/components/auth/authForm/joinForm/JoinSuccessModal'
 import { getLayoutState } from '#/store/useLayoutStore'
-import AccountCircleIcon from '@mui/icons-material/AccountCircle'
 
 import { formatJoinData } from '#/common/libs/formatData'
 import t from '#/common/libs/trans'
+
+import BtnArrowIcon from '#/assets/btnArrowIcon.svg'
+import BtnArrowIconDark from '#/assets/btnArrowIconDark.svg'
 
 import style from './style.module'
 
@@ -97,39 +100,20 @@ const JoinModal = ({ isOpen, onClose }) => {
     }, [isOpen])
 
     return (
-        <Dialog open={isOpen} onClose={onClose} maxWidth="md">
-            <DialogTitle
-                sx={{
-                    display: 'flex',
-                    justifyContent: 'space-between',
-                    alignItems: 'center',
-                    fontSize: 16,
-                    backgroundColor: 'primary.lightBlue',
-                    borderRadius: 20,
-                    mt: 3.8,
-                    ml: 2.5,
-                    mr: 2.5,
-                    mb: 1.3,
-                    height: 42,
-                    pl: 1,
-                    pr: 1,
-                }}
-            >
+        <Dialog open={isOpen} onClose={onClose} maxWidth="md" sx={style.dialogBox}>
+            <DialogTitle sx={style.title}>
                 <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-                    {themeMode === 'light' ? (
-                        <Icon>
-                            <img
-                                src={AncestorUserIcon}
-                                style={{ display: 'flex', width: '100%' }}
-                            />
-                        </Icon>
-                    ) : (
-                        <AccountCircleIcon />
-                    )}
+                    <Icon>
+                        {themeMode === 'light' ? (
+                            <img src={joinIcon} style={{ display: 'flex', width: '24px' }} />
+                        ) : (
+                            <img src={joinIconDark} style={{ display: 'flex', width: '24px' }} />
+                        )}
+                    </Icon>
                     {t('join', 'auth')}
                 </Box>
                 <IconButton onClick={onClose}>
-                    <CloseIcon />
+                    <CloseIcon sx={style.close} />
                 </IconButton>
             </DialogTitle>
             <DialogContent>
@@ -210,6 +194,14 @@ const JoinModal = ({ isOpen, onClose }) => {
                         sx={style.btnDetaile}
                     >
                         {t('read_more', 'auth')}
+                        {themeMode === 'light' ? (
+                            <img src={BtnArrowIcon} style={{ width: '8.5px', marginLeft: '4px' }} />
+                        ) : (
+                            <img
+                                src={BtnArrowIconDark}
+                                style={{ width: '10px', marginLeft: '8.5px' }}
+                            />
+                        )}
                     </Button>
                 </Box>
                 <Typography variant="overline" component="p" sx={style.infoText}>

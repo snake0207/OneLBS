@@ -12,6 +12,8 @@ import EvCharging from '#/components/common/map/MapGpssDetail/DetailTab/EvChargi
 import BasicInfo from '#/components/common/map/MapGpssDetail/DetailTab/BasicInfo/index.jsx'
 import { poiDetailSchema } from '#/contents/validationSchema.js'
 
+import style from './style.module'
+
 const dummyData = [
     { id: 'qwer@acrofuture.com', name: '아*로1', company: '회사1', userSeq: 1 },
     { id: 'asdf@acrofuture.com', name: '아*로2', company: '회사2', userSeq: 2 },
@@ -116,11 +118,12 @@ const MapGpssDetailTab = ({ poiData }) => {
                 {/* 상세 기본 정보 */}
                 <BasicInfo formik={formik} poiData={poiData} />
                 <Box>
-                    <Typography sx={{ fontSize: 20, fontWeight: 600, color: '#00418D' }}>
+                    <Typography
+                        sx={{ fontSize: 20, fontWeight: 600, mb: '4px', color: 'primary.blue' }}
+                    >
                         {t('category', 'common')}
                     </Typography>
                 </Box>
-                <Divider />
                 {/* EV Charging */}
                 {!!evCharging && <EvCharging evChargingData={evCharging} formik={formik} />}
                 <Box>
@@ -129,7 +132,12 @@ const MapGpssDetailTab = ({ poiData }) => {
                     </Box>
                     <Divider />
                     <TextField
-                        sx={{ marginBottom: '16px', marginTop: '8px' }}
+                        sx={{
+                            marginBottom: '16px',
+                            marginTop: '8px',
+                            backgroundColor: 'form.main',
+                            borderRadius: '4px',
+                        }}
                         size={'small'}
                         multiline
                         fullWidth
@@ -235,18 +243,26 @@ const MapGpssDetailTab = ({ poiData }) => {
                     </Box>
                 </Box>
 
-                <Box sx={{ display: 'flex', justifyContent: 'end', gap: '6px' }}>
+                <Box sx={{ display: 'flex', justifyContent: 'space-between', gap: '2px' }}>
                     <Button
                         variant={'contained'}
                         onClick={handleClickTempSaveBtn}
-                        sx={{ whiteSpace: 'nowrap' }}
+                        sx={style.blueButton}
                     >
                         {t('temporary_save', 'gpss')}
                     </Button>
-                    <Button variant={'contained'} onClick={handleClickEditBtn}>
+                    <Button
+                        variant={'contained'}
+                        onClick={handleClickEditBtn}
+                        sx={style.lightButton}
+                    >
                         {t('edit_request', 'gpss')}
                     </Button>
-                    <Button variant={'contained'} onClick={handleClickDeleteBtn}>
+                    <Button
+                        variant={'contained'}
+                        onClick={handleClickDeleteBtn}
+                        sx={style.lineButton}
+                    >
                         {t('delete_request', 'gpss')}
                     </Button>
                 </Box>

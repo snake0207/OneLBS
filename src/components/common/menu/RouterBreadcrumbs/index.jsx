@@ -15,6 +15,11 @@ const breadcrumbNameMap = () => ({
     '/user-management/login-history': t('top_menu.user_login_history'),
     '/user-management/role-history': t('top_menu.user_permission_history'),
     '/user-management/ip-access': t('top_menu.user_ip_access_management'),
+    // search management
+    '/search-management': t('top_menu.search_management'),
+    '/search-management/map': t('top_menu.map'),
+    '/poi-view': t('top_menu.poi_search'),
+    '/poi-view/map': t('top_menu.map'),
     '/components': t('components'),
     '/components/layouts': t('layouts'),
     '/components/approval': t('approval', 'approval'),
@@ -30,7 +35,7 @@ const breadcrumbNameMap = () => ({
 
 function isAvailablePath(path) {
     // Exclude paths
-    const excludePaths = ['/mypage', '/user-management']
+    const excludePaths = ['/mypage', '/search-management', '/poi-view', '/user-management']
     return !excludePaths.includes(path)
 }
 

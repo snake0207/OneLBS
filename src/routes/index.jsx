@@ -8,7 +8,6 @@ import DemoPage from '#/pages/DemoPage'
 import LayoutPage from '#/pages/DemoPage/LayoutPage'
 import ButtonPage from '#/pages/DemoPage/ButtonPage'
 import SelectPage from '#/pages/DemoPage/SelectPage'
-import PoiMapPage from '#/pages/poiMapPage/index.jsx'
 import MapPage from '#/pages/DemoPage/MapPage/index.jsx'
 import LoginDemoPage from '#/pages/DemoPage/LoginPage'
 import PopupPage from '#/pages/DemoPage/PopupPage'
@@ -31,6 +30,10 @@ import DashboardPage from '#/pages/DemoPage/DashboardPage'
 import PrivateRoute from '#/routes/PrivateRoute'
 import ApprovalHistoryPage from '#/pages/ApprovalHistoryPage/index.jsx'
 import ApprovalHistoryDetailPage from '#/pages/ApprovalHistoryPage/DetailPage/index.jsx'
+import MapSearchPage from '#/pages/search/MapSearchPage'
+import POISearchPage from '#/pages/search/POISearchPage'
+import MapSearchDetail from '#/pages/search/MapSearchDetail'
+import POISearchDetail from '#/pages/search/POISearchDetail'
 
 const Routes = () => {
     return useRoutes([
@@ -42,7 +45,9 @@ const Routes = () => {
                     children: [
                         { path: '/', element: <MainPage /> },
                         { path: '/mypage/profile', element: <ProfilePage /> },
-                        { path: '/poi-map', element: <PoiMapPage /> },
+                        // search management
+                        { path: '/search-management/map', element: <MapSearchPage /> },
+                        { path: '/poi-view/map', element: <POISearchPage /> },
                         // user management
                         { path: '/user-management/user-list', element: <UserListPage /> },
                         { path: '/user-management/login-history', element: <LoginHistoryPage /> },
@@ -61,7 +66,11 @@ const Routes = () => {
                 },
                 {
                     element: <DetailLayout />,
-                    children: [{ path: '/components/layouts/detail', element: <MainPage /> }],
+                    children: [
+                        { path: '/components/layouts/detail', element: <MainPage /> },
+                        { path: '/search-management/map/:id', element: <MapSearchDetail /> },
+                        { path: '/poi-view/map/:id', element: <POISearchDetail /> },
+                    ],
                 },
             ],
         },

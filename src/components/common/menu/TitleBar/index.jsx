@@ -34,7 +34,7 @@ function TitleBar({ title }) {
                             fontWeight: 600,
                         }}
                     >
-                        aa {title}
+                        {title}
                     </Typography>
                     <RouterBreadcrumbs />
                 </Box>

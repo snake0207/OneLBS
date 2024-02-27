@@ -25,13 +25,13 @@ const BasicInfo = ({ formik, poiData, tabSelected, isEditable }) => {
     const [isShowInputs, setIsShowInputs] = useState({
         address: false,
         lat: false,
-        lng: false,
+        lon: false,
     })
 
     const [isDisabledInputs, setIsDisabledInputs] = useState({
         address: true,
         lat: true,
-        lng: true,
+        lon: true,
     })
     const handleClickInputButton = (name) => {
         setIsShowInputs({ ...isShowInputs, [name]: true })
@@ -185,18 +185,18 @@ const BasicInfo = ({ formik, poiData, tabSelected, isEditable }) => {
                                                     variant={'contained'}
                                                     sx={{ ml: 'auto' }}
                                                     disabled={!!formik.errors.position?.center?.lon}
-                                                    onClick={() => handleClickInputButton('lng')}
+                                                    onClick={() => handleClickInputButton('lon')}
                                                 >
-                                                    {isDisabledInputs['lng'] ? '수정' : '저장'}
+                                                    {isDisabledInputs['lon'] ? '수정' : '저장'}
                                                 </Button>
                                             )}
                                         </Box>
-                                        {isShowInputs['lng'] && (
+                                        {isShowInputs['lon'] && (
                                             <Box sx={{ height: 'auto' }}>
                                                 <TextInput
                                                     formik={formik}
                                                     name={'position.center.lon'}
-                                                    IsDisabled={isDisabledInputs['lng']}
+                                                    IsDisabled={isDisabledInputs['lon']}
                                                     placeholder={t('lon_input', 'gpss')}
                                                 />
                                             </Box>

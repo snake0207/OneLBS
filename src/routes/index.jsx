@@ -16,9 +16,6 @@ import ModalPage from '#/pages/DemoPage/ModalPage'
 import UserManagementDemo from '#/pages/DemoPage/UserManagementDemo'
 import UserLoginHistoryDemo from '#/pages/DemoPage/UserManagementDemo/UserLoginHistoryDemo'
 import UserPermissionDemo from '#/pages/DemoPage/UserManagementDemo/UserPermissionDemo'
-import ApprovalPage from '#/pages/DemoPage/ApprovalPage/index.jsx'
-import ApprovalHistoryPage from '#/pages/DemoPage/ApprovalPage/ApprovalHistoryPage/index.jsx'
-import ApprovalHistoryDetailPage from '#/pages/DemoPage/ApprovalPage/ApprovalHistoryPage/DetailPage/index.jsx'
 import UserListDemo from '#/pages/DemoPage/UserManagementDemo/UserListDemo'
 import IPManageDemo from '#/pages/DemoPage/UserManagementDemo/IPManageDemo'
 import TablePage from '#/pages/DemoPage/TablePage'
@@ -31,6 +28,8 @@ import PermissionHistoryPage from '#/pages/users/PermissionHistoryPage'
 import IpManagePage from '#/pages/users/IpManagePage'
 import DashboardPage from '#/pages/DemoPage/DashboardPage'
 import PrivateRoute from '#/routes/PrivateRoute'
+import ApprovalHistoryPage from '#/pages/ApprovalHistoryPage/index.jsx'
+import ApprovalHistoryDetailPage from '#/pages/ApprovalHistoryPage/DetailPage/index.jsx'
 import MapSearchPage from '#/pages/search/MapSearchPage'
 import POISearchPage from '#/pages/search/POISearchPage'
 import MapSearchDetail from '#/pages/search/MapSearchDetail'
@@ -57,6 +56,12 @@ const Routes = () => {
                             element: <PermissionHistoryPage />,
                         },
                         { path: '/user-management/ip-access', element: <IpManagePage /> },
+                        // approval history
+                        { path: '/approval/:type?', element: <ApprovalHistoryPage /> },
+                        {
+                            path: '/approval/:type?/detail/:id',
+                            element: <ApprovalHistoryDetailPage />,
+                        },
                     ],
                 },
                 {
@@ -85,12 +90,6 @@ const Routes = () => {
                 { path: '/components/logins', element: <LoginDemoPage /> },
                 { path: '/components/modals', element: <ModalPage /> },
                 { path: '/components/popup', element: <PopupPage /> },
-                { path: '/components/approval', element: <ApprovalPage /> },
-                { path: '/components/approval/:type', element: <ApprovalHistoryPage /> },
-                {
-                    path: '/components/approval/:type/detail/:id',
-                    element: <ApprovalHistoryDetailPage />,
-                },
                 { path: '/components/tables', element: <TablePage /> },
                 { path: '/components/users', element: <UserManagementDemo /> },
                 { path: '/components/users/list', element: <UserListDemo /> },

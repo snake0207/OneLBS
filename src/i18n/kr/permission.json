@@ -1,4 +1,6 @@
 {
+    "menu_change": "메뉴 변경",
+    "permission_change": "권한 변경",
     "menu": {
         "mypage": "마이페이지",
         "profile": "내 정보",
@@ -29,10 +31,10 @@
         "login_page_image_management": "로그인 페이지 사진 관리"
     },
     "permission_name": {
-        "25": "일반 사용자",
-        "26": "요청자",
-        "27": "검토자",
-        "28": "승인자",
-        "29": "운영자"
+        "GUEST": "일반 사용자",
+        "USER": "요청자",
+        "REVIEWER": "검토자",
+        "MANAGER": "승인자",
+        "ADMIN": "운영자"
     }
 }

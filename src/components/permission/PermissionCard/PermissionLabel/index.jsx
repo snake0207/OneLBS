@@ -9,6 +9,8 @@ const PermissionLabel = ({ permission }) => {
     const labelColor = {
         R: '#459BFF',
         U: '#C96CF5',
+        D: '#C96CF5',
+        C: '#C96CF5',
         A: '#0BB2A8',
     }
 

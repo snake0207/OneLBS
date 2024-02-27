@@ -6,6 +6,7 @@ import InfoIcon from '@mui/icons-material/Info'
 import CategoryCount from '#/components/dashboard/CategoryCount'
 import UserTooltip from '#/components/dashboard/UserTooltip'
 import VectorMapTooltip from '#/components/dashboard/VectorMapTooltip'
+import CountryTooltipMobileCarousel from '#/components/dashboard/CountryTooltip/CountryTooltipMobileCarousel'
 
 const DashboardPage = () => {
     const CountryTooltipMockData = [
@@ -26,6 +27,8 @@ const DashboardPage = () => {
             </div>
             <p>Country Tooltip</p>
             <CountryTooltip categoryCountList={CountryTooltipMockData} title={'국가명'} />
+            <p>Country Tooltip Mobile</p>
+            <CountryTooltipMobileCarousel categoryCountList={CountryTooltipMockData} />
             <p>User Tooltip</p>
             <UserTooltip />
             <p>VectorMap Tooltip</p>

@@ -15,7 +15,7 @@ const PermissionCard = ({ permissionCard }) => {
                     <Button variant="contained">{t('permission_change', 'permission')}</Button>
                 </Box>
             </Box>
-            <Typography>guest</Typography>
+            <Typography>{permissionCard.roleName.toLowerCase()}</Typography>
             <Box sx={{ display: 'flex', flexWrap: 'wrap' }}>
                 {permissionCard.permissions.map((code) => (
                     <PermissionLabel key={code} permission={code} />

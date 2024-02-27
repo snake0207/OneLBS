@@ -4,6 +4,7 @@ import { Box } from '@mui/material'
 import InfoIcon from '@mui/icons-material/Info'
 import VectorMap from '#/components/dashboard/VectorMap'
 import ShortCutBanner from '#/components/dashboard/ShortCutBanner'
+import VectorMapTooltip from '#/components/dashboard/VectorMapTooltip'
 
 function MainPage() {
     const countryMockData = [
@@ -12,6 +13,14 @@ function MainPage() {
         { icon: <InfoIcon />, category: 'parking', count: '003' },
         { icon: <InfoIcon />, category: 'h2Charging', count: '002' },
         { icon: <InfoIcon />, category: 'dealerPoi', count: '001' },
+    ]
+
+    const VectorMapMockData = [
+        { lightIcon: <InfoIcon />, darkIcon: <InfoIcon />, category: 'evCharging', count: '001' },
+        { lightIcon: <InfoIcon />, darkIcon: <InfoIcon />, category: 'fuel', count: '002' },
+        { lightIcon: <InfoIcon />, darkIcon: <InfoIcon />, category: 'parking', count: '003' },
+        { lightIcon: <InfoIcon />, darkIcon: <InfoIcon />, category: 'h2Charging', count: '004' },
+        { lightIcon: <InfoIcon />, darkIcon: <InfoIcon />, category: 'dealerPoi', count: '005' },
     ]
 
     const shortCutMockData = [
@@ -47,7 +56,10 @@ function MainPage() {
                 <UserTooltip />
                 <CountryTooltip title={'Europe'} categoryCountList={countryMockData} />
             </Box>
-            <VectorMap />
+            <Box sx={{ display: 'flex', p: 1, bgcolor: 'white', borderRadius: 2 }}>
+                <VectorMap />
+                <VectorMapTooltip categoryCountList={VectorMapMockData} title={'국가명'} />
+            </Box>
             <Box sx={{ display: 'flex' }}>
                 {shortCutMockData.map((item, idx) => (
                     <ShortCutBanner

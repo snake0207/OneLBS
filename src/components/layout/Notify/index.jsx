@@ -12,6 +12,7 @@ import { Button } from '@mui/material'
 import NotifyItem from './NotifyItem'
 import AlramIcon from '#/assets/alramIcon.svg'
 import AlramIconDark from '#/assets/alramIconDark.svg'
+import style from './style.module'
 
 function Notify({ notifications }) {
     const [anchorEl, setAnchorEl] = useState(null)
@@ -73,11 +74,13 @@ function Notify({ notifications }) {
                     vertical: 'top',
                     horizontal: 'right',
                 }}
-                sx={{ mt: 2 }}
+                sx={style.dialogBox}
                 onClose={handleClose}
             >
-                <Box p={2}>
-                    <Button onClick={handleReadAll}>{t('read_all')}</Button>
+                <Box p={2} sx={{ p: '0 0 10px 0', fontSize: 14 }}>
+                    <Button onClick={handleReadAll} sx={style.allButton}>
+                        {t('read_all')}
+                    </Button>
                     {notifications.map((item, index) => (
                         <NotifyItem key={index} item={item} onClick={handleItemClick} />
                     ))}

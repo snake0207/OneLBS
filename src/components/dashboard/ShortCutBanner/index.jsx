@@ -1,44 +1,40 @@
 import LinkRouter from '#/components/common/menu/LinkRouter'
-import { Box, Typography } from '@mui/material'
+import { Box, Typography, Icon } from '@mui/material'
 import EastIcon from '@mui/icons-material/East'
 
 import t from '#/common/libs/trans'
+import useLayoutStore from '#/store/useLayoutStore'
+import BannerarrowIcon from '#/assets/m_bannerarrowIcon.svg'
+import BannerarrowIconDark from '#/assets/m_bannerarrowIconDark.svg'
+import style from './style.module'
 
 const ShortCutBanner = ({ bannerTitle, bannerDesc, path, icon }) => {
+    const { themeMode } = useLayoutStore()
     return (
-        <Box
-            sx={{
-                display: 'flex',
-                flexDirection: 'column',
-                alignItems: 'flex-start',
-                position: 'relative',
-                padding: '10px 18px',
-                border: 1,
-                borderRadius: 2,
-                bgcolor: 'white',
-                width: 300,
-            }}
-        >
-            <Typography variant="h5" fontWeight={'bold'}>
+        <Box sx={style.dashboardBox}>
+            <Typography variant="h5" sx={style.Title}>
                 {bannerTitle}
             </Typography>
-            <Typography>{bannerDesc}</Typography>
-            <LinkRouter
-                to={path}
+            <Typography sx={style.subTitle}>{bannerDesc}</Typography>
+            <LinkRouter to={path} sx={style.more}>
+                {t('read_more', 'dashboard')}
+                {themeMode === 'light' ? (
+                    <img src={BannerarrowIcon} />
+                ) : (
+                    <img src={BannerarrowIconDark} />
+                )}
+            </LinkRouter>
+            <Icon
                 sx={{
-                    mt: 2,
-                    flexGrow: 0,
-                    textDecoration: 'none',
-                    color: 'inherit',
-                    display: 'flex',
-                    alignItems: 'center',
-                    gap: 1,
+                    position: 'absolute',
+                    right: '20px',
+                    bottom: '15px',
+                    width: '50px',
+                    height: '50px',
                 }}
             >
-                {t('read_more', 'dashboard')}
-                <EastIcon />
-            </LinkRouter>
-            {icon}
+                {icon}
+            </Icon>
         </Box>
     )
 }

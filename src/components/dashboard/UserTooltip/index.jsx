@@ -1,36 +1,62 @@
-import { Box, Divider, Stack, Typography } from '@mui/material'
-import AccountCircleIcon from '@mui/icons-material/AccountCircle'
+import { Box, Stack, Typography } from '@mui/material'
 import CategoryCount from '#/components/dashboard/CategoryCount'
-import InsertDriveFileIcon from '@mui/icons-material/InsertDriveFile'
-import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos'
+
+import UserIconDark from '#/assets/userIconDark.svg'
+import ApprovalIcon from '#/assets/m_approvalIcon.svg'
+import ApprovalIconDark from '#/assets/m_approvalIconDark.svg'
+import CompanionIcon from '#/assets/m_companionIcon.svg'
+import CompanionIconDark from '#/assets/m_companionIconDark.svg'
+import CompleteIcon from '#/assets/m_completeIcon.svg'
+import CompleteIconDark from '#/assets/m_completeIconDark.svg'
+import ArrowIcon from '#/assets/m_arrowIcon.svg'
 
 import t from '#/common/libs/trans'
+import useLayoutStore from '#/store/useLayoutStore'
+
+import style from './style.module'
 
 const userMockData = [
-    { categoryName: t('request_approval', 'dashboard'), icon: <InsertDriveFileIcon /> },
-    { categoryName: t('turn_back', 'dashboard'), icon: <InsertDriveFileIcon /> },
-    { categoryName: t('approval_completed', 'dashboard'), icon: <InsertDriveFileIcon /> },
+    {
+        categoryName: t('request_approval', 'dashboard'),
+        lightIcon: <img src={ApprovalIcon} />,
+        darkIcon: <img src={ApprovalIconDark} />,
+    },
+    {
+        categoryName: t('turn_back', 'dashboard'),
+        lightIcon: <img src={CompanionIcon} />,
+        darkIcon: <img src={CompanionIconDark} />,
+    },
+    {
+        categoryName: t('approval_completed', 'dashboard'),
+        lightIcon: <img src={CompleteIcon} />,
+        darkIcon: <img src={CompleteIconDark} />,
+    },
 ]
 
 const data = [{ count: 123 }, { count: 321 }, { count: 555 }]
 
 const UserTooltip = () => {
+    const { themeMode } = useLayoutStore()
     return (
-        <Box sx={{ display: 'inline-block', border: 1, bgcolor: 'white', borderRadius: 2 }}>
-            <Box sx={{ display: 'flex', padding: 2 }}>
-                <AccountCircleIcon />
-                <Typography>관리자</Typography>
-                <Typography>일반 사용자</Typography>
+        <Box sx={{ display: 'inline-block', borderRadius: '8px', width: '35%' }}>
+            <Box sx={style.Title}>
+                <img src={UserIconDark} />
+                <Typography sx={{ fontSize: '20px', fontWeight: 500, ml: '6px' }}>
+                    관리자
+                </Typography>
+                <Typography sx={{ fontSize: '14px', fontWeight: 400, ml: '6px' }}>
+                    일반 사용자
+                </Typography>
             </Box>
-            <Divider sx={{ borderColor: 'black' }} />
-            <Stack
-                sx={{ flexDirection: 'row', alignItems: 'center', gap: 3, padding: 2 }}
-                divider={<ArrowForwardIosIcon />}
-            >
+            <Stack sx={style.dashboardBox} divider={<img src={ArrowIcon} />}>
                 {data.map((item, idx) => (
                     <CategoryCount
                         key={idx}
-                        icon={userMockData[idx].icon}
+                        icon={
+                            themeMode === 'light'
+                                ? userMockData[idx].lightIcon
+                                : userMockData[idx].darkIcon
+                        }
                         categoryName={userMockData[idx].categoryName}
                         count={item.count}
                     />

@@ -19,14 +19,13 @@ const VectorMap = () => {
             sx={{
                 position: 'relative',
                 width: 1198,
-                height: 355,
+                height: '100%',
                 overflow: 'hidden',
-                bgcolor: 'white',
             }}
         >
             <ComposableMap
                 projection={'geoMercator'}
-                projectionConfig={{ scale: 80, center: [10, -60] }} // scale: 지도 크기, center: 지도 위치 [x, y]
+                projectionConfig={{ scale: 80, center: [10, -10] }} // scale: 지도 크기, center: 지도 위치 [x, y]
             >
                 <ZoomableGroup>
                     <Geographies geography={geoJson}>

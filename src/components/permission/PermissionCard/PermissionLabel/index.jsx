@@ -1,6 +1,17 @@
+import { parseMenuPermissionCode } from '#/common/libs/parseMenuPermissionCode'
 import { Box } from '@mui/material'
 
-const PermissionLabel = ({ permission, permissionId }) => {
+import t from '#/common/libs/trans'
+
+const PermissionLabel = ({ permission }) => {
+    const { menuObj, permissionCode } = parseMenuPermissionCode(permission)
+
+    const labelColor = {
+        R: '#459BFF',
+        U: '#C96CF5',
+        A: '#0BB2A8',
+    }
+
     return (
         <Box
             sx={{
@@ -8,11 +19,13 @@ const PermissionLabel = ({ permission, permissionId }) => {
                 justifyContent: 'center',
                 alignItems: 'center',
                 border: 1,
-                borderRadius: 2,
-                borderColor: 2,
+                borderRadius: 5,
+                px: 1,
+                borderColor: labelColor[permissionCode],
+                color: labelColor[permissionCode],
             }}
         >
-            {permission}
+            {t(`menu.${menuObj.label}`, 'permission')}
         </Box>
     )
 }

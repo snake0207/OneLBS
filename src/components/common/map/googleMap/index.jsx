@@ -14,6 +14,7 @@ import MapGpssDetail from '#/components/common/map/MapGpssDetail/index.jsx'
 import TuneIcon from '@mui/icons-material/Tune'
 import { BrowserView, MobileView } from 'react-device-detect'
 import { Stack } from '@mui/material'
+import { useNavigate } from 'react-router-dom'
 
 const mapSampleData = [
     {
@@ -254,6 +255,7 @@ const GoogleMapComponent = ({
     isPoiSearch = false,
     isGpssSearch = false,
 }) => {
+    const navigate = useNavigate()
     const [map, setMap] = useState(null)
     // 구글 검색 결과
     const [searchResultArr, setSearchResultArr] = useState([])
@@ -310,6 +312,19 @@ const GoogleMapComponent = ({
 
     const handleShowSearch = () => {
         setShowSearch(!showSearch)
+    }
+
+    // mobile detail navigate
+    const handlePOISelected = (id) => {
+        setSelectedPoi(id)
+
+        /* poi 상세  */
+        if (isPoiSearch) {
+            navigate(`/search-management/map/${id}`)
+        } else if (isGpssSearch && detailSampleData) {
+            /* gpss 상세 */
+            navigate(`/poi-view/map/${id}`)
+        }
     }
 
     return (
@@ -414,7 +429,7 @@ const GoogleMapComponent = ({
                                     <MapSearchList
                                         searchResultArr={mapSampleData}
                                         selectedPoi={selectedPoi}
-                                        setSelectedPoi={setSelectedPoi}
+                                        setSelectedPoi={handlePOISelected}
                                     />
                                 </Stack>
                             )}

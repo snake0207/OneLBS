@@ -1,27 +1,117 @@
 [
     {
         "roleId": 25,
-        "permission": ["M131R", "M151R", "M152R", "M153R", "M154R", "M111R", "M111U", "M121R"],
-        "count": 50
+        "roleName": "GUEST",
+        "permissions": [
+            "M101R",
+            "M131R",
+            "M151R",
+            "M152R",
+            "M153R",
+            "M154R",
+            "M111R",
+            "M111U",
+            "M121R"
+        ],
+        "userCount": 0
     },
     {
         "roleId": 26,
-        "permission": ["M131R", "M151R", "M152R", "M153R", "M154R", "M111R", "M111U", "M121R"],
-        "count": 50
+        "roleName": "USER",
+        "permissions": [
+            "M101R",
+            "M111R",
+            "M111U",
+            "M131R",
+            "M141R",
+            "M142R",
+            "M142U",
+            "M142D",
+            "M151R",
+            "M152R",
+            "M153R",
+            "M154R",
+            "M121R",
+            "M121U",
+            "M121D"
+        ],
+        "userCount": 6
     },
     {
         "roleId": 27,
-        "permission": ["M131R", "M151R", "M152R", "M153R", "M154R", "M111R", "M111U", "M121R"],
-        "count": 50
+        "roleName": "REVIEWER",
+        "permissions": [
+            "M101R",
+            "M111R",
+            "M111U",
+            "M131R",
+            "M141R",
+            "M143A",
+            "M143R",
+            "M143U",
+            "M151R",
+            "M152R",
+            "M153R",
+            "M154R",
+            "M121R"
+        ],
+        "userCount": 2
     },
     {
         "roleId": 28,
-        "permission": ["M131R", "M151R", "M152R", "M153R", "M154R", "M111R", "M111U", "M121R"],
-        "count": 50
+        "roleName": "MANAGER",
+        "permissions": [
+            "M101R",
+            "M111R",
+            "M111U",
+            "M131R",
+            "M141R",
+            "M144A",
+            "M144R",
+            "M144U",
+            "M151R",
+            "M152R",
+            "M153R",
+            "M154R",
+            "M121R"
+        ],
+        "userCount": 0
     },
     {
         "roleId": 29,
-        "permission": ["M131R", "M151R", "M152R", "M153R", "M154R", "M111R", "M111U", "M121R"],
-        "count": 50
+        "roleName": "ADMIN",
+        "permissions": [
+            "M101R",
+            "M111R",
+            "M111U",
+            "M131R",
+            "M141R",
+            "M151R",
+            "M152R",
+            "M153R",
+            "M154R",
+            "M162R",
+            "M161A",
+            "M161R",
+            "M161U",
+            "M161D",
+            "M163R",
+            "M171R",
+            "M171U",
+            "M164C",
+            "M164R",
+            "M164U",
+            "M181R",
+            "M181U",
+            "M182R",
+            "M182U",
+            "M183R",
+            "M183U",
+            "M184R",
+            "M184U",
+            "M184D",
+            "M121R"
+        ],
+        "userCount": 2
     }
 ]

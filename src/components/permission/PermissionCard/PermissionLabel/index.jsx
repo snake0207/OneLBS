@@ -12,6 +12,8 @@ const PermissionLabel = ({ permission }) => {
         A: '#0BB2A8',
     }
 
+    if (menuObj.menuId === 101) return
+
     return (
         <Box
             sx={{

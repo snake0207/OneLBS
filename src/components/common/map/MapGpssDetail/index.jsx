@@ -143,7 +143,12 @@ const MapGpssDetail = ({ selectedPoi, setSelectedPoi, poiData }) => {
                         }}
                     >
                         {/* 상세 기본 정보 */}
-                        <BasicInfo formik={formik} poiData={poiData} tabSelected={tabSelected} />
+                        <BasicInfo
+                            formik={formik}
+                            poiData={poiData}
+                            tabSelected={tabSelected}
+                            isEditable={true}
+                        />
                         <Box>
                             <Typography
                                 sx={{

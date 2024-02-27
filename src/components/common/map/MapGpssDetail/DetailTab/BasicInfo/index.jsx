@@ -21,7 +21,7 @@ const jsonSample = {
     key5: 'value5',
     key6: 'value6',
 }
-const BasicInfo = ({ formik, poiData, tabSelected }) => {
+const BasicInfo = ({ formik, poiData, tabSelected, isEditable }) => {
     const [isShowInputs, setIsShowInputs] = useState({
         address: false,
         lat: false,
@@ -68,13 +68,15 @@ const BasicInfo = ({ formik, poiData, tabSelected }) => {
                                         {poiData.address}
                                     </Typography>
                                 </Box>
-                                <Button
-                                    variant={'contained'}
-                                    sx={{ ml: 'auto' }}
-                                    onClick={() => handleClickInputButton('address')}
-                                >
-                                    {isDisabledInputs['address'] ? '수정' : '저장'}
-                                </Button>
+                                {isEditable && (
+                                    <Button
+                                        variant={'contained'}
+                                        sx={{ ml: 'auto' }}
+                                        onClick={() => handleClickInputButton('address')}
+                                    >
+                                        {isDisabledInputs['address'] ? '수정' : '저장'}
+                                    </Button>
+                                )}
                             </Box>
                             {isShowInputs['address'] && (
                                 <Box sx={{ height: '40px' }}>
@@ -137,14 +139,16 @@ const BasicInfo = ({ formik, poiData, tabSelected }) => {
                                                     {poiData.position.center.lat}
                                                 </Typography>
                                             </Box>
-                                            <Button
-                                                sx={{ ml: 'auto' }}
-                                                variant={'contained'}
-                                                disabled={!!formik.errors.position?.center?.lat}
-                                                onClick={() => handleClickInputButton('lat')}
-                                            >
-                                                {isDisabledInputs['lat'] ? '수정' : '저장'}
-                                            </Button>
+                                            {isEditable && (
+                                                <Button
+                                                    sx={{ ml: 'auto' }}
+                                                    variant={'contained'}
+                                                    disabled={!!formik.errors.position?.center?.lat}
+                                                    onClick={() => handleClickInputButton('lat')}
+                                                >
+                                                    {isDisabledInputs['lat'] ? '수정' : '저장'}
+                                                </Button>
+                                            )}
                                         </Box>
                                         {isShowInputs['lat'] && (
                                             <Box sx={{ height: 'auto' }}>
@@ -176,14 +180,16 @@ const BasicInfo = ({ formik, poiData, tabSelected }) => {
                                                     {poiData.position.center.lon}
                                                 </Typography>
                                             </Box>
-                                            <Button
-                                                variant={'contained'}
-                                                sx={{ ml: 'auto' }}
-                                                disabled={!!formik.errors.position?.center?.lon}
-                                                onClick={() => handleClickInputButton('lng')}
-                                            >
-                                                {isDisabledInputs['lng'] ? '수정' : '저장'}
-                                            </Button>
+                                            {isEditable && (
+                                                <Button
+                                                    variant={'contained'}
+                                                    sx={{ ml: 'auto' }}
+                                                    disabled={!!formik.errors.position?.center?.lon}
+                                                    onClick={() => handleClickInputButton('lng')}
+                                                >
+                                                    {isDisabledInputs['lng'] ? '수정' : '저장'}
+                                                </Button>
+                                            )}
                                         </Box>
                                         {isShowInputs['lng'] && (
                                             <Box sx={{ height: 'auto' }}>

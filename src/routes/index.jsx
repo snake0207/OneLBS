@@ -62,6 +62,7 @@ const Routes = () => {
                         {
                             path: '/permission-management/permissions-list',
                             element: <PermissionManagementPage />,
+                        },
                         // approval history
                         { path: '/approval/:type?', element: <ApprovalHistoryPage /> },
                         {

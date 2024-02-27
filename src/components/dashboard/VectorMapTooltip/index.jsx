@@ -1,31 +1,16 @@
 import { Box, Typography } from '@mui/material'
-import LanguageIcon from '@mui/icons-material/Language'
 import CategoryCount from '#/components/dashboard/CategoryCount'
 import useLayoutStore from '#/store/useLayoutStore'
+import LanguageIcon from '#/assets/languagesIconDark.svg'
+
+import style from './style.module'
 
 const VectorMapTooltip = ({ title, categoryCountList }) => {
     const { themeMode } = useLayoutStore()
     return (
-        <Box
-            sx={{
-                display: 'flex',
-                flexWrap: 'wrap',
-                gap: 1,
-                border: 1,
-                bgcolor: 'white',
-                borderRadius: 2,
-                p: 1,
-                width: 226,
-            }}
-        >
-            <Box
-                sx={{
-                    padding: 1,
-                    width: 100,
-                    height: 100,
-                }}
-            >
-                <LanguageIcon />
+        <Box sx={style.dashboardBox}>
+            <Box sx={style.Title}>
+                <img src={LanguageIcon} style={{ width: '20px' }} />
                 <Typography>{title}</Typography>
             </Box>
             {categoryCountList.map((item) => (
@@ -33,10 +18,15 @@ const VectorMapTooltip = ({ title, categoryCountList }) => {
                     key={item.category}
                     sx={{
                         padding: 1,
-                        bgcolor: '#C7F1FF',
+                        bgcolor: 'color.germany',
                         borderRadius: 2,
-                        width: 100,
+                        width: 'calc(50% - 5px)',
                         height: 100,
+                        justifyContent: 'center',
+                        m: '0 0 10px 0',
+                        '&:nth-of-type(even)': {
+                            ml: '10px',
+                        },
                     }}
                 >
                     <CategoryCount

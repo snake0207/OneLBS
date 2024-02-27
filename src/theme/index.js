@@ -71,6 +71,9 @@ export const tokens = {
         5001: '#002C5F',
         6001: '#080945',
         7001: '#727b83',
+        8001: '#306a7d',
+        9001: '#C7F1FF',
+        10001: '#73B4FF',
     },
 
     background: {
@@ -193,6 +196,11 @@ export const getThemeSettings = (mode) => ({
                       header: tokens.color[1000],
                       alert: tokens.color[1000],
                       alertBtn: tokens.color[5001],
+                      dashboard: tokens.color[701],
+                      germanyBox: tokens.color[8001],
+                      germany: tokens.color[9001],
+                      dashboardCnt: tokens.color[300],
+                      banner: tokens.color[5001],
                   },
                   button: {
                       ...tokens.button,
@@ -213,6 +221,7 @@ export const getThemeSettings = (mode) => ({
                       taps: tokens.text[400],
                       tapSelected: tokens.text[700],
                       mapTaps: tokens.text[900],
+                      dashboard: tokens.text[600],
                   },
                   background: {
                       default: tokens.background[100],
@@ -302,6 +311,11 @@ export const getThemeSettings = (mode) => ({
                       header: tokens.color[601],
                       alert: tokens.color[7001],
                       alertBtn: tokens.color[100],
+                      dashboard: tokens.color[100],
+                      germanyBox: tokens.color[1001],
+                      germany: tokens.color[901],
+                      dashboardCnt: tokens.color[701],
+                      banner: tokens.color[10001],
                   },
                   button: {
                       ...tokens.button,
@@ -322,6 +336,7 @@ export const getThemeSettings = (mode) => ({
                       taps: tokens.text[800],
                       tapSelected: tokens.background[400],
                       mapTaps: tokens.text[400],
+                      dashboard: tokens.text[700],
                   },
                   background: {
                       default: tokens.background.main,

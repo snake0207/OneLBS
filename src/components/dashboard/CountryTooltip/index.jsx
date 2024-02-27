@@ -1,29 +1,33 @@
-import { Box, Divider, Typography } from '@mui/material'
+import { Box, Typography } from '@mui/material'
 import CategoryCount from '#/components/dashboard/CategoryCount'
-import LanguageIcon from '@mui/icons-material/Language'
+import useLayoutStore from '#/store/useLayoutStore'
+import LanguageIcon from '#/assets/languagesIconDark.svg'
+
+import style from './style.module'
 
 const CountryTooltip = ({ title, categoryCountList }) => {
+    const { themeMode } = useLayoutStore()
     return (
-        <Box sx={{ display: 'inline-block', border: 1, bgcolor: 'white', borderRadius: 2 }}>
-            <Box
-                sx={{
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'flex-start',
-                    gap: 1,
-                    padding: 2,
-                }}
-            >
-                <LanguageIcon />
-                <Typography>{title}</Typography>
+        <Box
+            sx={{
+                display: 'inline-block',
+                borderRadius: '8px',
+                width: 'calc(65% - 10px)',
+                ml: '10px',
+            }}
+        >
+            <Box sx={style.Title}>
+                <img src={LanguageIcon} />
+                <Typography sx={{ fontSize: '20px', fontWeight: 500, ml: '6px' }}>
+                    {title}
+                </Typography>
             </Box>
-            <Divider sx={{ borderColor: 'black' }} />
-            <Box sx={{ display: 'flex', alignItems: 'center', gap: 2, padding: 2 }}>
+            <Box sx={style.dashboardBox}>
                 {categoryCountList.map((item) => (
                     <CategoryCount
                         key={item.category}
                         categoryName={item.category}
-                        icon={item.icon}
+                        icon={themeMode === 'light' ? item.lightIcon : item.darkIcon}
                         count={item.count}
                     />
                 ))}

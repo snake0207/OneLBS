@@ -1,26 +1,30 @@
-import t from '#/common/libs/trans'
 import PermissionLabel from '#/components/permission/PermissionCard/PermissionLabel'
 import { Box, Button, Typography } from '@mui/material'
+
+import t from '#/common/libs/trans'
 
 const PermissionCard = ({ permissionCard }) => {
     return (
         <Box sx={{ bgcolor: 'white' }}>
             <Box sx={{ display: 'flex', alignItems: 'center' }}>
                 <Typography>
-                    {t(`permission_name.${permissionCard.roleId}`, 'permission')}
+                    {t(`permission_name.${permissionCard.roleName}`, 'permission')}
                 </Typography>
                 <Box sx={{ display: 'flex' }}>
-                    <Button variant="contained">메뉴 변경</Button>
-                    <Button variant="contained">권한 변경</Button>
+                    <Button variant="contained">{t('menu_change', 'permission')}</Button>
+                    <Button variant="contained">{t('permission_change', 'permission')}</Button>
                 </Box>
             </Box>
             <Typography>guest</Typography>
-            <Box sx={{ display: 'flex' }}>
-                {permissionCard.permission.map((code) => (
+            <Box sx={{ display: 'flex', flexWrap: 'wrap' }}>
+                {permissionCard.permissions.map((code) => (
                     <PermissionLabel key={code} permission={code} />
                 ))}
             </Box>
-            <Typography>총 {permissionCard.count}명</Typography>
+            <Typography>
+                {t('total', 'permission')} {permissionCard.userCount}
+                {t('number_of_people', 'permission')}
+            </Typography>
         </Box>
     )
 }

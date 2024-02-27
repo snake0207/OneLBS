@@ -1,5 +1,6 @@
 import { Box, IconButton, InputAdornment, TextField, Typography } from '@mui/material'
 import Close from '@mui/icons-material/Close'
+import { useEffect } from 'react'
 
 /**
  * 일반 text 공통 Input
@@ -27,17 +28,23 @@ const TextInput = ({ name, formik, placeholder = null, inputRule = null, IsDisab
                     value={parseNameByPath(formik.values, name)}
                     onChange={formik.handleChange}
                     onBlur={formik.handleBlur}
-                    error={formik.touched[name] && !!formik.errors[name]}
+                    error={
+                        !!parseNameByPath(formik.touched, name) &&
+                        !!parseNameByPath(formik.errors, name)
+                    }
                     fullWidth
                     size="small"
                     type="text"
                     placeholder={placeholder}
-                    helperText={formik.touched[name] && formik.errors[name]}
+                    helperText={
+                        !!parseNameByPath(formik.touched, name) &&
+                        parseNameByPath(formik.errors, name)
+                    }
                     sx={{ backgroundColor: 'form.main', borderRadius: '4px' }}
                     InputProps={{
                         endAdornment: (
                             <InputAdornment position="end">
-                                {parseNameByPath(formik.values, name) && (
+                                {!IsDisabled && parseNameByPath(formik.values, name) && (
                                     <IconButton
                                         edge="end"
                                         onClick={() => formik.setFieldValue(name, '')}

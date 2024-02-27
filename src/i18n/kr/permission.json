@@ -1,6 +1,8 @@
 {
     "menu_change": "메뉴 변경",
     "permission_change": "권한 변경",
+    "total": "총",
+    "number_of_people": "명",
     "menu": {
         "mypage": "마이페이지",
         "profile": "내 정보",

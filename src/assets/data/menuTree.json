@@ -1,0 +1,116 @@
+[
+    {
+        "menuId": 121,
+        "name": "Map",
+        "menuUrl": "/search-management/map",
+        "label": "map"
+    },
+    {
+        "menuId": 131,
+        "name": "Map",
+        "menuUrl": "/poi-view/map",
+        "label": "map"
+    },
+    {
+        "menuId": 141,
+        "name": "Full History View",
+        "menuUrl": "/approval",
+        "label": "all_history"
+    },
+    {
+        "menuId": 142,
+        "name": "User History View",
+        "menuUrl": "/approval/user-history",
+        "label": "user_history"
+    },
+    {
+        "menuId": 143,
+        "name": "Reviewer History View",
+        "menuUrl": "/approval/reviewer-history",
+        "label": "reviewer_history"
+    },
+    {
+        "menuId": 144,
+        "name": "Manager History View",
+        "menuUrl": "/approval/manager-history",
+        "label": "manager_history"
+    },
+    {
+        "menuId": 151,
+        "name": "Hourly Statistics",
+        "menuUrl": "/mcp-poi/statistics/hourly",
+        "label": "time_statistics"
+    },
+    {
+        "menuId": 152,
+        "name": "Regional Statistics",
+        "menuUrl": "/mcp-poi/statistics/regional",
+        "label": "area_statistics"
+    },
+    {
+        "menuId": 153,
+        "name": "Content Provider Statistics",
+        "menuUrl": "/mcp-poi/statistics/content-provider",
+        "label": "cp_statistics"
+    },
+    {
+        "menuId": 154,
+        "name": "User Statistics",
+        "menuUrl": "/mcp-poi/statistics/user",
+        "label": "user_statistics"
+    },
+    {
+        "menuId": 161,
+        "name": "User List",
+        "menuUrl": "/user-management/user-list",
+        "label": "user_list"
+    },
+    {
+        "menuId": 162,
+        "name": "User Login History",
+        "menuUrl": "/user-management/login-history",
+        "label": "user_login_history"
+    },
+    {
+        "menuId": 163,
+        "name": "User Role History",
+        "menuUrl": "/user-management/role-history",
+        "label": "user_permission_history"
+    },
+    {
+        "menuId": 164,
+        "name": "IP Access Management",
+        "menuUrl": "/user-management/ip-access",
+        "label": "user_ip_access_management"
+    },
+    {
+        "menuId": 171,
+        "name": "Permissions List",
+        "menuUrl": "/permission-management/permissions-list",
+        "label": "permission_list"
+    },
+    {
+        "menuId": 181,
+        "name": "Category Code Management",
+        "menuUrl": "/common/category-code-management",
+        "label": "category_code_management"
+    },
+    {
+        "menuId": 182,
+        "name": "Country Code Management",
+        "menuUrl": "/common/country-code-management",
+        "label": "country_code_management"
+    },
+    {
+        "menuId": 183,
+        "name": "Language Code Management",
+        "menuUrl": "/common/language-code-management",
+        "label": "language_code_management"
+    },
+    {
+        "menuId": 184,
+        "name": "Login Page Image Management",
+        "menuUrl": "/common/login-page-image-management",
+        "label": "login_page_image_management"
+    }
+]

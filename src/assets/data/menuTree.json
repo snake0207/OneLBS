@@ -1,5 +1,17 @@
 [
     {
+        "menuId": 101,
+        "name": "Main",
+        "menuUrl": "/main",
+        "label": "main"
+    },
+    {
+        "menuId": 111,
+        "name": "My Infomation",
+        "menuUrl": "/my-page/my-info",
+        "label": "mypage"
+    },
+    {
         "menuId": 121,
         "name": "Map",
         "menuUrl": "/search-management/map",

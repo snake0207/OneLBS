@@ -11,6 +11,10 @@ import DisplayMarker from '#/components/common/map/googleMap/marker/DisplayMarke
 import SearchResultMarker from '#/components/common/map/googleMap/marker/SearchResultMarker/index.jsx'
 import MapGpssDetail from '#/components/common/map/MapGpssDetail/index.jsx'
 
+import TuneIcon from '@mui/icons-material/Tune'
+import { BrowserView, MobileView } from 'react-device-detect'
+import { Stack } from '@mui/material'
+
 const mapSampleData = [
     {
         poiId: 'ChIJm8fw1mfJwoARNzsUmsgD-Ig',
@@ -260,6 +264,7 @@ const GoogleMapComponent = ({
         lat: null,
         lng: null,
     })
+    const [showSearch, setShowSearch] = useState(false)
     // 오른쪽 클릭
     const [distanceCoordArr, setDistanceCoordArr] = useState([])
     // 거리측정 기능 활성 여부
@@ -302,6 +307,10 @@ const GoogleMapComponent = ({
     const onUnmount = useCallback(() => {
         setMap(null)
     }, [])
+
+    const handleShowSearch = () => {
+        setShowSearch(!showSearch)
+    }
 
     return (
         isLoaded && (
@@ -356,33 +365,63 @@ const GoogleMapComponent = ({
                 {(isPoiSearch || isGpssSearch) && (
                     <CustomControl position="TOP_LEFT" style={{ left: '0px !important' }}>
                         {/*<Box sx={{ display: 'flex', flexDirection: 'column', flex: 1 }}>*/}
-                        {/* 지도 검색 */}
-                        <MapSearch />
-                        {/* 검색 결과 */}
-                        <MapSearchList
-                            searchResultArr={mapSampleData}
-                            selectedPoi={selectedPoi}
-                            setSelectedPoi={setSelectedPoi}
-                        />
+                        <BrowserView>
+                            {/* 지도 검색 */}
+                            <MapSearch />
+                            {/* 검색 결과 */}
+                            <MapSearchList
+                                searchResultArr={mapSampleData}
+                                selectedPoi={selectedPoi}
+                                setSelectedPoi={setSelectedPoi}
+                            />
+
+                            {/* 상세정보 */}
+                            <CustomControl position="TOP_LEFT" style={{ left: '355px !important' }}>
+                                {/* poi 상세  */}
+                                {isPoiSearch && (
+                                    <MapPoiDetail
+                                        selectedPoi={selectedPoi}
+                                        setSelectedPoi={setSelectedPoi}
+                                    />
+                                )}
+                                {/* gpss 상세 */}
+                                {isGpssSearch && detailSampleData && (
+                                    <MapGpssDetail
+                                        selectedPoi={selectedPoi}
+                                        setSelectedPoi={setSelectedPoi}
+                                        poiData={detailSampleData.data.result[0]}
+                                    />
+                                )}
+                            </CustomControl>
+                        </BrowserView>
+                        {/* Mobile View */}
+                        <MobileView>
+                            <TuneIcon
+                                sx={{
+                                    fontSize: 32,
+                                    mt: 1,
+                                    ml: 2,
+                                    mb: 1,
+                                    border: '1px solid black',
+                                }}
+                                onClick={handleShowSearch}
+                            />
+                            {showSearch && (
+                                <Stack spacing={20} sx={{ ml: 2, mr: 2 }}>
+                                    {/* 지도 검색 */}
+                                    <MapSearch />
+                                    {/* 검색 결과 */}
+                                    <MapSearchList
+                                        searchResultArr={mapSampleData}
+                                        selectedPoi={selectedPoi}
+                                        setSelectedPoi={setSelectedPoi}
+                                    />
+                                </Stack>
+                            )}
+                        </MobileView>
                         {/*</Box>*/}
                     </CustomControl>
                 )}
-
-                {/* 상세정보 */}
-                <CustomControl position="TOP_LEFT" style={{ left: '355px !important' }}>
-                    {/* poi 상세  */}
-                    {isPoiSearch && (
-                        <MapPoiDetail selectedPoi={selectedPoi} setSelectedPoi={setSelectedPoi} />
-                    )}
-                    {/* gpss 상세 */}
-                    {isGpssSearch && detailSampleData && (
-                        <MapGpssDetail
-                            selectedPoi={selectedPoi}
-                            setSelectedPoi={setSelectedPoi}
-                            poiData={detailSampleData.data.result[0]}
-                        />
-                    )}
-                </CustomControl>
 
                 {/* 외부 마커 데이터 출력 */}
                 {markerDataArr &&

@@ -8,7 +8,6 @@ import DemoPage from '#/pages/DemoPage'
 import LayoutPage from '#/pages/DemoPage/LayoutPage'
 import ButtonPage from '#/pages/DemoPage/ButtonPage'
 import SelectPage from '#/pages/DemoPage/SelectPage'
-import PoiMapPage from '#/pages/poiMapPage/index.jsx'
 import MapPage from '#/pages/DemoPage/MapPage/index.jsx'
 import LoginDemoPage from '#/pages/DemoPage/LoginPage'
 import PopupPage from '#/pages/DemoPage/PopupPage'
@@ -32,6 +31,8 @@ import PermissionHistoryPage from '#/pages/users/PermissionHistoryPage'
 import IpManagePage from '#/pages/users/IpManagePage'
 import DashboardPage from '#/pages/DemoPage/DashboardPage'
 import PrivateRoute from '#/routes/PrivateRoute'
+import MapSearchPage from '#/pages/search/MapSearchPage'
+import POISearchPage from '#/pages/search/POISearchPage'
 
 const Routes = () => {
     return useRoutes([
@@ -43,7 +44,9 @@ const Routes = () => {
                     children: [
                         { path: '/', element: <MainPage /> },
                         { path: '/mypage/profile', element: <ProfilePage /> },
-                        { path: '/poi-map', element: <PoiMapPage /> },
+                        // search management
+                        { path: '/search-management/map', element: <MapSearchPage /> },
+                        { path: '/poi-view/map', element: <POISearchPage /> },
                         // user management
                         { path: '/user-management/user-list', element: <UserListPage /> },
                         { path: '/user-management/login-history', element: <LoginHistoryPage /> },

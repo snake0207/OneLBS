@@ -1,6 +1,5 @@
 import LinkRouter from '#/components/common/menu/LinkRouter'
 import { Box, Typography, Icon } from '@mui/material'
-import EastIcon from '@mui/icons-material/East'
 
 import t from '#/common/libs/trans'
 import useLayoutStore from '#/store/useLayoutStore'

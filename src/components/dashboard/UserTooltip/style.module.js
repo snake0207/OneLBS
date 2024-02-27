@@ -1,3 +1,5 @@
+import { isMobile } from 'react-device-detect'
+
 const style = {
     dashboardBox: {
         width: '100%',
@@ -7,7 +9,7 @@ const style = {
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'center',
-        gap: 6,
+        gap: isMobile ? 0 : 6,
         padding: '10px 26px',
         '& .MuiBox-root': {
             width: '33%',

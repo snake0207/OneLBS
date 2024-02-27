@@ -1,13 +1,13 @@
 import { Box, Typography } from '@mui/material'
 
-const CategoryCount = ({ icon, categoryName, count }) => {
+const CategoryCount = ({ icon, categoryName, count, ...rest }) => {
     return (
         <Box
             sx={{
                 display: 'flex',
                 flexDirection: 'column',
                 alignItems: 'center',
-                width: 'inherit',
+                ...rest,
             }}
         >
             {icon}

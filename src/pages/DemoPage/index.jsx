@@ -44,7 +44,7 @@ function DemoPage() {
                     <a href="/components/dashboard">Dashboard</a>
                 </li>
                 <li>
-                    <a href="/components/permission">Permission</a>
+                    <a href="/components/permission">Permission Management</a>
                 </li>
             </ul>
         </Box>

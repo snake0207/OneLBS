@@ -60,7 +60,7 @@ const FuelInfo = ({ data, isEditable, formik }) => {
                         ))}
                     </AccordionDetails>
                 </Accordion>
-                {data.summary.map(({ type, price, unit, currency }, index) => (
+                {data.summary.map(({ type, price, priceUnit, currency }, index) => (
                     <Accordion key={index}>
                         <AccordionSummary
                             expandIcon={<ExpandMoreIcon />}
@@ -82,8 +82,10 @@ const FuelInfo = ({ data, isEditable, formik }) => {
                             </Typography>
                         </AccordionSummary>
                         <AccordionDetails>
-                            {price}
-                            {currency}(1{currency} / 1{unit})
+                            <Typography>
+                                {price}
+                                {currency}(1{currency} / 1{priceUnit})
+                            </Typography>
                         </AccordionDetails>
                     </Accordion>
                 ))}

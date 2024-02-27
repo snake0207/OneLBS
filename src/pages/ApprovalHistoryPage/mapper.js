@@ -235,7 +235,7 @@ const fuelInfo = (data) => {
         summary: data.status.map(({ type, price }) => ({
             type: parseFuelType(type),
             price: price.price,
-            unit: price.priceUnit,
+            priceUnit: price.priceUnit,
             currencyCode: price.currencyCode,
             currency: price.currency,
         })),
@@ -262,6 +262,10 @@ const h2ChargingInfo = (data) => {
             unavailable: cannotUseCnt,
             noInfo: noInfoCnt,
         })),
+        price: data.price.price,
+        priceUnit: data.price.priceUnit,
+        currencyCode: data.price.currencyCode,
+        currency: data.price.currency,
         openingHours: parseOpeningHours(data.openingHours),
         chargers: data.charger.map(({ id, speed, status }) => ({
             id,
@@ -282,7 +286,7 @@ const detailResponseDataMapper = (res) => {
     const data = res.data.result[0]
     const basicData = {
         status: parseStatus(res.data.approvalStatus), // service에서 보내줄 결재이력 상태값
-        category: 'fuel',
+        category: 'h2Charging',
         // category: category(data),
         approvalInfo: res.data.approvalInfo,
         poiId: data.poiId,

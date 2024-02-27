@@ -22,12 +22,8 @@ function MapSearchPage() {
     return (
         <Box>
             <TitleBar title={t('top_menu.search_management')} />
-            <Box sx={{ display: 'flex' }}>
-                <Box sx={{ mr: 2 }}>
-                    <Box sx={{ width: '1600px', height: '900px' }}>
-                        <GoogleMapComponent markerDataArr={markerSampleData} isGpssSearch={true} />
-                    </Box>
-                </Box>
+            <Box sx={{ width: '100%', height: 'calc(100vh - 120px)' }}>
+                <GoogleMapComponent markerDataArr={markerSampleData} isGpssSearch={true} />
             </Box>
         </Box>
     )

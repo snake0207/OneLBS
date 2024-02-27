@@ -17,11 +17,12 @@ import { detailResponseDataMapper } from '#/pages/ApprovalHistoryPage/mapper.js'
 import InfoTab from '#/components/approval/Detail/InfoTab/index.jsx'
 import EvChargingInfo from '#/components/approval/Detail/CategoryInfo/EvChargingInfo/index.jsx'
 import BasicInfo from '#/components/common/map/MapGpssDetail/DetailTab/BasicInfo/index.jsx'
+import { getUserTypeFromPath } from '#/common/libs/approval.js'
 
 const ApprovalHistoryDetailPage = () => {
     const params = useParams()
     const popupActions = usePopupActions()
-    const userType = params.type // TODO: 전체이력 페이지면 all, 아니면 권한(url or token get..)
+    const userType = getUserTypeFromPath(params.type) // TODO: 전체이력 페이지면 all, 아니면 권한(url or token get..)
     const parsedData = detailResponseDataMapper(poiDetailData)
 
     // TODO: 추후 수정 api request 형식 확인해 {...parsedData}로 사용할 수 있을지 확인

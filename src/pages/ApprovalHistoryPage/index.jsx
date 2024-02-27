@@ -8,17 +8,18 @@ import TitleBar from '#/components/common/menu/TitleBar/index.jsx'
 import { useNavigate, useParams } from 'react-router-dom'
 import { BrowserView, MobileView, isMobile } from 'react-device-detect'
 import HistoryTableMobile from '#/components/approval/HistoryTable/Mobile/index.jsx'
-import { useRef, useState } from 'react'
+import { useMemo, useRef, useState } from 'react'
 import TotalCount from '#/components/approval/HistoryTable/TotalCount/index.jsx'
 import ViewMoreButton from '#/components/approval/HistoryTable/Mobile/ViewMoreButton/index.jsx'
 import { usePopupActions } from '#/store/usePopupStore.js'
+import { getUserTypeFromPath } from '#/common/libs/approval.js'
 
 const ApprovalHistoryPage = () => {
     // TODO: 임시상태값 - temporary, request, reviewed, approved, rejected_review, rejected_approval,
     const params = useParams()
     const popupActions = usePopupActions()
     const navigator = useNavigate()
-    const userType = params.type
+    const userType = getUserTypeFromPath(params.type)
     const url = window.location.pathname
     const totalCounts = useRef({
         total: dummyData?.length,

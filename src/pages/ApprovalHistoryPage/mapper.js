@@ -52,19 +52,19 @@ const parseOpeningHours = (openingHours) => {
 }
 const parseStationStatus = (status) => {
     switch (status) {
-        case '0':
+        case 0:
             return '알수없음'
-        case '1':
+        case 1:
             return '통신이상'
-        case '2':
+        case 2:
             return '사용가능'
-        case '3':
+        case 3:
             return '충전중'
-        case '4':
+        case 4:
             return '운영중지'
-        case '5':
+        case 5:
             return '점검중'
-        case '6':
+        case 6:
             return '예약중'
     }
 }
@@ -269,7 +269,7 @@ const h2ChargingInfo = (data) => {
         openingHours: parseOpeningHours(data.openingHours),
         chargers: data.charger.map(({ id, speed, status }) => ({
             id,
-            speed: parseH2ChargerSpeed(speed),
+            speed: speed,
             status: parseStationStatus(status),
         })),
     }

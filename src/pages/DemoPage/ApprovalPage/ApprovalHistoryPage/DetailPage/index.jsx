@@ -15,8 +15,8 @@ import Comment from '#/components/approval/Detail/Comment/index.jsx'
 import { usePopupActions } from '#/store/usePopupStore.js'
 import { detailResponseDataMapper } from '#/pages/DemoPage/ApprovalPage/ApprovalHistoryPage/mapper.js'
 import InfoTab from '#/components/approval/Detail/InfoTab/index.jsx'
-import CategoryInfo from '#/components/approval/Detail/CategoryInfo/index.jsx'
 import EvChargingInfo from '#/components/approval/Detail/CategoryInfo/EvChargingInfo/index.jsx'
+import BasicInfo from '#/components/common/map/MapGpssDetail/DetailTab/BasicInfo/index.jsx'
 
 const ApprovalHistoryDetailPage = () => {
     const params = useParams()
@@ -138,6 +138,7 @@ const ApprovalHistoryDetailPage = () => {
                         content={dummyData.approvalLineContents}
                     />
                     {/* 정보 탭 */}
+                    {/*<BasicInfo formik={formik} poiData={parsedData.basicInfo} />*/}
                     <InfoTab
                         basicData={parsedData.basicInfo}
                         coordData={parsedData.coordinates}

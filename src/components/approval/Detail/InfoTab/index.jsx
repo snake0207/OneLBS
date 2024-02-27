@@ -116,6 +116,253 @@ const InfoTab = ({ basicData, coordData, formik, isEditable }) => {
                             })}
                         </TableBody>
                     </Table>
+                    {/* 좌표 아코디언 시작 */}
+                    <Box>
+                        <Accordion>
+                            <AccordionSummary
+                                expandIcon={<ExpandMoreIcon />}
+                                sx={{
+                                    fontSize: '18px',
+                                    fontWeight: 500,
+                                    color: '#05141F',
+                                    mb: '4px',
+                                }}
+                            >
+                                <Typography
+                                    sx={{
+                                        fontSize: '18px',
+                                        fontWeight: 500,
+                                        color: '#05141F',
+                                        mb: '4px',
+                                    }}
+                                >
+                                    <img
+                                        // src={EvStationIcon}
+                                        style={{ verticalAlign: 'middle', paddingRight: '4px' }}
+                                    />
+                                    메인좌표
+                                </Typography>
+                            </AccordionSummary>
+                            <AccordionDetails>
+                                <Table size={'small'} sx={style.tableBox}>
+                                    <TableBody>
+                                        <TableRow>
+                                            <TableCell
+                                                component="th"
+                                                align={'center'}
+                                                sx={{ width: '8rem' }}
+                                            >
+                                                lat
+                                            </TableCell>
+                                            <TableCell>
+                                                <Box
+                                                    sx={{
+                                                        display: 'flex',
+                                                        justifyContent: 'space-between',
+                                                    }}
+                                                >
+                                                    <Typography variant={'body2'}>
+                                                        {coordData['center']['lat']}
+                                                    </Typography>
+                                                    {isEditable && (
+                                                        <Button
+                                                            variant={'contained'}
+                                                            onClick={() =>
+                                                                handleClickInputButton('center_lat')
+                                                            }
+                                                        >
+                                                            {isDisableInputs['center_lat']
+                                                                ? '수정'
+                                                                : '저장'}
+                                                        </Button>
+                                                    )}
+                                                </Box>
+                                                {isShowInputs['center_lat'] && (
+                                                    <Box mt={1}>
+                                                        <TextInput
+                                                            formik={formik}
+                                                            name={'center.lat'}
+                                                            IsDisabled={
+                                                                isDisableInputs['center_lat']
+                                                            }
+                                                            placeholder={'명칭을 입력하세요'}
+                                                        />
+                                                    </Box>
+                                                )}
+                                            </TableCell>
+                                        </TableRow>
+                                        <TableRow>
+                                            <TableCell
+                                                component="th"
+                                                align={'center'}
+                                                sx={{ width: '8rem' }}
+                                            >
+                                                lon
+                                            </TableCell>
+                                            <TableCell>
+                                                <Box
+                                                    sx={{
+                                                        display: 'flex',
+                                                        justifyContent: 'space-between',
+                                                    }}
+                                                >
+                                                    <Typography variant={'body2'}>
+                                                        {coordData['center']['lon']}
+                                                    </Typography>
+                                                    {isEditable && (
+                                                        <Button
+                                                            variant={'contained'}
+                                                            onClick={() =>
+                                                                handleClickInputButton('center_lon')
+                                                            }
+                                                        >
+                                                            {isDisableInputs['center_lon']
+                                                                ? '수정'
+                                                                : '저장'}
+                                                        </Button>
+                                                    )}
+                                                </Box>
+                                                {isShowInputs['center_lon'] && (
+                                                    <Box mt={1}>
+                                                        <TextInput
+                                                            formik={formik}
+                                                            name={'center.lon'}
+                                                            IsDisabled={
+                                                                isDisableInputs['center_lon']
+                                                            }
+                                                            placeholder={'명칭을 입력하세요'}
+                                                        />
+                                                    </Box>
+                                                )}
+                                            </TableCell>
+                                        </TableRow>
+                                    </TableBody>
+                                </Table>
+                            </AccordionDetails>
+                        </Accordion>
+                        <Accordion>
+                            <AccordionSummary
+                                expandIcon={<ExpandMoreIcon />}
+                                sx={{
+                                    fontSize: '18px',
+                                    fontWeight: 500,
+                                    color: '#05141F',
+                                    mb: '4px',
+                                }}
+                            >
+                                <Typography
+                                    sx={{
+                                        fontSize: '18px',
+                                        fontWeight: 500,
+                                        color: '#05141F',
+                                        mb: '4px',
+                                    }}
+                                >
+                                    <img
+                                        // src={EvStationIcon}
+                                        style={{ verticalAlign: 'middle', paddingRight: '4px' }}
+                                    />
+                                    가이드좌표
+                                </Typography>
+                            </AccordionSummary>
+                            <AccordionDetails>
+                                <Table size={'small'} sx={style.tableBox}>
+                                    <TableBody>
+                                        <TableRow>
+                                            <TableCell
+                                                component="th"
+                                                align={'center'}
+                                                sx={{ width: '8rem' }}
+                                            >
+                                                lat
+                                            </TableCell>
+                                            <TableCell>
+                                                <Box
+                                                    sx={{
+                                                        display: 'flex',
+                                                        justifyContent: 'space-between',
+                                                    }}
+                                                >
+                                                    <Typography variant={'body2'}>
+                                                        {coordData['guide']['lat']}
+                                                    </Typography>
+                                                    {isEditable && (
+                                                        <Button
+                                                            variant={'contained'}
+                                                            onClick={() =>
+                                                                handleClickInputButton('guide_lat')
+                                                            }
+                                                        >
+                                                            {isDisableInputs['guide_lat']
+                                                                ? '수정'
+                                                                : '저장'}
+                                                        </Button>
+                                                    )}
+                                                </Box>
+                                                {isShowInputs['guide_lat'] && (
+                                                    <Box mt={1}>
+                                                        <TextInput
+                                                            formik={formik}
+                                                            name={'guide.lat'}
+                                                            IsDisabled={
+                                                                isDisableInputs['guide_lat']
+                                                            }
+                                                            placeholder={'명칭을 입력하세요'}
+                                                        />
+                                                    </Box>
+                                                )}
+                                            </TableCell>
+                                        </TableRow>
+                                        <TableRow>
+                                            <TableCell
+                                                component="th"
+                                                align={'center'}
+                                                sx={{ width: '8rem' }}
+                                            >
+                                                lon
+                                            </TableCell>
+                                            <TableCell>
+                                                <Box
+                                                    sx={{
+                                                        display: 'flex',
+                                                        justifyContent: 'space-between',
+                                                    }}
+                                                >
+                                                    <Typography variant={'body2'}>
+                                                        {coordData['guide']['lon']}
+                                                    </Typography>
+                                                    {isEditable && (
+                                                        <Button
+                                                            variant={'contained'}
+                                                            onClick={() =>
+                                                                handleClickInputButton('guide_lon')
+                                                            }
+                                                        >
+                                                            {isDisableInputs['guide_lon']
+                                                                ? '수정'
+                                                                : '저장'}
+                                                        </Button>
+                                                    )}
+                                                </Box>
+                                                {isShowInputs['guide_lon'] && (
+                                                    <Box mt={1}>
+                                                        <TextInput
+                                                            formik={formik}
+                                                            name={'guide.lon'}
+                                                            IsDisabled={
+                                                                isDisableInputs['guide_lon']
+                                                            }
+                                                            placeholder={'명칭을 입력하세요'}
+                                                        />
+                                                    </Box>
+                                                )}
+                                            </TableCell>
+                                        </TableRow>
+                                    </TableBody>
+                                </Table>
+                            </AccordionDetails>
+                        </Accordion>
+                    </Box>
                 </TabPanel>
 
                 <TabPanel value="2" sx={{ padding: '4px 0 0 0' }}>
@@ -127,221 +374,6 @@ const InfoTab = ({ basicData, coordData, formik, isEditable }) => {
                     </Typography>
                 </TabPanel>
             </TabContext>
-            {/* 좌표 아코디언 시작 */}
-            <Box>
-                <Accordion>
-                    <AccordionSummary
-                        expandIcon={<ExpandMoreIcon />}
-                        sx={{ fontSize: '18px', fontWeight: 500, color: '#05141F', mb: '4px' }}
-                    >
-                        <Typography
-                            sx={{ fontSize: '18px', fontWeight: 500, color: '#05141F', mb: '4px' }}
-                        >
-                            <img
-                                // src={EvStationIcon}
-                                style={{ verticalAlign: 'middle', paddingRight: '4px' }}
-                            />
-                            메인좌표
-                        </Typography>
-                    </AccordionSummary>
-                    <AccordionDetails>
-                        <Table size={'small'} sx={style.tableBox}>
-                            <TableBody>
-                                <TableRow>
-                                    <TableCell
-                                        component="th"
-                                        align={'center'}
-                                        sx={{ width: '8rem' }}
-                                    >
-                                        lat
-                                    </TableCell>
-                                    <TableCell>
-                                        <Box
-                                            sx={{
-                                                display: 'flex',
-                                                justifyContent: 'space-between',
-                                            }}
-                                        >
-                                            <Typography variant={'body2'}>
-                                                {coordData['center']['lat']}
-                                            </Typography>
-                                            {isEditable && (
-                                                <Button
-                                                    variant={'contained'}
-                                                    onClick={() =>
-                                                        handleClickInputButton('center_lat')
-                                                    }
-                                                >
-                                                    {isDisableInputs['center_lat']
-                                                        ? '수정'
-                                                        : '저장'}
-                                                </Button>
-                                            )}
-                                        </Box>
-                                        {isShowInputs['center_lat'] && (
-                                            <Box mt={1}>
-                                                <TextInput
-                                                    formik={formik}
-                                                    name={'center.lat'}
-                                                    IsDisabled={isDisableInputs['center_lat']}
-                                                    placeholder={'명칭을 입력하세요'}
-                                                />
-                                            </Box>
-                                        )}
-                                    </TableCell>
-                                </TableRow>
-                                <TableRow>
-                                    <TableCell
-                                        component="th"
-                                        align={'center'}
-                                        sx={{ width: '8rem' }}
-                                    >
-                                        lon
-                                    </TableCell>
-                                    <TableCell>
-                                        <Box
-                                            sx={{
-                                                display: 'flex',
-                                                justifyContent: 'space-between',
-                                            }}
-                                        >
-                                            <Typography variant={'body2'}>
-                                                {coordData['center']['lon']}
-                                            </Typography>
-                                            {isEditable && (
-                                                <Button
-                                                    variant={'contained'}
-                                                    onClick={() =>
-                                                        handleClickInputButton('center_lon')
-                                                    }
-                                                >
-                                                    {isDisableInputs['center_lon']
-                                                        ? '수정'
-                                                        : '저장'}
-                                                </Button>
-                                            )}
-                                        </Box>
-                                        {isShowInputs['center_lon'] && (
-                                            <Box mt={1}>
-                                                <TextInput
-                                                    formik={formik}
-                                                    name={'center.lon'}
-                                                    IsDisabled={isDisableInputs['center_lon']}
-                                                    placeholder={'명칭을 입력하세요'}
-                                                />
-                                            </Box>
-                                        )}
-                                    </TableCell>
-                                </TableRow>
-                            </TableBody>
-                        </Table>
-                    </AccordionDetails>
-                </Accordion>
-                <Accordion>
-                    <AccordionSummary
-                        expandIcon={<ExpandMoreIcon />}
-                        sx={{ fontSize: '18px', fontWeight: 500, color: '#05141F', mb: '4px' }}
-                    >
-                        <Typography
-                            sx={{ fontSize: '18px', fontWeight: 500, color: '#05141F', mb: '4px' }}
-                        >
-                            <img
-                                // src={EvStationIcon}
-                                style={{ verticalAlign: 'middle', paddingRight: '4px' }}
-                            />
-                            가이드좌표
-                        </Typography>
-                    </AccordionSummary>
-                    <AccordionDetails>
-                        <Table size={'small'} sx={style.tableBox}>
-                            <TableBody>
-                                <TableRow>
-                                    <TableCell
-                                        component="th"
-                                        align={'center'}
-                                        sx={{ width: '8rem' }}
-                                    >
-                                        lat
-                                    </TableCell>
-                                    <TableCell>
-                                        <Box
-                                            sx={{
-                                                display: 'flex',
-                                                justifyContent: 'space-between',
-                                            }}
-                                        >
-                                            <Typography variant={'body2'}>
-                                                {coordData['guide']['lat']}
-                                            </Typography>
-                                            {isEditable && (
-                                                <Button
-                                                    variant={'contained'}
-                                                    onClick={() =>
-                                                        handleClickInputButton('guide_lat')
-                                                    }
-                                                >
-                                                    {isDisableInputs['guide_lat'] ? '수정' : '저장'}
-                                                </Button>
-                                            )}
-                                        </Box>
-                                        {isShowInputs['guide_lat'] && (
-                                            <Box mt={1}>
-                                                <TextInput
-                                                    formik={formik}
-                                                    name={'guide.lat'}
-                                                    IsDisabled={isDisableInputs['guide_lat']}
-                                                    placeholder={'명칭을 입력하세요'}
-                                                />
-                                            </Box>
-                                        )}
-                                    </TableCell>
-                                </TableRow>
-                                <TableRow>
-                                    <TableCell
-                                        component="th"
-                                        align={'center'}
-                                        sx={{ width: '8rem' }}
-                                    >
-                                        lon
-                                    </TableCell>
-                                    <TableCell>
-                                        <Box
-                                            sx={{
-                                                display: 'flex',
-                                                justifyContent: 'space-between',
-                                            }}
-                                        >
-                                            <Typography variant={'body2'}>
-                                                {coordData['guide']['lon']}
-                                            </Typography>
-                                            {isEditable && (
-                                                <Button
-                                                    variant={'contained'}
-                                                    onClick={() =>
-                                                        handleClickInputButton('guide_lon')
-                                                    }
-                                                >
-                                                    {isDisableInputs['guide_lon'] ? '수정' : '저장'}
-                                                </Button>
-                                            )}
-                                        </Box>
-                                        {isShowInputs['guide_lon'] && (
-                                            <Box mt={1}>
-                                                <TextInput
-                                                    formik={formik}
-                                                    name={'guide.lon'}
-                                                    IsDisabled={isDisableInputs['guide_lon']}
-                                                    placeholder={'명칭을 입력하세요'}
-                                                />
-                                            </Box>
-                                        )}
-                                    </TableCell>
-                                </TableRow>
-                            </TableBody>
-                        </Table>
-                    </AccordionDetails>
-                </Accordion>
-            </Box>
         </Box>
     )
 }

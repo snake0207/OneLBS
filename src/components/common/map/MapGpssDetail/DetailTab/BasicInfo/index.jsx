@@ -11,6 +11,7 @@ import GpsIcon from '#/assets/gpsIcon.svg'
 import EditIcon from '@mui/icons-material/Edit'
 
 const BasicInfo = ({ formik, poiData }) => {
+    console.log('POI DATA >> ', poiData)
     // 데이터 수정
     const [isAddressSave, setIsAddressSave] = useState(false)
     const [isLatSave, setIsLatSave] = useState(false)

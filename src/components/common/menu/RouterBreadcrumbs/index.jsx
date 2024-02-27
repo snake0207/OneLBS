@@ -15,6 +15,9 @@ const breadcrumbNameMap = () => ({
     '/user-management/login-history': t('top_menu.user_login_history'),
     '/user-management/role-history': t('top_menu.user_permission_history'),
     '/user-management/ip-access': t('top_menu.user_ip_access_management'),
+    // permission management
+    '/permission-management': t('top_menu.permission_management'),
+    '/permission-management/permissions-list': t('top_menu.permission_list'),
     // search management
     '/search-management': t('top_menu.search_management'),
     '/search-management/map': t('top_menu.map'),

@@ -43,6 +43,9 @@ function DemoPage() {
                 <li>
                     <a href="/components/dashboard">Dashboard</a>
                 </li>
+                <li>
+                    <a href="/components/permission">Permission Management</a>
+                </li>
             </ul>
         </Box>
     )

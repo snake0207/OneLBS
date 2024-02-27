@@ -9,6 +9,7 @@ import validation from './validation.json'
 import approval from './approval.json'
 import error from './error.json'
 import dashboard from './dashboard.json'
+import permission from './permission.json'
 
 const kr = {
     layout,
@@ -22,6 +23,7 @@ const kr = {
     approval,
     error,
     dashboard,
+    permission,
 }
 
 export default kr

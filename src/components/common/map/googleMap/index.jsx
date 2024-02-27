@@ -240,10 +240,11 @@ const seoul = {
 
 /**
  * 지도 컴포넌트는 지도 외부 div의 width / height만 선언하면 됨
+ * 전체화면을 위해 width: 100%,로 처리할 수 있으나 height의 경우 calc를 사용해야 화면에 제대로 랜더링 할 수 있음
  * isPoiSearch 와 isGpssSearch 둘 다 true면 안됨
  * 둘 다 false 거나 둘 중 하나만 true로 사용
  * 사용법 ex :
- * <Box sx={{ width: '1200px', height: '900px' }}>
+ * <Box sx={{ width: '1200px', height: 'calc(100vh - 120px)'' }}>
  *     <GoogleMapComponent markerDataArr={sampleDataArr} isPoiSearch={true} isGpssSearch={false}/>
  * </Box>
  * @param markerDataArr 마커 데이터 array

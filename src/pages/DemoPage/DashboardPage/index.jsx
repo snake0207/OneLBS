@@ -5,7 +5,7 @@ import { Box } from '@mui/material'
 import InfoIcon from '@mui/icons-material/Info'
 import CategoryCount from '#/components/dashboard/CategoryCount'
 import UserTooltip from '#/components/dashboard/UserTooltip'
-import VectorMapTooltip from '#/components/dashboard/VectorMap/VectorMapTooltip'
+import VectorMapTooltip from '#/components/dashboard/VectorMapTooltip'
 
 const DashboardPage = () => {
     const CountryTooltipMockData = [

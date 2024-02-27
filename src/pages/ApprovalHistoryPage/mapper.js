@@ -232,10 +232,10 @@ const evChargerInfo = (data) => {
 const fuelInfo = (data) => {
     return {
         brand: data.brand,
-        price: data.status.map(({ type, price }) => ({
+        summary: data.status.map(({ type, price }) => ({
             type: parseFuelType(type),
             price: price.price,
-            unit: price.priceUnit,
+            priceUnit: price.priceUnit,
             currencyCode: price.currencyCode,
             currency: price.currency,
         })),
@@ -247,7 +247,7 @@ const parkingInfo = (data) => {
     return {
         brand: data.compnay,
         type: parseParkingType(data.parkingType),
-        price: data.price,
+        priceList: data.price,
         openingHours: parseOpeningHours(data.openingHours),
         congestion: parseCongestion(data.congestion),
     }
@@ -262,6 +262,10 @@ const h2ChargingInfo = (data) => {
             unavailable: cannotUseCnt,
             noInfo: noInfoCnt,
         })),
+        price: data.price.price,
+        priceUnit: data.price.priceUnit,
+        currencyCode: data.price.currencyCode,
+        currency: data.price.currency,
         openingHours: parseOpeningHours(data.openingHours),
         chargers: data.charger.map(({ id, speed, status }) => ({
             id,
@@ -282,7 +286,8 @@ const detailResponseDataMapper = (res) => {
     const data = res.data.result[0]
     const basicData = {
         status: parseStatus(res.data.approvalStatus), // service에서 보내줄 결재이력 상태값
-        category: category(data),
+        category: 'h2Charging',
+        // category: category(data),
         approvalInfo: res.data.approvalInfo,
         poiId: data.poiId,
         basicInfo: {

@@ -96,6 +96,15 @@
                                 "currencyCode": "EUR",
                                 "currency": "€"
                             }
+                        },
+                        {
+                            "type": "D",
+                            "price": {
+                                "price": 9.5,
+                                "priceUnit": "l",
+                                "currencyCode": "EUR",
+                                "currency": "€"
+                            }
                         }
                     ],
                     "openingHours": [

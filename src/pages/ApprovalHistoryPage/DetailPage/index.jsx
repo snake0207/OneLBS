@@ -16,8 +16,9 @@ import { usePopupActions } from '#/store/usePopupStore.js'
 import { detailResponseDataMapper } from '#/pages/ApprovalHistoryPage/mapper.js'
 import InfoTab from '#/components/approval/Detail/InfoTab/index.jsx'
 import EvChargingInfo from '#/components/approval/Detail/CategoryInfo/EvChargingInfo/index.jsx'
-import BasicInfo from '#/components/common/map/MapGpssDetail/DetailTab/BasicInfo/index.jsx'
 import { getUserTypeFromPath } from '#/common/libs/approval.js'
+import FuelInfo from '#/components/approval/Detail/CategoryInfo/FuelInfo/index.jsx'
+import H2Charging from '#/components/approval/Detail/CategoryInfo/H2Charging/index.jsx'
 
 const ApprovalHistoryDetailPage = () => {
     const params = useParams()
@@ -73,7 +74,7 @@ const ApprovalHistoryDetailPage = () => {
                     }
             }
         },
-        [parsedData.category],
+        [parsedData],
     )
 
     const formik = useFormik({
@@ -156,9 +157,27 @@ const ApprovalHistoryDetailPage = () => {
                             formik={formik}
                         />
                     )}
-                    {/*{category === 'fuel' && <EvChargingInfo />}*/}
-                    {/*{category === 'parking' && <EvChargingInfo />}*/}
-                    {/*{category === 'h2Charging' && <EvChargingInfo />}*/}
+                    {parsedData.category === 'fuel' && (
+                        <FuelInfo
+                            data={parsedData.fuelInfo}
+                            isEditable={isEditable}
+                            formik={formik}
+                        />
+                    )}
+                    {/*{parsedData.category === 'parking' && (*/}
+                    {/*    <H2Charging*/}
+                    {/*        data={parsedData.h2ChargingInfo}*/}
+                    {/*        isEditable={isEditable}*/}
+                    {/*        formik={formik}*/}
+                    {/*    />*/}
+                    {/*)}*/}
+                    {parsedData.category === 'h2Charging' && (
+                        <H2Charging
+                            data={parsedData.h2ChargingInfo}
+                            isEditable={isEditable}
+                            formik={formik}
+                        />
+                    )}
                     {/*{category === 'dealerPoi' && <EvChargingInfo />}*/}
                     {/*<CategoryInfo*/}
                     {/*    category={parsedData.category}*/}

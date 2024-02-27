@@ -5,7 +5,7 @@ import Grid from '@mui/material/Unstable_Grid2'
 import { ArrowBackIosNew, ArrowForwardIos } from '@mui/icons-material'
 import { useMemo, useRef } from 'react'
 import Headline from '#/components/approval/Detail/Headline/index.jsx'
-import dummyData from '#/pages/DemoPage/ApprovalPage/detailData.json'
+import dummyData from '#/mock/data/detailData.json'
 import ArrowBack from '#/assets/arrowBackIos.svg'
 import ArrowBackDark from '#/assets/arrowBackIosDark.svg'
 import ArrowForward from '#/assets/arrowForwardIos.svg'
@@ -43,6 +43,7 @@ const ApprovalLineContent = ({ title, color, process, content }) => {
 }
 
 const ApprovalLine = ({ status, content }) => {
+    // TODO: 상태별 화살표 색상 및 방향 처리 필요
     const theme = useTheme()
     const colors = useRef({
         request: theme.palette.grey[200],

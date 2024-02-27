@@ -10,7 +10,7 @@
     "approver": "승인자",
     "info": "정보",
     "final_info": "최종수정정보",
-    "name": "명칭",
+    "title": "명칭",
     "address": "주소",
     "lat": "위도",
     "lon": "경도",
@@ -60,7 +60,7 @@
         "reject": "반려 되었습니다"
     },
     "valid": {
-        "name": "명칭",
+        "title": "명칭",
         "requester": "요청자",
         "reviewer": "검토자",
         "approver": "승인자"

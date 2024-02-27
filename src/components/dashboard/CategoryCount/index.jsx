@@ -4,8 +4,12 @@ const CategoryCount = ({ icon, categoryName, count }) => {
     return (
         <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
             {icon}
-            <Typography>{categoryName}</Typography>
-            <Typography sx={{ fontWeight: 'bold' }}>{count}</Typography>
+            <Typography sx={{ fontSize: '14px', color: 'text.dashboard', mt: '2px' }}>
+                {categoryName}
+            </Typography>
+            <Typography sx={{ fontSize: '28px', fontWeight: '600', color: 'text.darkgray' }}>
+                {count}
+            </Typography>
         </Box>
     )
 }

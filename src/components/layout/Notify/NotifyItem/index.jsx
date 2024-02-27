@@ -9,7 +9,21 @@ function NotifyItem({ item, onClick }) {
     return (
         <Box>
             <Divider />
-            <Box sx={{ p: 1 }} onClick={handleClick}>
+            <Box
+                sx={{
+                    p: '10px 20px 8px 20px',
+                    '&:before': {
+                        content: 'attr(title)',
+                        display: 'inline-flex',
+                        width: '8px',
+                        height: '8px',
+                        backgroundColor: '#db0024',
+                        borderRadius: '30px',
+                        mr: '8px',
+                    },
+                }}
+                onClick={handleClick}
+            >
                 {item?.title}
             </Box>
         </Box>

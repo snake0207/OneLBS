@@ -18,6 +18,11 @@ const breadcrumbNameMap = () => ({
     // permission management
     '/permission-management': t('top_menu.permission_management'),
     '/permission-management/permissions-list': t('top_menu.permission_list'),
+    // search management
+    '/search-management': t('top_menu.search_management'),
+    '/search-management/map': t('top_menu.map'),
+    '/poi-view': t('top_menu.poi_search'),
+    '/poi-view/map': t('top_menu.map'),
     '/components': t('components'),
     '/components/layouts': t('layouts'),
     '/components/approval': t('approval', 'approval'),
@@ -33,7 +38,7 @@ const breadcrumbNameMap = () => ({
 
 function isAvailablePath(path) {
     // Exclude paths
-    const excludePaths = ['/mypage', '/user-management']
+    const excludePaths = ['/mypage', '/search-management', '/poi-view', '/user-management']
     return !excludePaths.includes(path)
 }
 

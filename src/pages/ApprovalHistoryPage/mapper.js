@@ -1,10 +1,9 @@
 import { APPROVAL_STATUS } from '#/contents/constant.js'
 
 const category = (data) => {
-    const categories = ['EVCHARGING', 'FUEL', 'PARKING', 'H2CHARGING', 'DEALERPOI']
-    const upperCaseKeys = Object.keys(data).map((key) => key.toUpperCase())
+    const categories = ['evCharging', 'fuel', 'parking', 'h2Charging', 'dealerPoi']
     return categories.find((category) => {
-        if (upperCaseKeys.includes(category)) return category
+        if (Object.keys(data).includes(category)) return category
     })
 }
 
@@ -103,15 +102,15 @@ const parseSummaryConnectorType = (type) => {
 const parseConnectorType = (type) => {
     switch (type) {
         case 0:
-            return '알수없음'
+            return { text: '알수없음', value: 0 }
         case 1:
-            return 'ACtype1'
+            return { text: 'ACtype1', value: 1 }
         case 2:
-            return 'ACtype2'
+            return { text: 'ACtype2', value: 2 }
         case 3:
-            return 'Combo(AC+DC)'
+            return { text: 'Combo(AC+DC)', value: 3 }
         case 4:
-            return 'CHAdeMO'
+            return { text: 'CHAdeMO', value: 4 }
     }
 }
 const parseChargerSpeed = (speed) => {
@@ -125,6 +124,9 @@ const parseChargerSpeed = (speed) => {
         case 3:
             return '초급속'
     }
+}
+const parsePriceIsFree = (isFree) => {
+    return isFree === 0 ? '유료' : isFree === 1 ? '무료' : '정보없음'
 }
 // fuel Parser
 const parseFuelType = (type) => {
@@ -198,6 +200,7 @@ const evChargerInfo = (data) => {
     return {
         brand: data.brand,
         maxWatt: data.maxWatt,
+        parkingFee: data.pFee,
         status: parseStationStatus(data.stationStatus),
         summary: data.status.map(({ connector, watt, speed, possibleCount }) => ({
             type: parseSummaryConnectorType(connector),
@@ -206,14 +209,23 @@ const evChargerInfo = (data) => {
             possibleCount,
         })),
         openingHours: parseOpeningHours(data.openingHours),
-        chargers: data.charger.map(({ id, speed, watt, status, lastUsedTime, connectorType }) => ({
-            id,
-            speed: parseChargerSpeed(speed),
-            watt,
-            status: parseChargerStatus(status),
-            lastUsedTime,
-            type: parseConnectorType(connectorType),
-        })),
+        chargers: data.charger?.map(
+            ({ id, speed, watt, status, lastUsedTime, connectorType, price }) => ({
+                id,
+                speed: speed,
+                watt,
+                status: parseChargerStatus(status),
+                lastUsedTime,
+                type: connectorType,
+                priceList: price?.map(({ price, priceUnit, currencyCode, currency, isFree }) => ({
+                    price,
+                    priceUnit,
+                    currency,
+                    currencyCode,
+                    isFree: parsePriceIsFree(isFree),
+                })),
+            }),
+        ),
     }
 }
 
@@ -271,33 +283,26 @@ const detailResponseDataMapper = (res) => {
     const basicData = {
         status: parseStatus(res.data.approvalStatus), // service에서 보내줄 결재이력 상태값
         category: category(data),
+        approvalInfo: res.data.approvalInfo,
+        poiId: data.poiId,
         basicInfo: {
-            poiId: data.poiId,
             title: data.title,
-            postalCode: data.postalCode,
             address: data.address,
-            centerCoord: {
-                lat: data.position.center.lat,
-                lng: data.position.center.lon,
-            },
-            guideCoord: {
-                lat: data.position.guide.lat,
-                lng: data.position.guide.lon,
-            },
         },
+        coordinates: data.position,
     }
 
     switch (basicData.category) {
-        case 'EVCHARGING':
+        case 'evCharging':
             return { ...basicData, evChargingInfo: evChargerInfo(data.evCharging) }
-        case 'FUEL':
+        case 'fuel':
             return { ...basicData, fuelInfo: fuelInfo(data.fuel) }
-        case 'PARKING':
+        case 'parking':
             return { ...basicData, parkingInfo: parkingInfo(data.parking) }
-        case 'H2CHARGING':
+        case 'h2Charging':
             return { ...basicData, h2ChargingInfo: h2ChargingInfo(data.h2Charging) }
-        case 'DEALERPOI':
-            return { ...basicData, dealerInfo: dealerInfo(data.dealerPoi) }
+        case 'dealerPoi':
+            return { ...basicData, dealerPoiInfo: dealerInfo(data.dealerPoi) }
     }
     return basicData
 }

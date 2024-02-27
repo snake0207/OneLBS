@@ -16,6 +16,7 @@ import { getLayoutState } from '#/store/useLayoutStore'
 import style from './style.module'
 
 const BasicInfo = ({ formik, poiData }) => {
+    console.log('POI DATA >> ', poiData)
     // 데이터 수정
     const [isAddressSave, setIsAddressSave] = useState(false)
     const [isLatSave, setIsLatSave] = useState(false)

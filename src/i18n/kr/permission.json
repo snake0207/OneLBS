@@ -28,7 +28,7 @@
         "language_code_management": "언어 코드 관리",
         "login_page_image_management": "로그인 페이지 사진 관리"
     },
-    "user_permission": {
+    "permission_name": {
         "25": "일반 사용자",
         "26": "요청자",
         "27": "검토자",

@@ -1,72 +1,27 @@
 [
     {
         "roleId": 25,
-        "permission": [
-            "M101R",
-            "M131R",
-            "M151R",
-            "M152R",
-            "M153R",
-            "M154R",
-            "M111R",
-            "M111U",
-            "M121R"
-        ]
+        "permission": ["M131R", "M151R", "M152R", "M153R", "M154R", "M111R", "M111U", "M121R"],
+        "count": 50
     },
     {
         "roleId": 26,
-        "permission": [
-            "M101R",
-            "M131R",
-            "M151R",
-            "M152R",
-            "M153R",
-            "M154R",
-            "M111R",
-            "M111U",
-            "M121R"
-        ]
+        "permission": ["M131R", "M151R", "M152R", "M153R", "M154R", "M111R", "M111U", "M121R"],
+        "count": 50
     },
     {
         "roleId": 27,
-        "permission": [
-            "M101R",
-            "M131R",
-            "M151R",
-            "M152R",
-            "M153R",
-            "M154R",
-            "M111R",
-            "M111U",
-            "M121R"
-        ]
+        "permission": ["M131R", "M151R", "M152R", "M153R", "M154R", "M111R", "M111U", "M121R"],
+        "count": 50
     },
     {
         "roleId": 28,
-        "permission": [
-            "M101R",
-            "M131R",
-            "M151R",
-            "M152R",
-            "M153R",
-            "M154R",
-            "M111R",
-            "M111U",
-            "M121R"
-        ]
+        "permission": ["M131R", "M151R", "M152R", "M153R", "M154R", "M111R", "M111U", "M121R"],
+        "count": 50
     },
     {
         "roleId": 29,
-        "permission": [
-            "M101R",
-            "M131R",
-            "M151R",
-            "M152R",
-            "M153R",
-            "M154R",
-            "M111R",
-            "M111U",
-            "M121R"
-        ]
+        "permission": ["M131R", "M151R", "M152R", "M153R", "M154R", "M111R", "M111U", "M121R"],
+        "count": 50
     }
 ]

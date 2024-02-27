@@ -37,7 +37,7 @@ const TextInput = ({ name, formik, placeholder = null, inputRule = null, IsDisab
                     InputProps={{
                         endAdornment: (
                             <InputAdornment position="end">
-                                {formik.values[name] && (
+                                {parseNameByPath(formik.values, name) && (
                                     <IconButton
                                         edge="end"
                                         onClick={() => formik.setFieldValue(name, '')}

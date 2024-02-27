@@ -4,53 +4,100 @@ import t from '#/common/libs/trans.js'
 import TitleBar from '#/components/common/menu/TitleBar/index.jsx'
 import { Box, Card, Stack, TextField } from '@mui/material'
 import ApprovalLine from '#/components/approval/Detail/ApprovalLine/index.jsx'
-import InfoTab from '#/components/approval/Detail/InfoTab/index.jsx'
 import HistoryTable from '#/components/approval/Detail/HistoryTable/index.jsx'
-import { useMemo } from 'react'
+import { useCallback, useMemo } from 'react'
 import { useFormik } from 'formik'
 import ActionButtons from '#/components/approval/Detail/ActionButtons/index.jsx'
 import dummyData from '../../detailData.json'
-import poiDummyData from '../../poiDetailData.json'
+import poiDetailData from '../../poiDetailData.json'
 import Headline from '#/components/approval/Detail/Headline/index.jsx'
 import Comment from '#/components/approval/Detail/Comment/index.jsx'
 import { usePopupActions } from '#/store/usePopupStore.js'
-import CategoryInfo from '#/components/approval/Detail/CategoryInfo/index.jsx'
-// import { detailDataMapper } from '../mapper.js'
+import { detailResponseDataMapper } from '#/pages/DemoPage/ApprovalPage/ApprovalHistoryPage/mapper.js'
+import InfoTab from '#/components/approval/Detail/InfoTab/index.jsx'
+import EvChargingInfo from '#/components/approval/Detail/CategoryInfo/EvChargingInfo/index.jsx'
+import BasicInfo from '#/components/common/map/MapGpssDetail/DetailTab/BasicInfo/index.jsx'
 
 const ApprovalHistoryDetailPage = () => {
     const params = useParams()
     const popupActions = usePopupActions()
     const userType = params.type // TODO: 전체이력 페이지면 all, 아니면 권한(url or token get..)
-    const dealerCategory = poiDummyData.data.result[0]
+    const parsedData = detailResponseDataMapper(poiDetailData)
+
+    // TODO: 추후 수정 api request 형식 확인해 {...parsedData}로 사용할 수 있을지 확인
+    const categoryFormik = useCallback(
+        (data) => {
+            switch (parsedData.category) {
+                case 'evCharging':
+                    return {
+                        evChargingInfo: {
+                            brand: data.evChargingInfo?.brand || '',
+                            parkingFee: data.evChargingInfo?.parkingFee || '',
+                            openingHours: data.evChargingInfo?.openingHours || [],
+                            chargers: data.evChargingInfo?.chargers || [],
+                        },
+                    }
+                case 'fuel':
+                    return {
+                        fuelInfo: {
+                            brand: data.fuelInfo.brand || '',
+                            price: data.fuelInfo.price || [],
+                            openingHours: data.fuelInfo.openingHours || [],
+                        },
+                    }
+                case 'parking':
+                    return {
+                        parkingInfo: {
+                            brand: data.parkingInfo.brand || '',
+                            type: data.parkingInfo.type || '',
+                            price: data.parkingInfo.price || [],
+                            openingHours: data.parkingInfo.openingHours || [],
+                            congestion: data.parkingInfo.congestion || '',
+                        },
+                    }
+                case 'h2Charging':
+                    return {
+                        h2ChargingInfo: {
+                            brand: data.h2ChargingInfo.brand || '',
+                            openingHours: data.h2ChargingInfo.openingHours || [],
+                            chargers: data.h2ChargingInfo.chargers || [],
+                        },
+                    }
+                case 'dealerPoi':
+                    return {
+                        dealerInfo: {
+                            type: data.dealerInfo.type || '',
+                            manufacturer: data.dealerInfo.manufacturer || '',
+                        },
+                    }
+            }
+        },
+        [parsedData.category],
+    )
+
     const formik = useFormik({
         initialValues: {
-            name: poiDummyData.data.result[0].title,
-            address: poiDummyData.data.result[0].address,
-            lat: poiDummyData.data.result[0].position.center.lat,
-            lon: poiDummyData.data.result[0].position.center.lon,
-            evCharging: {
-                brand: poiDummyData.data.result[0].evCharging.brand,
-                maxWatt: poiDummyData.data.result[0].evCharging.maxWatt,
-                stationStatus: 0,
-            },
-            request_reason: '위.경도 좌표 수정',
-            reviewer_comment: dummyData.comment.reviewer,
-            approver_comment: dummyData.comment.approver,
+            ...parsedData.approvalInfo,
+            ...parsedData.basicInfo,
+            ...parsedData.coordinates,
+            ...categoryFormik(parsedData),
         },
     })
+    console.log('PARSED >> ', parsedData)
+    console.log('FORMIK >> ', formik.values)
 
     const isEditable = useMemo(() => {
         switch (userType) {
             case 'requester':
-                return !(dummyData.status === 'reviewed' || dummyData.status === 'approved')
+                return !(parsedData.status === 'reviewed' || parsedData.status === 'approved')
             case 'reviewer':
-                return dummyData.status === 'request'
+                return parsedData.status === 'request'
             case 'approver':
-                return dummyData.status === 'reviewed'
+                return parsedData.status === 'reviewed'
             default:
                 return false
         }
-    }, [userType])
+    }, [parsedData.status, userType])
 
     const openAlertPopup = (action) => {
         if (formik.values['request_reason'] === '') {
@@ -92,9 +139,32 @@ const ApprovalHistoryDetailPage = () => {
                         content={dummyData.approvalLineContents}
                     />
                     {/* 정보 탭 */}
-                    <InfoTab data={dummyData.info} formik={formik} isEditable={isEditable} />
+                    {/*<BasicInfo formik={formik} poiData={parsedData.basicInfo} />*/}
+                    <InfoTab
+                        basicData={parsedData.basicInfo}
+                        coordData={parsedData.coordinates}
+                        formik={formik}
+                        isEditable={isEditable}
+                    />
                     {/* 카테고리 */}
-                    <CategoryInfo data={dealerCategory} formik={formik} isEditable={isEditable} />
+                    <Headline title={t('category', 'approval')} />
+                    {parsedData.category === 'evCharging' && (
+                        <EvChargingInfo
+                            data={parsedData.evChargingInfo}
+                            isEditable={isEditable}
+                            formik={formik}
+                        />
+                    )}
+                    {/*{category === 'fuel' && <EvChargingInfo />}*/}
+                    {/*{category === 'parking' && <EvChargingInfo />}*/}
+                    {/*{category === 'h2Charging' && <EvChargingInfo />}*/}
+                    {/*{category === 'dealerPoi' && <EvChargingInfo />}*/}
+                    {/*<CategoryInfo*/}
+                    {/*    category={parsedData.category}*/}
+                    {/*    data={parsedData[`${parsedData.category}Info`]}*/}
+                    {/*    formik={formik}*/}
+                    {/*    isEditable={isEditable}*/}
+                    {/*/>*/}
                     {/* 승인 요청 이유*/}
                     <Box>
                         <Headline title={t('request_reason', 'approval')} />

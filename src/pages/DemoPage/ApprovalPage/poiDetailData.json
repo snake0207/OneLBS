@@ -28,6 +28,7 @@
                 "evCharging": {
                     "brand": "EIT",
                     "maxWatt": "100kw",
+                    "pFee": "0",
                     "stationStatus": "1",
                     "status": [
                         {
@@ -41,14 +42,6 @@
                             "speed": 2,
                             "possibleCount": 1,
                             "watt": 50
-                        }
-                    ],
-                    "price": [
-                        {
-                            "price": 12.5,
-                            "priceUnit": "kwh",
-                            "currencyCode": "EUR",
-                            "currency": "€"
                         }
                     ],
                     "openingHours": [
@@ -70,7 +63,16 @@
                             "watt": "7kW",
                             "status": 1,
                             "lastUsedTime": 2021231231123,
-                            "connectorType": 2
+                            "connectorType": 2,
+                            "price": [
+                                {
+                                    "price": 12.5,
+                                    "priceUnit": "kwh",
+                                    "currency": "€",
+                                    "currencyCode": "EUR",
+                                    "isFree": 0
+                                }
+                            ]
                         },
                         {
                             "id": "408104#12",
@@ -78,7 +80,8 @@
                             "watt": "50kW",
                             "status": 2,
                             "lastUsedTime": 2021231231123,
-                            "connectorType": 4
+                            "connectorType": 4,
+                            "price": []
                         }
                     ]
                 },
@@ -189,6 +192,11 @@
             }
         ],
         "approvalStatus": "request",
+        "approvalInfo": {
+            "request_reason": "위.경도 좌표 수정",
+            "reviewer_comment": "위.경도 재확인 후 요청하라",
+            "approver_comment": null
+        },
         "resultID": "searchResultId",
         "status": "success",
         "total": 0,

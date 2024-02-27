@@ -13,7 +13,6 @@ import { getLayoutState } from '#/store/useLayoutStore'
 import style from './style.module'
 
 const CategoryTable = ({ data, formik, isEditable }) => {
-    const theme = useTheme()
     const [isShowInputs, setIsShowInputs] = useState({
         brand: false,
     })

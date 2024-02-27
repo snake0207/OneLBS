@@ -125,6 +125,9 @@ const parseChargerSpeed = (speed) => {
             return '초급속'
     }
 }
+const parsePriceIsFree = (isFree) => {
+    return isFree === 0 ? '유료' : isFree === 1 ? '무료' : '정보없음'
+}
 // fuel Parser
 const parseFuelType = (type) => {
     switch (type) {
@@ -206,14 +209,23 @@ const evChargerInfo = (data) => {
             possibleCount,
         })),
         openingHours: parseOpeningHours(data.openingHours),
-        chargers: data.charger?.map(({ id, speed, watt, status, lastUsedTime, connectorType }) => ({
-            id,
-            speed: parseChargerSpeed(speed),
-            watt,
-            status: parseChargerStatus(status),
-            lastUsedTime,
-            type: connectorType,
-        })),
+        chargers: data.charger?.map(
+            ({ id, speed, watt, status, lastUsedTime, connectorType, price }) => ({
+                id,
+                speed: speed,
+                watt,
+                status: parseChargerStatus(status),
+                lastUsedTime,
+                type: connectorType,
+                priceList: price?.map(({ price, priceUnit, currencyCode, currency, isFree }) => ({
+                    price,
+                    priceUnit,
+                    currency,
+                    currencyCode,
+                    isFree: parsePriceIsFree(isFree),
+                })),
+            }),
+        ),
     }
 }
 

@@ -44,14 +44,6 @@
                             "watt": 50
                         }
                     ],
-                    "price": [
-                        {
-                            "price": 12.5,
-                            "priceUnit": "kwh",
-                            "currencyCode": "EUR",
-                            "currency": "€"
-                        }
-                    ],
                     "openingHours": [
                         {
                             "week": 0,
@@ -71,7 +63,16 @@
                             "watt": "7kW",
                             "status": 1,
                             "lastUsedTime": 2021231231123,
-                            "connectorType": 2
+                            "connectorType": 2,
+                            "price": [
+                                {
+                                    "price": 12.5,
+                                    "priceUnit": "kwh",
+                                    "currency": "€",
+                                    "currencyCode": "EUR",
+                                    "isFree": 0
+                                }
+                            ]
                         },
                         {
                             "id": "408104#12",
@@ -79,7 +80,8 @@
                             "watt": "50kW",
                             "status": 2,
                             "lastUsedTime": 2021231231123,
-                            "connectorType": 4
+                            "connectorType": 4,
+                            "price": []
                         }
                     ]
                 },

@@ -1,9 +1,10 @@
+import { useState } from 'react'
 import { Box, Button } from '@mui/material'
 import Typography from '@mui/material/Typography'
-import TextInput from '#/components/common/input/TextInput/index.jsx'
-import { useState } from 'react'
+import Select from '#/components/common/Select/index.jsx'
 
-const EditableTextColumn = ({ value, name, isEditable, formik }) => {
+const EditableSelectColumn = ({ value, name, items, isEditable, formik }) => {
+    console.log('ITEMS >> ', items)
     const [isShowInput, setIsShowInput] = useState(false)
     const [isDisableInput, setIsDisableInput] = useState(true)
 
@@ -21,7 +22,7 @@ const EditableTextColumn = ({ value, name, isEditable, formik }) => {
                     alignItems: 'center',
                 }}
             >
-                <Typography>{value || '-'}</Typography>
+                <Typography>{items?.find((item) => item.value === value)?.label || '-'}</Typography>
                 {isEditable && (
                     <Button variant={'contained'} onClick={handleClickInputButton}>
                         {isDisableInput ? '수정' : '저장'}
@@ -29,16 +30,11 @@ const EditableTextColumn = ({ value, name, isEditable, formik }) => {
                 )}
             </Box>
             {isShowInput && (
-                <Box>
-                    <TextInput
-                        formik={formik}
-                        name={name}
-                        IsDisabled={isDisableInput}
-                        placeholder={'명칭을 입력하세요'}
-                    />
+                <Box mt={1}>
+                    <Select name={name} formik={formik} items={items} disabled={isDisableInput} />
                 </Box>
             )}
         </>
     )
 }
-export default EditableTextColumn
+export default EditableSelectColumn

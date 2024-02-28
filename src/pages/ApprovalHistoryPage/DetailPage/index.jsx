@@ -18,7 +18,7 @@ import InfoTab from '#/components/approval/Detail/InfoTab/index.jsx'
 import EvChargingInfo from '#/components/approval/Detail/CategoryInfo/EvChargingInfo/index.jsx'
 import { getUserTypeFromPath } from '#/common/libs/approval.js'
 import FuelInfo from '#/components/approval/Detail/CategoryInfo/FuelInfo/index.jsx'
-import H2ChargingInfo from '#/components/approval/Detail/CategoryInfo/H2Charging/index.jsx'
+import H2ChargingInfo from '#/components/approval/Detail/CategoryInfo/H2ChargingInfo/index.jsx'
 
 const ApprovalHistoryDetailPage = () => {
     const params = useParams()

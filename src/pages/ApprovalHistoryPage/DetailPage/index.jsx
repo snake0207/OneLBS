@@ -18,6 +18,7 @@ import InfoTab from '#/components/approval/Detail/InfoTab/index.jsx'
 import EvChargingInfo from '#/components/approval/Detail/CategoryInfo/EvChargingInfo/index.jsx'
 import { getUserTypeFromPath } from '#/common/libs/approval.js'
 import FuelInfo from '#/components/approval/Detail/CategoryInfo/FuelInfo/index.jsx'
+import H2ChargingInfo from '#/components/approval/Detail/CategoryInfo/H2Charging/index.jsx'
 
 const ApprovalHistoryDetailPage = () => {
     const params = useParams()
@@ -26,55 +27,52 @@ const ApprovalHistoryDetailPage = () => {
     const parsedData = detailResponseDataMapper(poiDetailData)
 
     // TODO: 추후 수정 api request 형식 확인해 {...parsedData}로 사용할 수 있을지 확인
-    const categoryFormik = useCallback(
-        (data) => {
-            switch (parsedData.category) {
-                case 'evCharging':
-                    return {
-                        evChargingInfo: {
-                            brand: data.evChargingInfo?.brand || '',
-                            parkingFee: data.evChargingInfo?.parkingFee || '',
-                            openingHours: data.evChargingInfo?.openingHours || [],
-                            chargers: data.evChargingInfo?.chargers || [],
-                        },
-                    }
-                case 'fuel':
-                    return {
-                        fuelInfo: {
-                            brand: data.fuelInfo.brand || '',
-                            price: data.fuelInfo.price || [],
-                            openingHours: data.fuelInfo.openingHours || [],
-                        },
-                    }
-                case 'parking':
-                    return {
-                        parkingInfo: {
-                            brand: data.parkingInfo.brand || '',
-                            type: data.parkingInfo.type || '',
-                            price: data.parkingInfo.price || [],
-                            openingHours: data.parkingInfo.openingHours || [],
-                            congestion: data.parkingInfo.congestion || '',
-                        },
-                    }
-                case 'h2Charging':
-                    return {
-                        h2ChargingInfo: {
-                            brand: data.h2ChargingInfo.brand || '',
-                            openingHours: data.h2ChargingInfo.openingHours || [],
-                            chargers: data.h2ChargingInfo.chargers || [],
-                        },
-                    }
-                case 'dealerPoi':
-                    return {
-                        dealerInfo: {
-                            type: data.dealerInfo.type || '',
-                            manufacturer: data.dealerInfo.manufacturer || '',
-                        },
-                    }
-            }
-        },
-        [parsedData],
-    )
+    const categoryFormik = useCallback((data) => {
+        switch (data.category) {
+            case 'evCharging':
+                return {
+                    evChargingInfo: {
+                        brand: data.evChargingInfo?.brand || '',
+                        parkingFee: data.evChargingInfo?.parkingFee || '',
+                        openingHours: data.evChargingInfo?.openingHours || [],
+                        chargers: data.evChargingInfo?.chargers || [],
+                    },
+                }
+            case 'fuel':
+                return {
+                    fuelInfo: {
+                        brand: data.fuelInfo.brand || '',
+                        price: data.fuelInfo.price || [],
+                        openingHours: data.fuelInfo.openingHours || [],
+                    },
+                }
+            case 'parking':
+                return {
+                    parkingInfo: {
+                        brand: data.parkingInfo.brand || '',
+                        type: data.parkingInfo.type || '',
+                        price: data.parkingInfo.price || [],
+                        openingHours: data.parkingInfo.openingHours || [],
+                        congestion: data.parkingInfo.congestion || '',
+                    },
+                }
+            case 'h2Charging':
+                return {
+                    h2ChargingInfo: {
+                        brand: data.h2ChargingInfo.brand || '',
+                        openingHours: data.h2ChargingInfo.openingHours || [],
+                        chargers: data.h2ChargingInfo.chargers || [],
+                    },
+                }
+            case 'dealerPoi':
+                return {
+                    dealerInfo: {
+                        type: data.dealerInfo.type || '',
+                        manufacturer: data.dealerInfo.manufacturer || '',
+                    },
+                }
+        }
+    }, [])
 
     const formik = useFormik({
         initialValues: {
@@ -170,13 +168,13 @@ const ApprovalHistoryDetailPage = () => {
                     {/*        formik={formik}*/}
                     {/*    />*/}
                     {/*)}*/}
-                    {/*{parsedData.category === 'h2Charging' && (*/}
-                    {/*    // <H2Charging*/}
-                    {/*    //     data={parsedData.h2ChargingInfo}*/}
-                    {/*    //     isEditable={isEditable}*/}
-                    {/*    //     formik={formik}*/}
-                    {/*    />*/}
-                    {/*)}*/}
+                    {parsedData.category === 'h2Charging' && (
+                        <H2ChargingInfo
+                            data={parsedData.h2ChargingInfo}
+                            isEditable={isEditable}
+                            formik={formik}
+                        />
+                    )}
                     {/*{category === 'dealerPoi' && <EvChargingInfo />}*/}
                     {/*<CategoryInfo*/}
                     {/*    category={parsedData.category}*/}

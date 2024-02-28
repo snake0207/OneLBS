@@ -33,6 +33,8 @@ import UserIconDark from '#/assets/m_userIconDark.svg'
 import useLayoutStore from '#/store/useLayoutStore'
 import { isMobile } from 'react-device-detect'
 
+import style from './style.module'
+
 function MainPage() {
     const { themeMode } = useLayoutStore()
     const countryMockData = [
@@ -134,32 +136,15 @@ function MainPage() {
 
     return (
         <Box>
-            <Box
-                sx={{
-                    display: 'flex',
-                    mt: '-45px',
-                    width: '100%',
-                    flexDirection: isMobile ? 'column' : 'row',
-                }}
-            >
+            <Box sx={style.tooltipBox} style={{ flexDirection: isMobile ? 'column' : 'row' }}>
                 <UserTooltip />
                 <CountryTooltip title={'Europe'} categoryCountList={countryMockData} />
             </Box>
-            <Box
-                sx={{
-                    display: 'flex',
-                    mt: '10px',
-                    bgcolor: 'color.dashboardCnt',
-                    borderRadius: 2,
-                    boxShadow: '0 3px 14px rgb(0 0 0 / 24%)',
-                    height: 'calc(100vh - 375px)',
-                    justifyContent: 'center',
-                }}
-            >
+            <Box sx={style.mapBox}>
                 <VectorMap />
                 <VectorMapTooltip categoryCountList={VectorMapMockData} title={'국가명'} />
             </Box>
-            <Box sx={{ display: 'flex', flexDirection: isMobile ? 'column' : 'row' }}>
+            <Box sx={style.bannerBox} style={{ flexDirection: isMobile ? 'column' : 'row' }}>
                 {shortCutMockData.map((item, idx) => (
                     <ShortCutBanner
                         key={idx}

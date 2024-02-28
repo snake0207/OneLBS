@@ -14,21 +14,7 @@ const VectorMapTooltip = ({ title, categoryCountList }) => {
                 <Typography>{title}</Typography>
             </Box>
             {categoryCountList.map((item) => (
-                <Box
-                    key={item.category}
-                    sx={{
-                        padding: 1,
-                        bgcolor: 'color.germany',
-                        borderRadius: 2,
-                        width: 'calc(50% - 5px)',
-                        height: 100,
-                        justifyContent: 'center',
-                        m: '0 0 10px 0',
-                        '&:nth-of-type(even)': {
-                            ml: '10px',
-                        },
-                    }}
-                >
+                <Box key={item.category} sx={style.items}>
                     <CategoryCount
                         categoryName={item.category}
                         icon={themeMode === 'light' ? item.lightIcon : item.darkIcon}

@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Outlet } from 'react-router-dom'
+import { Outlet, useLocation } from 'react-router-dom'
 import { Box, Container } from '@mui/material'
 import Header from '#/layouts/Header'
 import SideMenu from '../SideMenu'
@@ -8,6 +8,7 @@ import useLayoutStore from '#/store/useLayoutStore'
 const MainLayout = () => {
     const { sidebar } = useLayoutStore()
     const [open, setOpen] = useState(false)
+    const { pathname } = useLocation()
 
     const toggleDrawer = () => {
         setOpen(!open)
@@ -23,7 +24,7 @@ const MainLayout = () => {
                     overflow: 'auto',
                     height: '100vh',
                     '@media (max-width:1024px)': {
-                        bgcolor: 'background.mobile',
+                        bgcolor: pathname === '/' ? 'background.mainMobile' : 'background.mobile',
                     },
                 }}
             >

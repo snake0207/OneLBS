@@ -14,19 +14,13 @@ import useLayoutStore from '#/store/useLayoutStore'
 
 function ExpandMenuItem({ label, iconNode, items }) {
     const [open, setOpen] = useState(false)
-    const { openDrawer, setDrawer } = useLayoutStore()
+    const { setDrawer } = useLayoutStore()
 
     useEffect(() => {
         if (open) {
             setDrawer(true)
         }
     }, [open, setDrawer])
-
-    useEffect(() => {
-        if (!openDrawer) {
-            setOpen(false)
-        }
-    }, [openDrawer])
 
     const handleClick = () => {
         setOpen(!open)

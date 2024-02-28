@@ -61,8 +61,8 @@ const fuelInfo = (data) => {
 
 const parkingInfo = (data) => {
     return {
-        brand: data.compnay,
-        type: parseParkingType(data.parkingType),
+        brand: data.company,
+        type: data.parkingType,
         priceList: data.price,
         openingHours: parseOpeningHours(data.openingHours),
         congestion: parseCongestion(data.congestion),
@@ -102,8 +102,7 @@ const detailResponseDataMapper = (res) => {
     const data = res.data.result[0]
     const basicData = {
         status: parseApprovalStatus(res.data.approvalStatus), // service에서 보내줄 결재이력 상태값
-        category: 'dealerPoi',
-        // category: parseCategory(data),
+        category: parseCategory(data),
         approvalInfo: res.data.approvalInfo,
         poiId: data.poiId,
         basicInfo: {

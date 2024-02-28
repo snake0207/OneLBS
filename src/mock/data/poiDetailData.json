@@ -121,7 +121,7 @@
                     ]
                 },
                 "parking": {
-                    "company": "string",
+                    "company": "parking company",
                     "parkingType": "0",
                     "price": [
                         {

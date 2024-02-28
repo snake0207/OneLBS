@@ -15,6 +15,18 @@ const globalStyles = css`
     ::-ms-reveal {
         display: none;
     }
+    ::-webkit-scrollbar {
+        width: 9px;
+    }
+    ::-webkit-scrollbar-track {
+        border-radius: 0px;
+        background: transparent;
+    }
+    ::-webkit-scrollbar-thumb {
+        border-radius: 20px;
+        background: #bcc0c5;
+        border: 3px solid #ffffff;
+    }
 `
 
 const GlobalStyles = () => {

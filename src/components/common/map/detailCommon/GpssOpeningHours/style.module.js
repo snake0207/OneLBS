@@ -7,7 +7,6 @@ const style = {
         th: {
             width: '120px',
             p: '6px 0px',
-            color: 'white',
             fontSize: 15,
             fontWeight: 500,
             textAlign: 'center',

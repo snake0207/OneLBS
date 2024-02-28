@@ -20,6 +20,22 @@ import { getUserTypeFromPath } from '#/common/libs/approvalParser.js'
 import FuelInfo from '#/components/approval/Detail/CategoryInfo/FuelInfo/index.jsx'
 import DealerPoiInfo from '#/components/approval/Detail/CategoryInfo/DealerPoiInfo/index.jsx'
 import H2ChargingInfo from '#/components/approval/Detail/CategoryInfo/H2ChargingInfo/index.jsx'
+import GoogleMapComponent from '#/components/common/map/googleMap/index.jsx'
+
+const markerSampleData = [
+    {
+        poiId: 'ChIJsTbYQbjLwoARpbZRYUbnEP4',
+        address: '12021 Wilmington Ave, Los Angeles, CA 90059, USA',
+        position: {
+            center: {
+                lat: 33.9243791,
+                lon: -118.23941569999998,
+            },
+        },
+        title: 'PowerFlex Charging Station',
+        category: 'ev',
+    },
+]
 
 const ApprovalHistoryDetailPage = () => {
     const params = useParams()
@@ -231,12 +247,11 @@ const ApprovalHistoryDetailPage = () => {
                 {/* 지도 영역 */}
                 <Box
                     sx={{
-                        height: '100%',
-                        backgroundColor: 'gray',
-                        textAlign: 'center',
+                        width: '100%',
+                        height: 'calc(100vh - 120px)',
                     }}
                 >
-                    지도 영역
+                    <GoogleMapComponent markerDataArr={markerSampleData} />
                 </Box>
             </Card>
         </>

@@ -20,9 +20,9 @@ const breadcrumbNameMap = () => ({
     '/permission-management/permissions-list': t('top_menu.permission_list'),
     // search management
     '/search-management': t('top_menu.search_management'),
-    '/search-management/map': t('top_menu.map'),
+    '/search-management/map': t('top_menu.search_map'),
     '/poi-view': t('top_menu.poi_search'),
-    '/poi-view/map': t('top_menu.map'),
+    '/poi-view/map': t('top_menu.poi_map'),
     '/components': t('components'),
     '/components/layouts': t('layouts'),
     '/components/approval': t('approval', 'approval'),

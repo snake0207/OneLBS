@@ -1,4 +1,3 @@
-import { useState } from 'react'
 import { Outlet, useLocation } from 'react-router-dom'
 import { Box, Container } from '@mui/material'
 import Header from '#/layouts/Header'
@@ -6,13 +5,8 @@ import SideMenu from '../SideMenu'
 import useLayoutStore from '#/store/useLayoutStore'
 
 const MainLayout = () => {
-    const { sidebar } = useLayoutStore()
-    const [open, setOpen] = useState(false)
+    const { sidebar, openDrawer, toggleDrawer } = useLayoutStore()
     const { pathname } = useLocation()
-
-    const toggleDrawer = () => {
-        setOpen(!open)
-    }
 
     return (
         <Box sx={{ display: 'flex' }}>
@@ -28,7 +22,7 @@ const MainLayout = () => {
                     },
                 }}
             >
-                {sidebar && <SideMenu open={open} toggleDrawer={toggleDrawer} />}
+                {sidebar && <SideMenu open={openDrawer} toggleDrawer={toggleDrawer} />}
                 <Container
                     sx={{
                         ml: 0,

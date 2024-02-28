@@ -7,6 +7,7 @@ const initialState = {
     themeMode: 'light',
     sidebar: true,
     device: 'pc',
+    openDrawer: false,
 }
 
 const useLayoutStore = create(
@@ -18,6 +19,8 @@ const useLayoutStore = create(
                 setThemeMode: (themeMode) => set({ themeMode }),
                 setSidebar: (sidebar) => set({ sidebar }),
                 setDevice: (device) => set({ device }),
+                setDrawer: (openDrawer) => set({ openDrawer }),
+                toggleDrawer: () => set((state) => ({ openDrawer: !state.openDrawer })),
                 reset: () => set(initialState),
             }),
             {

@@ -41,7 +41,7 @@ const markerSampleData = [
 const ApprovalHistoryDetailPage = () => {
     const params = useParams()
     const popupActions = usePopupActions()
-    const userType = getUserTypeFromPath(params.type) // TODO: 전체이력 페이지면 all, 아니면 권한(url or token get..)
+    const userType = getUserTypeFromPath(params.type)
     const parsedData = detailResponseDataMapper(poiDetailData)
 
     // TODO: 추후 수정 api request 형식 확인해 {...parsedData}로 사용할 수 있을지 확인
@@ -117,9 +117,9 @@ const ApprovalHistoryDetailPage = () => {
     }, [parsedData.status, userType])
 
     const openAlertPopup = (action) => {
-        if (formik.values['request_reason'] === '') {
+        if (formik.values['request_reason'] === '')
             popupActions.showPopup('alert', '승인 요청 이유를 입력해 주세요')
-        } else {
+        else {
             // TODO: 기능구분
             console.log('VALUES >> ', formik.values)
             popupActions.showPopup('alert', t(`confirmed.${action.toLowerCase()}`, 'approval'))
@@ -159,7 +159,6 @@ const ApprovalHistoryDetailPage = () => {
                     {/*<BasicInfo formik={formik} poiData={parsedData.basicInfo} />*/}
                     <InfoTab
                         basicData={parsedData.basicInfo}
-                        coordData={parsedData.coordinates}
                         formik={formik}
                         isEditable={isEditable}
                     />

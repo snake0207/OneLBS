@@ -22,6 +22,7 @@ import DealerPoiInfo from '#/components/approval/Detail/CategoryInfo/DealerPoiIn
 import H2ChargingInfo from '#/components/approval/Detail/CategoryInfo/H2ChargingInfo/index.jsx'
 import ParkingInfo from '#/components/approval/Detail/CategoryInfo/ParkingInfo/index.jsx'
 import GoogleMapComponent from '#/components/common/map/googleMap/index.jsx'
+import { isBrowser } from 'react-device-detect'
 
 const markerSampleData = [
     {
@@ -137,7 +138,7 @@ const ApprovalHistoryDetailPage = () => {
     return (
         <>
             <TitleBar title={t('detail', 'approval')} />
-            <Card variant="outlined" sx={{ mt: 4, position: 'relative', height: '45rem' }}>
+            <Box sx={{ position: 'relative', height: 'calc(100vh - 120px)' }}>
                 <Stack
                     sx={{
                         p: 2,
@@ -147,7 +148,8 @@ const ApprovalHistoryDetailPage = () => {
                         backgroundColor: 'dialog.main',
                         opacity: '95%',
                         overflowY: 'auto',
-                        height: '100%',
+                        height: '98%',
+                        zIndex: 100,
                     }}
                 >
                     {/* 결제라인 */}
@@ -243,17 +245,9 @@ const ApprovalHistoryDetailPage = () => {
                         id={params.id}
                     />
                 </Stack>
-
                 {/* 지도 영역 */}
-                <Box
-                    sx={{
-                        width: '100%',
-                        height: 'calc(100vh - 120px)',
-                    }}
-                >
-                    <GoogleMapComponent markerDataArr={markerSampleData} />
-                </Box>
-            </Card>
+                {isBrowser && <GoogleMapComponent markerDataArr={markerSampleData} />}
+            </Box>
         </>
     )
 }

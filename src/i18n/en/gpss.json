@@ -10,6 +10,8 @@
   "edit_request": "edit",
   "delete_request": "delete",
   "opening_hours": "Opening hours",
+  "center_coordinates": "Center coordinates",
+  "guide_coordinates": "Guide coordinates",
   "price" : {
     "title": "Price",
     "price": "price",

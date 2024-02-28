@@ -11,6 +11,8 @@
   "lon": "경도",
   "language": "언어",
   "category": "카테고리",
+  "edit": "수정",
+  "save": "저장",
   "day_of_week" : {
     "sun" : "일요일",
     "mon" : "월요일",

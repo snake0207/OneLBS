@@ -78,7 +78,9 @@ const BasicInfo = ({ formik, poiData, tabSelected, isEditable }) => {
                                         sx={{ ml: 'auto' }}
                                         onClick={() => handleClickInputButton('address')}
                                     >
-                                        {isDisabledInputs['address'] ? '수정' : '저장'}
+                                        {isDisabledInputs['address']
+                                            ? t('edit', 'common')
+                                            : t('save', 'common')}
                                     </Button>
                                 )}
                             </Box>
@@ -119,7 +121,7 @@ const BasicInfo = ({ formik, poiData, tabSelected, isEditable }) => {
                                             style={{ verticalAlign: 'middle', paddingRight: '4px' }}
                                         />
                                     )}
-                                    메인 좌표
+                                    {t('center_coordinates', 'gpss')}
                                 </AccordionSummary>
                                 <AccordionDetails sx={{ padding: 0 }}>
                                     <Box
@@ -149,7 +151,9 @@ const BasicInfo = ({ formik, poiData, tabSelected, isEditable }) => {
                                                     disabled={!!formik.errors.position?.center?.lat}
                                                     onClick={() => handleClickInputButton('lat')}
                                                 >
-                                                    {isDisabledInputs['lat'] ? '수정' : '저장'}
+                                                    {isDisabledInputs['lat']
+                                                        ? t('edit', 'common')
+                                                        : t('save', 'common')}
                                                 </Button>
                                             )}
                                         </Box>
@@ -190,7 +194,9 @@ const BasicInfo = ({ formik, poiData, tabSelected, isEditable }) => {
                                                     disabled={!!formik.errors.position?.center?.lon}
                                                     onClick={() => handleClickInputButton('lon')}
                                                 >
-                                                    {isDisabledInputs['lon'] ? '수정' : '저장'}
+                                                    {isDisabledInputs['lon']
+                                                        ? t('edit', 'common')
+                                                        : t('save', 'common')}
                                                 </Button>
                                             )}
                                         </Box>
@@ -234,7 +240,7 @@ const BasicInfo = ({ formik, poiData, tabSelected, isEditable }) => {
                                             style={{ verticalAlign: 'middle', paddingRight: '4px' }}
                                         />
                                     )}
-                                    가이드 좌표
+                                    {t('guide_coordinates', 'gpss')}
                                 </AccordionSummary>
                                 <AccordionDetails sx={{ padding: 0 }}>
                                     <Box
@@ -266,7 +272,9 @@ const BasicInfo = ({ formik, poiData, tabSelected, isEditable }) => {
                                                         handleClickInputButton('guideLat')
                                                     }
                                                 >
-                                                    {isDisabledInputs['guideLat'] ? '수정' : '저장'}
+                                                    {isDisabledInputs['guideLat']
+                                                        ? t('edit', 'common')
+                                                        : t('save', 'common')}
                                                 </Button>
                                             )}
                                         </Box>
@@ -309,7 +317,9 @@ const BasicInfo = ({ formik, poiData, tabSelected, isEditable }) => {
                                                         handleClickInputButton('guideLon')
                                                     }
                                                 >
-                                                    {isDisabledInputs['guideLon'] ? '수정' : '저장'}
+                                                    {isDisabledInputs['guideLon']
+                                                        ? t('edit', 'common')
+                                                        : t('save', 'common')}
                                                 </Button>
                                             )}
                                         </Box>

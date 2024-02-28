@@ -11,6 +11,8 @@
   "lon": "longitude",
   "language": "language",
   "category": "category",
+  "edit": "edit",
+  "save": "save",
   "day_of_week" : {
     "sun" : "SUN",
     "mon" : "MON",

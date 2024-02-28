@@ -108,8 +108,8 @@ const detailResponseDataMapper = (res) => {
         basicInfo: {
             title: data.title,
             address: data.address,
+            position: data.position,
         },
-        coordinates: data.position,
     }
 
     switch (basicData.category) {

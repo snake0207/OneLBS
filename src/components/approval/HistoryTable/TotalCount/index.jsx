@@ -1,4 +1,5 @@
 import Typography from '@mui/material/Typography'
+import { Box } from '@mui/material'
 import t from '#/common/libs/trans.js'
 
 const TotalCount = ({ type, counts }) => {
@@ -20,26 +21,36 @@ const TotalCount = ({ type, counts }) => {
 
     return (
         <>
-            <Typography
-                variant={'body2'}
-                component={'span'}
+            <Box
                 sx={{
-                    display: 'inline-flex',
-                    fontSize: '13px',
-                    color: 'text.main',
-                    marginBottom: '6px',
+                    '@media (max-width:1024px)': {
+                        borderBottom: '1px solid',
+                        borderBottomColor: 'border.light',
+                        pb: '16px',
+                    },
                 }}
             >
-                {t('total', 'approval')} {counts.total || 0}
-                {t('case', 'approval')}
-            </Typography>
-            <Typography
-                variant={'body2'}
-                component={'span'}
-                sx={{ fontSize: '13px', color: 'text.main', marginBottom: '6px' }}
-            >
-                ( {renderCountText()} )
-            </Typography>
+                <Typography
+                    variant={'body2'}
+                    component={'span'}
+                    sx={{
+                        display: 'inline-flex',
+                        fontSize: '13px',
+                        color: 'text.main',
+                        marginBottom: '6px',
+                    }}
+                >
+                    {t('total', 'approval')} {counts.total || 0}
+                    {t('case', 'approval')}
+                </Typography>
+                <Typography
+                    variant={'body2'}
+                    component={'span'}
+                    sx={{ fontSize: '13px', color: 'text.main', marginBottom: '6px' }}
+                >
+                    ( {renderCountText()} )
+                </Typography>
+            </Box>
         </>
     )
 }

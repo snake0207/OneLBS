@@ -1,8 +1,10 @@
 const style = {
     searchBox: {
         width: '100%',
-        ml: '0 !important',
-        p: '16px 20px',
+        p: '16px 20px 12px 20px',
+        '& .MuiGrid2-root': {
+            mb: '3px',
+        },
     },
     labelText: {
         fontSize: 14,
@@ -37,6 +39,38 @@ const style = {
         minWidth: 'auto',
         backgroundColor: 'button.main',
         padding: '6px',
+    },
+    filter: {
+        position: 'absolute',
+        left: '0',
+        width: '40px',
+        height: '40px',
+        minWidth: '40px',
+        borderRadius: '8px',
+        backgroundColor: '#0057BB',
+        boxShadow: '0 3px 14px rgb(0 0 0 / 24%)',
+    },
+    select: {
+        width: '100%',
+        height: 40,
+        backgroundColor: 'form.main',
+        borderRadius: '4px',
+        '& .MuiSelect-nativeInput': {
+            position: 'relative',
+        },
+    },
+    mobLine: {
+        '@media (max-width:1024px)': {
+            display: 'block',
+            borderTop: '1px solid',
+            borderTopColor: 'border.light',
+            mt: '5px',
+            pt: '5px',
+            borderRadius: '0px !important',
+            '& .MuiGrid2-direction-xs-row': {
+                width: '100%',
+            },
+        },
     },
 }
 

@@ -74,6 +74,7 @@ export const tokens = {
         8001: '#306a7d',
         9001: '#C7F1FF',
         10001: '#73B4FF',
+        20001: '#e3f0ff',
     },
 
     background: {
@@ -127,6 +128,7 @@ export const tokens = {
         700: '#EFEFEF',
         800: '#071c2c',
         900: '#d1d1d1',
+        1000: '#888',
     },
     table: {
         100: '#fff',
@@ -239,13 +241,16 @@ export const getThemeSettings = (mode) => ({
                   },
                   lnb: {
                       mobilelnb: tokens.lnb[100],
-                      mobilelnbdeps: tokens.lnb[300],
+                      mobilelnbdeps: tokens.lnb[100],
+                      mobilelnbText: tokens.lnb[400],
                       weblnb: tokens.lnb[500],
                       weblnbdeps: tokens.lnb[400],
                   },
                   border: {
                       main: tokens.border[200],
                       gray: tokens.border[900],
+                      light: tokens.border[900],
+                      darkgray: tokens.border[1000],
                       lnb: tokens.border[200],
                       dropdown: tokens.border[200],
                       tabs: tokens.border[700],
@@ -355,12 +360,15 @@ export const getThemeSettings = (mode) => ({
                   lnb: {
                       mobilelnb: tokens.lnb[200],
                       mobilelnbdeps: tokens.lnb[300],
+                      mobilelnbText: tokens.lnb[100],
                       weblnb: tokens.lnb[500],
                       weblnbdeps: tokens.lnb[400],
                   },
                   border: {
                       main: tokens.border[300],
                       gray: tokens.border[200],
+                      light: tokens.border[300],
+                      darkgray: tokens.border[300],
                       lnb: tokens.border[400],
                       dropdown: tokens.border[300],
                       tabs: tokens.border[800],

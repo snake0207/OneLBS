@@ -16,6 +16,9 @@ const CountryTooltip = ({ title, categoryCountList }) => {
                 borderRadius: '8px',
                 width: isMobile ? '100%' : 'calc(65% - 10px)',
                 ml: isMobile ? 0 : '10px',
+                mb: '10px',
+                backgroundColor: 'background.contents',
+                boxShadow: '0 3px 14px rgb(0 0 0 / 24%)',
             }}
         >
             <Box sx={style.Title}>

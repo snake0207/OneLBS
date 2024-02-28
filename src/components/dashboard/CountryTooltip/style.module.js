@@ -1,10 +1,6 @@
 const style = {
     dashboardBox: {
         width: '100%',
-        borderRadius: '0 0 8px 8px',
-        p: '18px 20px',
-        backgroundColor: 'background.contents',
-        boxShadow: '0 3px 14px rgb(0 0 0 / 24%)',
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'center',

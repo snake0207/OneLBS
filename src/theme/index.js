@@ -193,6 +193,7 @@ export const getThemeSettings = (mode) => ({
                   },
                   color: {
                       ...tokens.color,
+                      mainMobile: tokens.color[500],
                       grayBox: tokens.color[200],
                       grayBorder: tokens.color[600],
                       header: tokens.color[1000],
@@ -255,6 +256,8 @@ export const getThemeSettings = (mode) => ({
                       dropdown: tokens.border[200],
                       tabs: tokens.border[700],
                       tabSelected: tokens.border[500],
+                      header: tokens.border[1000],
+                      map: tokens.border[700],
                   },
                   table: {
                       td: tokens.table[100],
@@ -311,6 +314,7 @@ export const getThemeSettings = (mode) => ({
                   },
                   color: {
                       ...tokens.color,
+                      mainMobile: tokens.color[1001],
                       grayBox: tokens.color[901],
                       grayBorder: tokens.color[501],
                       header: tokens.color[601],
@@ -373,6 +377,8 @@ export const getThemeSettings = (mode) => ({
                       dropdown: tokens.border[300],
                       tabs: tokens.border[800],
                       tabSelected: tokens.border[600],
+                      header: tokens.border[300],
+                      map: tokens.border[300],
                   },
                   table: {
                       td: tokens.table[500],

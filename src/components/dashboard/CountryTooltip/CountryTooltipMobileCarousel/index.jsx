@@ -5,6 +5,7 @@ import { Box, IconButton } from '@mui/material'
 import useEmblaCarousel from 'embla-carousel-react'
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos'
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos'
+import style from './style.module'
 
 const CountryTooltipMobileCarousel = ({ categoryCountList }) => {
     const { themeMode } = useLayoutStore()
@@ -13,7 +14,7 @@ const CountryTooltipMobileCarousel = ({ categoryCountList }) => {
         useCarouselPrevNextButtons(emblaApi)
 
     return (
-        <Box ref={emblaRef} sx={{ overflow: 'hidden', width: '283px' }}>
+        <Box ref={emblaRef} sx={style.europeBox}>
             <Box sx={{ display: 'flex', gap: '14px' }}>
                 {categoryCountList.map((item) => (
                     <Box key={item.category} sx={{ width: 85 }}>
@@ -26,11 +27,11 @@ const CountryTooltipMobileCarousel = ({ categoryCountList }) => {
                     </Box>
                 ))}
             </Box>
-            <IconButton onClick={onPrevButtonClick} disabled={prevBtnDisabled}>
-                <ArrowBackIosIcon />
+            <IconButton onClick={onPrevButtonClick} disabled={prevBtnDisabled} sx={style.backArrow}>
+                <ArrowBackIosIcon sx={{ width: 20, position: 'absolute', left: '25%' }} />
             </IconButton>
-            <IconButton onClick={onNextbuttonClick} disabled={nextBtnDisabled}>
-                <ArrowForwardIosIcon />
+            <IconButton onClick={onNextbuttonClick} disabled={nextBtnDisabled} sx={style.nextArrow}>
+                <ArrowForwardIosIcon sx={{ width: 20 }} />
             </IconButton>
         </Box>
     )

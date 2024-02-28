@@ -12,6 +12,7 @@ const style = {
             minHeight: '50px',
         },
         '@media (max-width:1024px)': {
+            borderColor: 'border.header',
             '& .MuiToolbar-root': {
                 minHeight: '60px',
             },

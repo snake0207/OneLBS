@@ -37,11 +37,7 @@ const EvCharging = ({ evChargingData, formik }) => {
                 <AccordionDetails sx={{ padding: 0 }}>
                     {/* 이용 시간 */}
                     {evChargingData.openingHours && (
-                        <GpssOpeningHours
-                            openingHoursData={evChargingData.openingHours}
-                            dataType={'evCharging'}
-                            formik={formik}
-                        />
+                        <GpssOpeningHours openingHoursData={evChargingData.openingHours} />
                     )}
                     {/* 가격 정보 */}
                     {evChargingData.price && (

@@ -1,4 +1,4 @@
-import { Button, Stack } from '@mui/material'
+import { Button, Stack, Box } from '@mui/material'
 import Grid from '@mui/material/Unstable_Grid2'
 import { useFormik } from 'formik'
 import * as yup from 'yup'
@@ -9,6 +9,7 @@ import t from '#/common/libs/trans.js'
 import Typography from '@mui/material/Typography'
 import { useState } from 'react'
 import ResetIcon from '#/assets/resetIcon.svg'
+import FilterIcon from '#/assets/filterIcon.svg'
 
 import style from './style.module'
 
@@ -86,7 +87,7 @@ const SearchFilter = ({ type, handleSubmitFilter, isMobile }) => {
             sx={{ flexDirection: isMobile && 'column-reverse' }}
         >
             {isFilterShow && (
-                <Grid container spacing={1} sx={style.searchBox}>
+                <Grid container sx={style.searchBox}>
                     <Grid md={4} xs={12} container alignItems={'center'}>
                         <Grid xs={3} md={3} sx={style.labelText}>
                             {t('name', 'approval')}
@@ -108,12 +109,7 @@ const SearchFilter = ({ type, handleSubmitFilter, isMobile }) => {
                                 name={'tempFilter2'}
                                 formik={formik}
                                 items={regionSelectItems}
-                                sx={{
-                                    width: 200,
-                                    height: 40,
-                                    backgroundColor: 'form.main',
-                                    borderRadius: '4px',
-                                }}
+                                sx={style.select}
                             />
                         </Grid>
                     </Grid>
@@ -126,12 +122,7 @@ const SearchFilter = ({ type, handleSubmitFilter, isMobile }) => {
                                 name={'tempFilter3'}
                                 formik={formik}
                                 items={statusSelectItems()}
-                                sx={{
-                                    width: 200,
-                                    height: 40,
-                                    backgroundColor: 'form.main',
-                                    borderRadius: '4px',
-                                }}
+                                sx={style.select}
                             />
                         </Grid>
                     </Grid>
@@ -177,7 +168,7 @@ const SearchFilter = ({ type, handleSubmitFilter, isMobile }) => {
                             </Grid>
                         </Grid>
                     )}
-                    <Grid md={4} xs={12} container alignItems={'center'}>
+                    <Grid md={4} xs={12} container alignItems={'center'} sx={style.mobLine}>
                         <Grid xs={3} md={3} sx={style.labelText}>
                             {t('request_date', 'approval')}
                         </Grid>
@@ -189,7 +180,7 @@ const SearchFilter = ({ type, handleSubmitFilter, isMobile }) => {
                             </Stack>
                         </Grid>
                     </Grid>
-                    <Grid md={4} xs={12} container alignItems={'center'}>
+                    <Grid md={4} xs={12} container alignItems={'center'} sx={style.mobLine}>
                         <Grid xs={3} md={3} sx={style.labelText}>
                             {t('review_date', 'approval')}
                         </Grid>
@@ -201,7 +192,7 @@ const SearchFilter = ({ type, handleSubmitFilter, isMobile }) => {
                             </Stack>
                         </Grid>
                     </Grid>
-                    <Grid md={4} xs={12} container alignItems={'center'}>
+                    <Grid md={4} xs={12} container alignItems={'center'} sx={style.mobLine}>
                         <Grid xs={3} md={3} sx={style.labelText}>
                             {t('approval_date', 'approval')}
                         </Grid>
@@ -216,8 +207,20 @@ const SearchFilter = ({ type, handleSubmitFilter, isMobile }) => {
                 </Grid>
             )}
 
-            <Stack direction={'row'} sx={{ m: '0 20px 20px 0' }}>
-                {isMobile && <Button onClick={() => setIsFilterShow(!isFilterShow)}>필터</Button>}
+            <Stack
+                direction={'row'}
+                sx={{
+                    m: '0 20px 20px 0',
+                    '@media (max-width:1024px)': {
+                        m: '0 0 20px 0',
+                    },
+                }}
+            >
+                {isMobile && (
+                    <Button onClick={() => setIsFilterShow(!isFilterShow)} sx={style.filter}>
+                        <img src={FilterIcon} />
+                    </Button>
+                )}
                 {/* TODO: 새로고침 클릭 시 액션 정의 필요 (인풋클리어 / 인풋클리어 + 리스트초기화) */}
                 <Button variant={'contained'} onClick={formik.resetForm} sx={style.ResetButton}>
                     <img src={ResetIcon} />

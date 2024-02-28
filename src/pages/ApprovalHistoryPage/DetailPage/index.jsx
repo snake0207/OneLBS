@@ -20,6 +20,7 @@ import { getUserTypeFromPath } from '#/common/libs/approvalParser.js'
 import FuelInfo from '#/components/approval/Detail/CategoryInfo/FuelInfo/index.jsx'
 import DealerPoiInfo from '#/components/approval/Detail/CategoryInfo/DealerPoiInfo/index.jsx'
 import H2ChargingInfo from '#/components/approval/Detail/CategoryInfo/H2ChargingInfo/index.jsx'
+import ParkingInfo from '#/components/approval/Detail/CategoryInfo/ParkingInfo/index.jsx'
 import GoogleMapComponent from '#/components/common/map/googleMap/index.jsx'
 
 const markerSampleData = [
@@ -178,13 +179,13 @@ const ApprovalHistoryDetailPage = () => {
                             formik={formik}
                         />
                     )}
-                    {/*{parsedData.category === 'parking' && (*/}
-                    {/*    <H2Charging*/}
-                    {/*        data={parsedData.h2ChargingInfo}*/}
-                    {/*        isEditable={isEditable}*/}
-                    {/*        formik={formik}*/}
-                    {/*    />*/}
-                    {/*)}*/}
+                    {parsedData.category === 'parking' && (
+                        <ParkingInfo
+                            data={parsedData.parkingInfo}
+                            isEditable={isEditable}
+                            formik={formik}
+                        />
+                    )}
                     {parsedData.category === 'h2Charging' && (
                         <H2ChargingInfo
                             data={parsedData.h2ChargingInfo}

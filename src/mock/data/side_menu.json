@@ -14,7 +14,7 @@
                         "menuOrder": 1,
                         "rootMenuId": 120,
                         "menuUrl": "/search-management/map",
-                        "label": "map"
+                        "label": "search_map"
                     }
                 ]
             },
@@ -31,7 +31,7 @@
                         "menuOrder": 1,
                         "rootMenuId": 130,
                         "menuUrl": "/poi-view/map",
-                        "label": "map"
+                        "label": "poi_map"
                     }
                 ]
             },

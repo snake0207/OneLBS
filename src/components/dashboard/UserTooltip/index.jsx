@@ -40,7 +40,12 @@ const UserTooltip = () => {
     const { themeMode } = useLayoutStore()
     return (
         <Box
-            sx={{ display: 'inline-block', borderRadius: '8px', width: isMobile ? '100%' : '35%' }}
+            sx={{
+                display: 'inline-block',
+                borderRadius: '8px',
+                mb: '10px',
+                width: isMobile ? '100%' : '35%',
+            }}
         >
             <Box sx={style.Title}>
                 <img src={UserIconDark} />

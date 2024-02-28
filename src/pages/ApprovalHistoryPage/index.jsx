@@ -1,4 +1,4 @@
-import { Box, Container } from '@mui/material'
+import { Box, Container, Icon } from '@mui/material'
 import HistoryTable from '#/components/approval/HistoryTable/index.jsx'
 import SearchFilter from '#/components/approval/SearchFilter/index.jsx'
 import CommonPagination from '#/components/common/pagination/CommonPagination.jsx'
@@ -13,6 +13,12 @@ import TotalCount from '#/components/approval/HistoryTable/TotalCount/index.jsx'
 import ViewMoreButton from '#/components/approval/HistoryTable/Mobile/ViewMoreButton/index.jsx'
 import { usePopupActions } from '#/store/usePopupStore.js'
 import { getUserTypeFromPath } from '#/common/libs/approval.js'
+
+import PoiSearchIcon from '#/assets/poiSearchIcon.svg'
+import PoiSearchIconDark from '#/assets/poiSearchIconDark.svg'
+import useLayoutStore from '#/store/useLayoutStore'
+
+import style from './style.module'
 
 const ApprovalHistoryPage = () => {
     // TODO: 임시상태값 - temporary, request, reviewed, approved, rejected_review, rejected_approval,
@@ -85,35 +91,35 @@ const ApprovalHistoryPage = () => {
     const handleClickRow = (id) => {
         navigator(`${url}/detail/${id}`)
     }
+    const { themeMode } = useLayoutStore()
 
     return (
         <Box sx={{ display: 'flex', flexDirection: 'column' }}>
+            <MobileView>
+                <Icon
+                    style={{
+                        display: 'flex',
+                        position: 'absolute',
+                        top: ' 75px',
+                        zIndex: '4',
+                    }}
+                >
+                    {themeMode === 'light' ? (
+                        <img src={PoiSearchIcon} style={{ display: 'flex', width: '24px' }} />
+                    ) : (
+                        <img src={PoiSearchIconDark} style={{ display: 'flex', width: '24px' }} />
+                    )}
+                </Icon>
+            </MobileView>
             <TitleBar title={t(`list_${userType}`, 'approval')} />
-            <Container
-                sx={{
-                    m: '0 0 16px 0',
-                    p: '0 !important',
-                    borderRadius: '8px',
-                    maxWidth: 'calc(100% - 0px) !important',
-                    backgroundColor: 'grey.search',
-                    boxShadow: '0 3px 14px rgb(0 0 0 / 24%)',
-                }}
-            >
+            <Container sx={style.searchBox}>
                 <SearchFilter
                     type={userType}
                     handleSubmitFilter={handleSubmitFilter}
                     isMobile={isMobile}
                 />
             </Container>
-            <Box
-                sx={{
-                    width: '100%',
-                    borderRadius: '8px',
-                    p: '18px 20px',
-                    backgroundColor: 'background.contents',
-                    boxShadow: '0 3px 14px rgb(0 0 0 / 24%)',
-                }}
-            >
+            <Box sx={style.contentBox}>
                 <MobileView>
                     <TotalCount type={userType} counts={totalCounts.current} />
                     <HistoryTableMobile

@@ -8,6 +8,7 @@ const style = {
             m: '0 4px 2px 4px',
             '& .MuiButtonBase-root': {
                 m: '3px 0',
+                borderRadius: '350px',
                 '& .MuiListItemIcon-root': {
                     minWidth: '30px',
                     mr: '8px',
@@ -42,6 +43,7 @@ const style = {
             '& .MuiListItemIcon-root': {
                 minWidth: 'auto',
                 mr: '8px',
+                borderRadius: '0',
             },
         },
         '& .MuiListItemText-root': {
@@ -59,6 +61,7 @@ const style = {
             pt: '0',
             '& .MuiButtonBase-root': {
                 p: '15px 24px',
+                borderRadius: '0',
             },
         },
         '& .MuiCollapse-root': {
@@ -71,8 +74,9 @@ const style = {
                     p: '6px 24px 6px 52px',
                     borderBottom: 'none',
                     '& .MuiTypography-root ': {
-                        color: '#fff',
+                        color: 'lnb.mobilelnbText',
                         fontSize: 16,
+                        '&:hover': { borderRadius: '0px' },
                     },
                 },
             },

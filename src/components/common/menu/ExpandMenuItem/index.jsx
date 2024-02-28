@@ -24,13 +24,11 @@ function ExpandMenuItem({ label, iconNode, items }) {
                 onClick={handleClick}
                 sx={{
                     backgroundColor: open ? 'lnb.weblnbdeps' : 'weblnb',
-                    borderRadius: '350px',
                     '&:hover': {
                         backgroundColor: 'lnb.weblnbhover',
                     },
                     '&:focus:not(:focus-visible)': {
                         backgroundColor: 'lnb.weblnbdeps',
-                        borderRadius: '350px',
                     },
                     '@media (max-width:1024px)': {
                         backgroundColor: open ? 'lnb.mobilelnbdeps' : 'lnb.mobilelnb',

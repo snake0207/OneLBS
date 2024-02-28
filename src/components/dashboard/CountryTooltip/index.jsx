@@ -4,6 +4,8 @@ import useLayoutStore from '#/store/useLayoutStore'
 import LanguageIcon from '#/assets/languagesIconDark.svg'
 
 import style from './style.module'
+import { BrowserView, MobileView, isMobile } from 'react-device-detect'
+import CountryTooltipMobileCarousel from '#/components/dashboard/CountryTooltip/CountryTooltipMobileCarousel'
 
 const CountryTooltip = ({ title, categoryCountList }) => {
     const { themeMode } = useLayoutStore()
@@ -12,8 +14,8 @@ const CountryTooltip = ({ title, categoryCountList }) => {
             sx={{
                 display: 'inline-block',
                 borderRadius: '8px',
-                width: 'calc(65% - 10px)',
-                ml: '10px',
+                width: isMobile ? '100%' : 'calc(65% - 10px)',
+                ml: isMobile ? 0 : '10px',
             }}
         >
             <Box sx={style.Title}>
@@ -22,16 +24,23 @@ const CountryTooltip = ({ title, categoryCountList }) => {
                     {title}
                 </Typography>
             </Box>
-            <Box sx={style.dashboardBox}>
-                {categoryCountList.map((item) => (
-                    <CategoryCount
-                        key={item.category}
-                        categoryName={item.category}
-                        icon={themeMode === 'light' ? item.lightIcon : item.darkIcon}
-                        count={item.count}
-                    />
-                ))}
-            </Box>
+            <BrowserView>
+                <Box sx={style.dashboardBox}>
+                    {categoryCountList.map((item) => (
+                        <CategoryCount
+                            key={item.category}
+                            categoryName={item.category}
+                            icon={themeMode === 'light' ? item.lightIcon : item.darkIcon}
+                            count={item.count}
+                        />
+                    ))}
+                </Box>
+            </BrowserView>
+            <MobileView>
+                <Box>
+                    <CountryTooltipMobileCarousel categoryCountList={categoryCountList} />
+                </Box>
+            </MobileView>
         </Box>
     )
 }

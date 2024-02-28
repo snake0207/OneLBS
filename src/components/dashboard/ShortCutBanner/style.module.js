@@ -1,7 +1,9 @@
+import { isMobile } from 'react-device-detect'
+
 const style = {
     dashboardBox: {
         position: 'relative',
-        width: '25%',
+        width: isMobile ? '100%' : '25%',
         borderRadius: '8px',
         backgroundColor: 'background.contents',
         boxShadow: '0 3px 14px rgb(0 0 0 / 24%)',
@@ -9,7 +11,7 @@ const style = {
         alignItems: 'flex-start',
         padding: '15px 18px',
         mt: '10px',
-        ml: '10px',
+        ml: isMobile ? 0 : '10px',
         '&:first-of-type': { ml: '0px' },
     },
     Title: {

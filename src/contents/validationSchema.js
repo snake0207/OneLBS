@@ -173,6 +173,10 @@ export const poiDetailSchema = yup.object({
             lat: yup.string().matches(REGEXP.coordinates, HELPER_TEXT.searchLat),
             lon: yup.string().matches(REGEXP.coordinates, HELPER_TEXT.searchLng),
         }),
+        guide: yup.object().shape({
+            lat: yup.string().matches(REGEXP.coordinates, HELPER_TEXT.searchLat),
+            lon: yup.string().matches(REGEXP.coordinates, HELPER_TEXT.searchLng),
+        }),
     }),
 })
 

@@ -149,18 +149,6 @@ const MapGpssDetail = ({ selectedPoi, setSelectedPoi, poiData }) => {
                             tabSelected={tabSelected}
                             isEditable={true}
                         />
-                        <Box>
-                            <Typography
-                                sx={{
-                                    fontSize: 20,
-                                    fontWeight: 600,
-                                    mb: '4px',
-                                    color: 'primary.blue',
-                                }}
-                            >
-                                {t('category', 'common')}
-                            </Typography>
-                        </Box>
                         {/* EV Charging */}
                         {!!evCharging && <EvCharging evChargingData={evCharging} formik={formik} />}
                         <Box>

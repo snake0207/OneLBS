@@ -8,11 +8,11 @@ import TitleBar from '#/components/common/menu/TitleBar/index.jsx'
 import { useNavigate, useParams } from 'react-router-dom'
 import { BrowserView, MobileView, isMobile } from 'react-device-detect'
 import HistoryTableMobile from '#/components/approval/HistoryTable/Mobile/index.jsx'
-import { useMemo, useRef, useState } from 'react'
+import { useRef, useState } from 'react'
 import TotalCount from '#/components/approval/HistoryTable/TotalCount/index.jsx'
 import ViewMoreButton from '#/components/approval/HistoryTable/Mobile/ViewMoreButton/index.jsx'
 import { usePopupActions } from '#/store/usePopupStore.js'
-import { getUserTypeFromPath } from '#/common/libs/approval.js'
+import { getUserTypeFromPath } from '#/common/libs/approvalParser.js'
 
 const ApprovalHistoryPage = () => {
     // TODO: 임시상태값 - temporary, request, reviewed, approved, rejected_review, rejected_approval,

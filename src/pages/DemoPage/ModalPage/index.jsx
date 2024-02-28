@@ -4,6 +4,7 @@ import PrivacyPolicyModal from '#/components/auth/authForm/joinForm/JoinModal/Pr
 import JoinModal from '#/components/auth/authForm/joinForm/JoinModal'
 import OtpGuideModal from '#/components/auth/authForm/CertifiedForm/otpGuideModal'
 import PasswordChangeModal from '#/components/dashboard/PasswordChangeModal'
+import PermissionChangeModal from '#/components/permission/PermissionCard/PermissionChangeModal'
 
 const ModalPage = () => {
     const [isOpenJoinModal, setIsOpenJoinModal] = useState(false)
@@ -11,6 +12,7 @@ const ModalPage = () => {
     const [isOpenPrivacyPolicyModal, setIsOpenPrivacyPolicyModal] = useState(false)
     const [isOpenOtpGuideModal, setIsOpenOtpGuideModal] = useState(false)
     const [isOpenPasswordChangeModal, setIsOpenPasswordChangeModal] = useState(false)
+    const [isOpenPermissionChangeModal, setIsOpenPermissionChangeModal] = useState(true)
     return (
         <div>
             <h1>Modal</h1>
@@ -40,6 +42,14 @@ const ModalPage = () => {
             <PasswordChangeModal
                 isOpen={isOpenPasswordChangeModal}
                 onClose={() => setIsOpenPasswordChangeModal(false)}
+            />
+            <h2>PermissionChangeModal</h2>
+            <button onClick={() => setIsOpenPermissionChangeModal(true)}>
+                PermissionChangeModal
+            </button>
+            <PermissionChangeModal
+                isOpen={isOpenPermissionChangeModal}
+                onClose={() => setIsOpenPermissionChangeModal(false)}
             />
         </div>
     )

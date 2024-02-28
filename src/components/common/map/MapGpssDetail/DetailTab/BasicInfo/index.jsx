@@ -28,6 +28,7 @@ const BasicInfo = ({ formik, poiData, tabSelected, isEditable }) => {
         lon: false,
         guideLat: false,
         guideLon: false,
+        title: false,
     })
 
     const [isDisabledInputs, setIsDisabledInputs] = useState({
@@ -36,6 +37,7 @@ const BasicInfo = ({ formik, poiData, tabSelected, isEditable }) => {
         lon: true,
         guideLat: true,
         guideLon: true,
+        title: true,
     })
     const handleClickInputButton = (name) => {
         setIsShowInputs({ ...isShowInputs, [name]: true })
@@ -49,13 +51,40 @@ const BasicInfo = ({ formik, poiData, tabSelected, isEditable }) => {
             {tabSelected === 'info' ? (
                 <>
                     <Box>
-                        <Typography variant={'h6'} sx={style.title}>
-                            <img
-                                src={PointBlueIcon}
-                                style={{ verticalAlign: 'middle', paddingRight: '4px' }}
-                            />
-                            {poiData.title}
-                        </Typography>
+                        <Box sx={{ display: 'flex' }}>
+                            <Box sx={{ paddingTop: '7px' }}>
+                                <img
+                                    src={PointBlueIcon}
+                                    style={{ verticalAlign: 'middle', paddingRight: '4px' }}
+                                />
+                            </Box>
+                            <Box>
+                                <Typography variant={'h6'} sx={style.title}>
+                                    {poiData.title}
+                                </Typography>
+                            </Box>
+                            {isEditable && (
+                                <Button
+                                    variant={'contained'}
+                                    sx={{ ml: 'auto' }}
+                                    onClick={() => handleClickInputButton('title')}
+                                >
+                                    {isDisabledInputs['title']
+                                        ? t('edit', 'common')
+                                        : t('save', 'common')}
+                                </Button>
+                            )}
+                        </Box>
+                        {isShowInputs['title'] && (
+                            <Box sx={{ height: '40px' }}>
+                                <TextInput
+                                    formik={formik}
+                                    name={'title'}
+                                    IsDisabled={isDisabledInputs['title']}
+                                    placeholder={t('title_input', 'gpss')}
+                                />
+                            </Box>
+                        )}
                     </Box>
                     <Box sx={{ marginTop: '8px', marginBottom: '16px' }}>
                         <Box>

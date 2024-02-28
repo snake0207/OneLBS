@@ -25,8 +25,7 @@ import t from '#/common/libs/trans'
 
 function Settings() {
     const [anchorEl, setAnchorEl] = useState(null)
-    const { sidebar, themeMode, device, setSidebar, setThemeMode, setDevice, reset } =
-        useLayoutStore()
+    const { sidebar, themeMode, setSidebar, setThemeMode, reset } = useLayoutStore()
 
     const handleClick = (event) => {
         setAnchorEl(event.currentTarget)
@@ -42,10 +41,6 @@ function Settings() {
 
     const handleSidebar = (event) => {
         setSidebar(event.target.value === 'expand')
-    }
-
-    const handleDevice = (event) => {
-        setDevice(event.target.value)
     }
 
     const handleReset = () => {
@@ -173,21 +168,6 @@ function Settings() {
                                     value={'collapse'}
                                     control={<Radio />}
                                     label={t('collapse')}
-                                />
-                            </RadioGroup>
-                            <FormLabel id="device-group-label">{t('device')}</FormLabel>
-                            <RadioGroup
-                                row
-                                aria-labelledby="device-group-label"
-                                name="device-group"
-                                value={device}
-                                onChange={handleDevice}
-                            >
-                                <FormControlLabel value="pc" control={<Radio />} label={t('pc')} />
-                                <FormControlLabel
-                                    value="mobile"
-                                    control={<Radio />}
-                                    label={t('mobile')}
                                 />
                             </RadioGroup>
                         </BrowserView>

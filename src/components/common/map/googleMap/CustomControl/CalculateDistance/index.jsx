@@ -76,15 +76,19 @@ const CalculateDistance = ({
                 sx={{
                     width: '40px',
                     height: '40px',
+                    color: '#666',
                     margin: '10px',
                     cursor: 'pointer',
                     borderRadius: '2px',
                     boxShadow: '#0000004d 0px 1px 4px -1px',
                     backgroundColor: !isDistanceFunctionOn ? '#ffffff' : '#D1D1D1',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
                 }}
                 onClick={() => setIsDistanceFunctionOn(!isDistanceFunctionOn)}
             >
-                <StraightenIcon sx={{ fontSize: '40px' }} />
+                <StraightenIcon sx={{ fontSize: '25px' }} />
             </Box>
             {distanceCoordArr.length !== 0 && (
                 <>

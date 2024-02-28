@@ -27,14 +27,14 @@ function ExpandMenuItem({ label, iconNode, items }) {
                     '&:hover': {
                         backgroundColor: 'lnb.weblnbhover',
                     },
-                    '&:focus:not(:focus-visible)': {
-                        backgroundColor: 'lnb.weblnbdeps',
-                    },
+                    // '&:focus:not(:focus-visible)': {
+                    //     backgroundColor: 'lnb.weblnbdeps',
+                    // },
                     '@media (max-width:1024px)': {
                         backgroundColor: open ? 'lnb.mobilelnbdeps' : 'lnb.mobilelnb',
-                        '&:focus:not(:focus-visible)': {
-                            backgroundColor: 'lnb.mobilelnbdeps',
-                        },
+                        // '&:focus:not(:focus-visible)': {
+                        //     backgroundColor: 'lnb.mobilelnbdeps',
+                        // },
                     },
                 }}
             >

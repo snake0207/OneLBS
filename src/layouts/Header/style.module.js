@@ -23,7 +23,7 @@ const style = {
         backgroundColor: 'transparent',
         fontSize: 13,
         fontWeight: 400,
-        p: '6px 24px 6px 8px',
+        p: '6px 24px 6px 16px',
         '&:hover': {
             backgroundColor: 'transparent',
         },

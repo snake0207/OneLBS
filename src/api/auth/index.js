@@ -25,10 +25,15 @@ const getUserIp = () => {
     return getAPI({ endPoint: API_PATH.auth.get_ip })
 }
 
+const postRenewToken = () => {
+    return postAPI({ endPoint: API_PATH.auth.renew_token })
+}
+
 export default {
     postLogin,
     postJoin,
     postVerifyEmail,
     postConfirmEmail,
     getUserIp,
+    postRenewToken,
 }

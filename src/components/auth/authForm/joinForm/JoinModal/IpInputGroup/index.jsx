@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { Box, FormControlLabel, Checkbox, Typography, Button } from '@mui/material'
 import { IpInput } from '#/components/common/input/IpInput'
 import { BrowserView } from 'react-device-detect'
+import { useGetUserIp } from '#/hooks/queries/auth'
 
 import t from '#/common/libs/trans'
 
@@ -10,16 +11,15 @@ import style from './style.module'
 const IpInputGroup = ({ formik }) => {
     const [ipInputCount, setIpInputCount] = useState(0)
 
-    // const { data } = useGetUserIp()
-    const data = '123.123.123.123'
+    const { data } = useGetUserIp()
 
     const handleClickAddIPInput = () => {
         setIpInputCount((prev) => prev + 1)
     }
 
     useEffect(() => {
-        if (formik.values.isIpAutoAdd) {
-            const ipAddressList = data.split('.')
+        if (formik.values.isIpAutoAdd && data) {
+            const ipAddressList = data.data.data.ip.split('.')
             ipAddressList.forEach((ip, idx) => {
                 formik.setFieldValue(`ipAddress${idx + 1}_0`, ip)
             })
@@ -28,7 +28,7 @@ const IpInputGroup = ({ formik }) => {
                 formik.setFieldValue(`ipAddress${idx + 1}_0`, '')
             }
         }
-    }, [formik.values.isIpAutoAdd])
+    }, [formik.values.isIpAutoAdd, data])
 
     return (
         <>

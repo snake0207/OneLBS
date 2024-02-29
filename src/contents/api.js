@@ -1,10 +1,10 @@
 export const API_PATH = {
     auth: {
         login: '/',
-        join: '/userAuth/api/v1/user/register',
-        confirm_eamil: '/userAuth/api/v1/user/confirm-email',
-        verify_email: '/userAuth/api/v1/user/verify-email',
-        get_ip: '/userAuth/api/v1/user/get-ip',
+        join: '/user-auth/api/v1/user/register',
+        confirm_eamil: '/user-auth/api/v1/user/confirm-email',
+        verify_email: '/user-auth/api/v1/user/verify-email',
+        get_ip: '/user-auth/api/v1/user/get-ip',
     },
     gpss: {
         reviewer: '/reviewer',

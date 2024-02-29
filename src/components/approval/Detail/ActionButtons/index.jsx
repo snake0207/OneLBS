@@ -2,12 +2,13 @@ import { Box, Button } from '@mui/material'
 import t from '#/common/libs/trans.js'
 
 const ActionButtons = ({ type, status, clickAction, id }) => {
+    console.log('USER TYPE >> ', type)
     const buttonTextByType = (type, status) => {
         switch (type) {
             case 'requester':
                 return status === 'request'
                     ? ['retrieve']
-                    : status === 'rejected' || status === 'temporary'
+                    : status === 'rejected_review' || status === 'temporary'
                       ? ['re_request']
                       : null
             case 'reviewer':

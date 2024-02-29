@@ -97,7 +97,6 @@ const ApprovalHistoryDetailPage = () => {
         initialValues: {
             ...parsedData.approvalInfo,
             ...parsedData.basicInfo,
-            ...parsedData.coordinates,
             ...categoryFormik(parsedData),
         },
     })
@@ -116,6 +115,7 @@ const ApprovalHistoryDetailPage = () => {
                 return false
         }
     }, [parsedData.status, userType])
+    console.log('IS EDITABLE >> ', isEditable, parsedData.status)
 
     const openAlertPopup = (action) => {
         if (formik.values['request_reason'] === '')
@@ -148,14 +148,14 @@ const ApprovalHistoryDetailPage = () => {
                         backgroundColor: 'dialog.main',
                         opacity: '95%',
                         overflowY: 'auto',
-                        height: '98%',
+                        height: 'calc(100% - 1rem)',
                         zIndex: 100,
                     }}
                 >
                     {/* 결제라인 */}
                     <ApprovalLine
-                        status={dummyData.status}
-                        content={dummyData.approvalLineContents}
+                        status={parsedData.approvalInfo.status}
+                        content={parsedData.approvalInfo.approvalLineContents}
                     />
                     {/* 정보 탭 */}
                     {/*<BasicInfo formik={formik} poiData={parsedData.basicInfo} />*/}
@@ -201,12 +201,6 @@ const ApprovalHistoryDetailPage = () => {
                             formik={formik}
                         />
                     )}
-                    {/*<CategoryInfo*/}
-                    {/*    category={parsedData.category}*/}
-                    {/*    data={parsedData[`${parsedData.category}Info`]}*/}
-                    {/*    formik={formik}*/}
-                    {/*    isEditable={isEditable}*/}
-                    {/*/>*/}
                     {/* 승인 요청 이유*/}
                     <Box>
                         <Headline title={t('request_reason', 'approval')} />
@@ -240,7 +234,7 @@ const ApprovalHistoryDetailPage = () => {
                     {/* 버튼 */}
                     <ActionButtons
                         type={userType}
-                        status={dummyData.status}
+                        status={parsedData.approvalInfo.status}
                         clickAction={handleShowConfirmPopup}
                         id={params.id}
                     />

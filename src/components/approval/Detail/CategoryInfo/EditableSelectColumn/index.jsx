@@ -4,7 +4,6 @@ import Typography from '@mui/material/Typography'
 import Select from '#/components/common/Select/index.jsx'
 
 const EditableSelectColumn = ({ value, name, items, isEditable, formik }) => {
-    console.log('ITEMS >> ', items)
     const [isShowInput, setIsShowInput] = useState(false)
     const [isDisableInput, setIsDisableInput] = useState(true)
 

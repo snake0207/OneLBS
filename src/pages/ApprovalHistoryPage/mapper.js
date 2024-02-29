@@ -1,15 +1,14 @@
 import {
+    parseCategory,
     parseChargerSpeed,
     parseChargerStatus,
     parseCongestion,
+    parseEvStationStatus,
     parseFuelType,
+    parseH2StationStatus,
     parseOpeningHours,
-    parseParkingType,
     parsePriceIsFree,
-    parseStationStatus,
-    parseApprovalStatus,
     parseSummaryConnectorType,
-    parseCategory,
 } from '#/common/libs/approvalParser.js'
 
 const evChargerInfo = (data) => {
@@ -17,7 +16,7 @@ const evChargerInfo = (data) => {
         brand: data.brand,
         maxWatt: data.maxWatt,
         parkingFee: data.pFee,
-        status: parseStationStatus(data.stationStatus),
+        status: parseEvStationStatus(data.stationStatus),
         summary: data.status.map(({ connector, watt, speed, possibleCount }) => ({
             type: parseSummaryConnectorType(connector),
             watt,
@@ -86,7 +85,7 @@ const h2ChargingInfo = (data) => {
         chargers: data.charger.map(({ id, speed, status }) => ({
             id,
             speed: speed,
-            status: parseStationStatus(status),
+            status: parseH2StationStatus(status),
         })),
     }
 }
@@ -98,10 +97,15 @@ const dealerInfo = (data) => {
     }
 }
 
+/**
+ * POI Detail Response Mapper
+ * @param res
+ * @returns {{approvalInfo: *, poiId: *, category: *, status: string, basicInfo: {address: *, position: *, title: *}, evChargerInfo?: *, fuelInfo?: *, parkingInfo?: *, h2ChargingInfo?: *, dealerInfo?: *}}
+ */
 const detailResponseDataMapper = (res) => {
     const data = res.data.result[0]
     const basicData = {
-        status: parseApprovalStatus(res.data.approvalStatus), // service에서 보내줄 결재이력 상태값
+        status: res.data.approvalInfo.status, // service에서 보내줄 결재이력 상태값
         category: parseCategory(data),
         approvalInfo: res.data.approvalInfo,
         poiId: data.poiId,

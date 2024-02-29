@@ -3,7 +3,7 @@ import qs from 'qs'
 import useAuthStore from '#/store/useAuthStore'
 
 export const axiosInstance = axios.create({
-    baseURL: 'http://192.168.0.235:8081',
+    baseURL: import.meta.env.VITE_GW_BASE_URL,
     headers: {
         'Content-Type': 'application/x-www-form-urlencoded',
         Authorization: `${useAuthStore.getState().accesstoken}`,

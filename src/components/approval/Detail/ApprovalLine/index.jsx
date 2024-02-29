@@ -19,6 +19,8 @@ const ApprovalLineContent = ({ title, color, process, content }) => {
             </Typography>
             <Card sx={style.cardContBox}>
                 <Typography variant="subtitle2" sx={style.cardText}>
+                    {/* 글자색 변경 처리 부분 */}
+                    {/* sx={[style.cardText, { color: color === '#EFEFEF' ? '#000000' : '#ffffff' }]} */}
                     {process}
                 </Typography>
                 <Box p={1} sx={{ pb: 0 }}>

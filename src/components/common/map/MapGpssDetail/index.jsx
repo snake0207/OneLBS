@@ -8,12 +8,16 @@ import { useFormik } from 'formik'
 import { poiDetailSchema } from '#/contents/validationSchema.js'
 import { useGetApprover, useGetReviewer } from '#/hooks/queries/gpss.js'
 import BasicInfo from '#/components/common/map/MapGpssDetail/DetailTab/BasicInfo/index.jsx'
-import EvCharging from '#/components/common/map/MapGpssDetail/DetailTab/EvCharging/index.jsx'
 import Divider from '@mui/material/Divider'
 import TextInput from '#/components/common/input/TextInput/index.jsx'
 import UserSearchTable from '#/components/common/map/MapGpssDetail/UserSearchTable/index.jsx'
 import { GPSS_TABLE_TYPE } from '#/contents/constant.js'
 import { gpssDetailResponseDataMapper } from '#/pages/ApprovalHistoryPage/mapper.js'
+import EvChargingInfo from '#/components/approval/Detail/CategoryInfo/EvChargingInfo/index.jsx'
+import ParkingInfo from '#/components/approval/Detail/CategoryInfo/ParkingInfo/index.jsx'
+import FuelInfo from '#/components/approval/Detail/CategoryInfo/FuelInfo/index.jsx'
+import DealerPoiInfo from '#/components/approval/Detail/CategoryInfo/DealerPoiInfo/index.jsx'
+import H2ChargingInfo from '#/components/approval/Detail/CategoryInfo/H2ChargingInfo/index.jsx'
 
 const dummyData = [
     { id: 'qwer@acrofuture.com', name: '아*로1', company: '회사1', userSeq: 1 },
@@ -21,9 +25,8 @@ const dummyData = [
     { id: 'zxcv@acrofuture.com', name: '아*로3', company: '회사3', userSeq: 3 },
 ]
 const MapGpssDetail = ({ selectedPoi, setSelectedPoi, poiData }) => {
+    const isEditable = true
     const popupAction = usePopupActions()
-    const [initPoiData, setInitPoiData] = useState(poiData)
-    const { evCharging, fuel, parking, h2Charging, dealerPoi } = poiData
 
     const [isOpen, setIsOpen] = useState(false)
     const [tabSelected, setTabSelected] = useState('info')
@@ -150,12 +153,45 @@ const MapGpssDetail = ({ selectedPoi, setSelectedPoi, poiData }) => {
                             formik={formik}
                             poiData={parsedData.basicInfo}
                             tabSelected={tabSelected}
-                            isEditable={true}
+                            isEditable={isEditable}
                         />
                         {/* EV Charging */}
                         {!!parsedData.evChargingInfo && (
-                            <EvCharging
-                                evChargingData={parsedData.evChargingInfo}
+                            <EvChargingInfo
+                                data={parsedData.evChargingInfo}
+                                isEditable={isEditable}
+                                formik={formik}
+                            />
+                        )}
+                        {/* parking */}
+                        {!!parsedData.parkingInfo && (
+                            <ParkingInfo
+                                data={parsedData.parkingInfo}
+                                isEditable={isEditable}
+                                formik={formik}
+                            />
+                        )}
+                        {/* fuel */}
+                        {!!parsedData.fuelInfo && (
+                            <FuelInfo
+                                data={parsedData.fuelInfo}
+                                isEditable={isEditable}
+                                formik={formik}
+                            />
+                        )}
+                        {/* h2Charging */}
+                        {!!parsedData.h2ChargingInfo && (
+                            <H2ChargingInfo
+                                data={parsedData.h2ChargingInfo}
+                                isEditable={isEditable}
+                                formik={formik}
+                            />
+                        )}
+                        {/* dealerPoi */}
+                        {!!parsedData.dealerPoiInfo && (
+                            <DealerPoiInfo
+                                data={parsedData.dealerPoiInfo}
+                                isEditable={isEditable}
                                 formik={formik}
                             />
                         )}

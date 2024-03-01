@@ -111,20 +111,7 @@ const detailResponseDataMapper = (res) => {
             position: data.position,
         },
     }
-
-    switch (basicData.category) {
-        case 'evCharging':
-            return { ...basicData, evChargingInfo: evChargerInfo(data.evCharging) }
-        case 'fuel':
-            return { ...basicData, fuelInfo: fuelInfo(data.fuel) }
-        case 'parking':
-            return { ...basicData, parkingInfo: parkingInfo(data.parking) }
-        case 'h2Charging':
-            return { ...basicData, h2ChargingInfo: h2ChargingInfo(data.h2Charging) }
-        case 'dealerPoi':
-            return { ...basicData, dealerPoiInfo: dealerInfo(data.dealerPoi) }
-    }
-    return basicData
+    return setCategoryData(basicData, data)
 }
 
 /**
@@ -141,18 +128,22 @@ const gpssDetailResponseDataMapper = (res) => {
             position: data.position,
         },
     }
+    return setCategoryData(basicData, data)
+}
 
+// TODO 퍼블리싱 진행 이후에는 분기 처리
+const setCategoryData = (basicData, originData) => {
     switch (basicData.category) {
         case 'evCharging':
-            return { ...basicData, evChargingInfo: evChargerInfo(data.evCharging) }
+            basicData = { ...basicData, evChargingInfo: evChargerInfo(originData.evCharging) }
         case 'fuel':
-            return { ...basicData, fuelInfo: fuelInfo(data.fuel) }
+            basicData = { ...basicData, fuelInfo: fuelInfo(originData.fuel) }
         case 'parking':
-            return { ...basicData, parkingInfo: parkingInfo(data.parking) }
+            basicData = { ...basicData, parkingInfo: parkingInfo(originData.parking) }
         case 'h2Charging':
-            return { ...basicData, h2ChargingInfo: h2ChargingInfo(data.h2Charging) }
+            basicData = { ...basicData, h2ChargingInfo: h2ChargingInfo(originData.h2Charging) }
         case 'dealerPoi':
-            return { ...basicData, dealerPoiInfo: dealerInfo(data.dealerPoi) }
+            basicData = { ...basicData, dealerPoiInfo: dealerInfo(originData.dealerPoi) }
     }
     return basicData
 }

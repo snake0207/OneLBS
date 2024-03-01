@@ -10,6 +10,7 @@ import MapPoiDetail from '#/components/common/map/MapPoiDetail/index.jsx'
 import DisplayMarker from '#/components/common/map/googleMap/marker/DisplayMarker/index.jsx'
 import SearchResultMarker from '#/components/common/map/googleMap/marker/SearchResultMarker/index.jsx'
 import MapGpssDetail from '#/components/common/map/MapGpssDetail/index.jsx'
+import poiDetailData from '#/mock/data/poiDetailData.json'
 
 import TuneIcon from '@mui/icons-material/Tune'
 import { BrowserView, MobileView } from 'react-device-detect'
@@ -90,143 +91,6 @@ const mapSampleData = [
         category: 'ev',
     },
 ]
-
-const detailSampleData = {
-    data: {
-        result: [
-            {
-                poiId: 'here:pds:place:276u0yjhfsftw-aGVyZS1ldjplY29tb3ZlbWVudDo3MTIyMDkzNDQ',
-                cpType: ['HERE_API'],
-                title: 'E.ON',
-                country: 'Germany',
-                postalCode: '60327',
-                address: 'E.ON, Friedrich-Ebert-Anlage 49, 60327 Frankfurt, Germany',
-                distance: 120,
-                phone: '+4980012189555',
-                category: '700-7600-0322',
-                carPay: 1,
-                chains: {
-                    chains: 'Hyundai Motor Company',
-                },
-                position: {
-                    center: {
-                        lat: 12.123131,
-                        lon: 0.123131,
-                    },
-                    guide: {
-                        lat: 12.123131,
-                        lon: 0.123131,
-                    },
-                },
-                evCharging: {
-                    brand: 'EIT',
-                    maxWatt: '100kw',
-                    stationStatus: 0,
-                    status: [
-                        {
-                            connectorType: 1,
-                            speed: 1,
-                            possibleCount: 3,
-                            watt: 0,
-                        },
-                    ],
-                    price: [
-                        {
-                            price: 12.5,
-                            priceUnit: 'kwh',
-                            currencyCode: 'EUR',
-                            currency: '€',
-                        },
-                        {
-                            price: 10.0,
-                            priceUnit: 'kwh',
-                            currencyCode: 'EUR',
-                            currency: '€',
-                        },
-                    ],
-                    openingHours: [
-                        {
-                            week: 0,
-                            open: '08:00',
-                            close: '22:00',
-                        },
-                        {
-                            week: 1,
-                            open: '06:00',
-                            close: '22:00',
-                        },
-                        {
-                            week: 2,
-                            open: '09:00',
-                            close: '22:00',
-                        },
-                        {
-                            week: 3,
-                            open: '10:00',
-                            close: '22:00',
-                        },
-                    ],
-                    charger: [
-                        {
-                            id: '123',
-                            speed: 1,
-                            watt: '7kw',
-                            status: 1,
-                            timestamp: 2021231231123,
-                            connectorType: 2,
-                        },
-                        {
-                            id: '456',
-                            speed: 2,
-                            watt: '7kw',
-                            status: 2,
-                            timestamp: 2021231231123,
-                            connectorType: 3,
-                        },
-                    ],
-                },
-                fuel: {
-                    brand: 'AutoGas',
-                    status: [
-                        {
-                            type: 'G',
-                            price: {
-                                price: 12.5,
-                                priceUnit: 'kwh',
-                                currencyCode: 'EUR',
-                                currency: '€',
-                            },
-                        },
-                    ],
-                },
-                parking: {
-                    compnay: 'APCOA Parking (UK) Limited',
-                    parkingType: '0',
-                    price: {
-                        price: '12.5',
-                        priceUnit: 'kwh',
-                        currencyCode: 'EUR',
-                        currency: '€',
-                    },
-                },
-                h2Charging: {
-                    brand: 'EIT',
-                    possibleCount: 3,
-                    stationStatus: 'PLANNED',
-                },
-                dealerPoi: {
-                    dealerType: '5511',
-                    brand: 'H',
-                    staticUpdateTime: 1702345585,
-                },
-            },
-        ],
-        status: 'string',
-        total: 0,
-        resultID: 0,
-        resCode: 0,
-    },
-}
 
 const mapStyle = {
     width: '100%',
@@ -322,7 +186,7 @@ const GoogleMapComponent = ({
         /* poi 상세  */
         if (isPoiSearch) {
             navigate(`/search-management/map/${id}`)
-        } else if (isGpssSearch && detailSampleData) {
+        } else if (isGpssSearch && poiDetailData) {
             /* gpss 상세 */
             navigate(`/poi-view/map/${id}`)
         }
@@ -401,11 +265,11 @@ const GoogleMapComponent = ({
                                     />
                                 )}
                                 {/* gpss 상세 */}
-                                {isGpssSearch && detailSampleData && (
+                                {isGpssSearch && poiDetailData && (
                                     <MapGpssDetail
                                         selectedPoi={selectedPoi}
                                         setSelectedPoi={setSelectedPoi}
-                                        poiData={detailSampleData.data.result[0]}
+                                        poiData={poiDetailData}
                                     />
                                 )}
                             </CustomControl>

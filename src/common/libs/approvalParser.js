@@ -38,6 +38,7 @@ export const parseApprovalStatus = (value) => {
 }
 
 export const parseOpeningHours = (openingHours) => {
+    if (!openingHours || openingHours.length == 0) return []
     const parseWeekday = (weekday) => {
         switch (weekday) {
             case 0:

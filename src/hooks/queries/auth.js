@@ -27,11 +27,10 @@ export const usePostConfirmEmail = () => {
 }
 
 export const useGetUserIp = () => {
-    const { data, refetch } = useQuery({
+    const { data } = useQuery({
         queryFn: auth.getUserIp,
         queryKey: [QUERY_KEYS.auth.getIp],
-        enabled: false,
     })
 
-    return { data, refetch }
+    return { data }
 }

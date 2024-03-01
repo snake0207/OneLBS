@@ -1,9 +1,8 @@
 import axios from 'axios'
-import qs from 'qs'
 import useAuthStore from '#/store/useAuthStore'
 
 export const axiosInstance = axios.create({
-    baseURL: 'http://192.168.0.235:8081',
+    baseURL: import.meta.env.VITE_GW_BASE_URL,
     headers: {
         'Content-Type': 'application/x-www-form-urlencoded',
         Authorization: `${useAuthStore.getState().accesstoken}`,
@@ -26,7 +25,7 @@ export const getAPI = ({ endPoint, axiosOption }) => {
 }
 
 export const postAPI = ({ endPoint, data, axiosOption }) => {
-    return axiosInstance.post(endPoint, qs.stringify(data), axiosOption)
+    return axiosInstance.post(endPoint, data, axiosOption)
 }
 
 export const putAPI = ({ endPoint, data, axiosOption }) => {

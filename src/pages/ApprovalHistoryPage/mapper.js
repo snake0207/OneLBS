@@ -127,4 +127,34 @@ const detailResponseDataMapper = (res) => {
     return basicData
 }
 
-export { detailResponseDataMapper }
+/**
+ * gpss 상세데이터 매퍼
+ */
+const gpssDetailResponseDataMapper = (res) => {
+    const data = res.data.result[0]
+    const basicData = {
+        category: parseCategory(data),
+        poiId: data.poiId,
+        basicInfo: {
+            title: data.title,
+            address: data.address,
+            position: data.position,
+        },
+    }
+
+    switch (basicData.category) {
+        case 'evCharging':
+            return { ...basicData, evChargingInfo: evChargerInfo(data.evCharging) }
+        case 'fuel':
+            return { ...basicData, fuelInfo: fuelInfo(data.fuel) }
+        case 'parking':
+            return { ...basicData, parkingInfo: parkingInfo(data.parking) }
+        case 'h2Charging':
+            return { ...basicData, h2ChargingInfo: h2ChargingInfo(data.h2Charging) }
+        case 'dealerPoi':
+            return { ...basicData, dealerPoiInfo: dealerInfo(data.dealerPoi) }
+    }
+    return basicData
+}
+
+export { detailResponseDataMapper, gpssDetailResponseDataMapper }

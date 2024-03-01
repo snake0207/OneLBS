@@ -13,6 +13,7 @@ import Divider from '@mui/material/Divider'
 import TextInput from '#/components/common/input/TextInput/index.jsx'
 import UserSearchTable from '#/components/common/map/MapGpssDetail/UserSearchTable/index.jsx'
 import { GPSS_TABLE_TYPE } from '#/contents/constant.js'
+import { gpssDetailResponseDataMapper } from '#/pages/ApprovalHistoryPage/mapper.js'
 
 const dummyData = [
     { id: 'qwer@acrofuture.com', name: '아*로1', company: '회사1', userSeq: 1 },
@@ -38,13 +39,15 @@ const MapGpssDetail = ({ selectedPoi, setSelectedPoi, poiData }) => {
         if (selectedPoi) setIsOpen(true)
         else setIsOpen(false)
     }, [selectedPoi])
-
+    const parsedData = gpssDetailResponseDataMapper(poiData)
+    const { basicInfo, ...restData } = parsedData
     const formik = useFormik({
         initialValues: {
             reason: '',
             reviewer: '',
             approver: '',
-            ...poiData,
+            ...basicInfo,
+            ...restData,
         },
         validationSchema: poiDetailSchema,
         onSubmit: (form) => {
@@ -145,12 +148,17 @@ const MapGpssDetail = ({ selectedPoi, setSelectedPoi, poiData }) => {
                         {/* 상세 기본 정보 */}
                         <BasicInfo
                             formik={formik}
-                            poiData={poiData}
+                            poiData={parsedData.basicInfo}
                             tabSelected={tabSelected}
                             isEditable={true}
                         />
                         {/* EV Charging */}
-                        {!!evCharging && <EvCharging evChargingData={evCharging} formik={formik} />}
+                        {!!parsedData.evChargingInfo && (
+                            <EvCharging
+                                evChargingData={parsedData.evChargingInfo}
+                                formik={formik}
+                            />
+                        )}
                         <Box>
                             <Box>
                                 <Typography>{t('reason_for_approval', 'gpss')}</Typography>

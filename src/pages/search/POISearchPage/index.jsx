@@ -165,7 +165,6 @@ function POISearchPage() {
                 </Box>
                 <GoogleMapComponent
                     markerDataArr={markerSampleData}
-                    isPoiSearch={true}
                     selectedPoi={selectedPoi}
                     setSelectedPoi={setSelectedPoi}
                     searchResultArr={mapSampleData}

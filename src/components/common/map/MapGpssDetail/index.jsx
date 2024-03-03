@@ -127,8 +127,9 @@ const MapGpssDetail = ({ selectedPoi, setSelectedPoi, poiData }) => {
         setSelectedPoi(null)
     }
     return (
-        poiData && (
-            <Box sx={{ display: isOpen ? 'flex' : 'none', margin: '10px' }}>
+        poiData &&
+        isOpen && (
+            <Box sx={{ display: 'flex', margin: '10px' }}>
                 <Box sx={style.mapDetail}>
                     <Box>
                         <Tabs value={tabSelected} onChange={handleClickTabChange} sx={style.tabs}>

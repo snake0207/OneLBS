@@ -4,8 +4,9 @@ import List from '@mui/material/List'
 import { useEffect, useRef, useState } from 'react'
 import t from '#/common/libs/trans.js'
 import TopIcon from '#/assets/topIcon.svg'
+import Button from '@mui/material/Button'
 
-const MapSearchList = ({ searchResultArr, selectedPoi, setSelectedPoi }) => {
+const MapSearchList = ({ searchResultArr, selectedPoi, setSelectedPoi, isGpssSearch = false }) => {
     const [isResultNon, setIsResultNon] = useState(true)
     const [isTopBtnVisible, setIsTopBtnVisible] = useState(false)
     const poiList = useRef()
@@ -29,7 +30,7 @@ const MapSearchList = ({ searchResultArr, selectedPoi, setSelectedPoi }) => {
     }, [])
 
     const handleScroll = () => {
-        if (poiList.current.scrollTop > 70) setIsTopBtnVisible(true)
+        if (poiList.current.scrollTop > 30) setIsTopBtnVisible(true)
         else setIsTopBtnVisible(false)
     }
 
@@ -58,6 +59,23 @@ const MapSearchList = ({ searchResultArr, selectedPoi, setSelectedPoi }) => {
             ) : (
                 searchResultArr && (
                     <List sx={{ width: '100%' }}>
+                        {/* gpss 검색일 때만 poi 생성버튼 표출 */}
+                        {isGpssSearch && (
+                            <Box
+                                sx={{
+                                    position: 'relative',
+                                    mb: 5,
+                                    display: 'flex',
+                                    justifyContent: 'flex-end',
+                                    backgroundColor: 'dialog.main',
+                                    zIndex: 10,
+                                }}
+                            >
+                                <Box sx={{ position: 'fixed' }}>
+                                    <Button variant={'contained'}> POI생성 </Button>
+                                </Box>
+                            </Box>
+                        )}
                         {searchResultArr.map((data, idx) => (
                             <MapPoiContent
                                 key={data.poiId}

@@ -130,6 +130,7 @@ function MapSearchPage() {
                                     searchResultArr={mapSampleData}
                                     selectedPoi={selectedPoi}
                                     setSelectedPoi={setSelectedPoi}
+                                    isGpssSearch={true}
                                 />
                             </Box>
                             {/* gpss 상세 */}

@@ -1,12 +1,13 @@
-import { useEffect } from 'react'
-import { getLayoutState } from '#/store/useLayoutStore.js'
-import { Box, IconButton, Typography } from '@mui/material'
+import { useEffect, useState } from 'react'
+import { Box, Button, IconButton, TextField, Typography } from '@mui/material'
 import Divider from '@mui/material/Divider'
 import t from '#/common/libs/trans.js'
 import CloseIcon from '@mui/icons-material/Close.js'
 import { useFormik } from 'formik'
 import TextInput from '#/components/common/input/TextInput/index.jsx'
 import RadioInput from '#/components/common/Radio/index.jsx'
+import MapApprovalSelect from '#/components/common/map/MapApprovalSelect/index.jsx'
+import style from '#/components/common/map/MapPoiAdd/style.module.js'
 
 const MapPoiAdd = ({ setIsOpen, selectedPoi }) => {
     useEffect(() => {
@@ -20,6 +21,10 @@ const MapPoiAdd = ({ setIsOpen, selectedPoi }) => {
         { label: 'h2Charging', value: 'h2Charging' },
         { label: 'dealerPoi', value: 'dealerPoi' },
     ]
+
+    // 검토자 승인자
+    const [selectedReviewer, setSelectedReviewer] = useState(null)
+    const [selectedApprover, setSelectedApprover] = useState(null)
 
     const formik = useFormik({
         initialValues: {
@@ -40,17 +45,18 @@ const MapPoiAdd = ({ setIsOpen, selectedPoi }) => {
             approver: '',
             category: '',
         },
-        onsubmit: (form) => {
+        onSubmit: (form) => {
             console.log(form)
         },
     })
-    const { themeMode } = getLayoutState()
     return (
         <Box sx={{ display: 'flex', margin: '10px' }}>
             <Box
                 sx={{
                     width: '350px',
                     padding: '16px',
+                    maxHeight: '800px',
+                    overflow: 'auto',
                     background: '#ffffff',
                     borderRadius: '8px',
                     boxShadow: '0 3px 14px rgb(0 0 0 / 24%)',
@@ -148,6 +154,51 @@ const MapPoiAdd = ({ setIsOpen, selectedPoi }) => {
                 </Box>
                 <Box>
                     <RadioInput radioList={categoryList} name={'category'} formik={formik} />
+                </Box>
+                <Box>
+                    <Box>
+                        <Typography>{t('reason_for_approval', 'gpss')}</Typography>
+                    </Box>
+                    <Divider />
+                    <TextField
+                        sx={{
+                            marginBottom: '16px',
+                            marginTop: '8px',
+                            backgroundColor: 'form.main',
+                            borderRadius: '4px',
+                        }}
+                        size={'small'}
+                        multiline
+                        fullWidth
+                        placeholder={t('reason_for_approval_input', 'gpss')}
+                        name={'reason'}
+                        onChange={formik.handleChange}
+                        onBlur={formik.handleBlur}
+                        value={formik.values[name]}
+                    ></TextField>
+                </Box>
+                {/* 검토자 승인자 */}
+                <MapApprovalSelect
+                    formik={formik}
+                    selectedApprover={selectedApprover}
+                    setSelectedApprover={setSelectedApprover}
+                    selectedReviewer={selectedReviewer}
+                    setSelectedReviewer={setSelectedReviewer}
+                />
+                <Box
+                    sx={{
+                        display: 'flex',
+                        justifyContent: 'space-between',
+                        gap: '2px',
+                    }}
+                >
+                    <Button
+                        variant={'contained'}
+                        sx={style.blueButton}
+                        onClick={formik.handleSubmit}
+                    >
+                        Poi 생성 요청
+                    </Button>
                 </Box>
             </Box>
             <IconButton

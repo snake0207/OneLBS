@@ -6,7 +6,13 @@ import t from '#/common/libs/trans.js'
 import TopIcon from '#/assets/topIcon.svg'
 import Button from '@mui/material/Button'
 
-const MapSearchList = ({ searchResultArr, selectedPoi, setSelectedPoi, isGpssSearch = false }) => {
+const MapSearchList = ({
+    searchResultArr,
+    selectedPoi,
+    setSelectedPoi,
+    isGpssSearch = false,
+    setIsNewPoiCreateOpen,
+}) => {
     const [isResultNon, setIsResultNon] = useState(true)
     const [isTopBtnVisible, setIsTopBtnVisible] = useState(false)
     const poiList = useRef()
@@ -16,6 +22,7 @@ const MapSearchList = ({ searchResultArr, selectedPoi, setSelectedPoi, isGpssSea
             behavior: 'smooth',
         })
     }
+    // 검색 결과가 없을 때 처리
     useEffect(() => {
         if (searchResultArr && searchResultArr.length === 0) setIsResultNon(true)
         else setIsResultNon(false)
@@ -32,6 +39,11 @@ const MapSearchList = ({ searchResultArr, selectedPoi, setSelectedPoi, isGpssSea
     const handleScroll = () => {
         if (poiList.current.scrollTop > 30) setIsTopBtnVisible(true)
         else setIsTopBtnVisible(false)
+    }
+
+    const handleNewPoiOpen = () => {
+        setIsNewPoiCreateOpen(true)
+        setSelectedPoi(null)
     }
 
     return (
@@ -70,7 +82,9 @@ const MapSearchList = ({ searchResultArr, selectedPoi, setSelectedPoi, isGpssSea
                                     zIndex: 10,
                                 }}
                             >
-                                <Button variant={'contained'}> POI생성 </Button>
+                                <Button variant={'contained'} onClick={handleNewPoiOpen}>
+                                    POI생성
+                                </Button>
                             </Box>
                         )}
                         {searchResultArr.map((data, idx) => (

@@ -136,6 +136,7 @@ function MapSearchPage() {
                                     selectedPoi={selectedPoi}
                                     setSelectedPoi={setSelectedPoi}
                                     isGpssSearch={true}
+                                    setIsNewPoiCreateOpen={setIsNewPoiCreateOpen}
                                 />
                             </Box>
                             {/* gpss 상세 */}

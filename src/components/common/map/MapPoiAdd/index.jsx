@@ -1,30 +1,49 @@
 import { useEffect } from 'react'
 import { getLayoutState } from '#/store/useLayoutStore.js'
-import {
-    Accordion,
-    AccordionDetails,
-    AccordionSummary,
-    Box,
-    IconButton,
-    Typography,
-} from '@mui/material'
-import PointBlueIcon from '#/assets/pointBlueIcon.svg'
-import LanguageIcon from '#/assets/languagesIcon.svg'
-import LanguageIconDark from '#/assets/languagesIconDark.svg'
+import { Box, IconButton, Typography } from '@mui/material'
 import Divider from '@mui/material/Divider'
-import GpsIcon from '#/assets/gpsIcon.svg'
-import GpsIconDark from '#/assets/gpsIconDark.svg'
 import t from '#/common/libs/trans.js'
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore.js'
-import EvStationIcon from '#/assets/evStationIcon.svg'
-import EvStationIconDark from '#/assets/evStationIconDark.svg'
 import CloseIcon from '@mui/icons-material/Close.js'
+import { useFormik } from 'formik'
+import TextInput from '#/components/common/input/TextInput/index.jsx'
+import RadioInput from '#/components/common/Radio/index.jsx'
 
 const MapPoiAdd = ({ setIsOpen, selectedPoi }) => {
     useEffect(() => {
         if (selectedPoi) setIsOpen(false)
     }, [selectedPoi])
 
+    const categoryList = [
+        { label: 'evCharging', value: 'evCharging' },
+        { label: 'fuel', value: 'fuel' },
+        { label: 'parking', value: 'parking' },
+        { label: 'h2Charging', value: 'h2Charging' },
+        { label: 'dealerPoi', value: 'dealerPoi' },
+    ]
+
+    const formik = useFormik({
+        initialValues: {
+            title: '',
+            address: '',
+            position: {
+                center: {
+                    lat: '',
+                    lon: '',
+                },
+                guide: {
+                    lat: '',
+                    lon: '',
+                },
+            },
+            reason: '',
+            reviewer: '',
+            approver: '',
+            category: '',
+        },
+        onsubmit: (form) => {
+            console.log(form)
+        },
+    })
     const { themeMode } = getLayoutState()
     return (
         <Box sx={{ display: 'flex', margin: '10px' }}>
@@ -39,80 +58,96 @@ const MapPoiAdd = ({ setIsOpen, selectedPoi }) => {
             >
                 <Box>
                     <Typography variant={'h6'} sx={{ fontSize: '20px', fontWeight: 600 }}>
-                        <img
-                            src={PointBlueIcon}
-                            style={{ verticalAlign: 'middle', paddingRight: '4px' }}
-                        />
-                        Times Square
+                        명칭
                     </Typography>
+                    <Box sx={{ height: '40px' }}>
+                        <TextInput
+                            formik={formik}
+                            name={'title'}
+                            placeholder={t('title_input', 'gpss')}
+                        />
+                    </Box>
                 </Box>
-                <Box sx={{ marginTop: '8px', marginBottom: '16px' }}>
-                    <Box sx={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
-                        <Box sx={{ paddingTop: '5px' }}>
-                            {themeMode === 'light' ? (
-                                <img src={LanguageIcon} />
-                            ) : (
-                                <img src={LanguageIconDark} />
-                            )}
-                        </Box>
-                        <Box>
-                            <Typography>10036 New York, Manhattan, United States</Typography>
+                <Box>
+                    <Typography variant={'h6'} sx={{ fontSize: '20px', fontWeight: 600 }}>
+                        주소
+                    </Typography>
+                    <Box sx={{ height: '40px' }}>
+                        <TextInput
+                            formik={formik}
+                            name={'address'}
+                            placeholder={t('address_input', 'gpss')}
+                        />
+                    </Box>
+                </Box>
+                <Box>
+                    <Typography variant={'h6'} sx={{ fontSize: '20px', fontWeight: 600 }}>
+                        메인 좌표
+                    </Typography>
+                    <Divider sx={{ marginY: '5px' }} />
+                    <Box>
+                        <Typography variant={'h6'} sx={{ fontSize: '16px', fontWeight: 600 }}>
+                            위도
+                        </Typography>
+                        <Box sx={{ height: '40px' }}>
+                            <TextInput
+                                formik={formik}
+                                name={'position.center.lat'}
+                                placeholder={t('lat_input', 'gpss')}
+                            />
                         </Box>
                     </Box>
-                    <Divider sx={{ marginY: '5px' }} />
-                    <Box sx={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
-                        <Box sx={{ paddingTop: '5px' }}>
-                            {themeMode === 'light' ? (
-                                <img src={GpsIcon} />
-                            ) : (
-                                <img src={GpsIconDark} />
-                            )}
-                        </Box>
-                        <Box>
-                            <Typography>40.758077</Typography>
-                        </Box>
-                    </Box>
-                    <Divider sx={{ marginY: '5px' }} />
-                    <Box sx={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
-                        <Box sx={{ paddingTop: '5px' }}>
-                            {themeMode === 'light' ? (
-                                <img src={GpsIcon} />
-                            ) : (
-                                <img src={GpsIconDark} />
-                            )}
-                        </Box>
-                        <Box>
-                            <Typography>-73.985480</Typography>
+                    <Box>
+                        <Typography variant={'h6'} sx={{ fontSize: '16px', fontWeight: 600 }}>
+                            경도
+                        </Typography>
+                        <Box sx={{ height: '40px' }}>
+                            <TextInput
+                                formik={formik}
+                                name={'position.center.lon'}
+                                placeholder={t('lon_input', 'gpss')}
+                            />
                         </Box>
                     </Box>
+                </Box>
+                <Box>
+                    <Typography variant={'h6'} sx={{ fontSize: '20px', fontWeight: 600 }}>
+                        가이드 좌표
+                    </Typography>
                     <Divider sx={{ marginY: '5px' }} />
+                    <Box>
+                        <Typography variant={'h6'} sx={{ fontSize: '16px', fontWeight: 600 }}>
+                            위도
+                        </Typography>
+                        <Box sx={{ height: '40px' }}>
+                            <TextInput
+                                formik={formik}
+                                name={'position.guide.lat'}
+                                placeholder={t('lat_input', 'gpss')}
+                            />
+                        </Box>
+                    </Box>
+                    <Box>
+                        <Typography variant={'h6'} sx={{ fontSize: '16px', fontWeight: 600 }}>
+                            경도
+                        </Typography>
+                        <Box sx={{ height: '40px' }}>
+                            <TextInput
+                                formik={formik}
+                                name={'position.guide.lon'}
+                                placeholder={t('lon_input', 'gpss')}
+                            />
+                        </Box>
+                    </Box>
                 </Box>
                 <Box>
                     <Typography sx={{ fontSize: 20, fontWeight: 600, color: '#00418D' }}>
                         {t('category', 'common')}
                     </Typography>
+                    <Divider sx={{ marginY: '5px' }} />
                 </Box>
-                <Box sx={{ display: 'flex' }}>
-                    <Accordion elevation={0}>
-                        <AccordionSummary expandIcon={<ExpandMoreIcon />} sx={{ padding: '0px' }}>
-                            {themeMode === 'light' ? (
-                                <img
-                                    src={EvStationIcon}
-                                    style={{ verticalAlign: 'middle', paddingRight: '4px' }}
-                                />
-                            ) : (
-                                <img
-                                    src={EvStationIconDark}
-                                    style={{ verticalAlign: 'middle', paddingRight: '4px' }}
-                                />
-                            )}{' '}
-                            EV Charging
-                        </AccordionSummary>
-                        <AccordionDetails sx={{ padding: 0 }}>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
-                            malesuada lacus ex, sit amet blandit leo lobortis eget.
-                        </AccordionDetails>
-                    </Accordion>
+                <Box>
+                    <RadioInput radioList={categoryList} name={'category'} formik={formik} />
                 </Box>
             </Box>
             <IconButton

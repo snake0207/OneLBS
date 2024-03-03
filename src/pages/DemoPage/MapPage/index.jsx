@@ -52,14 +52,14 @@ const MapPage = () => {
                     <Typography>Map List Component with Result (스크롤 TOP 버튼 존재)</Typography>
                     <MapSearchList searchResultArr={markerSampleData} />
                 </Box>
-                <Box sx={{ mr: 2 }}>
-                    <Typography>Map POI Detail Component</Typography>
-                    <MapPoiDetail />
-                </Box>
-                <Box sx={{ mr: 2 }}>
-                    <Typography>Map GPSS Detail Component</Typography>
-                    <MapGpssDetail />
-                </Box>
+                {/*<Box sx={{ mr: 2 }}>*/}
+                {/*    <Typography>Map POI Detail Component</Typography>*/}
+                {/*    <MapPoiDetail />*/}
+                {/*</Box>*/}
+                {/*<Box sx={{ mr: 2 }}>*/}
+                {/*    <Typography>Map GPSS Detail Component</Typography>*/}
+                {/*    <MapGpssDetail />*/}
+                {/*</Box>*/}
             </Box>
             <Box sx={{ display: 'flex' }}>
                 <Box sx={{ mr: 2 }}>
@@ -67,14 +67,14 @@ const MapPage = () => {
                     <MapInfoWindow />
                 </Box>
             </Box>
-            <Box sx={{ display: 'flex' }}>
-                <Box sx={{ mr: 2 }}>
-                    <Typography>Google Map Component</Typography>
-                    <Box sx={{ width: '1600px', height: '900px' }}>
-                        <GoogleMapComponent markerDataArr={markerSampleData} />
-                    </Box>
-                </Box>
-            </Box>
+            {/*<Box sx={{ display: 'flex' }}>*/}
+            {/*    <Box sx={{ mr: 2 }}>*/}
+            {/*        <Typography>Google Map Component</Typography>*/}
+            {/*        <Box sx={{ width: '1600px', height: '900px' }}>*/}
+            {/*            <GoogleMapComponent markerDataArr={markerSampleData} />*/}
+            {/*        </Box>*/}
+            {/*    </Box>*/}
+            {/*</Box>*/}
         </div>
     )
 }

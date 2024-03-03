@@ -69,6 +69,15 @@ const GoogleMapComponent = ({
         setMap(null)
     }, [])
 
+    const getMapBounds = () => {
+        if (!map) return
+        const bounds = map.getBounds()
+        console.log(bounds.getNorthEast().lat())
+        console.log(bounds.getNorthEast().lng())
+        console.log(bounds.getSouthWest().lat())
+        console.log(bounds.getSouthWest().lng())
+    }
+
     return (
         isLoaded && (
             <GoogleMap
@@ -89,6 +98,7 @@ const GoogleMapComponent = ({
                         ])
                     }
                 }}
+                onIdle={getMapBounds}
                 options={{
                     fullscreenControlOptions: {
                         position: window.google.maps.ControlPosition.TOP_RIGHT,

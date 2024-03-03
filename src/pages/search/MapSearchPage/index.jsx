@@ -10,6 +10,7 @@ import poiDetailData from '#/mock/data/poiDetailData.json'
 import TuneIcon from '@mui/icons-material/Tune.js'
 import { useNavigate } from 'react-router-dom'
 import MapGpssDetail from '#/components/common/map/MapGpssDetail/index.jsx'
+import MapPoiAdd from '#/components/common/map/MapPoiAdd/index.jsx'
 
 const mapSampleData = [
     {
@@ -108,6 +109,9 @@ function MapSearchPage() {
     // TODO 장소 상세 정보 호출 api 연동
     // 선택한 poi
     const [selectedPoi, setSelectedPoi] = useState(null)
+    // 신규 poi 생성 컴포넌트 표출
+    const [isNewPoiCreateOpen, setIsNewPoiCreateOpen] = useState(false)
+    // mobile search toggle
     const [showSearch, setShowSearch] = useState(false)
 
     // mobile detail navigate
@@ -115,6 +119,7 @@ function MapSearchPage() {
         setSelectedPoi(id)
         navigate(`/search-management/map/${id}`)
     }
+
     return (
         <Box>
             <TitleBar title={t('top_menu.search_management')} />
@@ -139,6 +144,13 @@ function MapSearchPage() {
                                 setSelectedPoi={setSelectedPoi}
                                 poiData={poiDetailData}
                             />
+                            {/* 신규 poi 생성 요청 */}
+                            {isNewPoiCreateOpen && (
+                                <MapPoiAdd
+                                    setIsOpen={setIsNewPoiCreateOpen}
+                                    selectedPoi={selectedPoi}
+                                />
+                            )}
                         </Box>
                     </BrowserView>
                     <MobileView>

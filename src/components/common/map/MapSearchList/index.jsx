@@ -64,16 +64,13 @@ const MapSearchList = ({ searchResultArr, selectedPoi, setSelectedPoi, isGpssSea
                             <Box
                                 sx={{
                                     position: 'relative',
-                                    mb: 5,
                                     display: 'flex',
                                     justifyContent: 'flex-end',
                                     backgroundColor: 'dialog.main',
                                     zIndex: 10,
                                 }}
                             >
-                                <Box sx={{ position: 'fixed' }}>
-                                    <Button variant={'contained'}> POI생성 </Button>
-                                </Box>
+                                <Button variant={'contained'}> POI생성 </Button>
                             </Box>
                         )}
                         {searchResultArr.map((data, idx) => (

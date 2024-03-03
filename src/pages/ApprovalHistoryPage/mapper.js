@@ -11,50 +11,55 @@ import {
     parseSummaryConnectorType,
     parseCategory,
 } from '#/common/libs/approvalParser.js'
-
+// TODO primitive 타입 데이터 null 처리 의논 필요
 const evChargerInfo = (data) => {
     return {
         brand: data.brand,
         maxWatt: data.maxWatt,
         parkingFee: data.pFee,
         status: parseStationStatus(data.stationStatus),
-        summary: data.status.map(({ connector, watt, speed, possibleCount }) => ({
-            type: parseSummaryConnectorType(connector),
-            watt,
-            speed: parseChargerSpeed(speed),
-            possibleCount,
-        })),
-        openingHours: parseOpeningHours(data.openingHours),
-        chargers: data.charger?.map(
-            ({ id, speed, watt, status, lastUsedTime, connectorType, price }) => ({
-                id,
-                speed: speed,
+        summary:
+            data.status?.map(({ connector, watt, speed, possibleCount }) => ({
+                type: parseSummaryConnectorType(connector),
                 watt,
-                status: parseChargerStatus(status),
-                lastUsedTime,
-                type: connectorType,
-                priceList: price?.map(({ price, priceUnit, currencyCode, currency, isFree }) => ({
-                    price,
-                    priceUnit,
-                    currency,
-                    currencyCode,
-                    isFree: parsePriceIsFree(isFree),
-                })),
-            }),
-        ),
+                speed: parseChargerSpeed(speed),
+                possibleCount,
+            })) ?? [],
+        openingHours: parseOpeningHours(data.openingHours),
+        chargers:
+            data.charger?.map(
+                ({ id, speed, watt, status, lastUsedTime, connectorType, price }) => ({
+                    id,
+                    speed: speed,
+                    watt,
+                    status: parseChargerStatus(status),
+                    lastUsedTime,
+                    type: connectorType,
+                    priceList: price?.map(
+                        ({ price, priceUnit, currencyCode, currency, isFree }) => ({
+                            price,
+                            priceUnit,
+                            currency,
+                            currencyCode,
+                            isFree: parsePriceIsFree(isFree),
+                        }),
+                    ),
+                }),
+            ) ?? [],
     }
 }
 
 const fuelInfo = (data) => {
     return {
         brand: data.brand,
-        summary: data.status.map(({ type, price }) => ({
-            type: parseFuelType(type),
-            price: price.price,
-            priceUnit: price.priceUnit,
-            currencyCode: price.currencyCode,
-            currency: price.currency,
-        })),
+        summary:
+            data.status?.map(({ type, price }) => ({
+                type: parseFuelType(type),
+                price: price.price,
+                priceUnit: price.priceUnit,
+                currencyCode: price.currencyCode,
+                currency: price.currency,
+            })) ?? [],
         openingHours: parseOpeningHours(data.openingHours),
     }
 }
@@ -72,22 +77,24 @@ const parkingInfo = (data) => {
 const h2ChargingInfo = (data) => {
     return {
         brand: data.brand,
-        summary: data.status.map(({ chargerCnt, availableCnt, cannotUseCnt, noInfoCnt }) => ({
-            totalCount: chargerCnt,
-            available: availableCnt,
-            unavailable: cannotUseCnt,
-            noInfo: noInfoCnt,
-        })),
+        summary:
+            data.status?.map(({ chargerCnt, availableCnt, cannotUseCnt, noInfoCnt }) => ({
+                totalCount: chargerCnt,
+                available: availableCnt,
+                unavailable: cannotUseCnt,
+                noInfo: noInfoCnt,
+            })) ?? [],
         price: data.price.price,
         priceUnit: data.price.priceUnit,
         currencyCode: data.price.currencyCode,
         currency: data.price.currency,
         openingHours: parseOpeningHours(data.openingHours),
-        chargers: data.charger.map(({ id, speed, status }) => ({
-            id,
-            speed: speed,
-            status: parseStationStatus(status),
-        })),
+        chargers:
+            data.charger?.map(({ id, speed, status }) => ({
+                id,
+                speed: speed,
+                status: parseStationStatus(status),
+            })) ?? [],
     }
 }
 

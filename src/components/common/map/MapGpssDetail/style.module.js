@@ -1,6 +1,6 @@
 const style = {
     mapDetail: {
-        width: '410px',
+        width: '350px',
         ml: 0.5,
         opacity: '95%',
         borderRadius: '8px',
@@ -11,6 +11,11 @@ const style = {
             borderRadius: '0 0 8px 8px',
         },
         '& .css-1fbfkr9': {
+            backgroundColor: 'dialog.main',
+            padding: '20px 16px 16px 16px',
+            borderRadius: '0 0 8px 8px',
+        },
+        '& .css-2j8k7x': {
             backgroundColor: 'dialog.main',
             padding: '20px 16px 16px 16px',
             borderRadius: '0 0 8px 8px',

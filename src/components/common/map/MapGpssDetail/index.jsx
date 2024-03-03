@@ -6,12 +6,8 @@ import style from './style.module'
 import { usePopupActions } from '#/store/usePopupStore.js'
 import { useFormik } from 'formik'
 import { poiDetailSchema } from '#/contents/validationSchema.js'
-import { useGetApprover, useGetReviewer } from '#/hooks/queries/gpss.js'
 import BasicInfo from '#/components/common/map/MapGpssDetail/DetailTab/BasicInfo/index.jsx'
 import Divider from '@mui/material/Divider'
-import TextInput from '#/components/common/input/TextInput/index.jsx'
-import UserSearchTable from '#/components/common/map/MapGpssDetail/UserSearchTable/index.jsx'
-import { GPSS_TABLE_TYPE } from '#/contents/constant.js'
 import { gpssDetailResponseDataMapper } from '#/pages/ApprovalHistoryPage/mapper.js'
 import EvChargingInfo from '#/components/approval/Detail/CategoryInfo/EvChargingInfo/index.jsx'
 import ParkingInfo from '#/components/approval/Detail/CategoryInfo/ParkingInfo/index.jsx'
@@ -123,8 +119,7 @@ const MapGpssDetail = ({ selectedPoi, setSelectedPoi, poiData }) => {
                     <Box
                         sx={{
                             paddingTop: '16px',
-                            // TODO maxHeight의 경우 샘플컴포넌트 구성을 위해 넣은 값입니다. 추후에 실제 적용시에는 지도가 한 화면을 가득 사용할 것이므로 알맞게 수정되어야합니다
-                            maxHeight: '800px',
+                            maxHeight: '760px',
                             overflow: 'auto',
                         }}
                     >

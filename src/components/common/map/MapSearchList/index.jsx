@@ -41,7 +41,7 @@ const MapSearchList = ({ searchResultArr, selectedPoi, setSelectedPoi }) => {
                 backgroundColor: 'dialog.main',
                 borderRadius: '8px',
                 minHeight: '130px',
-                maxHeight: '550px',
+                maxHeight: '500px',
                 display: isResultNon ? 'flex' : '',
                 justifyContent: isResultNon ? 'center' : '',
                 alignItems: isResultNon ? 'center' : '',

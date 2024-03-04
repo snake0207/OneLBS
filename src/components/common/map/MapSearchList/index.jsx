@@ -5,6 +5,7 @@ import { useEffect, useRef, useState } from 'react'
 import t from '#/common/libs/trans.js'
 import TopIcon from '#/assets/topIcon.svg'
 import Button from '@mui/material/Button'
+import { isBrowser } from 'react-device-detect'
 
 const MapSearchList = ({
     searchResultArr,
@@ -54,7 +55,7 @@ const MapSearchList = ({
                 backgroundColor: 'dialog.main',
                 borderRadius: '8px',
                 minHeight: '130px',
-                maxHeight: '500px',
+                maxHeight: isBrowser ? '500px' : 'calc(100vh - 620px)',
                 display: isResultNon ? 'flex' : '',
                 justifyContent: isResultNon ? 'center' : '',
                 alignItems: isResultNon ? 'center' : '',

@@ -143,23 +143,31 @@ function POISearchPage() {
                             sx={{
                                 fontSize: 32,
                                 mt: 1,
-                                ml: 2,
-                                mb: 1,
+                                ml: 1,
                                 border: '1px solid black',
                             }}
                             onClick={() => setShowSearch(!showSearch)}
                         />
                         {showSearch && (
-                            <Stack spacing={20} sx={{ ml: 2, mr: 2 }}>
+                            <Box
+                                sx={{
+                                    ml: '-5px',
+                                    display: 'flex',
+                                    justifyContent: 'center',
+                                    flexDirection: 'column',
+                                }}
+                            >
                                 {/* 지도 검색 */}
                                 <MapSearch />
                                 {/* 검색 결과 */}
-                                <MapSearchList
-                                    searchResultArr={mapSampleData}
-                                    selectedPoi={selectedPoi}
-                                    setSelectedPoi={handlePOISelected}
-                                />
-                            </Stack>
+                                <Box sx={{ mt: 17 }}>
+                                    <MapSearchList
+                                        searchResultArr={mapSampleData}
+                                        selectedPoi={selectedPoi}
+                                        setSelectedPoi={handlePOISelected}
+                                    />
+                                </Box>
+                            </Box>
                         )}
                     </MobileView>
                 </Box>

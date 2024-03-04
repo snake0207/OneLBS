@@ -1,17 +1,16 @@
 import {
+    parseCategory,
     parseChargerSpeed,
     parseChargerStatus,
     parseCongestion,
+    parseEvStationStatus,
     parseFuelType,
+    parseH2StationStatus,
     parseOpeningHours,
-    parseParkingType,
     parsePriceIsFree,
-    parseStationStatus,
-    parseApprovalStatus,
     parseSummaryConnectorType,
-    parseCategory,
 } from '#/common/libs/approvalParser.js'
-// TODO primitive 타입 데이터 null 처리 의논 필요
+
 const evChargerInfo = (data) => {
     return {
         brand: data.brand,
@@ -105,10 +104,15 @@ const dealerInfo = (data) => {
     }
 }
 
+/**
+ * POI Detail Response Mapper
+ * @param res
+ * @returns {{approvalInfo: *, poiId: *, category: *, status: string, basicInfo: {address: *, position: *, title: *}, evChargerInfo?: *, fuelInfo?: *, parkingInfo?: *, h2ChargingInfo?: *, dealerInfo?: *}}
+ */
 const detailResponseDataMapper = (res) => {
     const data = res.data.result[0]
     const basicData = {
-        status: parseApprovalStatus(res.data.approvalStatus), // service에서 보내줄 결재이력 상태값
+        status: res.data.approvalInfo.status, // service에서 보내줄 결재이력 상태값
         category: parseCategory(data),
         approvalInfo: res.data.approvalInfo,
         poiId: data.poiId,
@@ -138,21 +142,19 @@ const gpssDetailResponseDataMapper = (res) => {
     return setCategoryData(basicData, data)
 }
 
-// TODO 퍼블리싱 진행 이후에는 분기 처리
 const setCategoryData = (basicData, originData) => {
     switch (basicData.category) {
         case 'evCharging':
-            basicData = { ...basicData, evChargingInfo: evChargerInfo(originData.evCharging) }
+            return { ...basicData, evChargingInfo: evChargerInfo(originData.evCharging) }
         case 'fuel':
-            basicData = { ...basicData, fuelInfo: fuelInfo(originData.fuel) }
+            return { ...basicData, fuelInfo: fuelInfo(originData.fuel) }
         case 'parking':
-            basicData = { ...basicData, parkingInfo: parkingInfo(originData.parking) }
+            return { ...basicData, parkingInfo: parkingInfo(originData.parking) }
         case 'h2Charging':
-            basicData = { ...basicData, h2ChargingInfo: h2ChargingInfo(originData.h2Charging) }
+            return { ...basicData, h2ChargingInfo: h2ChargingInfo(originData.h2Charging) }
         case 'dealerPoi':
-            basicData = { ...basicData, dealerPoiInfo: dealerInfo(originData.dealerPoi) }
+            return { ...basicData, dealerPoiInfo: dealerInfo(originData.dealerPoi) }
     }
-    return basicData
 }
 
 export { detailResponseDataMapper, gpssDetailResponseDataMapper }

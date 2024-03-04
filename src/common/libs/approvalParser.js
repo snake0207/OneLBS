@@ -64,7 +64,26 @@ export const parseOpeningHours = (openingHours) => {
     }))
 }
 
-export const parseStationStatus = (status) => {
+// TODO: 타입 확인 후 그대로 분리 or 합칠 지 결정
+export const parseEvStationStatus = (status) => {
+    switch (status) {
+        case '0':
+            return '알수없음'
+        case '1':
+            return '통신이상'
+        case '2':
+            return '사용가능'
+        case '3':
+            return '충전중'
+        case '4':
+            return '운영중지'
+        case '5':
+            return '점검중'
+        case '6':
+            return '예약중'
+    }
+}
+export const parseH2StationStatus = (status) => {
     switch (status) {
         case 0:
             return '알수없음'

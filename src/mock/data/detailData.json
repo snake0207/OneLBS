@@ -1,5 +1,5 @@
 {
-    "status": "rejected",
+    "status": "request",
     "approvalLineContents": {
         "requester": {
             "team": "콘텐츠플랫폼개발팀",
@@ -40,16 +40,6 @@
             "history": "승인 완료"
         }
     ],
-    "info": {
-        "name": "Phillips 66",
-        "address": "Phillips 66Phillips 66",
-        "lat": "45.123123",
-        "lon": "-103.34234"
-    },
-    "category": {
-        "brand": null,
-        "name": "evCharging"
-    },
     "comment": {
         "reviewer": "위.경도 재확인 후 요청하라",
         "approver": null

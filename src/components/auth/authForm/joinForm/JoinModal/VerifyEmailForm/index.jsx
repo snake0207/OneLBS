@@ -1,14 +1,15 @@
 import { useEffect, useState } from 'react'
 import useTimerStore from '#/store/useTimerStore'
 import Close from '@mui/icons-material/Close'
-import { Box, Button, FormHelperText, IconButton, InputAdornment, TextField } from '@mui/material'
+import { Box, FormHelperText, IconButton, InputAdornment, TextField } from '@mui/material'
 import { usePostEmailVerify } from '#/hooks/queries/auth'
 
 import t from '#/common/libs/trans'
+import { LoadingButton } from '@mui/lab'
 
 // 인증 메일 전송
 const VerifyEmailForm = ({ formik }) => {
-    const { mutate } = usePostEmailVerify()
+    const { mutate, isPending } = usePostEmailVerify()
     const { time, actions } = useTimerStore()
     const [isButtonDisabled, setIsButtonDisabled] = useState(false)
     const [isReSend, setIsReSend] = useState(false)
@@ -16,17 +17,15 @@ const VerifyEmailForm = ({ formik }) => {
     const handleClickSendEmail = () => {
         formik.setFieldTouched('email')
         if (formik.values.email && !formik.errors.email) {
-            setIsButtonDisabled(true)
-            actions.setTime(180)
-            // mutate(
-            //     { email: formik.values.email },
-            //     {
-            //         onSuccess: () => {
-            //             setIsButtonDisabled(true)
-            //             action.setTime(180)
-            //         },
-            //     },
-            // )
+            mutate(
+                { email: formik.values.email },
+                {
+                    onSuccess: () => {
+                        setIsButtonDisabled(true)
+                        actions.setTime(180)
+                    },
+                },
+            )
         }
     }
 
@@ -89,7 +88,8 @@ const VerifyEmailForm = ({ formik }) => {
                 />
                 {customHelperText()}
             </Box>
-            <Button
+            <LoadingButton
+                loading={isPending}
                 variant="contained"
                 onClick={handleClickSendEmail}
                 type="button"
@@ -103,7 +103,7 @@ const VerifyEmailForm = ({ formik }) => {
                 disabled={isButtonDisabled}
             >
                 {isReSend ? t('re_send_mail', 'auth') : t('send_mail_certified', 'auth')}
-            </Button>
+            </LoadingButton>
         </Box>
     )
 }

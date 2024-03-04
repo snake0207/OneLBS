@@ -28,7 +28,7 @@ const ClickMarker = ({ clickedCoord, setClickedCoord }) => {
                     }}
                 >
                     <Box>
-                        <Typography sx={{ fontSize: '300' }}>
+                        <Typography sx={{ fontSize: '12px', color: '#444' }}>
                             {clickedCoord.lat},{clickedCoord.lng}
                         </Typography>
                     </Box>

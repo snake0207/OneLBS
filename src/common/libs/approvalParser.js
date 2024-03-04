@@ -38,6 +38,7 @@ export const parseApprovalStatus = (value) => {
 }
 
 export const parseOpeningHours = (openingHours) => {
+    if (!openingHours || openingHours.length == 0) return []
     const parseWeekday = (weekday) => {
         switch (weekday) {
             case 0:
@@ -209,6 +210,19 @@ export const parseCongestion = (congestion) => {
 // h2Charging Parser
 export const parseH2ChargerSpeed = (speed) => {
     return speed === 750 || speed === 350 ? `${speed}bar 수소차` : '확인불가'
+}
+
+export const parseH2StationStatus = (status) => {
+    switch (status) {
+        case 0:
+            return '신규 건설 중'
+        case 1:
+            return '영업 중'
+        case 2:
+            return '영업 종료'
+        case 3:
+            return '영업 불가'
+    }
 }
 
 // dealer Parser

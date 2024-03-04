@@ -9,9 +9,11 @@ import GpsIcon from '#/assets/gpsIcon.svg'
 import GpsIconDark from '#/assets/gpsIconDark.svg'
 import { getLayoutState } from '#/store/useLayoutStore'
 import style from './style.module'
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore.js'
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
 import TextInput from '#/components/common/input/TextInput/index.jsx'
-import Button from '@mui/material/Button'
+import IconButton from '@mui/material/IconButton'
+import SaveIcon from '@mui/icons-material/Save'
+import EditIcon from '@mui/icons-material/Edit'
 
 const jsonSample = {
     key1: 'value1',
@@ -64,15 +66,18 @@ const BasicInfo = ({ formik, poiData, tabSelected, isEditable }) => {
                                 </Typography>
                             </Box>
                             {isEditable && (
-                                <Button
-                                    variant={'contained'}
-                                    sx={{ ml: 'auto' }}
+                                <IconButton
+                                    sx={{
+                                        ml: 'auto',
+                                        minWidth: '15px',
+                                        width: '30px',
+                                        minHeight: '15px',
+                                        height: '30px',
+                                    }}
                                     onClick={() => handleClickInputButton('title')}
                                 >
-                                    {isDisabledInputs['title']
-                                        ? t('edit', 'common')
-                                        : t('save', 'common')}
-                                </Button>
+                                    {isDisabledInputs['title'] ? <EditIcon /> : <SaveIcon />}
+                                </IconButton>
                             )}
                         </Box>
                         {isShowInputs['title'] && (
@@ -102,15 +107,18 @@ const BasicInfo = ({ formik, poiData, tabSelected, isEditable }) => {
                                     </Typography>
                                 </Box>
                                 {isEditable && (
-                                    <Button
-                                        variant={'contained'}
-                                        sx={{ ml: 'auto' }}
+                                    <IconButton
+                                        sx={{
+                                            ml: 'auto',
+                                            minWidth: '15px',
+                                            width: '30px',
+                                            minHeight: '15px',
+                                            height: '30px',
+                                        }}
                                         onClick={() => handleClickInputButton('address')}
                                     >
-                                        {isDisabledInputs['address']
-                                            ? t('edit', 'common')
-                                            : t('save', 'common')}
-                                    </Button>
+                                        {isDisabledInputs['address'] ? <EditIcon /> : <SaveIcon />}
+                                    </IconButton>
                                 )}
                             </Box>
                             {isShowInputs['address'] && (
@@ -174,16 +182,22 @@ const BasicInfo = ({ formik, poiData, tabSelected, isEditable }) => {
                                                 </Typography>
                                             </Box>
                                             {isEditable && (
-                                                <Button
-                                                    sx={{ ml: 'auto' }}
-                                                    variant={'contained'}
-                                                    disabled={!!formik.errors.position?.center?.lat}
+                                                <IconButton
+                                                    sx={{
+                                                        ml: 'auto',
+                                                        minWidth: '15px',
+                                                        width: '30px',
+                                                        minHeight: '15px',
+                                                        height: '30px',
+                                                    }}
                                                     onClick={() => handleClickInputButton('lat')}
                                                 >
-                                                    {isDisabledInputs['lat']
-                                                        ? t('edit', 'common')
-                                                        : t('save', 'common')}
-                                                </Button>
+                                                    {isDisabledInputs['lat'] ? (
+                                                        <EditIcon />
+                                                    ) : (
+                                                        <SaveIcon />
+                                                    )}
+                                                </IconButton>
                                             )}
                                         </Box>
                                         {isShowInputs['lat'] && (
@@ -217,16 +231,22 @@ const BasicInfo = ({ formik, poiData, tabSelected, isEditable }) => {
                                                 </Typography>
                                             </Box>
                                             {isEditable && (
-                                                <Button
-                                                    variant={'contained'}
-                                                    sx={{ ml: 'auto' }}
-                                                    disabled={!!formik.errors.position?.center?.lon}
+                                                <IconButton
+                                                    sx={{
+                                                        ml: 'auto',
+                                                        minWidth: '15px',
+                                                        width: '30px',
+                                                        minHeight: '15px',
+                                                        height: '30px',
+                                                    }}
                                                     onClick={() => handleClickInputButton('lon')}
                                                 >
-                                                    {isDisabledInputs['lon']
-                                                        ? t('edit', 'common')
-                                                        : t('save', 'common')}
-                                                </Button>
+                                                    {isDisabledInputs['lon'] ? (
+                                                        <EditIcon />
+                                                    ) : (
+                                                        <SaveIcon />
+                                                    )}
+                                                </IconButton>
                                             )}
                                         </Box>
                                         {isShowInputs['lon'] && (
@@ -293,18 +313,24 @@ const BasicInfo = ({ formik, poiData, tabSelected, isEditable }) => {
                                                 </Typography>
                                             </Box>
                                             {isEditable && (
-                                                <Button
-                                                    sx={{ ml: 'auto' }}
-                                                    variant={'contained'}
-                                                    disabled={!!formik.errors.position?.guide?.lat}
+                                                <IconButton
+                                                    sx={{
+                                                        ml: 'auto',
+                                                        minWidth: '15px',
+                                                        width: '30px',
+                                                        minHeight: '15px',
+                                                        height: '30px',
+                                                    }}
                                                     onClick={() =>
                                                         handleClickInputButton('guideLat')
                                                     }
                                                 >
-                                                    {isDisabledInputs['guideLat']
-                                                        ? t('edit', 'common')
-                                                        : t('save', 'common')}
-                                                </Button>
+                                                    {isDisabledInputs['guideLat'] ? (
+                                                        <EditIcon />
+                                                    ) : (
+                                                        <SaveIcon />
+                                                    )}
+                                                </IconButton>
                                             )}
                                         </Box>
                                         {isShowInputs['guideLat'] && (
@@ -338,18 +364,24 @@ const BasicInfo = ({ formik, poiData, tabSelected, isEditable }) => {
                                                 </Typography>
                                             </Box>
                                             {isEditable && (
-                                                <Button
-                                                    variant={'contained'}
-                                                    sx={{ ml: 'auto' }}
-                                                    disabled={!!formik.errors.position?.guide?.lon}
+                                                <IconButton
+                                                    sx={{
+                                                        ml: 'auto',
+                                                        minWidth: '15px',
+                                                        width: '30px',
+                                                        minHeight: '15px',
+                                                        height: '30px',
+                                                    }}
                                                     onClick={() =>
                                                         handleClickInputButton('guideLon')
                                                     }
                                                 >
-                                                    {isDisabledInputs['guideLon']
-                                                        ? t('edit', 'common')
-                                                        : t('save', 'common')}
-                                                </Button>
+                                                    {isDisabledInputs['guideLon'] ? (
+                                                        <EditIcon />
+                                                    ) : (
+                                                        <SaveIcon />
+                                                    )}
+                                                </IconButton>
                                             )}
                                         </Box>
                                         {isShowInputs['guideLon'] && (

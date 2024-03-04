@@ -84,20 +84,6 @@ function Header({ toggleDrawer }) {
                     <BrowserView>
                         <Box sx={{ flexGrow: 0, display: 'flex', alignItems: 'center' }}>
                             <Notify notifications={notifications} />
-                            <Icon
-                                sx={{
-                                    display: 'flex',
-                                    width: '20px',
-                                    height: '20px',
-                                    ml: '16px',
-                                }}
-                            >
-                                {themeMode === 'light' ? (
-                                    <img src={UserIcon} />
-                                ) : (
-                                    <img src={UserIconDark} />
-                                )}
-                            </Icon>
                             <Dropdown
                                 items={userMenus}
                                 onSelect={handleSelectUserMenu}
@@ -105,20 +91,6 @@ function Header({ toggleDrawer }) {
                             >
                                 김승일
                             </Dropdown>
-                            <Icon
-                                sx={{
-                                    display: 'flex',
-                                    width: '21px',
-                                    height: '20px',
-                                    mr: '6px',
-                                }}
-                            >
-                                {themeMode === 'light' ? (
-                                    <img src={LanguagesIcon} />
-                                ) : (
-                                    <img src={LanguagesIconDark} />
-                                )}
-                            </Icon>
                             <Dropdown
                                 items={languages}
                                 selectable={true}

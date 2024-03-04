@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 import List from '@mui/material/List'
 import ListItemButton from '@mui/material/ListItemButton'
@@ -10,9 +10,17 @@ import ExpandLess from '@mui/icons-material/ExpandLess'
 import ExpandMore from '@mui/icons-material/ExpandMore'
 import t from '#/common/libs/trans'
 import LinkRouter from '../LinkRouter'
+import useLayoutStore from '#/store/useLayoutStore'
 
 function ExpandMenuItem({ label, iconNode, items }) {
     const [open, setOpen] = useState(false)
+    const { setDrawer } = useLayoutStore()
+
+    useEffect(() => {
+        if (open) {
+            setDrawer(true)
+        }
+    }, [open, setDrawer])
 
     const handleClick = () => {
         setOpen(!open)
@@ -27,14 +35,14 @@ function ExpandMenuItem({ label, iconNode, items }) {
                     '&:hover': {
                         backgroundColor: 'lnb.weblnbhover',
                     },
-                    '&:focus:not(:focus-visible)': {
-                        backgroundColor: 'lnb.weblnbdeps',
-                    },
+                    // '&:focus:not(:focus-visible)': {
+                    //     backgroundColor: 'lnb.weblnbdeps',
+                    // },
                     '@media (max-width:1024px)': {
                         backgroundColor: open ? 'lnb.mobilelnbdeps' : 'lnb.mobilelnb',
-                        '&:focus:not(:focus-visible)': {
-                            backgroundColor: 'lnb.mobilelnbdeps',
-                        },
+                        // '&:focus:not(:focus-visible)': {
+                        //     backgroundColor: 'lnb.mobilelnbdeps',
+                        // },
                     },
                 }}
             >

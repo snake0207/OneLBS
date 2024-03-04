@@ -42,15 +42,20 @@ const CurrentLocation = () => {
                 sx={{
                     width: '40px',
                     height: '40px',
+                    color: '#666',
+                    margin: '10px',
                     margin: '10px',
                     cursor: 'pointer',
                     borderRadius: '2px',
                     boxShadow: '#0000004d 0px 1px 4px -1px',
                     backgroundColor: '#ffffff',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
                 }}
                 onClick={handleClickMoveToCurrentLocation}
             >
-                <GpsFixedIcon sx={{ fontSize: '40px' }} />
+                <GpsFixedIcon sx={{ fontSize: '25px' }} />
             </Box>
             {currCoordinate.lat && isClicked && <Marker position={currCoordinate}></Marker>}
         </>

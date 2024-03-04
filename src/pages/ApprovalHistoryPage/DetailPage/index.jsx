@@ -233,12 +233,14 @@ const ApprovalHistoryDetailPage = () => {
                     {/* 이력 */}
                     <HistoryTable historyList={parsedData.approvalInfo.historyList} />
                     {/* 버튼 */}
-                    <ActionButtons
-                        type={userType}
-                        status={parsedData.approvalInfo.status}
-                        clickAction={handleShowConfirmPopup}
-                        id={params.id}
-                    />
+                    <Box>
+                        <ActionButtons
+                            type={userType}
+                            status={parsedData.approvalInfo.status}
+                            clickAction={handleShowConfirmPopup}
+                            id={params.id}
+                        />
+                    </Box>
                 </Stack>
                 {/* 지도 영역 */}
                 {isBrowser && <GoogleMapComponent markerDataArr={markerSampleData} />}

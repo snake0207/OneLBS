@@ -17,7 +17,10 @@ export const extractChangedObjectOfChangedJson = (originalJson, changedJson) => 
         // 원본 값과 변경된 값이 다른 경우
         if (originalValue !== changedValue) {
             // 두 값이 모두 객체인지 확인합니다.
-            const isObject = typeof originalValue === 'object' && typeof changedValue === 'object'
+            const isObject =
+                typeof originalValue === 'object' &&
+                typeof changedValue === 'object' &&
+                !Array.isArray(originalValue)
 
             // 두 값이 모두 객체인 경우
             if (isObject) {
@@ -33,11 +36,6 @@ export const extractChangedObjectOfChangedJson = (originalJson, changedJson) => 
             } else {
                 // 두 값이 모두 객체가 아닌 경우, 변경된 값을 differentItems에 직접 추가합니다.
                 differentItems[key] = changedValue
-            }
-            // 원본 값과 변경된 값이 다르고, 변경된 값이 객체이며 'id' 키를 포함하는 경우
-            if (changedValue && typeof changedValue === 'object' && 'id' in changedValue) {
-                differentItems[key] = differentItems[key] || {}
-                differentItems[key].id = changedValue.id
             }
         }
     })

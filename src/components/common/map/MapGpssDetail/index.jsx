@@ -116,13 +116,7 @@ const MapGpssDetail = ({ selectedPoi, setSelectedPoi, poiData }) => {
                             />
                         </Tabs>
                     </Box>
-                    <Box
-                        sx={{
-                            paddingTop: '16px',
-                            maxHeight: '760px',
-                            overflow: 'auto',
-                        }}
-                    >
+                    <Box sx={style.mapDetailContent}>
                         {/* 상세 기본 정보 */}
                         <BasicInfo
                             formik={formik}

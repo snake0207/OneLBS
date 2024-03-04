@@ -10,6 +10,7 @@ import MapSearchList from '#/components/common/map/MapSearchList/index.jsx'
 import poiListData from '#/mock/data/poiListData.json'
 import TuneIcon from '@mui/icons-material/Tune'
 import MapPoiDetail from '#/components/common/map/MapPoiDetail/index.jsx'
+import poiDetailData from '#/mock/data/poiDetailData.json'
 
 const markerSampleData = [
     {
@@ -58,6 +59,7 @@ function POISearchPage() {
                                 />
                             </Box>
                             <MapPoiDetail
+                                poiData={poiDetailData}
                                 selectedPoi={selectedPoi}
                                 setSelectedPoi={setSelectedPoi}
                             />

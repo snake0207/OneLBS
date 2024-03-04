@@ -25,6 +25,10 @@ const postRenewToken = () => {
     return postAPI({ endPoint: API_PATH.auth.renew_token })
 }
 
+const postVerifyOtp = (data) => {
+    return postAPI({ endPoint: API_PATH.auth.verify_otp, data })
+}
+
 export default {
     postLogin,
     postJoin,
@@ -32,4 +36,5 @@ export default {
     postConfirmEmail,
     getUserIp,
     postRenewToken,
+    postVerifyOtp,
 }

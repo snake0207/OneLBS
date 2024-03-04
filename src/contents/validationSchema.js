@@ -40,7 +40,7 @@ const REGEXP = {
 }
 
 export const loginSchema = yup.object({
-    userMail: yup.string().email(HELPER_TEXT.emailNotMatch).required(HELPER_TEXT.emailRequired),
+    email: yup.string().email(HELPER_TEXT.emailNotMatch).required(HELPER_TEXT.emailRequired),
     password: yup.string().required(HELPER_TEXT.passwordRequired),
 })
 

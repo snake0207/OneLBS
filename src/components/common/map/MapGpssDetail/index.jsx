@@ -15,6 +15,7 @@ import FuelInfo from '#/components/approval/Detail/CategoryInfo/FuelInfo/index.j
 import DealerPoiInfo from '#/components/approval/Detail/CategoryInfo/DealerPoiInfo/index.jsx'
 import H2ChargingInfo from '#/components/approval/Detail/CategoryInfo/H2ChargingInfo/index.jsx'
 import MapApprovalSelect from '#/components/common/map/MapApprovalSelect/index.jsx'
+import { isBrowser } from 'react-device-detect'
 
 const MapGpssDetail = ({ selectedPoi, setSelectedPoi, poiData }) => {
     const isEditable = true
@@ -28,6 +29,10 @@ const MapGpssDetail = ({ selectedPoi, setSelectedPoi, poiData }) => {
     const [selectedApprover, setSelectedApprover] = useState(null)
 
     useEffect(() => {
+        if (!isBrowser) {
+            setIsOpen(true)
+            return
+        }
         if (selectedPoi) setIsOpen(true)
         else setIsOpen(false)
     }, [selectedPoi])
@@ -224,18 +229,20 @@ const MapGpssDetail = ({ selectedPoi, setSelectedPoi, poiData }) => {
                         </Box>
                     </Box>
                 </Box>
-                <IconButton
-                    variant={'contained'}
-                    sx={{
-                        inWidth: '22px',
-                        minHeight: '22px',
-                        width: '35px',
-                        height: '35px',
-                    }}
-                    onClick={handleClickDetailClose}
-                >
-                    <CloseIcon sx={{ color: 'background.close' }} />
-                </IconButton>
+                {isBrowser && (
+                    <IconButton
+                        variant={'contained'}
+                        sx={{
+                            inWidth: '22px',
+                            minHeight: '22px',
+                            width: '35px',
+                            height: '35px',
+                        }}
+                        onClick={handleClickDetailClose}
+                    >
+                        <CloseIcon sx={{ color: 'background.close' }} />
+                    </IconButton>
+                )}
             </Box>
         )
     )

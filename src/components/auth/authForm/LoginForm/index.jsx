@@ -32,8 +32,7 @@ const LoginForm = () => {
     const { mutate, isPending } = usePostLogin()
     const [isOpenJoinModal, setIsOpenJoinModal] = useState(false)
     const {
-        setOtpStore,
-        actions: { setTwoFactorSecret },
+        actions: { setOtpStore, setTwoFactorSecret, setTwoFactorAuth },
     } = useOtpStore()
 
     const formik = useFormik({
@@ -57,6 +56,7 @@ const LoginForm = () => {
                         console.log(twoFactorAuth, twoFactorSecret, secretKey, qrCodeUrl)
                         if (twoFactorAuth === 'Y') {
                             setTwoFactorSecret(twoFactorSecret)
+                            setTwoFactorAuth(twoFactorAuth)
                         } else if (twoFactorAuth === 'N') {
                             setOtpStore(twoFactorAuth, secretKey, twoFactorSecret, qrCodeUrl)
                         }

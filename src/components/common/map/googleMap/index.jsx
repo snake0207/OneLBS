@@ -31,7 +31,7 @@ const seoul = {
  */
 const GoogleMapComponent = ({
     markerDataArr = null,
-    searchResultArr,
+    searchResultArr = null,
     selectedPoi,
     setSelectedPoi,
 }) => {
@@ -50,6 +50,7 @@ const GoogleMapComponent = ({
 
     // poi 선택시 해당 poi 위치로 이동및 줌
     useEffect(() => {
+        if (!searchResultArr) return
         const poiArr = searchResultArr.filter((poiData) => poiData.poiId === selectedPoi)
         if (poiArr.length === 0) return
         const { lat, lon } = poiArr[0].position.center

@@ -201,7 +201,7 @@
             }
         ],
         "approvalInfo": {
-            "status": "request",
+            "status": "rejected_review",
             "requestReason": "위.경도 좌표 수정",
             "reviewerComment": "위.경도 재확인 후 요청하라",
             "approverComment": null,

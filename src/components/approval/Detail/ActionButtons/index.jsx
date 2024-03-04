@@ -23,6 +23,7 @@ const ActionButtons = ({ type, status, clickAction, id }) => {
     }
 
     const MakeButtons = (actions) => {
+        // TODO: 버튼 색상 분기 추가
         return (
             actions &&
             actions.map((action, index) => {

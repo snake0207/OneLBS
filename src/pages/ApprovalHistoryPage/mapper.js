@@ -3,11 +3,10 @@ import {
     parseChargerSpeed,
     parseChargerStatus,
     parseCongestion,
-    parseEvStationStatus,
     parseFuelType,
-    parseH2StationStatus,
     parseOpeningHours,
     parsePriceIsFree,
+    parseStationStatus,
     parseSummaryConnectorType,
 } from '#/common/libs/approvalParser.js'
 

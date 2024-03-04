@@ -2,13 +2,12 @@ import { useParams } from 'react-router-dom'
 import Typography from '@mui/material/Typography'
 import t from '#/common/libs/trans.js'
 import TitleBar from '#/components/common/menu/TitleBar/index.jsx'
-import { Box, Card, Stack, TextField } from '@mui/material'
+import { Box, Stack, TextField } from '@mui/material'
 import ApprovalLine from '#/components/approval/Detail/ApprovalLine/index.jsx'
 import HistoryTable from '#/components/approval/Detail/HistoryTable/index.jsx'
 import { useCallback, useMemo } from 'react'
 import { useFormik } from 'formik'
 import ActionButtons from '#/components/approval/Detail/ActionButtons/index.jsx'
-import dummyData from '#/mock/data/detailData.json'
 import poiDetailData from '#/mock/data/poiDetailData.json'
 import Headline from '#/components/approval/Detail/Headline/index.jsx'
 import Comment from '#/components/approval/Detail/Comment/index.jsx'
@@ -158,7 +157,6 @@ const ApprovalHistoryDetailPage = () => {
                         content={parsedData.approvalInfo.approvalLineContents}
                     />
                     {/* 정보 탭 */}
-                    {/*<BasicInfo formik={formik} poiData={parsedData.basicInfo} />*/}
                     <InfoTab
                         basicData={parsedData.basicInfo}
                         formik={formik}
@@ -224,13 +222,16 @@ const ApprovalHistoryDetailPage = () => {
                     </Box>
                     {/* Comment */}
                     <Comment
-                        comments={dummyData.comment}
+                        comments={{
+                            reviewer: parsedData.approvalInfo.reviewerComment,
+                            approver: parsedData.approvalInfo.approverComment,
+                        }}
                         userType={userType}
                         isEditable={isEditable}
                         formik={formik}
                     />
                     {/* 이력 */}
-                    <HistoryTable historyList={dummyData.historyList} />
+                    <HistoryTable historyList={parsedData.approvalInfo.historyList} />
                     {/* 버튼 */}
                     <ActionButtons
                         type={userType}

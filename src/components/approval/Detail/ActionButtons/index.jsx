@@ -22,8 +22,21 @@ const ActionButtons = ({ type, status, clickAction, id }) => {
         }
     }
 
+    // 종류에 따른 버튼색상 설정
+    const renderButtonColor = (action) => {
+        switch (action) {
+            case 'approval':
+                return 'button.lightblue'
+            case 'reject':
+                return 'button.lightblue'
+            case 'retrieve':
+                return 'button.lightblue'
+            case 're_request':
+                return 'button.lightblue'
+        }
+    }
+
     const MakeButtons = (actions) => {
-        // TODO: 버튼 색상 분기 추가
         return (
             actions &&
             actions.map((action, index) => {
@@ -32,7 +45,7 @@ const ActionButtons = ({ type, status, clickAction, id }) => {
                         key={index}
                         variant="contained"
                         onClick={() => clickAction(action, id)}
-                        sx={{ bgcolor: 'button.light', mr: '4px' }}
+                        sx={{ bgcolor: renderButtonColor(action), mr: '4px' }}
                     >
                         {t(`actions.${action}`, 'approval')}
                     </Button>

@@ -85,6 +85,7 @@ export const tokens = {
         300: '#D1D1D1',
         400: '#f5f5f5',
         500: '#071c2c',
+        600: '#fafafa',
         800: '#142532',
         900: '#05141f',
         1000: '#132736',
@@ -99,7 +100,7 @@ export const tokens = {
         700: '#EFEFEF',
         800: '#05141f',
         900: '#CFE5FF',
-        1000: '#536877',
+        1000: '#A1CDFF',
     },
     text: {
         100: '#fff',
@@ -129,6 +130,7 @@ export const tokens = {
         800: '#071c2c',
         900: '#d1d1d1',
         1000: '#888',
+        2000: '#e2e2e2',
     },
     table: {
         100: '#fff',
@@ -207,10 +209,11 @@ export const getThemeSettings = (mode) => ({
                   },
                   button: {
                       ...tokens.button,
-                      main: tokens.button[500],
+                      main: tokens.button[300],
                       light: tokens.button[400],
                       lightblue: tokens.button[900],
                       lightgray: tokens.button[700],
+                      blue: tokens.button[1000],
                       gray: tokens.button[600],
                       white: tokens.button[100],
                   },
@@ -239,6 +242,7 @@ export const getThemeSettings = (mode) => ({
                       taps: tokens.background[200],
                       tapSelected: tokens.background[100],
                       mapTaps: tokens.background[200],
+                      accordion: tokens.background[600],
                   },
                   lnb: {
                       mobilelnb: tokens.lnb[100],
@@ -250,6 +254,7 @@ export const getThemeSettings = (mode) => ({
                   border: {
                       main: tokens.border[200],
                       gray: tokens.border[900],
+                      lightgray: tokens.border[2000],
                       light: tokens.border[900],
                       darkgray: tokens.border[1000],
                       lnb: tokens.border[200],
@@ -331,6 +336,7 @@ export const getThemeSettings = (mode) => ({
                       main: tokens.button[300],
                       light: tokens.button[400],
                       lightblue: tokens.button[900],
+                      blue: tokens.button[1000],
                       gray: tokens.button[200],
                       lightgray: tokens.button[800],
                       white: tokens.button[100],
@@ -345,7 +351,7 @@ export const getThemeSettings = (mode) => ({
                       taps: tokens.text[800],
                       tapSelected: tokens.background[400],
                       mapTaps: tokens.text[400],
-                      dashboard: tokens.text[700],
+                      dashboard: tokens.text[100],
                   },
                   background: {
                       default: tokens.background.main,
@@ -360,6 +366,7 @@ export const getThemeSettings = (mode) => ({
                       taps: tokens.background[500],
                       tapSelected: tokens.background[900],
                       mapTaps: tokens.background[1000],
+                      accordion: tokens.background[500],
                   },
                   lnb: {
                       mobilelnb: tokens.lnb[200],
@@ -372,6 +379,7 @@ export const getThemeSettings = (mode) => ({
                       main: tokens.border[300],
                       gray: tokens.border[200],
                       light: tokens.border[300],
+                      lightgray: tokens.border[300],
                       darkgray: tokens.border[300],
                       lnb: tokens.border[400],
                       dropdown: tokens.border[300],

@@ -2,11 +2,13 @@ import { Accordion, AccordionDetails, AccordionSummary, Box, Typography } from '
 import t from '#/common/libs/trans.js'
 import Divider from '@mui/material/Divider'
 import { useState } from 'react'
-import PointBlueIcon from '#/assets/pointBlueIcon.svg'
+import PointBlueParkingIcon from '#/assets/pointBlueParkingIcon.svg'
 import LanguageIcon from '#/assets/languagesIcon.svg'
 import LanguageIconDark from '#/assets/languagesIconDark.svg'
 import GpsIcon from '#/assets/gpsIcon.svg'
 import GpsIconDark from '#/assets/gpsIconDark.svg'
+import StstesIcon from '#/assets/ststesIcon.svg'
+import StstesIconDark from '#/assets/ststesIconDark.svg'
 import { getLayoutState } from '#/store/useLayoutStore'
 import style from './style.module'
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore.js'
@@ -51,11 +53,15 @@ const BasicInfo = ({ formik, poiData, tabSelected, isEditable }) => {
             {tabSelected === 'info' ? (
                 <>
                     <Box>
-                        <Box sx={{ display: 'flex' }}>
+                        <Box sx={{ display: 'flex', mt: '10px' }}>
                             <Box sx={{ paddingTop: '7px' }}>
                                 <img
-                                    src={PointBlueIcon}
-                                    style={{ verticalAlign: 'middle', paddingRight: '4px' }}
+                                    src={PointBlueParkingIcon}
+                                    style={{
+                                        verticalAlign: 'middle',
+                                        paddingRight: '4px',
+                                        width: '18px',
+                                    }}
                                 />
                             </Box>
                             <Box>
@@ -88,12 +94,19 @@ const BasicInfo = ({ formik, poiData, tabSelected, isEditable }) => {
                     </Box>
                     <Box sx={{ marginTop: '8px', marginBottom: '16px' }}>
                         <Box>
-                            <Box sx={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+                            <Box
+                                sx={{
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                    gap: '6px',
+                                    marginBottom: '24px',
+                                }}
+                            >
                                 <Box sx={{ paddingTop: '5px' }}>
                                     {themeMode === 'light' ? (
-                                        <img src={LanguageIcon} />
+                                        <img src={StstesIcon} />
                                     ) : (
-                                        <img src={LanguageIconDark} />
+                                        <img src={StstesIconDark} />
                                     )}
                                 </Box>
                                 <Box>
@@ -124,7 +137,6 @@ const BasicInfo = ({ formik, poiData, tabSelected, isEditable }) => {
                                 </Box>
                             )}
                         </Box>
-                        <Divider sx={style.hr} />
                         <Box>
                             <Accordion
                                 elevation={0}

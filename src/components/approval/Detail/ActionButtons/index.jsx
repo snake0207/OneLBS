@@ -1,5 +1,6 @@
 import { Box, Button } from '@mui/material'
 import t from '#/common/libs/trans.js'
+import style from './style.module'
 
 const ActionButtons = ({ type, status, clickAction, id }) => {
     const buttonTextByType = (type, status) => {
@@ -30,7 +31,8 @@ const ActionButtons = ({ type, status, clickAction, id }) => {
                         key={index}
                         variant="contained"
                         onClick={() => clickAction(action, id)}
-                        sx={{ bgcolor: 'button.light', mr: '4px' }}
+                        sx={style.darkBlueButton}
+                        /* 버튼 클래스명 : darkBlueButton, lightButton, lineButton, blueButton */
                     >
                         {t(`actions.${action}`, 'approval')}
                     </Button>
@@ -39,6 +41,16 @@ const ActionButtons = ({ type, status, clickAction, id }) => {
         )
     }
 
-    return <Box>{MakeButtons(buttonTextByType(type, status))}</Box>
+    return (
+        <Box
+            sx={{
+                display: 'flex',
+                justifyContent: 'flex-end',
+                mt: '40px',
+            }}
+        >
+            {MakeButtons(buttonTextByType(type, status))}
+        </Box>
+    )
 }
 export default ActionButtons

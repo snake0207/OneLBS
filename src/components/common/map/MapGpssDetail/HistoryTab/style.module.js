@@ -16,7 +16,7 @@ const style = {
     hr: {
         marginY: '5px',
         borderBottom: '1px solid',
-        borderBottomColor: 'border.gray',
+        borderBottomColor: 'border.tabs',
     },
 }
 

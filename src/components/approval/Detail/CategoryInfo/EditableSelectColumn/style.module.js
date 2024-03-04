@@ -1,19 +1,4 @@
 const style = {
-    historyTabBox: {
-        paddingTop: '20px',
-        paddingRight: '16px',
-    },
-    title: {
-        fontSize: '20px',
-        fontWeight: 600,
-        color: 'text.darkgray',
-    },
-    hr: {
-        marginY: '5px',
-        mb: '12px',
-        borderBottom: '1px solid',
-        borderBottomColor: 'border.lightgray',
-    },
     lightButton: {
         width: '100%',
         height: '30px',
@@ -21,9 +6,10 @@ const style = {
         ml: '2px',
         backgroundColor: 'button.lightblue',
         border: '1px solid #5b8cc5',
-        borderRadius: '4px',
+        borderRadius: '50px',
         flex: 1,
         boxShadow: 'none',
+        mb: '4px',
         '&:hover': {
             backgroundColor: 'button.lightblue',
             boxShadow: 'none',

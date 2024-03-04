@@ -11,7 +11,7 @@ const HistoryTable = ({ historyList }) => {
     return (
         <Box>
             <Headline title={t('history', 'approval')} />
-            <Typography sx={{ fontSize: 15, mb: '4px' }}>
+            <Typography sx={{ fontSize: 15, mb: '4px', mt: '8px', color: 'text.main' }}>
                 {t('total', 'approval')} {historyList?.length || 0}
                 {t('case', 'approval')}
             </Typography>

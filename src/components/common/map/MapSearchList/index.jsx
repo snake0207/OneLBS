@@ -99,6 +99,7 @@ const MapSearchList = ({
                                 selectedPoi={selectedPoi}
                                 setSelectedPoi={setSelectedPoi}
                                 isLast={searchResultArr.length - 1 === idx}
+                                cpType={data.cpType}
                             />
                         ))}
                         <Box

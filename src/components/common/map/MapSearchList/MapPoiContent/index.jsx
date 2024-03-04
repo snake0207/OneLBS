@@ -4,8 +4,9 @@ import ListItemText from '@mui/material/ListItemText'
 import ListItemButton from '@mui/material/ListItemButton'
 import { useMapActions } from '#/store/useMapStore.js'
 import PointBlueIcon from '#/assets/pointBlueIcon.svg'
+import PointRedIcon from '#/assets/pointRedIcon.svg'
 
-const MapPoiContent = ({ idx, name, address, isLast, selectedPoi, setSelectedPoi }) => {
+const MapPoiContent = ({ idx, name, address, isLast, selectedPoi, setSelectedPoi, cpType }) => {
     const { setHoveredPoi } = useMapActions()
     return (
         <>
@@ -32,7 +33,7 @@ const MapPoiContent = ({ idx, name, address, isLast, selectedPoi, setSelectedPoi
                                 }}
                             >
                                 <img
-                                    src={PointBlueIcon}
+                                    src={cpType === 'mcp' ? PointBlueIcon : PointRedIcon}
                                     style={{ verticalAlign: 'middle', paddingRight: '4px' }}
                                 />
                                 {name}

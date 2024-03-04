@@ -6,11 +6,7 @@ const postLogin = (data) => {
 }
 
 const postJoin = (data) => {
-    return postAPI({
-        endPoint: API_PATH.auth.join,
-        data,
-        axiosOption: { headers: { 'Content-Type': 'application/json' } },
-    })
+    return postAPI({ endPoint: API_PATH.auth.join, data })
 }
 
 const postVerifyEmail = (data) => {

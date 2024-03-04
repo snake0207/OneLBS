@@ -5,7 +5,7 @@ import auth from '#/api/auth'
 export const axiosInstance = axios.create({
     baseURL: import.meta.env.VITE_GW_BASE_URL,
     headers: {
-        'Content-Type': 'application/x-www-form-urlencoded',
+        'Content-Type': 'application/json',
         Authorization: `Bearer ${useAuthStore.getState().accesstoken}`,
     },
     withCredentials: true,
@@ -19,17 +19,17 @@ axiosInstance.interceptors.request.use(
 axiosInstance.interceptors.response.use(
     (response) => response,
     async (error) => {
-        if (error.response.status) {
-            const prevRequest = error.config
-            prevRequest._retry = true
+        // if (error.response.status) {
+        //     const prevRequest = error.config
+        //     prevRequest._retry = true
 
-            const newAccessToken = await auth.postRenewToken()
+        // const newAccessToken = await auth.postRenewToken()
 
-            prevRequest.headers.Authorization = `Bearer ${newAccessToken}`
-            useAuthStore.setState({ accessToken: newAccessToken })
+        //     prevRequest.headers.Authorization = `Bearer ${newAccessToken}`
+        //     useAuthStore.setState({ accessToken: newAccessToken })
 
-            return axiosInstance(prevRequest)
-        }
+        //     return axiosInstance(prevRequest)
+        // }
 
         return Promise.reject(error)
     },

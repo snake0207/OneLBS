@@ -93,13 +93,11 @@ const MapSearchList = ({
                         {parsedList.map((data, idx) => (
                             <MapPoiContent
                                 key={data.poiId}
-                                idx={data.poiId}
-                                name={data.title}
-                                address={data.address}
                                 selectedPoi={selectedPoi}
                                 setSelectedPoi={setSelectedPoi}
                                 isLast={searchResultArr.length - 1 === idx}
-                                cpType={data.cpType}
+                                isGpssSearch={isGpssSearch}
+                                poiData={data}
                             />
                         ))}
                         <Box

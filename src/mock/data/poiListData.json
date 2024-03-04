@@ -11,7 +11,8 @@
           }
         },
         "title": "Blink Charging Station",
-        "category": "ev"
+        "category": "ev",
+        "progress": "reviewing"
       },
       {
         "poiId": "here:ChIJSblb29_LwoARUQWFAR785F4",
@@ -23,7 +24,8 @@
           }
         },
         "title": "EVCS Charging Station",
-        "category": "ev"
+        "category": "ev",
+        "progress": "approving"
       },
       {
         "poiId": "mcp:ChIJ5xP4utnLwoARR5thyWQMcI0",
@@ -35,7 +37,8 @@
           }
         },
         "title": "Electric Circuit Charging Station",
-        "category": "ev"
+        "category": "ev",
+        "progress": "reviewing"
       },
       {
         "poiId": "here:ChIJS-pkdn7JwoARzkOPLkLB0LM",

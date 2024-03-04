@@ -150,9 +150,12 @@ const gpssListResponseDataMapper = (res) => {
     return dataArr.map((data) => ({
         poiId: data.poiId,
         cpType: parsePoiProviderType(data.poiId),
+        category: parseCategory(data),
         title: data.title,
         address: data.address,
         position: data.position,
+        country: data.country,
+        progress: data.progress ?? null,
     }))
 }
 

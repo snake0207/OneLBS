@@ -4,229 +4,9 @@ import ClickMarker from '#/components/common/map/googleMap/marker/ClickMarker/in
 import CustomControl from '#/components/common/map/googleMap/CustomControl/index.jsx'
 import CurrentLocation from '#/components/common/map/googleMap/CustomControl/CurrentLocation/index.jsx'
 import CalculateDistance from '#/components/common/map/googleMap/CustomControl/CalculateDistance/index.jsx'
-import MapSearch from '#/components/common/map/MapSearch/index.jsx'
-import MapSearchList from '#/components/common/map/MapSearchList/index.jsx'
-import MapPoiDetail from '#/components/common/map/MapPoiDetail/index.jsx'
 import DisplayMarker from '#/components/common/map/googleMap/marker/DisplayMarker/index.jsx'
 import SearchResultMarker from '#/components/common/map/googleMap/marker/SearchResultMarker/index.jsx'
-import MapGpssDetail from '#/components/common/map/MapGpssDetail/index.jsx'
-
-import TuneIcon from '@mui/icons-material/Tune'
-import { BrowserView, MobileView } from 'react-device-detect'
-import { Stack } from '@mui/material'
-import { useNavigate } from 'react-router-dom'
-
-const mapSampleData = [
-    {
-        poiId: 'ChIJm8fw1mfJwoARNzsUmsgD-Ig',
-        address: '2268 Firestone Blvd, Los Angeles, CA 90002, USA',
-        position: {
-            center: {
-                lat: 33.9578479,
-                lon: -118.23168319999998,
-            },
-        },
-        title: 'Blink Charging Station',
-        category: 'ev',
-    },
-    {
-        poiId: 'ChIJSblb29_LwoARUQWFAR785F4',
-        address: '2365 E Century Blvd, Los Angeles, CA 90002, USA',
-        position: {
-            center: {
-                lat: 33.946781099999995,
-                lon: -118.22994750000001,
-            },
-        },
-        title: 'EVCS Charging Station',
-        category: 'ev',
-    },
-    {
-        poiId: 'ChIJ5xP4utnLwoARR5thyWQMcI0',
-        address: '10320 Wilmington Ave, Los Angeles, CA 90002, USA',
-        position: {
-            center: {
-                lat: 33.942737099999995,
-                lon: -118.2389758,
-            },
-        },
-        title: 'Electric Circuit Charging Station',
-        category: 'ev',
-    },
-    {
-        poiId: 'ChIJS-pkdn7JwoARzkOPLkLB0LM',
-        address: '1501 E Century Blvd, Los Angeles, CA 90002, USA',
-        position: {
-            center: {
-                lat: 33.945758000000005,
-                lon: -118.246968,
-            },
-        },
-        title: 'Flo Charging Station',
-        category: 'ev',
-    },
-    {
-        poiId: 'ChIJMS-G-n3JwoAR2TPD7A6yXoY',
-        address: '10104 Compton Ave, Los Angeles, CA 90002, USA',
-        position: {
-            center: {
-                lat: 33.9448115,
-                lon: -118.246128,
-            },
-        },
-        title: 'ChargePoint Charging Station',
-        category: 'ev',
-    },
-    {
-        poiId: 'ChIJm6KTpoiIdnLwoARwSZzuHOvyOU',
-        address: '10455 Wilmington Ave, Los Angeles, CA 90002, USA',
-        position: {
-            center: {
-                lat: 33.941035899999996,
-                lon: -118.239077,
-            },
-        },
-        title: 'Electric Circuit Charging Station',
-        category: 'ev',
-    },
-]
-
-const detailSampleData = {
-    data: {
-        result: [
-            {
-                poiId: 'here:pds:place:276u0yjhfsftw-aGVyZS1ldjplY29tb3ZlbWVudDo3MTIyMDkzNDQ',
-                cpType: ['HERE_API'],
-                title: 'E.ON',
-                country: 'Germany',
-                postalCode: '60327',
-                address: 'E.ON, Friedrich-Ebert-Anlage 49, 60327 Frankfurt, Germany',
-                distance: 120,
-                phone: '+4980012189555',
-                category: '700-7600-0322',
-                carPay: 1,
-                chains: {
-                    chains: 'Hyundai Motor Company',
-                },
-                position: {
-                    center: {
-                        lat: 12.123131,
-                        lon: 0.123131,
-                    },
-                    guide: {
-                        lat: 12.123131,
-                        lon: 0.123131,
-                    },
-                },
-                evCharging: {
-                    brand: 'EIT',
-                    maxWatt: '100kw',
-                    stationStatus: 0,
-                    status: [
-                        {
-                            connectorType: 1,
-                            speed: 1,
-                            possibleCount: 3,
-                            watt: 0,
-                        },
-                    ],
-                    price: [
-                        {
-                            price: 12.5,
-                            priceUnit: 'kwh',
-                            currencyCode: 'EUR',
-                            currency: '€',
-                        },
-                        {
-                            price: 10.0,
-                            priceUnit: 'kwh',
-                            currencyCode: 'EUR',
-                            currency: '€',
-                        },
-                    ],
-                    openingHours: [
-                        {
-                            week: 0,
-                            open: '08:00',
-                            close: '22:00',
-                        },
-                        {
-                            week: 1,
-                            open: '06:00',
-                            close: '22:00',
-                        },
-                        {
-                            week: 2,
-                            open: '09:00',
-                            close: '22:00',
-                        },
-                        {
-                            week: 3,
-                            open: '10:00',
-                            close: '22:00',
-                        },
-                    ],
-                    charger: [
-                        {
-                            id: '123',
-                            speed: 1,
-                            watt: '7kw',
-                            status: 1,
-                            timestamp: 2021231231123,
-                            connectorType: 2,
-                        },
-                        {
-                            id: '456',
-                            speed: 2,
-                            watt: '7kw',
-                            status: 2,
-                            timestamp: 2021231231123,
-                            connectorType: 3,
-                        },
-                    ],
-                },
-                fuel: {
-                    brand: 'AutoGas',
-                    status: [
-                        {
-                            type: 'G',
-                            price: {
-                                price: 12.5,
-                                priceUnit: 'kwh',
-                                currencyCode: 'EUR',
-                                currency: '€',
-                            },
-                        },
-                    ],
-                },
-                parking: {
-                    compnay: 'APCOA Parking (UK) Limited',
-                    parkingType: '0',
-                    price: {
-                        price: '12.5',
-                        priceUnit: 'kwh',
-                        currencyCode: 'EUR',
-                        currency: '€',
-                    },
-                },
-                h2Charging: {
-                    brand: 'EIT',
-                    possibleCount: 3,
-                    stationStatus: 'PLANNED',
-                },
-                dealerPoi: {
-                    dealerType: '5511',
-                    brand: 'H',
-                    staticUpdateTime: 1702345585,
-                },
-            },
-        ],
-        status: 'string',
-        total: 0,
-        resultID: 0,
-        resCode: 0,
-    },
-}
+import { BrowserView } from 'react-device-detect'
 
 const mapStyle = {
     width: '100%',
@@ -241,11 +21,9 @@ const seoul = {
 /**
  * 지도 컴포넌트는 지도 외부 div의 width / height만 선언하면 됨
  * 전체화면을 위해 width: 100%,로 처리할 수 있으나 height의 경우 calc를 사용해야 화면에 제대로 랜더링 할 수 있음
- * isPoiSearch 와 isGpssSearch 둘 다 true면 안됨
- * 둘 다 false 거나 둘 중 하나만 true로 사용
  * 사용법 ex :
  * <Box sx={{ width: '1200px', height: 'calc(100vh - 120px)'' }}>
- *     <GoogleMapComponent markerDataArr={sampleDataArr} isPoiSearch={true} isGpssSearch={false}/>
+ *     <GoogleMapComponent markerDataArr={sampleDataArr}/>
  * </Box>
  * @param markerDataArr 마커 데이터 array
  * @param isPoiSearch 서치 페이지에서 사용여부 false 일 때, 검색 / 검색결과 컴포넌트 비노출
@@ -253,46 +31,27 @@ const seoul = {
  */
 const GoogleMapComponent = ({
     markerDataArr = null,
-    isPoiSearch = false,
-    isGpssSearch = false,
+    searchResultArr = null,
+    selectedPoi,
+    setSelectedPoi,
 }) => {
-    const navigate = useNavigate()
     const [map, setMap] = useState(null)
-    // 구글 검색 결과
-    const [searchResultArr, setSearchResultArr] = useState([])
-    // 선택한 poi
-    const [selectedPoi, setSelectedPoi] = useState(null)
+
     // 왼쪽 클릭
     const [clickedCoord, setClickedCoord] = useState({
         lat: null,
         lng: null,
     })
-    const [showSearch, setShowSearch] = useState(false)
+
     // 오른쪽 클릭
     const [distanceCoordArr, setDistanceCoordArr] = useState([])
     // 거리측정 기능 활성 여부
     const [isDistanceFunctionOn, setIsDistanceFunctionOn] = useState(false)
 
-    // searchResultArr 샘플용 더미데이터 푸시 추후 삭제
-    useEffect(() => {
-        if (searchResultArr.length === 0)
-            setSearchResultArr(...searchResultArr, {
-                poiId: 'ChIJm6KTpoiIdnLwoARwSZzuHOvyOU',
-                address: '10455 Wilmington Ave, Los Angeles, CA 90002, USA',
-                position: {
-                    center: {
-                        lat: 33.941035899999996,
-                        lon: -118.239077,
-                    },
-                },
-                title: 'Electric Circuit Charging Station',
-                category: 'ev',
-            })
-    }, [])
-
     // poi 선택시 해당 poi 위치로 이동및 줌
     useEffect(() => {
-        const poiArr = mapSampleData.filter((poiData) => poiData.poiId === selectedPoi)
+        if (!searchResultArr) return
+        const poiArr = searchResultArr.filter((poiData) => poiData.poiId === selectedPoi)
         if (poiArr.length === 0) return
         const { lat, lon } = poiArr[0].position.center
         map.panTo({ lat: lat, lng: lon })
@@ -311,21 +70,13 @@ const GoogleMapComponent = ({
         setMap(null)
     }, [])
 
-    const handleShowSearch = () => {
-        setShowSearch(!showSearch)
-    }
-
-    // mobile detail navigate
-    const handlePOISelected = (id) => {
-        setSelectedPoi(id)
-
-        /* poi 상세  */
-        if (isPoiSearch) {
-            navigate(`/search-management/map/${id}`)
-        } else if (isGpssSearch && detailSampleData) {
-            /* gpss 상세 */
-            navigate(`/poi-view/map/${id}`)
-        }
+    const getMapBounds = () => {
+        if (!map) return
+        const bounds = map.getBounds()
+        console.log(bounds.getNorthEast().lat())
+        console.log(bounds.getNorthEast().lng())
+        console.log(bounds.getSouthWest().lat())
+        console.log(bounds.getSouthWest().lng())
     }
 
     return (
@@ -348,6 +99,7 @@ const GoogleMapComponent = ({
                         ])
                     }
                 }}
+                onIdle={getMapBounds}
                 options={{
                     fullscreenControlOptions: {
                         position: window.google.maps.ControlPosition.TOP_RIGHT,
@@ -369,85 +121,24 @@ const GoogleMapComponent = ({
                     <CurrentLocation />
                 </CustomControl>
                 {/* 지도내 거리측정 */}
-                <CustomControl position="TOP_RIGHT" style={{ right: '100px !important' }}>
-                    <CalculateDistance
-                        isDistanceFunctionOn={isDistanceFunctionOn}
-                        setIsDistanceFunctionOn={setIsDistanceFunctionOn}
-                        distanceCoordArr={distanceCoordArr}
-                        setDistanceCoordArr={setDistanceCoordArr}
-                    />
-                </CustomControl>
-                {/* poi / gpss 조회 공통 */}
-                {(isPoiSearch || isGpssSearch) && (
-                    <CustomControl position="TOP_LEFT" style={{ left: '0px !important' }}>
-                        {/*<Box sx={{ display: 'flex', flexDirection: 'column', flex: 1 }}>*/}
-                        <BrowserView>
-                            {/* 지도 검색 */}
-                            <MapSearch />
-                            {/* 검색 결과 */}
-                            <MapSearchList
-                                searchResultArr={mapSampleData}
-                                selectedPoi={selectedPoi}
-                                setSelectedPoi={setSelectedPoi}
-                            />
-
-                            {/* 상세정보 */}
-                            <CustomControl position="TOP_LEFT" style={{ left: '355px !important' }}>
-                                {/* poi 상세  */}
-                                {isPoiSearch && (
-                                    <MapPoiDetail
-                                        selectedPoi={selectedPoi}
-                                        setSelectedPoi={setSelectedPoi}
-                                    />
-                                )}
-                                {/* gpss 상세 */}
-                                {isGpssSearch && detailSampleData && (
-                                    <MapGpssDetail
-                                        selectedPoi={selectedPoi}
-                                        setSelectedPoi={setSelectedPoi}
-                                        poiData={detailSampleData.data.result[0]}
-                                    />
-                                )}
-                            </CustomControl>
-                        </BrowserView>
-                        {/* Mobile View */}
-                        <MobileView>
-                            <TuneIcon
-                                sx={{
-                                    fontSize: 32,
-                                    mt: 1,
-                                    ml: 2,
-                                    mb: 1,
-                                    border: '1px solid black',
-                                }}
-                                onClick={handleShowSearch}
-                            />
-                            {showSearch && (
-                                <Stack spacing={20} sx={{ ml: 2, mr: 2 }}>
-                                    {/* 지도 검색 */}
-                                    <MapSearch />
-                                    {/* 검색 결과 */}
-                                    <MapSearchList
-                                        searchResultArr={mapSampleData}
-                                        selectedPoi={selectedPoi}
-                                        setSelectedPoi={handlePOISelected}
-                                    />
-                                </Stack>
-                            )}
-                        </MobileView>
-                        {/*</Box>*/}
+                <BrowserView>
+                    <CustomControl position="TOP_RIGHT" style={{ right: '100px !important' }}>
+                        <CalculateDistance
+                            isDistanceFunctionOn={isDistanceFunctionOn}
+                            setIsDistanceFunctionOn={setIsDistanceFunctionOn}
+                            distanceCoordArr={distanceCoordArr}
+                            setDistanceCoordArr={setDistanceCoordArr}
+                        />
                     </CustomControl>
-                )}
-
+                </BrowserView>
                 {/* 외부 마커 데이터 출력 */}
                 {markerDataArr &&
                     markerDataArr.map((data) => (
                         <DisplayMarker key={data.poiId} markerData={data} />
                     ))}
                 {/* 지도 검색 결과 마커 데이터 출력*/}
-                {(isPoiSearch || isGpssSearch) &&
-                    searchResultArr &&
-                    mapSampleData.map((poiData) => (
+                {searchResultArr &&
+                    searchResultArr.map((poiData) => (
                         <SearchResultMarker
                             key={poiData.poiId}
                             poiData={poiData}

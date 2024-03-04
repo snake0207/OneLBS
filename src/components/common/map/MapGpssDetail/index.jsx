@@ -6,31 +6,24 @@ import style from './style.module'
 import { usePopupActions } from '#/store/usePopupStore.js'
 import { useFormik } from 'formik'
 import { poiDetailSchema } from '#/contents/validationSchema.js'
-import { useGetApprover, useGetReviewer } from '#/hooks/queries/gpss.js'
 import BasicInfo from '#/components/common/map/MapGpssDetail/DetailTab/BasicInfo/index.jsx'
-import EvCharging from '#/components/common/map/MapGpssDetail/DetailTab/EvCharging/index.jsx'
 import Divider from '@mui/material/Divider'
-import TextInput from '#/components/common/input/TextInput/index.jsx'
-import UserSearchTable from '#/components/common/map/MapGpssDetail/UserSearchTable/index.jsx'
-import { GPSS_TABLE_TYPE } from '#/contents/constant.js'
+import { gpssDetailResponseDataMapper } from '#/pages/ApprovalHistoryPage/mapper.js'
+import EvChargingInfo from '#/components/approval/Detail/CategoryInfo/EvChargingInfo/index.jsx'
+import ParkingInfo from '#/components/approval/Detail/CategoryInfo/ParkingInfo/index.jsx'
+import FuelInfo from '#/components/approval/Detail/CategoryInfo/FuelInfo/index.jsx'
+import DealerPoiInfo from '#/components/approval/Detail/CategoryInfo/DealerPoiInfo/index.jsx'
+import H2ChargingInfo from '#/components/approval/Detail/CategoryInfo/H2ChargingInfo/index.jsx'
+import MapApprovalSelect from '#/components/common/map/MapApprovalSelect/index.jsx'
 
-const dummyData = [
-    { id: 'qwer@acrofuture.com', name: '아*로1', company: '회사1', userSeq: 1 },
-    { id: 'asdf@acrofuture.com', name: '아*로2', company: '회사2', userSeq: 2 },
-    { id: 'zxcv@acrofuture.com', name: '아*로3', company: '회사3', userSeq: 3 },
-]
 const MapGpssDetail = ({ selectedPoi, setSelectedPoi, poiData }) => {
+    const isEditable = true
     const popupAction = usePopupActions()
-    const [initPoiData, setInitPoiData] = useState(poiData)
-    const { evCharging, fuel, parking, h2Charging, dealerPoi } = poiData
 
     const [isOpen, setIsOpen] = useState(false)
     const [tabSelected, setTabSelected] = useState('info')
 
-    // 검토자 승인자 검색
-    const [isReviewerSearchClick, setIsReviewerSearchClick] = useState(false)
-    const [isApproverSearchClick, setIsApproverSearchClick] = useState(false)
-    // 검토자 승인자 선택
+    // 검토자 승인자
     const [selectedReviewer, setSelectedReviewer] = useState(null)
     const [selectedApprover, setSelectedApprover] = useState(null)
 
@@ -39,12 +32,15 @@ const MapGpssDetail = ({ selectedPoi, setSelectedPoi, poiData }) => {
         else setIsOpen(false)
     }, [selectedPoi])
 
+    const parsedData = gpssDetailResponseDataMapper(poiData)
+    const { basicInfo, ...restData } = parsedData
     const formik = useFormik({
         initialValues: {
             reason: '',
             reviewer: '',
             approver: '',
-            ...poiData,
+            ...basicInfo,
+            ...restData,
         },
         validationSchema: poiDetailSchema,
         onSubmit: (form) => {
@@ -52,21 +48,6 @@ const MapGpssDetail = ({ selectedPoi, setSelectedPoi, poiData }) => {
         },
     })
 
-    const { data: reviewerData, refetch: getReviewer } = useGetReviewer(formik.values.reviewer)
-    const { data: approverData, refetch: getApprover } = useGetApprover(formik.values.approver)
-
-    // 검토자 검색
-    const handleClickGetReviewer = () => {
-        if (formik.values.reviewer === '') return
-        setIsReviewerSearchClick(true)
-        // getReviewer()
-    }
-    // 결제자 검색
-    const handleClickGetApprover = () => {
-        if (formik.values.approver === '') return
-        setIsApproverSearchClick(true)
-        // getApprover()
-    }
     // 임시저장
     const handleClickTempSaveBtn = () => {
         formik.handleSubmit()
@@ -121,8 +102,9 @@ const MapGpssDetail = ({ selectedPoi, setSelectedPoi, poiData }) => {
         setSelectedPoi(null)
     }
     return (
-        poiData && (
-            <Box sx={{ display: isOpen ? 'flex' : 'none', margin: '10px' }}>
+        poiData &&
+        isOpen && (
+            <Box sx={{ display: 'flex', margin: '10px' }}>
                 <Box sx={style.mapDetail}>
                     <Box>
                         <Tabs value={tabSelected} onChange={handleClickTabChange} sx={style.tabs}>
@@ -137,32 +119,57 @@ const MapGpssDetail = ({ selectedPoi, setSelectedPoi, poiData }) => {
                     <Box
                         sx={{
                             paddingTop: '16px',
-                            // TODO maxHeight의 경우 샘플컴포넌트 구성을 위해 넣은 값입니다. 추후에 실제 적용시에는 지도가 한 화면을 가득 사용할 것이므로 알맞게 수정되어야합니다
-                            maxHeight: '800px',
+                            maxHeight: '760px',
                             overflow: 'auto',
                         }}
                     >
                         {/* 상세 기본 정보 */}
                         <BasicInfo
                             formik={formik}
-                            poiData={poiData}
+                            poiData={parsedData.basicInfo}
                             tabSelected={tabSelected}
-                            isEditable={true}
+                            isEditable={isEditable}
                         />
-                        <Box>
-                            <Typography
-                                sx={{
-                                    fontSize: 20,
-                                    fontWeight: 600,
-                                    mb: '4px',
-                                    color: 'primary.blue',
-                                }}
-                            >
-                                {t('category', 'common')}
-                            </Typography>
-                        </Box>
                         {/* EV Charging */}
-                        {!!evCharging && <EvCharging evChargingData={evCharging} formik={formik} />}
+                        {!!parsedData.evChargingInfo && (
+                            <EvChargingInfo
+                                data={parsedData.evChargingInfo}
+                                isEditable={isEditable}
+                                formik={formik}
+                            />
+                        )}
+                        {/* parking */}
+                        {!!parsedData.parkingInfo && (
+                            <ParkingInfo
+                                data={parsedData.parkingInfo}
+                                isEditable={isEditable}
+                                formik={formik}
+                            />
+                        )}
+                        {/* fuel */}
+                        {!!parsedData.fuelInfo && (
+                            <FuelInfo
+                                data={parsedData.fuelInfo}
+                                isEditable={isEditable}
+                                formik={formik}
+                            />
+                        )}
+                        {/* h2Charging */}
+                        {!!parsedData.h2ChargingInfo && (
+                            <H2ChargingInfo
+                                data={parsedData.h2ChargingInfo}
+                                isEditable={isEditable}
+                                formik={formik}
+                            />
+                        )}
+                        {/* dealerPoi */}
+                        {!!parsedData.dealerPoiInfo && (
+                            <DealerPoiInfo
+                                data={parsedData.dealerPoiInfo}
+                                isEditable={isEditable}
+                                formik={formik}
+                            />
+                        )}
                         <Box>
                             <Box>
                                 <Typography>{t('reason_for_approval', 'gpss')}</Typography>
@@ -185,101 +192,13 @@ const MapGpssDetail = ({ selectedPoi, setSelectedPoi, poiData }) => {
                                 value={formik.values[name]}
                             ></TextField>
                         </Box>
-                        <Box>
-                            <Box>
-                                <Typography>{t('reviewer', 'users')}</Typography>
-                            </Box>
-                            <Divider />
-                            <Box
-                                sx={{
-                                    display: 'flex',
-                                    alignItems: 'flex-start',
-                                    gap: '6px',
-                                    mt: '8px',
-                                    height: '40px',
-                                }}
-                            >
-                                <TextInput
-                                    formik={formik}
-                                    name={'reviewer'}
-                                    placeholder={t('input_keyword', 'common')}
-                                />
-                                <Button variant={'contained'} onClick={handleClickGetReviewer}>
-                                    {t('search', 'common')}
-                                </Button>
-                            </Box>
-                            <Box
-                                sx={{
-                                    display: 'flex',
-                                    alignItems: 'center',
-                                    justifyContent: 'center',
-                                    flexDirection: 'column',
-                                    mt: '8px',
-                                }}
-                            >
-                                {isReviewerSearchClick && (
-                                    <>
-                                        <Typography sx={{ marginY: '16px' }}>
-                                            {t('search_no_result', 'common')}
-                                        </Typography>
-                                        <UserSearchTable
-                                            data={dummyData}
-                                            tableType={GPSS_TABLE_TYPE.reviewer}
-                                            selectedReviewer={selectedReviewer}
-                                            setSelectedReviewer={setSelectedReviewer}
-                                        />
-                                    </>
-                                )}
-                            </Box>
-                        </Box>
-                        <Box>
-                            <Box>
-                                <Typography>{t('approver', 'users')}</Typography>
-                            </Box>
-                            <Divider />
-                            <Box
-                                sx={{
-                                    display: 'flex',
-                                    alignItems: 'flex-start',
-                                    gap: '6px',
-                                    mt: '8px',
-                                    height: '40px',
-                                }}
-                            >
-                                <TextInput
-                                    formik={formik}
-                                    name={'approver'}
-                                    placeholder={t('input_keyword', 'common')}
-                                />
-                                <Button variant={'contained'} onClick={handleClickGetApprover}>
-                                    {t('search', 'common')}
-                                </Button>
-                            </Box>
-                            <Box
-                                sx={{
-                                    display: 'flex',
-                                    alignItems: 'center',
-                                    justifyContent: 'center',
-                                    flexDirection: 'column',
-                                    mt: '8px',
-                                }}
-                            >
-                                {isApproverSearchClick && (
-                                    <>
-                                        <Typography sx={{ marginY: '16px' }}>
-                                            {t('search_no_result', 'common')}
-                                        </Typography>
-                                        <UserSearchTable
-                                            data={dummyData}
-                                            tableType={GPSS_TABLE_TYPE.approver}
-                                            selectedApprover={selectedApprover}
-                                            setSelectedApprover={setSelectedApprover}
-                                        />
-                                    </>
-                                )}
-                            </Box>
-                        </Box>
-
+                        <MapApprovalSelect
+                            formik={formik}
+                            selectedApprover={selectedApprover}
+                            setSelectedApprover={setSelectedApprover}
+                            selectedReviewer={selectedReviewer}
+                            setSelectedReviewer={setSelectedReviewer}
+                        />
                         <Box
                             sx={{
                                 display: 'flex',

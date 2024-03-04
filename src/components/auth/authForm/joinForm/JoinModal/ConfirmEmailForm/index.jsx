@@ -3,7 +3,6 @@ import useTimerStore from '#/store/useTimerStore'
 import Close from '@mui/icons-material/Close'
 import {
     Box,
-    Button,
     FormHelperText,
     IconButton,
     InputAdornment,
@@ -15,11 +14,12 @@ import { usePostConfirmEmail } from '#/hooks/queries/auth'
 import t from '#/common/libs/trans'
 
 import style from './style.module'
+import { LoadingButton } from '@mui/lab'
 
 // 메일 인증 코드
 const ConfirmEmailForm = ({ formik }) => {
     const { time, actions } = useTimerStore()
-    const { mutate } = usePostConfirmEmail()
+    const { mutate, isPending } = usePostConfirmEmail()
     const [isAuthCompleted, setIsAuthCompleted] = useState(false)
 
     const handleSubmitEmailCode = () => {
@@ -31,17 +31,15 @@ const ConfirmEmailForm = ({ formik }) => {
             formik.values.email &&
             !formik.errors.email
         ) {
-            setIsAuthCompleted(true)
-            actions.reset()
-            // mutate(
-            //     { email: formik.values.email, code: formik.values.code },
-            //     {
-            //         onSuccess: () => {
-            //             setIsAuthCompleted(true)
-            //             actions.setTime(null)
-            //         },
-            //     },
-            // )
+            mutate(
+                { email: formik.values.email, code: formik.values.code },
+                {
+                    onSuccess: () => {
+                        setIsAuthCompleted(true)
+                        actions.reset()
+                    },
+                },
+            )
         }
     }
 
@@ -128,7 +126,8 @@ const ConfirmEmailForm = ({ formik }) => {
                 />
                 {customHelperText()}
             </Box>
-            <Button
+            <LoadingButton
+                loading={isPending}
                 variant="contained"
                 onClick={handleSubmitEmailCode}
                 type="button"
@@ -144,7 +143,7 @@ const ConfirmEmailForm = ({ formik }) => {
                 {isAuthCompleted
                     ? t('authentication_completed', 'auth')
                     : t('to_authenticate', 'auth')}
-            </Button>
+            </LoadingButton>
         </Box>
     )
 }

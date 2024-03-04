@@ -36,11 +36,12 @@ import BtnArrowIconDark from '#/assets/btnArrowIconDark.svg'
 import style from './style.module'
 
 import joinList from './list.json'
+import { LoadingButton } from '@mui/lab'
 
 const JoinModal = ({ isOpen, onClose }) => {
     const { showPopup } = usePopupActions()
     const { themeMode } = getLayoutState()
-    const { mutate } = usePostJoin()
+    const { mutate, isPending } = usePostJoin()
     const [isOpenPrivacyPolicyModal, setIsOpenPrivacyPolicyModal] = useState(false)
     const [isOpenJoinSuccessModal, setIsOpenJoinSuccessModal] = useState(false)
 
@@ -79,9 +80,11 @@ const JoinModal = ({ isOpen, onClose }) => {
                 return
             }
             const data = formatJoinData(form)
-            console.log(data)
-            // mutate(data)
-            setIsOpenJoinSuccessModal(true)
+            mutate(data, {
+                onSuccess: () => {
+                    setIsOpenJoinSuccessModal(true)
+                },
+            })
         },
     })
 
@@ -215,7 +218,8 @@ const JoinModal = ({ isOpen, onClose }) => {
                 />
             </DialogContent>
             <DialogActions>
-                <Button
+                <LoadingButton
+                    loading={isPending}
                     variant="contained"
                     onClick={formik.handleSubmit}
                     type="submit"
@@ -223,7 +227,7 @@ const JoinModal = ({ isOpen, onClose }) => {
                     sx={style.btnLarge}
                 >
                     {t('join', 'auth')}
-                </Button>
+                </LoadingButton>
             </DialogActions>
             <PrivacyPolicyModal
                 isOpen={isOpenPrivacyPolicyModal}

@@ -6,6 +6,7 @@ import t from '#/common/libs/trans.js'
 import TopIcon from '#/assets/topIcon.svg'
 import Button from '@mui/material/Button'
 import { isBrowser } from 'react-device-detect'
+import { gpssListResponseDataMapper } from '#/pages/ApprovalHistoryPage/mapper.js'
 
 const MapSearchList = ({
     searchResultArr,
@@ -23,9 +24,10 @@ const MapSearchList = ({
             behavior: 'smooth',
         })
     }
+    const parsedList = gpssListResponseDataMapper(searchResultArr)
     // 검색 결과가 없을 때 처리
     useEffect(() => {
-        if (searchResultArr && searchResultArr.length === 0) setIsResultNon(true)
+        if (parsedList && parsedList.length === 0) setIsResultNon(true)
         else setIsResultNon(false)
     }, [searchResultArr])
 
@@ -70,7 +72,7 @@ const MapSearchList = ({
                     {t('search_no_result', 'common')}
                 </Typography>
             ) : (
-                searchResultArr && (
+                parsedList && (
                     <List sx={{ width: '100%' }}>
                         {/* gpss 검색일 때만 poi 생성버튼 표출 */}
                         {isGpssSearch && (
@@ -88,7 +90,7 @@ const MapSearchList = ({
                                 </Button>
                             </Box>
                         )}
-                        {searchResultArr.map((data, idx) => (
+                        {parsedList.map((data, idx) => (
                             <MapPoiContent
                                 key={data.poiId}
                                 idx={data.poiId}

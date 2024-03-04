@@ -5,6 +5,7 @@ import {
     parseCongestion,
     parseFuelType,
     parseOpeningHours,
+    parsePoiProviderType,
     parsePriceIsFree,
     parseStationStatus,
     parseSummaryConnectorType,
@@ -141,6 +142,20 @@ const gpssDetailResponseDataMapper = (res) => {
     return setCategoryData(basicData, data)
 }
 
+/**
+ * gpss 리스트데이터 매퍼
+ */
+const gpssListResponseDataMapper = (res) => {
+    const dataArr = res.data.result
+    return dataArr.map((data) => ({
+        poiId: data.poiId,
+        cpType: parsePoiProviderType(data.poiId),
+        title: data.title,
+        address: data.address,
+        position: data.position,
+    }))
+}
+
 const setCategoryData = (basicData, originData) => {
     switch (basicData.category) {
         case 'evCharging':
@@ -156,4 +171,4 @@ const setCategoryData = (basicData, originData) => {
     }
 }
 
-export { detailResponseDataMapper, gpssDetailResponseDataMapper }
+export { detailResponseDataMapper, gpssDetailResponseDataMapper, gpssListResponseDataMapper }

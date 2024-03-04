@@ -11,6 +11,7 @@ import FlexEndButtonContainer from '#/components/common/button/FlexEndButtonCont
 import OtpGuideModal from '#/components/auth/authForm/CertifiedForm/otpGuideModal'
 import { usePostVerifyOtp } from '#/hooks/queries/auth'
 import useOtpStore from '#/store/useOtpStore'
+import { useSetAccessToken } from '#/store/useAuthStore'
 
 import t from '#/common/libs/trans'
 
@@ -21,6 +22,7 @@ const CertifiedForm = () => {
     const [isOtpGuideOpen, setIsOtpGuideOpen] = useState(false)
     const { mutate, isPending } = usePostVerifyOtp()
     const { twoFactorAuth, secretKey, twoFactorSecret, qrCodeUrl } = useOtpStore()
+    const setAccessToken = useSetAccessToken()
 
     const handleClickOtpGuideClose = () => {
         setIsOtpGuideOpen(false)
@@ -39,8 +41,12 @@ const CertifiedForm = () => {
             mutate(
                 { ...form, twoFactorSecret },
                 {
-                    onSuccess: (data) => {
-                        console.log(data)
+                    onSuccess: ({
+                        data: {
+                            data: { accessToken, permissions, pwChangeRequired, userId },
+                        },
+                    }) => {
+                        setAccessToken(accessToken)
                     },
                 },
             )
@@ -109,10 +115,10 @@ const CertifiedForm = () => {
                     </Box>
                 </>
             )}
-            <Typography variant="h6" sx={style.labelText}>
-                OTP
-            </Typography>
             <form onSubmit={formik.handleSubmit}>
+                <Typography variant="h6" sx={style.labelText}>
+                    OTP
+                </Typography>
                 <TextInput
                     name={'code'}
                     placeholder={t('placeholder.otp', 'auth')}

@@ -11,7 +11,7 @@ export default defineConfig({
         port: 2999,
         proxy: {
             '/api': {
-                target: 'https://stg-gpss-eu.auto-hmg.io',
+                target: 'http://k8s-portal-admin-058f374ba2-825941414.eu-central-1.elb.amazonaws.com/gw',
                 changeOrigin: true,
                 rewrite: (path) => path.replace(/^\/api/, ''),
             },

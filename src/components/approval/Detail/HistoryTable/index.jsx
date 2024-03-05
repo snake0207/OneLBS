@@ -11,12 +11,12 @@ const HistoryTable = ({ historyList }) => {
     return (
         <Box>
             <Headline title={t('history', 'approval')} />
-            <Typography sx={{ fontSize: 15, mb: '4px' }}>
+            <Typography sx={{ fontSize: 15, mb: '4px', mt: '8px', color: 'text.main' }}>
                 {t('total', 'approval')} {historyList?.length || 0}
                 {t('case', 'approval')}
             </Typography>
             <Table size={'small'} sx={style.tableBox}>
-                <TableHead sx={{ backgroundColor: theme.palette.grey[100] }}>
+                <TableHead>
                     <TableRow>
                         <TableCell align={'center'}>{t('date', 'approval')}</TableCell>
                         <TableCell align={'center'}>{t('state', 'approval')}</TableCell>

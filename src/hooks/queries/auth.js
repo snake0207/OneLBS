@@ -5,6 +5,9 @@ import { useMutation, useQuery } from '@tanstack/react-query'
 export const usePostLogin = () => {
     return useMutation({
         mutationFn: auth.postLogin,
+        onSuccess: (data) => {
+            console.log(data)
+        },
     })
 }
 
@@ -33,4 +36,16 @@ export const useGetUserIp = () => {
     })
 
     return { data }
+}
+
+export const usePostVerifyOtp = () => {
+    return useMutation({
+        mutationFn: auth.postVerifyOtp,
+    })
+}
+
+export const usePostPasswordReset = () => {
+    return useMutation({
+        mutationFn: auth.postPasswordReset,
+    })
 }

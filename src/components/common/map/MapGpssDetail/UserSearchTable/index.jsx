@@ -1,6 +1,7 @@
 import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@mui/material'
 import { GPSS_TABLE_TYPE } from '#/contents/constant.js'
 import t from '#/common/libs/trans.js'
+import style from './style.module'
 
 const UserSearchTable = ({ data, ...props }) => {
     const tableHeader = [t('id', 'common'), t('name', 'common'), t('company', 'common')]
@@ -38,8 +39,8 @@ const UserSearchTable = ({ data, ...props }) => {
     }
 
     return (
-        <TableContainer sx={{ marginY: '16px' }}>
-            <Table>
+        <TableContainer>
+            <Table sx={style.tableBox}>
                 <TableHead>
                     <TableRow>
                         {tableHeader.map((header, idx) => (

@@ -4,8 +4,17 @@ import List from '@mui/material/List'
 import { useEffect, useRef, useState } from 'react'
 import t from '#/common/libs/trans.js'
 import TopIcon from '#/assets/topIcon.svg'
+import Button from '@mui/material/Button'
+import { isBrowser } from 'react-device-detect'
+import { gpssListResponseDataMapper } from '#/pages/ApprovalHistoryPage/mapper.js'
 
-const MapSearchList = ({ searchResultArr, selectedPoi, setSelectedPoi }) => {
+const MapSearchList = ({
+    searchResultArr,
+    selectedPoi,
+    setSelectedPoi,
+    isGpssSearch = false,
+    setIsNewPoiCreateOpen,
+}) => {
     const [isResultNon, setIsResultNon] = useState(true)
     const [isTopBtnVisible, setIsTopBtnVisible] = useState(false)
     const poiList = useRef()
@@ -15,8 +24,10 @@ const MapSearchList = ({ searchResultArr, selectedPoi, setSelectedPoi }) => {
             behavior: 'smooth',
         })
     }
+    const parsedList = gpssListResponseDataMapper(searchResultArr)
+    // 검색 결과가 없을 때 처리
     useEffect(() => {
-        if (searchResultArr && searchResultArr.length === 0) setIsResultNon(true)
+        if (parsedList && parsedList.length === 0) setIsResultNon(true)
         else setIsResultNon(false)
     }, [searchResultArr])
 
@@ -29,8 +40,13 @@ const MapSearchList = ({ searchResultArr, selectedPoi, setSelectedPoi }) => {
     }, [])
 
     const handleScroll = () => {
-        if (poiList.current.scrollTop > 70) setIsTopBtnVisible(true)
+        if (poiList.current.scrollTop > 30) setIsTopBtnVisible(true)
         else setIsTopBtnVisible(false)
+    }
+
+    const handleNewPoiOpen = () => {
+        setIsNewPoiCreateOpen(true)
+        setSelectedPoi(null)
     }
 
     return (
@@ -41,7 +57,7 @@ const MapSearchList = ({ searchResultArr, selectedPoi, setSelectedPoi }) => {
                 backgroundColor: 'dialog.main',
                 borderRadius: '8px',
                 minHeight: '130px',
-                maxHeight: '550px',
+                maxHeight: isBrowser ? '500px' : 'calc(100vh - 620px)',
                 display: isResultNon ? 'flex' : '',
                 justifyContent: isResultNon ? 'center' : '',
                 alignItems: isResultNon ? 'center' : '',
@@ -56,17 +72,41 @@ const MapSearchList = ({ searchResultArr, selectedPoi, setSelectedPoi }) => {
                     {t('search_no_result', 'common')}
                 </Typography>
             ) : (
-                searchResultArr && (
+                parsedList && (
                     <List sx={{ width: '100%' }}>
-                        {searchResultArr.map((data, idx) => (
+                        {/* gpss 검색일 때만 poi 생성버튼 표출 */}
+                        {isGpssSearch && (
+                            <Box
+                                sx={{
+                                    position: 'relative',
+                                    display: 'flex',
+                                    justifyContent: 'flex-end',
+                                    backgroundColor: 'dialog.main',
+                                    zIndex: 10,
+                                }}
+                            >
+                                <Button
+                                    variant={'contained'}
+                                    onClick={handleNewPoiOpen}
+                                    sx={{
+                                        fontSize: 13,
+                                        fontWeight: 400,
+                                        mr: '10px',
+                                        backgroundColor: 'button.main',
+                                    }}
+                                >
+                                    POI생성
+                                </Button>
+                            </Box>
+                        )}
+                        {parsedList.map((data, idx) => (
                             <MapPoiContent
                                 key={data.poiId}
-                                idx={data.poiId}
-                                name={data.title}
-                                address={data.address}
                                 selectedPoi={selectedPoi}
                                 setSelectedPoi={setSelectedPoi}
                                 isLast={searchResultArr.length - 1 === idx}
+                                isGpssSearch={isGpssSearch}
+                                poiData={data}
                             />
                         ))}
                         <Box

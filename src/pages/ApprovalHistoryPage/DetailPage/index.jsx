@@ -2,13 +2,12 @@ import { useParams } from 'react-router-dom'
 import Typography from '@mui/material/Typography'
 import t from '#/common/libs/trans.js'
 import TitleBar from '#/components/common/menu/TitleBar/index.jsx'
-import { Box, Card, Stack, TextField } from '@mui/material'
+import { Box, Card, Stack, TextField, Icon } from '@mui/material'
 import ApprovalLine from '#/components/approval/Detail/ApprovalLine/index.jsx'
 import HistoryTable from '#/components/approval/Detail/HistoryTable/index.jsx'
 import { useCallback, useMemo } from 'react'
 import { useFormik } from 'formik'
 import ActionButtons from '#/components/approval/Detail/ActionButtons/index.jsx'
-import dummyData from '#/mock/data/detailData.json'
 import poiDetailData from '#/mock/data/poiDetailData.json'
 import Headline from '#/components/approval/Detail/Headline/index.jsx'
 import Comment from '#/components/approval/Detail/Comment/index.jsx'
@@ -22,7 +21,12 @@ import DealerPoiInfo from '#/components/approval/Detail/CategoryInfo/DealerPoiIn
 import H2ChargingInfo from '#/components/approval/Detail/CategoryInfo/H2ChargingInfo/index.jsx'
 import ParkingInfo from '#/components/approval/Detail/CategoryInfo/ParkingInfo/index.jsx'
 import GoogleMapComponent from '#/components/common/map/googleMap/index.jsx'
-import { isBrowser } from 'react-device-detect'
+import { MobileView, isBrowser } from 'react-device-detect'
+
+import PoiSearchIcon from '#/assets/poiSearchIcon.svg'
+import PoiSearchIconDark from '#/assets/poiSearchIconDark.svg'
+import useLayoutStore from '#/store/useLayoutStore'
+import Divider from '@mui/material/Divider'
 
 const markerSampleData = [
     {
@@ -97,7 +101,6 @@ const ApprovalHistoryDetailPage = () => {
         initialValues: {
             ...parsedData.approvalInfo,
             ...parsedData.basicInfo,
-            ...parsedData.coordinates,
             ...categoryFormik(parsedData),
         },
     })
@@ -116,6 +119,7 @@ const ApprovalHistoryDetailPage = () => {
                 return false
         }
     }, [parsedData.status, userType])
+    console.log('IS EDITABLE >> ', isEditable, parsedData.status)
 
     const openAlertPopup = (action) => {
         if (formik.values['request_reason'] === '')
@@ -134,38 +138,69 @@ const ApprovalHistoryDetailPage = () => {
             openAlertPopup(action),
         )
     }
+    const { themeMode } = useLayoutStore()
 
     return (
         <>
+            <MobileView>
+                <Icon
+                    style={{
+                        display: 'flex',
+                        position: 'absolute',
+                        top: ' 75px',
+                        zIndex: '4',
+                    }}
+                >
+                    {themeMode === 'light' ? (
+                        <img src={PoiSearchIcon} style={{ display: 'flex', width: '24px' }} />
+                    ) : (
+                        <img src={PoiSearchIconDark} style={{ display: 'flex', width: '24px' }} />
+                    )}
+                </Icon>
+            </MobileView>
             <TitleBar title={t('detail', 'approval')} />
-            <Box sx={{ position: 'relative', height: 'calc(100vh - 120px)' }}>
+            <Box
+                sx={{
+                    position: 'relative',
+                    height: 'calc(100vh - 120px)',
+                    '@media (max-width:1024px)': {
+                        height: '100%',
+                    },
+                }}
+            >
                 <Stack
                     sx={{
                         p: 2,
                         m: 2,
-                        gap: 4,
                         position: 'absolute',
                         backgroundColor: 'dialog.main',
                         opacity: '95%',
                         overflowY: 'auto',
                         height: '98%',
-                        zIndex: 100,
+                        zIndex: 2,
+                        borderRadius: '8px',
+                        boxShadow: '0 4px 4px rgb(0 0 0 / 25%)',
+                        '@media (max-width:1024px)': {
+                            position: 'relative',
+                            borderRadius: '0',
+                            boxShadow: 'none',
+                            m: '0',
+                            p: '0',
+                            height: '100%',
+                        },
                     }}
                 >
                     {/* 결제라인 */}
                     <ApprovalLine
-                        status={dummyData.status}
-                        content={dummyData.approvalLineContents}
+                        status={parsedData.approvalInfo.status}
+                        content={parsedData.approvalInfo.approvalLineContents}
                     />
                     {/* 정보 탭 */}
-                    {/*<BasicInfo formik={formik} poiData={parsedData.basicInfo} />*/}
                     <InfoTab
                         basicData={parsedData.basicInfo}
                         formik={formik}
                         isEditable={isEditable}
                     />
-                    {/* 카테고리 */}
-                    <Headline title={t('category', 'approval')} />
                     {parsedData.category === 'evCharging' && (
                         <EvChargingInfo
                             data={parsedData.evChargingInfo}
@@ -173,6 +208,9 @@ const ApprovalHistoryDetailPage = () => {
                             formik={formik}
                         />
                     )}
+                    <Divider
+                        sx={{ borderBottom: '1px solid', borderBottomColor: 'border.lightgray' }}
+                    />
                     {parsedData.category === 'fuel' && (
                         <FuelInfo
                             data={parsedData.fuelInfo}
@@ -201,14 +239,8 @@ const ApprovalHistoryDetailPage = () => {
                             formik={formik}
                         />
                     )}
-                    {/*<CategoryInfo*/}
-                    {/*    category={parsedData.category}*/}
-                    {/*    data={parsedData[`${parsedData.category}Info`]}*/}
-                    {/*    formik={formik}*/}
-                    {/*    isEditable={isEditable}*/}
-                    {/*/>*/}
                     {/* 승인 요청 이유*/}
-                    <Box>
+                    <Box sx={{ mt: '24px' }}>
                         <Headline title={t('request_reason', 'approval')} />
                         <Box>
                             {userType === 'requester' && isEditable ? (
@@ -230,20 +262,25 @@ const ApprovalHistoryDetailPage = () => {
                     </Box>
                     {/* Comment */}
                     <Comment
-                        comments={dummyData.comment}
+                        comments={{
+                            reviewer: parsedData.approvalInfo.reviewerComment,
+                            approver: parsedData.approvalInfo.approverComment,
+                        }}
                         userType={userType}
                         isEditable={isEditable}
                         formik={formik}
                     />
                     {/* 이력 */}
-                    <HistoryTable historyList={dummyData.historyList} />
+                    <HistoryTable historyList={parsedData.approvalInfo.historyList} />
                     {/* 버튼 */}
-                    <ActionButtons
-                        type={userType}
-                        status={dummyData.status}
-                        clickAction={handleShowConfirmPopup}
-                        id={params.id}
-                    />
+                    <Box>
+                        <ActionButtons
+                            type={userType}
+                            status={parsedData.approvalInfo.status}
+                            clickAction={handleShowConfirmPopup}
+                            id={params.id}
+                        />
+                    </Box>
                 </Stack>
                 {/* 지도 영역 */}
                 {isBrowser && <GoogleMapComponent markerDataArr={markerSampleData} />}

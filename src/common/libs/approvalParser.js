@@ -56,7 +56,7 @@ export const parseOpeningHours = (openingHours) => {
                 return 'Sat'
         }
     }
-    return openingHours.map(({ week, open, close }) => ({
+    return openingHours?.map(({ week, open, close }) => ({
         weekday: parseWeekday(week),
         open,
         close,
@@ -192,6 +192,19 @@ export const parseH2ChargerSpeed = (speed) => {
     return speed === 750 || speed === 350 ? `${speed}bar 수소차` : '확인불가'
 }
 
+export const parseH2StationStatus = (status) => {
+    switch (status) {
+        case 0:
+            return '신규 건설 중'
+        case 1:
+            return '영업 중'
+        case 2:
+            return '영업 종료'
+        case 3:
+            return '영업 불가'
+    }
+}
+
 // dealer Parser
 export const parseDealerType = (type) => {
     switch (type) {
@@ -212,4 +225,8 @@ export const parseManufacturer = (type) => {
         case 'GENESIS':
             return 'GENESIS'
     }
+}
+
+export const parsePoiProviderType = (poiId) => {
+    return poiId.split(':')[0] === 'mcp' ? 'mcp' : 'here'
 }

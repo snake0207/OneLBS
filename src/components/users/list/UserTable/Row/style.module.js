@@ -1,5 +1,6 @@
 const style = {
     resetButton: {
+        minWidth: '40px',
         height: '34px',
         fontWeight: 400,
         p: '0 8px',

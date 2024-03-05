@@ -2,6 +2,7 @@ import { InfoWindow, Marker, useGoogleMap } from '@react-google-maps/api'
 import MapInfoWindow from '#/components/common/map/MapInfoWindow/index.jsx'
 import { useEffect, useState } from 'react'
 import useMapStore from '#/store/useMapStore.js'
+import { isBrowser } from 'react-device-detect'
 
 const SearchResultMarker = ({ poiData, selectedPoi, setSelectedPoi }) => {
     const map = useGoogleMap()
@@ -31,7 +32,7 @@ const SearchResultMarker = ({ poiData, selectedPoi, setSelectedPoi }) => {
             onClick={() => {
                 setSelectedPoi(poiId)
             }}
-            animation={hoveredPoi === poiId && window.google.maps.Animation.BOUNCE}
+            animation={isBrowser && hoveredPoi === poiId && window.google.maps.Animation.BOUNCE}
         >
             {selectedPoi === poiId && (
                 <InfoWindow

@@ -1,17 +1,24 @@
-import { Accordion, AccordionDetails, AccordionSummary, Box, Typography } from '@mui/material'
+import { Accordion, AccordionDetails, AccordionSummary, Box, Typography, Icon } from '@mui/material'
 import t from '#/common/libs/trans.js'
 import Divider from '@mui/material/Divider'
 import { useState } from 'react'
-import PointBlueIcon from '#/assets/pointBlueIcon.svg'
+import PointBlueParkingIcon from '#/assets/pointBlueParkingIcon.svg'
 import LanguageIcon from '#/assets/languagesIcon.svg'
 import LanguageIconDark from '#/assets/languagesIconDark.svg'
 import GpsIcon from '#/assets/gpsIcon.svg'
 import GpsIconDark from '#/assets/gpsIconDark.svg'
-import { getLayoutState } from '#/store/useLayoutStore'
+import StstesIcon from '#/assets/ststesIcon.svg'
+import StstesIconDark from '#/assets/ststesIconDark.svg'
+import useLayoutStore from '#/store/useLayoutStore'
 import style from './style.module'
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore.js'
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
 import TextInput from '#/components/common/input/TextInput/index.jsx'
-import Button from '@mui/material/Button'
+import IconButton from '@mui/material/IconButton'
+
+import EditIcon from '#/assets/editIcon.svg'
+import EditIconDark from '#/assets/editIconDark.svg'
+import SaveIcon from '#/assets/saveIcon.svg'
+import SaveIconDark from '#/assets/saveIconDark.svg'
 
 const jsonSample = {
     key1: 'value1',
@@ -44,7 +51,7 @@ const BasicInfo = ({ formik, poiData, tabSelected, isEditable }) => {
         setIsDisabledInputs({ ...isDisabledInputs, [name]: !isDisabledInputs[name] })
     }
 
-    const { themeMode } = getLayoutState()
+    const { themeMode } = useLayoutStore()
 
     return (
         <Box>
@@ -54,8 +61,12 @@ const BasicInfo = ({ formik, poiData, tabSelected, isEditable }) => {
                         <Box sx={{ display: 'flex' }}>
                             <Box sx={{ paddingTop: '7px' }}>
                                 <img
-                                    src={PointBlueIcon}
-                                    style={{ verticalAlign: 'middle', paddingRight: '4px' }}
+                                    src={PointBlueParkingIcon}
+                                    style={{
+                                        verticalAlign: 'middle',
+                                        paddingRight: '4px',
+                                        width: '18px',
+                                    }}
                                 />
                             </Box>
                             <Box>
@@ -64,15 +75,28 @@ const BasicInfo = ({ formik, poiData, tabSelected, isEditable }) => {
                                 </Typography>
                             </Box>
                             {isEditable && (
-                                <Button
-                                    variant={'contained'}
-                                    sx={{ ml: 'auto' }}
+                                <IconButton
+                                    sx={{ ml: 'auto', p: '0' }}
                                     onClick={() => handleClickInputButton('title')}
                                 >
-                                    {isDisabledInputs['title']
-                                        ? t('edit', 'common')
-                                        : t('save', 'common')}
-                                </Button>
+                                    {isDisabledInputs['title'] ? (
+                                        <Icon sx={style.edit}>
+                                            {themeMode === 'light' ? (
+                                                <img src={EditIcon} width={14} height={14} />
+                                            ) : (
+                                                <img src={EditIconDark} width={14} height={14} />
+                                            )}
+                                        </Icon>
+                                    ) : (
+                                        <Icon sx={style.save}>
+                                            {themeMode === 'light' ? (
+                                                <img src={SaveIcon} width={14} height={14} />
+                                            ) : (
+                                                <img src={SaveIconDark} width={14} height={14} />
+                                            )}
+                                        </Icon>
+                                    )}
+                                </IconButton>
                             )}
                         </Box>
                         {isShowInputs['title'] && (
@@ -86,14 +110,21 @@ const BasicInfo = ({ formik, poiData, tabSelected, isEditable }) => {
                             </Box>
                         )}
                     </Box>
-                    <Box sx={{ marginTop: '8px', marginBottom: '16px' }}>
+                    <Box sx={{ marginTop: '8px', marginBottom: '0px' }}>
                         <Box>
-                            <Box sx={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+                            <Box
+                                sx={{
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                    gap: '6px',
+                                    marginBottom: '24px',
+                                }}
+                            >
                                 <Box sx={{ paddingTop: '5px' }}>
                                     {themeMode === 'light' ? (
-                                        <img src={LanguageIcon} />
+                                        <img src={StstesIcon} />
                                     ) : (
-                                        <img src={LanguageIconDark} />
+                                        <img src={StstesIconDark} />
                                     )}
                                 </Box>
                                 <Box>
@@ -102,15 +133,36 @@ const BasicInfo = ({ formik, poiData, tabSelected, isEditable }) => {
                                     </Typography>
                                 </Box>
                                 {isEditable && (
-                                    <Button
-                                        variant={'contained'}
-                                        sx={{ ml: 'auto' }}
+                                    <IconButton
+                                        sx={{ ml: 'auto', p: '0' }}
                                         onClick={() => handleClickInputButton('address')}
                                     >
-                                        {isDisabledInputs['address']
-                                            ? t('edit', 'common')
-                                            : t('save', 'common')}
-                                    </Button>
+                                        {isDisabledInputs['address'] ? (
+                                            <Icon sx={style.edit}>
+                                                {themeMode === 'light' ? (
+                                                    <img src={EditIcon} width={14} height={14} />
+                                                ) : (
+                                                    <img
+                                                        src={EditIconDark}
+                                                        width={14}
+                                                        height={14}
+                                                    />
+                                                )}
+                                            </Icon>
+                                        ) : (
+                                            <Icon sx={style.save}>
+                                                {themeMode === 'light' ? (
+                                                    <img src={SaveIcon} width={14} height={14} />
+                                                ) : (
+                                                    <img
+                                                        src={SaveIconDark}
+                                                        width={14}
+                                                        height={14}
+                                                    />
+                                                )}
+                                            </Icon>
+                                        )}
+                                    </IconButton>
                                 )}
                             </Box>
                             {isShowInputs['address'] && (
@@ -124,19 +176,28 @@ const BasicInfo = ({ formik, poiData, tabSelected, isEditable }) => {
                                 </Box>
                             )}
                         </Box>
-                        <Divider sx={style.hr} />
                         <Box>
                             <Accordion
                                 elevation={0}
-                                sx={{ padding: 0, backgroundColor: 'dialog.main' }}
+                                sx={{
+                                    padding: 0,
+                                    backgroundColor: 'dialog.main',
+                                    '& .Mui-expanded': {
+                                        margin: '0',
+                                        minHeight: 'auto',
+                                    },
+                                }}
                             >
                                 <AccordionSummary
                                     expandIcon={<ExpandMoreIcon />}
                                     sx={{
                                         padding: '0px',
                                         fontSize: '18px',
-                                        fontWeight: 500,
+                                        fontWeight: 600,
                                         color: 'text.darkgray',
+                                        '& .MuiAccordionSummary-content': {
+                                            margin: '0',
+                                        },
                                     }}
                                 >
                                     {themeMode === 'light' ? (
@@ -158,7 +219,7 @@ const BasicInfo = ({ formik, poiData, tabSelected, isEditable }) => {
                                             display: 'flex',
                                             flexDirection: 'column',
                                             gap: '6px',
-                                            mb: 1,
+                                            mb: '8px',
                                         }}
                                     >
                                         <Box
@@ -169,21 +230,49 @@ const BasicInfo = ({ formik, poiData, tabSelected, isEditable }) => {
                                             }}
                                         >
                                             <Box>
-                                                <Typography sx={{ color: 'text.main' }}>
+                                                <Typography sx={{ color: 'text.main', ml: '24px' }}>
                                                     {poiData.position.center.lat}
                                                 </Typography>
                                             </Box>
                                             {isEditable && (
-                                                <Button
-                                                    sx={{ ml: 'auto' }}
-                                                    variant={'contained'}
-                                                    disabled={!!formik.errors.position?.center?.lat}
+                                                <IconButton
+                                                    sx={{ ml: 'auto', p: '0' }}
                                                     onClick={() => handleClickInputButton('lat')}
                                                 >
-                                                    {isDisabledInputs['lat']
-                                                        ? t('edit', 'common')
-                                                        : t('save', 'common')}
-                                                </Button>
+                                                    {isDisabledInputs['lat'] ? (
+                                                        <Icon sx={style.edit}>
+                                                            {themeMode === 'light' ? (
+                                                                <img
+                                                                    src={EditIcon}
+                                                                    width={14}
+                                                                    height={14}
+                                                                />
+                                                            ) : (
+                                                                <img
+                                                                    src={EditIconDark}
+                                                                    width={14}
+                                                                    height={14}
+                                                                />
+                                                            )}
+                                                        </Icon>
+                                                    ) : (
+                                                        <Icon sx={style.save}>
+                                                            {themeMode === 'light' ? (
+                                                                <img
+                                                                    src={SaveIcon}
+                                                                    width={14}
+                                                                    height={14}
+                                                                />
+                                                            ) : (
+                                                                <img
+                                                                    src={SaveIconDark}
+                                                                    width={14}
+                                                                    height={14}
+                                                                />
+                                                            )}
+                                                        </Icon>
+                                                    )}
+                                                </IconButton>
                                             )}
                                         </Box>
                                         {isShowInputs['lat'] && (
@@ -202,6 +291,7 @@ const BasicInfo = ({ formik, poiData, tabSelected, isEditable }) => {
                                             display: 'flex',
                                             flexDirection: 'column',
                                             gap: '6px',
+                                            mb: '12px',
                                         }}
                                     >
                                         <Box
@@ -212,21 +302,54 @@ const BasicInfo = ({ formik, poiData, tabSelected, isEditable }) => {
                                             }}
                                         >
                                             <Box>
-                                                <Typography sx={{ color: 'text.main' }}>
+                                                <Typography
+                                                    sx={{
+                                                        color: 'text.main',
+                                                        ml: '24px',
+                                                    }}
+                                                >
                                                     {poiData.position.center.lon}
                                                 </Typography>
                                             </Box>
                                             {isEditable && (
-                                                <Button
-                                                    variant={'contained'}
-                                                    sx={{ ml: 'auto' }}
-                                                    disabled={!!formik.errors.position?.center?.lon}
+                                                <IconButton
+                                                    sx={{ ml: 'auto', p: '0' }}
                                                     onClick={() => handleClickInputButton('lon')}
                                                 >
-                                                    {isDisabledInputs['lon']
-                                                        ? t('edit', 'common')
-                                                        : t('save', 'common')}
-                                                </Button>
+                                                    {isDisabledInputs['lon'] ? (
+                                                        <Icon sx={style.edit}>
+                                                            {themeMode === 'light' ? (
+                                                                <img
+                                                                    src={EditIcon}
+                                                                    width={14}
+                                                                    height={14}
+                                                                />
+                                                            ) : (
+                                                                <img
+                                                                    src={EditIconDark}
+                                                                    width={14}
+                                                                    height={14}
+                                                                />
+                                                            )}
+                                                        </Icon>
+                                                    ) : (
+                                                        <Icon sx={style.save}>
+                                                            {themeMode === 'light' ? (
+                                                                <img
+                                                                    src={SaveIcon}
+                                                                    width={14}
+                                                                    height={14}
+                                                                />
+                                                            ) : (
+                                                                <img
+                                                                    src={SaveIconDark}
+                                                                    width={14}
+                                                                    height={14}
+                                                                />
+                                                            )}
+                                                        </Icon>
+                                                    )}
+                                                </IconButton>
                                             )}
                                         </Box>
                                         {isShowInputs['lon'] && (
@@ -247,15 +370,25 @@ const BasicInfo = ({ formik, poiData, tabSelected, isEditable }) => {
                         <Box>
                             <Accordion
                                 elevation={0}
-                                sx={{ padding: 0, backgroundColor: 'dialog.main' }}
+                                sx={{
+                                    padding: 0,
+                                    backgroundColor: 'dialog.main',
+                                    '& .Mui-expanded': {
+                                        margin: '0',
+                                        minHeight: 'auto',
+                                    },
+                                }}
                             >
                                 <AccordionSummary
                                     expandIcon={<ExpandMoreIcon />}
                                     sx={{
                                         padding: '0px',
                                         fontSize: '18px',
-                                        fontWeight: 500,
+                                        fontWeight: 600,
                                         color: 'text.darkgray',
+                                        '& .MuiAccordionSummary-content': {
+                                            margin: '0',
+                                        },
                                     }}
                                 >
                                     {themeMode === 'light' ? (
@@ -277,7 +410,7 @@ const BasicInfo = ({ formik, poiData, tabSelected, isEditable }) => {
                                             display: 'flex',
                                             flexDirection: 'column',
                                             gap: '6px',
-                                            mb: 1,
+                                            mb: '8px',
                                         }}
                                     >
                                         <Box
@@ -288,23 +421,51 @@ const BasicInfo = ({ formik, poiData, tabSelected, isEditable }) => {
                                             }}
                                         >
                                             <Box>
-                                                <Typography sx={{ color: 'text.main' }}>
+                                                <Typography sx={{ color: 'text.main', ml: '24px' }}>
                                                     {poiData.position.guide.lat}
                                                 </Typography>
                                             </Box>
                                             {isEditable && (
-                                                <Button
-                                                    sx={{ ml: 'auto' }}
-                                                    variant={'contained'}
-                                                    disabled={!!formik.errors.position?.guide?.lat}
+                                                <IconButton
+                                                    sx={{ ml: 'auto', p: '0' }}
                                                     onClick={() =>
                                                         handleClickInputButton('guideLat')
                                                     }
                                                 >
-                                                    {isDisabledInputs['guideLat']
-                                                        ? t('edit', 'common')
-                                                        : t('save', 'common')}
-                                                </Button>
+                                                    {isDisabledInputs['guideLat'] ? (
+                                                        <Icon sx={style.edit}>
+                                                            {themeMode === 'light' ? (
+                                                                <img
+                                                                    src={EditIcon}
+                                                                    width={14}
+                                                                    height={14}
+                                                                />
+                                                            ) : (
+                                                                <img
+                                                                    src={EditIconDark}
+                                                                    width={14}
+                                                                    height={14}
+                                                                />
+                                                            )}
+                                                        </Icon>
+                                                    ) : (
+                                                        <Icon sx={style.save}>
+                                                            {themeMode === 'light' ? (
+                                                                <img
+                                                                    src={SaveIcon}
+                                                                    width={14}
+                                                                    height={14}
+                                                                />
+                                                            ) : (
+                                                                <img
+                                                                    src={SaveIconDark}
+                                                                    width={14}
+                                                                    height={14}
+                                                                />
+                                                            )}
+                                                        </Icon>
+                                                    )}
+                                                </IconButton>
                                             )}
                                         </Box>
                                         {isShowInputs['guideLat'] && (
@@ -323,6 +484,7 @@ const BasicInfo = ({ formik, poiData, tabSelected, isEditable }) => {
                                             display: 'flex',
                                             flexDirection: 'column',
                                             gap: '6px',
+                                            mb: '12px',
                                         }}
                                     >
                                         <Box
@@ -333,23 +495,51 @@ const BasicInfo = ({ formik, poiData, tabSelected, isEditable }) => {
                                             }}
                                         >
                                             <Box>
-                                                <Typography sx={{ color: 'text.main' }}>
+                                                <Typography sx={{ color: 'text.main', ml: '24px' }}>
                                                     {poiData.position.guide.lon}
                                                 </Typography>
                                             </Box>
                                             {isEditable && (
-                                                <Button
-                                                    variant={'contained'}
-                                                    sx={{ ml: 'auto' }}
-                                                    disabled={!!formik.errors.position?.guide?.lon}
+                                                <IconButton
+                                                    sx={{ ml: 'auto', p: '0' }}
                                                     onClick={() =>
                                                         handleClickInputButton('guideLon')
                                                     }
                                                 >
-                                                    {isDisabledInputs['guideLon']
-                                                        ? t('edit', 'common')
-                                                        : t('save', 'common')}
-                                                </Button>
+                                                    {isDisabledInputs['guideLon'] ? (
+                                                        <Icon sx={style.edit}>
+                                                            {themeMode === 'light' ? (
+                                                                <img
+                                                                    src={EditIcon}
+                                                                    width={14}
+                                                                    height={14}
+                                                                />
+                                                            ) : (
+                                                                <img
+                                                                    src={EditIconDark}
+                                                                    width={14}
+                                                                    height={14}
+                                                                />
+                                                            )}
+                                                        </Icon>
+                                                    ) : (
+                                                        <Icon sx={style.save}>
+                                                            {themeMode === 'light' ? (
+                                                                <img
+                                                                    src={SaveIcon}
+                                                                    width={14}
+                                                                    height={14}
+                                                                />
+                                                            ) : (
+                                                                <img
+                                                                    src={SaveIconDark}
+                                                                    width={14}
+                                                                    height={14}
+                                                                />
+                                                            )}
+                                                        </Icon>
+                                                    )}
+                                                </IconButton>
                                             )}
                                         </Box>
                                         {isShowInputs['guideLon'] && (

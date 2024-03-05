@@ -70,11 +70,12 @@ const VerifyEmailForm = ({ formik }) => {
                     size="small"
                     type="text"
                     placeholder={t('placeholder.email', 'auth')}
+                    disabled={isButtonDisabled}
                     sx={{ backgroundColor: 'form.main', borderRadius: '4px' }}
                     InputProps={{
                         endAdornment: (
                             <InputAdornment position="end">
-                                {formik.values.email && (
+                                {formik.values.email && !isButtonDisabled && (
                                     <IconButton
                                         edge="end"
                                         onClick={() => formik.setFieldValue('email', '')}

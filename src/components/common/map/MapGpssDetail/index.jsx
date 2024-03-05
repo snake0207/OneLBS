@@ -131,74 +131,85 @@ const MapGpssDetail = ({ selectedPoi, setSelectedPoi, poiData }) => {
                         />
                         {/* EV Charging */}
                         {!!parsedData.evChargingInfo && (
-                            <EvChargingInfo
-                                data={parsedData.evChargingInfo}
-                                isEditable={isEditable}
-                                formik={formik}
-                            />
+                            <Box>
+                                <EvChargingInfo
+                                    data={parsedData.evChargingInfo}
+                                    isEditable={isEditable}
+                                    formik={formik}
+                                />
+                                <Divider
+                                    sx={{
+                                        borderBottom: '1px solid',
+                                        borderBottomColor: 'border.lightgray',
+                                    }}
+                                />
+                            </Box>
                         )}
-                        <Divider
-                            sx={{
-                                borderBottom: '1px solid',
-                                borderBottomColor: 'border.lightgray',
-                            }}
-                        />
                         {/* parking */}
                         {!!parsedData.parkingInfo && (
-                            <ParkingInfo
-                                data={parsedData.parkingInfo}
-                                isEditable={isEditable}
-                                formik={formik}
-                            />
+                            <Box>
+                                <ParkingInfo
+                                    data={parsedData.parkingInfo}
+                                    isEditable={isEditable}
+                                    formik={formik}
+                                />
+                                <Divider
+                                    sx={{
+                                        borderBottom: '1px solid',
+                                        borderBottomColor: 'border.lightgray',
+                                    }}
+                                />
+                            </Box>
                         )}
-                        <Divider
-                            sx={{
-                                borderBottom: '1px solid',
-                                borderBottomColor: 'border.lightgray',
-                            }}
-                        />
                         {/* fuel */}
                         {!!parsedData.fuelInfo && (
-                            <FuelInfo
-                                data={parsedData.fuelInfo}
-                                isEditable={isEditable}
-                                formik={formik}
-                            />
+                            <Box>
+                                <FuelInfo
+                                    data={parsedData.fuelInfo}
+                                    isEditable={isEditable}
+                                    formik={formik}
+                                />
+                                <Divider
+                                    sx={{
+                                        borderBottom: '1px solid',
+                                        borderBottomColor: 'border.lightgray',
+                                    }}
+                                />
+                            </Box>
                         )}
-                        <Divider
-                            sx={{
-                                borderBottom: '1px solid',
-                                borderBottomColor: 'border.lightgray',
-                            }}
-                        />
                         {/* h2Charging */}
                         {!!parsedData.h2ChargingInfo && (
-                            <H2ChargingInfo
-                                data={parsedData.h2ChargingInfo}
-                                isEditable={isEditable}
-                                formik={formik}
-                            />
+                            <Box>
+                                <H2ChargingInfo
+                                    data={parsedData.h2ChargingInfo}
+                                    isEditable={isEditable}
+                                    formik={formik}
+                                />
+                                <Divider
+                                    sx={{
+                                        borderBottom: '1px solid',
+                                        borderBottomColor: 'border.lightgray',
+                                    }}
+                                />
+                            </Box>
                         )}
-                        <Divider
-                            sx={{
-                                borderBottom: '1px solid',
-                                borderBottomColor: 'border.lightgray',
-                            }}
-                        />
+
                         {/* dealerPoi */}
                         {!!parsedData.dealerPoiInfo && (
-                            <DealerPoiInfo
-                                data={parsedData.dealerPoiInfo}
-                                isEditable={isEditable}
-                                formik={formik}
-                            />
+                            <Box>
+                                <DealerPoiInfo
+                                    data={parsedData.dealerPoiInfo}
+                                    isEditable={isEditable}
+                                    formik={formik}
+                                />
+                                <Divider
+                                    sx={{
+                                        borderBottom: '1px solid',
+                                        borderBottomColor: 'border.lightgray',
+                                    }}
+                                />
+                            </Box>
                         )}
-                        <Divider
-                            sx={{
-                                borderBottom: '1px solid',
-                                borderBottomColor: 'border.lightgray',
-                            }}
-                        />
                         <Box>
                             <Box>
                                 <Typography

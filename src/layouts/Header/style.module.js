@@ -7,6 +7,7 @@ const style = {
         backgroundImage: 'none',
         '& .MuiContainer-root': {
             maxWidth: '100%',
+            pl: '10px',
         },
         '& .MuiToolbar-root': {
             minHeight: '50px',

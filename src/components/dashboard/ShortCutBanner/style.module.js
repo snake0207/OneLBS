@@ -28,6 +28,8 @@ const style = {
         fontSize: 14,
         fontWeight: 400,
         mt: '4px',
+        zIndex: '2',
+        position: 'relative',
     },
     more: {
         mt: 2,
@@ -38,6 +40,8 @@ const style = {
         gap: 1,
         fontSize: 14,
         color: 'text.gray',
+        position: 'relative',
+        zIndex: '1',
     },
 }
 

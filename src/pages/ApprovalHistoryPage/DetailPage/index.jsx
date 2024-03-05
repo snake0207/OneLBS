@@ -2,7 +2,7 @@ import { useParams } from 'react-router-dom'
 import Typography from '@mui/material/Typography'
 import t from '#/common/libs/trans.js'
 import TitleBar from '#/components/common/menu/TitleBar/index.jsx'
-import { Box, Stack, TextField } from '@mui/material'
+import { Box, Card, Stack, TextField, Icon } from '@mui/material'
 import ApprovalLine from '#/components/approval/Detail/ApprovalLine/index.jsx'
 import HistoryTable from '#/components/approval/Detail/HistoryTable/index.jsx'
 import { useCallback, useMemo } from 'react'
@@ -21,7 +21,12 @@ import DealerPoiInfo from '#/components/approval/Detail/CategoryInfo/DealerPoiIn
 import H2ChargingInfo from '#/components/approval/Detail/CategoryInfo/H2ChargingInfo/index.jsx'
 import ParkingInfo from '#/components/approval/Detail/CategoryInfo/ParkingInfo/index.jsx'
 import GoogleMapComponent from '#/components/common/map/googleMap/index.jsx'
-import { isBrowser } from 'react-device-detect'
+import { MobileView, isBrowser } from 'react-device-detect'
+
+import PoiSearchIcon from '#/assets/poiSearchIcon.svg'
+import PoiSearchIconDark from '#/assets/poiSearchIconDark.svg'
+import useLayoutStore from '#/store/useLayoutStore'
+import Divider from '@mui/material/Divider'
 
 const markerSampleData = [
     {
@@ -133,22 +138,56 @@ const ApprovalHistoryDetailPage = () => {
             openAlertPopup(action),
         )
     }
+    const { themeMode } = useLayoutStore()
 
     return (
         <>
+            <MobileView>
+                <Icon
+                    style={{
+                        display: 'flex',
+                        position: 'absolute',
+                        top: ' 75px',
+                        zIndex: '4',
+                    }}
+                >
+                    {themeMode === 'light' ? (
+                        <img src={PoiSearchIcon} style={{ display: 'flex', width: '24px' }} />
+                    ) : (
+                        <img src={PoiSearchIconDark} style={{ display: 'flex', width: '24px' }} />
+                    )}
+                </Icon>
+            </MobileView>
             <TitleBar title={t('detail', 'approval')} />
-            <Box sx={{ position: 'relative', height: 'calc(100vh - 120px)' }}>
+            <Box
+                sx={{
+                    position: 'relative',
+                    height: 'calc(100vh - 120px)',
+                    '@media (max-width:1024px)': {
+                        height: '100%',
+                    },
+                }}
+            >
                 <Stack
                     sx={{
                         p: 2,
                         m: 2,
-                        gap: 4,
                         position: 'absolute',
                         backgroundColor: 'dialog.main',
                         opacity: '95%',
                         overflowY: 'auto',
-                        height: 'calc(100% - 1rem)',
-                        zIndex: 100,
+                        height: '98%',
+                        zIndex: 2,
+                        borderRadius: '8px',
+                        boxShadow: '0 4px 4px rgb(0 0 0 / 25%)',
+                        '@media (max-width:1024px)': {
+                            position: 'relative',
+                            borderRadius: '0',
+                            boxShadow: 'none',
+                            m: '0',
+                            p: '0',
+                            height: '100%',
+                        },
                     }}
                 >
                     {/* 결제라인 */}
@@ -162,8 +201,6 @@ const ApprovalHistoryDetailPage = () => {
                         formik={formik}
                         isEditable={isEditable}
                     />
-                    {/* 카테고리 */}
-                    <Headline title={t('category', 'approval')} />
                     {parsedData.category === 'evCharging' && (
                         <EvChargingInfo
                             data={parsedData.evChargingInfo}
@@ -171,6 +208,9 @@ const ApprovalHistoryDetailPage = () => {
                             formik={formik}
                         />
                     )}
+                    <Divider
+                        sx={{ borderBottom: '1px solid', borderBottomColor: 'border.lightgray' }}
+                    />
                     {parsedData.category === 'fuel' && (
                         <FuelInfo
                             data={parsedData.fuelInfo}
@@ -200,7 +240,7 @@ const ApprovalHistoryDetailPage = () => {
                         />
                     )}
                     {/* 승인 요청 이유*/}
-                    <Box>
+                    <Box sx={{ mt: '24px' }}>
                         <Headline title={t('request_reason', 'approval')} />
                         <Box>
                             {userType === 'requester' && isEditable ? (

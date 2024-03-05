@@ -1,10 +1,13 @@
 import { Accordion, AccordionDetails, AccordionSummary, Box, Stack } from '@mui/material'
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore.js'
 import Typography from '@mui/material/Typography'
-import EvStationIcon from '#/assets/evStationIcon.svg'
 import EditableTextColumn from '#/components/approval/Detail/CategoryInfo/EditableTextColumn/index.jsx'
 import { useRef } from 'react'
 import EditableSelectColumn from '#/components/approval/Detail/CategoryInfo/EditableSelectColumn/index.jsx'
+import ParkingIcon from '#/assets/parkingIcon.svg'
+import ParkingIconDark from '#/assets/parkingIconDark.svg'
+import useLayoutStore from '#/store/useLayoutStore'
+import style from './style.module'
 
 const ParkingInfo = ({ data, isEditable, formik }) => {
     const selectTypeItems = useRef([
@@ -17,17 +20,28 @@ const ParkingInfo = ({ data, isEditable, formik }) => {
         { key: 6, value: '6', label: 'MECHANICAL' },
     ])
 
+    const { themeMode } = useLayoutStore()
+
     return (
-        <Accordion>
-            <AccordionSummary
-                expandIcon={<ExpandMoreIcon />}
-                sx={{ fontSize: '18px', fontWeight: 500, color: '#05141F', mb: '4px' }}
-            >
-                <Typography sx={{ fontSize: '18px', fontWeight: 500, color: '#05141F', mb: '4px' }}>
-                    <img
-                        src={EvStationIcon}
-                        style={{ verticalAlign: 'middle', paddingRight: '4px' }}
-                    />
+        <Accordion sx={style.accordionBox}>
+            <AccordionSummary expandIcon={<ExpandMoreIcon />} sx={style.summaryBox}>
+                <Typography
+                    sx={{
+                        display: 'flex',
+                        fontSize: '18px',
+                        fontWeight: 500,
+                        color: 'text.darkgray',
+                        mb: '4px',
+                    }}
+                >
+                    {themeMode === 'light' ? (
+                        <img src={ParkingIcon} style={{ marginRight: '4px', marginTop: '4px' }} />
+                    ) : (
+                        <img
+                            src={ParkingIconDark}
+                            style={{ marginRight: '4px', marginTop: '4px' }}
+                        />
+                    )}
                     parking
                 </Typography>
             </AccordionSummary>
@@ -46,27 +60,22 @@ const ParkingInfo = ({ data, isEditable, formik }) => {
                     isEditable={isEditable}
                     formik={formik}
                 />
-                <Accordion>
-                    <AccordionSummary
-                        expandIcon={<ExpandMoreIcon />}
-                        sx={{ fontSize: '18px', fontWeight: 500, color: '#05141F', mb: '4px' }}
-                    >
+                <Accordion sx={style.accordionDepsBox}>
+                    <AccordionSummary expandIcon={<ExpandMoreIcon />}>
                         <Typography
                             sx={{
                                 fontSize: '18px',
-                                fontWeight: 500,
-                                color: '#05141F',
-                                mb: '4px',
+                                fontWeight: 600,
+                                color: 'text.darkgray',
                             }}
                         >
                             <img
-                                // src={EvStationIcon}
-                                style={{ verticalAlign: 'middle', paddingRight: '4px' }}
+                            // src={EvStationIcon}
                             />
                             영업 요일
                         </Typography>
                     </AccordionSummary>
-                    <AccordionDetails>
+                    <AccordionDetails sx={style.detailsBox}>
                         {data.openingHours.map((openingHour, index) => (
                             <Box key={index}>
                                 <Typography component={'span'}>{openingHour.weekday}</Typography>
@@ -79,16 +88,13 @@ const ParkingInfo = ({ data, isEditable, formik }) => {
                         ))}
                     </AccordionDetails>
                 </Accordion>
-                <Accordion>
-                    <AccordionSummary
-                        expandIcon={<ExpandMoreIcon />}
-                        sx={{ fontSize: '18px', fontWeight: 500, color: '#05141F', mb: '4px' }}
-                    >
+                <Accordion sx={style.accordionBox}>
+                    <AccordionSummary expandIcon={<ExpandMoreIcon />}>
                         <Typography
                             sx={{
                                 fontSize: '18px',
                                 fontWeight: 500,
-                                color: '#05141F',
+                                color: 'text.darkgray',
                                 mb: '4px',
                             }}
                         >
@@ -99,7 +105,7 @@ const ParkingInfo = ({ data, isEditable, formik }) => {
                             가격
                         </Typography>
                     </AccordionSummary>
-                    <AccordionDetails>
+                    <AccordionDetails sx={style.detailsBox}>
                         {data.priceList.map(({ price, priceNote, priceUnit, currency }, index) => (
                             <Stack key={index} direction={'row'}>
                                 <Typography>

@@ -80,9 +80,9 @@ const style = {
         height: 36,
         fontSize: 14,
         fontWeight: 400,
-        backgroundColor: 'primary.dark',
+        backgroundColor: 'button.main',
         '&:hover': {
-            backgroundColor: 'primary.dark',
+            bbackgroundColor: 'button.main',
         },
     },
 }

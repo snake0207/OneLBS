@@ -37,10 +37,10 @@ const style = {
             backgroundColor: '#0A5CBA',
         },
     },
-    blueButton: {
+    darkBlueButton: {
         whiteSpace: 'nowrap',
         backgroundColor: 'button.light',
-        borderRadius: '30px',
+        borderRadius: '4px',
         flex: 1,
         boxShadow: 'none',
         '&:hover': {
@@ -53,7 +53,7 @@ const style = {
         ml: '2px',
         backgroundColor: 'button.lightblue',
         border: '1px solid #5b8cc5',
-        borderRadius: '30px',
+        borderRadius: '4px',
         flex: 1,
         boxShadow: 'none',
         '&:hover': {
@@ -61,11 +61,11 @@ const style = {
         },
     },
     lineButton: {
-        borderRadius: '30px',
+        borderRadius: '4px',
         color: '#002C5F',
         ml: '2px',
         flex: 1,
-        border: '1px solid #5b8cc5',
+        border: '1px solid #002C5F',
         backgroundColor: 'button.white',
         boxShadow: 'none',
         '&:hover': {

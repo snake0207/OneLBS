@@ -104,13 +104,11 @@ function Row({
                                 display: 'flex',
                                 width: 20,
                                 height: 20,
-                                mr: 0.5,
                                 alignItems: 'center',
                             }}
                         >
                             <img src={ResetIcon} />
                         </Icon>
-                        {t('reset_password', 'users')}
                     </Button>
                     <Button onClick={handleWithdraw} sx={style.lineButton}>
                         {t('withdraw', 'users')}

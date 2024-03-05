@@ -153,6 +153,23 @@ function UserDetail({
                 <Button
                     variant="contained"
                     color="primary"
+                    onClick={onResetPassword}
+                    sx={style.resetButton}
+                >
+                    <Icon
+                        sx={{
+                            display: 'flex',
+                            width: 20,
+                            height: 20,
+                            alignItems: 'center',
+                        }}
+                    >
+                        <img src={ResetIcon} />
+                    </Icon>
+                </Button>
+                <Button
+                    variant="contained"
+                    color="primary"
                     onClick={() => handleStatusChange(1)}
                     sx={style.darkLarge}
                 >
@@ -165,25 +182,6 @@ function UserDetail({
                     sx={style.bluelineButton}
                 >
                     {t('resume', 'users')}
-                </Button>
-                <Button
-                    variant="contained"
-                    color="primary"
-                    onClick={onResetPassword}
-                    sx={style.resetButton}
-                >
-                    <Icon
-                        sx={{
-                            display: 'flex',
-                            width: 20,
-                            height: 20,
-                            mr: 0.5,
-                            alignItems: 'center',
-                        }}
-                    >
-                        <img src={ResetIcon} />
-                    </Icon>
-                    {t('reset_password', 'users')}
                 </Button>
                 <Button
                     variant="contained"

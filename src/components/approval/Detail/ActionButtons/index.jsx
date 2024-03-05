@@ -1,5 +1,6 @@
 import { Button } from '@mui/material'
 import t from '#/common/libs/trans.js'
+import style from './style.module'
 
 const ActionButtons = ({ type, status, clickAction, id }) => {
     switch (type) {
@@ -34,7 +35,8 @@ const ActionButtons = ({ type, status, clickAction, id }) => {
                     <Button
                         variant="contained"
                         onClick={() => clickAction('reject', id)}
-                        sx={{ mr: '4px' }}
+                        sx={style.darkBlueButton}
+                        /* 버튼 클래스명 : darkBlueButton, lightButton, lineButton, blueButton */
                     >
                         {t(`actions.reject`, 'approval')}
                     </Button>

@@ -147,6 +147,7 @@ const gpssDetailResponseDataMapper = (res) => {
  * gpss 리스트데이터 매퍼
  */
 const gpssListResponseDataMapper = (res) => {
+    if (!!res?.data?.result === false) return null
     const dataArr = res.data.result
     return dataArr.map((data) => ({
         poiId: data.poiId,

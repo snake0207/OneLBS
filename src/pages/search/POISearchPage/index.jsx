@@ -11,6 +11,7 @@ import poiListData from '#/mock/data/poiListData.json'
 import TuneIcon from '@mui/icons-material/Tune'
 import MapPoiDetail from '#/components/common/map/MapPoiDetail/index.jsx'
 import poiDetailData from '#/mock/data/poiDetailData.json'
+import SwipeMapSearchList from '#/components/common/map/searchList/SwipeMapSearchList/index.jsx'
 
 const markerSampleData = [
     {
@@ -88,16 +89,14 @@ function POISearchPage() {
                             >
                                 {/* 지도 검색 */}
                                 <MapSearch />
-                                {/* 검색 결과 */}
-                                <Box sx={{ mt: 17 }}>
-                                    <MapSearchList
-                                        searchResultArr={poiListData}
-                                        selectedPoi={selectedPoi}
-                                        setSelectedPoi={handlePOISelected}
-                                    />
-                                </Box>
                             </Box>
                         )}
+                        {/* 검색 결과 */}
+                        <SwipeMapSearchList
+                            searchResultArr={poiListData}
+                            selectedPoi={selectedPoi}
+                            setSelectedPoi={handlePOISelected}
+                        />
                     </MobileView>
                 </Box>
                 <GoogleMapComponent

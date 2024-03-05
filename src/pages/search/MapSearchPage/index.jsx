@@ -107,6 +107,7 @@ function MapSearchPage() {
                         )}
                         {/* 검색 결과 */}
                         <SwipeMapSearchList
+                            isGpssSearch={true}
                             searchResultArr={poiListData}
                             selectedPoi={selectedPoi}
                             setSelectedPoi={handlePOISelected}

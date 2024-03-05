@@ -51,6 +51,7 @@ const style = {
         position: 'relative',
         minHeight: '36px',
         marginRight: '0px',
+        mb: '20px',
         mt: '24px',
         '& .MuiTabs-indicator': {
             backgroundColor: 'transparent',

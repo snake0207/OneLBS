@@ -9,8 +9,8 @@ const style = {
         color: 'text.darkgray',
     },
     hr: {
-        marginY: '5px',
-        mb: '12px',
+        marginY: '0px',
+        mb: '0px',
         borderBottom: '1px solid',
         borderBottomColor: 'border.lightgray',
     },
@@ -26,6 +26,32 @@ const style = {
         boxShadow: 'none',
         '&:hover': {
             backgroundColor: 'button.lightblue',
+            boxShadow: 'none',
+        },
+    },
+    edit: {
+        display: 'flex',
+        width: '30px',
+        height: '30px',
+        backgroundColor: 'color.edit',
+        borderRadius: '50px',
+        alignItems: 'center',
+        justifyContent: 'center',
+        '&:hover': {
+            backgroundColor: 'button.lightblue',
+            boxShadow: 'none',
+        },
+    },
+    save: {
+        display: 'flex',
+        width: '30px',
+        height: '30px',
+        backgroundColor: 'button.main',
+        borderRadius: '50px',
+        alignItems: 'center',
+        justifyContent: 'center',
+        '&:hover': {
+            backgroundColor: 'button.main',
             boxShadow: 'none',
         },
     },

@@ -12,7 +12,7 @@ import CloseIcon from '@mui/icons-material/Close'
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
 import t from '#/common/libs/trans.js'
 import { useEffect, useState } from 'react'
-import PointBlueIcon from '#/assets/pointBlueIcon.svg'
+import PointBlueEVIcon from '#/assets/pointBlueEVIcon.svg'
 import LanguageIcon from '#/assets/languagesIcon.svg'
 import LanguageIconDark from '#/assets/languagesIconDark.svg'
 import GpsIcon from '#/assets/gpsIcon.svg'
@@ -48,8 +48,9 @@ const MapPoiDetail = ({ selectedPoi, setSelectedPoi, poiData }) => {
                     <Box>
                         <Typography variant={'h6'} sx={{ fontSize: '20px', fontWeight: 600 }}>
                             <img
-                                src={PointBlueIcon}
+                                src={PointBlueEVIcon}
                                 style={{ verticalAlign: 'middle', paddingRight: '4px' }}
+                                width={18}
                             />
                             Times Square
                         </Typography>

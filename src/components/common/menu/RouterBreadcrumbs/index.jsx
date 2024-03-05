@@ -3,6 +3,7 @@ import { useLocation } from 'react-router-dom'
 import Breadcrumbs from '@mui/material/Breadcrumbs'
 import Typography from '@mui/material/Typography'
 import LinkRouter from '../LinkRouter'
+import NavigateNextIcon from '@mui/icons-material/NavigateNext'
 
 import t from '#/common/libs/trans'
 
@@ -47,7 +48,17 @@ function RouterBreadcrumbs() {
     const pathnames = location.pathname.split('/').filter((x) => x)
 
     return (
-        <Breadcrumbs aria-label="breadcrumb">
+        <Breadcrumbs
+            aria-label="breadcrumb"
+            sx={{
+                position: 'fixed',
+                right: '16px',
+                top: '60px',
+                color: 'text.gray',
+                fontSize: '13px',
+            }}
+            separator={<NavigateNextIcon fontSize="small" />}
+        >
             <LinkRouter
                 underline="hover"
                 color="inherit"

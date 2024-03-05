@@ -16,7 +16,7 @@ const HistoryTable = ({ historyList }) => {
                 {t('case', 'approval')}
             </Typography>
             <Table size={'small'} sx={style.tableBox}>
-                <TableHead sx={{ backgroundColor: theme.palette.grey[100] }}>
+                <TableHead>
                     <TableRow>
                         <TableCell align={'center'}>{t('date', 'approval')}</TableCell>
                         <TableCell align={'center'}>{t('state', 'approval')}</TableCell>

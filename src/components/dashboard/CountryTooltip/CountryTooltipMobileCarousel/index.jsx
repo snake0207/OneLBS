@@ -15,7 +15,7 @@ const CountryTooltipMobileCarousel = ({ categoryCountList }) => {
 
     return (
         <Box ref={emblaRef} sx={style.europeBox}>
-            <Box sx={{ display: 'flex', gap: '14px' }}>
+            <Box sx={style.categoryBox}>
                 {categoryCountList.map((item) => (
                     <Box key={item.category} sx={{ width: 85 }}>
                         <CategoryCount

@@ -27,6 +27,7 @@ import { MobileView, isBrowser } from 'react-device-detect'
 import PoiSearchIcon from '#/assets/poiSearchIcon.svg'
 import PoiSearchIconDark from '#/assets/poiSearchIconDark.svg'
 import useLayoutStore from '#/store/useLayoutStore'
+import Divider from '@mui/material/Divider'
 
 const markerSampleData = [
     {
@@ -202,8 +203,6 @@ const ApprovalHistoryDetailPage = () => {
                         formik={formik}
                         isEditable={isEditable}
                     />
-                    {/* 카테고리 */}
-                    <Headline title={t('category', 'approval')} />
                     {parsedData.category === 'evCharging' && (
                         <EvChargingInfo
                             data={parsedData.evChargingInfo}
@@ -211,6 +210,9 @@ const ApprovalHistoryDetailPage = () => {
                             formik={formik}
                         />
                     )}
+                    <Divider
+                        sx={{ borderBottom: '1px solid', borderBottomColor: 'border.lightgray' }}
+                    />
                     {parsedData.category === 'fuel' && (
                         <FuelInfo
                             data={parsedData.fuelInfo}

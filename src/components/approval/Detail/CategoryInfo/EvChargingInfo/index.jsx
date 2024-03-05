@@ -27,17 +27,21 @@ const EvChargingInfo = ({ data, isEditable, formik }) => {
 
     return (
         <Accordion sx={style.accordionBox}>
-            <AccordionSummary expandIcon={<ExpandMoreIcon />} sx={style.evChargingBox}>
-                <Typography sx={{ fontSize: '18px', fontWeight: 600, color: 'text.darkgray' }}>
+            <AccordionSummary expandIcon={<ExpandMoreIcon />} sx={style.summaryBox}>
+                <Typography
+                    sx={{
+                        display: 'flex',
+                        fontSize: '18px',
+                        fontWeight: 600,
+                        color: 'text.darkgray',
+                    }}
+                >
                     {themeMode === 'light' ? (
-                        <img
-                            src={EvStationIcon}
-                            style={{ verticalAlign: 'middle', marginRight: '4px' }}
-                        />
+                        <img src={EvStationIcon} style={{ marginRight: '4px', marginTop: '4px' }} />
                     ) : (
                         <img
                             src={EvStationIconDark}
-                            style={{ verticalAlign: 'middle', marginRight: '4px' }}
+                            style={{ marginRight: '4px', marginTop: '4px' }}
                         />
                     )}
                     evCharging
@@ -51,10 +55,10 @@ const EvChargingInfo = ({ data, isEditable, formik }) => {
                     formik={formik}
                 />
                 <EditableSelectColumn />
-                <Typography>{data.maxWatt}</Typography>
-                <Typography sx={{ color: '#0057BB', fontSize: '18px', fontWeight: 500 }}>
-                    {data.status}
+                <Typography sx={{ color: 'text.main', fontSize: '18px' }}>
+                    {data.maxWatt}
                 </Typography>
+                <Typography sx={{ color: 'text.main', fontSize: '18px' }}>{data.status}</Typography>
                 <Accordion sx={style.accordionDepsBox}>
                     <AccordionSummary expandIcon={<ExpandMoreIcon />}>
                         <Typography
@@ -65,13 +69,12 @@ const EvChargingInfo = ({ data, isEditable, formik }) => {
                             }}
                         >
                             <img
-                                // src={EvStationIcon}
-                                style={{ verticalAlign: 'middle', paddingRight: '4px' }}
+                            // src={EvStationIcon}
                             />
                             영업 요일
                         </Typography>
                     </AccordionSummary>
-                    <AccordionDetails sx={style.evContentBox}>
+                    <AccordionDetails sx={style.detailsBox}>
                         {data.openingHours.map((openingHour, index) => (
                             <Box key={index}>
                                 <Typography component={'span'}>{openingHour.weekday}</Typography>
@@ -86,26 +89,22 @@ const EvChargingInfo = ({ data, isEditable, formik }) => {
                 </Accordion>
 
                 <Accordion sx={style.accordionBox}>
-                    <AccordionSummary
-                        expandIcon={<ExpandMoreIcon />}
-                        sx={{ fontSize: '18px', fontWeight: 500, color: '#05141F', mb: '4px' }}
-                    >
+                    <AccordionSummary expandIcon={<ExpandMoreIcon />}>
                         <Typography
                             sx={{
                                 fontSize: '18px',
                                 fontWeight: 500,
-                                color: '#05141F',
+                                color: 'text.darkgray',
                                 mb: '4px',
                             }}
                         >
                             <img
-                                // src={EvStationIcon}
-                                style={{ verticalAlign: 'middle', paddingRight: '4px' }}
+                            // src={EvStationIcon}
                             />
                             status
                         </Typography>
                     </AccordionSummary>
-                    <AccordionDetails sx={style.evContentBox}>
+                    <AccordionDetails sx={style.detailsBox}>
                         {data.summary.map((summary, index) => (
                             <Box key={index}>
                                 <Typography>{summary.type}</Typography>
@@ -118,15 +117,12 @@ const EvChargingInfo = ({ data, isEditable, formik }) => {
                 </Accordion>
 
                 <Accordion sx={style.accordionBox}>
-                    <AccordionSummary
-                        expandIcon={<ExpandMoreIcon />}
-                        sx={{ fontSize: '18px', fontWeight: 500, color: '#05141F', mb: '4px' }}
-                    >
+                    <AccordionSummary expandIcon={<ExpandMoreIcon />}>
                         <Typography
                             sx={{
                                 fontSize: '18px',
                                 fontWeight: 500,
-                                color: '#05141F',
+                                color: 'text.darkgray',
                                 mb: '4px',
                             }}
                         >
@@ -137,7 +133,7 @@ const EvChargingInfo = ({ data, isEditable, formik }) => {
                             charger
                         </Typography>
                     </AccordionSummary>
-                    <AccordionDetails sx={style.evContentBox}>
+                    <AccordionDetails sx={style.detailsBox}>
                         {data.chargers.map((charger, index) => (
                             <Grid container key={index} gap={2} direction={'column'}>
                                 <Typography>{charger.id || '-'}</Typography>

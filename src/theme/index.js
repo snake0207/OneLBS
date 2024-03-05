@@ -206,6 +206,7 @@ export const getThemeSettings = (mode) => ({
                       germany: tokens.color[9001],
                       dashboardCnt: tokens.color[300],
                       banner: tokens.color[5001],
+                      edit: tokens.color[101],
                   },
                   button: {
                       ...tokens.button,
@@ -330,6 +331,7 @@ export const getThemeSettings = (mode) => ({
                       germany: tokens.color[901],
                       dashboardCnt: tokens.color[701],
                       banner: tokens.color[10001],
+                      edit: tokens.color[5001],
                   },
                   button: {
                       ...tokens.button,

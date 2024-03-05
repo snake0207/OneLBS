@@ -48,9 +48,16 @@ const MapApprovalSelect = ({
         <Box>
             <Box>
                 <Box>
-                    <Typography>{t('reviewer', 'users')}</Typography>
+                    <Typography
+                        sx={{
+                            fontSize: '18px',
+                            fontWeight: 600,
+                            color: 'text.darkgray',
+                        }}
+                    >
+                        {t('reviewer', 'users')}
+                    </Typography>
                 </Box>
-                <Divider />
                 <Box
                     sx={{
                         display: 'flex',
@@ -65,7 +72,11 @@ const MapApprovalSelect = ({
                         name={'reviewer'}
                         placeholder={t('input_keyword', 'common')}
                     />
-                    <Button variant={'contained'} onClick={handleClickGetReviewer}>
+                    <Button
+                        variant={'contained'}
+                        onClick={handleClickGetReviewer}
+                        sx={{ backgroundColor: 'button.gray' }}
+                    >
                         {t('search', 'common')}
                     </Button>
                 </Box>
@@ -95,9 +106,16 @@ const MapApprovalSelect = ({
             </Box>
             <Box>
                 <Box>
-                    <Typography>{t('approver', 'users')}</Typography>
+                    <Typography
+                        sx={{
+                            fontSize: '18px',
+                            fontWeight: 600,
+                            color: 'text.darkgray',
+                        }}
+                    >
+                        {t('approver', 'users')}
+                    </Typography>
                 </Box>
-                <Divider />
                 <Box
                     sx={{
                         display: 'flex',
@@ -112,7 +130,11 @@ const MapApprovalSelect = ({
                         name={'approver'}
                         placeholder={t('input_keyword', 'common')}
                     />
-                    <Button variant={'contained'} onClick={handleClickGetApprover}>
+                    <Button
+                        variant={'contained'}
+                        onClick={handleClickGetApprover}
+                        sx={{ backgroundColor: 'button.gray' }}
+                    >
                         {t('search', 'common')}
                     </Button>
                 </Box>
@@ -127,7 +149,7 @@ const MapApprovalSelect = ({
                 >
                     {isSearchButtonClick['approver'] && (
                         <>
-                            <Typography sx={{ marginY: '16px' }}>
+                            <Typography sx={{ marginY: '16px', color: 'text.darkgray' }}>
                                 {t('search_no_result', 'common')}
                             </Typography>
                             <UserSearchTable

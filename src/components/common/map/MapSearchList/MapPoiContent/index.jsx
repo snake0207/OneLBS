@@ -3,7 +3,7 @@ import Divider from '@mui/material/Divider'
 import ListItemText from '@mui/material/ListItemText'
 import ListItemButton from '@mui/material/ListItemButton'
 import { useMapActions } from '#/store/useMapStore.js'
-import PointBlueIcon from '#/assets/pointBlueIcon.svg'
+import PointBlueEVIcon from '#/assets/pointBlueEVIcon.svg'
 
 const MapPoiContent = ({ idx, name, address, isLast, selectedPoi, setSelectedPoi }) => {
     const { setHoveredPoi } = useMapActions()
@@ -32,8 +32,9 @@ const MapPoiContent = ({ idx, name, address, isLast, selectedPoi, setSelectedPoi
                                 }}
                             >
                                 <img
-                                    src={PointBlueIcon}
+                                    src={PointBlueEVIcon}
                                     style={{ verticalAlign: 'middle', paddingRight: '4px' }}
+                                    width={18}
                                 />
                                 {name}
                             </Typography>

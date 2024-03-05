@@ -1,7 +1,8 @@
 import { useState } from 'react'
-import { useFormik } from 'formik'
+import { useNavigate } from 'react-router-dom'
 import { BrowserView } from 'react-device-detect'
 import CopyToClipboard from 'react-copy-to-clipboard'
+import { useFormik } from 'formik'
 import { Box, Button, TextField, Typography, Icon } from '@mui/material'
 import { LoadingButton } from '@mui/lab'
 import TextInput from '#/components/common/input/TextInput'
@@ -12,6 +13,7 @@ import OtpGuideModal from '#/components/auth/authForm/CertifiedForm/otpGuideModa
 import { usePostVerifyOtp } from '#/hooks/queries/auth'
 import useOtpStore from '#/store/useOtpStore'
 import { useSetAccessToken } from '#/store/useAuthStore'
+import { useUserActions } from '#/store/useUserStore'
 
 import t from '#/common/libs/trans'
 
@@ -23,6 +25,8 @@ const CertifiedForm = () => {
     const { mutate, isPending } = usePostVerifyOtp()
     const { twoFactorAuth, secretKey, twoFactorSecret, qrCodeUrl } = useOtpStore()
     const setAccessToken = useSetAccessToken()
+    const { setUserStore } = useUserActions()
+    const navigate = useNavigate()
 
     const handleClickOtpGuideClose = () => {
         setIsOtpGuideOpen(false)
@@ -47,6 +51,8 @@ const CertifiedForm = () => {
                         },
                     }) => {
                         setAccessToken(accessToken)
+                        setUserStore(userId, permissions, pwChangeRequired)
+                        navigate('/')
                     },
                 },
             )

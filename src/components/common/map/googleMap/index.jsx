@@ -6,7 +6,7 @@ import CurrentLocation from '#/components/common/map/googleMap/CustomControl/Cur
 import CalculateDistance from '#/components/common/map/googleMap/CustomControl/CalculateDistance/index.jsx'
 import DisplayMarker from '#/components/common/map/googleMap/marker/DisplayMarker/index.jsx'
 import SearchResultMarker from '#/components/common/map/googleMap/marker/SearchResultMarker/index.jsx'
-import { BrowserView } from 'react-device-detect'
+import { BrowserView, isBrowser } from 'react-device-detect'
 import { gpssListResponseDataMapper } from '#/pages/ApprovalHistoryPage/mapper.js'
 
 const mapStyle = {
@@ -104,6 +104,16 @@ const GoogleMapComponent = ({
                 options={{
                     fullscreenControlOptions: {
                         position: window.google.maps.ControlPosition.TOP_RIGHT,
+                    },
+                    streetViewControlOptions: {
+                        position: isBrowser
+                            ? window.google.maps.ControlPosition.RIGHT_BOTTOM
+                            : window.google.maps.ControlPosition.RIGHT_TOP,
+                    },
+                    zoomControlOptions: {
+                        position: isBrowser
+                            ? window.google.maps.ControlPosition.RIGHT_BOTTOM
+                            : window.google.maps.ControlPosition.RIGHT_TOP,
                     },
                     mapTypeControl: false,
                     clickableIcons: false,

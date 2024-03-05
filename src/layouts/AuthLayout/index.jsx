@@ -19,7 +19,6 @@ const AuthLayout = () => {
                         backgroundImage: 'none',
                         boxShadow: 'none',
                         borderBottom: '1px solid !important',
-                        borderBottom: '1px solid',
                         borderColor: 'color.header',
                     },
                 }}

@@ -6,7 +6,6 @@ const style = {
         borderTop: '1px solid',
         th: {
             p: '6px 0px',
-            color: 'white',
             fontSize: 15,
             fontWeight: 500,
             textAlign: 'center',

@@ -44,7 +44,6 @@ const CurrentLocation = () => {
                     height: '40px',
                     color: '#666',
                     margin: '10px',
-                    margin: '10px',
                     cursor: 'pointer',
                     borderRadius: '2px',
                     boxShadow: '#0000004d 0px 1px 4px -1px',

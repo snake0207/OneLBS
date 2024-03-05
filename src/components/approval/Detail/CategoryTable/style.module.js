@@ -4,11 +4,10 @@ const style = {
         borderTop: '1px solid #d1d1d1',
         th: {
             p: '6px 0px',
-            color: 'white',
             fontSize: 15,
             fontWeight: 500,
             textAlign: 'center',
-            color: '#444',
+            color: 'text.main',
             backgroundColor: '#e2e2e2',
             borderBottom: '1px solid #d1d1d1',
         },

@@ -29,6 +29,10 @@ const postVerifyOtp = (data) => {
     return postAPI({ endPoint: API_PATH.auth.verify_otp, data })
 }
 
+const postPasswordReset = (data) => {
+    return postAPI({ endPoint: API_PATH.auth.password_reset, data })
+}
+
 export default {
     postLogin,
     postJoin,
@@ -37,4 +41,5 @@ export default {
     getUserIp,
     postRenewToken,
     postVerifyOtp,
+    postPasswordReset,
 }

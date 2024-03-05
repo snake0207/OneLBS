@@ -1,5 +1,5 @@
 import { Box, Typography } from '@mui/material'
-import MapPoiContent from '#/components/common/map/MapSearchList/MapPoiContent/index.jsx'
+import MapPoiContent from '#/components/common/map/searchList/MapSearchList/MapPoiContent/index.jsx'
 import List from '@mui/material/List'
 import { useEffect, useRef, useState } from 'react'
 import t from '#/common/libs/trans.js'
@@ -27,7 +27,7 @@ const MapSearchList = ({
     const parsedList = gpssListResponseDataMapper(searchResultArr)
     // 검색 결과가 없을 때 처리
     useEffect(() => {
-        if (parsedList && parsedList.length === 0) setIsResultNon(true)
+        if (!parsedList || parsedList.length === 0) setIsResultNon(true)
         else setIsResultNon(false)
     }, [searchResultArr])
 

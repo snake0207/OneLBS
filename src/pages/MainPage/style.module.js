@@ -23,11 +23,9 @@ const style = {
     bannerBox: {
         display: 'flex',
         '@media (max-width:1024px)': {
-            display: 'block',
             borderTop: '1px solid',
             borderTopColor: 'border.light',
-            mt: '5px',
-            pt: '5px',
+            pb: '20px',
             borderRadius: '0px !important',
             '& .MuiGrid2-direction-xs-row': {
                 width: '100%',

@@ -150,6 +150,7 @@ const EvChargingInfo = ({ data, isEditable, formik }) => {
                                           items={selectSpeedItems.current}
                                           isEditable={isEditable}
                                           formik={formik}
+                                          sx={{ width: '100%' }}
                                       />
                                       <EditableTextColumn
                                           value={charger.watt}

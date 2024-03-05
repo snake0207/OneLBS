@@ -46,7 +46,7 @@ function TitleBar({ title }) {
                     sx={{
                         backgroundColor: 'background.titleBar',
                         mb: '20px',
-                        ml: '-24px',
+                        ml: '-20px',
                         height: '54px',
                         alignItems: 'center',
                         p: '0 16px',

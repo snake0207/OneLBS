@@ -117,7 +117,7 @@ const BasicInfo = ({ formik, poiData, tabSelected, isEditable }) => {
                                     display: 'flex',
                                     alignItems: 'center',
                                     gap: '6px',
-                                    marginBottom: '24px',
+                                    marginBottom: '4px',
                                 }}
                             >
                                 <Box sx={{ paddingTop: '5px' }}>
@@ -181,6 +181,7 @@ const BasicInfo = ({ formik, poiData, tabSelected, isEditable }) => {
                                 elevation={0}
                                 sx={{
                                     padding: 0,
+                                    marginTop: '20px',
                                     backgroundColor: 'dialog.main',
                                     '& .Mui-expanded': {
                                         margin: '0',

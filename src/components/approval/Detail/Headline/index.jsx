@@ -7,7 +7,7 @@ const Headline = ({ title }) => {
             <Typography
                 variant={'h6'}
                 sx={{
-                    fontSize: 20,
+                    fontSize: 18,
                     fontWeight: 600,
                     color: 'text.darkgray',
                 }}

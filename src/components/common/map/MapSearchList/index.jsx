@@ -85,7 +85,16 @@ const MapSearchList = ({
                                     zIndex: 10,
                                 }}
                             >
-                                <Button variant={'contained'} onClick={handleNewPoiOpen}>
+                                <Button
+                                    variant={'contained'}
+                                    onClick={handleNewPoiOpen}
+                                    sx={{
+                                        fontSize: 13,
+                                        fontWeight: 400,
+                                        mr: '10px',
+                                        backgroundColor: 'button.main',
+                                    }}
+                                >
                                     POI생성
                                 </Button>
                             </Box>

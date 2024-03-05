@@ -1,5 +1,3 @@
-import { MicNoneOutlined } from '@mui/icons-material'
-
 const style = {
     cardBox: {
         width: '100%',
@@ -27,12 +25,15 @@ const style = {
         backgroundColor: 'background.gray',
         boxShadow: 'none',
         borderRadius: '0 0 8px 8px',
+        '@media (max-width:1024px)': {
+            p: '8px 2px',
+        },
     },
     cardText: {
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
-        backgroundColor: '#05141F',
+        backgroundColor: '',
         color: '#fff',
         fontSize: 14,
         fontWeight: 500,

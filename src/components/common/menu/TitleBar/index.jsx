@@ -23,13 +23,14 @@ function TitleBar({ title }) {
                         borderBottom: '1px solid',
                         borderColor: 'table.viewBorderTh',
                         color: 'text.darkgray',
+                        justifyContent: 'space-between',
                     }}
                 >
                     <Typography
                         variant="h6"
                         component="h6"
                         sx={{
-                            flexGrow: 1,
+                            flexGrow: 0,
                             fontSize: '18px',
                             fontWeight: 600,
                         }}

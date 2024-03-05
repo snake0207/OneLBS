@@ -13,6 +13,15 @@ const style = {
             color: 'rgba(255, 255, 255, 0.2) !important',
         },
     },
+    categoryBox: {
+        display: 'flex',
+        gap: '35px',
+        justifyContent: 'center',
+        '@media (max-width:767px)': {
+            gap: '14px',
+            justifyContent: 'flex-start',
+        },
+    },
     backArrow: {
         backgroundColor: 'rgba(0, 0, 0, 0.5) !important',
         color: 'rgba(255, 255, 255, 0.7) !important',

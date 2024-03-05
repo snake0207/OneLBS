@@ -137,6 +137,12 @@ const MapGpssDetail = ({ selectedPoi, setSelectedPoi, poiData }) => {
                                 formik={formik}
                             />
                         )}
+                        <Divider
+                            sx={{
+                                borderBottom: '1px solid',
+                                borderBottomColor: 'border.lightgray',
+                            }}
+                        />
                         {/* parking */}
                         {!!parsedData.parkingInfo && (
                             <ParkingInfo
@@ -145,6 +151,12 @@ const MapGpssDetail = ({ selectedPoi, setSelectedPoi, poiData }) => {
                                 formik={formik}
                             />
                         )}
+                        <Divider
+                            sx={{
+                                borderBottom: '1px solid',
+                                borderBottomColor: 'border.lightgray',
+                            }}
+                        />
                         {/* fuel */}
                         {!!parsedData.fuelInfo && (
                             <FuelInfo
@@ -153,6 +165,12 @@ const MapGpssDetail = ({ selectedPoi, setSelectedPoi, poiData }) => {
                                 formik={formik}
                             />
                         )}
+                        <Divider
+                            sx={{
+                                borderBottom: '1px solid',
+                                borderBottomColor: 'border.lightgray',
+                            }}
+                        />
                         {/* h2Charging */}
                         {!!parsedData.h2ChargingInfo && (
                             <H2ChargingInfo
@@ -161,6 +179,12 @@ const MapGpssDetail = ({ selectedPoi, setSelectedPoi, poiData }) => {
                                 formik={formik}
                             />
                         )}
+                        <Divider
+                            sx={{
+                                borderBottom: '1px solid',
+                                borderBottomColor: 'border.lightgray',
+                            }}
+                        />
                         {/* dealerPoi */}
                         {!!parsedData.dealerPoiInfo && (
                             <DealerPoiInfo
@@ -169,11 +193,25 @@ const MapGpssDetail = ({ selectedPoi, setSelectedPoi, poiData }) => {
                                 formik={formik}
                             />
                         )}
+                        <Divider
+                            sx={{
+                                borderBottom: '1px solid',
+                                borderBottomColor: 'border.lightgray',
+                            }}
+                        />
                         <Box>
                             <Box>
-                                <Typography>{t('reason_for_approval', 'gpss')}</Typography>
+                                <Typography
+                                    sx={{
+                                        fontSize: '18px',
+                                        fontWeight: 600,
+                                        color: 'text.darkgray',
+                                        mt: '8px',
+                                    }}
+                                >
+                                    {t('reason_for_approval', 'gpss')}
+                                </Typography>
                             </Box>
-                            <Divider />
                             <TextField
                                 sx={{
                                     marginBottom: '16px',
@@ -203,12 +241,13 @@ const MapGpssDetail = ({ selectedPoi, setSelectedPoi, poiData }) => {
                                 display: 'flex',
                                 justifyContent: 'space-between',
                                 gap: '2px',
+                                mt: '30px',
                             }}
                         >
                             <Button
                                 variant={'contained'}
                                 onClick={handleClickTempSaveBtn}
-                                sx={style.blueButton}
+                                sx={style.darkBlueButton}
                             >
                                 {t('temporary_save', 'gpss')}
                             </Button>

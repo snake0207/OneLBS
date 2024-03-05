@@ -159,7 +159,12 @@ const MapPoiAdd = ({ setIsOpen, selectedPoi }) => {
                     <Box>
                         <Typography>{t('reason_for_approval', 'gpss')}</Typography>
                     </Box>
-                    <Divider />
+                    <Divider
+                        sx={{
+                            borderBottom: '1px solid',
+                            borderBottomColor: 'border.lightgray',
+                        }}
+                    />
                     <TextField
                         sx={{
                             marginBottom: '16px',

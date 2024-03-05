@@ -100,11 +100,12 @@ const ConfirmEmailForm = ({ formik }) => {
                     size="small"
                     type="text"
                     placeholder={t('placeholder.confirm_email', 'auth')}
+                    disabled={isAuthCompleted}
                     sx={{ backgroundColor: 'form.main', borderRadius: '4px' }}
                     InputProps={{
                         endAdornment: (
                             <InputAdornment position="end" sx={{ gap: 2 }}>
-                                {formik.values.code && (
+                                {formik.values.code && !isAuthCompleted && (
                                     <IconButton
                                         edge="end"
                                         onClick={() => formik.setFieldValue('code', '')}

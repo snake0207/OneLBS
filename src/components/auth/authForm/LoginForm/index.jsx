@@ -1,40 +1,68 @@
-import { Button, Typography, Box } from '@mui/material'
+import { useState } from 'react'
+import { BrowserView, isBrowser, isMobile } from 'react-device-detect'
 import { useFormik } from 'formik'
+import { Button, Typography, Box } from '@mui/material'
+import { Icon } from '@mui/material'
+import { LoadingButton } from '@mui/lab'
 import TextInput from '#/components/common/input/TextInput'
 import PasswordInput from '#/components/common/input/PasswordInput'
 import FlexEndButtonContainer from '#/components/common/button/FlexEndButtonContainer'
 import AuthStepper from '#/components/auth/AuthStepper'
-import { useAuthStepActions } from '#/store/useAuthStepStore'
+import JoinModal from '#/components/auth/authForm/joinForm/JoinModal'
 import { AUTH_STEP } from '#/contents/constant'
 import { loginSchema } from '#/contents/validationSchema'
 import { usePostLogin } from '#/hooks/queries/auth'
-import { Icon } from '@mui/material'
-import LoginIcon from '#/assets/loginIcon.svg'
-import LoginIconDark from '#/assets/loginIconDark.svg'
-import { BrowserView, isBrowser, isMobile } from 'react-device-detect'
+import { useAuthStepActions } from '#/store/useAuthStepStore'
+import { getLayoutState } from '#/store/useLayoutStore'
+import useOtpStore from '#/store/useOtpStore'
 
+import {
+    encryptPasswordBase64WithTime,
+    encryptPasswordSHA256,
+    encryptPasswordSHA256WithTime,
+} from '#/common/libs/encode'
 import t from '#/common/libs/trans'
 
-import { getLayoutState } from '#/store/useLayoutStore'
 import style from './style.module'
-import JoinModal from '#/components/auth/authForm/joinForm/JoinModal'
-import { useState } from 'react'
+import LoginIcon from '#/assets/loginIcon.svg'
+import LoginIconDark from '#/assets/loginIconDark.svg'
 
 const LoginForm = () => {
     const { changeAuthStep } = useAuthStepActions()
-    const { mutate } = usePostLogin()
+    const { mutate, isPending } = usePostLogin()
     const [isOpenJoinModal, setIsOpenJoinModal] = useState(false)
+    const {
+        actions: { setOtpStore, setTwoFactorSecret, setTwoFactorAuth },
+    } = useOtpStore()
 
     const formik = useFormik({
         initialValues: {
-            userMail: '',
+            email: '',
             password: '',
         },
         validationSchema: loginSchema,
         onSubmit: (form) => {
-            console.log(form)
-            // mutate(form)
-            changeAuthStep(AUTH_STEP.certified)
+            const password = encryptPasswordBase64WithTime(
+                encryptPasswordSHA256WithTime(encryptPasswordSHA256(form.password)),
+            )
+            mutate(
+                { ...form, password },
+                {
+                    onSuccess: ({
+                        data: {
+                            data: { twoFactorAuth, twoFactorSecret, secretKey, qrCodeUrl },
+                        },
+                    }) => {
+                        if (twoFactorAuth === 'Y') {
+                            setTwoFactorSecret(twoFactorSecret)
+                            setTwoFactorAuth(twoFactorAuth)
+                        } else if (twoFactorAuth === 'N') {
+                            setOtpStore(twoFactorAuth, secretKey, twoFactorSecret, qrCodeUrl)
+                        }
+                        changeAuthStep(AUTH_STEP.certified)
+                    },
+                },
+            )
         },
     })
 
@@ -82,62 +110,65 @@ const LoginForm = () => {
                     </Typography>
                 </Box>
             </BrowserView>
-            <Typography variant="h6" sx={style.labelText}>
-                {t('email', 'auth')}
-            </Typography>
-            <TextInput
-                name={'userMail'}
-                placeholder={t('placeholder.email', 'auth')}
-                formik={formik}
-            />
-            <Typography variant="h6" sx={style.labelText}>
-                {t('password', 'auth')}
-            </Typography>
-            <PasswordInput
-                name={'password'}
-                placeholder={t('placeholder.password', 'auth')}
-                formik={formik}
-            />
-            <FlexEndButtonContainer>
-                <Button
-                    variant="contained"
-                    onClick={formik.handleSubmit}
-                    sx={{ bgcolor: 'button.main', width: '100%', fontWeight: 400 }}
-                >
-                    {t('login', 'auth')}
-                </Button>
-                <Box
-                    sx={{
-                        display: 'flex',
-                        justifyContent: 'space-between',
-                        alignItems: 'flex-start',
-                        gap: 0.5,
-                        height: 36,
-                    }}
-                >
-                    <Button
+            <form onSubmit={formik.handleSubmit}>
+                <Typography variant="h6" sx={style.labelText}>
+                    {t('email', 'auth')}
+                </Typography>
+                <TextInput
+                    name={'email'}
+                    placeholder={t('placeholder.email', 'auth')}
+                    formik={formik}
+                />
+                <Typography variant="h6" sx={style.labelText}>
+                    {t('password', 'auth')}
+                </Typography>
+                <PasswordInput
+                    name={'password'}
+                    placeholder={t('placeholder.password', 'auth')}
+                    formik={formik}
+                />
+                <FlexEndButtonContainer>
+                    <LoadingButton
+                        loading={isPending}
                         variant="contained"
-                        type="button"
-                        onClick={handleClickJoin}
-                        sx={{ bgcolor: 'button.light', width: '100%', fontWeight: 400 }}
+                        type="submit"
+                        sx={{ bgcolor: 'button.main', width: '100%', fontWeight: 400 }}
                     >
-                        {t('join', 'auth')}
-                    </Button>
-                    <Button
-                        variant="contained"
-                        onClick={handleClickPasswordReset}
-                        type="button"
+                        {t('login', 'auth')}
+                    </LoadingButton>
+                    <Box
                         sx={{
-                            bgcolor: 'button.light',
-                            width: '100%',
-                            fontWeight: 400,
-                            textWrap: 'nowrap',
+                            display: 'flex',
+                            justifyContent: 'space-between',
+                            alignItems: 'flex-start',
+                            gap: 0.5,
+                            height: 36,
                         }}
                     >
-                        {t('reset_password', 'auth')}
-                    </Button>
-                </Box>
-            </FlexEndButtonContainer>
+                        <Button
+                            variant="contained"
+                            type="button"
+                            onClick={handleClickJoin}
+                            sx={{ bgcolor: 'button.light', width: '100%', fontWeight: 400 }}
+                        >
+                            {t('join', 'auth')}
+                        </Button>
+                        <Button
+                            variant="contained"
+                            onClick={handleClickPasswordReset}
+                            type="button"
+                            sx={{
+                                bgcolor: 'button.light',
+                                width: '100%',
+                                fontWeight: 400,
+                                textWrap: 'nowrap',
+                            }}
+                        >
+                            {t('reset_password', 'auth')}
+                        </Button>
+                    </Box>
+                </FlexEndButtonContainer>
+            </form>
             <JoinModal isOpen={isOpenJoinModal} onClose={handleCloseJoinModal} />
         </>
     )

@@ -5,8 +5,11 @@ import Grid from '@mui/material/Unstable_Grid2'
 import { useMemo, useRef } from 'react'
 import Headline from '#/components/approval/Detail/Headline/index.jsx'
 import ArrowForward from '#/assets/arrowForwardIos.svg'
-import ArrowForwardDark from '#/assets/ArrowForwardDark.svg'
+import ArrowForwardDark from '#/assets/arrowForwardDark.svg'
 import ArrowRedBack from '#/assets/arrowRedBack.svg'
+import ArrowRedForward from '#/assets/arrowRedForward.svg'
+import ArrowGrayBack from '#/assets/arrowGrayBack.svg'
+import ArrowGrayForward from '#/assets/arrowGrayForward.svg'
 import { getLayoutState } from '#/store/useLayoutStore'
 
 import style from './style.module'
@@ -43,9 +46,9 @@ const ApprovalLine = ({ status, content }) => {
     // TODO: 상태별 화살표 색상 및 방향 처리 필요
     const theme = useTheme()
     const colors = useRef({
-        request: theme.palette.grey[200],
-        review: theme.palette.grey[200],
-        approval: theme.palette.grey[200],
+        request: '#e2e2e2',
+        review: '#e2e2e2',
+        approval: '#e2e2e2',
     })
     const isReject = useRef({
         review: false,
@@ -54,8 +57,8 @@ const ApprovalLine = ({ status, content }) => {
     const { themeMode } = getLayoutState()
 
     useMemo(() => {
-        const active = theme.palette.primary.main
-        const danger = theme.palette.error.main
+        const active = '#05141f'
+        const danger = '#db0024'
         switch (status) {
             case 'request':
                 colors.current.request = active

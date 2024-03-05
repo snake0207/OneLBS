@@ -38,7 +38,6 @@ export const parseApprovalStatus = (value) => {
 }
 
 export const parseOpeningHours = (openingHours) => {
-    if (!openingHours || openingHours.length == 0) return []
     const parseWeekday = (weekday) => {
         switch (weekday) {
             case 0:
@@ -57,7 +56,7 @@ export const parseOpeningHours = (openingHours) => {
                 return 'Sat'
         }
     }
-    return openingHours.map(({ week, open, close }) => ({
+    return openingHours?.map(({ week, open, close }) => ({
         weekday: parseWeekday(week),
         open,
         close,
@@ -226,4 +225,8 @@ export const parseManufacturer = (type) => {
         case 'GENESIS':
             return 'GENESIS'
     }
+}
+
+export const parsePoiProviderType = (poiId) => {
+    return poiId.split(':')[0] === 'mcp' ? 'mcp' : 'here'
 }

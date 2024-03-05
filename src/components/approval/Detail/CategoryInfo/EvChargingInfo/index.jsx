@@ -75,16 +75,20 @@ const EvChargingInfo = ({ data, isEditable, formik }) => {
                         </Typography>
                     </AccordionSummary>
                     <AccordionDetails sx={style.detailsBox}>
-                        {data.openingHours.map((openingHour, index) => (
-                            <Box key={index}>
-                                <Typography component={'span'}>{openingHour.weekday}</Typography>
-                                <Typography component={'span'}>
-                                    {openingHour.open || '-'}
-                                    {' ~ '}
-                                    {openingHour.close || '-'}
-                                </Typography>
-                            </Box>
-                        ))}
+                        {data.openingHours?.length
+                            ? data.openingHours.map((openingHour, index) => (
+                                  <Box key={index}>
+                                      <Typography component={'span'}>
+                                          {openingHour.weekday}
+                                      </Typography>
+                                      <Typography component={'span'}>
+                                          {openingHour.open || '-'}
+                                          {' ~ '}
+                                          {openingHour.close || '-'}
+                                      </Typography>
+                                  </Box>
+                              ))
+                            : '-'}
                     </AccordionDetails>
                 </Accordion>
 
@@ -105,14 +109,16 @@ const EvChargingInfo = ({ data, isEditable, formik }) => {
                         </Typography>
                     </AccordionSummary>
                     <AccordionDetails sx={style.detailsBox}>
-                        {data.summary.map((summary, index) => (
-                            <Box key={index}>
-                                <Typography>{summary.type}</Typography>
-                                <Typography>{summary.speed}</Typography>
-                                <Typography>{summary.possibleCount}</Typography>
-                                <Typography>{summary.watt}</Typography>
-                            </Box>
-                        ))}
+                        {data.summary?.length
+                            ? data.summary?.map((summary, index) => (
+                                  <Box key={index}>
+                                      <Typography>{summary.type}</Typography>
+                                      <Typography>{summary.speed}</Typography>
+                                      <Typography>{summary.possibleCount}</Typography>
+                                      <Typography>{summary.watt}kw</Typography>
+                                  </Box>
+                              ))
+                            : '-'}
                     </AccordionDetails>
                 </Accordion>
 
@@ -134,42 +140,45 @@ const EvChargingInfo = ({ data, isEditable, formik }) => {
                         </Typography>
                     </AccordionSummary>
                     <AccordionDetails sx={style.detailsBox}>
-                        {data.chargers.map((charger, index) => (
-                            <Grid container key={index} gap={2} direction={'column'}>
-                                <Typography>{charger.id || '-'}</Typography>
-                                <EditableSelectColumn
-                                    value={charger.speed}
-                                    name={`evChargingInfo.chargers.${index}.speed`}
-                                    items={selectSpeedItems.current}
-                                    isEditable={isEditable}
-                                    formik={formik}
-                                />
-                                <EditableTextColumn
-                                    value={charger.watt}
-                                    name={`evChargingInfo.chargers.${index}.watt`}
-                                    isEditable={isEditable}
-                                    formik={formik}
-                                />
-                                <Typography>{charger.status || '-'}</Typography>
-                                <Typography>{charger.lastUsedTime || '-'}</Typography>
-                                <EditableSelectColumn
-                                    value={charger.type}
-                                    name={`evChargingInfo.chargers.${index}.type`}
-                                    items={selectTypeItems.current}
-                                    isEditable={isEditable}
-                                    formik={formik}
-                                />
-                                {charger.priceList?.map((price, index) => (
-                                    <Fragment key={index}>
-                                        <Typography>
-                                            {price.price}
-                                            {price.currency}(1{price.currency} / 1{price.priceUnit})
-                                        </Typography>
-                                        <Typography>{price.isFree}</Typography>
-                                    </Fragment>
-                                ))}
-                            </Grid>
-                        ))}
+                        {data.chargers?.length
+                            ? data.chargers.map((charger, index) => (
+                                  <Grid container key={index} gap={2} direction={'column'}>
+                                      <Typography>{charger.id || '-'}</Typography>
+                                      <EditableSelectColumn
+                                          value={charger.speed}
+                                          name={`evChargingInfo.chargers.${index}.speed`}
+                                          items={selectSpeedItems.current}
+                                          isEditable={isEditable}
+                                          formik={formik}
+                                      />
+                                      <EditableTextColumn
+                                          value={charger.watt}
+                                          name={`evChargingInfo.chargers.${index}.watt`}
+                                          isEditable={isEditable}
+                                          formik={formik}
+                                      />
+                                      <Typography>{charger.status || '-'}</Typography>
+                                      <Typography>{charger.lastUsedTime || '-'}</Typography>
+                                      <EditableSelectColumn
+                                          value={charger.type}
+                                          name={`evChargingInfo.chargers.${index}.type`}
+                                          items={selectTypeItems.current}
+                                          isEditable={isEditable}
+                                          formik={formik}
+                                      />
+                                      {charger.priceList?.map((price, index) => (
+                                          <Fragment key={index}>
+                                              <Typography>
+                                                  {price.price}
+                                                  {price.currency}(1{price.currency} / 1
+                                                  {price.priceUnit})
+                                              </Typography>
+                                              <Typography>{price.isFree}</Typography>
+                                          </Fragment>
+                                      ))}
+                                  </Grid>
+                              ))
+                            : '-'}
                     </AccordionDetails>
                 </Accordion>
             </AccordionDetails>

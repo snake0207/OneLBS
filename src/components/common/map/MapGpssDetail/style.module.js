@@ -4,22 +4,15 @@ const style = {
         ml: 0.5,
         opacity: '95%',
         borderRadius: '8px',
+    },
+    mapDetailContent: {
+        maxHeight: '760px',
+        overflow: 'auto',
+        paddingTop: '16px',
+        padding: '20px 16px 16px 16px',
+        borderRadius: '0 0 8px 8px',
+        backgroundColor: 'dialog.main',
         boxShadow: '0 3px 14px rgb(0 0 0 / 24%)',
-        '& .css-1ilmods': {
-            backgroundColor: 'dialog.main',
-            padding: '20px 16px 16px 16px',
-            borderRadius: '0 0 8px 8px',
-        },
-        '& .css-1fbfkr9': {
-            backgroundColor: 'dialog.main',
-            padding: '20px 16px 16px 16px',
-            borderRadius: '0 0 8px 8px',
-        },
-        '& .css-2j8k7x': {
-            backgroundColor: 'dialog.main',
-            padding: '20px 16px 16px 16px',
-            borderRadius: '0 0 8px 8px',
-        },
     },
     tabMenu: {
         width: '49.4%',

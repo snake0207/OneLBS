@@ -8,7 +8,6 @@ import HistoryTable from '#/components/approval/Detail/HistoryTable/index.jsx'
 import { useCallback, useMemo } from 'react'
 import { useFormik } from 'formik'
 import ActionButtons from '#/components/approval/Detail/ActionButtons/index.jsx'
-import dummyData from '#/mock/data/detailData.json'
 import poiDetailData from '#/mock/data/poiDetailData.json'
 import Headline from '#/components/approval/Detail/Headline/index.jsx'
 import Comment from '#/components/approval/Detail/Comment/index.jsx'
@@ -102,7 +101,6 @@ const ApprovalHistoryDetailPage = () => {
         initialValues: {
             ...parsedData.approvalInfo,
             ...parsedData.basicInfo,
-            ...parsedData.coordinates,
             ...categoryFormik(parsedData),
         },
     })
@@ -121,6 +119,7 @@ const ApprovalHistoryDetailPage = () => {
                 return false
         }
     }, [parsedData.status, userType])
+    console.log('IS EDITABLE >> ', isEditable, parsedData.status)
 
     const openAlertPopup = (action) => {
         if (formik.values['request_reason'] === '')
@@ -193,11 +192,10 @@ const ApprovalHistoryDetailPage = () => {
                 >
                     {/* 결제라인 */}
                     <ApprovalLine
-                        status={dummyData.status}
-                        content={dummyData.approvalLineContents}
+                        status={parsedData.approvalInfo.status}
+                        content={parsedData.approvalInfo.approvalLineContents}
                     />
                     {/* 정보 탭 */}
-                    {/*<BasicInfo formik={formik} poiData={parsedData.basicInfo} />*/}
                     <InfoTab
                         basicData={parsedData.basicInfo}
                         formik={formik}
@@ -241,12 +239,6 @@ const ApprovalHistoryDetailPage = () => {
                             formik={formik}
                         />
                     )}
-                    {/*<CategoryInfo*/}
-                    {/*    category={parsedData.category}*/}
-                    {/*    data={parsedData[`${parsedData.category}Info`]}*/}
-                    {/*    formik={formik}*/}
-                    {/*    isEditable={isEditable}*/}
-                    {/*/>*/}
                     {/* 승인 요청 이유*/}
                     <Box sx={{ mt: '24px' }}>
                         <Headline title={t('request_reason', 'approval')} />
@@ -270,20 +262,25 @@ const ApprovalHistoryDetailPage = () => {
                     </Box>
                     {/* Comment */}
                     <Comment
-                        comments={dummyData.comment}
+                        comments={{
+                            reviewer: parsedData.approvalInfo.reviewerComment,
+                            approver: parsedData.approvalInfo.approverComment,
+                        }}
                         userType={userType}
                         isEditable={isEditable}
                         formik={formik}
                     />
                     {/* 이력 */}
-                    <HistoryTable historyList={dummyData.historyList} />
+                    <HistoryTable historyList={parsedData.approvalInfo.historyList} />
                     {/* 버튼 */}
-                    <ActionButtons
-                        type={userType}
-                        status={dummyData.status}
-                        clickAction={handleShowConfirmPopup}
-                        id={params.id}
-                    />
+                    <Box>
+                        <ActionButtons
+                            type={userType}
+                            status={parsedData.approvalInfo.status}
+                            clickAction={handleShowConfirmPopup}
+                            id={params.id}
+                        />
+                    </Box>
                 </Stack>
                 {/* 지도 영역 */}
                 {isBrowser && <GoogleMapComponent markerDataArr={markerSampleData} />}

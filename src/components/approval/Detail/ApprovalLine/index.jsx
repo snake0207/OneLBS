@@ -2,11 +2,8 @@ import Typography from '@mui/material/Typography'
 import { Box, Card, useTheme } from '@mui/material'
 import t from '#/common/libs/trans.js'
 import Grid from '@mui/material/Unstable_Grid2'
-import { ArrowBackIosNew, ArrowForwardIos } from '@mui/icons-material'
 import { useMemo, useRef } from 'react'
 import Headline from '#/components/approval/Detail/Headline/index.jsx'
-import ArrowBack from '#/assets/arrowBackIos.svg'
-import ArrowBackDark from '#/assets/arrowBackIosDark.svg'
 import ArrowForward from '#/assets/arrowForwardIos.svg'
 import ArrowForwardDark from '#/assets/arrowForwardDark.svg'
 import ArrowRedBack from '#/assets/arrowRedBack.svg'
@@ -24,7 +21,9 @@ const ApprovalLineContent = ({ title, color, process, content }) => {
                 {title}
             </Typography>
             <Card sx={style.cardContBox}>
-                <Typography variant="subtitle2" sx={[style.cardText, { backgroundColor: color }]}>
+                <Typography variant="subtitle2" sx={style.cardText}>
+                    {/* 글자색 변경 처리 부분 */}
+                    {/* sx={[style.cardText, { color: color === '#EFEFEF' ? '#000000' : '#ffffff' }]} */}
                     {process}
                 </Typography>
                 <Box p={1} sx={{ pb: 0 }}>
@@ -73,18 +72,17 @@ const ApprovalLine = ({ status, content }) => {
                 colors.current.review = active
                 colors.current.approval = active
                 break
-            // TODO: 검토자반려 / 승인자반려 구분필요
-            case 'rejected':
+            case 'rejected_review':
                 colors.current.request = active
                 colors.current.review = danger
                 isReject.current.review = true
                 break
-            // case 'rejected':
-            //     colors.current.request = active
-            //     colors.current.review = active
-            //     colors.current.approval = danger
-            //     isReject.current.approval = true
-            //     break
+            case 'rejected_approval':
+                colors.current.request = active
+                colors.current.review = active
+                colors.current.approval = danger
+                isReject.current.approval = true
+                break
         }
     }, [])
 
@@ -102,11 +100,7 @@ const ApprovalLine = ({ status, content }) => {
                 </Grid>
                 {isReject.current.review ? (
                     <Box sx={style.ArrowIos}>
-                        {themeMode === 'light' ? (
-                            <img src={ArrowForwardDark} width={30} height={30} />
-                        ) : (
-                            <img src={ArrowForwardDark} width={30} height={30} />
-                        )}
+                        <img src={ArrowRedBack} width={30} height={30} />
                     </Box>
                 ) : (
                     <Box sx={style.ArrowIos}>
@@ -134,9 +128,9 @@ const ApprovalLine = ({ status, content }) => {
                 ) : (
                     <Box sx={style.ArrowIos}>
                         {themeMode === 'light' ? (
-                            <img src={ArrowBack} width={30} height={30} />
+                            <img src={ArrowForward} width={30} height={30} />
                         ) : (
-                            <img src={ArrowBackDark} width={30} height={30} />
+                            <img src={ArrowForwardDark} width={30} height={30} />
                         )}
                     </Box>
                 )}

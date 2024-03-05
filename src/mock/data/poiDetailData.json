@@ -201,11 +201,51 @@
                 }
             }
         ],
-        "approvalStatus": "request",
         "approvalInfo": {
-            "request_reason": "위.경도 좌표 수정",
-            "reviewer_comment": "위.경도 재확인 후 요청하라",
-            "approver_comment": null
+            "status": "rejected_review",
+            "requestReason": "위.경도 좌표 수정",
+            "reviewerComment": "위.경도 재확인 후 요청하라",
+            "approverComment": null,
+            "approvalLineContents": {
+                "requester": {
+                    "team": "콘텐츠플랫폼개발팀",
+                    "name": "박다정 책임",
+                    "date": "2024-01-19 12:10:02"
+                },
+                "reviewer": {
+                    "team": "콘텐츠플랫폼개발팀",
+                    "name": "박다정 책임",
+                    "date": "2024-01-19 12:10:02"
+                },
+                "approver": {
+                    "title": "승인 완료",
+                    "team": "콘텐츠플랫폼개발팀",
+                    "name": "박다정 책임",
+                    "date": "2024-01-19 12:10:02"
+                }
+            },
+            "historyList": [
+                {
+                    "date": "2024-01-19 12:10:02",
+                    "status": "temporary",
+                    "history": "위.경도 수정 요청"
+                },
+                {
+                    "date": "2024-01-19 12:10:02",
+                    "status": "reject",
+                    "history": "위.경도 수정 요청 반려"
+                },
+                {
+                    "date": "2024-01-19 12:10:02",
+                    "status": "reviewed",
+                    "history": "위.경도 수정 재 승인 요청"
+                },
+                {
+                    "date": "2024-01-19 12:10:02",
+                    "status": "approved",
+                    "history": "승인 완료"
+                }
+            ]
         },
         "resultID": "searchResultId",
         "status": "success",

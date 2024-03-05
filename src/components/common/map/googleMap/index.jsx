@@ -7,6 +7,7 @@ import CalculateDistance from '#/components/common/map/googleMap/CustomControl/C
 import DisplayMarker from '#/components/common/map/googleMap/marker/DisplayMarker/index.jsx'
 import SearchResultMarker from '#/components/common/map/googleMap/marker/SearchResultMarker/index.jsx'
 import { BrowserView } from 'react-device-detect'
+import { gpssListResponseDataMapper } from '#/pages/ApprovalHistoryPage/mapper.js'
 
 const mapStyle = {
     width: '100%',
@@ -36,7 +37,6 @@ const GoogleMapComponent = ({
     setSelectedPoi,
 }) => {
     const [map, setMap] = useState(null)
-
     // 왼쪽 클릭
     const [clickedCoord, setClickedCoord] = useState({
         lat: null,
@@ -48,10 +48,11 @@ const GoogleMapComponent = ({
     // 거리측정 기능 활성 여부
     const [isDistanceFunctionOn, setIsDistanceFunctionOn] = useState(false)
 
+    const parsedList = gpssListResponseDataMapper(searchResultArr)
     // poi 선택시 해당 poi 위치로 이동및 줌
     useEffect(() => {
-        if (!searchResultArr) return
-        const poiArr = searchResultArr.filter((poiData) => poiData.poiId === selectedPoi)
+        if (!parsedList) return
+        const poiArr = parsedList.filter((poiData) => poiData.poiId === selectedPoi)
         if (poiArr.length === 0) return
         const { lat, lon } = poiArr[0].position.center
         map.panTo({ lat: lat, lng: lon })
@@ -137,8 +138,8 @@ const GoogleMapComponent = ({
                         <DisplayMarker key={data.poiId} markerData={data} />
                     ))}
                 {/* 지도 검색 결과 마커 데이터 출력*/}
-                {searchResultArr &&
-                    searchResultArr.map((poiData) => (
+                {parsedList &&
+                    parsedList.map((poiData) => (
                         <SearchResultMarker
                             key={poiData.poiId}
                             poiData={poiData}

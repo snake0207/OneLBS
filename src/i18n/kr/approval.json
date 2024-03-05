@@ -15,7 +15,6 @@
     "lat": "위도",
     "lon": "경도",
     "category": "카테고리",
-    "brand": "Brand",
     "request_reason": "승인 요청 이유",
     "comment": "Comment",
     "history": "이력",
@@ -64,5 +63,54 @@
         "requester": "요청자",
         "reviewer": "검토자",
         "approver": "승인자"
+    },
+    "categories": {
+        "evChargingInfo": {
+            "pFee": "주차 유/무료",
+            "0": "무료",
+            "1": "유료",
+            "stationStatus": {
+                "0": "알수없음",
+                "1": "통신이상",
+                "2": "사용가능",
+                "3": "충전중",
+                "4": "운영중지",
+                "5": "점검중",
+                "6": "예약중"
+            },
+            "connector": {
+                "1": "AC type 1 (국내, 북미)",
+                "2": "AC type 2 (유럽)",
+                "3": "Combo(AC+DC) type 1 (국내, 북미)",
+                "4": "Combo(AC+DC) type 2 (유럽)",
+                "5": "CHAdeMO (확장)",
+                "6": "CHAdeMO + AC tyep1 (일본)"
+            },
+            "speed": {
+                "0": "알 수 없음",
+                "1": "완속",
+                "2": "급속",
+                "3": "초급속"
+            },
+            "status": {
+                "0": "알수 없음",
+                "1": "충전가능",
+                "2": "충전중",
+                "3": "충전불가"
+            },
+            "noInfo": "정보없음"
+        },
+        "fuelInfo": {
+            "status": {
+                "G": "휘발유",
+                "PG": "고급휘발유",
+                "D": "경유",
+                "L": "LPG"
+            }
+        },
+        "h2ChargingInfo": {
+            "350": "350bar 수소차",
+            "750": "750bar 수소차"
+        }
     }
 }

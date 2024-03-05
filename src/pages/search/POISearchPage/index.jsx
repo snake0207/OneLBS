@@ -1,90 +1,16 @@
 import t from '#/common/libs/trans'
 import GoogleMapComponent from '#/components/common/map/googleMap'
 import TitleBar from '#/components/common/menu/TitleBar'
-import { Box, Stack } from '@mui/material'
+import { Box } from '@mui/material'
 import { useNavigate } from 'react-router-dom'
 import { useState } from 'react'
 import { BrowserView, MobileView } from 'react-device-detect'
 import MapSearch from '#/components/common/map/MapSearch/index.jsx'
 import MapSearchList from '#/components/common/map/MapSearchList/index.jsx'
-import poiDetailData from '#/mock/data/poiDetailData.json'
+import poiListData from '#/mock/data/poiListData.json'
 import TuneIcon from '@mui/icons-material/Tune'
 import MapPoiDetail from '#/components/common/map/MapPoiDetail/index.jsx'
-
-const mapSampleData = [
-    {
-        poiId: 'ChIJm8fw1mfJwoARNzsUmsgD-Ig',
-        address: '2268 Firestone Blvd, Los Angeles, CA 90002, USA',
-        position: {
-            center: {
-                lat: 33.9578479,
-                lon: -118.23168319999998,
-            },
-        },
-        title: 'Blink Charging Station',
-        category: 'ev',
-    },
-    {
-        poiId: 'ChIJSblb29_LwoARUQWFAR785F4',
-        address: '2365 E Century Blvd, Los Angeles, CA 90002, USA',
-        position: {
-            center: {
-                lat: 33.946781099999995,
-                lon: -118.22994750000001,
-            },
-        },
-        title: 'EVCS Charging Station',
-        category: 'ev',
-    },
-    {
-        poiId: 'ChIJ5xP4utnLwoARR5thyWQMcI0',
-        address: '10320 Wilmington Ave, Los Angeles, CA 90002, USA',
-        position: {
-            center: {
-                lat: 33.942737099999995,
-                lon: -118.2389758,
-            },
-        },
-        title: 'Electric Circuit Charging Station',
-        category: 'ev',
-    },
-    {
-        poiId: 'ChIJS-pkdn7JwoARzkOPLkLB0LM',
-        address: '1501 E Century Blvd, Los Angeles, CA 90002, USA',
-        position: {
-            center: {
-                lat: 33.945758000000005,
-                lon: -118.246968,
-            },
-        },
-        title: 'Flo Charging Station',
-        category: 'ev',
-    },
-    {
-        poiId: 'ChIJMS-G-n3JwoAR2TPD7A6yXoY',
-        address: '10104 Compton Ave, Los Angeles, CA 90002, USA',
-        position: {
-            center: {
-                lat: 33.9448115,
-                lon: -118.246128,
-            },
-        },
-        title: 'ChargePoint Charging Station',
-        category: 'ev',
-    },
-    {
-        poiId: 'ChIJm6KTpoiIdnLwoARwSZzuHOvyOU',
-        address: '10455 Wilmington Ave, Los Angeles, CA 90002, USA',
-        position: {
-            center: {
-                lat: 33.941035899999996,
-                lon: -118.239077,
-            },
-        },
-        title: 'Electric Circuit Charging Station',
-        category: 'ev',
-    },
-]
+import poiDetailData from '#/mock/data/poiDetailData.json'
 
 const markerSampleData = [
     {
@@ -127,12 +53,13 @@ function POISearchPage() {
                                 <MapSearch />
                                 {/* 검색 결과 */}
                                 <MapSearchList
-                                    searchResultArr={mapSampleData}
+                                    searchResultArr={poiListData}
                                     selectedPoi={selectedPoi}
                                     setSelectedPoi={setSelectedPoi}
                                 />
                             </Box>
                             <MapPoiDetail
+                                poiData={poiDetailData}
                                 selectedPoi={selectedPoi}
                                 setSelectedPoi={setSelectedPoi}
                             />
@@ -162,7 +89,7 @@ function POISearchPage() {
                                 {/* 검색 결과 */}
                                 <Box sx={{ mt: 17 }}>
                                     <MapSearchList
-                                        searchResultArr={mapSampleData}
+                                        searchResultArr={poiListData}
                                         selectedPoi={selectedPoi}
                                         setSelectedPoi={handlePOISelected}
                                     />
@@ -175,7 +102,7 @@ function POISearchPage() {
                     markerDataArr={markerSampleData}
                     selectedPoi={selectedPoi}
                     setSelectedPoi={setSelectedPoi}
-                    searchResultArr={mapSampleData}
+                    searchResultArr={poiListData}
                 />
             </Box>
         </Box>

@@ -1,10 +1,10 @@
 import t from '#/common/libs/trans'
 import GoogleMapComponent from '#/components/common/map/googleMap'
 import TitleBar from '#/components/common/menu/TitleBar'
-import { Box } from '@mui/material'
+import { Box, SwipeableDrawer } from '@mui/material'
 import { BrowserView, MobileView } from 'react-device-detect'
 import MapSearch from '#/components/common/map/MapSearch/index.jsx'
-import MapSearchList from '#/components/common/map/MapSearchList/index.jsx'
+import MapSearchList from '#/components/common/map/searchList/MapSearchList/index.jsx'
 import { useState } from 'react'
 import poiDetailData from '#/mock/data/poiDetailData.json'
 import poiListData from '#/mock/data/poiListData.json'
@@ -12,6 +12,7 @@ import TuneIcon from '@mui/icons-material/Tune.js'
 import { useNavigate } from 'react-router-dom'
 import MapGpssDetail from '#/components/common/map/MapGpssDetail/index.jsx'
 import MapPoiAdd from '#/components/common/map/MapPoiAdd/index.jsx'
+import SwipeMapSearchList from '#/components/common/map/searchList/SwipeMapSearchList/index.jsx'
 
 const markerSampleData = [
     {
@@ -45,7 +46,6 @@ function MapSearchPage() {
         setSelectedPoi(id)
         navigate(`/search-management/map/${id}`)
     }
-
     return (
         <Box>
             <TitleBar title={t('top_menu.search_management')} />
@@ -103,16 +103,14 @@ function MapSearchPage() {
                             >
                                 {/* 지도 검색 */}
                                 <MapSearch />
-                                {/* 검색 결과 */}
-                                <Box sx={{ mt: 17 }}>
-                                    <MapSearchList
-                                        searchResultArr={poiListData}
-                                        selectedPoi={selectedPoi}
-                                        setSelectedPoi={handlePOISelected}
-                                    />
-                                </Box>
                             </Box>
                         )}
+                        {/* 검색 결과 */}
+                        <SwipeMapSearchList
+                            searchResultArr={poiListData}
+                            selectedPoi={selectedPoi}
+                            setSelectedPoi={handlePOISelected}
+                        />
                     </MobileView>
                 </Box>
                 <GoogleMapComponent

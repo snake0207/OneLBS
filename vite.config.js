@@ -9,5 +9,12 @@ export default defineConfig({
     },
     server: {
         port: 2999,
+        proxy: {
+            '/api': {
+                target: 'https://stg-gpss-eu.auto-hmg.io',
+                changeOrigin: true,
+                rewrite: (path) => path.replace(/^\/api/, ''),
+            },
+        },
     },
 })

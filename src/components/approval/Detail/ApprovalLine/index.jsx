@@ -85,7 +85,7 @@ const ApprovalLine = ({ status, content }) => {
 
     return (
         <Box>
-            <Headline title={t('line', 'approval')} />
+            <Typography>{t('line', 'approval')}</Typography>
             <Grid container flexWrap={'nowrap'} sx={{ justifyContent: 'center' }}>
                 <Grid xs={4}>
                     <ApprovalLineContent

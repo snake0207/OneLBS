@@ -43,3 +43,9 @@ export const usePostVerifyOtp = () => {
         mutationFn: auth.postVerifyOtp,
     })
 }
+
+export const usePostPasswordReset = () => {
+    return useMutation({
+        mutationFn: auth.postPasswordReset,
+    })
+}

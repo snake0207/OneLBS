@@ -19,6 +19,7 @@ import t from '#/common/libs/trans'
 
 import style from './style.module'
 import LoginIcon from '#/assets/loginIcon.svg'
+import { useAuthStepActions } from '#/store/useAuthStepStore'
 
 const CertifiedForm = () => {
     const [isOtpGuideOpen, setIsOtpGuideOpen] = useState(false)
@@ -26,6 +27,7 @@ const CertifiedForm = () => {
     const { twoFactorAuth, secretKey, twoFactorSecret, qrCodeUrl } = useOtpStore()
     const { setAccessToken } = useAuthActions()
     const { setUserStore } = useUserActions()
+    const { initAuthStep } = useAuthStepActions()
     const navigate = useNavigate()
 
     const handleClickOtpGuideClose = () => {
@@ -52,6 +54,7 @@ const CertifiedForm = () => {
                     }) => {
                         setAccessToken(accessToken)
                         setUserStore(userId, permissions, pwChangeRequired)
+                        initAuthStep()
                         navigate('/')
                     },
                 },

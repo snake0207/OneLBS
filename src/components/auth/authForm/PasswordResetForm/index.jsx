@@ -1,30 +1,51 @@
-import { useFormik } from 'formik/dist'
-import { Button, Typography, Box, Icon } from '@mui/material'
+import { useFormik } from 'formik'
+import { Typography, Box, Icon } from '@mui/material'
+import { LoadingButton } from '@mui/lab'
 import FlexEndButtonContainer from '#/components/common/button/FlexEndButtonContainer'
 import PasswordInput from '#/components/common/input/PasswordInput'
 import TextInput from '#/components/common/input/TextInput'
 import { passwordResetSchema } from '#/contents/validationSchema'
-import LoginIcon from '#/assets/loginIcon.svg'
+import { usePostPasswordReset } from '#/hooks/queries/auth'
+import { useAuthStepActions } from '#/store/useAuthStepStore'
+import { usePopupActions } from '#/store/usePopupStore'
 
 import t from '#/common/libs/trans'
+import { encryptPasswordSHA256 } from '#/common/libs/encode'
 
 import style from './style.module'
+import LoginIcon from '#/assets/loginIcon.svg'
 
 const PasswordResetForm = () => {
+    const { mutate, isPending } = usePostPasswordReset()
+    const { initAuthStep } = useAuthStepActions()
+    const { showPopup } = usePopupActions()
     const formik = useFormik({
         initialValues: {
             email: '',
             password: '',
             confirmPassword: '',
-            otp: '',
+            code: '',
         },
         validationSchema: passwordResetSchema,
         onSubmit: (form) => {
-            console.log(form)
+            mutate(
+                {
+                    email: form.email,
+                    password: encryptPasswordSHA256(form.password),
+                    code: form.code,
+                },
+                {
+                    onSuccess: () => {
+                        showPopup('alert', t('alert.password_reset_complete', 'auth'), () =>
+                            initAuthStep(),
+                        )
+                    },
+                },
+            )
         },
     })
     return (
-        <>
+        <form onSubmit={formik.handleSubmit}>
             <Box sx={{ display: 'flex', justifyContent: 'flex-start', mb: 2 }}>
                 <Icon sx={{ display: 'flex', width: 20, height: 20, alignItems: 'center' }}>
                     <img src={LoginIcon} />
@@ -61,17 +82,18 @@ const PasswordResetForm = () => {
             <Typography variant="h6" sx={style.labelText}>
                 OTP
             </Typography>
-            <TextInput formik={formik} name={'otp'} placeholder={t('placeholder.otp', 'auth')} />
+            <TextInput formik={formik} name={'code'} placeholder={t('placeholder.otp', 'auth')} />
             <FlexEndButtonContainer>
-                <Button
+                <LoadingButton
+                    loading={isPending}
                     variant="contained"
-                    onClick={formik.handleSubmit}
+                    type="submit"
                     sx={{ bgcolor: 'button.main', width: '100%', fontWeight: 400 }}
                 >
                     {t('reset_password', 'auth')}
-                </Button>
+                </LoadingButton>
             </FlexEndButtonContainer>
-        </>
+        </form>
     )
 }
 

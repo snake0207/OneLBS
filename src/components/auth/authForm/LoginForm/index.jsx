@@ -53,7 +53,6 @@ const LoginForm = () => {
                             data: { twoFactorAuth, twoFactorSecret, secretKey, qrCodeUrl },
                         },
                     }) => {
-                        console.log(twoFactorAuth, twoFactorSecret, secretKey, qrCodeUrl)
                         if (twoFactorAuth === 'Y') {
                             setTwoFactorSecret(twoFactorSecret)
                             setTwoFactorAuth(twoFactorAuth)

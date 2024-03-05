@@ -12,7 +12,7 @@ import FlexEndButtonContainer from '#/components/common/button/FlexEndButtonCont
 import OtpGuideModal from '#/components/auth/authForm/CertifiedForm/otpGuideModal'
 import { usePostVerifyOtp } from '#/hooks/queries/auth'
 import useOtpStore from '#/store/useOtpStore'
-import { useSetAccessToken } from '#/store/useAuthStore'
+import { useAuthActions } from '#/store/useAuthStore'
 import { useUserActions } from '#/store/useUserStore'
 
 import t from '#/common/libs/trans'
@@ -24,7 +24,7 @@ const CertifiedForm = () => {
     const [isOtpGuideOpen, setIsOtpGuideOpen] = useState(false)
     const { mutate, isPending } = usePostVerifyOtp()
     const { twoFactorAuth, secretKey, twoFactorSecret, qrCodeUrl } = useOtpStore()
-    const setAccessToken = useSetAccessToken()
+    const { setAccessToken } = useAuthActions()
     const { setUserStore } = useUserActions()
     const navigate = useNavigate()
 

@@ -61,7 +61,7 @@ const SwipeMapSearchList = ({
             }}
             sx={{
                 '& .MuiDrawer-paper': {
-                    height: `calc(50% - 100px)`,
+                    height: `calc(50% - 200px)`,
                     overflowY: 'visible',
                 },
             }}

@@ -187,6 +187,7 @@ const ApprovalHistoryDetailPage = () => {
                             m: '0',
                             p: '0',
                             height: '100%',
+                            overflowY: 'inherit',
                         },
                     }}
                 >

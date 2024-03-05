@@ -21,19 +21,54 @@ const ApprovalLineContent = ({ title, color, process, content }) => {
                 {title}
             </Typography>
             <Card sx={style.cardContBox}>
-                <Typography variant="subtitle2" sx={style.cardText}>
-                    {/* 글자색 변경 처리 부분 */}
-                    {/* sx={[style.cardText, { color: color === '#EFEFEF' ? '#000000' : '#ffffff' }]} */}
+                <Typography
+                    variant="subtitle2"
+                    sx={[
+                        style.cardText,
+                        {
+                            backgroundColor: color,
+                            color: color === '#EFEFEF' ? '#A9A9A9' : '#ffffff',
+                        },
+                    ]}
+                >
                     {process}
                 </Typography>
                 <Box p={1} sx={{ pb: 0 }}>
-                    <Typography sx={{ fontSize: 14, fontWeight: 500 }} variant="body2">
+                    <Typography
+                        sx={{
+                            fontSize: 14,
+                            fontWeight: 500,
+                            '@media (max-width:767px)': {
+                                fontSize: 9,
+                            },
+                        }}
+                        variant="body2"
+                    >
                         {content.team}
                     </Typography>
-                    <Typography sx={{ fontSize: 18, fontWeight: 600, color: 'tdxt.darkgray' }}>
+                    <Typography
+                        sx={{
+                            fontSize: 18,
+                            fontWeight: 600,
+                            color: 'tdxt.darkgray',
+                            '@media (max-width:767px)': {
+                                fontSize: 12,
+                            },
+                        }}
+                    >
                         {content.name}
                     </Typography>
-                    <Typography sx={{ fontSize: 14 }} variant="caption">
+                    <Typography
+                        sx={{
+                            fontSize: 14,
+                            display: 'flex',
+                            '@media (max-width:767px)': {
+                                fontSize: 10,
+                                lineHeight: '12px',
+                            },
+                        }}
+                        variant="caption"
+                    >
                         {content.date}
                     </Typography>
                 </Box>

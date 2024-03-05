@@ -34,8 +34,8 @@ const MainLayout = () => {
                         pr: '10px !important',
                         maxWidth: '100% !important',
                         '@media (max-width:1024px)': {
-                            pl: '24px !important',
-                            pr: '24px !important',
+                            pl: '20px !important',
+                            pr: '20px !important',
                             pt: '74px !important',
                             mt: '60px',
                             mb: '24px !important',

@@ -28,6 +28,7 @@ const MapPoiDetail = ({ selectedPoi, setSelectedPoi, poiData }) => {
         setSelectedPoi(null)
     }
     return (
+        poiData &&
         isOpen && (
             <Box sx={{ display: 'flex', margin: '10px' }}>
                 <Box

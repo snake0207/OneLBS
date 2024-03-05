@@ -58,11 +58,13 @@ function POISearchPage() {
                                     setSelectedPoi={setSelectedPoi}
                                 />
                             </Box>
-                            <MapPoiDetail
-                                poiData={poiDetailData}
-                                selectedPoi={selectedPoi}
-                                setSelectedPoi={setSelectedPoi}
-                            />
+                            {poiDetailData && (
+                                <MapPoiDetail
+                                    poiData={poiDetailData}
+                                    selectedPoi={selectedPoi}
+                                    setSelectedPoi={setSelectedPoi}
+                                />
+                            )}
                         </Box>
                     </BrowserView>
                     <MobileView>

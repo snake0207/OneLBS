@@ -66,11 +66,13 @@ function MapSearchPage() {
                                 />
                             </Box>
                             {/* gpss 상세 */}
-                            <MapGpssDetail
-                                selectedPoi={selectedPoi}
-                                setSelectedPoi={setSelectedPoi}
-                                poiData={poiDetailData}
-                            />
+                            {poiDetailData && (
+                                <MapGpssDetail
+                                    selectedPoi={selectedPoi}
+                                    setSelectedPoi={setSelectedPoi}
+                                    poiData={poiDetailData}
+                                />
+                            )}
                             {/* 신규 poi 생성 요청 */}
                             {isNewPoiCreateOpen && (
                                 <MapPoiAdd

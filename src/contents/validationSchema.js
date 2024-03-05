@@ -149,7 +149,7 @@ export const passwordResetSchema = yup.object({
         .matches(REGEXP.passwordIncludeNumber, HELPER_TEXT.passwordNotIncludeNumber)
         .oneOf([yup.ref('password'), null], HELPER_TEXT.confirmPasswordNotMatch)
         .required(HELPER_TEXT.passwordRequired),
-    otp: yup
+    code: yup
         .string()
         .matches(REGEXP.verifyCode, HELPER_TEXT.otpNotMatch)
         .required(HELPER_TEXT.otpRequired),

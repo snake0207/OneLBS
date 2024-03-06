@@ -209,6 +209,7 @@ export const getThemeSettings = (mode) => ({
                       banner: tokens.color[5001],
                       edit: tokens.color[101],
                       closeBg: tokens.color[100],
+                      swiper: tokens.color[900],
                   },
                   button: {
                       ...tokens.button,
@@ -340,6 +341,7 @@ export const getThemeSettings = (mode) => ({
                       edit: tokens.color[5001],
                       close: tokens.color[900],
                       closeBg: tokens.color[1001],
+                      swiper: tokens.color[100],
                   },
                   button: {
                       ...tokens.button,

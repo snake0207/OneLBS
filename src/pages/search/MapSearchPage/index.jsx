@@ -82,7 +82,7 @@ function MapSearchPage() {
                     },
                 }}
             >
-                <Box sx={{ position: 'absolute', top: 0, zIndex: 2 }}>
+                <Box sx={{ position: 'absolute', top: 0, zIndex: 1000 }}>
                     <BrowserView>
                         <Box sx={{ display: 'flex', flexDirection: 'colunm' }}>
                             <Box>

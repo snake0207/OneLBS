@@ -75,7 +75,12 @@ const SwipeMapSearchList = ({
                     visibility: 'visible',
                     right: 0,
                     left: 0,
-                    backgroundColor: '#fff',
+                    backgroundColor: 'background.main',
+                    boxShadow: '0 -6px 4px rgb(0 0 0 / 8%)',
+                    '& .MuiTypography-body1': {
+                        p: '16px 16px 0',
+                        color: 'transparent',
+                    },
                 }}
                 onClick={() => setIsDrawerOpen(!isDrawerOpen)}
             >
@@ -83,7 +88,7 @@ const SwipeMapSearchList = ({
                     sx={{
                         width: 30,
                         height: 6,
-                        backgroundColor: 'black',
+                        backgroundColor: 'color.swiper',
                         borderRadius: 3,
                         position: 'absolute',
                         top: 8,
@@ -108,6 +113,10 @@ const SwipeMapSearchList = ({
                         justifyContent: !isResultNon ? '' : 'center',
                         alignItems: !isResultNon ? '' : 'center',
                         overflow: 'auto',
+                        backgroundColor: 'background.main',
+                        '@media (max-width:767px)': {
+                            width: '100%',
+                        },
                     }}
                     ref={poiList}
                 >

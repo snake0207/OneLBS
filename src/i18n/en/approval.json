@@ -63,5 +63,62 @@
         "requester": "requester",
         "reviewer": "reviewer",
         "approver": "approver"
+    },
+    "commonInfo": {
+        "stationStatus": {
+            "0": "(영)알수없음",
+            "1": "(영)통신이상",
+            "2": "(영)사용가능",
+            "3": "(영)충전중",
+            "4": "(영)운영중지",
+            "5": "(영)점검중",
+            "6": "(영)예약중"
+        },
+        "weekday": "weekday",
+        "charger": "charger",
+        "unknown": "unknown"
+    },
+    "evChargingInfo": {
+        "isFree": {
+            "0": "(영)무료",
+            "1": "(영)유료"
+        },
+        "connector": {
+            "0": "(영)알수없음",
+            "1": "(영)AC type 1 (국내, 북미)",
+            "2": "(영)AC type 2 (유럽)",
+            "3": "(영)Combo(AC+DC) type 1 (국내, 북미)",
+            "4": "(영)Combo(AC+DC) type 2 (유럽)",
+            "5": "(영)CHAdeMO (확장)",
+            "6": "(영)CHAdeMO + AC tyep1 (일본)"
+        },
+        "speed": {
+            "0": "(영)알수없음",
+            "1": "(영)완속",
+            "2": "(영)급속",
+            "3": "(영)초급속"
+        },
+        "status": {
+            "0": "(영)알수없음",
+            "1": "(영)충전가능",
+            "2": "(영)충전중",
+            "3": "(영)충전불가"
+        }
+    },
+    "fuelInfo": {
+        "type": {
+            "G": "(영)휘발유",
+            "PG": "(영)고급휘발유",
+            "D": "(영)경유",
+            "L": "(영)LPG"
+        }
+    },
+    "parkingInfo": {
+        "price": "price"
+    },
+    "h2ChargingInfo": {
+        "0": "(영)알수없음",
+        "350": "(영)350bar 수소차",
+        "750": "(영)750bar 수소차"
     }
 }

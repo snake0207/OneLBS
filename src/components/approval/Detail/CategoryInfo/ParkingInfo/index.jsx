@@ -5,6 +5,7 @@ import EvStationIcon from '#/assets/evStationIcon.svg'
 import EditableTextColumn from '#/components/approval/Detail/CategoryInfo/EditableTextColumn/index.jsx'
 import { useRef } from 'react'
 import EditableSelectColumn from '#/components/approval/Detail/CategoryInfo/EditableSelectColumn/index.jsx'
+import t from '#/common/libs/trans.js'
 
 const ParkingInfo = ({ data, isEditable, formik }) => {
     const selectTypeItems = useRef([
@@ -63,7 +64,7 @@ const ParkingInfo = ({ data, isEditable, formik }) => {
                                 // src={EvStationIcon}
                                 style={{ verticalAlign: 'middle', paddingRight: '4px' }}
                             />
-                            영업 요일
+                            {t('commonInfo.weekday', 'approval')}
                         </Typography>
                     </AccordionSummary>
                     <AccordionDetails>
@@ -96,7 +97,7 @@ const ParkingInfo = ({ data, isEditable, formik }) => {
                                 // src={EvStationIcon}
                                 style={{ verticalAlign: 'middle', paddingRight: '4px' }}
                             />
-                            가격
+                            {t('parkingInfo.price', 'approval')}
                         </Typography>
                     </AccordionSummary>
                     <AccordionDetails>

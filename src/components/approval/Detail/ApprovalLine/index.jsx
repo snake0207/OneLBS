@@ -3,7 +3,6 @@ import { Box, Card, useTheme } from '@mui/material'
 import t from '#/common/libs/trans.js'
 import Grid from '@mui/material/Unstable_Grid2'
 import { useMemo, useRef } from 'react'
-import Headline from '#/components/approval/Detail/Headline/index.jsx'
 import ArrowForward from '#/assets/arrowForwardIos.svg'
 import ArrowForwardDark from '#/assets/ArrowForwardDark.svg'
 import ArrowRedBack from '#/assets/arrowRedBack.svg'
@@ -40,7 +39,6 @@ const ApprovalLineContent = ({ title, color, process, content }) => {
 }
 
 const ApprovalLine = ({ status, content }) => {
-    // TODO: 상태별 화살표 색상 및 방향 처리 필요
     const theme = useTheme()
     const colors = useRef({
         request: theme.palette.grey[200],

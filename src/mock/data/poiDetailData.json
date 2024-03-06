@@ -27,21 +27,21 @@
                 },
                 "evCharging": {
                     "brand": "EIT",
-                    "maxWatt": "100kw",
+                    "maxWatt": "100",
                     "pFee": 0,
-                    "stationStatus": 1,
+                    "stationStatus": 3,
                     "status": [
                         {
                             "connector": 2,
                             "speed": 1,
                             "possibleCount": 3,
-                            "watt": 7
+                            "watt": "7"
                         },
                         {
                             "connector": 1,
                             "speed": 2,
                             "possibleCount": 1,
-                            "watt": 50
+                            "watt": "50"
                         }
                     ],
                     "openingHours": [
@@ -60,13 +60,13 @@
                         {
                             "id": "408104#11",
                             "speed": 1,
-                            "watt": "7kW",
+                            "watt": "7",
                             "status": 1,
                             "lastUsedTime": 2021231231123,
                             "connectorType": 2,
                             "price": [
                                 {
-                                    "price": 12.5,
+                                    "price": "12.5",
                                     "priceUnit": "kwh",
                                     "currency": "€",
                                     "currencyCode": "EUR",
@@ -77,7 +77,7 @@
                         {
                             "id": "408104#12",
                             "speed": 2,
-                            "watt": "50kW",
+                            "watt": "50",
                             "status": 2,
                             "lastUsedTime": 2021231231123,
                             "connectorType": 4,
@@ -91,7 +91,7 @@
                         {
                             "type": "G",
                             "price": {
-                                "price": 12.5,
+                                "price": "12.5",
                                 "priceUnit": "l",
                                 "currencyCode": "EUR",
                                 "currency": "€"
@@ -100,7 +100,7 @@
                         {
                             "type": "D",
                             "price": {
-                                "price": 9.5,
+                                "price": "9.5",
                                 "priceUnit": "l",
                                 "currencyCode": "EUR",
                                 "currency": "€"
@@ -202,7 +202,7 @@
             }
         ],
         "approvalInfo": {
-            "status": "rejected_review",
+            "status": "request",
             "requestReason": "위.경도 좌표 수정",
             "reviewerComment": "위.경도 재확인 후 요청하라",
             "approverComment": null,
@@ -227,12 +227,12 @@
             "historyList": [
                 {
                     "date": "2024-01-19 12:10:02",
-                    "status": "temporary",
+                    "status": "request",
                     "history": "위.경도 수정 요청"
                 },
                 {
                     "date": "2024-01-19 12:10:02",
-                    "status": "reject",
+                    "status": "rejected_review",
                     "history": "위.경도 수정 요청 반려"
                 },
                 {

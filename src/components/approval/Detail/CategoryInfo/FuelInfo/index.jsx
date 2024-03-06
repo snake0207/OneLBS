@@ -3,6 +3,7 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore.js'
 import Typography from '@mui/material/Typography'
 import EvStationIcon from '#/assets/evStationIcon.svg'
 import EditableTextColumn from '#/components/approval/Detail/CategoryInfo/EditableTextColumn/index.jsx'
+import t from '#/common/libs/trans.js'
 
 const FuelInfo = ({ data, isEditable, formik }) => {
     return (
@@ -44,7 +45,7 @@ const FuelInfo = ({ data, isEditable, formik }) => {
                                 // src={EvStationIcon}
                                 style={{ verticalAlign: 'middle', paddingRight: '4px' }}
                             />
-                            영업 요일
+                            {t('commonInfo.weekday', 'approval')}
                         </Typography>
                     </AccordionSummary>
                     <AccordionDetails>
@@ -78,7 +79,7 @@ const FuelInfo = ({ data, isEditable, formik }) => {
                                     src={EvStationIcon}
                                     style={{ verticalAlign: 'middle', paddingRight: '4px' }}
                                 />
-                                {type}
+                                {t(`fuelInfo.type.${type}`, 'approval')}
                             </Typography>
                         </AccordionSummary>
                         <AccordionDetails>

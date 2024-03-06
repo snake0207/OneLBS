@@ -34,9 +34,14 @@ import useLayoutStore from '#/store/useLayoutStore'
 import { isMobile } from 'react-device-detect'
 
 import style from './style.module'
+import { useEffect, useState } from 'react'
+import { useUserPwChangeRequiredState } from '#/store/useUserStore'
+import PasswordChangeModal from '#/components/dashboard/PasswordChangeModal'
 
 function MainPage() {
     const { themeMode } = useLayoutStore()
+    const pwChangeRequired = useUserPwChangeRequiredState()
+    const [isOpenPasswordChangeModal, setIsOpenPasswordChangeModal] = useState(false)
     const countryMockData = [
         {
             lightIcon: <img src={EvIcon} />,
@@ -134,6 +139,12 @@ function MainPage() {
         },
     ]
 
+    useEffect(() => {
+        if (pwChangeRequired) {
+            setIsOpenPasswordChangeModal(true)
+        }
+    }, [])
+
     return (
         <Box>
             <Box sx={style.tooltipBox} style={{ flexDirection: isMobile ? 'column' : 'row' }}>
@@ -155,6 +166,10 @@ function MainPage() {
                     />
                 ))}
             </Box>
+            <PasswordChangeModal
+                isOpen={isOpenPasswordChangeModal}
+                onClose={() => setIsOpenPasswordChangeModal(false)}
+            />
         </Box>
     )
 }

@@ -20,11 +20,16 @@ const useApiError = () => {
         showPopup('alert', t('400.10122', 'error'), () => changeAuthStep(AUTH_STEP.emailAuth))
     }
 
+    const handler40010121 = (res) => {
+        showPopup('alert', t('400.10121', 'error', { failCount: res.data.failCount }))
+    }
+
     const handlers = {
         default: handlerDefault,
         400: {
             default: handler400Default,
             10122: handler40010122,
+            10121: handler40010121,
         },
     }
 
@@ -34,7 +39,7 @@ const useApiError = () => {
         const errorMessage = error.response.data.error
 
         if (handlers[httpStatus]?.[subCode]) {
-            handlers[httpStatus][subCode]()
+            handlers[httpStatus][subCode](error.response.data)
             return
         }
 

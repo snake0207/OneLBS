@@ -12,6 +12,7 @@ const style = {
     text: {
         color: 'text.main',
         textAlign: 'center',
+        whiteSpace: 'pre-line',
     },
     btnBox: {
         justifyContent: 'center',

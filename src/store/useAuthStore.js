@@ -8,6 +8,7 @@ const useAuthStore = create(
                 accessToken: null,
                 actions: {
                     setAccessToken: (accessToken) => set({ accessToken }),
+                    resetAccessToken: () => set({ accessToken: null }),
                 },
             }),
             {

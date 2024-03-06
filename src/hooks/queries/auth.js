@@ -1,6 +1,8 @@
 import auth from '#/api/auth'
 import { QUERY_KEYS } from '#/contents/queryKeys'
 import { useMutation, useQuery } from '@tanstack/react-query'
+import { useAuthActions } from '#/store/useAuthStore'
+import { useUserActions } from '#/store/useUserStore'
 
 export const usePostLogin = () => {
     return useMutation({
@@ -44,5 +46,17 @@ export const usePostVerifyOtp = () => {
 export const usePostPasswordReset = () => {
     return useMutation({
         mutationFn: auth.postPasswordReset,
+    })
+}
+
+export const usePostLogout = () => {
+    const { resetAccessToken } = useAuthActions()
+    const { resetUserStore } = useUserActions()
+    return useMutation({
+        mutationFn: auth.postLogout,
+        onSettled: () => {
+            resetAccessToken()
+            resetUserStore()
+        },
     })
 }

@@ -16,7 +16,7 @@ const useApiError = () => {
         showPopup('alert', errorMessage)
     }
 
-    const handler40010122 = () => {
+    const handler400inActive = () => {
         showPopup('alert', t('400.10122', 'error'), () => changeAuthStep(AUTH_STEP.emailAuth))
     }
 
@@ -28,8 +28,9 @@ const useApiError = () => {
         default: handlerDefault,
         400: {
             default: handler400Default,
+            10118: handler400inActive,
             10121: handler400failCount,
-            10122: handler40010122,
+            10122: handler400inActive,
             10123: handler400failCount,
         },
     }

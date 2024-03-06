@@ -5,6 +5,7 @@ import IconButton from '@mui/material/IconButton'
 import Container from '@mui/material/Container'
 //import FullscreenIcon from '@mui/icons-material/Fullscreen'
 import useLayoutStore from '#/store/useLayoutStore'
+import { usePostLogout } from '#/hooks/queries/auth'
 import { Icon } from '@mui/material'
 
 import t from '#/common/libs/trans'
@@ -39,14 +40,16 @@ const languages = [
 
 function Header({ toggleDrawer }) {
     const { language, setLanguage, themeMode } = useLayoutStore()
+    const { mutate } = usePostLogout()
     const [, toggleFullScreen] = useFullScreen()
     const navigate = useNavigate()
 
     const handleSelectUserMenu = (item) => {
         console.log(item)
 
-        if (item.value === '/logout') {
+        if (item.key === 'logout') {
             // clear auth token & user data
+            mutate()
         }
 
         navigate(item.value)

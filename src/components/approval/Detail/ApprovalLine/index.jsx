@@ -82,7 +82,6 @@ const ApprovalLineContent = ({ title, color, process, content }) => {
 }
 
 const ApprovalLine = ({ status, content }) => {
-    const theme = useTheme()
     const { themeMode } = getLayoutState()
     const colors = useRef({
         request: themeMode === 'light' ? '#e2e2e2' : '#071c2c',
@@ -122,7 +121,7 @@ const ApprovalLine = ({ status, content }) => {
                 isReject.current.approval = true
                 break
         }
-    }, [])
+    }, [status])
 
     return (
         <Box>

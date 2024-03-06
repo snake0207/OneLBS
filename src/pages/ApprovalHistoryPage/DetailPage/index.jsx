@@ -203,7 +203,7 @@ const ApprovalHistoryDetailPage = () => {
                 >
                     {/* 결제라인 */}
                     <ApprovalLine
-                        status={parsedData.approvalInfo.status}
+                        status={parsedData.status}
                         content={parsedData.approvalInfo.approvalLineContents}
                     />
                     {/* 정보 탭 */}

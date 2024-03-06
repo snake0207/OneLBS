@@ -26,15 +26,15 @@ const breadcrumbNameMap = () => ({
     '/poi-view/map': t('top_menu.poi_map'),
     '/components': t('components'),
     '/components/layouts': t('layouts'),
-    '/components/approval': t('approval', 'approval'),
-    '/components/approval/all': t('list_all', 'approval'),
-    '/components/approval/requester': t('list_requester', 'approval'),
-    '/components/approval/reviewer': t('list_reviewer', 'approval'),
-    '/components/approval/approver': t('list_approver', 'approval'),
-    '/components/approval/all/detail': t('detail', 'approval'),
-    '/components/approval/requester/detail': t('detail', 'approval'),
-    '/components/approval/reviewer/detail': t('detail', 'approval'),
-    '/components/approval/approver/detail': t('detail', 'approval'),
+    // approval history
+    '/approval': t('list_all', 'approval'),
+    '/approval/user-history': t('requester', 'approval'),
+    '/approval/reviewer-history': t('reviewer', 'approval'),
+    '/approval/manager-history': t('approver', 'approval'),
+    '/approval/detail': t('detail', 'approval'),
+    '/approval/user-history/detail': t('detail', 'approval'),
+    '/approval/reviewer-history/detail': t('detail', 'approval'),
+    '/approval/manager-history/detail': t('detail', 'approval'),
 })
 
 function isAvailablePath(path) {

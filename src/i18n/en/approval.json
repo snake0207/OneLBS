@@ -1,5 +1,5 @@
 {
-    "list_all": "Approval history list(All)",
+    "list_all": "Approval history list",
     "list_requester": "Approval history list(Requester)",
     "list_reviewer": "Approval history list(Reviewer)",
     "list_approver": "Approval history list(Approver)",
@@ -35,7 +35,8 @@
         "request": "Request",
         "reviewed": "Reviewed",
         "approved": "Approved",
-        "rejected": "Rejected"
+        "rejected_review": "Review rejected",
+        "rejected_approval": "Approval rejected"
     },
     "actions": {
         "temporary": "Temporary save",

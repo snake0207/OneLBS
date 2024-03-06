@@ -22,12 +22,13 @@ import H2ChargingInfo from '#/components/approval/Detail/CategoryInfo/H2Charging
 import ParkingInfo from '#/components/approval/Detail/CategoryInfo/ParkingInfo/index.jsx'
 import GoogleMapComponent from '#/components/common/map/googleMap/index.jsx'
 import MapApprovalSelect from '#/components/common/map/MapApprovalSelect/index.jsx'
-import { MobileView, isBrowser } from 'react-device-detect'
+import { MobileView, isBrowser, isMobile } from 'react-device-detect'
 
 import PoiSearchIcon from '#/assets/poiSearchIcon.svg'
 import PoiSearchIconDark from '#/assets/poiSearchIconDark.svg'
 import useLayoutStore from '#/store/useLayoutStore'
 import Divider from '@mui/material/Divider'
+import Header1Depth from '#/layouts/Header1Depth/index.jsx'
 
 const markerSampleData = [
     {
@@ -148,27 +149,10 @@ const ApprovalHistoryDetailPage = () => {
             () => openAlertPopup(action),
         )
     }
-    const { themeMode } = useLayoutStore()
 
     return (
         <>
-            <MobileView>
-                <Icon
-                    style={{
-                        display: 'flex',
-                        position: 'absolute',
-                        top: ' 75px',
-                        zIndex: '4',
-                    }}
-                >
-                    {themeMode === 'light' ? (
-                        <img src={PoiSearchIcon} style={{ display: 'flex', width: '24px' }} />
-                    ) : (
-                        <img src={PoiSearchIconDark} style={{ display: 'flex', width: '24px' }} />
-                    )}
-                </Icon>
-            </MobileView>
-            <TitleBar title={t('detail', 'approval')} />
+            {isMobile ? <Header1Depth /> : <TitleBar title={t('detail', 'approval')} />}
             <Box
                 sx={{
                     position: 'relative',

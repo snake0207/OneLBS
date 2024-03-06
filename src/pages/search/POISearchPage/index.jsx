@@ -1,90 +1,20 @@
 import t from '#/common/libs/trans'
 import GoogleMapComponent from '#/components/common/map/googleMap'
 import TitleBar from '#/components/common/menu/TitleBar'
-import { Box, Stack } from '@mui/material'
+import { Box, Icon, Button } from '@mui/material'
 import { useNavigate } from 'react-router-dom'
 import { useState } from 'react'
 import { BrowserView, MobileView } from 'react-device-detect'
 import MapSearch from '#/components/common/map/MapSearch/index.jsx'
-import MapSearchList from '#/components/common/map/MapSearchList/index.jsx'
-import poiDetailData from '#/mock/data/poiDetailData.json'
-import TuneIcon from '@mui/icons-material/Tune'
+import MapSearchList from '#/components/common/map/searchList/MapSearchList/index.jsx'
+import poiListData from '#/mock/data/poiListData.json'
 import MapPoiDetail from '#/components/common/map/MapPoiDetail/index.jsx'
-
-const mapSampleData = [
-    {
-        poiId: 'ChIJm8fw1mfJwoARNzsUmsgD-Ig',
-        address: '2268 Firestone Blvd, Los Angeles, CA 90002, USA',
-        position: {
-            center: {
-                lat: 33.9578479,
-                lon: -118.23168319999998,
-            },
-        },
-        title: 'Blink Charging Station',
-        category: 'ev',
-    },
-    {
-        poiId: 'ChIJSblb29_LwoARUQWFAR785F4',
-        address: '2365 E Century Blvd, Los Angeles, CA 90002, USA',
-        position: {
-            center: {
-                lat: 33.946781099999995,
-                lon: -118.22994750000001,
-            },
-        },
-        title: 'EVCS Charging Station',
-        category: 'ev',
-    },
-    {
-        poiId: 'ChIJ5xP4utnLwoARR5thyWQMcI0',
-        address: '10320 Wilmington Ave, Los Angeles, CA 90002, USA',
-        position: {
-            center: {
-                lat: 33.942737099999995,
-                lon: -118.2389758,
-            },
-        },
-        title: 'Electric Circuit Charging Station',
-        category: 'ev',
-    },
-    {
-        poiId: 'ChIJS-pkdn7JwoARzkOPLkLB0LM',
-        address: '1501 E Century Blvd, Los Angeles, CA 90002, USA',
-        position: {
-            center: {
-                lat: 33.945758000000005,
-                lon: -118.246968,
-            },
-        },
-        title: 'Flo Charging Station',
-        category: 'ev',
-    },
-    {
-        poiId: 'ChIJMS-G-n3JwoAR2TPD7A6yXoY',
-        address: '10104 Compton Ave, Los Angeles, CA 90002, USA',
-        position: {
-            center: {
-                lat: 33.9448115,
-                lon: -118.246128,
-            },
-        },
-        title: 'ChargePoint Charging Station',
-        category: 'ev',
-    },
-    {
-        poiId: 'ChIJm6KTpoiIdnLwoARwSZzuHOvyOU',
-        address: '10455 Wilmington Ave, Los Angeles, CA 90002, USA',
-        position: {
-            center: {
-                lat: 33.941035899999996,
-                lon: -118.239077,
-            },
-        },
-        title: 'Electric Circuit Charging Station',
-        category: 'ev',
-    },
-]
+import poiDetailData from '#/mock/data/poiDetailData.json'
+import PoiSearchIcon from '#/assets/poiSearchIcon.svg'
+import PoiSearchIconDark from '#/assets/poiSearchIconDark.svg'
+import useLayoutStore from '#/store/useLayoutStore'
+import FilterIcon from '#/assets/filterIcon.svg'
+import SwipeMapSearchList from '#/components/common/map/searchList/SwipeMapSearchList/index.jsx'
 
 const markerSampleData = [
     {
@@ -115,11 +45,37 @@ function POISearchPage() {
         setSelectedPoi(id)
         navigate(`/poi-view/map/${id}`)
     }
+    const { themeMode } = useLayoutStore()
     return (
         <Box>
+            <MobileView>
+                <Icon
+                    style={{
+                        display: 'flex',
+                        position: 'absolute',
+                        top: ' 75px',
+                        zIndex: '4',
+                    }}
+                >
+                    {themeMode === 'light' ? (
+                        <img src={PoiSearchIcon} style={{ display: 'flex', width: '24px' }} />
+                    ) : (
+                        <img src={PoiSearchIconDark} style={{ display: 'flex', width: '24px' }} />
+                    )}
+                </Icon>
+            </MobileView>
             <TitleBar title={t('top_menu.poi_search')} />
-            <Box sx={{ position: 'relative', width: '100%', height: 'calc(100vh - 120px)' }}>
-                <Box sx={{ position: 'absolute', top: 0, zIndex: 1000 }}>
+            <Box
+                sx={{
+                    position: 'relative',
+                    width: '100%',
+                    height: 'calc(100vh - 120px)',
+                    '@media (max-width:1024px)': {
+                        height: 'calc(100vh - 153px)',
+                    },
+                }}
+            >
+                <Box sx={{ position: 'absolute', top: 0, zIndex: 2 }}>
                     <BrowserView>
                         <Box sx={{ display: 'flex', flexDirection: 'colunm' }}>
                             <Box>
@@ -127,27 +83,40 @@ function POISearchPage() {
                                 <MapSearch />
                                 {/* 검색 결과 */}
                                 <MapSearchList
-                                    searchResultArr={mapSampleData}
+                                    searchResultArr={poiListData}
                                     selectedPoi={selectedPoi}
                                     setSelectedPoi={setSelectedPoi}
                                 />
                             </Box>
-                            <MapPoiDetail
-                                selectedPoi={selectedPoi}
-                                setSelectedPoi={setSelectedPoi}
-                            />
+                            {poiDetailData && (
+                                <MapPoiDetail
+                                    poiData={poiDetailData}
+                                    selectedPoi={selectedPoi}
+                                    setSelectedPoi={setSelectedPoi}
+                                />
+                            )}
                         </Box>
                     </BrowserView>
                     <MobileView>
-                        <TuneIcon
-                            sx={{
-                                fontSize: 32,
-                                mt: 1,
-                                ml: 1,
-                                border: '1px solid black',
-                            }}
+                        <Button
                             onClick={() => setShowSearch(!showSearch)}
-                        />
+                            sx={{
+                                width: '40px',
+                                height: '40px',
+                                minWidth: '40px',
+                                mt: '8px',
+                                ml: '8px',
+                                borderRadius: '8px',
+                                backgroundColor: '#0057BB',
+                                boxShadow: '0 3px 14px rgb(0 0 0 / 24%)',
+                                ZIndex: '2',
+                                '&:hover': {
+                                    backgroundColor: '#0057BB',
+                                },
+                            }}
+                        >
+                            <img src={FilterIcon} />
+                        </Button>
                         {showSearch && (
                             <Box
                                 sx={{
@@ -159,23 +128,21 @@ function POISearchPage() {
                             >
                                 {/* 지도 검색 */}
                                 <MapSearch />
-                                {/* 검색 결과 */}
-                                <Box sx={{ mt: 17 }}>
-                                    <MapSearchList
-                                        searchResultArr={mapSampleData}
-                                        selectedPoi={selectedPoi}
-                                        setSelectedPoi={handlePOISelected}
-                                    />
-                                </Box>
                             </Box>
                         )}
+                        {/* 검색 결과 */}
+                        <SwipeMapSearchList
+                            searchResultArr={poiListData}
+                            selectedPoi={selectedPoi}
+                            setSelectedPoi={handlePOISelected}
+                        />
                     </MobileView>
                 </Box>
                 <GoogleMapComponent
                     markerDataArr={markerSampleData}
                     selectedPoi={selectedPoi}
                     setSelectedPoi={setSelectedPoi}
-                    searchResultArr={mapSampleData}
+                    searchResultArr={poiListData}
                 />
             </Box>
         </Box>

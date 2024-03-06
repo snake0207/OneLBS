@@ -3,19 +3,22 @@ import Typography from '@mui/material/Typography'
 import TextInput from '#/components/common/input/TextInput/index.jsx'
 import { useState } from 'react'
 import { getLayoutState } from '#/store/useLayoutStore.js'
-import AlamIcon1 from '#/assets/alramIcon.svg'
-import AlamIcon2 from '#/assets/alramIconDark.svg'
 import IconButton from '@mui/material/IconButton'
+
+import EditIcon from '#/assets/editIcon.svg'
+import EditIconDark from '#/assets/editIconDark.svg'
+import SaveIcon from '#/assets/saveIcon.svg'
+import SaveIconDark from '#/assets/saveIconDark.svg'
 
 const EditableTextColumn = ({ value, name, isEditable, formik }) => {
     const [isShowInput, setIsShowInput] = useState(false)
     const [isDisableInput, setIsDisableInput] = useState(true)
     const { themeMode } = getLayoutState()
     // 테마에 따른 아이콘, 배경색 삽입부
-    const editButtonIcon = themeMode === 'light' ? AlamIcon1 : AlamIcon1
-    const saveButtonIcon = themeMode === 'light' ? AlamIcon2 : AlamIcon2
-    const editButtonBackground = themeMode === 'light' ? '#CFE5FF' : '#84A3C7'
-    const saveButtonBackground = themeMode === 'light' ? '#002C5F' : '#00418D'
+    const editButtonIcon = themeMode === 'light' ? EditIcon : EditIconDark
+    const saveButtonIcon = themeMode === 'light' ? SaveIcon : SaveIconDark
+    const editButtonBackground = themeMode === 'light' ? '#CFE5FF' : '#002C5F'
+    const saveButtonBackground = themeMode === 'light' ? '#002C5F' : '#002C5F'
 
     const handleClickInputButton = () => {
         setIsShowInput(true)
@@ -36,15 +39,21 @@ const EditableTextColumn = ({ value, name, isEditable, formik }) => {
                     <IconButton
                         onClick={handleClickInputButton}
                         sx={{
+                            mb: '4px',
                             backgroundColor: isDisableInput
                                 ? editButtonBackground
                                 : saveButtonBackground,
+                            '&:hover': {
+                                backgroundColor: isDisableInput
+                                    ? editButtonBackground
+                                    : saveButtonBackground,
+                            },
                         }}
                     >
                         {isDisableInput ? (
-                            <img src={editButtonIcon} />
+                            <img src={editButtonIcon} width={14} height={14} />
                         ) : (
-                            <img src={saveButtonIcon} />
+                            <img src={saveButtonIcon} width={14} height={14} />
                         )}
                     </IconButton>
                 )}

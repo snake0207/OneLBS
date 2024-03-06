@@ -1,24 +1,35 @@
 const style = {
+    mapDetailBox: {
+        display: 'flex',
+        margin: '10px',
+        '@media (max-width:1024px)': {
+            margin: '0',
+            pt: '15px',
+        },
+    },
     mapDetail: {
         width: '350px',
         ml: 0.5,
         opacity: '95%',
         borderRadius: '8px',
+        '@media (max-width:1024px)': {
+            width: '100%',
+            ml: 0,
+            opacity: '1',
+        },
+    },
+    mapDetailContent: {
+        maxHeight: '760px',
+        overflow: 'auto',
+        paddingTop: '16px',
+        padding: '20px 16px 16px 16px',
+        borderRadius: '0 0 8px 8px',
+        backgroundColor: 'dialog.main',
         boxShadow: '0 3px 14px rgb(0 0 0 / 24%)',
-        '& .css-1ilmods': {
-            backgroundColor: 'dialog.main',
-            padding: '20px 16px 16px 16px',
-            borderRadius: '0 0 8px 8px',
-        },
-        '& .css-1fbfkr9': {
-            backgroundColor: 'dialog.main',
-            padding: '20px 16px 16px 16px',
-            borderRadius: '0 0 8px 8px',
-        },
-        '& .css-2j8k7x': {
-            backgroundColor: 'dialog.main',
-            padding: '20px 16px 16px 16px',
-            borderRadius: '0 0 8px 8px',
+        '@media (max-width:1024px)': {
+            boxShadow: 'none',
+            padding: '20px 0 16px 0',
+            overflow: 'inherit',
         },
     },
     tabMenu: {
@@ -44,10 +55,10 @@ const style = {
             backgroundColor: '#0A5CBA',
         },
     },
-    blueButton: {
+    darkBlueButton: {
         whiteSpace: 'nowrap',
         backgroundColor: 'button.light',
-        borderRadius: '30px',
+        borderRadius: '4px',
         flex: 1,
         boxShadow: 'none',
         '&:hover': {
@@ -60,7 +71,7 @@ const style = {
         ml: '2px',
         backgroundColor: 'button.lightblue',
         border: '1px solid #5b8cc5',
-        borderRadius: '30px',
+        borderRadius: '4px',
         flex: 1,
         boxShadow: 'none',
         '&:hover': {
@@ -68,11 +79,11 @@ const style = {
         },
     },
     lineButton: {
-        borderRadius: '30px',
+        borderRadius: '4px',
         color: '#002C5F',
         ml: '2px',
         flex: 1,
-        border: '1px solid #5b8cc5',
+        border: '1px solid #002C5F',
         backgroundColor: 'button.white',
         boxShadow: 'none',
         '&:hover': {

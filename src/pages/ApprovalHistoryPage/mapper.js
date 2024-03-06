@@ -2,6 +2,7 @@ import {
     parseCategory,
     parseCongestion,
     parseOpeningHours,
+    parsePoiProviderType,
     parsePriceIsFree,
 } from '#/common/libs/approvalParser.js'
 import t from '#/common/libs/trans.js'
@@ -128,6 +129,7 @@ const detailResponseDataMapper = (res) => {
  * gpss 상세데이터 매퍼
  */
 const gpssDetailResponseDataMapper = (res) => {
+    if (!!res?.data?.result === false) return null
     const data = res.data.result[0]
     const basicData = {
         category: parseCategory(data),
@@ -139,6 +141,24 @@ const gpssDetailResponseDataMapper = (res) => {
         },
     }
     return setCategoryData(basicData, data)
+}
+
+/**
+ * gpss 리스트데이터 매퍼
+ */
+const gpssListResponseDataMapper = (res) => {
+    if (!!res?.data?.result === false) return null
+    const dataArr = res.data.result
+    return dataArr.map((data) => ({
+        poiId: data.poiId,
+        cpType: parsePoiProviderType(data.poiId),
+        category: parseCategory(data),
+        title: data.title,
+        address: data.address,
+        position: data.position,
+        country: data.country,
+        progress: data.progress ?? null,
+    }))
 }
 
 const setCategoryData = (basicData, originData) => {
@@ -156,4 +176,4 @@ const setCategoryData = (basicData, originData) => {
     }
 }
 
-export { detailResponseDataMapper, gpssDetailResponseDataMapper }
+export { detailResponseDataMapper, gpssDetailResponseDataMapper, gpssListResponseDataMapper }

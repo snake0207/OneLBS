@@ -16,16 +16,17 @@ const globalStyles = css`
         display: none;
     }
     ::-webkit-scrollbar {
-        width: 9px;
+        width: 5px;
+        height: 7px;
     }
     ::-webkit-scrollbar-track {
-        border-radius: 0px;
-        background: transparent;
+        border-radius: 20px;
+        background: #e2e2e2;
     }
     ::-webkit-scrollbar-thumb {
         border-radius: 20px;
-        background: #bcc0c5;
-        border: 3px solid #ffffff;
+        background: #a9a9a9;
+        border: 3px solid transparent;
     }
 `
 

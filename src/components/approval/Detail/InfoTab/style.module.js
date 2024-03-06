@@ -6,7 +6,6 @@ const style = {
         borderTop: '1px solid',
         th: {
             p: '6px 0px',
-            color: 'white',
             fontSize: 15,
             fontWeight: 500,
             textAlign: 'center',
@@ -34,7 +33,7 @@ const style = {
         },
     },
     tabMenu: {
-        width: '25%',
+        width: '140px',
         fontSize: 15,
         fontWeight: 600,
         color: 'text.taps',
@@ -48,8 +47,11 @@ const style = {
         '&:first-of-type': { marginRight: '4px' },
     },
     tabs: {
+        position: 'relative',
         minHeight: '36px',
         marginRight: '0px',
+        mb: '20px',
+        mt: '24px',
         '& .MuiTabs-indicator': {
             backgroundColor: 'transparent',
         },

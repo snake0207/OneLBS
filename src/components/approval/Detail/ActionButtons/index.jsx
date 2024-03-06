@@ -1,6 +1,6 @@
 import { Button } from '@mui/material'
 import t from '#/common/libs/trans.js'
-import style from './style.module.js'
+import style from './style.module'
 
 const requesterButtons = (status, clickAction, id) => {
     switch (status) {

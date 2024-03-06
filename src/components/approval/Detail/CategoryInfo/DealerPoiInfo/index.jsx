@@ -1,9 +1,12 @@
 import { Accordion, AccordionDetails, AccordionSummary } from '@mui/material'
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore.js'
 import Typography from '@mui/material/Typography'
-import EvStationIcon from '#/assets/evStationIcon.svg'
 import { useRef } from 'react'
 import EditableSelectColumn from '#/components/approval/Detail/CategoryInfo/EditableSelectColumn/index.jsx'
+import DealerPoiIcon from '#/assets/dealerPoiIcon.svg'
+import DealerPoiIconDark from '#/assets/dealerPoiIconDark.svg'
+import useLayoutStore from '#/store/useLayoutStore'
+import style from './style.module'
 
 const DealerPoiInfo = ({ data, isEditable, formik }) => {
     const selectTypeItems = useRef([
@@ -16,22 +19,31 @@ const DealerPoiInfo = ({ data, isEditable, formik }) => {
         { key: 2, value: 'K', label: 'Kia' },
         { key: 3, value: 'Genesis', label: 'Genesis' },
     ])
+    const { themeMode } = useLayoutStore()
 
     return (
-        <Accordion>
-            <AccordionSummary
-                expandIcon={<ExpandMoreIcon />}
-                sx={{ fontSize: '18px', fontWeight: 500, color: '#05141F', mb: '4px' }}
-            >
-                <Typography sx={{ fontSize: '18px', fontWeight: 500, color: '#05141F', mb: '4px' }}>
-                    <img
-                        src={EvStationIcon}
-                        style={{ verticalAlign: 'middle', paddingRight: '4px' }}
-                    />
+        <Accordion sx={style.accordionBox}>
+            <AccordionSummary expandIcon={<ExpandMoreIcon />} sx={style.summaryBox}>
+                <Typography
+                    sx={{
+                        display: 'flex',
+                        fontSize: '18px',
+                        fontWeight: 600,
+                        color: 'text.darkgray',
+                    }}
+                >
+                    {themeMode === 'light' ? (
+                        <img src={DealerPoiIcon} style={{ marginRight: '4px', marginTop: '4px' }} />
+                    ) : (
+                        <img
+                            src={DealerPoiIconDark}
+                            style={{ marginRight: '4px', marginTop: '4px' }}
+                        />
+                    )}
                     dealerPoi
                 </Typography>
             </AccordionSummary>
-            <AccordionDetails>
+            <AccordionDetails sx={style.detailsBox}>
                 <EditableSelectColumn
                     value={data.type}
                     name={`dealerPoiInfo.type`}

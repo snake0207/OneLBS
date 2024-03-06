@@ -20,9 +20,9 @@ const style = {
         fontWeight: 400,
         mb: 2,
         mr: 2,
-        backgroundColor: 'primary.dark',
+        backgroundColor: 'button.main',
         '&:hover': {
-            backgroundColor: 'primary.dark',
+            backgroundColor: 'button.main',
         },
     },
     btnDetaile: {

@@ -4,7 +4,6 @@ const style = {
         backgroundColor: 'table.td',
         th: {
             p: '6px 0px',
-            color: 'white',
             fontSize: 15,
             fontWeight: 500,
             textAlign: 'center',

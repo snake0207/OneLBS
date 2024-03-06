@@ -4,8 +4,11 @@ import t from '#/common/libs/trans.js'
 import Grid from '@mui/material/Unstable_Grid2'
 import { useMemo, useRef } from 'react'
 import ArrowForward from '#/assets/arrowForwardIos.svg'
-import ArrowForwardDark from '#/assets/ArrowForwardDark.svg'
+import ArrowForwardDark from '#/assets/arrowForwardDark.svg'
 import ArrowRedBack from '#/assets/arrowRedBack.svg'
+import ArrowRedForward from '#/assets/arrowRedForward.svg'
+import ArrowGrayBack from '#/assets/arrowGrayBack.svg'
+import ArrowGrayForward from '#/assets/arrowGrayForward.svg'
 import { getLayoutState } from '#/store/useLayoutStore'
 
 import style from './style.module'
@@ -17,19 +20,59 @@ const ApprovalLineContent = ({ title, color, process, content }) => {
                 {title}
             </Typography>
             <Card sx={style.cardContBox}>
-                <Typography variant="subtitle2" sx={style.cardText}>
-                    {/* 글자색 변경 처리 부분 */}
-                    {/* sx={[style.cardText, { color: color === '#EFEFEF' ? '#000000' : '#ffffff' }]} */}
+                <Typography
+                    variant="subtitle2"
+                    sx={[
+                        style.cardText,
+                        {
+                            backgroundColor: color,
+                            color:
+                                color === '#e2e2e2'
+                                    ? '#a9a9a9'
+                                    : color === '#071c2c'
+                                      ? '#536877'
+                                      : '#ffffff',
+                        },
+                    ]}
+                >
                     {process}
                 </Typography>
                 <Box p={1} sx={{ pb: 0 }}>
-                    <Typography sx={{ fontSize: 14, fontWeight: 500 }} variant="body2">
+                    <Typography
+                        sx={{
+                            fontSize: 14,
+                            fontWeight: 500,
+                            '@media (max-width:767px)': {
+                                fontSize: 9,
+                            },
+                        }}
+                        variant="body2"
+                    >
                         {content.team}
                     </Typography>
-                    <Typography sx={{ fontSize: 18, fontWeight: 600, color: 'tdxt.darkgray' }}>
+                    <Typography
+                        sx={{
+                            fontSize: 18,
+                            fontWeight: 600,
+                            color: 'tdxt.darkgray',
+                            '@media (max-width:767px)': {
+                                fontSize: 12,
+                            },
+                        }}
+                    >
                         {content.name}
                     </Typography>
-                    <Typography sx={{ fontSize: 14 }} variant="caption">
+                    <Typography
+                        sx={{
+                            fontSize: 14,
+                            display: 'flex',
+                            '@media (max-width:767px)': {
+                                fontSize: 10,
+                                lineHeight: '12px',
+                            },
+                        }}
+                        variant="caption"
+                    >
                         {content.date}
                     </Typography>
                 </Box>
@@ -40,20 +83,20 @@ const ApprovalLineContent = ({ title, color, process, content }) => {
 
 const ApprovalLine = ({ status, content }) => {
     const theme = useTheme()
+    const { themeMode } = getLayoutState()
     const colors = useRef({
-        request: theme.palette.grey[200],
-        review: theme.palette.grey[200],
-        approval: theme.palette.grey[200],
+        request: themeMode === 'light' ? '#e2e2e2' : '#071c2c',
+        review: themeMode === 'light' ? '#e2e2e2' : '#071c2c',
+        approval: themeMode === 'light' ? '#e2e2e2' : '#071c2c',
     })
     const isReject = useRef({
         review: false,
         approval: false,
     })
-    const { themeMode } = getLayoutState()
 
     useMemo(() => {
-        const active = theme.palette.primary.main
-        const danger = theme.palette.error.main
+        const active = '#05141f'
+        const danger = '#8B0F2A'
         switch (status) {
             case 'request':
                 colors.current.request = active

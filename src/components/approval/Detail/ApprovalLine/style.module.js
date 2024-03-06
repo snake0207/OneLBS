@@ -1,5 +1,3 @@
-import { MicNoneOutlined } from '@mui/icons-material'
-
 const style = {
     cardBox: {
         width: '100%',
@@ -12,12 +10,19 @@ const style = {
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
-        fontSize: 15,
+        fontSize: '15px',
         fontWeight: 600,
         color: '#fff',
         height: '30px',
         borderRadius: '8px 8px 0 0',
         backgroundColor: '#002C5F',
+        '@media (max-width:1024px)': {
+            fontSize: '15px',
+        },
+        '@media (max-width:767px)': {
+            fontSize: '12px',
+            height: '23px',
+        },
     },
     cardContBox: {
         textAlign: 'center',
@@ -27,17 +32,24 @@ const style = {
         backgroundColor: 'background.gray',
         boxShadow: 'none',
         borderRadius: '0 0 8px 8px',
+        '@media (max-width:767px)': {
+            p: '8px 3px',
+        },
     },
     cardText: {
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
-        backgroundColor: '#05141F',
+        backgroundColor: '',
         color: '#fff',
         fontSize: 14,
         fontWeight: 500,
         height: 28,
         borderRadius: '30px',
+        '@media (max-width:767px)': {
+            fontSize: '12px',
+            height: 20,
+        },
     },
     ResetButton: {
         width: '40px',

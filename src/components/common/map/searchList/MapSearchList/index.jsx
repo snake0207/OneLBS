@@ -1,11 +1,12 @@
 import { Box, Typography } from '@mui/material'
-import MapPoiContent from '#/components/common/map/MapSearchList/MapPoiContent/index.jsx'
+import MapPoiContent from '#/components/common/map/searchList/MapSearchList/MapPoiContent/index.jsx'
 import List from '@mui/material/List'
 import { useEffect, useRef, useState } from 'react'
 import t from '#/common/libs/trans.js'
 import TopIcon from '#/assets/topIcon.svg'
 import Button from '@mui/material/Button'
 import { isBrowser } from 'react-device-detect'
+import { gpssListResponseDataMapper } from '#/pages/ApprovalHistoryPage/mapper.js'
 
 const MapSearchList = ({
     searchResultArr,
@@ -23,9 +24,10 @@ const MapSearchList = ({
             behavior: 'smooth',
         })
     }
+    const parsedList = gpssListResponseDataMapper(searchResultArr)
     // 검색 결과가 없을 때 처리
     useEffect(() => {
-        if (searchResultArr && searchResultArr.length === 0) setIsResultNon(true)
+        if (!parsedList || parsedList.length === 0) setIsResultNon(true)
         else setIsResultNon(false)
     }, [searchResultArr])
 
@@ -55,7 +57,7 @@ const MapSearchList = ({
                 backgroundColor: 'dialog.main',
                 borderRadius: '8px',
                 minHeight: '130px',
-                maxHeight: isBrowser ? '500px' : 'calc(100vh - 620px)',
+                maxHeight: isBrowser ? '480px' : 'calc(100vh - 620px)',
                 display: isResultNon ? 'flex' : '',
                 justifyContent: isResultNon ? 'center' : '',
                 alignItems: isResultNon ? 'center' : '',
@@ -66,11 +68,11 @@ const MapSearchList = ({
             ref={poiList}
         >
             {isResultNon ? (
-                <Typography sx={{ fontSize: 15, color: '#444' }}>
+                <Typography sx={{ fontSize: 15, color: 'text.main' }}>
                     {t('search_no_result', 'common')}
                 </Typography>
             ) : (
-                searchResultArr && (
+                parsedList && (
                     <List sx={{ width: '100%' }}>
                         {/* gpss 검색일 때만 poi 생성버튼 표출 */}
                         {isGpssSearch && (
@@ -83,20 +85,28 @@ const MapSearchList = ({
                                     zIndex: 10,
                                 }}
                             >
-                                <Button variant={'contained'} onClick={handleNewPoiOpen}>
+                                <Button
+                                    variant={'contained'}
+                                    onClick={handleNewPoiOpen}
+                                    sx={{
+                                        fontSize: 13,
+                                        fontWeight: 400,
+                                        mr: '10px',
+                                        backgroundColor: 'button.main',
+                                    }}
+                                >
                                     POI생성
                                 </Button>
                             </Box>
                         )}
-                        {searchResultArr.map((data, idx) => (
+                        {parsedList.map((data, idx) => (
                             <MapPoiContent
                                 key={data.poiId}
-                                idx={data.poiId}
-                                name={data.title}
-                                address={data.address}
                                 selectedPoi={selectedPoi}
                                 setSelectedPoi={setSelectedPoi}
                                 isLast={searchResultArr.length - 1 === idx}
+                                isGpssSearch={isGpssSearch}
+                                poiData={data}
                             />
                         ))}
                         <Box

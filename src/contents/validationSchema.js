@@ -40,7 +40,7 @@ const REGEXP = {
 }
 
 export const loginSchema = yup.object({
-    userMail: yup.string().email(HELPER_TEXT.emailNotMatch).required(HELPER_TEXT.emailRequired),
+    email: yup.string().email(HELPER_TEXT.emailNotMatch).required(HELPER_TEXT.emailRequired),
     password: yup.string().required(HELPER_TEXT.passwordRequired),
 })
 
@@ -116,7 +116,7 @@ export const joinSchema = yup.object().shape({
 })
 
 export const otpSchema = yup.object({
-    otp: yup
+    code: yup
         .string()
         .matches(REGEXP.verifyCode, HELPER_TEXT.otpNotMatch)
         .required(HELPER_TEXT.otpRequired),
@@ -149,7 +149,7 @@ export const passwordResetSchema = yup.object({
         .matches(REGEXP.passwordIncludeNumber, HELPER_TEXT.passwordNotIncludeNumber)
         .oneOf([yup.ref('password'), null], HELPER_TEXT.confirmPasswordNotMatch)
         .required(HELPER_TEXT.passwordRequired),
-    otp: yup
+    code: yup
         .string()
         .matches(REGEXP.verifyCode, HELPER_TEXT.otpNotMatch)
         .required(HELPER_TEXT.otpRequired),

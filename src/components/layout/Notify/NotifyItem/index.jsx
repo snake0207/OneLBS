@@ -17,7 +17,7 @@ function NotifyItem({ item, onClick }) {
                         display: 'inline-flex',
                         width: '8px',
                         height: '8px',
-                        backgroundColor: '#db0024',
+                        backgroundColor: '#8B0F2A',
                         borderRadius: '30px',
                         mr: '8px',
                     },

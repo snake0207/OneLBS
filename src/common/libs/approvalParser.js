@@ -62,3 +62,7 @@ export const parseCongestion = (congestion) => {
             return 'High'
     }
 }
+
+export const parsePoiProviderType = (poiId) => {
+    return poiId.split(':')[0] === 'mcp' ? 'mcp' : 'here'
+}

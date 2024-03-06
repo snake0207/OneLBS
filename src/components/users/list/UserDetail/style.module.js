@@ -80,16 +80,16 @@ const style = {
         ml: 2,
     },
     darkLarge: {
-        width: '24%',
+        width: '30%',
         height: 36,
         fontWeight: 400,
-        backgroundColor: 'primary.dark',
+        backgroundColor: 'button.main',
         '&:hover': {
-            backgroundColor: 'primary.dark',
+            backgroundColor: 'button.main',
         },
     },
     bluelineButton: {
-        width: '24%',
+        width: '30%',
         height: 36,
         p: 0,
         color: '#0A5CBA',
@@ -100,7 +100,8 @@ const style = {
         },
     },
     resetButton: {
-        width: '28%',
+        width: '40px',
+        minWidth: '40px',
         height: 36,
         p: '0 6px',
         color: 'white',
@@ -117,7 +118,7 @@ const style = {
         },
     },
     lineButton: {
-        width: '27%',
+        width: '30%',
         height: 36,
         p: 0,
         color: '#0A5CBA',

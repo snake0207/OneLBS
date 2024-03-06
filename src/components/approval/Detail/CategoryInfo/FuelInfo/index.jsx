@@ -1,22 +1,31 @@
 import { Accordion, AccordionDetails, AccordionSummary, Box } from '@mui/material'
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore.js'
 import Typography from '@mui/material/Typography'
-import EvStationIcon from '#/assets/evStationIcon.svg'
 import EditableTextColumn from '#/components/approval/Detail/CategoryInfo/EditableTextColumn/index.jsx'
 import t from '#/common/libs/trans.js'
+import FuelIcon from '#/assets/fuelIcon.svg'
+import FuelIconDark from '#/assets/fuelIconDark.svg'
+import useLayoutStore from '#/store/useLayoutStore'
+import style from './style.module'
 
 const FuelInfo = ({ data, isEditable, formik }) => {
+    const { themeMode } = useLayoutStore()
     return (
-        <Accordion>
-            <AccordionSummary
-                expandIcon={<ExpandMoreIcon />}
-                sx={{ fontSize: '18px', fontWeight: 500, color: '#05141F', mb: '4px' }}
-            >
-                <Typography sx={{ fontSize: '18px', fontWeight: 500, color: '#05141F', mb: '4px' }}>
-                    <img
-                        src={EvStationIcon}
-                        style={{ verticalAlign: 'middle', paddingRight: '4px' }}
-                    />
+        <Accordion sx={style.accordionBox}>
+            <AccordionSummary expandIcon={<ExpandMoreIcon />} sx={style.summaryBox}>
+                <Typography
+                    sx={{
+                        display: 'flex',
+                        fontSize: '18px',
+                        fontWeight: 600,
+                        color: 'text.darkgray',
+                    }}
+                >
+                    {themeMode === 'light' ? (
+                        <img src={FuelIcon} style={{ marginRight: '4px', marginTop: '4px' }} />
+                    ) : (
+                        <img src={FuelIconDark} style={{ marginRight: '4px', marginTop: '4px' }} />
+                    )}
                     fuel
                 </Typography>
             </AccordionSummary>
@@ -28,27 +37,22 @@ const FuelInfo = ({ data, isEditable, formik }) => {
                     formik={formik}
                 />
                 {/* 영업시간 */}
-                <Accordion>
-                    <AccordionSummary
-                        expandIcon={<ExpandMoreIcon />}
-                        sx={{ fontSize: '18px', fontWeight: 500, color: '#05141F', mb: '4px' }}
-                    >
+                <Accordion sx={style.accordionDepsBox}>
+                    <AccordionSummary expandIcon={<ExpandMoreIcon />}>
                         <Typography
                             sx={{
                                 fontSize: '18px',
-                                fontWeight: 500,
-                                color: '#05141F',
-                                mb: '4px',
+                                fontWeight: 600,
+                                color: 'text.darkgray',
                             }}
                         >
                             <img
-                                // src={EvStationIcon}
-                                style={{ verticalAlign: 'middle', paddingRight: '4px' }}
+                            // src={EvStationIcon}
                             />
                             {t('commonInfo.weekday', 'approval')}
                         </Typography>
                     </AccordionSummary>
-                    <AccordionDetails>
+                    <AccordionDetails sx={style.detailsBox}>
                         {data.openingHours.map((openingHour, index) => (
                             <Box key={index}>
                                 <Typography component={'span'}>{openingHour.weekday}</Typography>
@@ -62,27 +66,23 @@ const FuelInfo = ({ data, isEditable, formik }) => {
                     </AccordionDetails>
                 </Accordion>
                 {data.summary.map(({ type, price, priceUnit, currency }, index) => (
-                    <Accordion key={index}>
-                        <AccordionSummary
-                            expandIcon={<ExpandMoreIcon />}
-                            sx={{ fontSize: '18px', fontWeight: 500, color: '#05141F', mb: '4px' }}
-                        >
+                    <Accordion key={index} sx={style.accordionBox}>
+                        <AccordionSummary expandIcon={<ExpandMoreIcon />}>
                             <Typography
                                 sx={{
                                     fontSize: '18px',
                                     fontWeight: 500,
-                                    color: '#05141F',
+                                    color: 'text.darkgray',
                                     mb: '4px',
                                 }}
                             >
                                 <img
-                                    src={EvStationIcon}
-                                    style={{ verticalAlign: 'middle', paddingRight: '4px' }}
+                                // src={EvStationIcon}
                                 />
                                 {t(`fuelInfo.type.${type}`, 'approval')}
                             </Typography>
                         </AccordionSummary>
-                        <AccordionDetails>
+                        <AccordionDetails sx={style.detailsBox}>
                             <Typography>
                                 {price}
                                 {currency}(1{currency} / 1{priceUnit})

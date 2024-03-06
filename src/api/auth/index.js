@@ -6,11 +6,7 @@ const postLogin = (data) => {
 }
 
 const postJoin = (data) => {
-    return postAPI({
-        endPoint: API_PATH.auth.join,
-        data,
-        axiosOption: { headers: { 'Content-Type': 'application/json' } },
-    })
+    return postAPI({ endPoint: API_PATH.auth.join, data })
 }
 
 const postVerifyEmail = (data) => {
@@ -25,10 +21,25 @@ const getUserIp = () => {
     return getAPI({ endPoint: API_PATH.auth.get_ip })
 }
 
+const postRenewToken = () => {
+    return postAPI({ endPoint: API_PATH.auth.renew_token })
+}
+
+const postVerifyOtp = (data) => {
+    return postAPI({ endPoint: API_PATH.auth.verify_otp, data })
+}
+
+const postPasswordReset = (data) => {
+    return postAPI({ endPoint: API_PATH.auth.password_reset, data })
+}
+
 export default {
     postLogin,
     postJoin,
     postVerifyEmail,
     postConfirmEmail,
     getUserIp,
+    postRenewToken,
+    postVerifyOtp,
+    postPasswordReset,
 }

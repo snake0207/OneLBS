@@ -6,11 +6,14 @@ const useAuthStore = create(
         persist(
             (set) => ({
                 accessToken: null,
-                setAccessToken: (accessToken) => set({ accessToken }),
+                actions: {
+                    setAccessToken: (accessToken) => set({ accessToken }),
+                },
             }),
             {
                 name: 'auth-storage',
                 storage: createJSONStorage(() => localStorage),
+                partialize: (state) => ({ accessToken: state.accessToken }),
             },
         ),
     ),
@@ -18,5 +21,5 @@ const useAuthStore = create(
 
 export default useAuthStore
 
-export const useSetAccessToken = () => useAuthStore((state) => state.setAccessToken)
+export const useAuthActions = () => useAuthStore((state) => state.actions)
 export const useAccessTokenState = () => useAuthStore((state) => state.accessToken)

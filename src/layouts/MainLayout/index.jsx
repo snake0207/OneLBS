@@ -13,6 +13,7 @@ const MainLayout = () => {
             <Header toggleDrawer={toggleDrawer} />
             <Box
                 sx={{
+                    display: 'flex',
                     bgcolor: 'background.web',
                     flexGrow: 1,
                     overflow: 'auto',
@@ -29,12 +30,12 @@ const MainLayout = () => {
                         mt: '50px',
                         mb: 1.5,
                         pt: '56px',
-                        pl: '67px !important',
+                        pl: '10px !important',
                         pr: '10px !important',
                         maxWidth: '100% !important',
                         '@media (max-width:1024px)': {
-                            pl: '24px !important',
-                            pr: '24px !important',
+                            pl: '20px !important',
+                            pr: '20px !important',
                             pt: '74px !important',
                             mt: '60px',
                             mb: '24px !important',

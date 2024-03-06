@@ -15,6 +15,7 @@ import FuelInfo from '#/components/approval/Detail/CategoryInfo/FuelInfo/index.j
 import DealerPoiInfo from '#/components/approval/Detail/CategoryInfo/DealerPoiInfo/index.jsx'
 import H2ChargingInfo from '#/components/approval/Detail/CategoryInfo/H2ChargingInfo/index.jsx'
 import MapApprovalSelect from '#/components/common/map/MapApprovalSelect/index.jsx'
+import { isBrowser } from 'react-device-detect'
 
 const MapGpssDetail = ({ selectedPoi, setSelectedPoi, poiData }) => {
     const isEditable = true
@@ -28,6 +29,10 @@ const MapGpssDetail = ({ selectedPoi, setSelectedPoi, poiData }) => {
     const [selectedApprover, setSelectedApprover] = useState(null)
 
     useEffect(() => {
+        if (!isBrowser) {
+            setIsOpen(true)
+            return
+        }
         if (selectedPoi) setIsOpen(true)
         else setIsOpen(false)
     }, [selectedPoi])
@@ -104,7 +109,7 @@ const MapGpssDetail = ({ selectedPoi, setSelectedPoi, poiData }) => {
     return (
         poiData &&
         isOpen && (
-            <Box sx={{ display: 'flex', margin: '10px' }}>
+            <Box sx={style.mapDetailBox}>
                 <Box sx={style.mapDetail}>
                     <Box>
                         <Tabs value={tabSelected} onChange={handleClickTabChange} sx={style.tabs}>
@@ -116,13 +121,7 @@ const MapGpssDetail = ({ selectedPoi, setSelectedPoi, poiData }) => {
                             />
                         </Tabs>
                     </Box>
-                    <Box
-                        sx={{
-                            paddingTop: '16px',
-                            maxHeight: '760px',
-                            overflow: 'auto',
-                        }}
-                    >
+                    <Box sx={style.mapDetailContent}>
                         {/* 상세 기본 정보 */}
                         <BasicInfo
                             formik={formik}
@@ -132,49 +131,98 @@ const MapGpssDetail = ({ selectedPoi, setSelectedPoi, poiData }) => {
                         />
                         {/* EV Charging */}
                         {!!parsedData.evChargingInfo && (
-                            <EvChargingInfo
-                                data={parsedData.evChargingInfo}
-                                isEditable={isEditable}
-                                formik={formik}
-                            />
+                            <Box>
+                                <EvChargingInfo
+                                    data={parsedData.evChargingInfo}
+                                    isEditable={isEditable}
+                                    formik={formik}
+                                />
+                                <Divider
+                                    sx={{
+                                        borderBottom: '1px solid',
+                                        borderBottomColor: 'border.lightgray',
+                                    }}
+                                />
+                            </Box>
                         )}
                         {/* parking */}
                         {!!parsedData.parkingInfo && (
-                            <ParkingInfo
-                                data={parsedData.parkingInfo}
-                                isEditable={isEditable}
-                                formik={formik}
-                            />
+                            <Box>
+                                <ParkingInfo
+                                    data={parsedData.parkingInfo}
+                                    isEditable={isEditable}
+                                    formik={formik}
+                                />
+                                <Divider
+                                    sx={{
+                                        borderBottom: '1px solid',
+                                        borderBottomColor: 'border.lightgray',
+                                    }}
+                                />
+                            </Box>
                         )}
                         {/* fuel */}
                         {!!parsedData.fuelInfo && (
-                            <FuelInfo
-                                data={parsedData.fuelInfo}
-                                isEditable={isEditable}
-                                formik={formik}
-                            />
+                            <Box>
+                                <FuelInfo
+                                    data={parsedData.fuelInfo}
+                                    isEditable={isEditable}
+                                    formik={formik}
+                                />
+                                <Divider
+                                    sx={{
+                                        borderBottom: '1px solid',
+                                        borderBottomColor: 'border.lightgray',
+                                    }}
+                                />
+                            </Box>
                         )}
                         {/* h2Charging */}
                         {!!parsedData.h2ChargingInfo && (
-                            <H2ChargingInfo
-                                data={parsedData.h2ChargingInfo}
-                                isEditable={isEditable}
-                                formik={formik}
-                            />
+                            <Box>
+                                <H2ChargingInfo
+                                    data={parsedData.h2ChargingInfo}
+                                    isEditable={isEditable}
+                                    formik={formik}
+                                />
+                                <Divider
+                                    sx={{
+                                        borderBottom: '1px solid',
+                                        borderBottomColor: 'border.lightgray',
+                                    }}
+                                />
+                            </Box>
                         )}
+
                         {/* dealerPoi */}
                         {!!parsedData.dealerPoiInfo && (
-                            <DealerPoiInfo
-                                data={parsedData.dealerPoiInfo}
-                                isEditable={isEditable}
-                                formik={formik}
-                            />
+                            <Box>
+                                <DealerPoiInfo
+                                    data={parsedData.dealerPoiInfo}
+                                    isEditable={isEditable}
+                                    formik={formik}
+                                />
+                                <Divider
+                                    sx={{
+                                        borderBottom: '1px solid',
+                                        borderBottomColor: 'border.lightgray',
+                                    }}
+                                />
+                            </Box>
                         )}
                         <Box>
                             <Box>
-                                <Typography>{t('reason_for_approval', 'gpss')}</Typography>
+                                <Typography
+                                    sx={{
+                                        fontSize: '18px',
+                                        fontWeight: 600,
+                                        color: 'text.darkgray',
+                                        mt: '8px',
+                                    }}
+                                >
+                                    {t('reason_for_approval', 'gpss')}
+                                </Typography>
                             </Box>
-                            <Divider />
                             <TextField
                                 sx={{
                                     marginBottom: '16px',
@@ -204,12 +252,16 @@ const MapGpssDetail = ({ selectedPoi, setSelectedPoi, poiData }) => {
                                 display: 'flex',
                                 justifyContent: 'space-between',
                                 gap: '2px',
+                                mt: '30px',
+                                '@media (max-width:1024px)': {
+                                    mb: '20px',
+                                },
                             }}
                         >
                             <Button
                                 variant={'contained'}
                                 onClick={handleClickTempSaveBtn}
-                                sx={style.blueButton}
+                                sx={style.darkBlueButton}
                             >
                                 {t('temporary_save', 'gpss')}
                             </Button>
@@ -230,18 +282,30 @@ const MapGpssDetail = ({ selectedPoi, setSelectedPoi, poiData }) => {
                         </Box>
                     </Box>
                 </Box>
-                <IconButton
-                    variant={'contained'}
-                    sx={{
-                        inWidth: '22px',
-                        minHeight: '22px',
-                        width: '35px',
-                        height: '35px',
-                    }}
-                    onClick={handleClickDetailClose}
-                >
-                    <CloseIcon sx={{ color: 'background.close' }} />
-                </IconButton>
+                {isBrowser && (
+                    <IconButton
+                        variant={'contained'}
+                        sx={{
+                            inWidth: '20px',
+                            minHeight: '20px',
+                            width: '20px',
+                            height: '20px',
+                            ml: '4px',
+                            color: 'text.close',
+                            borderRadius: '35px',
+                            backgroundColor: 'color.closeBg',
+                            border: '1px solid',
+                            borderColor: 'border.close',
+                            boxShadow: '0 3px 14px rgb(0 0 0 / 20%)',
+                            '&:hover': {
+                                backgroundColor: 'color.closeBg',
+                            },
+                        }}
+                        onClick={handleClickDetailClose}
+                    >
+                        <CloseIcon sx={{ color: 'color.close', width: '13px', height: '13px' }} />
+                    </IconButton>
+                )}
             </Box>
         )
     )

@@ -214,42 +214,79 @@ const ApprovalHistoryDetailPage = () => {
                     />
                     {/* 카테고리 */}
                     {parsedData.category === 'evCharging' && (
-                        <EvChargingInfo
-                            data={parsedData.evChargingInfo}
-                            isEditable={isEditable}
-                            formik={formik}
-                        />
+                        <Box>
+                            <EvChargingInfo
+                                data={parsedData.evChargingInfo}
+                                isEditable={isEditable}
+                                formik={formik}
+                            />
+                            <Divider
+                                sx={{
+                                    borderBottom: '1px solid',
+                                    borderBottomColor: 'border.lightgray',
+                                }}
+                            />
+                        </Box>
                     )}
-                    <Divider
-                        sx={{ borderBottom: '1px solid', borderBottomColor: 'border.lightgray' }}
-                    />
                     {parsedData.category === 'fuel' && (
-                        <FuelInfo
-                            data={parsedData.fuelInfo}
-                            isEditable={isEditable}
-                            formik={formik}
-                        />
+                        <Box>
+                            <FuelInfo
+                                data={parsedData.fuelInfo}
+                                isEditable={isEditable}
+                                formik={formik}
+                            />
+                            <Divider
+                                sx={{
+                                    borderBottom: '1px solid',
+                                    borderBottomColor: 'border.lightgray',
+                                }}
+                            />
+                        </Box>
                     )}
                     {parsedData.category === 'parking' && (
-                        <ParkingInfo
-                            data={parsedData.parkingInfo}
-                            isEditable={isEditable}
-                            formik={formik}
-                        />
+                        <Box>
+                            <ParkingInfo
+                                data={parsedData.parkingInfo}
+                                isEditable={isEditable}
+                                formik={formik}
+                            />
+                            <Divider
+                                sx={{
+                                    borderBottom: '1px solid',
+                                    borderBottomColor: 'border.lightgray',
+                                }}
+                            />
+                        </Box>
                     )}
                     {parsedData.category === 'h2Charging' && (
-                        <H2ChargingInfo
-                            data={parsedData.h2ChargingInfo}
-                            isEditable={isEditable}
-                            formik={formik}
-                        />
+                        <Box>
+                            <H2ChargingInfo
+                                data={parsedData.h2ChargingInfo}
+                                isEditable={isEditable}
+                                formik={formik}
+                            />
+                            <Divider
+                                sx={{
+                                    borderBottom: '1px solid',
+                                    borderBottomColor: 'border.lightgray',
+                                }}
+                            />
+                        </Box>
                     )}
                     {parsedData.category === 'dealerPoi' && (
-                        <DealerPoiInfo
-                            data={parsedData.dealerPoiInfo}
-                            isEditable={isEditable}
-                            formik={formik}
-                        />
+                        <Box>
+                            <DealerPoiInfo
+                                data={parsedData.dealerPoiInfo}
+                                isEditable={isEditable}
+                                formik={formik}
+                            />
+                            <Divider
+                                sx={{
+                                    borderBottom: '1px solid',
+                                    borderBottomColor: 'border.lightgray',
+                                }}
+                            />
+                        </Box>
                     )}
                     {/* 승인 요청 이유*/}
                     <Box sx={{ mt: '24px' }}>

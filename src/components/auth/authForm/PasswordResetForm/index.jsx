@@ -14,9 +14,12 @@ import { encryptPasswordSHA256 } from '#/common/libs/encode'
 
 import style from './style.module'
 import LoginIcon from '#/assets/loginIcon.svg'
+import LoginIconDark from '#/assets/loginIconDark.svg'
+import useLayoutStore from '#/store/useLayoutStore'
 
 const PasswordResetForm = () => {
     const { mutate, isPending } = usePostPasswordReset()
+    const { themeMode } = useLayoutStore()
     const { initAuthStep } = useAuthStepActions()
     const { showPopup } = usePopupActions()
     const formik = useFormik({
@@ -48,7 +51,17 @@ const PasswordResetForm = () => {
         <form onSubmit={formik.handleSubmit}>
             <Box sx={{ display: 'flex', justifyContent: 'flex-start', mb: 2 }}>
                 <Icon sx={{ display: 'flex', width: 20, height: 20, alignItems: 'center' }}>
-                    <img src={LoginIcon} />
+                    {themeMode === 'light' ? (
+                        <img
+                            src={LoginIcon}
+                            style={{ verticalAlign: 'middle', paddingRight: '4px' }}
+                        />
+                    ) : (
+                        <img
+                            src={LoginIconDark}
+                            style={{ verticalAlign: 'middle', paddingRight: '4px' }}
+                        />
+                    )}
                 </Icon>
                 <Typography variant="h5" sx={style.passwordTitle}>
                     {t('reset_password', 'auth')}

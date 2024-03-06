@@ -18,6 +18,7 @@ function Select({ name, formik, value, items, label, onChange, ...props }) {
     return (
         <FormControl
             sx={{
+                width: '100%',
                 '& .MuiInputBase-root': {
                     '& .MuiSvgIcon-root': {
                         color: 'text.lightblue',

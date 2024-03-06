@@ -36,6 +36,7 @@ function LoginPage() {
                     alignItems: 'flex-start',
                     mt: '120px',
                     height: 'calc(100vh - 120px);',
+                    display: 'block',
                 },
             }}
         >

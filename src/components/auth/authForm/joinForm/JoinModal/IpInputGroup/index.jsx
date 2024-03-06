@@ -39,7 +39,7 @@ const IpInputGroup = ({ formik }) => {
                     alignItems: 'center',
                 }}
             >
-                <Typography variant="button" component="p" sx={{ mt: 1 }}>
+                <Typography variant="button" component="p" sx={{ mt: 1, color: 'text.main' }}>
                     <span style={{ color: 'red' }}>*</span>IP
                 </Typography>
                 <Button
@@ -50,7 +50,9 @@ const IpInputGroup = ({ formik }) => {
                     {t('add', 'auth')}
                 </Button>
             </Box>
-            <Typography variant="body2">{t('guide.ip_input_guide', 'auth')}</Typography>
+            <Typography variant="body2" sx={{ color: 'text.main' }}>
+                {t('guide.ip_input_guide', 'auth')}
+            </Typography>
             <Box sx={{ display: 'flex', gap: 1 }}>
                 <IpInput
                     ipName1={'ipAddress1_0'}

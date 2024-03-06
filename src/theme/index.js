@@ -102,6 +102,7 @@ export const tokens = {
         900: '#CFE5FF',
         1000: '#A1CDFF',
         2000: '#0A5CBA',
+        3000: '#1e3343',
     },
     text: {
         100: '#fff',
@@ -222,6 +223,7 @@ export const getThemeSettings = (mode) => ({
                       white: tokens.button[100],
                       map: tokens.button[2000],
                       lineblue: tokens.button[2000],
+                      moreBtn: tokens.button[700],
                   },
                   text: {
                       ...tokens.text,
@@ -354,6 +356,7 @@ export const getThemeSettings = (mode) => ({
                       white: tokens.button[100],
                       map: tokens.button[2000],
                       lineblue: tokens.button[1000],
+                      moreBtn: tokens.button[3000],
                   },
                   text: {
                       ...tokens.text,

@@ -10,6 +10,7 @@ import EvStationIcon from '#/assets/evStationIcon.svg'
 import EvStationIconDark from '#/assets/evStationIconDark.svg'
 import { getLayoutState } from '#/store/useLayoutStore'
 import { isBrowser } from 'react-device-detect'
+import Divider from '@mui/material/Divider'
 import BasicInfo from '#/components/common/map/MapGpssDetail/DetailTab/BasicInfo/index.jsx'
 import { gpssDetailResponseDataMapper } from '#/pages/ApprovalHistoryPage/mapper.js'
 import EvChargingInfo from '#/components/approval/Detail/CategoryInfo/EvChargingInfo/index.jsx'
@@ -49,23 +50,72 @@ const MapPoiDetail = ({ selectedPoi, setSelectedPoi, poiData }) => {
                     />
                     {/* EV Charging */}
                     {!!parsedData.evChargingInfo && (
-                        <EvChargingInfo data={parsedData.evChargingInfo} isEditable={isEditable} />
+                        <Box>
+                            <EvChargingInfo
+                                data={parsedData.evChargingInfo}
+                                isEditable={isEditable}
+                            />
+                            <Divider
+                                sx={{
+                                    borderBottom: '1px solid',
+                                    borderBottomColor: 'border.lightgray',
+                                }}
+                            />
+                        </Box>
                     )}
                     {/* parking */}
                     {!!parsedData.parkingInfo && (
-                        <ParkingInfo data={parsedData.parkingInfo} isEditable={isEditable} />
+                        <Box>
+                            <ParkingInfo data={parsedData.parkingInfo} isEditable={isEditable} />
+                            <Divider
+                                sx={{
+                                    borderBottom: '1px solid',
+                                    borderBottomColor: 'border.lightgray',
+                                }}
+                            />
+                        </Box>
                     )}
                     {/* fuel */}
                     {!!parsedData.fuelInfo && (
-                        <FuelInfo data={parsedData.fuelInfo} isEditable={isEditable} />
+                        <Box>
+                            <FuelInfo data={parsedData.fuelInfo} isEditable={isEditable} />
+                            <Divider
+                                sx={{
+                                    borderBottom: '1px solid',
+                                    borderBottomColor: 'border.lightgray',
+                                }}
+                            />
+                        </Box>
                     )}
                     {/* h2Charging */}
                     {!!parsedData.h2ChargingInfo && (
-                        <H2ChargingInfo data={parsedData.h2ChargingInfo} isEditable={isEditable} />
+                        <Box>
+                            <H2ChargingInfo
+                                data={parsedData.h2ChargingInfo}
+                                isEditable={isEditable}
+                            />
+                            <Divider
+                                sx={{
+                                    borderBottom: '1px solid',
+                                    borderBottomColor: 'border.lightgray',
+                                }}
+                            />
+                        </Box>
                     )}
                     {/* dealerPoi */}
                     {!!parsedData.dealerPoiInfo && (
-                        <DealerPoiInfo data={parsedData.dealerPoiInfo} isEditable={isEditable} />
+                        <Box>
+                            <DealerPoiInfo
+                                data={parsedData.dealerPoiInfo}
+                                isEditable={isEditable}
+                            />
+                            <Divider
+                                sx={{
+                                    borderBottom: '1px solid',
+                                    borderBottomColor: 'border.lightgray',
+                                }}
+                            />
+                        </Box>
                     )}
                 </Box>
                 {isBrowser && (

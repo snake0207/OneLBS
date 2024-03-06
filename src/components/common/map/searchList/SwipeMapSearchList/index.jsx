@@ -79,7 +79,6 @@ const SwipeMapSearchList = ({
                     boxShadow: '0 -6px 4px rgb(0 0 0 / 8%)',
                     '& .MuiTypography-body1': {
                         p: '16px 16px 0',
-                        color: 'transparent',
                     },
                 }}
                 onClick={() => setIsDrawerOpen(!isDrawerOpen)}
@@ -91,11 +90,11 @@ const SwipeMapSearchList = ({
                         backgroundColor: 'color.swiper',
                         borderRadius: 3,
                         position: 'absolute',
-                        top: 8,
+                        top: 10,
                         left: 'calc(50% - 15px)',
                     }}
                 />
-                <Typography sx={{ p: 2, color: 'white' }}>|</Typography>
+                <Typography sx={{ p: 2, color: 'background.main' }}>|</Typography>
             </Box>
             <Box
                 sx={{
@@ -116,6 +115,9 @@ const SwipeMapSearchList = ({
                         backgroundColor: 'background.main',
                         '@media (max-width:767px)': {
                             width: '100%',
+                            '& .MuiList-root': {
+                                pt: '0',
+                            },
                         },
                     }}
                     ref={poiList}

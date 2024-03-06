@@ -40,7 +40,7 @@ function AuthHeader() {
                     height: '60px',
                     borderBottom: '1px solid',
                     borderColor: 'border.main',
-                    backgroundColor: '#fff',
+                    backgroundColor: 'background.mobile',
                 }}
             >
                 <Toolbar disableGutters>

@@ -10,10 +10,11 @@ import { FormControl, FormControlLabel, Radio, RadioGroup } from '@mui/material'
  */
 const RadioInput = ({ radioList, name, formik, isDisabled = false }) => {
     const formControlLabelStyle = {
-        "& .MuiFormControlLabel-label": {
-          fontSize: '13px'
-        }
-      }
+        '& .MuiFormControlLabel-label': {
+            fontSize: '13px',
+            color: 'text.main',
+        },
+    }
 
     return (
         <FormControl>
@@ -31,7 +32,7 @@ const RadioInput = ({ radioList, name, formik, isDisabled = false }) => {
                         control={<Radio name={name} />}
                         label={radio.label}
                         disabled={isDisabled}
-                        sx={{...formControlLabelStyle}}
+                        sx={{ ...formControlLabelStyle }}
                     />
                 ))}
             </RadioGroup>

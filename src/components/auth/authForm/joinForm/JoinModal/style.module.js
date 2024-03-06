@@ -60,6 +60,8 @@ const style = {
         color: 'grey.darkgray',
         bgcolor: 'button.lightgray',
         boxShadow: 'none',
+        border: '1px solid',
+        borderColor: 'button.moreBtn',
         '&:hover': {
             bgcolor: 'button.lightgray',
             boxShadow: 'none',

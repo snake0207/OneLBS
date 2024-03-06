@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom'
 import { useState } from 'react'
 import { BrowserView, MobileView } from 'react-device-detect'
 import MapSearch from '#/components/common/map/MapSearch/index.jsx'
-import MapSearchList from '#/components/common/map/MapSearchList/index.jsx'
+import MapSearchList from '#/components/common/map/searchList/MapSearchList/index.jsx'
 import poiListData from '#/mock/data/poiListData.json'
 import MapPoiDetail from '#/components/common/map/MapPoiDetail/index.jsx'
 import poiDetailData from '#/mock/data/poiDetailData.json'
@@ -14,6 +14,7 @@ import PoiSearchIcon from '#/assets/poiSearchIcon.svg'
 import PoiSearchIconDark from '#/assets/poiSearchIconDark.svg'
 import useLayoutStore from '#/store/useLayoutStore'
 import FilterIcon from '#/assets/filterIcon.svg'
+import SwipeMapSearchList from '#/components/common/map/searchList/SwipeMapSearchList/index.jsx'
 
 const markerSampleData = [
     {
@@ -127,16 +128,14 @@ function POISearchPage() {
                             >
                                 {/* 지도 검색 */}
                                 <MapSearch />
-                                {/* 검색 결과 */}
-                                <Box sx={{ mt: 17 }}>
-                                    <MapSearchList
-                                        searchResultArr={poiListData}
-                                        selectedPoi={selectedPoi}
-                                        setSelectedPoi={handlePOISelected}
-                                    />
-                                </Box>
                             </Box>
                         )}
+                        {/* 검색 결과 */}
+                        <SwipeMapSearchList
+                            searchResultArr={poiListData}
+                            selectedPoi={selectedPoi}
+                            setSelectedPoi={handlePOISelected}
+                        />
                     </MobileView>
                 </Box>
                 <GoogleMapComponent

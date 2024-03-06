@@ -41,7 +41,7 @@ const MapPoiContent = ({ isLast, isGpssSearch, selectedPoi, setSelectedPoi, poiD
                                     variant={'h6'}
                                     sx={{
                                         display: 'block',
-                                        maxWidth: '210px',
+                                        maxWidth: 'calc(100% - 50px)',
                                         color: 'text.main',
                                         fontWeight: 600,
                                         fontSize: 18,

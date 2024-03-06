@@ -1,10 +1,11 @@
 import t from '#/common/libs/trans'
 import GoogleMapComponent from '#/components/common/map/googleMap'
 import TitleBar from '#/components/common/menu/TitleBar'
-import { Box, Icon, Button } from '@mui/material'
+
+import { Box, Icon, Button, SwipeableDrawer } from '@mui/material'
 import { BrowserView, MobileView } from 'react-device-detect'
 import MapSearch from '#/components/common/map/MapSearch/index.jsx'
-import MapSearchList from '#/components/common/map/MapSearchList/index.jsx'
+import MapSearchList from '#/components/common/map/searchList/MapSearchList/index.jsx'
 import { useState } from 'react'
 import poiDetailData from '#/mock/data/poiDetailData.json'
 import poiListData from '#/mock/data/poiListData.json'
@@ -16,6 +17,7 @@ import SearchIcon from '#/assets/searchIcon.svg'
 import SearchIconDark from '#/assets/searchIconLightDark.svg'
 import FilterIcon from '#/assets/filterIcon.svg'
 import useLayoutStore from '#/store/useLayoutStore'
+import SwipeMapSearchList from '#/components/common/map/searchList/SwipeMapSearchList/index.jsx'
 
 const markerSampleData = [
     {
@@ -34,6 +36,7 @@ const markerSampleData = [
 
 function MapSearchPage() {
     const navigate = useNavigate()
+    const { themeMode } = useLayoutStore()
     // 검색 결과
     const [searchResultArr, setSearchResultArr] = useState([])
     // TODO 장소 상세 정보 호출 api 연동
@@ -49,7 +52,6 @@ function MapSearchPage() {
         setSelectedPoi(id)
         navigate(`/search-management/map/${id}`)
     }
-    const { themeMode } = useLayoutStore()
 
     return (
         <Box>
@@ -143,16 +145,15 @@ function MapSearchPage() {
                             >
                                 {/* 지도 검색 */}
                                 <MapSearch />
-                                {/* 검색 결과 */}
-                                <Box sx={{ mt: 17 }}>
-                                    <MapSearchList
-                                        searchResultArr={poiListData}
-                                        selectedPoi={selectedPoi}
-                                        setSelectedPoi={handlePOISelected}
-                                    />
-                                </Box>
                             </Box>
                         )}
+                        {/* 검색 결과 */}
+                        <SwipeMapSearchList
+                            isGpssSearch={true}
+                            searchResultArr={poiListData}
+                            selectedPoi={selectedPoi}
+                            setSelectedPoi={handlePOISelected}
+                        />
                     </MobileView>
                 </Box>
                 <GoogleMapComponent

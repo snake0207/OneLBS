@@ -80,7 +80,15 @@ const JoinFormMobile = () => {
     }
 
     return (
-        <Box sx={{ height: '100vh', mt: 20 }}>
+        <Box
+            sx={{
+                height: '100vh',
+                mt: 20,
+                '@media (max-width:1024px)': {
+                    mt: '-40px',
+                },
+            }}
+        >
             <Typography sx={style.subTitle}>
                 <span style={{ color: 'red' }}>*</span>
                 {t('guide.required', 'auth')}

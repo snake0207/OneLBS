@@ -181,12 +181,7 @@ const BasicInfo = ({ formik, poiData, tabSelected, isEditable }) => {
                                 elevation={0}
                                 sx={{
                                     padding: 0,
-                                    marginTop: '20px',
                                     backgroundColor: 'dialog.main',
-                                    '& .Mui-expanded': {
-                                        margin: '0',
-                                        minHeight: 'auto',
-                                    },
                                 }}
                             >
                                 <AccordionSummary
@@ -374,10 +369,6 @@ const BasicInfo = ({ formik, poiData, tabSelected, isEditable }) => {
                                 sx={{
                                     padding: 0,
                                     backgroundColor: 'dialog.main',
-                                    '& .Mui-expanded': {
-                                        margin: '0',
-                                        minHeight: 'auto',
-                                    },
                                 }}
                             >
                                 <AccordionSummary

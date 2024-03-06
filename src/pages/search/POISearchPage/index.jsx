@@ -1,16 +1,19 @@
 import t from '#/common/libs/trans'
 import GoogleMapComponent from '#/components/common/map/googleMap'
 import TitleBar from '#/components/common/menu/TitleBar'
-import { Box } from '@mui/material'
+import { Box, Icon, Button } from '@mui/material'
 import { useNavigate } from 'react-router-dom'
 import { useState } from 'react'
 import { BrowserView, MobileView } from 'react-device-detect'
 import MapSearch from '#/components/common/map/MapSearch/index.jsx'
 import MapSearchList from '#/components/common/map/searchList/MapSearchList/index.jsx'
 import poiListData from '#/mock/data/poiListData.json'
-import TuneIcon from '@mui/icons-material/Tune'
 import MapPoiDetail from '#/components/common/map/MapPoiDetail/index.jsx'
 import poiDetailData from '#/mock/data/poiDetailData.json'
+import PoiSearchIcon from '#/assets/poiSearchIcon.svg'
+import PoiSearchIconDark from '#/assets/poiSearchIconDark.svg'
+import useLayoutStore from '#/store/useLayoutStore'
+import FilterIcon from '#/assets/filterIcon.svg'
 import SwipeMapSearchList from '#/components/common/map/searchList/SwipeMapSearchList/index.jsx'
 
 const markerSampleData = [
@@ -42,11 +45,37 @@ function POISearchPage() {
         setSelectedPoi(id)
         navigate(`/poi-view/map/${id}`)
     }
+    const { themeMode } = useLayoutStore()
     return (
         <Box>
+            <MobileView>
+                <Icon
+                    style={{
+                        display: 'flex',
+                        position: 'absolute',
+                        top: ' 75px',
+                        zIndex: '4',
+                    }}
+                >
+                    {themeMode === 'light' ? (
+                        <img src={PoiSearchIcon} style={{ display: 'flex', width: '24px' }} />
+                    ) : (
+                        <img src={PoiSearchIconDark} style={{ display: 'flex', width: '24px' }} />
+                    )}
+                </Icon>
+            </MobileView>
             <TitleBar title={t('top_menu.poi_search')} />
-            <Box sx={{ position: 'relative', width: '100%', height: 'calc(100vh - 120px)' }}>
-                <Box sx={{ position: 'absolute', top: 0, zIndex: 1000 }}>
+            <Box
+                sx={{
+                    position: 'relative',
+                    width: '100%',
+                    height: 'calc(100vh - 120px)',
+                    '@media (max-width:1024px)': {
+                        height: 'calc(100vh - 153px)',
+                    },
+                }}
+            >
+                <Box sx={{ position: 'absolute', top: 0, zIndex: 2 }}>
                     <BrowserView>
                         <Box sx={{ display: 'flex', flexDirection: 'colunm' }}>
                             <Box>
@@ -69,15 +98,25 @@ function POISearchPage() {
                         </Box>
                     </BrowserView>
                     <MobileView>
-                        <TuneIcon
-                            sx={{
-                                fontSize: 32,
-                                mt: 1,
-                                ml: 1,
-                                border: '1px solid black',
-                            }}
+                        <Button
                             onClick={() => setShowSearch(!showSearch)}
-                        />
+                            sx={{
+                                width: '40px',
+                                height: '40px',
+                                minWidth: '40px',
+                                mt: '8px',
+                                ml: '8px',
+                                borderRadius: '8px',
+                                backgroundColor: '#0057BB',
+                                boxShadow: '0 3px 14px rgb(0 0 0 / 24%)',
+                                ZIndex: '2',
+                                '&:hover': {
+                                    backgroundColor: '#0057BB',
+                                },
+                            }}
+                        >
+                            <img src={FilterIcon} />
+                        </Button>
                         {showSearch && (
                             <Box
                                 sx={{

@@ -27,7 +27,12 @@ const ApprovalLineContent = ({ title, color, process, content }) => {
                         style.cardText,
                         {
                             backgroundColor: color,
-                            color: color === '#EFEFEF' ? '#A9A9A9' : '#ffffff',
+                            color:
+                                color === '#e2e2e2'
+                                    ? '#a9a9a9'
+                                    : color === '#071c2c'
+                                      ? '#536877'
+                                      : '#ffffff',
                         },
                     ]}
                 >
@@ -80,20 +85,20 @@ const ApprovalLineContent = ({ title, color, process, content }) => {
 const ApprovalLine = ({ status, content }) => {
     // TODO: 상태별 화살표 색상 및 방향 처리 필요
     const theme = useTheme()
+    const { themeMode } = getLayoutState()
     const colors = useRef({
-        request: '#e2e2e2',
-        review: '#e2e2e2',
-        approval: '#e2e2e2',
+        request: themeMode === 'light' ? '#e2e2e2' : '#071c2c',
+        review: themeMode === 'light' ? '#e2e2e2' : '#071c2c',
+        approval: themeMode === 'light' ? '#e2e2e2' : '#071c2c',
     })
     const isReject = useRef({
         review: false,
         approval: false,
     })
-    const { themeMode } = getLayoutState()
 
     useMemo(() => {
         const active = '#05141f'
-        const danger = '#db0024'
+        const danger = '#8B0F2A'
         switch (status) {
             case 'request':
                 colors.current.request = active

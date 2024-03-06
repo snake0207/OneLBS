@@ -43,6 +43,11 @@ const EditableTextColumn = ({ value, name, isEditable, formik }) => {
                             backgroundColor: isDisableInput
                                 ? editButtonBackground
                                 : saveButtonBackground,
+                            '&:hover': {
+                                backgroundColor: isDisableInput
+                                    ? editButtonBackground
+                                    : saveButtonBackground,
+                            },
                         }}
                     >
                         {isDisableInput ? (

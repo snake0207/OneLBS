@@ -112,7 +112,8 @@ const dealerInfo = (data) => {
 const detailResponseDataMapper = (res) => {
     const data = res.data.result[0]
     const basicData = {
-        status: res.data.approvalInfo.status, // service에서 보내줄 결재이력 상태값
+        // status: res.data.approvalInfo.status, // service에서 보내줄 결재이력 상태값
+        status: 'rejected_review',
         // category: 'fuel',
         category: parseCategory(data),
         approvalInfo: res.data.approvalInfo,

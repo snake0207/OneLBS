@@ -33,7 +33,16 @@ function AuthHeader() {
 
     return (
         <AppBar position="absolute">
-            <Container maxWidth="xl" sx={{ minHeight: '60px', height: '60px' }}>
+            <Container
+                maxWidth="xl"
+                sx={{
+                    minHeight: '60px',
+                    height: '60px',
+                    borderBottom: '1px solid',
+                    borderColor: 'border.main',
+                    backgroundColor: '#fff',
+                }}
+            >
                 <Toolbar disableGutters>
                     <Box
                         sx={{

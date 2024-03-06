@@ -300,6 +300,10 @@ const MapSearch = () => {
                 backgroundColor: 'dialog.main',
                 boxShadow: '0 3px 14px rgb(0 0 0 / 24%)',
                 opacity: '95%',
+                '@media (max-width:767px)': {
+                    margin: '10px 0px 6px 10px',
+                    width: 'calc(100% - 15px)',
+                },
             }}
         >
             <Box>
@@ -327,6 +331,10 @@ const MapSearch = () => {
                                     '& .MuiFormHelperText-root': {
                                         backgroundColor: 'dialog.main',
                                     },
+                                },
+                                '& .MuiAutocomplete-popper': {
+                                    zIndex: '10000',
+                                    position: 'relative',
                                 },
                             }}
                             onChange={(event, value) => {

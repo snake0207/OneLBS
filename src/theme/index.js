@@ -101,6 +101,7 @@ export const tokens = {
         800: '#05141f',
         900: '#CFE5FF',
         1000: '#A1CDFF',
+        2000: '#0A5CBA',
     },
     text: {
         100: '#fff',
@@ -207,6 +208,7 @@ export const getThemeSettings = (mode) => ({
                       dashboardCnt: tokens.color[300],
                       banner: tokens.color[5001],
                       edit: tokens.color[101],
+                      closeBg: tokens.color[100],
                   },
                   button: {
                       ...tokens.button,
@@ -217,6 +219,8 @@ export const getThemeSettings = (mode) => ({
                       blue: tokens.button[1000],
                       gray: tokens.button[600],
                       white: tokens.button[100],
+                      map: tokens.button[2000],
+                      lineblue: tokens.button[2000],
                   },
                   text: {
                       ...tokens.text,
@@ -229,6 +233,7 @@ export const getThemeSettings = (mode) => ({
                       tapSelected: tokens.text[700],
                       mapTaps: tokens.text[900],
                       dashboard: tokens.text[600],
+                      close: tokens.text[500],
                   },
                   background: {
                       default: tokens.background[100],
@@ -264,6 +269,7 @@ export const getThemeSettings = (mode) => ({
                       tabSelected: tokens.border[500],
                       header: tokens.border[1000],
                       map: tokens.border[700],
+                      close: tokens.border[1000],
                   },
                   table: {
                       td: tokens.table[100],
@@ -332,6 +338,8 @@ export const getThemeSettings = (mode) => ({
                       dashboardCnt: tokens.color[701],
                       banner: tokens.color[10001],
                       edit: tokens.color[5001],
+                      close: tokens.color[900],
+                      closeBg: tokens.color[1001],
                   },
                   button: {
                       ...tokens.button,
@@ -342,6 +350,8 @@ export const getThemeSettings = (mode) => ({
                       gray: tokens.button[200],
                       lightgray: tokens.button[800],
                       white: tokens.button[100],
+                      map: tokens.button[2000],
+                      lineblue: tokens.button[1000],
                   },
                   text: {
                       ...tokens.text,
@@ -354,6 +364,7 @@ export const getThemeSettings = (mode) => ({
                       tapSelected: tokens.background[400],
                       mapTaps: tokens.text[400],
                       dashboard: tokens.text[100],
+                      close: tokens.text[400],
                   },
                   background: {
                       default: tokens.background.main,
@@ -389,6 +400,7 @@ export const getThemeSettings = (mode) => ({
                       tabSelected: tokens.border[600],
                       header: tokens.border[300],
                       map: tokens.border[300],
+                      close: tokens.border[500],
                   },
                   table: {
                       td: tokens.table[500],

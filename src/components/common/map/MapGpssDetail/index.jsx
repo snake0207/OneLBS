@@ -109,7 +109,7 @@ const MapGpssDetail = ({ selectedPoi, setSelectedPoi, poiData }) => {
     return (
         poiData &&
         isOpen && (
-            <Box sx={{ display: 'flex', margin: '10px' }}>
+            <Box sx={style.mapDetailBox}>
                 <Box sx={style.mapDetail}>
                     <Box>
                         <Tabs value={tabSelected} onChange={handleClickTabChange} sx={style.tabs}>
@@ -253,6 +253,9 @@ const MapGpssDetail = ({ selectedPoi, setSelectedPoi, poiData }) => {
                                 justifyContent: 'space-between',
                                 gap: '2px',
                                 mt: '30px',
+                                '@media (max-width:1024px)': {
+                                    mb: '20px',
+                                },
                             }}
                         >
                             <Button
@@ -283,14 +286,24 @@ const MapGpssDetail = ({ selectedPoi, setSelectedPoi, poiData }) => {
                     <IconButton
                         variant={'contained'}
                         sx={{
-                            inWidth: '22px',
-                            minHeight: '22px',
-                            width: '35px',
-                            height: '35px',
+                            inWidth: '20px',
+                            minHeight: '20px',
+                            width: '20px',
+                            height: '20px',
+                            ml: '4px',
+                            color: 'text.close',
+                            borderRadius: '35px',
+                            backgroundColor: 'color.closeBg',
+                            border: '1px solid',
+                            borderColor: 'border.close',
+                            boxShadow: '0 3px 14px rgb(0 0 0 / 20%)',
+                            '&:hover': {
+                                backgroundColor: 'color.closeBg',
+                            },
                         }}
                         onClick={handleClickDetailClose}
                     >
-                        <CloseIcon sx={{ color: 'background.close' }} />
+                        <CloseIcon sx={{ color: 'color.close', width: '13px', height: '13px' }} />
                     </IconButton>
                 )}
             </Box>

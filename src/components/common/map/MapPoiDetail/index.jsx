@@ -17,6 +17,7 @@ import ParkingInfo from '#/components/approval/Detail/CategoryInfo/ParkingInfo/i
 import FuelInfo from '#/components/approval/Detail/CategoryInfo/FuelInfo/index.jsx'
 import H2ChargingInfo from '#/components/approval/Detail/CategoryInfo/H2ChargingInfo/index.jsx'
 import DealerPoiInfo from '#/components/approval/Detail/CategoryInfo/DealerPoiInfo/index.jsx'
+import style from './style.module'
 
 const MapPoiDetail = ({ selectedPoi, setSelectedPoi, poiData }) => {
     const isEditable = false
@@ -38,19 +39,8 @@ const MapPoiDetail = ({ selectedPoi, setSelectedPoi, poiData }) => {
     return (
         poiData &&
         isOpen && (
-            <Box sx={{ display: 'flex', margin: '10px' }}>
-                <Box
-                    sx={{
-                        width: '350px',
-                        maxHeight: '797px',
-                        overflow: 'auto',
-                        paddingTop: '16px',
-                        padding: '20px 16px 16px 16px',
-                        borderRadius: '0 0 8px 8px',
-                        backgroundColor: 'dialog.main',
-                        boxShadow: '0 3px 14px rgb(0 0 0 / 24%)',
-                    }}
-                >
+            <Box sx={style.mapDetailBox}>
+                <Box sx={style.mapDetail}>
                     {/* 상세 기본 정보 */}
                     <BasicInfo
                         poiData={parsedData.basicInfo}
@@ -82,14 +72,26 @@ const MapPoiDetail = ({ selectedPoi, setSelectedPoi, poiData }) => {
                     <IconButton
                         variant={'contained'}
                         sx={{
-                            minWidth: '22px',
-                            minHeight: '22px',
-                            width: '35px',
-                            height: '35px',
+                            inWidth: '20px',
+                            minHeight: '20px',
+                            width: '20px',
+                            height: '20px',
+                            ml: '4px',
+                            color: 'text.close',
+                            borderRadius: '35px',
+                            backgroundColor: 'color.closeBg',
+                            border: '1px solid',
+                            borderColor: 'border.close',
+                            boxShadow: '0 3px 14px rgb(0 0 0 / 20%)',
+                            '&:hover': {
+                                backgroundColor: 'color.closeBg',
+                            },
                         }}
                         onClick={handleClickDetailClose}
                     >
-                        <CloseIcon sx={{ color: 'background.close' }} />
+                        <CloseIcon
+                            sx={{ color: 'background.close', width: '13px', height: '13px' }}
+                        />
                     </IconButton>
                 )}
             </Box>

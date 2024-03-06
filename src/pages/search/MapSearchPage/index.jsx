@@ -1,7 +1,7 @@
 import t from '#/common/libs/trans'
 import GoogleMapComponent from '#/components/common/map/googleMap'
 import TitleBar from '#/components/common/menu/TitleBar'
-import { Box } from '@mui/material'
+import { Box, Icon, Button } from '@mui/material'
 import { BrowserView, MobileView } from 'react-device-detect'
 import MapSearch from '#/components/common/map/MapSearch/index.jsx'
 import MapSearchList from '#/components/common/map/MapSearchList/index.jsx'
@@ -12,6 +12,10 @@ import TuneIcon from '@mui/icons-material/Tune.js'
 import { useNavigate } from 'react-router-dom'
 import MapGpssDetail from '#/components/common/map/MapGpssDetail/index.jsx'
 import MapPoiAdd from '#/components/common/map/MapPoiAdd/index.jsx'
+import SearchIcon from '#/assets/searchIcon.svg'
+import SearchIconDark from '#/assets/searchIconLightDark.svg'
+import FilterIcon from '#/assets/filterIcon.svg'
+import useLayoutStore from '#/store/useLayoutStore'
 
 const markerSampleData = [
     {
@@ -45,12 +49,38 @@ function MapSearchPage() {
         setSelectedPoi(id)
         navigate(`/search-management/map/${id}`)
     }
+    const { themeMode } = useLayoutStore()
 
     return (
         <Box>
+            <MobileView>
+                <Icon
+                    style={{
+                        display: 'flex',
+                        position: 'absolute',
+                        top: ' 75px',
+                        zIndex: '4',
+                    }}
+                >
+                    {themeMode === 'light' ? (
+                        <img src={SearchIcon} style={{ display: 'flex', width: '24px' }} />
+                    ) : (
+                        <img src={SearchIconDark} style={{ display: 'flex', width: '24px' }} />
+                    )}
+                </Icon>
+            </MobileView>
             <TitleBar title={t('top_menu.search_management')} />
-            <Box sx={{ position: 'relative', width: '100%', height: 'calc(100vh - 120px)' }}>
-                <Box sx={{ position: 'absolute', top: 0, zIndex: 1000 }}>
+            <Box
+                sx={{
+                    position: 'relative',
+                    width: '100%',
+                    height: 'calc(100vh - 120px)',
+                    '@media (max-width:1024px)': {
+                        height: 'calc(100vh - 153px)',
+                    },
+                }}
+            >
+                <Box sx={{ position: 'absolute', top: 0, zIndex: 2 }}>
                     <BrowserView>
                         <Box sx={{ display: 'flex', flexDirection: 'colunm' }}>
                             <Box>
@@ -83,15 +113,25 @@ function MapSearchPage() {
                         </Box>
                     </BrowserView>
                     <MobileView>
-                        <TuneIcon
-                            sx={{
-                                fontSize: 32,
-                                mt: 1,
-                                ml: 1,
-                                border: '1px solid black',
-                            }}
+                        <Button
                             onClick={() => setShowSearch(!showSearch)}
-                        />
+                            sx={{
+                                width: '40px',
+                                height: '40px',
+                                minWidth: '40px',
+                                mt: '8px',
+                                ml: '8px',
+                                borderRadius: '8px',
+                                backgroundColor: '#0057BB',
+                                boxShadow: '0 3px 14px rgb(0 0 0 / 24%)',
+                                ZIndex: '2',
+                                '&:hover': {
+                                    backgroundColor: '#0057BB',
+                                },
+                            }}
+                        >
+                            <img src={FilterIcon} />
+                        </Button>
                         {showSearch && (
                             <Box
                                 sx={{

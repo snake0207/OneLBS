@@ -1,9 +1,22 @@
 const style = {
+    mapDetailBox: {
+        display: 'flex',
+        margin: '10px',
+        '@media (max-width:1024px)': {
+            margin: '0',
+            pt: '15px',
+        },
+    },
     mapDetail: {
         width: '350px',
         ml: 0.5,
         opacity: '95%',
         borderRadius: '8px',
+        '@media (max-width:1024px)': {
+            width: '100%',
+            ml: 0,
+            opacity: '1',
+        },
     },
     mapDetailContent: {
         maxHeight: '760px',
@@ -13,6 +26,11 @@ const style = {
         borderRadius: '0 0 8px 8px',
         backgroundColor: 'dialog.main',
         boxShadow: '0 3px 14px rgb(0 0 0 / 24%)',
+        '@media (max-width:1024px)': {
+            boxShadow: 'none',
+            padding: '20px 0 16px 0',
+            overflow: 'inherit',
+        },
     },
     tabMenu: {
         width: '49.4%',

@@ -4,8 +4,15 @@ import ListItemText from '@mui/material/ListItemText'
 import ListItemButton from '@mui/material/ListItemButton'
 import { useMapActions } from '#/store/useMapStore.js'
 import PointBlueEVIcon from '#/assets/pointBlueEVIcon.svg'
-import PointBlueIcon from '#/assets/pointBlueIcon.svg'
-import PointRedIcon from '#/assets/pointRedIcon.svg'
+import PointBlueFuelIcon from '#/assets/pointBlueFuelIcon.svg'
+import PointBlueH2Icon from '#/assets/pointBlueH2Icon.svg'
+import PointBlueParkingIcon from '#/assets/pointBlueParkingIcon.svg'
+import PointBluePoiIcon from '#/assets/pointBluePoiIcon.svg'
+import PointRedEVIcon from '#/assets/pointRedEVIcon.svg'
+import PointRedFuelIcon from '#/assets/pointRedFuelIcon.svg'
+import PointRedH2Icon from '#/assets/pointRedH2Icon.svg'
+import PointRedParkingIcon from '#/assets/pointRedParkingIcon.svg'
+import PointRedPoiIcon from '#/assets/pointRedPoiIcon.svg'
 import Brightness1Icon from '@mui/icons-material/Brightness1'
 
 const MapPoiContent = ({ isLast, isGpssSearch, selectedPoi, setSelectedPoi, poiData }) => {
@@ -45,8 +52,12 @@ const MapPoiContent = ({ isLast, isGpssSearch, selectedPoi, setSelectedPoi, poiD
                                     }}
                                 >
                                     <img
-                                        src={cpType === 'mcp' ? PointBlueIcon : PointRedIcon}
-                                        style={{ verticalAlign: 'middle', paddingRight: '4px' }}
+                                        src={cpType === 'mcp' ? PointBlueEVIcon : PointRedEVIcon}
+                                        style={{
+                                            verticalAlign: 'middle',
+                                            paddingRight: '4px',
+                                            width: '16px',
+                                        }}
                                     />
                                     {title}
                                 </Typography>
@@ -54,12 +65,37 @@ const MapPoiContent = ({ isLast, isGpssSearch, selectedPoi, setSelectedPoi, poiD
                                     {isGpssSearch &&
                                         progress &&
                                         (progress === 'reviewing' ? (
-                                            <Chip label={'검토대기'} color="primary" />
+                                            <Chip
+                                                label={'검토대기'}
+                                                sx={{
+                                                    color: 'button.lineblue',
+                                                    width: '62px',
+                                                    height: '24px',
+                                                    fontSize: '12px',
+                                                    fontWeight: 500,
+                                                    backgroundColor: 'transparent',
+                                                    border: '1px solid',
+                                                    borderColor: 'button.lineblue',
+                                                    '& .MuiChip-label': {
+                                                        p: '0',
+                                                    },
+                                                }}
+                                            />
                                         ) : (
                                             <Chip
                                                 label={'승인대기'}
-                                                color="primary"
                                                 variant="outlined"
+                                                sx={{
+                                                    color: 'white',
+                                                    width: '62px',
+                                                    height: '24px',
+                                                    fontSize: '12px',
+                                                    border: 'none',
+                                                    backgroundColor: 'button.map',
+                                                    '& .MuiChip-label': {
+                                                        p: '0',
+                                                    },
+                                                }}
                                             />
                                         ))}
                                     {/* 국기 들어가는 부분 */}

@@ -57,7 +57,7 @@ const MapSearchList = ({
                 backgroundColor: 'dialog.main',
                 borderRadius: '8px',
                 minHeight: '130px',
-                maxHeight: isBrowser ? '500px' : 'calc(100vh - 620px)',
+                maxHeight: isBrowser ? '480px' : 'calc(100vh - 620px)',
                 display: isResultNon ? 'flex' : '',
                 justifyContent: isResultNon ? 'center' : '',
                 alignItems: isResultNon ? 'center' : '',
@@ -68,7 +68,7 @@ const MapSearchList = ({
             ref={poiList}
         >
             {isResultNon ? (
-                <Typography sx={{ fontSize: 15, color: '#444' }}>
+                <Typography sx={{ fontSize: 15, color: 'text.main' }}>
                     {t('search_no_result', 'common')}
                 </Typography>
             ) : (

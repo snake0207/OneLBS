@@ -8,6 +8,7 @@ export const API_PATH = {
         renew_token: '/user-auth/api/v1/user/renew-token',
         verify_otp: '/user-auth/api/v1/user/verify-otp',
         password_reset: '/user-auth/api/v1/user/password/reset',
+        logout: '/user-auth/api/v1/user/logout',
     },
     gpss: {
         reviewer: '/reviewer',

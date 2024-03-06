@@ -33,6 +33,10 @@ const postPasswordReset = (data) => {
     return postAPI({ endPoint: API_PATH.auth.password_reset, data })
 }
 
+const postLogout = () => {
+    return postAPI({ endPoint: API_PATH.auth.logout })
+}
+
 export default {
     postLogin,
     postJoin,
@@ -42,4 +46,5 @@ export default {
     postRenewToken,
     postVerifyOtp,
     postPasswordReset,
+    postLogout,
 }

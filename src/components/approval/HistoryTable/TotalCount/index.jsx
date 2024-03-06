@@ -3,11 +3,25 @@ import { Box } from '@mui/material'
 import t from '#/common/libs/trans.js'
 
 const TotalCount = ({ type, counts }) => {
-    const texts = ['temporary', 'request', 'reviewed', 'approved', 'rejected']
+    const texts = [
+        'temporary',
+        'request',
+        'reviewed',
+        'rejected_review',
+        'approved',
+        'rejected_approval',
+    ]
     const renderCountText = () => {
         return texts.map((text, index) => {
-            if (text === 'temporary' && (type === 'reviewer' || type === 'approver')) return
-            if (text === 'request' && type === 'approver') return
+            switch (type) {
+                case 'reviewer':
+                    if (text === 'temporary') return
+                    break
+                case 'approver':
+                    if (text === 'temporary' || text === 'request' || text === 'rejected_review')
+                        return
+                    break
+            }
 
             return (
                 <Typography key={index} variant={'body2'} component={'span'}>

@@ -4,6 +4,7 @@ import Typography from '@mui/material/Typography'
 import EditableTextColumn from '#/components/approval/Detail/CategoryInfo/EditableTextColumn/index.jsx'
 import { useRef } from 'react'
 import EditableSelectColumn from '#/components/approval/Detail/CategoryInfo/EditableSelectColumn/index.jsx'
+import t from '#/common/libs/trans.js'
 import ParkingIcon from '#/assets/parkingIcon.svg'
 import ParkingIconDark from '#/assets/parkingIconDark.svg'
 import useLayoutStore from '#/store/useLayoutStore'
@@ -72,7 +73,7 @@ const ParkingInfo = ({ data, isEditable, formik }) => {
                             <img
                             // src={EvStationIcon}
                             />
-                            영업 요일
+                            {t('commonInfo.weekday', 'approval')}
                         </Typography>
                     </AccordionSummary>
                     <AccordionDetails sx={style.detailsBox}>
@@ -102,7 +103,7 @@ const ParkingInfo = ({ data, isEditable, formik }) => {
                                 // src={EvStationIcon}
                                 style={{ verticalAlign: 'middle', paddingRight: '4px' }}
                             />
-                            가격
+                            {t('parkingInfo.price', 'approval')}
                         </Typography>
                     </AccordionSummary>
                     <AccordionDetails sx={style.detailsBox}>

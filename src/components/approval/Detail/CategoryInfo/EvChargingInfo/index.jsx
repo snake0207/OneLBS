@@ -6,22 +6,23 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
 import EditableTextColumn from '#/components/approval/Detail/CategoryInfo/EditableTextColumn/index.jsx'
 import { Fragment, useRef } from 'react'
 import EditableSelectColumn from '#/components/approval/Detail/CategoryInfo/EditableSelectColumn/index.jsx'
+import t from '#/common/libs/trans.js'
 import useLayoutStore from '#/store/useLayoutStore'
 import style from './style.module'
 
 const EvChargingInfo = ({ data, isEditable, formik }) => {
     const selectTypeItems = useRef([
-        { key: 0, value: 0, label: '알수없음' },
+        { key: 0, value: 0, label: t('commonInfo.unknown', 'approval') },
         { key: 1, value: 1, label: 'ACtype1' },
         { key: 2, value: 2, label: 'ACtype2' },
         { key: 3, value: 3, label: 'Combo(AC+DC)' },
         { key: 4, value: 4, label: 'CHAdeMO' },
     ])
     const selectSpeedItems = useRef([
-        { key: 0, value: 0, label: '알수없음' },
-        { key: 1, value: 1, label: '완속' },
-        { key: 2, value: 2, label: '급속' },
-        { key: 3, value: 3, label: '초급속' },
+        { key: 0, value: 0, label: t('evChargingInfo.speed.0', 'approval') },
+        { key: 1, value: 1, label: t('evChargingInfo.speed.1', 'approval') },
+        { key: 2, value: 2, label: t('evChargingInfo.speed.2', 'approval') },
+        { key: 3, value: 3, label: t('evChargingInfo.speed.3', 'approval') },
     ])
     const { themeMode } = useLayoutStore()
 
@@ -56,7 +57,7 @@ const EvChargingInfo = ({ data, isEditable, formik }) => {
                 />
                 <EditableSelectColumn />
                 <Typography sx={{ color: 'text.main', fontSize: '18px' }}>
-                    {data.maxWatt}
+                    {data.maxWatt}kw
                 </Typography>
                 <Typography sx={{ color: 'text.main', fontSize: '18px' }}>{data.status}</Typography>
                 <Accordion sx={style.accordionDepsBox}>
@@ -71,7 +72,7 @@ const EvChargingInfo = ({ data, isEditable, formik }) => {
                             <img
                             // src={EvStationIcon}
                             />
-                            영업 요일
+                            {t('commonInfo.weekday', 'approval')}
                         </Typography>
                     </AccordionSummary>
                     <AccordionDetails sx={style.detailsBox}>
@@ -153,7 +154,7 @@ const EvChargingInfo = ({ data, isEditable, formik }) => {
                                           sx={{ width: '100%' }}
                                       />
                                       <EditableTextColumn
-                                          value={charger.watt}
+                                          value={`${charger.watt}kw`}
                                           name={`evChargingInfo.chargers.${index}.watt`}
                                           isEditable={isEditable}
                                           formik={formik}

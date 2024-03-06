@@ -2,6 +2,7 @@ import { Accordion, AccordionDetails, AccordionSummary, Box } from '@mui/materia
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore.js'
 import Typography from '@mui/material/Typography'
 import EditableTextColumn from '#/components/approval/Detail/CategoryInfo/EditableTextColumn/index.jsx'
+import t from '#/common/libs/trans.js'
 import FuelIcon from '#/assets/fuelIcon.svg'
 import FuelIconDark from '#/assets/fuelIconDark.svg'
 import useLayoutStore from '#/store/useLayoutStore'
@@ -48,7 +49,7 @@ const FuelInfo = ({ data, isEditable, formik }) => {
                             <img
                             // src={EvStationIcon}
                             />
-                            영업 요일
+                            {t('commonInfo.weekday', 'approval')}
                         </Typography>
                     </AccordionSummary>
                     <AccordionDetails sx={style.detailsBox}>
@@ -78,7 +79,7 @@ const FuelInfo = ({ data, isEditable, formik }) => {
                                 <img
                                 // src={EvStationIcon}
                                 />
-                                {type}
+                                {t(`fuelInfo.type.${type}`, 'approval')}
                             </Typography>
                         </AccordionSummary>
                         <AccordionDetails sx={style.detailsBox}>

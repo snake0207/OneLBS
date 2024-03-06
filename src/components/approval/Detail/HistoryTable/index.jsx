@@ -28,7 +28,9 @@ const HistoryTable = ({ historyList }) => {
                         return (
                             <TableRow key={index}>
                                 <TableCell align={'center'}>{history.date}</TableCell>
-                                <TableCell align={'center'}>{history.status}</TableCell>
+                                <TableCell align={'center'}>
+                                    {t(`status.${history.status}`, 'approval')}
+                                </TableCell>
                                 <TableCell>{history.history}</TableCell>
                             </TableRow>
                         )

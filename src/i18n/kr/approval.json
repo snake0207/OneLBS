@@ -1,4 +1,6 @@
 {
+    "yes": "예",
+    "no": "아니오",
     "list_all": "전체 이력 조회",
     "list_requester": "이력 조회(요청자)",
     "list_reviewer": "이력 조회(검토자)",
@@ -34,8 +36,8 @@
         "request": "검토요청",
         "reviewed": "검토완료",
         "approved": "승인완료",
-        "rejected_review": "반려",
-        "rejected_approval": "반려"
+        "rejected_review": "검토반려",
+        "rejected_approval": "승인반려"
     },
     "actions": {
         "temporary": "임시저장",
@@ -64,53 +66,61 @@
         "reviewer": "검토자",
         "approver": "승인자"
     },
-    "categories": {
-        "evChargingInfo": {
-            "pFee": "주차 유/무료",
+    "commonInfo": {
+        "stationStatus": {
+            "0": "알수없음",
+            "1": "통신이상",
+            "2": "사용가능",
+            "3": "충전중",
+            "4": "운영중지",
+            "5": "점검중",
+            "6": "예약중"
+        },
+        "weekday": "영업요일",
+        "charger": "충전기",
+        "unknown": "알수없음"
+    },
+    "evChargingInfo": {
+        "isFree": {
             "0": "무료",
-            "1": "유료",
-            "stationStatus": {
-                "0": "알수없음",
-                "1": "통신이상",
-                "2": "사용가능",
-                "3": "충전중",
-                "4": "운영중지",
-                "5": "점검중",
-                "6": "예약중"
-            },
-            "connector": {
-                "1": "AC type 1 (국내, 북미)",
-                "2": "AC type 2 (유럽)",
-                "3": "Combo(AC+DC) type 1 (국내, 북미)",
-                "4": "Combo(AC+DC) type 2 (유럽)",
-                "5": "CHAdeMO (확장)",
-                "6": "CHAdeMO + AC tyep1 (일본)"
-            },
-            "speed": {
-                "0": "알 수 없음",
-                "1": "완속",
-                "2": "급속",
-                "3": "초급속"
-            },
-            "status": {
-                "0": "알수 없음",
-                "1": "충전가능",
-                "2": "충전중",
-                "3": "충전불가"
-            },
-            "noInfo": "정보없음"
+            "1": "유료"
         },
-        "fuelInfo": {
-            "status": {
-                "G": "휘발유",
-                "PG": "고급휘발유",
-                "D": "경유",
-                "L": "LPG"
-            }
+        "connector": {
+            "0": "알수없음",
+            "1": "AC type 1 (국내, 북미)",
+            "2": "AC type 2 (유럽)",
+            "3": "Combo(AC+DC) type 1 (국내, 북미)",
+            "4": "Combo(AC+DC) type 2 (유럽)",
+            "5": "CHAdeMO (확장)",
+            "6": "CHAdeMO + AC tyep1 (일본)"
         },
-        "h2ChargingInfo": {
-            "350": "350bar 수소차",
-            "750": "750bar 수소차"
+        "speed": {
+            "0": "알수없음",
+            "1": "완속",
+            "2": "급속",
+            "3": "초급속"
+        },
+        "status": {
+            "0": "알수없음",
+            "1": "충전가능",
+            "2": "충전중",
+            "3": "충전불가"
         }
+    },
+    "fuelInfo": {
+        "type": {
+            "G": "휘발유",
+            "PG": "고급휘발유",
+            "D": "경유",
+            "L": "LPG"
+        }
+    },
+    "parkingInfo": {
+        "price": "가격"
+    },
+    "h2ChargingInfo": {
+        "0": "알수없음",
+        "350": "350bar 수소차",
+        "750": "750bar 수소차"
     }
 }

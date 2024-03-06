@@ -5,6 +5,7 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
 import EditableTextColumn from '#/components/approval/Detail/CategoryInfo/EditableTextColumn/index.jsx'
 import EditableSelectColumn from '#/components/approval/Detail/CategoryInfo/EditableSelectColumn/index.jsx'
 import { useRef } from 'react'
+import t from '#/common/libs/trans.js'
 import H2Icon from '#/assets/h2Icon.svg'
 import H2IconDark from '#/assets/h2IconDark.svg'
 import useLayoutStore from '#/store/useLayoutStore'
@@ -12,9 +13,9 @@ import style from './style.module'
 
 const H2ChargingInfo = ({ data, isEditable, formik }) => {
     const selectSpeedItems = useRef([
-        { key: 0, value: 0, label: '알수없음' },
-        { key: 1, value: 750, label: '750bar 수소차' },
-        { key: 2, value: 350, label: '350bar 수소차' },
+        { key: 0, value: 0, label: t('h2ChargingInfo.0', 'approval') },
+        { key: 1, value: 750, label: t('h2ChargingInfo.750', 'approval') },
+        { key: 2, value: 350, label: t('h2ChargingInfo.350', 'approval') },
     ])
     const { themeMode } = useLayoutStore()
 
@@ -63,7 +64,7 @@ const H2ChargingInfo = ({ data, isEditable, formik }) => {
                             <img
                             // src={EvStationIcon}
                             />
-                            영업 요일
+                            {t('commonInfo.weekday', 'approval')}
                         </Typography>
                     </AccordionSummary>
                     <AccordionDetails sx={style.detailsBox}>
@@ -93,7 +94,7 @@ const H2ChargingInfo = ({ data, isEditable, formik }) => {
                             <img
                             // src={EvStationIcon}
                             />
-                            charger
+                            {t('commonInfo.charger', 'approval')}
                         </Typography>
                     </AccordionSummary>
                     <AccordionDetails sx={style.detailsBox}>
@@ -101,7 +102,6 @@ const H2ChargingInfo = ({ data, isEditable, formik }) => {
                             <Box key={index}>
                                 <Typography>{id}</Typography>
                                 <Typography>{status}</Typography>
-                                <Typography>{speed}</Typography>
                                 <EditableSelectColumn
                                     value={speed}
                                     name={`h2ChargingInfo.chargers.${index}.speed`}

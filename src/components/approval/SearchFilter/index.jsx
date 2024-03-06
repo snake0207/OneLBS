@@ -1,4 +1,4 @@
-import { Button, Stack, Box } from '@mui/material'
+import { Button, Stack } from '@mui/material'
 import Grid from '@mui/material/Unstable_Grid2'
 import { useFormik } from 'formik'
 import * as yup from 'yup'
@@ -90,13 +90,13 @@ const SearchFilter = ({ type, handleSubmitFilter, isMobile }) => {
                 <Grid container sx={style.searchBox}>
                     <Grid md={4} xs={12} container alignItems={'center'}>
                         <Grid xs={3} md={3} sx={style.labelText}>
-                            {t('name', 'approval')}
+                            {t('title', 'approval')}
                         </Grid>
                         <Grid xs={9} md={8}>
                             <TextInput
                                 formik={formik}
                                 name={'tempFilter1'}
-                                placeholder={t('valid.name', 'approval')}
+                                placeholder={t('valid.title', 'approval')}
                             />
                         </Grid>
                     </Grid>

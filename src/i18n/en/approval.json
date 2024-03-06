@@ -10,7 +10,7 @@
     "approver": "Approver",
     "info": "Info",
     "final_info": "Final Info",
-    "name": "Name",
+    "title": "Title",
     "address": "Address",
     "lat": "Lat",
     "lon": "Lon",
@@ -60,7 +60,7 @@
         "reject": "Confirmed"
     },
     "valid": {
-        "name": "name",
+        "title": "title",
         "requester": "requester",
         "reviewer": "reviewer",
         "approver": "approver"

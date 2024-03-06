@@ -1,26 +1,24 @@
 import {
     parseCategory,
-    parseChargerSpeed,
-    parseChargerStatus,
     parseCongestion,
-    parseFuelType,
     parseOpeningHours,
     parsePriceIsFree,
-    parseStationStatus,
-    parseSummaryConnectorType,
 } from '#/common/libs/approvalParser.js'
+import t from '#/common/libs/trans.js'
 
+// TODO: request mapper, null processing
 const evChargerInfo = (data) => {
     return {
         brand: data.brand,
         maxWatt: data.maxWatt,
         parkingFee: data.pFee,
-        status: parseStationStatus(data.stationStatus),
+        status: t(`commonInfo.stationStatus.${data.stationStatus}`, 'approval'),
         summary:
             data.status?.map(({ connector, watt, speed, possibleCount }) => ({
-                type: parseSummaryConnectorType(connector),
+                type: t(`evChargingInfo.connector.${connector}`, 'approval'),
+                // type: parseSummaryConnectorType(connector),
                 watt,
-                speed: parseChargerSpeed(speed),
+                speed: t(`evChargingInfo.speed.${speed}`, 'approval'),
                 possibleCount,
             })) ?? [],
         openingHours: parseOpeningHours(data.openingHours),
@@ -30,7 +28,7 @@ const evChargerInfo = (data) => {
                     id,
                     speed: speed,
                     watt,
-                    status: parseChargerStatus(status),
+                    status: t(`evChargingInfo.status.${status}`, 'approval'),
                     lastUsedTime,
                     type: connectorType,
                     priceList: price?.map(
@@ -52,7 +50,7 @@ const fuelInfo = (data) => {
         brand: data.brand,
         summary:
             data.status?.map(({ type, price }) => ({
-                type: parseFuelType(type),
+                type: type,
                 price: price.price,
                 priceUnit: price.priceUnit,
                 currencyCode: price.currencyCode,
@@ -91,7 +89,7 @@ const h2ChargingInfo = (data) => {
             data.charger?.map(({ id, speed, status }) => ({
                 id,
                 speed: speed,
-                status: parseStationStatus(status),
+                status: t(`commonInfo.stationStatus.${status}`, 'approval'),
             })) ?? [],
     }
 }
@@ -111,8 +109,9 @@ const dealerInfo = (data) => {
 const detailResponseDataMapper = (res) => {
     const data = res.data.result[0]
     const basicData = {
+        // status: 'request',
+        // category: 'h2Charging',
         status: res.data.approvalInfo.status, // service에서 보내줄 결재이력 상태값
-        // category: 'fuel',
         category: parseCategory(data),
         approvalInfo: res.data.approvalInfo,
         poiId: data.poiId,

@@ -320,7 +320,7 @@ const MapSearch = () => {
                     <Grid item xs={9}>
                         <Autocomplete
                             multiple
-                            disablePortal
+                            //disablePortal
                             options={countryCodeArr}
                             size="small"
                             name={'country'}
@@ -331,10 +331,6 @@ const MapSearch = () => {
                                     '& .MuiFormHelperText-root': {
                                         backgroundColor: 'dialog.main',
                                     },
-                                },
-                                '& .MuiAutocomplete-popper': {
-                                    zIndex: '10000',
-                                    position: 'relative',
                                 },
                             }}
                             onChange={(event, value) => {
@@ -452,7 +448,7 @@ const MapSearch = () => {
                     </Grid>
                     <Grid item xs={9}>
                         <Autocomplete
-                            disablePortal
+                            //disablePortal
                             options={languageCodeArr}
                             size="small"
                             name={'language'}
@@ -503,7 +499,7 @@ const MapSearch = () => {
                     <Grid item xs={9}>
                         <Autocomplete
                             multiple
-                            disablePortal
+                            //disablePortal
                             options={categoryCodeArr}
                             size="small"
                             name={'category'}

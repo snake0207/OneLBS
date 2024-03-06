@@ -9,6 +9,7 @@ export const API_PATH = {
         verify_otp: '/user-auth/api/v1/user/verify-otp',
         password_reset: '/user-auth/api/v1/user/password/reset',
         logout: '/user-auth/api/v1/user/logout',
+        password_change: 'user-auth/api/v1/user/password/change',
     },
     gpss: {
         reviewer: '/reviewer',

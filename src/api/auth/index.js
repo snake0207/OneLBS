@@ -37,6 +37,10 @@ const postLogout = () => {
     return postAPI({ endPoint: API_PATH.auth.logout })
 }
 
+const postPasswordChange = (data) => {
+    return postAPI({ endPoint: API_PATH.auth.password_change, data })
+}
+
 export default {
     postLogin,
     postJoin,
@@ -47,4 +51,5 @@ export default {
     postVerifyOtp,
     postPasswordReset,
     postLogout,
+    postPasswordChange,
 }

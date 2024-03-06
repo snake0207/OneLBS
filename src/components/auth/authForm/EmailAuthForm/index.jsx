@@ -19,12 +19,16 @@ import { emailAuthSchema } from '#/contents/validationSchema'
 import FlexEndButtonContainer from '#/components/common/button/FlexEndButtonContainer'
 
 import style from './style.module'
+import { usePostConfirmEmail, usePostEmailVerify } from '#/hooks/queries/auth'
+import { LoadingButton } from '@mui/lab'
 
 const EmailAuthForm = () => {
     const { time, actions } = useTimerStore()
     const [isButtonDisabled, setIsButtonDisabled] = useState(false)
     const [isReSend, setIsReSend] = useState(false)
     const [isAuthCompleted, setIsAuthCompleted] = useState(false)
+    const { mutate: emailVerifyMutate, isPending: isEmailVerifyPending } = usePostEmailVerify()
+    const { mutate: confirmEmailMutate, isPending: isConfirmEmailPending } = usePostConfirmEmail()
 
     const formik = useFormik({
         initialValues: {
@@ -33,16 +37,26 @@ const EmailAuthForm = () => {
         },
         validationSchema: emailAuthSchema,
         onSubmit: (form) => {
-            console.log(form)
-            setIsAuthCompleted(true)
-            actions.reset()
+            confirmEmailMutate(form, {
+                onSuccess: () => {
+                    setIsAuthCompleted(true)
+                    actions.reset()
+                },
+            })
         },
     })
 
     const handleClickSendEmail = () => {
-        setIsButtonDisabled(true)
-        setIsReSend(true)
-        actions.setTime(180)
+        emailVerifyMutate(
+            { email: formik.values.email },
+            {
+                onSuccess: () => {
+                    setIsButtonDisabled(true)
+                    setIsReSend(true)
+                    actions.setTime(180)
+                },
+            },
+        )
     }
 
     const customEmailHelperText = () => {
@@ -125,6 +139,7 @@ const EmailAuthForm = () => {
                     size="small"
                     type="text"
                     placeholder={t('placeholder.email', 'auth')}
+                    disabled={isButtonDisabled}
                     InputProps={{
                         endAdornment: (
                             <InputAdornment position="end">
@@ -140,7 +155,8 @@ const EmailAuthForm = () => {
                         ),
                     }}
                 />
-                <Button
+                <LoadingButton
+                    loading={isEmailVerifyPending}
                     variant="contained"
                     onClick={handleClickSendEmail}
                     type="button"
@@ -154,7 +170,7 @@ const EmailAuthForm = () => {
                     }}
                 >
                     {isReSend ? t('re_send_mail', 'auth') : t('send_mail_certified', 'auth')}
-                </Button>
+                </LoadingButton>
             </Box>
             {customEmailHelperText()}
             <Typography sx={style.labelText}>{t('email_confirm_code', 'auth')}</Typography>
@@ -199,7 +215,8 @@ const EmailAuthForm = () => {
                         ),
                     }}
                 />
-                <Button
+                <LoadingButton
+                    loading={isConfirmEmailPending}
                     variant="contained"
                     onClick={formik.handleSubmit}
                     type="button"
@@ -215,7 +232,7 @@ const EmailAuthForm = () => {
                     {isAuthCompleted
                         ? t('authentication_completed', 'auth')
                         : t('to_authenticate', 'auth')}
-                </Button>
+                </LoadingButton>
             </Box>
             {customCodeHelperText()}
             <FlexEndButtonContainer>

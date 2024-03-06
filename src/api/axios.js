@@ -3,8 +3,7 @@ import useAuthStore from '#/store/useAuthStore'
 import auth from '#/api/auth'
 
 export const axiosInstance = axios.create({
-    // baseURL: import.meta.env.VITE_GW_BASE_URL,
-    baseURL: '/api',
+    baseURL: import.meta.env.VITE_GW_BASE_URL,
     headers: {
         'Content-Type': 'application/json',
         Authorization: `Bearer ${useAuthStore.getState().accesstoken}`,

@@ -5,9 +5,6 @@ import { useMutation, useQuery } from '@tanstack/react-query'
 export const usePostLogin = () => {
     return useMutation({
         mutationFn: auth.postLogin,
-        onSuccess: (data) => {
-            console.log(data)
-        },
     })
 }
 

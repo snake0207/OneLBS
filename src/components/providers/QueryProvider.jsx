@@ -7,10 +7,10 @@ const QueryProvider = ({ children }) => {
     const queryClient = new QueryClient({
         defaultOptions: {
             queries: {
-                retry: 1,
+                retry: false,
             },
             mutations: {
-                retry: 1,
+                retry: false,
                 onError: handlerError,
             },
         },

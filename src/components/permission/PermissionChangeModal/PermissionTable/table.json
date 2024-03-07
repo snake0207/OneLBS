@@ -1,0 +1,118 @@
+{
+    "totalPages": 2,
+    "currentPage": 1,
+    "pageSize": 10,
+    "totalElements": 15,
+    "list": [
+        {
+            "userId": 245734,
+            "email": "user4@naver.com",
+            "name": "user4",
+            "companyName": "아크로퓨처",
+            "teamName": "IT 서비스 사업팀",
+            "roleId": 26,
+            "failCount": 0,
+            "statusName": "ACTIVE",
+            "termsAccepted": "Y"
+        },
+        {
+            "userId": 245645,
+            "email": "user6@naver.com",
+            "name": "user6",
+            "companyName": "아크로퓨처",
+            "teamName": "IT 서비스 사업팀",
+            "roleId": 26,
+            "failCount": 0,
+            "statusName": "ACTIVE",
+            "termsAccepted": "Y"
+        },
+        {
+            "userId": 245,
+            "email": "user1@naver.com",
+            "name": "user1",
+            "companyName": "아크로퓨처",
+            "teamName": "IT 서비스 사업팀",
+            "roleId": 26,
+            "failCount": 0,
+            "statusName": "ACTIVE",
+            "termsAccepted": "Y"
+        },
+        {
+            "userId": 2463,
+            "email": "user2@naver.com",
+            "name": "user2",
+            "companyName": "아크로퓨처",
+            "teamName": "IT 서비스 사업팀",
+            "roleId": 26,
+            "failCount": 0,
+            "statusName": "ACTIVE",
+            "termsAccepted": "Y"
+        },
+        {
+            "userId": 123,
+            "email": "ahnjmt@gmail.com",
+            "name": "안제민",
+            "companyName": "현대오토에버",
+            "teamName": "협력사",
+            "roleId": 28,
+            "failCount": 0,
+            "statusName": "ACTIVE",
+            "termsAccepted": "Y"
+        },
+        {
+            "userId": 11,
+            "email": "ssk07104@naver.com",
+            "name": "김인후",
+            "companyName": "아크로퓨처",
+            "teamName": "IT 서비스 사업팀",
+            "roleId": 27,
+            "failCount": 0,
+            "statusName": "ACTIVE",
+            "termsAccepted": "Y"
+        },
+        {
+            "userId": 1005,
+            "email": "unknown.prop@gmail.com",
+            "name": "zerome",
+            "companyName": "Acro",
+            "teamName": "Dev",
+            "roleId": 25,
+            "failCount": 0,
+            "statusName": "ACTIVE",
+            "termsAccepted": "Y"
+        },
+        {
+            "userId": 1004,
+            "email": "dhkang@acrofuture.com",
+            "name": "강동훈",
+            "companyName": "아크로퓨처",
+            "teamName": "it 서비스팀",
+            "roleId": 29,
+            "failCount": 0,
+            "statusName": "ACTIVE",
+            "termsAccepted": "Y"
+        },
+        {
+            "userId": 2457,
+            "email": "user3@naver.com",
+            "name": "user3",
+            "companyName": "아크로퓨처",
+            "teamName": "IT 서비스 사업팀",
+            "roleId": 26,
+            "failCount": 0,
+            "statusName": "ACTIVE",
+            "termsAccepted": "Y"
+        },
+        {
+            "userId": 1002,
+            "email": "kjy6911@gmail.com",
+            "name": "권지영",
+            "companyName": "아크로퓨처",
+            "teamName": "글로벌",
+            "roleId": 25,
+            "failCount": 0,
+            "statusName": "ACTIVE",
+            "termsAccepted": "Y"
+        }
+    ]
+}

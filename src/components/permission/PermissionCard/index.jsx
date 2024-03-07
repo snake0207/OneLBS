@@ -2,8 +2,21 @@ import PermissionLabel from '#/components/permission/PermissionCard/PermissionLa
 import { Box, Button, Typography } from '@mui/material'
 
 import t from '#/common/libs/trans'
+import { useState } from 'react'
+import PermissionChangeModal from '#/components/permission/PermissionCard/PermissionChangeModal'
 
 const PermissionCard = ({ permissionCardData }) => {
+    const [isOpenMenuChangeModal, setIsOpenMenuChangeModal] = useState(false)
+    const [isOpenPermissionChangeModal, setIsOpenPermissionChangeModal] = useState(false)
+
+    const handleClickMenuChangeModalOpen = () => {
+        setIsOpenMenuChangeModal(true)
+    }
+
+    const handleClickPermissionChangeModalOpen = () => {
+        setIsOpenPermissionChangeModal(true)
+    }
+
     return (
         <Box sx={{ bgcolor: 'white' }}>
             <Box sx={{ display: 'flex', alignItems: 'center' }}>
@@ -14,8 +27,12 @@ const PermissionCard = ({ permissionCardData }) => {
                     <Typography>{permissionCardData.roleName.toLowerCase()}</Typography>
                 </Box>
                 <Box sx={{ display: 'flex' }}>
-                    <Button variant="contained">{t('menu_change', 'permission')}</Button>
-                    <Button variant="contained">{t('permission_change', 'permission')}</Button>
+                    <Button variant="contained" onClick={handleClickMenuChangeModalOpen}>
+                        {t('menu_change', 'permission')}
+                    </Button>
+                    <Button variant="contained" onClick={handleClickPermissionChangeModalOpen}>
+                        {t('permission_change', 'permission')}
+                    </Button>
                 </Box>
             </Box>
             <Box sx={{ display: 'flex', flexWrap: 'wrap' }}>
@@ -28,6 +45,10 @@ const PermissionCard = ({ permissionCardData }) => {
                     userCount: permissionCardData.userCount,
                 })}
             </Typography>
+            <PermissionChangeModal
+                isOpen={isOpenPermissionChangeModal}
+                onClose={() => setIsOpenPermissionChangeModal(false)}
+            />
         </Box>
     )
 }

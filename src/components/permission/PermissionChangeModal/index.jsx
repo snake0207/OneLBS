@@ -6,9 +6,15 @@ import PermissionTable from '#/components/permission/PermissionChangeModal/Permi
 import { getLayoutState } from '#/store/useLayoutStore'
 
 import t from '#/common/libs/trans'
+import CommonPagination from '#/components/common/pagination/CommonPagination'
 
 const PermissionChangeModal = ({ isOpen, onClose }) => {
     const { themeMode } = getLayoutState()
+
+    const handleChangePage = (page) => {
+        console.log(page)
+    }
+
     return (
         <Dialog open={isOpen} onClose={onClose} maxWidth="lg">
             <DialogTitle sx={{ display: 'flex', justifyContent: 'space-between' }}>
@@ -23,6 +29,7 @@ const PermissionChangeModal = ({ isOpen, onClose }) => {
             <DialogContent>
                 <PermissionTableSearch />
                 <PermissionTable />
+                <CommonPagination dataLength={200} onChangePageFunction={handleChangePage} />
             </DialogContent>
         </Dialog>
     )

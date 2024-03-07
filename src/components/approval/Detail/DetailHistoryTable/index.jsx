@@ -1,13 +1,11 @@
 import Typography from '@mui/material/Typography'
-import { Box, Table, TableBody, TableCell, TableHead, TableRow, useTheme } from '@mui/material'
+import { Box, Table, TableBody, TableCell, TableHead, TableRow } from '@mui/material'
 import t from '#/common/libs/trans.js'
 import Headline from '#/components/approval/Detail/Headline/index.jsx'
 
 import style from './style.module'
 
-const HistoryTable = ({ historyList }) => {
-    const theme = useTheme()
-
+const DetailHistoryTable = ({ historyList }) => {
     return (
         <Box>
             <Headline title={t('history', 'approval')} />
@@ -41,4 +39,4 @@ const HistoryTable = ({ historyList }) => {
     )
 }
 
-export default HistoryTable
+export default DetailHistoryTable

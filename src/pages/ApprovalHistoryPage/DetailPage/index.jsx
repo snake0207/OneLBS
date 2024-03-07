@@ -2,10 +2,9 @@ import { useParams } from 'react-router-dom'
 import Typography from '@mui/material/Typography'
 import t from '#/common/libs/trans.js'
 import TitleBar from '#/components/common/menu/TitleBar/index.jsx'
-import { Box, Card, Stack, TextField, Icon } from '@mui/material'
+import { Box, Stack, TextField } from '@mui/material'
 import ApprovalLine from '#/components/approval/Detail/ApprovalLine/index.jsx'
-import HistoryTable from '#/components/approval/Detail/HistoryTable/index.jsx'
-import { useCallback, useMemo, useRef, useState } from 'react'
+import { useCallback, useMemo, useState } from 'react'
 import { useFormik } from 'formik'
 import ActionButtons from '#/components/approval/Detail/ActionButtons/index.jsx'
 import poiDetailData from '#/mock/data/poiDetailData.json'
@@ -14,21 +13,18 @@ import Comment from '#/components/approval/Detail/Comment/index.jsx'
 import { usePopupActions } from '#/store/usePopupStore.js'
 import { detailResponseDataMapper } from '#/pages/ApprovalHistoryPage/mapper.js'
 import InfoTab from '#/components/approval/Detail/InfoTab/index.jsx'
-import EvChargingInfo from '#/components/approval/Detail/CategoryInfo/EvChargingInfo/index.jsx'
 import { getUserTypeFromPath } from '#/common/libs/approvalParser.js'
-import FuelInfo from '#/components/approval/Detail/CategoryInfo/FuelInfo/index.jsx'
-import DealerPoiInfo from '#/components/approval/Detail/CategoryInfo/DealerPoiInfo/index.jsx'
-import H2ChargingInfo from '#/components/approval/Detail/CategoryInfo/H2ChargingInfo/index.jsx'
-import ParkingInfo from '#/components/approval/Detail/CategoryInfo/ParkingInfo/index.jsx'
+import EvChargingInfo from '#/components/poiDetail/CategoryInfo/EvChargingInfo/index.jsx'
+import FuelInfo from '#/components/poiDetail/CategoryInfo/FuelInfo/index.jsx'
+import DealerPoiInfo from '#/components/poiDetail/CategoryInfo/DealerPoiInfo/index.jsx'
+import H2ChargingInfo from '#/components/poiDetail/CategoryInfo/H2ChargingInfo/index.jsx'
+import ParkingInfo from '#/components/poiDetail/CategoryInfo/ParkingInfo/index.jsx'
 import GoogleMapComponent from '#/components/common/map/googleMap/index.jsx'
 import MapApprovalSelect from '#/components/common/map/MapApprovalSelect/index.jsx'
-import { MobileView, isBrowser, isMobile } from 'react-device-detect'
-
-import PoiSearchIcon from '#/assets/poiSearchIcon.svg'
-import PoiSearchIconDark from '#/assets/poiSearchIconDark.svg'
-import useLayoutStore from '#/store/useLayoutStore'
+import { isBrowser, isMobile } from 'react-device-detect'
 import Divider from '@mui/material/Divider'
 import Header1Depth from '#/layouts/Header1Depth/index.jsx'
+import DetailHistoryTable from '#/components/approval/Detail/DetailHistoryTable/index.jsx'
 
 const markerSampleData = [
     {
@@ -308,7 +304,7 @@ const ApprovalHistoryDetailPage = () => {
                     {/* Comment */}
                     <Comment userType={userType} isEditable={isEditable} formik={formik} />
                     {/* 이력 */}
-                    <HistoryTable historyList={parsedData.approvalInfo.historyList} />
+                    <DetailHistoryTable historyList={parsedData.approvalInfo.historyList} />
                     {/* 버튼 */}
                     <Box>
                         <ActionButtons

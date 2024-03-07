@@ -1,7 +1,7 @@
 import t from '#/common/libs/trans'
 import GoogleMapComponent from '#/components/common/map/googleMap'
 import TitleBar from '#/components/common/menu/TitleBar'
-import { Box, Icon, Button } from '@mui/material'
+import { Box, Button, Icon } from '@mui/material'
 import { useNavigate } from 'react-router-dom'
 import { useState } from 'react'
 import { BrowserView, MobileView } from 'react-device-detect'
@@ -15,21 +15,6 @@ import PoiSearchIconDark from '#/assets/poiSearchIconDark.svg'
 import useLayoutStore from '#/store/useLayoutStore'
 import FilterIcon from '#/assets/filterIcon.svg'
 import SwipeMapSearchList from '#/components/common/map/searchList/SwipeMapSearchList/index.jsx'
-
-const markerSampleData = [
-    {
-        poiId: 'ChIJsTbYQbjLwoARpbZRYUbnEP4',
-        address: '12021 Wilmington Ave, Los Angeles, CA 90059, USA',
-        position: {
-            center: {
-                lat: 33.9243791,
-                lon: -118.23941569999998,
-            },
-        },
-        title: 'PowerFlex Charging Station',
-        category: 'ev',
-    },
-]
 
 function POISearchPage() {
     const navigate = useNavigate()

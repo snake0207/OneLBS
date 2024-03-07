@@ -16,8 +16,24 @@ import PointRedPoiIcon from '#/assets/pointRedPoiIcon.svg'
 import Brightness1Icon from '@mui/icons-material/Brightness1'
 
 const MapPoiContent = ({ isLast, isGpssSearch, selectedPoi, setSelectedPoi, poiData }) => {
-    const { poiId, title, address, cpType, progress, country } = poiData
+    const { poiId, title, address, cpType, progress, country, category } = poiData
     const { setHoveredPoi } = useMapActions()
+    const markerImage = (category) => {
+        switch (category) {
+            case 'evCharging':
+                return cpType === 'mcp' ? PointBlueEVIcon : PointRedEVIcon
+            case 'fuel':
+                return cpType === 'mcp' ? PointBlueFuelIcon : PointRedFuelIcon
+            case 'h2Charging':
+                return cpType === 'mcp' ? PointBlueH2Icon : PointRedH2Icon
+            case 'parking':
+                return cpType === 'mcp' ? PointBlueParkingIcon : PointRedParkingIcon
+            case 'dealerPoi':
+                return cpType === 'mcp' ? PointBluePoiIcon : PointRedPoiIcon
+            default:
+                return cpType === 'mcp' ? PointBluePoiIcon : PointRedPoiIcon
+        }
+    }
     return (
         <>
             <ListItem
@@ -52,7 +68,7 @@ const MapPoiContent = ({ isLast, isGpssSearch, selectedPoi, setSelectedPoi, poiD
                                     }}
                                 >
                                     <img
-                                        src={cpType === 'mcp' ? PointBlueEVIcon : PointRedEVIcon}
+                                        src={markerImage(category)}
                                         style={{
                                             verticalAlign: 'middle',
                                             paddingRight: '4px',

@@ -1,19 +1,22 @@
+import { useState } from 'react'
+import { Box, Button, Typography } from '@mui/material'
 import PermissionLabel from '#/components/permission/PermissionCard/PermissionLabel'
 import PermissionChangeModal from '#/components/permission/PermissionChangeModal'
-import { Box, Button, Typography } from '@mui/material'
+import { usePermissionSearchActions } from '#/store/usePermissionSearchStore'
 
 import t from '#/common/libs/trans'
-import { useState } from 'react'
 
 const PermissionCard = ({ permissionCardData }) => {
     const [isOpenMenuChangeModal, setIsOpenMenuChangeModal] = useState(false)
     const [isOpenPermissionChangeModal, setIsOpenPermissionChangeModal] = useState(false)
+    const { setPermissionSearchRoleId } = usePermissionSearchActions()
 
     const handleClickMenuChangeModalOpen = () => {
         setIsOpenMenuChangeModal(true)
     }
 
     const handleClickPermissionChangeModalOpen = () => {
+        setPermissionSearchRoleId(permissionCardData.roleId)
         setIsOpenPermissionChangeModal(true)
     }
 

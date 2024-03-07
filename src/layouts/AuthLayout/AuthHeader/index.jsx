@@ -32,7 +32,7 @@ function AuthHeader() {
     }
 
     return (
-        <AppBar position="absolute">
+        <AppBar position="absolute" sx={{ color: 'transparent' }}>
             <Container
                 maxWidth="xl"
                 sx={{

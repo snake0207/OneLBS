@@ -1,16 +1,18 @@
 const style = {
-    lineButton: {
+    lightButton: {
         height: '34px',
         fontWeight: 400,
         p: 0,
-        color: '#0A5CBA',
-        border: '1px solid #0A5CBA',
-        backgroundColor: '#E3F0FF',
+        color: '#0000418D2C5F',
+        backgroundColor: 'button.lightblue',
+        border: '1px solid',
+        borderColor: 'button.lightblueBoder',
         '&:hover': {
-            backgroundColor: '#E3F0FF',
+            backgroundColor: 'button.lightblue',
+            boxShadow: 'none',
         },
     },
-    lightButton: {
+    darkBlueButton: {
         width: '45px',
         height: '34px',
         fontWeight: 400,
@@ -18,8 +20,11 @@ const style = {
         ml: '4px',
         color: 'white',
         backgroundColor: 'button.light',
+        border: '1px solid',
+        borderColor: 'button.light',
         '&:hover': {
             backgroundColor: 'button.light',
+            boxShadow: 'none',
         },
     },
 }

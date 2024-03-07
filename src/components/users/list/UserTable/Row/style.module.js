@@ -20,8 +20,9 @@ const style = {
         height: '34px',
         fontWeight: 500,
         p: 0,
-        color: '#0A5CBA',
-        border: '1px solid #0A5CBA',
+        color: '#00418D',
+        border: '1px solid',
+        borderColor: 'button.whiteBoder',
         backgroundColor: 'white',
         '&:hover': {
             backgroundColor: 'white',

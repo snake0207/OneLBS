@@ -132,7 +132,15 @@ const LoginForm = () => {
                         loading={isPending}
                         variant="contained"
                         type="submit"
-                        sx={{ bgcolor: 'button.main', width: '100%', fontWeight: 400 }}
+                        sx={{
+                            bgcolor: 'button.main',
+                            width: '100%',
+                            fontWeight: 400,
+                            '&:hover': {
+                                backgroundColor: 'button.main',
+                                boxShadow: 'none',
+                            },
+                        }}
                     >
                         {t('login', 'auth')}
                     </LoadingButton>
@@ -149,7 +157,15 @@ const LoginForm = () => {
                             variant="contained"
                             type="button"
                             onClick={handleClickJoin}
-                            sx={{ bgcolor: 'button.light', width: '100%', fontWeight: 400 }}
+                            sx={{
+                                bgcolor: 'button.light',
+                                width: '100%',
+                                fontWeight: 400,
+                                '&:hover': {
+                                    backgroundColor: 'button.light',
+                                    boxShadow: 'none',
+                                },
+                            }}
                         >
                             {t('join', 'auth')}
                         </Button>
@@ -162,6 +178,10 @@ const LoginForm = () => {
                                 width: '100%',
                                 fontWeight: 400,
                                 textWrap: 'nowrap',
+                                '&:hover': {
+                                    backgroundColor: 'button.light',
+                                    boxShadow: 'none',
+                                },
                             }}
                         >
                             {t('reset_password', 'auth')}

@@ -272,7 +272,7 @@ const BasicInfo = ({ formik, poiData, tabSelected, isEditable }) => {
                                             )}
                                         </Box>
                                         {isShowInputs['lat'] && (
-                                            <Box sx={{ height: 'auto' }}>
+                                            <Box sx={{ height: 'auto', ml: '24px' }}>
                                                 <TextInput
                                                     formik={formik}
                                                     name={'position.center.lat'}
@@ -349,7 +349,7 @@ const BasicInfo = ({ formik, poiData, tabSelected, isEditable }) => {
                                             )}
                                         </Box>
                                         {isShowInputs['lon'] && (
-                                            <Box sx={{ height: 'auto' }}>
+                                            <Box sx={{ height: 'auto', ml: '24px' }}>
                                                 <TextInput
                                                     formik={formik}
                                                     name={'position.center.lon'}
@@ -461,7 +461,7 @@ const BasicInfo = ({ formik, poiData, tabSelected, isEditable }) => {
                                             )}
                                         </Box>
                                         {isShowInputs['guideLat'] && (
-                                            <Box sx={{ height: 'auto' }}>
+                                            <Box sx={{ height: 'auto', ml: '24px' }}>
                                                 <TextInput
                                                     formik={formik}
                                                     name={'position.guide.lat'}
@@ -535,7 +535,7 @@ const BasicInfo = ({ formik, poiData, tabSelected, isEditable }) => {
                                             )}
                                         </Box>
                                         {isShowInputs['guideLon'] && (
-                                            <Box sx={{ height: 'auto' }}>
+                                            <Box sx={{ height: 'auto', ml: '24px' }}>
                                                 <TextInput
                                                     formik={formik}
                                                     name={'position.guide.lon'}

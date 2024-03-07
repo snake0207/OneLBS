@@ -292,7 +292,7 @@ const ApprovalHistoryDetailPage = () => {
                     {/* 이력 */}
                     <DetailHistoryTable historyList={parsedData.approvalInfo.historyList} />
                     {/* 버튼 */}
-                    <Box>
+                    <Box sx={{ display: 'flex', mt: '30px' }}>
                         <ActionButtons
                             type={userType}
                             status={parsedData.status}

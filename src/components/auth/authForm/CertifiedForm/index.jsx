@@ -14,15 +14,18 @@ import { usePostVerifyOtp } from '#/hooks/queries/auth'
 import useOtpStore from '#/store/useOtpStore'
 import { useAuthActions } from '#/store/useAuthStore'
 import { useUserActions } from '#/store/useUserStore'
+import useLayoutStore from '#/store/useLayoutStore'
 
 import t from '#/common/libs/trans'
 
 import style from './style.module'
 import LoginIcon from '#/assets/loginIcon.svg'
+import LoginIconDark from '#/assets/loginIconDark.svg'
 import { useAuthStepActions } from '#/store/useAuthStepStore'
 
 const CertifiedForm = () => {
     const [isOtpGuideOpen, setIsOtpGuideOpen] = useState(false)
+    const { themeMode } = useLayoutStore()
     const { mutate, isPending } = usePostVerifyOtp()
     const { twoFactorAuth, secretKey, twoFactorSecret, qrCodeUrl } = useOtpStore()
     const { setAccessToken } = useAuthActions()
@@ -66,7 +69,17 @@ const CertifiedForm = () => {
         <>
             <Box sx={{ display: 'flex', justifyContent: 'flex-start', mb: 5 }}>
                 <Icon sx={{ display: 'flex', width: 20, height: 20, alignItems: 'center' }}>
-                    <img src={LoginIcon} />
+                    {themeMode === 'light' ? (
+                        <img
+                            src={LoginIcon}
+                            style={{ verticalAlign: 'middle', paddingRight: '4px' }}
+                        />
+                    ) : (
+                        <img
+                            src={LoginIconDark}
+                            style={{ verticalAlign: 'middle', paddingRight: '4px' }}
+                        />
+                    )}
                 </Icon>
                 <Typography variant="h5" sx={style.loginTitle}>
                     LOGIN

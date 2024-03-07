@@ -201,54 +201,48 @@
                 }
             }
         ],
-        "approvalInfo": {
-            "status": "request",
-            "requestReason": "위.경도 좌표 수정",
-            "reviewerComment": "위.경도 재확인 후 요청하라",
-            "approverComment": null,
-            "approvalLineContents": {
-                "requester": {
-                    "team": "콘텐츠플랫폼개발팀",
-                    "name": "박다정 책임",
-                    "date": "2024-01-19 12:10:02"
-                },
-                "reviewer": {
-                    "team": "콘텐츠플랫폼개발팀",
-                    "name": "박다정 책임",
-                    "date": "2024-01-19 12:10:02"
-                },
-                "approver": {
-                    "title": "승인 완료",
-                    "team": "콘텐츠플랫폼개발팀",
-                    "name": "박다정 책임",
-                    "date": "2024-01-19 12:10:02"
-                }
+        "status": "request",
+        "userId": 456,
+        "userName": "ExampleUserName",
+        "userTeam": "ExampleUserTeam",
+        "reviewerId": 789,
+        "reviewerName": "ExampleReviewerName",
+        "reviewerTeam": "ExampleReviewerTeam",
+        "managerId": 101112,
+        "managerName": "ExampleManagerName",
+        "managerTeam": "ExampleManagerTeam",
+        "requestComment": "ExampleRequestComment",
+        "reviewerComment": "ExampleReviewerComment",
+        "managerComment": "ExampleManagerComment",
+        "createDtString": "2023-03-22 10:30:00",
+        "requestDtString": "2023-03-22 11:30:00",
+        "reviewDtString": "2023-03-22 12:30:00",
+        "manageDtString": "2023-03-22 13:30:00",
+        "deleteDtString": "2023-03-22 14:30:00",
+        "updateDtString": "2023-03-22 15:30:00",
+        "historyList": [
+            {
+                "date": "2024-01-19 12:10:02",
+                "status": "request",
+                "history": "위.경도 수정 요청"
             },
-            "historyList": [
-                {
-                    "date": "2024-01-19 12:10:02",
-                    "status": "request",
-                    "history": "위.경도 수정 요청"
-                },
-                {
-                    "date": "2024-01-19 12:10:02",
-                    "status": "rejected_review",
-                    "history": "위.경도 수정 요청 반려"
-                },
-                {
-                    "date": "2024-01-19 12:10:02",
-                    "status": "reviewed",
-                    "history": "위.경도 수정 재 승인 요청"
-                },
-                {
-                    "date": "2024-01-19 12:10:02",
-                    "status": "approved",
-                    "history": "승인 완료"
-                }
-            ]
-        },
+            {
+                "date": "2024-01-19 12:10:02",
+                "status": "rejected_review",
+                "history": "위.경도 수정 요청 반려"
+            },
+            {
+                "date": "2024-01-19 12:10:02",
+                "status": "reviewed",
+                "history": "위.경도 수정 재 승인 요청"
+            },
+            {
+                "date": "2024-01-19 12:10:02",
+                "status": "approved",
+                "history": "승인 완료"
+            }
+        ],
         "resultID": "searchResultId",
-        "status": "success",
         "total": 0,
         "resCode": 0
     }

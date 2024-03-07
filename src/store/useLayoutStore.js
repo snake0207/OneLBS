@@ -1,6 +1,6 @@
 import { create } from 'zustand'
 
-import { persist, devtools } from 'zustand/middleware'
+import { devtools, persist } from 'zustand/middleware'
 
 const initialState = {
     language: 'kr',
@@ -22,6 +22,9 @@ const useLayoutStore = create(
                 setDrawer: (openDrawer) => set({ openDrawer }),
                 toggleDrawer: () => set((state) => ({ openDrawer: !state.openDrawer })),
                 reset: () => set(initialState),
+                isLightMode: () => {
+                    console.log()
+                },
             }),
             {
                 name: 'layout',
@@ -31,5 +34,5 @@ const useLayoutStore = create(
 )
 
 export const getLayoutState = () => useLayoutStore.getState()
-
+export const getIsLightTheme = () => useLayoutStore.getState().themeMode === 'light'
 export default useLayoutStore

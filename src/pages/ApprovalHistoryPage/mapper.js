@@ -110,9 +110,9 @@ const dealerInfo = (data) => {
 const detailResponseDataMapper = (res) => {
     const data = res.data.result[0]
     const basicData = {
-        // status: 'request',
+        status: 'rejected_approval',
         // category: 'h2Charging',
-        status: res.data.status, // service에서 보내줄 결재이력 상태값
+        // status: res.data.status, // service에서 보내줄 결재이력 상태값
         category: parseCategory(data),
         approvalInfo: {
             requestComment: res.data.requestComment,

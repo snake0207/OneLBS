@@ -6,7 +6,8 @@ import { useMemo, useRef } from 'react'
 import ArrowForward from '#/assets/arrowForwardIos.svg'
 import ArrowForwardDark from '#/assets/arrowForwardDark.svg'
 import ArrowRedBack from '#/assets/arrowRedBack.svg'
-import { getLayoutState } from '#/store/useLayoutStore'
+import ArrowGrayForward from '#/assets/arrowGrayForward.svg'
+import { getIsLightTheme } from '#/store/useLayoutStore'
 
 import style from './style.module'
 
@@ -79,11 +80,18 @@ const ApprovalLineContent = ({ title, color, process, content }) => {
 }
 
 const ApprovalLine = ({ status, content }) => {
-    const { themeMode } = getLayoutState()
+    const isLight = getIsLightTheme()
     const colors = useRef({
-        request: themeMode === 'light' ? '#e2e2e2' : '#071c2c',
-        review: themeMode === 'light' ? '#e2e2e2' : '#071c2c',
-        approval: themeMode === 'light' ? '#e2e2e2' : '#071c2c',
+        request: isLight ? '#e2e2e2' : '#071c2c',
+        review: isLight ? '#e2e2e2' : '#071c2c',
+        approval: isLight ? '#e2e2e2' : '#071c2c',
+    })
+    const isArrowActive = useRef([true, false])
+    const arrowIcons = useRef({
+        active: isLight ? ArrowForward : ArrowForwardDark,
+        inactive: ArrowGrayForward,
+        // TODO: 빨간색 화살표 다크버전
+        danger: isLight ? ArrowRedBack : ArrowRedBack,
     })
     const isReject = useRef({
         review: false,
@@ -94,17 +102,22 @@ const ApprovalLine = ({ status, content }) => {
         const active = '#05141f'
         const danger = '#8B0F2A'
         switch (status) {
+            case 'temporary':
+                isArrowActive.current[0] = false
+                break
             case 'request':
                 colors.current.request = active
                 break
             case 'reviewed':
                 colors.current.request = active
                 colors.current.review = active
+                isArrowActive.current[1] = true
                 break
             case 'approved':
                 colors.current.request = active
                 colors.current.review = active
                 colors.current.approval = active
+                isArrowActive.current[1] = true
                 break
             case 'rejected_review':
                 colors.current.request = active
@@ -132,19 +145,19 @@ const ApprovalLine = ({ status, content }) => {
                         content={content.requester}
                     />
                 </Grid>
-                {isReject.current.review ? (
-                    <Box sx={style.ArrowIos}>
-                        <img src={ArrowRedBack} width={30} height={30} />
-                    </Box>
-                ) : (
-                    <Box sx={style.ArrowIos}>
-                        {themeMode === 'light' ? (
-                            <img src={ArrowForward} width={30} height={30} />
-                        ) : (
-                            <img src={ArrowForwardDark} width={30} height={30} />
-                        )}
-                    </Box>
-                )}
+                <Box sx={style.ArrowIos}>
+                    <img
+                        src={
+                            isReject.current.review
+                                ? arrowIcons.current.danger
+                                : isArrowActive.current[0]
+                                  ? arrowIcons.current.active
+                                  : arrowIcons.current.inactive
+                        }
+                        width={30}
+                        height={30}
+                    />
+                </Box>
                 <Grid xs={4}>
                     <ApprovalLineContent
                         title={t('reviewer', 'approval')}
@@ -155,19 +168,19 @@ const ApprovalLine = ({ status, content }) => {
                         content={content.reviewer}
                     />
                 </Grid>
-                {isReject.current.approval ? (
-                    <Box sx={style.ArrowIos}>
-                        <img src={ArrowRedBack} width={30} height={30} />
-                    </Box>
-                ) : (
-                    <Box sx={style.ArrowIos}>
-                        {themeMode === 'light' ? (
-                            <img src={ArrowForward} width={30} height={30} />
-                        ) : (
-                            <img src={ArrowForwardDark} width={30} height={30} />
-                        )}
-                    </Box>
-                )}
+                <Box sx={style.ArrowIos}>
+                    <img
+                        src={
+                            isReject.current.approval
+                                ? arrowIcons.current.danger
+                                : isArrowActive.current[1]
+                                  ? arrowIcons.current.active
+                                  : arrowIcons.current.inactive
+                        }
+                        width={30}
+                        height={30}
+                    />
+                </Box>
                 <Grid xs={4}>
                     <ApprovalLineContent
                         title={t('approver', 'approval')}

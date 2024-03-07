@@ -1,10 +1,13 @@
+import { Box } from '@mui/material'
+import { isMobile } from 'react-device-detect'
 import CountryTooltip from '#/components/dashboard/CountryTooltip'
 import UserTooltip from '#/components/dashboard/UserTooltip'
-import { Box } from '@mui/material'
-import InfoIcon from '@mui/icons-material/Info'
 import VectorMap from '#/components/dashboard/VectorMap'
 import ShortCutBanner from '#/components/dashboard/ShortCutBanner'
 import VectorMapTooltip from '#/components/dashboard/VectorMapTooltip'
+import PasswordChangeModal from '#/components/dashboard/PasswordChangeModal'
+import useLayoutStore from '#/store/useLayoutStore'
+import { useUserPwChangeRequiredState } from '#/store/useUserStore'
 
 import EvIcon from '#/assets/m_evIcon.svg'
 import EvIconDark from '#/assets/m_evIconDark.svg'
@@ -30,13 +33,11 @@ import CpIconDark from '#/assets/m_cpIconDark.svg'
 import UserIcon from '#/assets/m_userIcon.svg'
 import UserIconDark from '#/assets/m_userIconDark.svg'
 
-import useLayoutStore from '#/store/useLayoutStore'
-import { isMobile } from 'react-device-detect'
-
 import style from './style.module'
 
 function MainPage() {
     const { themeMode } = useLayoutStore()
+    const pwChangeRequired = useUserPwChangeRequiredState()
     const countryMockData = [
         {
             lightIcon: <img src={EvIcon} />,
@@ -155,6 +156,7 @@ function MainPage() {
                     />
                 ))}
             </Box>
+            <PasswordChangeModal isOpen={pwChangeRequired} />
         </Box>
     )
 }

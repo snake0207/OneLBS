@@ -25,21 +25,7 @@ import { isBrowser, isMobile } from 'react-device-detect'
 import Divider from '@mui/material/Divider'
 import Header1Depth from '#/layouts/Header1Depth/index.jsx'
 import DetailHistoryTable from '#/components/approval/Detail/DetailHistoryTable/index.jsx'
-
-const markerSampleData = [
-    {
-        poiId: 'ChIJsTbYQbjLwoARpbZRYUbnEP4',
-        address: '12021 Wilmington Ave, Los Angeles, CA 90059, USA',
-        position: {
-            center: {
-                lat: 33.9243791,
-                lon: -118.23941569999998,
-            },
-        },
-        title: 'PowerFlex Charging Station',
-        category: 'ev',
-    },
-]
+import markerSampleData from '#/mock/data/poiMarker.json'
 
 const ApprovalHistoryDetailPage = () => {
     const params = useParams()
@@ -123,7 +109,7 @@ const ApprovalHistoryDetailPage = () => {
     }, [parsedData.status, userType])
 
     const openAlertPopup = (action) => {
-        if (formik.values['request_reason'] === '')
+        if (formik.values['requestComment'] === '')
             popupActions.showPopup('alert', '승인 요청 이유를 입력해 주세요')
         else {
             // TODO: 기능구분

@@ -198,11 +198,11 @@ const JoinModal = ({ isOpen, onClose }) => {
                     >
                         {t('read_more', 'auth')}
                         {themeMode === 'light' ? (
-                            <img src={BtnArrowIcon} style={{ width: '8.5px', marginLeft: '4px' }} />
+                            <img src={BtnArrowIcon} style={{ width: '10px', marginLeft: '4px' }} />
                         ) : (
                             <img
                                 src={BtnArrowIconDark}
-                                style={{ width: '10px', marginLeft: '8.5px' }}
+                                style={{ width: '10px', marginLeft: '4px' }}
                             />
                         )}
                     </Button>

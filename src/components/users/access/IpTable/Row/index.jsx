@@ -88,10 +88,10 @@ function Row({ row, onEdit, onDelete }) {
                             direction="row"
                             sx={{ display: 'flex', justifyContent: 'center', gap: 1 }}
                         >
-                            <Button onClick={() => handleEditable(index)} sx={style.lineButton}>
+                            <Button onClick={() => handleEditable(index)} sx={style.lightButton}>
                                 {t('edit', 'users')}
                             </Button>
-                            <Button onClick={() => handleDelete(index)} sx={style.lightButton}>
+                            <Button onClick={() => handleDelete(index)} sx={style.darkBlueButton}>
                                 {t('delete', 'users')}
                             </Button>
                         </Stack>

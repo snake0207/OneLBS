@@ -16,6 +16,7 @@ import JoinSuccessModal from '#/components/auth/authForm/joinForm/JoinSuccessMod
 import BtnArrowIcon from '#/assets/btnArrowIcon.svg'
 import BtnArrowIconDark from '#/assets/btnArrowIconDark.svg'
 import { useAuthStepActions } from '#/store/useAuthStepStore'
+import { getLayoutState } from '#/store/useLayoutStore'
 
 import t from '#/common/libs/trans'
 import { formatJoinData } from '#/common/libs/formatData'
@@ -26,7 +27,7 @@ import joinList from './list.json'
 
 const JoinFormMobile = () => {
     const { showPopup } = usePopupActions()
-    const { themeMode } = useAuthStepActions()
+    const { themeMode } = getLayoutState()
     const actions = useAuthStepActions()
     const { mutate } = usePostJoin()
     const [isOpenPrivacyPolicy, setIsOpenPrivacyPolicy] = useState(false)
@@ -163,12 +164,9 @@ const JoinFormMobile = () => {
                 >
                     {t('read_more', 'auth')}
                     {themeMode === 'light' ? (
-                        <img src={BtnArrowIcon} style={{ width: '8.5px', marginLeft: '4px' }} />
+                        <img src={BtnArrowIcon} style={{ width: '10px', marginLeft: '4px' }} />
                     ) : (
-                        <img
-                            src={BtnArrowIconDark}
-                            style={{ width: '10px', marginLeft: '8.5px' }}
-                        />
+                        <img src={BtnArrowIconDark} style={{ width: '10px', marginLeft: '4px' }} />
                     )}
                 </Button>
             </Box>

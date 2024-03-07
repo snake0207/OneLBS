@@ -1,6 +1,6 @@
 const style = {
     loginTitle: {
-        color: 'primary.dark',
+        color: 'text.main',
         backgroundSize: 20,
         fontSize: 16,
         fontWeight: 500,
@@ -22,7 +22,7 @@ const style = {
         fontSize: 13,
         fontWeight: 500,
         mt: 2,
-        color: '#05141F',
+        color: 'text.main',
     },
     linklText: {
         fontSize: 14,

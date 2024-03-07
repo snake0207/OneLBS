@@ -1,6 +1,7 @@
 const style = {
     dialogBox: {
         '& .MuiDialog-paper': {
+            width: '250px',
             backgroundColor: 'dialog.main',
             borderRadius: '8px',
             backgroundImage: 'none',

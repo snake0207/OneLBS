@@ -1,6 +1,7 @@
 import { Box, IconButton, InputAdornment, TextField, Typography } from '@mui/material'
 import Close from '@mui/icons-material/Close'
 import { useEffect } from 'react'
+import { extractChangedObjectOfChangedJson } from '#/common/libs/objectCheck.js'
 
 /**
  * 일반 text 공통 Input
@@ -15,6 +16,10 @@ const TextInput = ({ name, formik, placeholder = null, inputRule = null, IsDisab
     // formik 중첩구조 사용 시 value parsing 위한 함수
     const parseNameByPath = (obj, path) =>
         path.split('.').reduce((acc, current) => (acc ? acc[current] : ''), obj)
+
+    useEffect(() => {
+        console.log(extractChangedObjectOfChangedJson(formik.initialValues, formik.values))
+    }, [formik.values])
 
     return (
         <>

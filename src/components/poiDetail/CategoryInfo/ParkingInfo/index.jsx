@@ -1,22 +1,26 @@
-import { Accordion, AccordionDetails, AccordionSummary, Box } from '@mui/material'
+import { Accordion, AccordionDetails, AccordionSummary, Box, Stack } from '@mui/material'
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore.js'
 import Typography from '@mui/material/Typography'
-import EvStationIcon from '#/assets/evStationIcon.svg'
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
-import EditableTextColumn from '#/components/approval/Detail/CategoryInfo/EditableTextColumn/index.jsx'
-import EditableSelectColumn from '#/components/approval/Detail/CategoryInfo/EditableSelectColumn/index.jsx'
 import { useRef } from 'react'
+import EditableTextColumn from '#/components/poiDetail/CategoryInfo/EditableTextColumn/index.jsx'
+import EditableSelectColumn from '#/components/poiDetail/CategoryInfo/EditableSelectColumn/index.jsx'
 import t from '#/common/libs/trans.js'
-import H2Icon from '#/assets/h2Icon.svg'
-import H2IconDark from '#/assets/h2IconDark.svg'
+import ParkingIcon from '#/assets/parkingIcon.svg'
+import ParkingIconDark from '#/assets/parkingIconDark.svg'
 import useLayoutStore from '#/store/useLayoutStore'
 import style from './style.module'
 
-const H2ChargingInfo = ({ data, isEditable, formik }) => {
-    const selectSpeedItems = useRef([
-        { key: 0, value: 0, label: t('h2ChargingInfo.0', 'approval') },
-        { key: 1, value: 750, label: t('h2ChargingInfo.750', 'approval') },
-        { key: 2, value: 350, label: t('h2ChargingInfo.350', 'approval') },
+const ParkingInfo = ({ data, isEditable, formik }) => {
+    const selectTypeItems = useRef([
+        { key: 0, value: '0', label: 'UNKNOWN' },
+        { key: 1, value: '1', label: 'MULTISTOREY' },
+        { key: 2, value: '2', label: 'NOTCOVERED' },
+        { key: 3, value: '3', label: 'COVERED' },
+        { key: 4, value: '4', label: 'UNDERGROUND' },
+        { key: 5, value: '5', label: 'PARTIALLY COVERED' },
+        { key: 6, value: '6', label: 'MECHANICAL' },
     ])
+
     const { themeMode } = useLayoutStore()
 
     return (
@@ -26,37 +30,42 @@ const H2ChargingInfo = ({ data, isEditable, formik }) => {
                     sx={{
                         display: 'flex',
                         fontSize: '18px',
-                        fontWeight: 600,
+                        fontWeight: 500,
                         color: 'text.darkgray',
+                        mb: '4px',
                     }}
                 >
                     {themeMode === 'light' ? (
-                        <img src={H2Icon} style={{ marginRight: '4px', marginTop: '4px' }} />
+                        <img src={ParkingIcon} style={{ marginRight: '4px', marginTop: '4px' }} />
                     ) : (
-                        <img src={H2IconDark} style={{ marginRight: '4px', marginTop: '4px' }} />
+                        <img
+                            src={ParkingIconDark}
+                            style={{ marginRight: '4px', marginTop: '4px' }}
+                        />
                     )}
-                    h2Charging
+                    parking
                 </Typography>
             </AccordionSummary>
             <AccordionDetails>
-                {/* brand */}
                 <EditableTextColumn
                     value={data.brand}
-                    name={'h2ChargingInfo.brand'}
+                    name={'parkingInfo.brand'}
                     isEditable={isEditable}
                     formik={formik}
                 />
-                {/* price */}
-                <Typography sx={{ color: 'text.main', fontSize: '18px' }}>
-                    {data.price}
-                    {data.currency}(1{data.currency} / 1{data.priceUnit})
-                </Typography>
-                {/* openingHours */}
+                <Typography>{data.congestion}</Typography>
+                <EditableSelectColumn
+                    value={data.type}
+                    name={`parkingInfo.type`}
+                    items={selectTypeItems.current}
+                    isEditable={isEditable}
+                    formik={formik}
+                />
                 <Accordion sx={style.accordionDepsBox}>
                     <AccordionSummary expandIcon={<ExpandMoreIcon />}>
                         <Typography
                             sx={{
-                                ontSize: '18px',
+                                fontSize: '18px',
                                 fontWeight: 600,
                                 color: 'text.darkgray',
                             }}
@@ -80,7 +89,6 @@ const H2ChargingInfo = ({ data, isEditable, formik }) => {
                         ))}
                     </AccordionDetails>
                 </Accordion>
-                {/* status */}
                 <Accordion sx={style.accordionBox}>
                     <AccordionSummary expandIcon={<ExpandMoreIcon />}>
                         <Typography
@@ -92,24 +100,21 @@ const H2ChargingInfo = ({ data, isEditable, formik }) => {
                             }}
                         >
                             <img
-                            // src={EvStationIcon}
+                                // src={EvStationIcon}
+                                style={{ verticalAlign: 'middle', paddingRight: '4px' }}
                             />
-                            {t('commonInfo.charger', 'approval')}
+                            {t('parkingInfo.price', 'approval')}
                         </Typography>
                     </AccordionSummary>
                     <AccordionDetails sx={style.detailsBox}>
-                        {data.chargers.map(({ id, speed, status }, index) => (
-                            <Box key={index}>
-                                <Typography>{id}</Typography>
-                                <Typography>{status}</Typography>
-                                <EditableSelectColumn
-                                    value={speed}
-                                    name={`h2ChargingInfo.chargers.${index}.speed`}
-                                    items={selectSpeedItems.current}
-                                    isEditable={isEditable}
-                                    formik={formik}
-                                />
-                            </Box>
+                        {data.priceList.map(({ price, priceNote, priceUnit, currency }, index) => (
+                            <Stack key={index} direction={'row'}>
+                                <Typography>
+                                    {price}
+                                    {currency} ({priceUnit})
+                                </Typography>
+                                <Typography>{priceNote}</Typography>
+                            </Stack>
                         ))}
                     </AccordionDetails>
                 </Accordion>
@@ -117,4 +122,4 @@ const H2ChargingInfo = ({ data, isEditable, formik }) => {
         </Accordion>
     )
 }
-export default H2ChargingInfo
+export default ParkingInfo

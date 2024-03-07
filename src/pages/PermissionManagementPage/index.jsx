@@ -1,10 +1,10 @@
-import TitleBar from '#/components/common/menu/TitleBar'
 import { Box } from '@mui/material'
+import TitleBar from '#/components/common/menu/TitleBar'
+import PermissionCard from '#/components/permission/PermissionCard'
 
 import t from '#/common/libs/trans'
 
 import userMenuPermissionList from '#/mock/data/user_menu_permission_list.json'
-import PermissionCard from '#/components/permission/PermissionCard'
 
 const PermissionManagementPage = () => {
     return (
@@ -12,7 +12,7 @@ const PermissionManagementPage = () => {
             <TitleBar title={t('permission_list')} />
             <Box>
                 {userMenuPermissionList.map((item) => (
-                    <PermissionCard key={item.roleId} permissionCard={item} />
+                    <PermissionCard key={item.roleId} permissionCardData={item} />
                 ))}
             </Box>
         </Box>

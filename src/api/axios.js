@@ -6,7 +6,7 @@ export const axiosInstance = axios.create({
     baseURL: import.meta.env.VITE_GW_BASE_URL,
     headers: {
         'Content-Type': 'application/json',
-        Authorization: `Bearer ${useAuthStore.getState().accesstoken}`,
+        Authorization: `Bearer ${useAuthStore.getState().accessToken}`,
     },
     withCredentials: true,
 })

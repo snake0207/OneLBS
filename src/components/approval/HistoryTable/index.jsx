@@ -8,7 +8,6 @@ import {
     TableRow,
 } from '@mui/material'
 import t from '#/common/libs/trans.js'
-import ActionButtons from '#/components/approval/Detail/ActionButtons/index.jsx'
 
 import style from './style.module'
 

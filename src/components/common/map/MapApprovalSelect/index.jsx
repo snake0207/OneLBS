@@ -14,13 +14,16 @@ const dummyData = [
 ]
 const MapApprovalSelect = ({
     formik,
+    reviewerName,
+    approverName,
     selectedReviewer,
     setSelectedReviewer,
     selectedApprover,
     setSelectedApprover,
+    isReviewerShow,
 }) => {
-    const { data: reviewerData, refetch: getReviewer } = useGetReviewer(formik.values.reviewer)
-    const { data: approverData, refetch: getApprover } = useGetApprover(formik.values.approver)
+    const { data: reviewerData, refetch: getReviewer } = useGetReviewer(formik.values[reviewerName])
+    const { data: approverData, refetch: getApprover } = useGetApprover(formik.values[approverName])
 
     // 검토자 승인자 검색 클릭
     const [isSearchButtonClick, setIsSearchButtonClick] = useState({
@@ -34,76 +37,78 @@ const MapApprovalSelect = ({
 
     // 검토자 검색
     const handleClickGetReviewer = () => {
-        if (formik.values.reviewer === '') return
+        if (formik.values[reviewerName] === '') return
         handleClickSearchButton('reviewer')
         // getReviewer()
     }
     // 결제자 검색
     const handleClickGetApprover = () => {
-        if (formik.values.approver === '') return
+        if (formik.values[approverName] === '') return
         handleClickSearchButton('approver')
         // getApprover()
     }
     return (
         <Box>
-            <Box>
+            {isReviewerShow && (
                 <Box>
-                    <Typography
+                    <Box>
+                        <Typography
+                            sx={{
+                                fontSize: '18px',
+                                fontWeight: 600,
+                                color: 'text.darkgray',
+                            }}
+                        >
+                            {t('reviewer', 'users')}
+                        </Typography>
+                    </Box>
+                    <Box
                         sx={{
-                            fontSize: '18px',
-                            fontWeight: 600,
-                            color: 'text.darkgray',
+                            display: 'flex',
+                            alignItems: 'flex-start',
+                            gap: '6px',
+                            mt: '8px',
+                            height: '40px',
                         }}
                     >
-                        {t('reviewer', 'users')}
-                    </Typography>
-                </Box>
-                <Box
-                    sx={{
-                        display: 'flex',
-                        alignItems: 'flex-start',
-                        gap: '6px',
-                        mt: '8px',
-                        height: '40px',
-                    }}
-                >
-                    <TextInput
-                        formik={formik}
-                        name={'reviewer'}
-                        placeholder={t('input_keyword', 'common')}
-                    />
-                    <Button
-                        variant={'contained'}
-                        onClick={handleClickGetReviewer}
-                        sx={{ backgroundColor: 'button.gray' }}
+                        <TextInput
+                            formik={formik}
+                            name={reviewerName}
+                            placeholder={t('input_keyword', 'common')}
+                        />
+                        <Button
+                            variant={'contained'}
+                            onClick={handleClickGetReviewer}
+                            sx={{ backgroundColor: 'button.gray' }}
+                        >
+                            {t('search', 'common')}
+                        </Button>
+                    </Box>
+                    <Box
+                        sx={{
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                            flexDirection: 'column',
+                            mt: '8px',
+                        }}
                     >
-                        {t('search', 'common')}
-                    </Button>
+                        {isSearchButtonClick['reviewer'] && (
+                            <>
+                                <Typography sx={{ marginY: '16px' }}>
+                                    {t('search_no_result', 'common')}
+                                </Typography>
+                                <UserSearchTable
+                                    data={dummyData}
+                                    tableType={GPSS_TABLE_TYPE.reviewer}
+                                    selectedReviewer={selectedReviewer}
+                                    setSelectedReviewer={setSelectedReviewer}
+                                />
+                            </>
+                        )}
+                    </Box>
                 </Box>
-                <Box
-                    sx={{
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                        flexDirection: 'column',
-                        mt: '8px',
-                    }}
-                >
-                    {isSearchButtonClick['reviewer'] && (
-                        <>
-                            <Typography sx={{ marginY: '16px' }}>
-                                {t('search_no_result', 'common')}
-                            </Typography>
-                            <UserSearchTable
-                                data={dummyData}
-                                tableType={GPSS_TABLE_TYPE.reviewer}
-                                selectedReviewer={selectedReviewer}
-                                setSelectedReviewer={setSelectedReviewer}
-                            />
-                        </>
-                    )}
-                </Box>
-            </Box>
+            )}
             <Box>
                 <Box>
                     <Typography
@@ -127,7 +132,7 @@ const MapApprovalSelect = ({
                 >
                     <TextInput
                         formik={formik}
-                        name={'approver'}
+                        name={approverName}
                         placeholder={t('input_keyword', 'common')}
                     />
                     <Button

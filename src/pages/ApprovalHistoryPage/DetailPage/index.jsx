@@ -5,7 +5,7 @@ import TitleBar from '#/components/common/menu/TitleBar/index.jsx'
 import { Box, Card, Stack, TextField, Icon } from '@mui/material'
 import ApprovalLine from '#/components/approval/Detail/ApprovalLine/index.jsx'
 import HistoryTable from '#/components/approval/Detail/HistoryTable/index.jsx'
-import { useCallback, useMemo, useState } from 'react'
+import { useCallback, useMemo, useRef, useState } from 'react'
 import { useFormik } from 'formik'
 import ActionButtons from '#/components/approval/Detail/ActionButtons/index.jsx'
 import poiDetailData from '#/mock/data/poiDetailData.json'
@@ -125,7 +125,6 @@ const ApprovalHistoryDetailPage = () => {
                 return false
         }
     }, [parsedData.status, userType])
-    console.log('IS EDITABLE >> ', isEditable, parsedData.status)
 
     const openAlertPopup = (action) => {
         if (formik.values['request_reason'] === '')
@@ -190,6 +189,19 @@ const ApprovalHistoryDetailPage = () => {
                         status={parsedData.status}
                         content={parsedData.approvalInfo.approvalLineContents}
                     />
+                    {/* 유저할당 */}
+                    {isEditable && (
+                        <MapApprovalSelect
+                            formik={formik}
+                            reviewerName={'approvalLineContents.reviewer.name'}
+                            approverName={'approvalLineContents.approver.name'}
+                            selectedApprover={selectedApprover}
+                            setSelectedApprover={setSelectedApprover}
+                            selectedReviewer={selectedReviewer}
+                            setSelectedReviewer={setSelectedReviewer}
+                            isReviewerShow={userType === 'requester'}
+                        />
+                    )}
                     {/* 정보 탭 */}
                     <InfoTab
                         basicData={parsedData.basicInfo}
@@ -279,40 +291,22 @@ const ApprovalHistoryDetailPage = () => {
                             {userType === 'requester' && isEditable ? (
                                 <TextField
                                     id="outlined-multiline-static"
-                                    name="request_reason"
+                                    name="requestComment"
                                     fullWidth
                                     hiddenLabel
                                     multiline
                                     rows={3}
-                                    value={formik.values['request_reason']}
+                                    value={formik.values['requestComment']}
                                     onChange={formik.handleChange}
                                     sx={{ backgroundColor: 'form.main', borderRadius: '4px' }}
                                 />
                             ) : (
-                                <Typography>{formik.values['request_reason'] || '-'}</Typography>
+                                <Typography>{formik.values['requestComment'] || '-'}</Typography>
                             )}
                         </Box>
                     </Box>
                     {/* Comment */}
-                    {/* 상태가 temporary 일때만 보이게..? [기획대기] */}
-                    {false && (
-                        <MapApprovalSelect
-                            formik={formik}
-                            selectedApprover={selectedApprover}
-                            setSelectedApprover={setSelectedApprover}
-                            selectedReviewer={selectedReviewer}
-                            setSelectedReviewer={setSelectedReviewer}
-                        />
-                    )}
-                    <Comment
-                        comments={{
-                            reviewer: parsedData.approvalInfo.reviewerComment,
-                            approver: parsedData.approvalInfo.approverComment,
-                        }}
-                        userType={userType}
-                        isEditable={isEditable}
-                        formik={formik}
-                    />
+                    <Comment userType={userType} isEditable={isEditable} formik={formik} />
                     {/* 이력 */}
                     <HistoryTable historyList={parsedData.approvalInfo.historyList} />
                     {/* 버튼 */}

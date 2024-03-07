@@ -242,10 +242,13 @@ const MapGpssDetail = ({ selectedPoi, setSelectedPoi, poiData }) => {
                         </Box>
                         <MapApprovalSelect
                             formik={formik}
+                            reviewerName={'reviewer'}
+                            approverName={'approver'}
                             selectedApprover={selectedApprover}
                             setSelectedApprover={setSelectedApprover}
                             selectedReviewer={selectedReviewer}
                             setSelectedReviewer={setSelectedReviewer}
+                            isReviewerShow={true}
                         />
                         <Box
                             sx={{

@@ -1,6 +1,5 @@
 import { Box, Button, Typography } from '@mui/material'
 import t from '#/common/libs/trans.js'
-import Divider from '@mui/material/Divider'
 import TextInput from '#/components/common/input/TextInput/index.jsx'
 import UserSearchTable from '#/components/common/map/MapGpssDetail/UserSearchTable/index.jsx'
 import { GPSS_TABLE_TYPE } from '#/contents/constant.js'
@@ -12,7 +11,7 @@ const dummyData = [
     { id: 'asdf@acrofuture.com', name: '아*로2', company: '회사2', userSeq: 2 },
     { id: 'zxcv@acrofuture.com', name: '아*로3', company: '회사3', userSeq: 3 },
 ]
-const MapApprovalSelect = ({
+const ApprovalSelect = ({
     formik,
     reviewerName,
     approverName,
@@ -171,4 +170,4 @@ const MapApprovalSelect = ({
     )
 }
 
-export default MapApprovalSelect
+export default ApprovalSelect

@@ -139,7 +139,6 @@ function POISearchPage() {
                     </MobileView>
                 </Box>
                 <GoogleMapComponent
-                    markerDataArr={markerSampleData}
                     selectedPoi={selectedPoi}
                     setSelectedPoi={setSelectedPoi}
                     searchResultArr={poiListData}

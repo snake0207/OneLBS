@@ -7,7 +7,10 @@ import CalculateDistance from '#/components/common/map/googleMap/CustomControl/C
 import DisplayMarker from '#/components/common/map/googleMap/marker/DisplayMarker/index.jsx'
 import SearchResultMarker from '#/components/common/map/googleMap/marker/SearchResultMarker/index.jsx'
 import { BrowserView, isBrowser } from 'react-device-detect'
-import { gpssListResponseDataMapper } from '#/pages/ApprovalHistoryPage/mapper.js'
+import {
+    gpssDetailResponseDataMapper,
+    gpssListResponseDataMapper,
+} from '#/pages/ApprovalHistoryPage/mapper.js'
 
 const mapStyle = {
     width: '100%',
@@ -24,14 +27,13 @@ const seoul = {
  * 전체화면을 위해 width: 100%,로 처리할 수 있으나 height의 경우 calc를 사용해야 화면에 제대로 랜더링 할 수 있음
  * 사용법 ex :
  * <Box sx={{ width: '1200px', height: 'calc(100vh - 120px)'' }}>
- *     <GoogleMapComponent markerDataArr={sampleDataArr}/>
+ *     <GoogleMapComponent markerDetailData={sampleData}/>
  * </Box>
- * @param markerDataArr 마커 데이터 array
- * @param isPoiSearch 서치 페이지에서 사용여부 false 일 때, 검색 / 검색결과 컴포넌트 비노출
- * @param isGpssSearch gpss 페이지에서 사용여부 false 일 때, 검색 / 검색결과 컴포넌트 비노출
+ * @param markerDetailData 마커 데이터
+ * @param searchResultArr 검색 결과 목록
  */
 const GoogleMapComponent = ({
-    markerDataArr = null,
+    markerDetailData = null,
     searchResultArr = null,
     selectedPoi,
     setSelectedPoi,
@@ -48,11 +50,12 @@ const GoogleMapComponent = ({
     // 거리측정 기능 활성 여부
     const [isDistanceFunctionOn, setIsDistanceFunctionOn] = useState(false)
 
-    const parsedList = gpssListResponseDataMapper(searchResultArr)
+    const parsedPoiSearchArr = gpssListResponseDataMapper(searchResultArr)
+    const parsedMarkerDetail = gpssDetailResponseDataMapper(markerDetailData)
     // poi 선택시 해당 poi 위치로 이동및 줌
     useEffect(() => {
-        if (!parsedList) return
-        const poiArr = parsedList.filter((poiData) => poiData.poiId === selectedPoi)
+        if (!parsedPoiSearchArr) return
+        const poiArr = parsedPoiSearchArr.filter((poiData) => poiData.poiId === selectedPoi)
         if (poiArr.length === 0) return
         const { lat, lon } = poiArr[0].position.center
         map.panTo({ lat: lat, lng: lon })
@@ -143,13 +146,10 @@ const GoogleMapComponent = ({
                     </CustomControl>
                 </BrowserView>
                 {/* 외부 마커 데이터 출력 */}
-                {markerDataArr &&
-                    markerDataArr.map((data) => (
-                        <DisplayMarker key={data.poiId} markerData={data} />
-                    ))}
+                {parsedMarkerDetail && <DisplayMarker markerData={parsedMarkerDetail} />}
                 {/* 지도 검색 결과 마커 데이터 출력*/}
-                {parsedList &&
-                    parsedList.map((poiData) => (
+                {parsedPoiSearchArr &&
+                    parsedPoiSearchArr.map((poiData) => (
                         <SearchResultMarker
                             key={poiData.poiId}
                             poiData={poiData}

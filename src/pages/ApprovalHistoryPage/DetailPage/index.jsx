@@ -20,7 +20,7 @@ import DealerPoiInfo from '#/components/poiDetail/CategoryInfo/DealerPoiInfo/ind
 import H2ChargingInfo from '#/components/poiDetail/CategoryInfo/H2ChargingInfo/index.jsx'
 import ParkingInfo from '#/components/poiDetail/CategoryInfo/ParkingInfo/index.jsx'
 import GoogleMapComponent from '#/components/common/map/googleMap/index.jsx'
-import MapApprovalSelect from '#/components/common/map/MapApprovalSelect/index.jsx'
+import ApprovalSelect from '#/components/poiDetail/ApprovalSelect/index.jsx'
 import { isBrowser, isMobile } from 'react-device-detect'
 import Divider from '@mui/material/Divider'
 import Header1Depth from '#/layouts/Header1Depth/index.jsx'
@@ -173,7 +173,7 @@ const ApprovalHistoryDetailPage = () => {
                     />
                     {/* 유저할당 */}
                     {isEditable && (
-                        <MapApprovalSelect
+                        <ApprovalSelect
                             formik={formik}
                             reviewerName={'approvalLineContents.reviewer.name'}
                             approverName={'approvalLineContents.approver.name'}
@@ -302,7 +302,7 @@ const ApprovalHistoryDetailPage = () => {
                     </Box>
                 </Stack>
                 {/* 지도 영역 */}
-                {isBrowser && <GoogleMapComponent markerDataArr={markerSampleData} />}
+                {isBrowser && <GoogleMapComponent markerDetailData={poiDetailData} />}
             </Box>
         </>
     )

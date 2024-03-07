@@ -6,7 +6,7 @@ import style from './style.module'
 import { usePopupActions } from '#/store/usePopupStore.js'
 import { useFormik } from 'formik'
 import { poiDetailSchema } from '#/contents/validationSchema.js'
-import BasicInfo from '#/components/common/map/MapGpssDetail/DetailTab/BasicInfo/index.jsx'
+import BasicInfo from '#/components/poiDetail/CategoryInfo/BasicInfo/index.jsx'
 import Divider from '@mui/material/Divider'
 import { gpssDetailResponseDataMapper } from '#/pages/ApprovalHistoryPage/mapper.js'
 import EvChargingInfo from '#/components/poiDetail/CategoryInfo/EvChargingInfo/index.jsx'
@@ -14,7 +14,7 @@ import ParkingInfo from '#/components/poiDetail/CategoryInfo/ParkingInfo/index.j
 import FuelInfo from '#/components/poiDetail/CategoryInfo/FuelInfo/index.jsx'
 import DealerPoiInfo from '#/components/poiDetail/CategoryInfo/DealerPoiInfo/index.jsx'
 import H2ChargingInfo from '#/components/poiDetail/CategoryInfo/H2ChargingInfo/index.jsx'
-import MapApprovalSelect from '#/components/common/map/MapApprovalSelect/index.jsx'
+import ApprovalSelect from '#/components/poiDetail/ApprovalSelect/index.jsx'
 import { isBrowser } from 'react-device-detect'
 
 const MapGpssDetail = ({ selectedPoi, setSelectedPoi, poiData }) => {
@@ -240,7 +240,7 @@ const MapGpssDetail = ({ selectedPoi, setSelectedPoi, poiData }) => {
                                 value={formik.values[name]}
                             ></TextField>
                         </Box>
-                        <MapApprovalSelect
+                        <ApprovalSelect
                             formik={formik}
                             reviewerName={'reviewer'}
                             approverName={'approver'}

@@ -9,6 +9,8 @@
     "team_name": "팀명",
     "status": "상태",
     "search": "검색",
+    "ACTIVE": "활성화",
+    "INACTIVE": "비활성화",
     "menu": {
         "mypage": "마이페이지",
         "profile": "내 정보",
@@ -51,5 +53,9 @@
         "R": "Read(읽기, 보기)",
         "U": "Update(변경, 수정)",
         "D": "Delete(삭제)"
+    },
+    "placeholder": {
+        "email": "이메일을 입력해 주세요",
+        "name": "이름을 입력해 주세요"
     }
 }

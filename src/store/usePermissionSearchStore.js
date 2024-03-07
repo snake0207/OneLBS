@@ -4,7 +4,7 @@ const initialState = {
     page: 1,
     email: '',
     name: '',
-    roleId: '',
+    roleId: '0',
 }
 
 const usePermissionSearchStore = create((set) => ({

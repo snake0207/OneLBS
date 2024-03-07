@@ -12,7 +12,7 @@ const ModalPage = () => {
     const [isOpenPrivacyPolicyModal, setIsOpenPrivacyPolicyModal] = useState(false)
     const [isOpenOtpGuideModal, setIsOpenOtpGuideModal] = useState(false)
     const [isOpenPasswordChangeModal, setIsOpenPasswordChangeModal] = useState(false)
-    const [isOpenPermissionChangeModal, setIsOpenPermissionChangeModal] = useState(true)
+    const [isOpenPermissionChangeModal, setIsOpenPermissionChangeModal] = useState(false)
     return (
         <div>
             <h1>Modal</h1>

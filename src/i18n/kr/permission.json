@@ -44,5 +44,12 @@
         "REVIEWER": "검토자",
         "MANAGER": "승인자",
         "ADMIN": "운영자"
+    },
+    "permission_code": {
+        "A": "Approval(승인)",
+        "C": "Create(등록, 생성)",
+        "R": "Read(읽기, 보기)",
+        "U": "Update(변경, 수정)",
+        "D": "Delete(삭제)"
     }
 }

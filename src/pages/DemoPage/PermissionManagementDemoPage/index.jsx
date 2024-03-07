@@ -1,54 +1,47 @@
 import PermissionCard from '#/components/permission/PermissionCard'
+import PermissionDescription from '#/components/permission/PermissionCard/PermissionDescription'
 import PermissionLabel from '#/components/permission/PermissionCard/PermissionLabel'
 
 const PermissionManagementDemoPage = () => {
     const permissionCardMockData = {
         roleId: 29,
         roleName: 'ADMIN',
-        permissions: [
-            'M101R',
-            'M111R',
-            'M111U',
-            'M131R',
-            'M141R',
-            'M151R',
-            'M152R',
-            'M153R',
-            'M154R',
-            'M162R',
-            'M161A',
-            'M161R',
-            'M161U',
-            'M161D',
-            'M163R',
-            'M171R',
-            'M171U',
-            'M164C',
-            'M164R',
-            'M164U',
-            'M181R',
-            'M181U',
-            'M182R',
-            'M182U',
-            'M183R',
-            'M183U',
-            'M184R',
-            'M184U',
-            'M184D',
-            'M121R',
+        permissionList: [
+            { menu: '101', permissions: ['R'] },
+            { menu: '111', permissions: ['R', 'U'] },
+            { menu: '131', permissions: ['R'] },
+            { menu: '141', permissions: ['R'] },
+            { menu: '151', permissions: ['R'] },
+            { menu: '152', permissions: ['R'] },
+            { menu: '153', permissions: ['R'] },
+            { menu: '154', permissions: ['R'] },
+            { menu: '162', permissions: ['R'] },
+            { menu: '161', permissions: ['A', 'D', 'R', 'U'] },
+            { menu: '163', permissions: ['R'] },
+            { menu: '171', permissions: ['R', 'U'] },
+            { menu: '164', permissions: ['C', 'R', 'U'] },
+            { menu: '181', permissions: ['R', 'U'] },
+            { menu: '182', permissions: ['R', 'U'] },
+            { menu: '183', permissions: ['R', 'U'] },
+            { menu: '184', permissions: ['D', 'R', 'U'] },
+            { menu: '121', permissions: ['R'] },
         ],
         userCount: 2,
     }
 
-    const permissionLabelMockData = 'M131R'
+    const permissionLabelMockData = { menu: '161', permissions: ['A', 'D', 'R', 'U'] }
 
     return (
         <div>
             <h1>Permission Card</h1>
             <h2>Card</h2>
-            <PermissionCard permissionCard={permissionCardMockData} />
+            <PermissionCard permissionCardData={permissionCardMockData} />
             <h2>Label</h2>
-            <PermissionLabel permission={permissionLabelMockData} />
+            <div style={{ display: 'flex' }}>
+                <PermissionLabel permissionItem={permissionLabelMockData} />
+            </div>
+            <h1>Permission Description</h1>
+            <PermissionDescription />
         </div>
     )
 }

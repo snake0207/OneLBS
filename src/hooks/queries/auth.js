@@ -66,3 +66,9 @@ export const usePostPasswordChange = () => {
         mutationFn: auth.postPasswordChange,
     })
 }
+
+export const usePostDeferChange = () => {
+    return useMutation({
+        mutationFn: auth.postDeferChange,
+    })
+}

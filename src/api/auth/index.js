@@ -41,6 +41,10 @@ const postPasswordChange = (data) => {
     return postAPI({ endPoint: API_PATH.auth.password_change, data })
 }
 
+const postDeferChange = () => {
+    return postAPI({ endPoint: API_PATH.auth.defer_change })
+}
+
 export default {
     postLogin,
     postJoin,
@@ -52,4 +56,5 @@ export default {
     postPasswordReset,
     postLogout,
     postPasswordChange,
+    postDeferChange,
 }

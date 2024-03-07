@@ -10,6 +10,7 @@ export const API_PATH = {
         password_reset: '/user-auth/api/v1/user/password/reset',
         logout: '/user-auth/api/v1/user/logout',
         password_change: 'user-auth/api/v1/user/password/change',
+        defer_change: 'user-auth/api/v1/user/password/defer-change',
     },
     gpss: {
         reviewer: '/reviewer',

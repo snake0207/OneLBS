@@ -1,7 +1,7 @@
 import { Box, Typography } from '@mui/material'
 import StraightenIcon from '@mui/icons-material/Straighten'
 import { useCallback, useEffect, useState } from 'react'
-import { InfoBox, Marker, Polyline } from '@react-google-maps/api'
+import { InfoWindow, Marker, Polyline } from '@react-google-maps/api'
 
 const CalculateDistance = ({
     isDistanceFunctionOn,
@@ -31,6 +31,7 @@ const CalculateDistance = ({
         const _distance = distance.toFixed(0)
         if (_distance < 1000) {
             setTotalDistance(_distance)
+            setMetric('m')
         } else {
             setTotalDistance(_distance / 1000)
             setMetric('km')
@@ -105,7 +106,7 @@ const CalculateDistance = ({
                         >
                             {/* 마지막 마커만 인포박스 표시 */}
                             {distanceCoordArr.length > 1 && idx === distanceCoordArr.length - 1 && (
-                                <InfoBox
+                                <InfoWindow
                                     anchor={marker}
                                     onLoad={(info) => {
                                         setInfoBox([...infoBox, info])
@@ -113,15 +114,15 @@ const CalculateDistance = ({
                                 >
                                     <Box
                                         style={{
-                                            backgroundColor: 'yellow',
+                                            backgroundColor: 'white',
                                         }}
                                     >
-                                        <Typography>
+                                        <Typography sx={{ margin: 'auto' }}>
                                             {totalDistance}
                                             {metric}
                                         </Typography>
                                     </Box>
-                                </InfoBox>
+                                </InfoWindow>
                             )}
                         </Marker>
                     ))}

@@ -11,6 +11,7 @@ import {
     gpssDetailResponseDataMapper,
     gpssListResponseDataMapper,
 } from '#/pages/ApprovalHistoryPage/mapper.js'
+import MarkerDiscription from '#/components/common/map/googleMap/CustomControl/MarkerDiscription/index.jsx'
 
 const mapStyle = {
     width: '100%',
@@ -128,6 +129,10 @@ const GoogleMapComponent = ({
                 onLoad={onLoad}
                 onUnmount={onUnmount}
             >
+                {/* 마커 정보 표시 */}
+                <CustomControl position="TOP_CENTER" style={{ top: '10px !important' }}>
+                    <MarkerDiscription />
+                </CustomControl>
                 {/* 지도내 클릭 위치 표시 마커 */}
                 <ClickMarker clickedCoord={clickedCoord} setClickedCoord={setClickedCoord} />
                 {/* 내 현재 위치 표시 마커 */}

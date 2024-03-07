@@ -1,5 +1,5 @@
 import PermissionCard from '#/components/permission/PermissionCard'
-import PermissionDescription from '#/components/permission/PermissionCard/PermissionDescription'
+import PermissionDescription from '#/components/permission/PermissionDescription'
 import PermissionLabel from '#/components/permission/PermissionCard/PermissionLabel'
 
 const PermissionManagementDemoPage = () => {

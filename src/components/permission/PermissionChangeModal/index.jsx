@@ -1,10 +1,11 @@
-import { getLayoutState } from '#/store/useLayoutStore'
 import { Box, Dialog, DialogContent, DialogTitle, Icon, IconButton } from '@mui/material'
 import InfoIcon from '@mui/icons-material/Info'
 import CloseIcon from '@mui/icons-material/Close'
+import { getLayoutState } from '#/store/useLayoutStore'
+import PermissionTableSearch from '#/components/permission/PermissionChangeModal/PermissionTableSearch'
+import PermissionTable from '#/components/permission/PermissionChangeModal/PermissionTable'
+
 import t from '#/common/libs/trans'
-import PermissionTableSearch from '#/components/permission/PermissionCard/PermissionChangeModal/PermissionTableSearch'
-import PermissionTable from '#/components/permission/PermissionCard/PermissionChangeModal/PermissionTable'
 
 const PermissionChangeModal = ({ isOpen, onClose }) => {
     const { themeMode } = getLayoutState()

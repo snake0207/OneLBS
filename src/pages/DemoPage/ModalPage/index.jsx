@@ -4,7 +4,7 @@ import PrivacyPolicyModal from '#/components/auth/authForm/joinForm/JoinModal/Pr
 import JoinModal from '#/components/auth/authForm/joinForm/JoinModal'
 import OtpGuideModal from '#/components/auth/authForm/CertifiedForm/otpGuideModal'
 import PasswordChangeModal from '#/components/dashboard/PasswordChangeModal'
-import PermissionChangeModal from '#/components/permission/PermissionCard/PermissionChangeModal'
+import PermissionChangeModal from '#/components/permission/PermissionChangeModal'
 
 const ModalPage = () => {
     const [isOpenJoinModal, setIsOpenJoinModal] = useState(false)

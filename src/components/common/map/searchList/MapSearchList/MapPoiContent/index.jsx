@@ -3,37 +3,12 @@ import Divider from '@mui/material/Divider'
 import ListItemText from '@mui/material/ListItemText'
 import ListItemButton from '@mui/material/ListItemButton'
 import { useMapActions } from '#/store/useMapStore.js'
-import PointBlueEVIcon from '#/assets/pointBlueEVIcon.svg'
-import PointBlueFuelIcon from '#/assets/pointBlueFuelIcon.svg'
-import PointBlueH2Icon from '#/assets/pointBlueH2Icon.svg'
-import PointBlueParkingIcon from '#/assets/pointBlueParkingIcon.svg'
-import PointBluePoiIcon from '#/assets/pointBluePoiIcon.svg'
-import PointRedEVIcon from '#/assets/pointRedEVIcon.svg'
-import PointRedFuelIcon from '#/assets/pointRedFuelIcon.svg'
-import PointRedH2Icon from '#/assets/pointRedH2Icon.svg'
-import PointRedParkingIcon from '#/assets/pointRedParkingIcon.svg'
-import PointRedPoiIcon from '#/assets/pointRedPoiIcon.svg'
 import Brightness1Icon from '@mui/icons-material/Brightness1'
+import { markerImage } from '#/common/libs/mapMarker.js'
 
 const MapPoiContent = ({ isLast, isGpssSearch, selectedPoi, setSelectedPoi, poiData }) => {
     const { poiId, title, address, cpType, progress, country, category } = poiData
     const { setHoveredPoi } = useMapActions()
-    const markerImage = (category) => {
-        switch (category) {
-            case 'evCharging':
-                return cpType === 'mcp' ? PointBlueEVIcon : PointRedEVIcon
-            case 'fuel':
-                return cpType === 'mcp' ? PointBlueFuelIcon : PointRedFuelIcon
-            case 'h2Charging':
-                return cpType === 'mcp' ? PointBlueH2Icon : PointRedH2Icon
-            case 'parking':
-                return cpType === 'mcp' ? PointBlueParkingIcon : PointRedParkingIcon
-            case 'dealerPoi':
-                return cpType === 'mcp' ? PointBluePoiIcon : PointRedPoiIcon
-            default:
-                return cpType === 'mcp' ? PointBluePoiIcon : PointRedPoiIcon
-        }
-    }
     return (
         <>
             <ListItem
@@ -68,7 +43,7 @@ const MapPoiContent = ({ isLast, isGpssSearch, selectedPoi, setSelectedPoi, poiD
                                     }}
                                 >
                                     <img
-                                        src={markerImage(category)}
+                                        src={markerImage(category, cpType)}
                                         style={{
                                             verticalAlign: 'middle',
                                             paddingRight: '4px',

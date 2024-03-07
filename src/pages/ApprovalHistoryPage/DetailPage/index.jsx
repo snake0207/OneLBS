@@ -326,7 +326,7 @@ const ApprovalHistoryDetailPage = () => {
                     </Box>
                 </Stack>
                 {/* 지도 영역 */}
-                {isBrowser && <GoogleMapComponent markerDataArr={markerSampleData} />}
+                {isBrowser && <GoogleMapComponent markerDetailData={poiDetailData} />}
             </Box>
         </>
     )

@@ -60,3 +60,15 @@ export const usePostLogout = () => {
         },
     })
 }
+
+export const usePostPasswordChange = () => {
+    return useMutation({
+        mutationFn: auth.postPasswordChange,
+    })
+}
+
+export const usePostDeferChange = () => {
+    return useMutation({
+        mutationFn: auth.postDeferChange,
+    })
+}

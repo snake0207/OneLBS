@@ -6,7 +6,7 @@ import CloseIcon from '@mui/icons-material/Close.js'
 import { useFormik } from 'formik'
 import TextInput from '#/components/common/input/TextInput/index.jsx'
 import RadioInput from '#/components/common/Radio/index.jsx'
-import MapApprovalSelect from '#/components/common/map/MapApprovalSelect/index.jsx'
+import ApprovalSelect from '#/components/poiDetail/ApprovalSelect/index.jsx'
 import style from '#/components/common/map/MapPoiAdd/style.module.js'
 
 const MapPoiAdd = ({ setIsOpen, selectedPoi }) => {
@@ -183,12 +183,15 @@ const MapPoiAdd = ({ setIsOpen, selectedPoi }) => {
                     ></TextField>
                 </Box>
                 {/* 검토자 승인자 */}
-                <MapApprovalSelect
+                <ApprovalSelect
                     formik={formik}
+                    reviewerName={'reviewer'}
+                    approverName={'approver'}
                     selectedApprover={selectedApprover}
                     setSelectedApprover={setSelectedApprover}
                     selectedReviewer={selectedReviewer}
                     setSelectedReviewer={setSelectedReviewer}
+                    isReviewerShow={true}
                 />
                 <Box
                     sx={{

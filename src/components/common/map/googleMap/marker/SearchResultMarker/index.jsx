@@ -3,13 +3,14 @@ import MapInfoWindow from '#/components/common/map/MapInfoWindow/index.jsx'
 import { useEffect, useState } from 'react'
 import useMapStore from '#/store/useMapStore.js'
 import { isBrowser } from 'react-device-detect'
+import { markerImage } from '#/common/libs/mapMarker.js'
 
 const SearchResultMarker = ({ poiData, selectedPoi, setSelectedPoi }) => {
     const map = useGoogleMap()
     const [marker, setMarker] = useState(null)
     const [infoWindow, setInfoWindow] = useState([])
     const { hoveredPoi } = useMapStore()
-    const { poiId, position } = poiData
+    const { poiId, position, cpType, category } = poiData
     const { lat, lon } = position.center
     useEffect(() => {
         // poi가 같으면 단일 infoWindow만 엶
@@ -32,6 +33,7 @@ const SearchResultMarker = ({ poiData, selectedPoi, setSelectedPoi }) => {
             onClick={() => {
                 setSelectedPoi(poiId)
             }}
+            icon={markerImage(category, cpType)}
             animation={isBrowser && hoveredPoi === poiId && window.google.maps.Animation.BOUNCE}
         >
             {selectedPoi === poiId && (

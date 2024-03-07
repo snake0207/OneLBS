@@ -3,7 +3,7 @@ import { useState } from 'react'
 import t from '#/common/libs/trans.js'
 
 import style from './style.module'
-import BasicInfo from '#/components/common/map/MapGpssDetail/DetailTab/BasicInfo/index.jsx'
+import BasicInfo from '#/components/poiDetail/CategoryInfo/BasicInfo/index.jsx'
 
 const InfoTab = ({ basicData, formik, isEditable }) => {
     const [tabSelected, setTabSelected] = useState('info')

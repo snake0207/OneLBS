@@ -3,7 +3,7 @@ import t from '#/common/libs/trans.js'
 import { Box, TextField } from '@mui/material'
 import Typography from '@mui/material/Typography'
 
-const Comment = ({ comments, userType, isEditable, formik }) => {
+const Comment = ({ userType, isEditable, formik }) => {
     // TODO: 유저권한(타입), 수정가능여부에 따라 input or text 노출
 
     return (
@@ -25,12 +25,12 @@ const Comment = ({ comments, userType, isEditable, formik }) => {
                 {userType === 'reviewer' && isEditable ? (
                     <TextField
                         id="outlined-multiline-static"
-                        name="reviewer_comment"
+                        name="reviewerComment"
                         fullWidth
                         hiddenLabel
                         multiline
                         rows={3}
-                        value={formik.values['reviewer_comment'] || ''}
+                        value={formik.values['reviewerComment'] || ''}
                         onChange={formik.handleChange}
                         sx={{ backgroundColor: 'form.main', borderRadius: '4px' }}
                     />
@@ -44,7 +44,7 @@ const Comment = ({ comments, userType, isEditable, formik }) => {
                             },
                         }}
                     >
-                        {comments.reviewer || '-'}
+                        {formik.values['reviewerComment'] || '-'}
                     </Typography>
                 )}
             </Box>
@@ -64,17 +64,17 @@ const Comment = ({ comments, userType, isEditable, formik }) => {
                 {userType === 'approver' && isEditable ? (
                     <TextField
                         id="outlined-multiline-static"
-                        name="approver_comment"
+                        name="approverComment"
                         fullWidth
                         hiddenLabel
                         multiline
                         rows={3}
-                        value={formik.values['approver_comment'] || ''}
+                        value={formik.values['approverComment'] || ''}
                         onChange={formik.handleChange}
                         sx={{ backgroundColor: 'form.main', borderRadius: '4px' }}
                     />
                 ) : (
-                    <Typography>{comments.approver || '-'}</Typography>
+                    <Typography>{formik.values['approverComment'] || '-'}</Typography>
                 )}
             </Box>
         </Box>

@@ -1,0 +1,14 @@
+[
+    {
+        "poiId": "ChIJsTbYQbjLwoARpbZRYUbnEP4",
+        "address": "12021 Wilmington Ave, Los Angeles, CA 90059, USA",
+        "position": {
+            "center": {
+                "lat": 33.9243791,
+                "lon": -118.23941569999998
+            }
+        },
+        "title": "PowerFlex Charging Station",
+        "category": "ev"
+    }
+]

@@ -110,11 +110,33 @@ const dealerInfo = (data) => {
 const detailResponseDataMapper = (res) => {
     const data = res.data.result[0]
     const basicData = {
-        // status: 'request',
+        status: 'rejected_approval',
         // category: 'h2Charging',
-        status: res.data.approvalInfo.status, // service에서 보내줄 결재이력 상태값
+        // status: res.data.status, // service에서 보내줄 결재이력 상태값
         category: parseCategory(data),
-        approvalInfo: res.data.approvalInfo,
+        approvalInfo: {
+            requestComment: res.data.requestComment,
+            reviewerComment: res.data.reviewerComment,
+            approverComment: res.data.managerComment,
+            approvalLineContents: {
+                requester: {
+                    team: res.data.userTeam,
+                    name: res.data.userName,
+                    date: res.data.requestDtString,
+                },
+                reviewer: {
+                    team: res.data.reviewerTeam,
+                    name: res.data.reviewerName,
+                    date: res.data.reviewDtString,
+                },
+                approver: {
+                    team: res.data.managerTeam,
+                    name: res.data.managerName,
+                    date: res.data.manageDtString,
+                },
+            },
+            historyList: res.data.historyList,
+        },
         poiId: data.poiId,
         basicInfo: {
             title: data.title,
@@ -133,6 +155,7 @@ const gpssDetailResponseDataMapper = (res) => {
     const data = res.data.result[0]
     const basicData = {
         category: parseCategory(data),
+        cpType: parsePoiProviderType(data.poiId),
         poiId: data.poiId,
         basicInfo: {
             title: data.title,

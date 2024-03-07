@@ -11,8 +11,9 @@
           }
         },
         "title": "Blink Charging Station",
-        "category": "ev",
-        "progress": "reviewing"
+        "evCharging": {},
+        "progress": "reviewing",
+        "countryCode": "DEU"
       },
       {
         "poiId": "here:ChIJSblb29_LwoARUQWFAR785F4",
@@ -24,8 +25,9 @@
           }
         },
         "title": "EVCS Charging Station",
-        "category": "ev",
-        "progress": "approving"
+        "fuel": {},
+        "progress": "approving",
+        "countryCode": "GBR"
       },
       {
         "poiId": "mcp:ChIJ5xP4utnLwoARR5thyWQMcI0",
@@ -37,8 +39,9 @@
           }
         },
         "title": "Electric Circuit Charging Station",
-        "category": "ev",
-        "progress": "reviewing"
+        "parking": {},
+        "progress": "reviewing",
+        "countryCode": "CHE"
       },
       {
         "poiId": "here:ChIJS-pkdn7JwoARzkOPLkLB0LM",
@@ -50,7 +53,8 @@
           }
         },
         "title": "Flo Charging Station",
-        "category": "ev"
+        "h2Charging": {},
+        "countryCode": "FRA"
       },
       {
         "poiId": "here:ChIJMS-G-n3JwoAR2TPD7A6yXoY",
@@ -62,7 +66,8 @@
           }
         },
         "title": "ChargePoint Charging Station",
-        "category": "ev"
+        "dealerPoi": {},
+        "countryCode": "ITA"
       },
       {
         "poiId": "mcp:ChIJm6KTpoiIdnLwoARwSZzuHOvyOU",
@@ -74,7 +79,8 @@
           }
         },
         "title": "Electric Circuit Charging Station",
-        "category": "ev"
+        "fuel": {},
+        "countryCode": "ESP"
       }
     ]
   }

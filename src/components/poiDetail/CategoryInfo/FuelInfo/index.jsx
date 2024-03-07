@@ -1,7 +1,7 @@
 import { Accordion, AccordionDetails, AccordionSummary, Box } from '@mui/material'
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore.js'
 import Typography from '@mui/material/Typography'
-import EditableTextColumn from '#/components/approval/Detail/CategoryInfo/EditableTextColumn/index.jsx'
+import EditableTextColumn from '#/components/poiDetail/CategoryInfo/EditableTextColumn/index.jsx'
 import t from '#/common/libs/trans.js'
 import FuelIcon from '#/assets/fuelIcon.svg'
 import FuelIconDark from '#/assets/fuelIconDark.svg'

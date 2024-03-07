@@ -1,20 +1,21 @@
-import { parseMenuPermissionCode } from '#/common/libs/parseMenuPermissionCode'
-import { Box } from '@mui/material'
+import { Box, Typography } from '@mui/material'
+
+import menuTree from '#/assets/data/menuTree.json'
 
 import t from '#/common/libs/trans'
 
-const PermissionLabel = ({ permission }) => {
-    const { menuObj, permissionCode } = parseMenuPermissionCode(permission)
-
+const PermissionLabel = ({ permissionItem }) => {
     const labelColor = {
-        R: '#459BFF',
-        U: '#C96CF5',
-        D: '#C96CF5',
-        C: '#C96CF5',
-        A: '#0BB2A8',
+        C: '#FA5E41',
+        R: '#00418D',
+        U: '#5B0584',
+        D: '#DB0024',
+        A: '#006761',
     }
 
-    if (menuObj.menuId === 101) return
+    if (permissionItem.menu == 101) return
+
+    const menuTreeItem = menuTree.find((item) => item.menuId == permissionItem.menu)
 
     return (
         <Box
@@ -22,14 +23,25 @@ const PermissionLabel = ({ permission }) => {
                 display: 'flex',
                 justifyContent: 'center',
                 alignItems: 'center',
-                border: 1,
                 borderRadius: 5,
                 px: 1,
-                borderColor: labelColor[permissionCode],
-                color: labelColor[permissionCode],
+                bgcolor: 'lightgray',
             }}
         >
-            {t(`menu.${menuObj.label}`, 'permission')}
+            <Typography>{t(`menu.${menuTreeItem.label}`, 'permission')}</Typography>
+            <Box sx={{ display: 'flex' }}>
+                {permissionItem.permissions.map((permissionCode) => (
+                    <Box
+                        key={permissionCode}
+                        sx={{
+                            width: 15,
+                            height: 15,
+                            borderRadius: '50%',
+                            bgcolor: labelColor[permissionCode],
+                        }}
+                    />
+                ))}
+            </Box>
         </Box>
     )
 }

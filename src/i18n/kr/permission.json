@@ -1,8 +1,7 @@
 {
     "menu_change": "메뉴 변경",
     "permission_change": "권한 변경",
-    "total": "총",
-    "number_of_people": "명",
+    "total_number_of_people": "총 {{userCount}}명",
     "email": "이메일",
     "name": "이름",
     "perrmission": "권한",

@@ -1,4 +1,5 @@
 import PermissionCard from '#/components/permission/PermissionCard'
+import PermissionDescription from '#/components/permission/PermissionCard/PermissionDescription'
 import PermissionLabel from '#/components/permission/PermissionCard/PermissionLabel'
 
 const PermissionManagementDemoPage = () => {
@@ -36,7 +37,11 @@ const PermissionManagementDemoPage = () => {
             <h2>Card</h2>
             <PermissionCard permissionCardData={permissionCardMockData} />
             <h2>Label</h2>
-            <PermissionLabel permissionItem={permissionLabelMockData} />
+            <div style={{ display: 'flex' }}>
+                <PermissionLabel permissionItem={permissionLabelMockData} />
+            </div>
+            <h1>Permission Description</h1>
+            <PermissionDescription />
         </div>
     )
 }

@@ -21,6 +21,7 @@ import { useFormik } from 'formik'
 import { mapSearchSchema } from '#/contents/validationSchema.js'
 import { useGetGpssSuggestions } from '#/hooks/queries/gpss.js'
 import useMapStore from '#/store/useMapStore.js'
+import { useDebounce } from '#/hooks/useDebounce.js'
 
 function MapSearchPage() {
     const navigate = useNavigate()
@@ -60,9 +61,7 @@ function MapSearchPage() {
     // mobile search toggle
     const [showSearch, setShowSearch] = useState(false)
     // 추천어 검색
-    const { data: suggestionsData, refetch: getSuggstions } = useGetGpssSuggestions(
-        searchFormik.values,
-    )
+    const { data: suggestionsData } = useGetGpssSuggestions(useDebounce(searchFormik.values, 400))
 
     // mobile detail navigate
     const handlePOISelected = (id) => {

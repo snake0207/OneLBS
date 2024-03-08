@@ -1,5 +1,6 @@
 import { Table, TableBody, TableCell, TableHead, TableRow, Typography } from '@mui/material'
 import MenuTableRow from '#/components/permission/MenuChangeModal/MenuTable/MenuTableRow'
+import { permissionLabelColor } from '#/contents/color'
 
 import t from '#/common/libs/trans'
 
@@ -41,21 +42,15 @@ const MenuTable = () => {
         },
     ]
 
-    const labelColor = {
-        C: '#FA5E41',
-        R: '#00418D',
-        U: '#5B0584',
-        D: '#DB0024',
-        A: '#006761',
-    }
-
     return (
         <Table>
             <TableHead>
                 <TableRow>
                     {menuTableHeader.map((item) => (
                         <TableCell key={item.field} colSpan={item.colSpan} align="center">
-                            <Typography color={labelColor[item.code]}>{item.headerName}</Typography>
+                            <Typography color={permissionLabelColor[item.code]}>
+                                {item.headerName}
+                            </Typography>
                         </TableCell>
                     ))}
                 </TableRow>

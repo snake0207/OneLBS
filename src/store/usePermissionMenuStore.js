@@ -2,7 +2,7 @@ import { create } from 'zustand'
 
 const initialState = {
     roleName: 'GUEST',
-    roleId: '25',
+    roleId: 25,
 }
 
 const usePermissionMenuStore = create((set) => ({

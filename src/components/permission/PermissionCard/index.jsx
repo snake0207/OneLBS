@@ -16,7 +16,7 @@ const PermissionCard = ({ permissionCardData }) => {
     const { setPermissionMenuStore } = usePermissionMenuActions()
 
     const handleClickMenuChangeModalOpen = () => {
-        setPermissionMenuStore(permissionCardData.roleId, permissionCardData.roleName)
+        setPermissionMenuStore(permissionCardData.roleName, permissionCardData.roleId)
         setIsOpenMenuChangeModal(true)
     }
 

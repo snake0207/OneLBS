@@ -2,7 +2,9 @@ import { useState } from 'react'
 import { Box, Button, Typography } from '@mui/material'
 import PermissionLabel from '#/components/permission/PermissionCard/PermissionLabel'
 import PermissionChangeModal from '#/components/permission/PermissionChangeModal'
+import MenuChangeModal from '#/components/permission/MenuChangeModal'
 import { usePermissionSearchActions } from '#/store/usePermissionSearchStore'
+import { usePermissionMenuActions } from '#/store/usePermissionMenuStore'
 
 import t from '#/common/libs/trans'
 
@@ -10,8 +12,10 @@ const PermissionCard = ({ permissionCardData }) => {
     const [isOpenMenuChangeModal, setIsOpenMenuChangeModal] = useState(false)
     const [isOpenPermissionChangeModal, setIsOpenPermissionChangeModal] = useState(false)
     const { setPermissionSearchRoleId } = usePermissionSearchActions()
+    const { setPermissionMenuStore } = usePermissionMenuActions()
 
     const handleClickMenuChangeModalOpen = () => {
+        setPermissionMenuStore(permissionCardData.roleId, permissionCardData.roleName)
         setIsOpenMenuChangeModal(true)
     }
 
@@ -51,6 +55,10 @@ const PermissionCard = ({ permissionCardData }) => {
             <PermissionChangeModal
                 isOpen={isOpenPermissionChangeModal}
                 onClose={() => setIsOpenPermissionChangeModal(false)}
+            />
+            <MenuChangeModal
+                isOpen={isOpenMenuChangeModal}
+                onClose={() => setIsOpenMenuChangeModal(false)}
             />
         </Box>
     )

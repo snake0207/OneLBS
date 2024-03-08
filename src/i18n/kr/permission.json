@@ -11,11 +11,21 @@
     "search": "검색",
     "ACTIVE": "활성화",
     "INACTIVE": "비활성화",
+    "menu_table_header": {
+        "menu": "메뉴",
+        "approval": "승인(Approval)",
+        "create": "생성(Create)",
+        "read": "읽기(Read)",
+        "update": "변경(Update)",
+        "delete": "삭제(Delete)"
+    },
     "menu": {
         "mypage": "마이페이지",
         "profile": "내 정보",
         "search_management": "검색 관리",
         "map": "지도",
+        "search_map": "검색 지도",
+        "poi_map": "POI 지도",
         "poi_search": "POI 조회",
         "permit_history": "결제 이력관리",
         "all_history": "전체 이력 조회",

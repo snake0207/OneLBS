@@ -16,7 +16,6 @@ import UserInfo from './UserInfo'
 import t from '#/common/libs/trans'
 
 import { BrowserView, MobileView } from 'react-device-detect'
-import { data } from '#/mock/data/side_menu.json'
 import { filterMobileMenuItems } from '#/common/libs/menuTools'
 import LinkRouter from '#/components/common/menu/LinkRouter'
 
@@ -39,9 +38,12 @@ import ViewModuleIcon from '#/assets/viewModuleIcon.svg'
 import ViewModuleIconDark from '#/assets/viewModuleIconDark.svg'
 import LogoIcon from '#/assets/logo.svg'
 import LogoIconDark from '#/assets/logoDark.svg'
+import DashboardIcon from '@mui/icons-material/Dashboard'
 
 import style from './style.module'
 import { useNavigate } from 'react-router-dom'
+
+import { data } from '#/mock/data/side_menu.json'
 
 const drawerWidth = 240
 
@@ -96,6 +98,18 @@ const getMenuIcon = (key, themeMode) => {
                     }}
                 >
                     {themeMode === 'light' ? <img src={UserIcon} /> : <img src={UserIconDark} />}
+                </Icon>
+            )
+        case 'dashboard':
+            return (
+                <Icon
+                    sx={{
+                        display: 'flex',
+                        width: '20px',
+                        height: '20px',
+                    }}
+                >
+                    {themeMode === 'light' ? <DashboardIcon /> : <DashboardIcon />}
                 </Icon>
             )
         case 'search_management':
@@ -216,6 +230,7 @@ const createMenuItems = (menuItems, themeMode) => {
                         <ExpandMenuItem
                             key={index}
                             label={t(`top_menu.${item.label}`)}
+                            to={item.menuUrl}
                             iconNode={getMenuIcon(item.label, themeMode)}
                             items={item.children}
                         />

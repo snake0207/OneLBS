@@ -2,6 +2,14 @@
     "data": {
         "menuTree": [
             {
+                "menuId": 101,
+                "name": "Main(dashboard)",
+                "menuOrder": 0,
+                "menuUrl": "/",
+                "label": "dashboard",
+                "children": []
+            },
+            {
                 "menuId": 120,
                 "name": "Search Management",
                 "menuOrder": 1,

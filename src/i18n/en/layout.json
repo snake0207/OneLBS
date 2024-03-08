@@ -2,6 +2,7 @@
     "top_menu": {
         "mypage": "마이페이지",
         "profile": "내 정보",
+        "dashboard": "대시보드",
         "search_management": "검색 관리",
         "search_map": "지도",
         "poi_search": "POI Search",

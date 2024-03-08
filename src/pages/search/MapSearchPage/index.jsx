@@ -6,7 +6,7 @@ import { Box, Button, Icon } from '@mui/material'
 import { BrowserView, MobileView } from 'react-device-detect'
 import MapSearch from '#/components/common/map/MapSearch/index.jsx'
 import MapSearchList from '#/components/common/map/searchList/MapSearchList/index.jsx'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import poiDetailData from '#/mock/data/poiDetailData.json'
 import poiListData from '#/mock/data/poiListData.json'
 import { useNavigate } from 'react-router-dom'
@@ -17,10 +17,39 @@ import SearchIconDark from '#/assets/searchIconDark.svg'
 import FilterIcon from '#/assets/filterIcon.svg'
 import useLayoutStore from '#/store/useLayoutStore'
 import SwipeMapSearchList from '#/components/common/map/searchList/SwipeMapSearchList/index.jsx'
+import { useFormik } from 'formik'
+import { mapSearchSchema } from '#/contents/validationSchema.js'
+import { useGetGpssSuggestions } from '#/hooks/queries/gpss.js'
+import useMapStore from '#/store/useMapStore.js'
 
 function MapSearchPage() {
     const navigate = useNavigate()
     const { themeMode } = useLayoutStore()
+    const { actions: mapStoreActions, lat, lon } = useMapStore()
+    const searchFormik = useFormik({
+        initialValues: {
+            country: [],
+            lat: '',
+            lon: '',
+            category: [],
+            keyword: '',
+            language: 'ENG',
+            vehicleCode: 'ICE',
+        },
+        validationSchema: mapSearchSchema,
+        onSubmit: (form) => {
+            console.log(form)
+        },
+    })
+    // 위경도 좌표 초기화
+    useEffect(() => {
+        mapStoreActions.resetCoordinates()
+    }, [])
+    useEffect(() => {
+        searchFormik.setFieldValue('lat', lat)
+        searchFormik.setFieldValue('lon', lon)
+    }, [lat])
+
     // 검색 결과
     const [searchResultArr, setSearchResultArr] = useState([])
     // TODO 장소 상세 정보 호출 api 연동
@@ -75,7 +104,7 @@ function MapSearchPage() {
                         <Box sx={{ display: 'flex', flexDirection: 'colunm' }}>
                             <Box>
                                 {/* 지도 검색 */}
-                                <MapSearch />
+                                <MapSearch formik={searchFormik} />
                                 {/* 검색 결과 */}
                                 <MapSearchList
                                     searchResultArr={poiListData}

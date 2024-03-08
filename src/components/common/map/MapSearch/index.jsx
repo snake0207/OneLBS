@@ -1,16 +1,14 @@
 import Box from '@mui/material/Box'
 import { Autocomplete, Grid, InputAdornment, TextField, Typography } from '@mui/material'
 //import SearchIcon from '@mui/icons-material/Search'
-import { useFormik } from 'formik'
-import { mapSearchSchema } from '#/contents/validationSchema.js'
 import t from '#/common/libs/trans.js'
-import { usePopupActions } from '#/store/usePopupStore.js'
 import SearchIcon from '#/assets/searchIcon.svg'
 import SearchIconDark from '#/assets/searchIconLightDark.svg'
 import KeyboardArrowDownRoundedIcon from '@mui/icons-material/KeyboardArrowDownRounded'
 
 import { getLayoutState } from '#/store/useLayoutStore'
 import style from './style.module'
+import { useEffect, useState } from 'react'
 
 const countryCodeArr = [
     'ABW',
@@ -266,28 +264,22 @@ const countryCodeArr = [
 const languageCodeArr = ['ENG', 'KOR']
 const categoryCodeArr = ['ev Charging', 'fuel', 'parking', 'h2 Charging', 'dealerPoi']
 
-const MapSearch = () => {
-    const popupAction = usePopupActions()
-    const formik = useFormik({
-        initialValues: {
-            country: [],
-            lat: '',
-            lon: '',
-            category: [],
-            searchValue: '',
-            language: 'ENG',
-        },
-        validationSchema: mapSearchSchema,
-        onSubmit: (form) => {
-            console.log(form)
-            if (form.searchValue === '') {
-                popupAction.showPopup('alert', t('input_keyword', 'common'))
-                return
-            }
-        },
-    })
+const MapSearch = ({ formik }) => {
     const { themeMode } = getLayoutState()
-
+    const [isKeywordDisabled, setIsKeywordDisabled] = useState(true)
+    useEffect(() => {
+        // 국가 위/경도가 모두 입력되면 키워드 입력 가능
+        // formik errors가 없으면 키워드 입력 가능
+        if (
+            formik.values.lat.length === 0 ||
+            formik.values.lon.length === 0 ||
+            formik.values.country.length === 0
+        ) {
+            setIsKeywordDisabled(true)
+            return
+        }
+        setIsKeywordDisabled(false)
+    }, [formik.values])
     return (
         <Box
             sx={{
@@ -546,9 +538,10 @@ const MapSearch = () => {
                                 backgroundColor: 'form.main',
                                 borderRadius: '4px',
                             }}
-                            name={'searchValue'}
+                            name={'keyword'}
                             onChange={formik.handleChange}
-                            value={formik.values.searchValue}
+                            value={formik.values.keyword}
+                            disabled={isKeywordDisabled}
                             InputProps={{
                                 endAdornment: (
                                     <InputAdornment position="end">

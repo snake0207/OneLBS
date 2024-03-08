@@ -7,8 +7,12 @@ import { create } from 'zustand'
 const useMapStore = create(
     devtools((set) => ({
         hoveredPoi: null,
+        lat: '',
+        lon: '',
         actions: {
             setHoveredPoi: (hoveredPoi) => set({ hoveredPoi }),
+            setCoordinates: (lat, lon) => set({ lat: lat, lon: lon }),
+            resetCoordinates: () => set({ lat: '', lon: '' }),
         },
     })),
 )

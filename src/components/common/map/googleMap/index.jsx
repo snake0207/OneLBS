@@ -12,6 +12,7 @@ import {
     gpssListResponseDataMapper,
 } from '#/pages/ApprovalHistoryPage/mapper.js'
 import MarkerDiscription from '#/components/common/map/googleMap/CustomControl/MarkerDiscription/index.jsx'
+import { useMapActions } from '#/store/useMapStore.js'
 
 const mapStyle = {
     width: '100%',
@@ -40,6 +41,7 @@ const GoogleMapComponent = ({
     setSelectedPoi,
 }) => {
     const [map, setMap] = useState(null)
+    const { setCoordinates } = useMapActions()
     // 왼쪽 클릭
     const [clickedCoord, setClickedCoord] = useState({
         lat: null,
@@ -92,6 +94,10 @@ const GoogleMapComponent = ({
                         lat: parseFloat(event.latLng.lat().toFixed(7)),
                         lng: parseFloat(event.latLng.lng().toFixed(7)),
                     })
+                    setCoordinates(
+                        parseFloat(event.latLng.lat().toFixed(7)),
+                        parseFloat(event.latLng.lng().toFixed(7)),
+                    )
                 }}
                 onRightClick={(event) => {
                     if (isDistanceFunctionOn) {

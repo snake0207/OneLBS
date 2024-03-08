@@ -41,6 +41,9 @@ function AuthHeader() {
                     borderBottom: '1px solid',
                     borderColor: 'border.main',
                     backgroundColor: 'background.mobile',
+                    '@media (max-width:1024px)': {
+                        borderColor: 'border.header',
+                    },
                 }}
             >
                 <Toolbar disableGutters>

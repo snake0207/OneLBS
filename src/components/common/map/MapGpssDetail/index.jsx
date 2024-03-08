@@ -257,7 +257,7 @@ const MapGpssDetail = ({ selectedPoi, setSelectedPoi, poiData }) => {
                                 gap: '2px',
                                 mt: '30px',
                                 '@media (max-width:1024px)': {
-                                    mb: '20px',
+                                    pb: '20px',
                                 },
                             }}
                         >

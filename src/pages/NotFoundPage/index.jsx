@@ -35,7 +35,7 @@ function NotFoundPage() {
             <Button
                 variant="contained"
                 onClick={() => navigate('/login', { replace: true })}
-                sx={style.button}
+                sx={style.darkBlueButton}
             >
                 {t('login_page')}
             </Button>

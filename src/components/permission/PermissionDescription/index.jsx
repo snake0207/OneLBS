@@ -1,4 +1,5 @@
 import { Box, Typography } from '@mui/material'
+import style from './style.module.js'
 
 import t from '#/common/libs/trans'
 
@@ -12,14 +13,14 @@ const PermissionDescription = () => {
     }
 
     return (
-        <Box sx={{ display: 'flex', bgcolor: 'white' }}>
-            <Typography>{t('permission', 'permission')}</Typography>
+        <Box sx={style.descriptionBox}>
+            <Typography sx={style.Title}>{t('permission', 'permission')}</Typography>
             {Object.keys(labelColor).map((item) => (
-                <Box key={item} sx={{ display: 'flex', alignItems: 'center' }}>
+                <Box key={item} sx={style.label}>
                     <Box
                         sx={{
-                            width: 15,
-                            height: 15,
+                            width: 8,
+                            height: 8,
                             borderRadius: '50%',
                             bgcolor: labelColor[item],
                         }}

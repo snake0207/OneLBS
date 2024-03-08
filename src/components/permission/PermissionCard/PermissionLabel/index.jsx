@@ -25,17 +25,21 @@ const PermissionLabel = ({ permissionItem }) => {
                 alignItems: 'center',
                 borderRadius: 5,
                 px: 1,
-                bgcolor: 'lightgray',
+                p: '8px 14px',
+                bgcolor: 'background.gray',
             }}
         >
-            <Typography>{t(`menu.${menuTreeItem.label}`, 'permission')}</Typography>
+            <Typography sx={{ fontSize: '12px', fontWeight: 500, color: 'text.main', pr: '3px' }}>
+                {t(`menu.${menuTreeItem.label}`, 'permission')}
+            </Typography>
             <Box sx={{ display: 'flex' }}>
                 {permissionItem.permissions.map((permissionCode) => (
                     <Box
                         key={permissionCode}
                         sx={{
-                            width: 15,
-                            height: 15,
+                            width: 8,
+                            height: 8,
+                            ml: '2px',
                             borderRadius: '50%',
                             bgcolor: labelColor[permissionCode],
                         }}

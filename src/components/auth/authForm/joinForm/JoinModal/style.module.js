@@ -3,7 +3,6 @@ const style = {
         '& .MuiDialog-paper': {
             width: '550px',
             backgroundColor: 'dialog.main',
-            width: '550px',
             borderRadius: '8px',
             backgroundImage: 'none',
             '@media (max-width:1280px)': {

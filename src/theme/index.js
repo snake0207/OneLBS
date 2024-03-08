@@ -75,6 +75,7 @@ export const tokens = {
         9001: '#C7F1FF',
         10001: '#73B4FF',
         20001: '#e3f0ff',
+        30001: '#9ABDE5',
     },
 
     background: {
@@ -93,7 +94,7 @@ export const tokens = {
     button: {
         100: '#fff',
         200: '#EFEFEF',
-        300: '#E5E5E5',
+        300: '#E2E2E2',
         400: '#888888',
         500: '#858585',
         600: '#CFE5FF',
@@ -101,12 +102,12 @@ export const tokens = {
         800: '#A1CDFF',
         900: '#9ABDE5',
         1000: '#205279',
-        2000: '#194D8A',
-        3000: '#193C65',
+        2000: '#004699',
+        3000: '#0057BB',
         4000: '#0A5CBA',
         5000: '#00418D',
         6000: '#002C5F',
-        7000: '#080945',
+        7000: '#071C2C',
         8000: '#05141f',
         9000: '#1e3343',
 
@@ -114,6 +115,8 @@ export const tokens = {
     },
     text: {
         100: '#fff',
+        200: '#0A5CBA',
+        300: '#00418D',
         400: '#a9a9a9',
         500: '#888',
         600: '#444',
@@ -151,6 +154,7 @@ export const tokens = {
         600: '#253846',
         700: '#e2e2e2',
         800: '#385264',
+        900: '#33aed6',
     },
     dialog: {
         100: '#fff',
@@ -219,6 +223,7 @@ export const getThemeSettings = (mode) => ({
                       edit: tokens.color[101],
                       closeBg: tokens.color[100],
                       swiper: tokens.color[900],
+                      gusest: tokens.color[20001],
                   },
                   button: {
                       ...tokens.button,
@@ -235,6 +240,7 @@ export const getThemeSettings = (mode) => ({
                       lightblueBoder: tokens.button[1001],
                       blueBoder: tokens.button[1001],
                       lineblueBoder: tokens.button[6000],
+                      disable: tokens.button[300],
                   },
                   text: {
                       ...tokens.text,
@@ -248,6 +254,7 @@ export const getThemeSettings = (mode) => ({
                       mapTaps: tokens.text[900],
                       dashboard: tokens.text[600],
                       close: tokens.text[500],
+                      blue: tokens.text[200],
                   },
                   background: {
                       default: tokens.background[100],
@@ -263,6 +270,7 @@ export const getThemeSettings = (mode) => ({
                       tapSelected: tokens.background[100],
                       mapTaps: tokens.background[200],
                       accordion: tokens.background[600],
+                      grayCard: tokens.background[200],
                   },
                   lnb: {
                       mobilelnb: tokens.lnb[100],
@@ -288,7 +296,7 @@ export const getThemeSettings = (mode) => ({
                   table: {
                       td: tokens.table[100],
                       border: tokens.table[200],
-                      borderTh: tokens.table[200],
+                      borderTh: tokens.table[900],
                       hover: tokens.table[300],
                       color: tokens.table[500],
                       viewTh: tokens.table[700],
@@ -355,6 +363,7 @@ export const getThemeSettings = (mode) => ({
                       close: tokens.color[900],
                       closeBg: tokens.color[1001],
                       swiper: tokens.color[100],
+                      gusest: tokens.color[30001],
                   },
                   button: {
                       ...tokens.button,
@@ -364,13 +373,14 @@ export const getThemeSettings = (mode) => ({
                       blue: tokens.button[900],
                       gray: tokens.button[1000],
                       lightgray: tokens.button[8000],
-                      white: tokens.button[100],
+                      white: tokens.button[8000],
                       map: tokens.button[4000],
                       lineblue: tokens.button[800],
                       moreBtn: tokens.button[9000],
                       lightblueBoder: tokens.button[700],
                       blueBoder: tokens.button[900],
                       lineblueBoder: tokens.button[100],
+                      disable: tokens.button[7000],
                   },
                   text: {
                       ...tokens.text,
@@ -384,6 +394,7 @@ export const getThemeSettings = (mode) => ({
                       mapTaps: tokens.text[400],
                       dashboard: tokens.text[100],
                       close: tokens.text[400],
+                      blue: tokens.text[300],
                   },
                   background: {
                       default: tokens.background.main,
@@ -399,6 +410,7 @@ export const getThemeSettings = (mode) => ({
                       tapSelected: tokens.background[900],
                       mapTaps: tokens.background[1000],
                       accordion: tokens.background[500],
+                      grayCard: tokens.background[800],
                   },
                   lnb: {
                       mobilelnb: tokens.lnb[200],

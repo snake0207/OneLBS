@@ -53,7 +53,7 @@ const ApprovalLineContent = ({ title, color, process, content }) => {
                         sx={{
                             fontSize: 18,
                             fontWeight: 600,
-                            color: 'tdxt.darkgray',
+                            color: 'text.darkgray',
                             wordBreak: 'break-word',
                             '@media (max-width:767px)': {
                                 fontSize: 12,

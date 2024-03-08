@@ -1,6 +1,7 @@
 import { Box, Table, TableBody, TableCell, TableHead, TableRow } from '@mui/material'
 
 import t from '#/common/libs/trans'
+import style from './style.module'
 
 import tableData from '#/components/permission/PermissionChangeModal/PermissionTable/table.json'
 import PermissionTableRow from '#/components/permission/PermissionChangeModal/PermissionTable/PermissionTableRow'
@@ -18,7 +19,7 @@ const PermissionTable = () => {
 
     return (
         <Box>
-            <Table>
+            <Table sx={style.tableBox}>
                 <TableHead>
                     <TableRow>
                         {permissionTableHeader.map((item) => (

@@ -4,6 +4,7 @@ import PermissionLabel from '#/components/permission/PermissionCard/PermissionLa
 import PermissionChangeModal from '#/components/permission/PermissionChangeModal'
 import MenuChangeModal from '#/components/permission/MenuChangeModal'
 import { usePermissionSearchActions } from '#/store/usePermissionSearchStore'
+import style from './style.module.js'
 import { usePermissionMenuActions } from '#/store/usePermissionMenuStore'
 
 import t from '#/common/libs/trans'
@@ -25,33 +26,53 @@ const PermissionCard = ({ permissionCardData }) => {
     }
 
     return (
-        <Box sx={{ bgcolor: 'white' }}>
-            <Box sx={{ display: 'flex', alignItems: 'center' }}>
-                <Box sx={{ display: 'flex' }}>
-                    <Typography>
-                        {t(`permission_name.${permissionCardData.roleName}`, 'permission')}
-                    </Typography>
-                    <Typography>{permissionCardData.roleName.toLowerCase()}</Typography>
+        <Box sx={style.cardBox}>
+            <Box>
+                <Box
+                    sx={{
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'space-between',
+                        mb: '14px',
+                    }}
+                >
+                    <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                        <Typography sx={style.Title}>
+                            {t(`permission_name.${permissionCardData.roleName}`, 'permission')}
+                        </Typography>
+                        <Typography sx={style.gusestBox}>
+                            {permissionCardData.roleName.toLowerCase()}
+                        </Typography>
+                    </Box>
+                    <Box sx={{ display: 'flex' }}>
+                        <Button
+                            variant="contained"
+                            onClick={handleClickMenuChangeModalOpen}
+                            sx={style.blueButton}
+                        >
+                            {t('menu_change', 'permission')}
+                        </Button>
+                        <Button
+                            variant="contained"
+                            onClick={handleClickPermissionChangeModalOpen}
+                            sx={style.darkBlueButton}
+                        >
+                            {t('permission_change', 'permission')}
+                        </Button>
+                    </Box>
                 </Box>
-                <Box sx={{ display: 'flex' }}>
-                    <Button variant="contained" onClick={handleClickMenuChangeModalOpen}>
-                        {t('menu_change', 'permission')}
-                    </Button>
-                    <Button variant="contained" onClick={handleClickPermissionChangeModalOpen}>
-                        {t('permission_change', 'permission')}
-                    </Button>
+                <Box sx={style.cardContBox}>
+                    {permissionCardData.permissionList.map((item) => (
+                        <PermissionLabel key={item.menu} permissionItem={item} />
+                    ))}
                 </Box>
             </Box>
-            <Box sx={{ display: 'flex', flexWrap: 'wrap' }}>
-                {permissionCardData.permissionList.map((item) => (
-                    <PermissionLabel key={item.menu} permissionItem={item} />
-                ))}
-            </Box>
-            <Typography>
+            <Typography sx={{ mt: '16px', fontSize: '14px', color: 'text.main' }}>
                 {t('total_number_of_people', 'permission', {
                     userCount: permissionCardData.userCount,
                 })}
             </Typography>
+
             <PermissionChangeModal
                 isOpen={isOpenPermissionChangeModal}
                 onClose={() => setIsOpenPermissionChangeModal(false)}

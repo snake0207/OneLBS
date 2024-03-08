@@ -1,4 +1,15 @@
 const style = {
+    title: {
+        fontSize: '20px',
+        fontWeight: 600,
+        color: 'text.darkgray',
+        marginBottom: '4px',
+        borderBottom: '1px solid',
+        borderBottomColor: 'border.gray',
+        '@media (max-width:1024px)': {
+            mt: '20px',
+        },
+    },
     cardBox: {
         width: '100%',
         boxShadow: 'none',

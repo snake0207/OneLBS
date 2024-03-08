@@ -4,7 +4,6 @@ const style = {
         margin: '10px',
         '@media (max-width:1024px)': {
             margin: '0',
-            pt: '15px',
         },
     },
     mapDetail: {

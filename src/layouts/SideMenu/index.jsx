@@ -274,7 +274,7 @@ const SideMenu = ({ open, toggleDrawer }) => {
                             <ChevronLeftIcon />
                         </IconButton>
                     </Toolbar>
-                    <List component="nav">{createMenuItems(data.menuTree, themeMode)}</List>
+                    <List component="nav">{createMenuItems(data, themeMode)}</List>
                 </VariantDrawer>
             </BrowserView>
             <MobileView>
@@ -288,7 +288,7 @@ const SideMenu = ({ open, toggleDrawer }) => {
                     </Box>
                     <UserInfo />
                     <List component="nav">
-                        {createMenuItems(filterMobileMenuItems(data.menuTree), themeMode)}
+                        {createMenuItems(filterMobileMenuItems(data), themeMode)}
                     </List>
                 </Drawer>
             </MobileView>

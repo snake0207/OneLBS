@@ -11,8 +11,10 @@ import ExpandMore from '@mui/icons-material/ExpandMore'
 import t from '#/common/libs/trans'
 import LinkRouter from '../LinkRouter'
 import useLayoutStore from '#/store/useLayoutStore'
+import { useNavigate } from 'react-router-dom'
 
-function ExpandMenuItem({ label, iconNode, items }) {
+function ExpandMenuItem({ label, to, iconNode, items }) {
+    const navigate = useNavigate()
     const [open, setOpen] = useState(false)
     const { setDrawer } = useLayoutStore()
 
@@ -23,7 +25,8 @@ function ExpandMenuItem({ label, iconNode, items }) {
     }, [open, setDrawer])
 
     const handleClick = () => {
-        setOpen(!open)
+        if (items.length > 0) setOpen(!open)
+        else navigate(to)
     }
 
     return (
@@ -47,8 +50,8 @@ function ExpandMenuItem({ label, iconNode, items }) {
                 }}
             >
                 <ListItemIcon>{iconNode}</ListItemIcon>
-                <ListItemText primary={label} />
-                {open ? <ExpandLess /> : <ExpandMore />}
+                <ListItemText primary={label} />{' '}
+                {items.length > 0 ? open ? <ExpandLess /> : <ExpandMore /> : <></>}
             </ListItemButton>
             <Collapse in={open} timeout="auto" unmountOnExit>
                 <List component="div" disablePadding>

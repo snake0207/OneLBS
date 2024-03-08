@@ -17,6 +17,6 @@ export const API_PATH = {
         approver: '/approver',
         gpss_searh: '/adminmgmt/api/v1/search/unified-search',
         gpss_detail: '/adminmgmt/api/v1/search/detail-search',
-        gpss_suggestion: '/adminmgmt/api/v1/search/suggest',
+        gpss_suggestion: '/adminmgmt/api/v1/search/suggest?',
     },
 }

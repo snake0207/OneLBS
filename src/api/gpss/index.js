@@ -1,5 +1,5 @@
-import { getAPI, postAPI } from '#/api/axios.js'
-import { API_PATH } from '#/contents/api.js'
+import { getAPI, postAPI } from '#/api/axios'
+import { API_PATH } from '#/contents/api'
 
 // 검토자 조회
 const getReviewer = (data) => {
@@ -13,7 +13,11 @@ const getApprover = (data) => {
 
 // gpss 추천어 검색
 const getGpssSuggestions = (data) => {
-    return getAPI({ endPoint: API_PATH.gpss.gpss_suggestion, data })
+    const queryParams = { ...data }
+    delete queryParams.category
+    return getAPI({
+        endPoint: API_PATH.gpss.gpss_suggestion + new URLSearchParams(queryParams).toString(),
+    })
 }
 
 // gpss 통합검색

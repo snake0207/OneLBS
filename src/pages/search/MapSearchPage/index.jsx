@@ -30,6 +30,10 @@ function MapSearchPage() {
     const [isNewPoiCreateOpen, setIsNewPoiCreateOpen] = useState(false)
     // mobile search toggle
     const [showSearch, setShowSearch] = useState(false)
+    // 추천어 검색
+    const { data: suggestionsData, refetch: getSuggstions } = useGetGpssSuggestions(
+        searchFormik.values,
+    )
 
     // mobile detail navigate
     const handlePOISelected = (id) => {

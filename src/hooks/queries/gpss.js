@@ -1,6 +1,7 @@
 import gpss from '#/api/gpss'
-import { useInfiniteQuery, useMutation, useQuery } from '@tanstack/react-query'
-import { QUERY_KEYS } from '#/contents/queryKeys.js'
+import { useInfiniteQuery, useQuery } from '@tanstack/react-query'
+import { QUERY_KEYS } from '#/contents/queryKeys'
+
 export const useGetReviewer = (userName) => {
     const { data, refetch } = useQuery({
         queryKey: [QUERY_KEYS.gpss.reviewer, userName],
@@ -22,8 +23,8 @@ export const useGetApprover = (userName) => {
 export const useGetGpssSuggestions = (searchParam) => {
     const { data, refetch } = useQuery({
         queryKey: [QUERY_KEYS.gpss.suggestion, searchParam.keyword],
-        queryFn: gpss.getGpssSuggestions,
-        enabled: false,
+        queryFn: () => gpss.getGpssSuggestions(searchParam),
+        enabled: !(searchParam.keyword.length === 0),
         staleTime: 5 * 1000,
     })
     return { data, refetch }

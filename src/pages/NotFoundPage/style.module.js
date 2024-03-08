@@ -18,23 +18,27 @@ const style = {
         p: '10px 20px',
         color: (theme) =>
             theme.palette.mode === 'light' ? theme.palette.color[1000] : theme.palette.color[700],
-        backgroundColor: 'color.grayBox',
         borderRadius: '4px',
+        border: '1px solid',
+        borderColor: 'border.lightgray',
         '@media (max-width:1024px)': {
             width: 'calc(100% - 22px)',
         },
     },
-    button: {
-        width: '100px',
+    darkBlueButton: {
+        width: '110px',
         height: '30px',
         mt: '30px',
         fontSize: '13px',
-        color: 'text.main',
         borderRadius: '4px',
         border: '1px solid',
-        borderColor: 'color.grayBorder',
-        backgroundColor: 'transparent',
+        borderColor: 'button.light',
+        backgroundColor: 'button.light',
         boxShadow: 'none',
+        '&:hover': {
+            backgroundColor: 'button.light',
+            boxShadow: 'none',
+        },
     },
 }
 

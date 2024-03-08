@@ -8,9 +8,8 @@ const PermissionDescription = () => {
     return (
         <Box sx={style.descriptionBox}>
             <Typography sx={style.Title}>{t('permission', 'permission')}</Typography>
-            {Object.keys(labelColor).map((item) => (
+            {Object.keys(permissionLabelColor).map((item) => (
                 <Box key={item} sx={style.label}>
-
                     <Box
                         sx={{
                             width: 8,

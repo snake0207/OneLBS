@@ -45,6 +45,10 @@ const postDeferChange = () => {
     return postAPI({ endPoint: API_PATH.auth.defer_change })
 }
 
+const getAskUserInfo = () => {
+    return getAPI({ endPoint: API_PATH.auth.ask_user_info })
+}
+
 export default {
     postLogin,
     postJoin,
@@ -57,4 +61,5 @@ export default {
     postLogout,
     postPasswordChange,
     postDeferChange,
+    getAskUserInfo,
 }

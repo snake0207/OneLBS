@@ -72,3 +72,12 @@ export const usePostDeferChange = () => {
         mutationFn: auth.postDeferChange,
     })
 }
+
+export const useGetAskUserInfo = () => {
+    const { data } = useQuery({
+        queryFn: auth.getAskUserInfo,
+        queryKey: [QUERY_KEYS.auth.getAskUserInfo],
+    })
+
+    return { data }
+}

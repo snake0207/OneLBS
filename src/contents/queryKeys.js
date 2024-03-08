@@ -8,5 +8,6 @@ export const QUERY_KEYS = {
     },
     auth: {
         getIp: 'get-ip',
+        getAskUserInfo: 'get-ask-user-info',
     },
 }

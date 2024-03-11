@@ -11,7 +11,7 @@ import poiDetailData from '#/mock/data/poiDetailData.json'
 import Headline from '#/components/approval/Detail/Headline/index.jsx'
 import Comment from '#/components/approval/Detail/Comment/index.jsx'
 import { usePopupActions } from '#/store/usePopupStore.js'
-import { detailResponseDataMapper } from '#/pages/ApprovalHistoryPage/mapper.js'
+import { detailResponseDataMapper } from '#/pages/ApprovalHistoryPage/responseMapper.js'
 import InfoTab from '#/components/approval/Detail/InfoTab/index.jsx'
 import { getUserTypeFromPath } from '#/common/libs/approvalParser.js'
 import EvChargingInfo from '#/components/poiDetail/CategoryInfo/EvChargingInfo/index.jsx'
@@ -24,11 +24,13 @@ import ApprovalSelect from '#/components/poiDetail/ApprovalSelect/index.jsx'
 import { isBrowser } from 'react-device-detect'
 import Divider from '@mui/material/Divider'
 import DetailHistoryTable from '#/components/approval/Detail/DetailHistoryTable/index.jsx'
+import { useGetHistoryDetail } from '#/hooks/queries/approval.js'
 
 const ApprovalHistoryDetailPage = () => {
     const params = useParams()
     const popupActions = usePopupActions()
     const userType = getUserTypeFromPath(params.type)
+    const detailData = useGetHistoryDetail(params.id)?.data
     const parsedData = detailResponseDataMapper(poiDetailData)
     const [selectedReviewer, setSelectedReviewer] = useState(null)
     const [selectedApprover, setSelectedApprover] = useState(null)
@@ -40,8 +42,7 @@ const ApprovalHistoryDetailPage = () => {
                 return {
                     evChargingInfo: {
                         brand: data.evChargingInfo?.brand || '',
-                        parkingFee: data.evChargingInfo?.parkingFee || '',
-                        openingHours: data.evChargingInfo?.openingHours || [],
+                        parkingFee: data.evChargingInfo?.parkingFee ?? '',
                         chargers: data.evChargingInfo?.chargers || [],
                     },
                 }
@@ -50,7 +51,6 @@ const ApprovalHistoryDetailPage = () => {
                     fuelInfo: {
                         brand: data.fuelInfo.brand || '',
                         price: data.fuelInfo.price || [],
-                        openingHours: data.fuelInfo.openingHours || [],
                     },
                 }
             case 'parking':
@@ -59,7 +59,6 @@ const ApprovalHistoryDetailPage = () => {
                         brand: data.parkingInfo.brand || '',
                         type: data.parkingInfo.type || '',
                         price: data.parkingInfo.price || [],
-                        openingHours: data.parkingInfo.openingHours || [],
                         congestion: data.parkingInfo.congestion || '',
                     },
                 }
@@ -67,7 +66,6 @@ const ApprovalHistoryDetailPage = () => {
                 return {
                     h2ChargingInfo: {
                         brand: data.h2ChargingInfo.brand || '',
-                        openingHours: data.h2ChargingInfo.openingHours || [],
                         chargers: data.h2ChargingInfo.chargers || [],
                     },
                 }

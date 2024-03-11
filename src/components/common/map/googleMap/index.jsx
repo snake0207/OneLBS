@@ -10,7 +10,7 @@ import { BrowserView, isBrowser } from 'react-device-detect'
 import {
     gpssDetailResponseDataMapper,
     gpssListResponseDataMapper,
-} from '#/pages/ApprovalHistoryPage/mapper.js'
+} from '#/pages/ApprovalHistoryPage/responseMapper.js'
 
 const mapStyle = {
     width: '100%',

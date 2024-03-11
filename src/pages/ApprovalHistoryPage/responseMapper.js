@@ -108,40 +108,40 @@ const dealerInfo = (data) => {
  * @returns {{approvalInfo: *, poiId: *, category: *, status: string, basicInfo: {address: *, position: *, title: *}, evChargerInfo?: *, fuelInfo?: *, parkingInfo?: *, h2ChargingInfo?: *, dealerInfo?: *}}
  */
 const detailResponseDataMapper = (res) => {
-    const data = res.data.result[0]
+    const data = res?.data?.result[0]
     const basicData = {
         status: 'rejected_approval',
         // category: 'h2Charging',
         // status: res.data.status, // service에서 보내줄 결재이력 상태값
-        category: parseCategory(data),
+        category: parseCategory(data) || '',
         approvalInfo: {
-            requestComment: res.data.requestComment,
-            reviewerComment: res.data.reviewerComment,
-            approverComment: res.data.managerComment,
+            requestComment: res?.data.requestComment || '',
+            reviewerComment: res?.data.reviewerComment || '',
+            approverComment: res?.data.managerComment || '',
             approvalLineContents: {
                 requester: {
-                    team: res.data.userTeam,
-                    name: res.data.userName,
-                    date: res.data.requestDtString,
+                    team: res?.data.userTeam || '',
+                    name: res?.data.userName || '',
+                    date: res?.data.requestDtString || '',
                 },
                 reviewer: {
-                    team: res.data.reviewerTeam,
-                    name: res.data.reviewerName,
-                    date: res.data.reviewDtString,
+                    team: res?.data.reviewerTeam || '',
+                    name: res?.data.reviewerName || '',
+                    date: res?.data.reviewDtString || '',
                 },
                 approver: {
-                    team: res.data.managerTeam,
-                    name: res.data.managerName,
-                    date: res.data.manageDtString,
+                    team: res?.data.managerTeam || '',
+                    name: res?.data.managerName || '',
+                    date: res?.data.manageDtString || '',
                 },
             },
-            historyList: res.data.historyList,
+            historyList: res?.data.historyList || [],
         },
-        poiId: data.poiId,
+        poiId: data?.poiId || '',
         basicInfo: {
-            title: data.title,
-            address: data.address,
-            position: data.position,
+            title: data?.title || '',
+            address: data?.address || '',
+            position: data?.position || {},
         },
     }
     return setCategoryData(basicData, data)

@@ -6,7 +6,7 @@ import t from '#/common/libs/trans.js'
 import TopIcon from '#/assets/topIcon.svg'
 import Button from '@mui/material/Button'
 import { isBrowser } from 'react-device-detect'
-import { gpssListResponseDataMapper } from '#/pages/ApprovalHistoryPage/mapper.js'
+import { gpssListResponseDataMapper } from '#/pages/ApprovalHistoryPage/responseMapper.js'
 
 const MapSearchList = ({
     searchResultArr,

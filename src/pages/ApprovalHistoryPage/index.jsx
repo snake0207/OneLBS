@@ -18,7 +18,7 @@ import useLayoutStore from '#/store/useLayoutStore'
 
 import style from './style.module'
 import { useGetHistoryList } from '#/hooks/queries/approval.js'
-import { countByTypeMapper } from '#/pages/ApprovalHistoryPage/mapper.js'
+import { countByTypeMapper } from '#/pages/ApprovalHistoryPage/responseMapper.js'
 
 const ApprovalHistoryPage = () => {
     // TODO: 임시상태값 - temporary, request, reviewed, approved, rejected_review, rejected_approval,

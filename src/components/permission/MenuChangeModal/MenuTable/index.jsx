@@ -56,8 +56,8 @@ const MenuTable = () => {
                 </TableRow>
             </TableHead>
             <TableBody>
-                {tableData.list.map((item) => (
-                    <MenuTableRow key={item.menuOrder} menuList={item} />
+                {tableData.map((item) => (
+                    <MenuTableRow key={item.number} menuList={item} />
                 ))}
             </TableBody>
         </Table>

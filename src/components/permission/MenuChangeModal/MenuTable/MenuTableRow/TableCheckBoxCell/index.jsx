@@ -13,6 +13,7 @@ const TableCheckBoxCell = ({ menuId, approvalYn, createYn, readYn, updateYn, del
         },
         onSubmit: (form) => {},
     })
+
     return (
         <>
             <TableCell align="center">

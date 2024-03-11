@@ -7,7 +7,7 @@ const MenuTableRow = ({ menuList }) => {
     return (
         <>
             <TableRow>
-                <TableCell rowSpan={menuList.children.length}>{menuList.menuOrder}</TableCell>
+                <TableCell rowSpan={menuList.children.length}>{menuList.number}</TableCell>
                 <TableCell rowSpan={menuList.children.length}>
                     {t(`menu.${menuList.label}`, 'permission')}
                 </TableCell>

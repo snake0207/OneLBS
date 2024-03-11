@@ -170,18 +170,24 @@ const gpssDetailResponseDataMapper = (res) => {
  * gpss 리스트데이터 매퍼
  */
 const gpssListResponseDataMapper = (res) => {
-    if (!!res?.data?.result === false) return null
-    const dataArr = res.data.result
-    return dataArr.map((data) => ({
-        poiId: data.poiId,
-        cpType: parsePoiProviderType(data.poiId),
-        category: parseCategory(data),
-        title: data.title,
-        address: data.address,
-        position: data.position,
-        country: data.country,
-        progress: data.progress ?? null,
-    }))
+    if (!!res?.pages === false) return null
+    const dataArr = res.pages
+    let poiDataArr = []
+    dataArr.map((page) =>
+        page.data.data.data.result.map((poi) =>
+            poiDataArr.push({
+                poiId: poi.poiId,
+                cpType: parsePoiProviderType(poi.poiId),
+                category: parseCategory(poi),
+                title: poi.title,
+                address: poi.address,
+                position: poi.position,
+                country: poi.country,
+                progress: poi.progress ?? null,
+            }),
+        ),
+    )
+    return poiDataArr
 }
 
 const setCategoryData = (basicData, originData) => {

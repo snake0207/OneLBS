@@ -199,4 +199,21 @@ const setCategoryData = (basicData, originData) => {
     }
 }
 
-export { detailResponseDataMapper, gpssDetailResponseDataMapper, gpssListResponseDataMapper }
+const countByTypeMapper = (total, counts) => {
+    return {
+        total,
+        temporary: counts.DRAFT,
+        request: counts.REVIEW_REQUESTED,
+        reviewed: counts.REVIEW_COMPLETED,
+        approved: counts.APPROVAL_COMPLETED,
+        rejected_review: counts.REVIEW_REJECTED,
+        rejected_approval: counts.APPROVAL_REJECTED,
+    }
+}
+
+export {
+    detailResponseDataMapper,
+    gpssDetailResponseDataMapper,
+    gpssListResponseDataMapper,
+    countByTypeMapper,
+}

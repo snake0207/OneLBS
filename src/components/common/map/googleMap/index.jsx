@@ -41,7 +41,7 @@ const GoogleMapComponent = ({
     setSelectedPoi,
 }) => {
     const [map, setMap] = useState(null)
-    const { setCoordinates } = useMapActions()
+    const { setCoordinates, setMapBounds } = useMapActions()
     // 왼쪽 클릭
     const [clickedCoord, setClickedCoord] = useState({
         lat: null,
@@ -80,10 +80,12 @@ const GoogleMapComponent = ({
     const getMapBounds = () => {
         if (!map) return
         const bounds = map.getBounds()
-        console.log(bounds.getNorthEast().lat())
-        console.log(bounds.getNorthEast().lng())
-        console.log(bounds.getSouthWest().lat())
-        console.log(bounds.getSouthWest().lng())
+        setMapBounds(
+            bounds.getSouthWest().lat(),
+            bounds.getSouthWest().lng(),
+            bounds.getNorthEast().lat(),
+            bounds.getNorthEast().lng(),
+        )
     }
 
     return (

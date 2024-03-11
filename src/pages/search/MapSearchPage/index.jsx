@@ -26,7 +26,7 @@ import { useDebounce } from '#/hooks/useDebounce.js'
 function MapSearchPage() {
     const navigate = useNavigate()
     const { themeMode } = useLayoutStore()
-    const { actions: mapStoreActions, lat, lon } = useMapStore()
+    const { actions: mapStoreActions, lat, lon, seLat, seLon, neLat, neLon } = useMapStore()
     const searchFormik = useFormik({
         initialValues: {
             country: [],
@@ -40,11 +40,13 @@ function MapSearchPage() {
         validationSchema: mapSearchSchema,
         onSubmit: (form) => {
             console.log(form)
+            console.log('mapBound =>', seLat, seLon, neLat, neLon)
         },
     })
     // 위경도 좌표 초기화
     useEffect(() => {
         mapStoreActions.resetCoordinates()
+        mapStoreActions.resetMapBounds()
     }, [])
     useEffect(() => {
         searchFormik.setFieldValue('lat', lat)

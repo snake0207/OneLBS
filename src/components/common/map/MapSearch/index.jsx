@@ -269,7 +269,6 @@ const MapSearch = ({ formik }) => {
     const [isKeywordDisabled, setIsKeywordDisabled] = useState(true)
     useEffect(() => {
         // 국가 위/경도가 모두 입력되면 키워드 입력 가능
-        // formik errors가 없으면 키워드 입력 가능
         if (
             formik.values.lat.length === 0 ||
             formik.values.lon.length === 0 ||
@@ -280,6 +279,14 @@ const MapSearch = ({ formik }) => {
         }
         setIsKeywordDisabled(false)
     }, [formik.values])
+
+    useEffect(() => {
+        if (formik.values.category.length !== 0) formik.setFieldValue('keyword', '')
+    }, [formik.values.category])
+    useEffect(() => {
+        if (formik.values.keyword.length !== 0) formik.setFieldValue('category', [])
+    }, [formik.values.keyword])
+
     return (
         <Box
             sx={{

@@ -56,7 +56,7 @@ const MapSearchList = ({
                 margin: '10px',
                 backgroundColor: 'dialog.main',
                 borderRadius: '8px',
-                minHeight: 'calc(100vh - 440px)',
+                minHeight: isResultNon ? '130px' : 'calc(100vh - 440px)',
                 maxHeight: isBrowser ? '480px' : 'calc(100vh - 620px)',
                 display: isResultNon ? 'flex' : '',
                 justifyContent: isResultNon ? 'center' : '',

@@ -1,6 +1,7 @@
 {
     "menu_change": "메뉴 변경",
     "permission_change": "권한 변경",
+    "permission_list": "권한 목록",
     "total_number_of_people": "총 {{userCount}}명",
     "email": "이메일",
     "name": "이름",
@@ -24,8 +25,8 @@
         "profile": "내 정보",
         "search_management": "검색 관리",
         "map": "지도",
-        "search_map": "검색 지도",
-        "poi_map": "POI 지도",
+        "search_map": "검색 관리",
+        "poi_map": "POI 조회",
         "poi_search": "POI 조회",
         "permit_history": "결제 이력관리",
         "all_history": "전체 이력 조회",

@@ -12,4 +12,7 @@ export const QUERY_KEYS = {
     approval: {
         getHistoryList: 'get_history_list',
     },
+    permission: {
+        roleMenuPermission: 'role_menu_permission',
+    },
 }

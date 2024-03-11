@@ -151,8 +151,8 @@ const detailResponseDataMapper = (res) => {
  * gpss 상세데이터 매퍼
  */
 const gpssDetailResponseDataMapper = (res) => {
-    if (!!res?.data?.result === false) return null
-    const data = res.data.result[0]
+    if (!!res?.data?.data?.data?.result === false) return null
+    const data = res.data.data.data.result[0]
     const basicData = {
         category: parseCategory(data),
         cpType: parsePoiProviderType(data.poiId),
@@ -202,6 +202,8 @@ const setCategoryData = (basicData, originData) => {
             return { ...basicData, h2ChargingInfo: h2ChargingInfo(originData.h2Charging) }
         case 'dealerPoi':
             return { ...basicData, dealerPoiInfo: dealerInfo(originData.dealerPoi) }
+        default:
+            return basicData
     }
 }
 

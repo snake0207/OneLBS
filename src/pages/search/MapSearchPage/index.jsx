@@ -19,14 +19,25 @@ import useLayoutStore from '#/store/useLayoutStore'
 import SwipeMapSearchList from '#/components/common/map/searchList/SwipeMapSearchList/index.jsx'
 import { useFormik } from 'formik'
 import { mapSearchSchema } from '#/contents/validationSchema.js'
-import { useGetGpssSuggestions, usePostGpssSearch } from '#/hooks/queries/gpss.js'
+import {
+    useGetGpssSuggestions,
+    usePostGpssDetail,
+    usePostGpssSearch,
+} from '#/hooks/queries/gpss.js'
 import useMapStore from '#/store/useMapStore.js'
 import { useDebounce } from '#/hooks/useDebounce.js'
 
 function MapSearchPage() {
     const navigate = useNavigate()
     const { themeMode } = useLayoutStore()
+    // 선택한 poi
+    const [selectedPoi, setSelectedPoi] = useState(null)
+    // 신규 poi 생성 컴포넌트 표출
+    const [isNewPoiCreateOpen, setIsNewPoiCreateOpen] = useState(false)
+    // mobile search toggle
+    const [showSearch, setShowSearch] = useState(false)
     const { actions: mapStoreActions, lat, lon, seLat, seLon, neLat, neLon } = useMapStore()
+
     const searchFormik = useFormik({
         initialValues: {
             country: [],
@@ -52,10 +63,20 @@ function MapSearchPage() {
         refetch: fetchPoiList,
         fetchNextPage,
     } = usePostGpssSearch(searchFormik.values)
+    // poi 상세 검색
+    const { data: poiDetailData, refetch: fetchPoiDetail } = usePostGpssDetail({
+        ...searchFormik.values,
+        poiId: [selectedPoi],
+    })
 
+    // poi 리스트 검색
     const onHandleSubmitSearch = () => {
         fetchPoiList()
     }
+    // poi 상세 검색
+    useEffect(() => {
+        if (selectedPoi) fetchPoiDetail()
+    }, [selectedPoi])
 
     // 위경도 좌표 초기화
     useEffect(() => {
@@ -69,16 +90,6 @@ function MapSearchPage() {
     useEffect(() => {
         searchFormik.setFieldValue('polygonFilter', [seLat, seLon, neLat, neLon])
     }, [seLat])
-
-    // 검색 결과
-    const [searchResultArr, setSearchResultArr] = useState([])
-    // TODO 장소 상세 정보 호출 api 연동
-    // 선택한 poi
-    const [selectedPoi, setSelectedPoi] = useState(null)
-    // 신규 poi 생성 컴포넌트 표출
-    const [isNewPoiCreateOpen, setIsNewPoiCreateOpen] = useState(false)
-    // mobile search toggle
-    const [showSearch, setShowSearch] = useState(false)
 
     // mobile detail navigate
     const handlePOISelected = (id) => {

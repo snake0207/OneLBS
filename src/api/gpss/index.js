@@ -36,8 +36,13 @@ const postGpssSearch = (data) => {
 
 // gpss 상세검색
 const postGpssDetail = (data) => {
-    console.log('search detail param =>', data)
-    return postAPI({ endPoint: API_PATH.gpss.gpss_detail, data })
+    const reqestParam = { ...data }
+    delete reqestParam.lat
+    delete reqestParam.lon
+    delete reqestParam.category
+    delete reqestParam.keyword
+    delete reqestParam.polygonFilter
+    return postAPI({ endPoint: API_PATH.gpss.gpss_detail, data: { ...reqestParam } })
 }
 
 export default {

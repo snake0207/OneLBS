@@ -46,10 +46,10 @@ export const usePostGpssSearch = (requestParam) => {
     }
 }
 
-export const usePostGpssDetail = (form) => {
+export const usePostGpssDetail = (requestParam) => {
     const { data, refetch } = useQuery({
-        queryKey: [QUERY_KEYS.gpss.detail, form.poiId],
-        queryFn: gpss.postGpssDetail,
+        queryKey: [QUERY_KEYS.gpss.detail, requestParam.poiId],
+        queryFn: () => gpss.postGpssDetail(requestParam),
         enabled: false,
     })
     return { data, refetch }

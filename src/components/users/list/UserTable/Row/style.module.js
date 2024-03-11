@@ -20,12 +20,12 @@ const style = {
         height: '34px',
         fontWeight: 500,
         p: 0,
-        color: '#00418D',
+        color: 'text.lineblue',
         border: '1px solid',
-        borderColor: 'button.whiteBoder',
-        backgroundColor: 'white',
+        borderColor: 'button.lineblue',
+        backgroundColor: 'button.white',
         '&:hover': {
-            backgroundColor: 'white',
+            backgroundColor: 'button.white',
         },
     },
     lightButton: {

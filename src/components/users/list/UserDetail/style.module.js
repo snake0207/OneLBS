@@ -121,11 +121,12 @@ const style = {
         width: '30%',
         height: 36,
         p: 0,
-        color: '#0A5CBA',
-        border: '1px solid #0A5CBA',
-        backgroundColor: 'white',
+        color: 'text.lineblue',
+        border: '1px solid',
+        borderColor: 'button.lineblue',
+        backgroundColor: 'button.white',
         '&:hover': {
-            backgroundColor: 'white',
+            backgroundColor: 'button.white',
         },
     },
 }

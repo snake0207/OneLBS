@@ -6,6 +6,7 @@ export const useGetRoleMenuPermission = () => {
     const { data } = useQuery({
         queryFn: permission.getRoleMenuPermission,
         queryKey: [QUERY_KEYS.permission.roleMenuPermission],
+        select: (data) => data.data.data,
     })
 
     return { data }

@@ -65,7 +65,7 @@ function Header({ toggleDrawer }) {
     }
 
     return (
-        <AppBar position="absolute" sx={style.header}>
+        <AppBar sx={style.header}>
             <Container maxWidth="xl">
                 <Toolbar disableGutters>
                     <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>

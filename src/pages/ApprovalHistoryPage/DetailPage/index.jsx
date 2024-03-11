@@ -112,20 +112,15 @@ const ApprovalHistoryDetailPage = () => {
         else {
             // TODO: 기능구분
             console.log('VALUES >> ', formik.values)
-            popupActions.showPopup(
-                'alert',
-                t(`confirmed.${action.split('_')[0].toLowerCase()}`, 'approval'),
-            )
+            popupActions.showPopup('alert', t(`confirmed.${action}`, 'approval'))
             formik.handleSubmit
         }
     }
 
     const handleShowConfirmPopup = (action, id) => {
         console.log(action, t(`modal.${action}`, 'approval'), id)
-        popupActions.showPopup(
-            'confirm',
-            t(`modal.${action.split('_')[0].toLowerCase()}`, 'approval'),
-            () => openAlertPopup(action),
+        popupActions.showPopup('confirm', t(`modal.${action}`, 'approval'), () =>
+            openAlertPopup(action),
         )
     }
 

@@ -170,7 +170,7 @@ const gpssDetailResponseDataMapper = (res) => {
  * gpss 리스트데이터 매퍼
  */
 const gpssListResponseDataMapper = (res) => {
-    if (!!res?.pages === false) return null
+    if (!!res?.pages[0]?.data?.data?.data?.result === false) return null
     const dataArr = res.pages
     let poiDataArr = []
     dataArr.map((page) =>

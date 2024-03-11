@@ -1,4 +1,4 @@
-import { useQuery } from '@tanstack/react-query'
+import { useMutation, useQuery } from '@tanstack/react-query'
 import { QUERY_KEYS } from '#/contents/queryKeys'
 import usePermissionSearchStore from '#/store/usePermissionSearchStore'
 import permission from '#/api/permission'
@@ -23,4 +23,10 @@ export const useGetRoleChangeUserList = () => {
     })
 
     return { data }
+}
+
+export const usePutTargetUserIdRole = () => {
+    return useMutation({
+        mutationFn: permission.putTargetUserIdRole,
+    })
 }

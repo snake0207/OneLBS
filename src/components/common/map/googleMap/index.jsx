@@ -62,8 +62,23 @@ const GoogleMapComponent = ({
         if (poiArr.length === 0) return
         const { lat, lon } = poiArr[0].position.center
         map.panTo({ lat: lat, lng: lon })
-        map.setZoom(15)
+        map.setZoom(19)
     }, [selectedPoi])
+
+    // 구글 검색 결과를 지도 bound로 설정
+    useEffect(() => {
+        if (parsedPoiSearchArr && map) {
+            const bounds = new window.google.maps.LatLngBounds()
+            const latLngArr = parsedPoiSearchArr.map((it) => ({
+                lat: it.position.center.lat,
+                lng: it.position.center.lon,
+            }))
+            latLngArr.forEach((it) => {
+                bounds.extend(it)
+            })
+            map.fitBounds(bounds)
+        }
+    }, [searchResultArr, map])
 
     // 구글지도 라이브러리 init
     const { isLoaded } = useJsApiLoader({

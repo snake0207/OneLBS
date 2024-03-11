@@ -1,5 +1,4 @@
 import { Box, Button, Typography } from '@mui/material'
-import RefreshIcon from '@mui/icons-material/Refresh'
 import { useFormik } from 'formik'
 import TextInput from '#/components/common/input/TextInput'
 import Select from '#/components/common/Select'
@@ -7,15 +6,16 @@ import {
     usePermissionSearchActions,
     usePermissionSearchRoleIdState,
 } from '#/store/usePermissionSearchStore'
-import ResetIcon from '#/assets/resetIcon.svg'
-import style from './style.module'
 
 import t from '#/common/libs/trans'
+
+import style from './style.module'
+import ResetIcon from '#/assets/resetIcon.svg'
 
 const PermissionTableSearch = () => {
     const roleId = usePermissionSearchRoleIdState()
     const { resetPermissionSearchStore } = usePermissionSearchActions()
-
+    const { setPermissionSearchStore } = usePermissionSearchActions()
     const formik = useFormik({
         initialValues: {
             email: '',
@@ -23,7 +23,7 @@ const PermissionTableSearch = () => {
             roleId,
         },
         onSubmit: (form) => {
-            console.log(form)
+            setPermissionSearchStore(form)
         },
     })
 

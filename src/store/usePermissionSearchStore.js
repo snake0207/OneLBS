@@ -4,13 +4,13 @@ const initialState = {
     page: 1,
     email: '',
     name: '',
-    roleId: '0',
+    roleId: '25',
 }
 
 const usePermissionSearchStore = create((set) => ({
     ...initialState,
     actions: {
-        setPermissionSearchStore: (page, email, name, roleId) => set({ page, email, name, roleId }),
+        setPermissionSearchStore: ({ email, name, roleId }) => set({ email, name, roleId }),
         setPermissionSearchPage: (page) => set({ page }),
         setPermissionSearchRoleId: (roleId) => set({ roleId }),
         resetPermissionSearchStore: () => set(initialState),

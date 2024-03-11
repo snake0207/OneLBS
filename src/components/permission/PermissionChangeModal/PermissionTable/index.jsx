@@ -1,10 +1,12 @@
 import { Box, Table, TableBody, TableCell, TableHead, TableRow } from '@mui/material'
+import PermissionTableRow from '#/components/permission/PermissionChangeModal/PermissionTable/PermissionTableRow'
+import CommonPagination from '#/components/common/pagination/CommonPagination'
+import { useGetRoleChangeUserList } from '#/hooks/queries/permission'
 
 import t from '#/common/libs/trans'
 import style from './style.module'
 
-import tableData from '#/components/permission/PermissionChangeModal/PermissionTable/table.json'
-import PermissionTableRow from '#/components/permission/PermissionChangeModal/PermissionTable/PermissionTableRow'
+import { usePermissionSearchActions } from '#/store/usePermissionSearchStore'
 
 const PermissionTable = () => {
     const permissionTableHeader = [
@@ -17,6 +19,13 @@ const PermissionTable = () => {
         { field: 'permission', headerName: t('permission', 'permission') },
     ]
 
+    const { data } = useGetRoleChangeUserList()
+    const { setPermissionSearchPage } = usePermissionSearchActions()
+
+    const handleChangePage = (page) => {
+        setPermissionSearchPage(page)
+    }
+
     return (
         <Box>
             <Table sx={style.tableBox}>
@@ -28,7 +37,7 @@ const PermissionTable = () => {
                     </TableRow>
                 </TableHead>
                 <TableBody>
-                    {tableData.list.map((item) => (
+                    {data?.list.map((item) => (
                         <PermissionTableRow
                             key={item.number}
                             number={item.number}
@@ -43,6 +52,10 @@ const PermissionTable = () => {
                     ))}
                 </TableBody>
             </Table>
+            <CommonPagination
+                dataLength={data?.totalPages}
+                onChangePageFunction={handleChangePage}
+            />
         </Box>
     )
 }

@@ -17,7 +17,8 @@ const MainLayout = () => {
                     bgcolor: 'background.web',
                     flexGrow: 1,
                     overflow: 'auto',
-                    height: '100vh',
+                    height: 'auto',
+                    minHeight: '100vh',
                     '@media (max-width:1024px)': {
                         bgcolor: pathname === '/' ? 'background.mainMobile' : 'background.mobile',
                     },
@@ -28,7 +29,7 @@ const MainLayout = () => {
                     sx={{
                         ml: 0,
                         mt: '50px',
-                        mb: 1.5,
+                        mb: '10px',
                         pt: '56px',
                         pl: '10px !important',
                         pr: '10px !important',

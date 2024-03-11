@@ -29,8 +29,9 @@ const style = {
         },
     },
     lightButton: {
-        width: '45px',
+        width: '40px',
         height: '34px',
+        minWidth: '40px',
         fontWeight: 400,
         p: '0 8px',
         ml: '4px',

@@ -1,5 +1,6 @@
 const style = {
     header: {
+        position: 'fixed',
         backgroundColor: 'background.mobile',
         boxShadow: 'none',
         borderBottom: '1px solid',

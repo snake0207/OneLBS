@@ -1,10 +1,8 @@
-import { Accordion, AccordionDetails, AccordionSummary, Box, Typography, Icon } from '@mui/material'
+import { Accordion, AccordionDetails, AccordionSummary, Box, Icon, Typography } from '@mui/material'
 import t from '#/common/libs/trans.js'
 import Divider from '@mui/material/Divider'
 import { useState } from 'react'
 import PointBlueParkingIcon from '#/assets/pointBlueParkingIcon.svg'
-import LanguageIcon from '#/assets/languagesIcon.svg'
-import LanguageIconDark from '#/assets/languagesIconDark.svg'
 import GpsIcon from '#/assets/gpsIcon.svg'
 import GpsIconDark from '#/assets/gpsIconDark.svg'
 import StstesIcon from '#/assets/ststesIcon.svg'
@@ -52,6 +50,7 @@ const BasicInfo = ({ formik, poiData, tabSelected, isEditable }) => {
     }
 
     const { themeMode } = useLayoutStore()
+    const { title, address, position } = poiData
 
     return (
         <Box>
@@ -71,7 +70,7 @@ const BasicInfo = ({ formik, poiData, tabSelected, isEditable }) => {
                             </Box>
                             <Box>
                                 <Typography variant={'h6'} sx={style.title}>
-                                    {poiData.title}
+                                    {title}
                                 </Typography>
                             </Box>
                             {isEditable && (
@@ -111,444 +110,480 @@ const BasicInfo = ({ formik, poiData, tabSelected, isEditable }) => {
                         )}
                     </Box>
                     <Box sx={{ marginTop: '8px', marginBottom: '0px' }}>
-                        <Box>
-                            <Box
-                                sx={{
-                                    display: 'flex',
-                                    alignItems: 'center',
-                                    gap: '6px',
-                                    marginBottom: '4px',
-                                }}
-                            >
-                                <Box sx={{ paddingTop: '5px' }}>
-                                    {themeMode === 'light' ? (
-                                        <img src={StstesIcon} />
-                                    ) : (
-                                        <img src={StstesIconDark} />
+                        {address && (
+                            <Box>
+                                <Box
+                                    sx={{
+                                        display: 'flex',
+                                        alignItems: 'center',
+                                        gap: '6px',
+                                        marginBottom: '4px',
+                                    }}
+                                >
+                                    <Box sx={{ paddingTop: '5px' }}>
+                                        {themeMode === 'light' ? (
+                                            <img src={StstesIcon} />
+                                        ) : (
+                                            <img src={StstesIconDark} />
+                                        )}
+                                    </Box>
+                                    <Box>
+                                        <Typography sx={{ color: 'text.main' }}>
+                                            {address}
+                                        </Typography>
+                                    </Box>
+                                    {isEditable && (
+                                        <IconButton
+                                            sx={{ ml: 'auto', p: '0' }}
+                                            onClick={() => handleClickInputButton('address')}
+                                        >
+                                            {isDisabledInputs['address'] ? (
+                                                <Icon sx={style.edit}>
+                                                    {themeMode === 'light' ? (
+                                                        <img
+                                                            src={EditIcon}
+                                                            width={14}
+                                                            height={14}
+                                                        />
+                                                    ) : (
+                                                        <img
+                                                            src={EditIconDark}
+                                                            width={14}
+                                                            height={14}
+                                                        />
+                                                    )}
+                                                </Icon>
+                                            ) : (
+                                                <Icon sx={style.save}>
+                                                    {themeMode === 'light' ? (
+                                                        <img
+                                                            src={SaveIcon}
+                                                            width={14}
+                                                            height={14}
+                                                        />
+                                                    ) : (
+                                                        <img
+                                                            src={SaveIconDark}
+                                                            width={14}
+                                                            height={14}
+                                                        />
+                                                    )}
+                                                </Icon>
+                                            )}
+                                        </IconButton>
                                     )}
                                 </Box>
-                                <Box>
-                                    <Typography sx={{ color: 'text.main' }}>
-                                        {poiData.address}
-                                    </Typography>
-                                </Box>
-                                {isEditable && (
-                                    <IconButton
-                                        sx={{ ml: 'auto', p: '0' }}
-                                        onClick={() => handleClickInputButton('address')}
-                                    >
-                                        {isDisabledInputs['address'] ? (
-                                            <Icon sx={style.edit}>
-                                                {themeMode === 'light' ? (
-                                                    <img src={EditIcon} width={14} height={14} />
-                                                ) : (
-                                                    <img
-                                                        src={EditIconDark}
-                                                        width={14}
-                                                        height={14}
-                                                    />
-                                                )}
-                                            </Icon>
-                                        ) : (
-                                            <Icon sx={style.save}>
-                                                {themeMode === 'light' ? (
-                                                    <img src={SaveIcon} width={14} height={14} />
-                                                ) : (
-                                                    <img
-                                                        src={SaveIconDark}
-                                                        width={14}
-                                                        height={14}
-                                                    />
-                                                )}
-                                            </Icon>
-                                        )}
-                                    </IconButton>
+                                {isShowInputs['address'] && (
+                                    <Box sx={{ height: '40px' }}>
+                                        <TextInput
+                                            formik={formik}
+                                            name={'address'}
+                                            IsDisabled={isDisabledInputs['address']}
+                                            placeholder={t('address_input', 'gpss')}
+                                        />
+                                    </Box>
                                 )}
                             </Box>
-                            {isShowInputs['address'] && (
-                                <Box sx={{ height: '40px' }}>
-                                    <TextInput
-                                        formik={formik}
-                                        name={'address'}
-                                        IsDisabled={isDisabledInputs['address']}
-                                        placeholder={t('address_input', 'gpss')}
-                                    />
-                                </Box>
-                            )}
-                        </Box>
-                        <Box>
-                            <Accordion
-                                elevation={0}
-                                sx={{
-                                    padding: 0,
-                                    backgroundColor: 'dialog.main',
-                                }}
-                            >
-                                <AccordionSummary
-                                    expandIcon={<ExpandMoreIcon />}
+                        )}
+                        {position.center && (
+                            <Box>
+                                <Accordion
+                                    elevation={0}
                                     sx={{
-                                        padding: '0px',
-                                        fontSize: '18px',
-                                        fontWeight: 600,
-                                        color: 'text.darkgray',
-                                        '& .MuiAccordionSummary-content': {
-                                            margin: '0',
-                                        },
+                                        padding: 0,
+                                        backgroundColor: 'dialog.main',
                                     }}
                                 >
-                                    {themeMode === 'light' ? (
-                                        <img
-                                            src={GpsIcon}
-                                            style={{ verticalAlign: 'middle', paddingRight: '4px' }}
-                                        />
-                                    ) : (
-                                        <img
-                                            src={GpsIconDark}
-                                            style={{ verticalAlign: 'middle', paddingRight: '4px' }}
-                                        />
-                                    )}
-                                    {t('center_coordinates', 'gpss')}
-                                </AccordionSummary>
-                                <AccordionDetails sx={{ padding: 0 }}>
-                                    <Box
+                                    <AccordionSummary
+                                        expandIcon={<ExpandMoreIcon />}
                                         sx={{
-                                            display: 'flex',
-                                            flexDirection: 'column',
-                                            gap: '6px',
-                                            mb: '8px',
+                                            padding: '0px',
+                                            fontSize: '18px',
+                                            fontWeight: 600,
+                                            color: 'text.darkgray',
+                                            '& .MuiAccordionSummary-content': {
+                                                margin: '0',
+                                            },
                                         }}
                                     >
+                                        {themeMode === 'light' ? (
+                                            <img
+                                                src={GpsIcon}
+                                                style={{
+                                                    verticalAlign: 'middle',
+                                                    paddingRight: '4px',
+                                                }}
+                                            />
+                                        ) : (
+                                            <img
+                                                src={GpsIconDark}
+                                                style={{
+                                                    verticalAlign: 'middle',
+                                                    paddingRight: '4px',
+                                                }}
+                                            />
+                                        )}
+                                        {t('center_coordinates', 'gpss')}
+                                    </AccordionSummary>
+                                    <AccordionDetails sx={{ padding: 0 }}>
                                         <Box
                                             sx={{
                                                 display: 'flex',
-                                                alignItems: 'center',
+                                                flexDirection: 'column',
                                                 gap: '6px',
+                                                mb: '8px',
                                             }}
                                         >
-                                            <Box>
-                                                <Typography sx={{ color: 'text.main', ml: '24px' }}>
-                                                    {poiData.position.center.lat}
-                                                </Typography>
+                                            <Box
+                                                sx={{
+                                                    display: 'flex',
+                                                    alignItems: 'center',
+                                                    gap: '6px',
+                                                }}
+                                            >
+                                                <Box>
+                                                    <Typography
+                                                        sx={{ color: 'text.main', ml: '24px' }}
+                                                    >
+                                                        {position.center.lat}
+                                                    </Typography>
+                                                </Box>
+                                                {isEditable && (
+                                                    <IconButton
+                                                        sx={{ ml: 'auto', p: '0' }}
+                                                        onClick={() =>
+                                                            handleClickInputButton('lat')
+                                                        }
+                                                    >
+                                                        {isDisabledInputs['lat'] ? (
+                                                            <Icon sx={style.edit}>
+                                                                {themeMode === 'light' ? (
+                                                                    <img
+                                                                        src={EditIcon}
+                                                                        width={14}
+                                                                        height={14}
+                                                                    />
+                                                                ) : (
+                                                                    <img
+                                                                        src={EditIconDark}
+                                                                        width={14}
+                                                                        height={14}
+                                                                    />
+                                                                )}
+                                                            </Icon>
+                                                        ) : (
+                                                            <Icon sx={style.save}>
+                                                                {themeMode === 'light' ? (
+                                                                    <img
+                                                                        src={SaveIcon}
+                                                                        width={14}
+                                                                        height={14}
+                                                                    />
+                                                                ) : (
+                                                                    <img
+                                                                        src={SaveIconDark}
+                                                                        width={14}
+                                                                        height={14}
+                                                                    />
+                                                                )}
+                                                            </Icon>
+                                                        )}
+                                                    </IconButton>
+                                                )}
                                             </Box>
-                                            {isEditable && (
-                                                <IconButton
-                                                    sx={{ ml: 'auto', p: '0' }}
-                                                    onClick={() => handleClickInputButton('lat')}
-                                                >
-                                                    {isDisabledInputs['lat'] ? (
-                                                        <Icon sx={style.edit}>
-                                                            {themeMode === 'light' ? (
-                                                                <img
-                                                                    src={EditIcon}
-                                                                    width={14}
-                                                                    height={14}
-                                                                />
-                                                            ) : (
-                                                                <img
-                                                                    src={EditIconDark}
-                                                                    width={14}
-                                                                    height={14}
-                                                                />
-                                                            )}
-                                                        </Icon>
-                                                    ) : (
-                                                        <Icon sx={style.save}>
-                                                            {themeMode === 'light' ? (
-                                                                <img
-                                                                    src={SaveIcon}
-                                                                    width={14}
-                                                                    height={14}
-                                                                />
-                                                            ) : (
-                                                                <img
-                                                                    src={SaveIconDark}
-                                                                    width={14}
-                                                                    height={14}
-                                                                />
-                                                            )}
-                                                        </Icon>
-                                                    )}
-                                                </IconButton>
+                                            {isShowInputs['lat'] && (
+                                                <Box sx={{ height: 'auto', ml: '24px' }}>
+                                                    <TextInput
+                                                        formik={formik}
+                                                        name={'position.center.lat'}
+                                                        IsDisabled={isDisabledInputs['lat']}
+                                                        placeholder={t('lat_input', 'gpss')}
+                                                    />
+                                                </Box>
                                             )}
                                         </Box>
-                                        {isShowInputs['lat'] && (
-                                            <Box sx={{ height: 'auto', ml: '24px' }}>
-                                                <TextInput
-                                                    formik={formik}
-                                                    name={'position.center.lat'}
-                                                    IsDisabled={isDisabledInputs['lat']}
-                                                    placeholder={t('lat_input', 'gpss')}
-                                                />
-                                            </Box>
-                                        )}
-                                    </Box>
-                                    <Box
-                                        sx={{
-                                            display: 'flex',
-                                            flexDirection: 'column',
-                                            gap: '6px',
-                                            mb: '12px',
-                                        }}
-                                    >
                                         <Box
                                             sx={{
                                                 display: 'flex',
-                                                alignItems: 'center',
+                                                flexDirection: 'column',
                                                 gap: '6px',
+                                                mb: '12px',
                                             }}
                                         >
-                                            <Box>
-                                                <Typography
-                                                    sx={{
-                                                        color: 'text.main',
-                                                        ml: '24px',
-                                                    }}
-                                                >
-                                                    {poiData.position.center.lon}
-                                                </Typography>
+                                            <Box
+                                                sx={{
+                                                    display: 'flex',
+                                                    alignItems: 'center',
+                                                    gap: '6px',
+                                                }}
+                                            >
+                                                <Box>
+                                                    <Typography
+                                                        sx={{
+                                                            color: 'text.main',
+                                                            ml: '24px',
+                                                        }}
+                                                    >
+                                                        {position.center.lon}
+                                                    </Typography>
+                                                </Box>
+                                                {isEditable && (
+                                                    <IconButton
+                                                        sx={{ ml: 'auto', p: '0' }}
+                                                        onClick={() =>
+                                                            handleClickInputButton('lon')
+                                                        }
+                                                    >
+                                                        {isDisabledInputs['lon'] ? (
+                                                            <Icon sx={style.edit}>
+                                                                {themeMode === 'light' ? (
+                                                                    <img
+                                                                        src={EditIcon}
+                                                                        width={14}
+                                                                        height={14}
+                                                                    />
+                                                                ) : (
+                                                                    <img
+                                                                        src={EditIconDark}
+                                                                        width={14}
+                                                                        height={14}
+                                                                    />
+                                                                )}
+                                                            </Icon>
+                                                        ) : (
+                                                            <Icon sx={style.save}>
+                                                                {themeMode === 'light' ? (
+                                                                    <img
+                                                                        src={SaveIcon}
+                                                                        width={14}
+                                                                        height={14}
+                                                                    />
+                                                                ) : (
+                                                                    <img
+                                                                        src={SaveIconDark}
+                                                                        width={14}
+                                                                        height={14}
+                                                                    />
+                                                                )}
+                                                            </Icon>
+                                                        )}
+                                                    </IconButton>
+                                                )}
                                             </Box>
-                                            {isEditable && (
-                                                <IconButton
-                                                    sx={{ ml: 'auto', p: '0' }}
-                                                    onClick={() => handleClickInputButton('lon')}
-                                                >
-                                                    {isDisabledInputs['lon'] ? (
-                                                        <Icon sx={style.edit}>
-                                                            {themeMode === 'light' ? (
-                                                                <img
-                                                                    src={EditIcon}
-                                                                    width={14}
-                                                                    height={14}
-                                                                />
-                                                            ) : (
-                                                                <img
-                                                                    src={EditIconDark}
-                                                                    width={14}
-                                                                    height={14}
-                                                                />
-                                                            )}
-                                                        </Icon>
-                                                    ) : (
-                                                        <Icon sx={style.save}>
-                                                            {themeMode === 'light' ? (
-                                                                <img
-                                                                    src={SaveIcon}
-                                                                    width={14}
-                                                                    height={14}
-                                                                />
-                                                            ) : (
-                                                                <img
-                                                                    src={SaveIconDark}
-                                                                    width={14}
-                                                                    height={14}
-                                                                />
-                                                            )}
-                                                        </Icon>
-                                                    )}
-                                                </IconButton>
+                                            {isShowInputs['lon'] && (
+                                                <Box sx={{ height: 'auto', ml: '24px' }}>
+                                                    <TextInput
+                                                        formik={formik}
+                                                        name={'position.center.lon'}
+                                                        IsDisabled={isDisabledInputs['lon']}
+                                                        placeholder={t('lon_input', 'gpss')}
+                                                    />
+                                                </Box>
                                             )}
                                         </Box>
-                                        {isShowInputs['lon'] && (
-                                            <Box sx={{ height: 'auto', ml: '24px' }}>
-                                                <TextInput
-                                                    formik={formik}
-                                                    name={'position.center.lon'}
-                                                    IsDisabled={isDisabledInputs['lon']}
-                                                    placeholder={t('lon_input', 'gpss')}
-                                                />
-                                            </Box>
-                                        )}
-                                    </Box>
-                                </AccordionDetails>
-                            </Accordion>
-                            <Divider sx={style.hr} />
-                        </Box>
-                        <Box>
-                            <Accordion
-                                elevation={0}
-                                sx={{
-                                    padding: 0,
-                                    backgroundColor: 'dialog.main',
-                                }}
-                            >
-                                <AccordionSummary
-                                    expandIcon={<ExpandMoreIcon />}
+                                    </AccordionDetails>
+                                </Accordion>
+                                <Divider sx={style.hr} />
+                            </Box>
+                        )}
+                        {position.guide && (
+                            <Box>
+                                <Accordion
+                                    elevation={0}
                                     sx={{
-                                        padding: '0px',
-                                        fontSize: '18px',
-                                        fontWeight: 600,
-                                        color: 'text.darkgray',
-                                        '& .MuiAccordionSummary-content': {
-                                            margin: '0',
-                                        },
+                                        padding: 0,
+                                        backgroundColor: 'dialog.main',
                                     }}
                                 >
-                                    {themeMode === 'light' ? (
-                                        <img
-                                            src={GpsIcon}
-                                            style={{ verticalAlign: 'middle', paddingRight: '4px' }}
-                                        />
-                                    ) : (
-                                        <img
-                                            src={GpsIconDark}
-                                            style={{ verticalAlign: 'middle', paddingRight: '4px' }}
-                                        />
-                                    )}
-                                    {t('guide_coordinates', 'gpss')}
-                                </AccordionSummary>
-                                <AccordionDetails sx={{ padding: 0 }}>
-                                    <Box
+                                    <AccordionSummary
+                                        expandIcon={<ExpandMoreIcon />}
                                         sx={{
-                                            display: 'flex',
-                                            flexDirection: 'column',
-                                            gap: '6px',
-                                            mb: '8px',
+                                            padding: '0px',
+                                            fontSize: '18px',
+                                            fontWeight: 600,
+                                            color: 'text.darkgray',
+                                            '& .MuiAccordionSummary-content': {
+                                                margin: '0',
+                                            },
                                         }}
                                     >
+                                        {themeMode === 'light' ? (
+                                            <img
+                                                src={GpsIcon}
+                                                style={{
+                                                    verticalAlign: 'middle',
+                                                    paddingRight: '4px',
+                                                }}
+                                            />
+                                        ) : (
+                                            <img
+                                                src={GpsIconDark}
+                                                style={{
+                                                    verticalAlign: 'middle',
+                                                    paddingRight: '4px',
+                                                }}
+                                            />
+                                        )}
+                                        {t('guide_coordinates', 'gpss')}
+                                    </AccordionSummary>
+                                    <AccordionDetails sx={{ padding: 0 }}>
                                         <Box
                                             sx={{
                                                 display: 'flex',
-                                                alignItems: 'center',
+                                                flexDirection: 'column',
                                                 gap: '6px',
+                                                mb: '8px',
                                             }}
                                         >
-                                            <Box>
-                                                <Typography sx={{ color: 'text.main', ml: '24px' }}>
-                                                    {poiData.position.guide.lat}
-                                                </Typography>
+                                            <Box
+                                                sx={{
+                                                    display: 'flex',
+                                                    alignItems: 'center',
+                                                    gap: '6px',
+                                                }}
+                                            >
+                                                <Box>
+                                                    <Typography
+                                                        sx={{ color: 'text.main', ml: '24px' }}
+                                                    >
+                                                        {position.guide.lat}
+                                                    </Typography>
+                                                </Box>
+                                                {isEditable && (
+                                                    <IconButton
+                                                        sx={{ ml: 'auto', p: '0' }}
+                                                        onClick={() =>
+                                                            handleClickInputButton('guideLat')
+                                                        }
+                                                    >
+                                                        {isDisabledInputs['guideLat'] ? (
+                                                            <Icon sx={style.edit}>
+                                                                {themeMode === 'light' ? (
+                                                                    <img
+                                                                        src={EditIcon}
+                                                                        width={14}
+                                                                        height={14}
+                                                                    />
+                                                                ) : (
+                                                                    <img
+                                                                        src={EditIconDark}
+                                                                        width={14}
+                                                                        height={14}
+                                                                    />
+                                                                )}
+                                                            </Icon>
+                                                        ) : (
+                                                            <Icon sx={style.save}>
+                                                                {themeMode === 'light' ? (
+                                                                    <img
+                                                                        src={SaveIcon}
+                                                                        width={14}
+                                                                        height={14}
+                                                                    />
+                                                                ) : (
+                                                                    <img
+                                                                        src={SaveIconDark}
+                                                                        width={14}
+                                                                        height={14}
+                                                                    />
+                                                                )}
+                                                            </Icon>
+                                                        )}
+                                                    </IconButton>
+                                                )}
                                             </Box>
-                                            {isEditable && (
-                                                <IconButton
-                                                    sx={{ ml: 'auto', p: '0' }}
-                                                    onClick={() =>
-                                                        handleClickInputButton('guideLat')
-                                                    }
-                                                >
-                                                    {isDisabledInputs['guideLat'] ? (
-                                                        <Icon sx={style.edit}>
-                                                            {themeMode === 'light' ? (
-                                                                <img
-                                                                    src={EditIcon}
-                                                                    width={14}
-                                                                    height={14}
-                                                                />
-                                                            ) : (
-                                                                <img
-                                                                    src={EditIconDark}
-                                                                    width={14}
-                                                                    height={14}
-                                                                />
-                                                            )}
-                                                        </Icon>
-                                                    ) : (
-                                                        <Icon sx={style.save}>
-                                                            {themeMode === 'light' ? (
-                                                                <img
-                                                                    src={SaveIcon}
-                                                                    width={14}
-                                                                    height={14}
-                                                                />
-                                                            ) : (
-                                                                <img
-                                                                    src={SaveIconDark}
-                                                                    width={14}
-                                                                    height={14}
-                                                                />
-                                                            )}
-                                                        </Icon>
-                                                    )}
-                                                </IconButton>
+                                            {isShowInputs['guideLat'] && (
+                                                <Box sx={{ height: 'auto', ml: '24px' }}>
+                                                    <TextInput
+                                                        formik={formik}
+                                                        name={'position.guide.lat'}
+                                                        IsDisabled={isDisabledInputs['guideLat']}
+                                                        placeholder={t('lat_input', 'gpss')}
+                                                    />
+                                                </Box>
                                             )}
                                         </Box>
-                                        {isShowInputs['guideLat'] && (
-                                            <Box sx={{ height: 'auto', ml: '24px' }}>
-                                                <TextInput
-                                                    formik={formik}
-                                                    name={'position.guide.lat'}
-                                                    IsDisabled={isDisabledInputs['guideLat']}
-                                                    placeholder={t('lat_input', 'gpss')}
-                                                />
-                                            </Box>
-                                        )}
-                                    </Box>
-                                    <Box
-                                        sx={{
-                                            display: 'flex',
-                                            flexDirection: 'column',
-                                            gap: '6px',
-                                            mb: '12px',
-                                        }}
-                                    >
                                         <Box
                                             sx={{
                                                 display: 'flex',
-                                                alignItems: 'center',
+                                                flexDirection: 'column',
                                                 gap: '6px',
+                                                mb: '12px',
                                             }}
                                         >
-                                            <Box>
-                                                <Typography sx={{ color: 'text.main', ml: '24px' }}>
-                                                    {poiData.position.guide.lon}
-                                                </Typography>
+                                            <Box
+                                                sx={{
+                                                    display: 'flex',
+                                                    alignItems: 'center',
+                                                    gap: '6px',
+                                                }}
+                                            >
+                                                <Box>
+                                                    <Typography
+                                                        sx={{ color: 'text.main', ml: '24px' }}
+                                                    >
+                                                        {position.guide.lon}
+                                                    </Typography>
+                                                </Box>
+                                                {isEditable && (
+                                                    <IconButton
+                                                        sx={{ ml: 'auto', p: '0' }}
+                                                        onClick={() =>
+                                                            handleClickInputButton('guideLon')
+                                                        }
+                                                    >
+                                                        {isDisabledInputs['guideLon'] ? (
+                                                            <Icon sx={style.edit}>
+                                                                {themeMode === 'light' ? (
+                                                                    <img
+                                                                        src={EditIcon}
+                                                                        width={14}
+                                                                        height={14}
+                                                                    />
+                                                                ) : (
+                                                                    <img
+                                                                        src={EditIconDark}
+                                                                        width={14}
+                                                                        height={14}
+                                                                    />
+                                                                )}
+                                                            </Icon>
+                                                        ) : (
+                                                            <Icon sx={style.save}>
+                                                                {themeMode === 'light' ? (
+                                                                    <img
+                                                                        src={SaveIcon}
+                                                                        width={14}
+                                                                        height={14}
+                                                                    />
+                                                                ) : (
+                                                                    <img
+                                                                        src={SaveIconDark}
+                                                                        width={14}
+                                                                        height={14}
+                                                                    />
+                                                                )}
+                                                            </Icon>
+                                                        )}
+                                                    </IconButton>
+                                                )}
                                             </Box>
-                                            {isEditable && (
-                                                <IconButton
-                                                    sx={{ ml: 'auto', p: '0' }}
-                                                    onClick={() =>
-                                                        handleClickInputButton('guideLon')
-                                                    }
-                                                >
-                                                    {isDisabledInputs['guideLon'] ? (
-                                                        <Icon sx={style.edit}>
-                                                            {themeMode === 'light' ? (
-                                                                <img
-                                                                    src={EditIcon}
-                                                                    width={14}
-                                                                    height={14}
-                                                                />
-                                                            ) : (
-                                                                <img
-                                                                    src={EditIconDark}
-                                                                    width={14}
-                                                                    height={14}
-                                                                />
-                                                            )}
-                                                        </Icon>
-                                                    ) : (
-                                                        <Icon sx={style.save}>
-                                                            {themeMode === 'light' ? (
-                                                                <img
-                                                                    src={SaveIcon}
-                                                                    width={14}
-                                                                    height={14}
-                                                                />
-                                                            ) : (
-                                                                <img
-                                                                    src={SaveIconDark}
-                                                                    width={14}
-                                                                    height={14}
-                                                                />
-                                                            )}
-                                                        </Icon>
-                                                    )}
-                                                </IconButton>
+                                            {isShowInputs['guideLon'] && (
+                                                <Box sx={{ height: 'auto', ml: '24px' }}>
+                                                    <TextInput
+                                                        formik={formik}
+                                                        name={'position.guide.lon'}
+                                                        IsDisabled={isDisabledInputs['guideLon']}
+                                                        placeholder={t('lon_input', 'gpss')}
+                                                    />
+                                                </Box>
                                             )}
                                         </Box>
-                                        {isShowInputs['guideLon'] && (
-                                            <Box sx={{ height: 'auto', ml: '24px' }}>
-                                                <TextInput
-                                                    formik={formik}
-                                                    name={'position.guide.lon'}
-                                                    IsDisabled={isDisabledInputs['guideLon']}
-                                                    placeholder={t('lon_input', 'gpss')}
-                                                />
-                                            </Box>
-                                        )}
-                                    </Box>
-                                </AccordionDetails>
-                            </Accordion>
-                            <Divider sx={style.hr} />
-                        </Box>
+                                    </AccordionDetails>
+                                </Accordion>
+                                <Divider sx={style.hr} />
+                            </Box>
+                        )}
                     </Box>
                 </>
             ) : (

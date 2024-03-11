@@ -72,7 +72,13 @@ const EditableSelectColumn = ({ value, name, items, isEditable, formik }) => {
                         },
                     }}
                 >
-                    <Select name={name} formik={formik} items={items} disabled={isDisableInput} />
+                    <Select
+                        name={name}
+                        formik={formik}
+                        value={value}
+                        items={items}
+                        disabled={isDisableInput}
+                    />
                 </Box>
             )}
         </>

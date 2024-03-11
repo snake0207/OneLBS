@@ -36,8 +36,14 @@ axiosInstance.interceptors.response.use(
     },
 )
 
+const generateQueryEndPoint = (endPoint, data) => {
+    const queryString = qs.stringify(data, { addQueryPrefix: true })
+
+    return `${endPoint}${queryString}`
+}
+
 export const getAPI = ({ endPoint, data, axiosOption }) => {
-    return axiosInstance.get(endPoint + qs.stringify(data), axiosOption)
+    return axiosInstance.get(data ? generateQueryEndPoint(endPoint, data) : endPoint, axiosOption)
 }
 
 export const postAPI = ({ endPoint, data, axiosOption }) => {

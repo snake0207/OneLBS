@@ -8,6 +8,7 @@ import Select from '#/components/common/Select'
 import { getPermissionList, gstStatusLabel, getAgainstStatus } from '#/common/libs/permission'
 import { Icon } from '@mui/material'
 import ResetIcon from '#/assets/resetIcon.svg'
+import EditIconWhite from '#/assets/editIconWhite.svg'
 
 import style from './style.module'
 
@@ -92,7 +93,7 @@ function Row({
                 <Stack direction={'row'} sx={{ display: 'flex', justifyContent: 'space-between' }}>
                     {editable ? <TextInput name="remark" formik={formik} /> : row?.remark}
                     <Button onClick={handleEditable} sx={style.lightButton}>
-                        {t('register_input', 'users')}
+                        <img src={EditIconWhite} width={22} />
                     </Button>
                 </Stack>
             </TableCell>

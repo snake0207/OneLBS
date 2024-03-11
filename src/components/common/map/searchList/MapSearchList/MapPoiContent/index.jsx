@@ -5,6 +5,7 @@ import ListItemButton from '@mui/material/ListItemButton'
 import { useMapActions } from '#/store/useMapStore.js'
 import Brightness1Icon from '@mui/icons-material/Brightness1'
 import { markerImage } from '#/common/libs/mapMarker.js'
+import DE from '#/assets/flag/DE.svg'
 
 const MapPoiContent = ({ isLast, isGpssSearch, selectedPoi, setSelectedPoi, poiData }) => {
     const { poiId, title, address, cpType, progress, country, category } = poiData
@@ -90,7 +91,17 @@ const MapPoiContent = ({ isLast, isGpssSearch, selectedPoi, setSelectedPoi, poiD
                                             />
                                         ))}
                                     {/* 국기 들어가는 부분 */}
-                                    <Brightness1Icon />
+                                    <Box
+                                        sx={{
+                                            width: '36px',
+                                            height: '24px',
+                                            ml: '4px',
+                                            border: '1px solid',
+                                            borderColor: 'border.grayFlag',
+                                        }}
+                                    >
+                                        <img src={DE} width={34} />
+                                    </Box>
                                 </Box>
                             </Box>
                         }

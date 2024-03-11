@@ -151,7 +151,7 @@ const ApprovalHistoryDetailPage = () => {
                         backgroundColor: 'dialog.main',
                         opacity: '95%',
                         overflowY: 'auto',
-                        height: '98%',
+                        height: 'calc(100% - 32px)',
                         zIndex: 2,
                         borderRadius: '8px',
                         boxShadow: '0 4px 4px rgb(0 0 0 / 25%)',

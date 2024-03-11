@@ -19,9 +19,9 @@ const mapStyle = {
     height: '100%',
 }
 
-const seoul = {
-    lat: 33.9326825,
-    lng: -118.2727244,
+const eu = {
+    lat: 49.5725329,
+    lng: 10.0539701,
 }
 
 /**
@@ -132,8 +132,8 @@ const GoogleMapComponent = ({
                     scaleControl: true,
                 }}
                 mapContainerStyle={mapStyle}
-                center={seoul}
-                zoom={12}
+                center={eu}
+                zoom={5}
                 onLoad={onLoad}
                 onUnmount={onUnmount}
             >

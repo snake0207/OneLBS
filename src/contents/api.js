@@ -16,4 +16,7 @@ export const API_PATH = {
         reviewer: '/reviewer',
         approver: '/approver',
     },
+    approval: {
+        history_list: '/approval-history-list',
+    },
 }

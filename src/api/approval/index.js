@@ -1,0 +1,9 @@
+import { getAPI } from '#/api/axios.js'
+import { API_PATH } from '#/contents/api.js'
+import dummyData from '#/mock/data/approvalData.json'
+
+export const getHistoryList = () => {
+    console.log('GET', dummyData)
+    return dummyData
+    // return getAPI({ endPoint: API_PATH.approval.history_list })
+}

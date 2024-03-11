@@ -152,7 +152,7 @@ const ApprovalHistoryDetailPage = () => {
                             position: 'relative',
                             borderRadius: '0',
                             boxShadow: 'none',
-                            m: '0',
+                            m: '-74px 0 0 0',
                             p: '0',
                             height: '100%',
                             overflowY: 'inherit',

@@ -3,9 +3,9 @@ import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos'
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos'
 import CategoryCount from '#/components/dashboard/CategoryCount'
 import useLayoutStore from '#/store/useLayoutStore'
-import LanguageIcon from '#/assets/languagesIconDark.svg'
 import useEmblaCarousel from 'embla-carousel-react'
 import { useCarouselPrevNextButtons } from '#/hooks/useCarouselPrevNextButtons'
+import DE from '#/assets/flag/DE.svg'
 
 import style from './style.module'
 
@@ -18,11 +18,11 @@ const VectorMapTooltip = ({ title, categoryCountList }) => {
     return (
         <Box sx={style.dashboardBox}>
             <Box sx={style.Title}>
-                <img src={LanguageIcon} style={{ width: '20px' }} />
+                <img src={DE} style={{ width: '36px', marginRight: '10px' }} />
                 <Typography>{title}</Typography>
             </Box>
             <Box ref={emblaRef} sx={{ overflow: 'hidden' }}>
-                <Box sx={{ display: 'flex' }}>
+                <Box sx={{ display: 'flex', width: '100%' }}>
                     {categoryCountList.map((item) => (
                         <Box key={item.category} sx={style.items}>
                             <CategoryCount
@@ -33,10 +33,18 @@ const VectorMapTooltip = ({ title, categoryCountList }) => {
                         </Box>
                     ))}
                 </Box>
-                <IconButton onClick={onPrevButtonClick} disabled={prevBtnDisabled}>
-                    <ArrowBackIosIcon sx={{ width: 20 }} />
+                <IconButton
+                    onClick={onPrevButtonClick}
+                    disabled={prevBtnDisabled}
+                    sx={style.backArrow}
+                >
+                    <ArrowBackIosIcon sx={{ width: 20, position: 'absolute', left: '25%' }} />
                 </IconButton>
-                <IconButton onClick={onNextbuttonClick} disabled={nextBtnDisabled}>
+                <IconButton
+                    onClick={onNextbuttonClick}
+                    disabled={nextBtnDisabled}
+                    sx={style.nextArrow}
+                >
                     <ArrowForwardIosIcon sx={{ width: 20 }} />
                 </IconButton>
             </Box>

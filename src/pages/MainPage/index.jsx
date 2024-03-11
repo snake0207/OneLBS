@@ -12,18 +12,23 @@ import { useUserPwChangeRequiredState } from '#/store/useUserStore'
 import EvIcon from '#/assets/m_evIcon.svg'
 import EvIconDark from '#/assets/m_evIconDark.svg'
 import EvIconLight from '#/assets/m_evIconLight.svg'
+import EvIconLightDark from '#/assets/m_evIconLightDark.svg'
 import FuelIcon from '#/assets/m_fuelIcon.svg'
 import FuelIconDark from '#/assets/m_fuelIconDark.svg'
 import FuelIconLight from '#/assets/m_fuelIconLight.svg'
+import FuelIconLightDark from '#/assets/m_fuelIconLightDark.svg'
 import ParkingIcon from '#/assets/m_parkingIcon.svg'
 import ParkingIconDark from '#/assets/m_parkingIconDark.svg'
 import ParkingIconLight from '#/assets/m_parkingIconLight.svg'
+import ParkingIconLightDark from '#/assets/m_parkingIconLightDark.svg'
 import H2Icon from '#/assets/m_h2Icon.svg'
 import H2IconDark from '#/assets/m_h2IconDark.svg'
 import H2IconLight from '#/assets/m_h2IconLight.svg'
+import H2IconLightDark from '#/assets/m_h2IconLightDark.svg'
 import DealerPoiIcon from '#/assets/m_dealerPoiIcon.svg'
 import DealerPoiIconDark from '#/assets/m_dealerPoiIconDark.svg'
 import DealerPoiIconLight from '#/assets/m_dealerPoiIconLight.svg'
+import DealerPoiIconLightDark from '#/assets/m_dealerPoiIconLightDark.svg'
 import TimeIcon from '#/assets/m_timeIcon.svg'
 import TimeIconDark from '#/assets/m_timeIconDark.svg'
 import RregionIcon from '#/assets/m_regionIcon.svg'
@@ -74,31 +79,31 @@ function MainPage() {
     const VectorMapMockData = [
         {
             lightIcon: <img src={EvIconLight} />,
-            darkIcon: <img src={EvIconDark} width={22} />,
+            darkIcon: <img src={EvIconLightDark} width={22} />,
             category: 'evCharging',
             count: '001',
         },
         {
             lightIcon: <img src={FuelIconLight} />,
-            darkIcon: <img src={FuelIconDark} width={22} />,
+            darkIcon: <img src={FuelIconLightDark} width={22} />,
             category: 'fuel',
             count: '002',
         },
         {
             lightIcon: <img src={ParkingIconLight} />,
-            darkIcon: <img src={ParkingIconDark} width={19} />,
+            darkIcon: <img src={ParkingIconLightDark} width={19} />,
             category: 'parking',
             count: '003',
         },
         {
             lightIcon: <img src={H2IconLight} />,
-            darkIcon: <img src={H2IconDark} width={22} />,
+            darkIcon: <img src={H2IconLightDark} width={22} />,
             category: 'h2Charging',
             count: '004',
         },
         {
             lightIcon: <img src={DealerPoiIconLight} />,
-            darkIcon: <img src={DealerPoiIconDark} width={22} />,
+            darkIcon: <img src={DealerPoiIconLightDark} width={22} />,
             category: 'dealerPoi',
             count: '005',
         },

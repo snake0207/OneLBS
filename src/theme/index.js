@@ -225,6 +225,7 @@ export const getThemeSettings = (mode) => ({
                       closeBg: tokens.color[100],
                       swiper: tokens.color[900],
                       gusest: tokens.color[20001],
+                      sidemenu: tokens.color[600],
                   },
                   button: {
                       ...tokens.button,

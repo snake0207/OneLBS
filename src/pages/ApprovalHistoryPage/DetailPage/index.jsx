@@ -21,11 +21,9 @@ import H2ChargingInfo from '#/components/poiDetail/CategoryInfo/H2ChargingInfo/i
 import ParkingInfo from '#/components/poiDetail/CategoryInfo/ParkingInfo/index.jsx'
 import GoogleMapComponent from '#/components/common/map/googleMap/index.jsx'
 import ApprovalSelect from '#/components/poiDetail/ApprovalSelect/index.jsx'
-import { isBrowser, isMobile } from 'react-device-detect'
+import { isBrowser } from 'react-device-detect'
 import Divider from '@mui/material/Divider'
-import Header1Depth from '#/layouts/Header1Depth/index.jsx'
 import DetailHistoryTable from '#/components/approval/Detail/DetailHistoryTable/index.jsx'
-import markerSampleData from '#/mock/data/poiMarker.json'
 
 const ApprovalHistoryDetailPage = () => {
     const params = useParams()
@@ -114,26 +112,21 @@ const ApprovalHistoryDetailPage = () => {
         else {
             // TODO: 기능구분
             console.log('VALUES >> ', formik.values)
-            popupActions.showPopup(
-                'alert',
-                t(`confirmed.${action.split('_')[0].toLowerCase()}`, 'approval'),
-            )
+            popupActions.showPopup('alert', t(`confirmed.${action}`, 'approval'))
             formik.handleSubmit
         }
     }
 
     const handleShowConfirmPopup = (action, id) => {
         console.log(action, t(`modal.${action}`, 'approval'), id)
-        popupActions.showPopup(
-            'confirm',
-            t(`modal.${action.split('_')[0].toLowerCase()}`, 'approval'),
-            () => openAlertPopup(action),
+        popupActions.showPopup('confirm', t(`modal.${action}`, 'approval'), () =>
+            openAlertPopup(action),
         )
     }
 
     return (
         <>
-            {isMobile ? <Header1Depth /> : <TitleBar title={t('detail', 'approval')} />}
+            {isBrowser && <TitleBar title={t('detail', 'approval')} />}
             <Box
                 sx={{
                     position: 'relative',
@@ -159,7 +152,7 @@ const ApprovalHistoryDetailPage = () => {
                             position: 'relative',
                             borderRadius: '0',
                             boxShadow: 'none',
-                            m: '0',
+                            m: '-74px 0 0 0',
                             p: '0',
                             height: '100%',
                             overflowY: 'inherit',

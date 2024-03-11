@@ -26,7 +26,7 @@ const PermissionChangeModal = ({ isOpen, onClose }) => {
                         {themeMode === 'light' ? (
                             <img src={joinIcon} style={{ display: 'flex', width: '24px' }} />
                         ) : (
-                            <img src={joinIcon} style={{ display: 'flex', width: '24px' }} />
+                            <img src={joinIconDark} style={{ display: 'flex', width: '24px' }} />
                         )}
                     </Icon>
                     {t('permission_change', 'permission')}

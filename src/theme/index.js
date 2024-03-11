@@ -156,6 +156,7 @@ export const tokens = {
         700: '#e2e2e2',
         800: '#385264',
         900: '#33aed6',
+        1000: '#a0a4a7',
     },
     dialog: {
         100: '#fff',
@@ -273,6 +274,7 @@ export const getThemeSettings = (mode) => ({
                       mapTaps: tokens.background[200],
                       accordion: tokens.background[600],
                       grayCard: tokens.background[200],
+                      darkgray: tokens.background[900],
                   },
                   lnb: {
                       mobilelnb: tokens.lnb[100],
@@ -308,6 +310,7 @@ export const getThemeSettings = (mode) => ({
                       viewBorder: tokens.table[500],
                       viewTopBorder: tokens.table[200],
                       borderlight: tokens.table[200],
+                      menuTh: tokens.table[700],
                   },
                   dialog: {
                       main: tokens.dialog[100],
@@ -415,6 +418,7 @@ export const getThemeSettings = (mode) => ({
                       mapTaps: tokens.background[1000],
                       accordion: tokens.background[500],
                       grayCard: tokens.background[800],
+                      darkgray: tokens.background[300],
                   },
                   lnb: {
                       mobilelnb: tokens.lnb[200],
@@ -450,6 +454,7 @@ export const getThemeSettings = (mode) => ({
                       viewBorder: tokens.table[800],
                       viewTopBorder: tokens.table[600],
                       borderlight: tokens.table[300],
+                      menuTh: tokens.table[1000],
                   },
                   dialog: {
                       main: tokens.dialog[400],

@@ -1,6 +1,7 @@
 import { Table, TableBody, TableCell, TableHead, TableRow, Typography } from '@mui/material'
 import MenuTableRow from '#/components/permission/MenuChangeModal/MenuTable/MenuTableRow'
 import { permissionLabelColor } from '#/contents/color'
+import style from './style.module'
 
 import t from '#/common/libs/trans'
 
@@ -43,7 +44,7 @@ const MenuTable = () => {
     ]
 
     return (
-        <Table>
+        <Table sx={style.tableBox}>
             <TableHead>
                 <TableRow>
                     {menuTableHeader.map((item) => (

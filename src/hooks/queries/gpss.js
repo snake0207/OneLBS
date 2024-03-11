@@ -20,23 +20,30 @@ export const useGetApprover = (userName) => {
     return { data, refetch }
 }
 
-export const useGetGpssSuggestions = (searchParam) => {
+export const useGetGpssSuggestions = (requestParam) => {
     const { data, refetch } = useQuery({
-        queryKey: [QUERY_KEYS.gpss.suggestion, searchParam.keyword],
-        queryFn: () => gpss.getGpssSuggestions(searchParam),
-        enabled: !(searchParam.keyword.length === 0),
+        queryKey: [QUERY_KEYS.gpss.suggestion, requestParam.keyword],
+        queryFn: () => gpss.getGpssSuggestions(requestParam),
+        enabled: !(requestParam.keyword.length === 0),
         staleTime: 5 * 1000,
     })
     return { data, refetch }
 }
 
-export const usePostGpssSearch = (form) => {
-    const { data, fetchNextPage } = useInfiniteQuery({
-        queryKey: [QUERY_KEYS.gpss.search, form],
-        queryFn: ({ pageParam }) => gpss.postGpssSearch({ ...form, pageParam }),
+export const usePostGpssSearch = (requestParam) => {
+    const { data, fetchNextPage, refetch } = useInfiniteQuery({
+        queryKey: [QUERY_KEYS.gpss.search, requestParam.keyword, requestParam.category],
+        queryFn: ({ pageParam }) => gpss.postGpssSearch({ ...requestParam, pageParam }),
         initialPageParam: 0,
         getNextPageParam: (lastPage, allPages, lastPageParam, allPageParams) => {},
+        enabled: false,
     })
+
+    return {
+        data,
+        refetch,
+        fetchNextPage,
+    }
 }
 
 export const usePostGpssDetail = (form) => {

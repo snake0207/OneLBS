@@ -19,7 +19,7 @@ import useLayoutStore from '#/store/useLayoutStore'
 import SwipeMapSearchList from '#/components/common/map/searchList/SwipeMapSearchList/index.jsx'
 import { useFormik } from 'formik'
 import { mapSearchSchema } from '#/contents/validationSchema.js'
-import { useGetGpssSuggestions } from '#/hooks/queries/gpss.js'
+import { useGetGpssSuggestions, usePostGpssSearch } from '#/hooks/queries/gpss.js'
 import useMapStore from '#/store/useMapStore.js'
 import { useDebounce } from '#/hooks/useDebounce.js'
 
@@ -36,6 +36,7 @@ function MapSearchPage() {
             keyword: '',
             language: 'ENG',
             vehicleCode: 'ICE',
+            polygonFilter: [],
         },
         validationSchema: mapSearchSchema,
         onSubmit: (form) => {
@@ -43,6 +44,19 @@ function MapSearchPage() {
             console.log('mapBound =>', seLat, seLon, neLat, neLon)
         },
     })
+    // 추천어 검색
+    const { data: suggestionsData } = useGetGpssSuggestions(useDebounce(searchFormik.values, 400))
+    // poi 리스트 검색
+    const {
+        data: poiListData,
+        refetch: fetchPoiList,
+        fetchNextPage,
+    } = usePostGpssSearch(searchFormik.values)
+
+    const onHandleSubmitSearch = () => {
+        fetchPoiList()
+    }
+
     // 위경도 좌표 초기화
     useEffect(() => {
         mapStoreActions.resetCoordinates()
@@ -52,6 +66,9 @@ function MapSearchPage() {
         searchFormik.setFieldValue('lat', lat)
         searchFormik.setFieldValue('lon', lon)
     }, [lat])
+    useEffect(() => {
+        searchFormik.setFieldValue('polygonFilter', [seLat, seLon, neLat, neLon])
+    }, [seLat])
 
     // 검색 결과
     const [searchResultArr, setSearchResultArr] = useState([])
@@ -62,8 +79,6 @@ function MapSearchPage() {
     const [isNewPoiCreateOpen, setIsNewPoiCreateOpen] = useState(false)
     // mobile search toggle
     const [showSearch, setShowSearch] = useState(false)
-    // 추천어 검색
-    const { data: suggestionsData } = useGetGpssSuggestions(useDebounce(searchFormik.values, 400))
 
     // mobile detail navigate
     const handlePOISelected = (id) => {
@@ -105,7 +120,10 @@ function MapSearchPage() {
                         <Box sx={{ display: 'flex', flexDirection: 'colunm' }}>
                             <Box>
                                 {/* 지도 검색 */}
-                                <MapSearch formik={searchFormik} />
+                                <MapSearch
+                                    formik={searchFormik}
+                                    onHandleSubmitSearch={onHandleSubmitSearch}
+                                />
                                 {/* 검색 결과 */}
                                 <MapSearchList
                                     searchResultArr={poiListData}

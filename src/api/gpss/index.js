@@ -22,8 +22,14 @@ const getGpssSuggestions = (data) => {
 
 // gpss 통합검색
 const postGpssSearch = (data) => {
-    console.log('search list param =>', data)
-    return postAPI({ endPoint: API_PATH.gpss.gpss_searh, data })
+    const queryParams = { ...data }
+    queryParams.size = 20
+    queryParams.from = queryParams.pageParam
+    queryParams.targetCp = ['mcp', 'here']
+    delete queryParams.pageParam
+    if (queryParams.keyword.length === 0) delete queryParams.keyword
+    if (queryParams.category.length === 0) delete queryParams.category
+    return postAPI({ endPoint: API_PATH.gpss.gpss_search, data: { ...queryParams } })
 }
 
 // gpss 상세검색

@@ -19,13 +19,14 @@ const style = {
         },
     },
     mapDetailContent: {
-        maxHeight: '760px',
+        maxHeight: '742px',
         overflow: 'auto',
         paddingTop: '16px',
         padding: '20px 16px 16px 16px',
         borderRadius: '0 0 8px 8px',
         backgroundColor: 'dialog.main',
         boxShadow: '0 3px 14px rgb(0 0 0 / 24%)',
+        minHeight: 'calc(100vh - 177px)',
         '@media (max-width:1024px)': {
             boxShadow: 'none',
             padding: '20px 0 16px 0',
@@ -85,11 +86,11 @@ const style = {
     },
     lineButton: {
         borderRadius: '4px',
-        color: '#00418D',
         ml: '2px',
         flex: 1,
+        color: 'text.lineblue',
         border: '1px solid',
-        borderColor: 'button.lineblueBoder',
+        borderColor: 'button.lineblue',
         backgroundColor: 'button.white',
         boxShadow: 'none',
         '&:hover': {

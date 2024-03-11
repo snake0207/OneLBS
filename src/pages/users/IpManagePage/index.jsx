@@ -70,7 +70,24 @@ function IpManagePage() {
                 onDelete={handleDelete}
                 onChangePage={handleChangePage}
             />
-            <Button variant="contained" onClick={handleOpenRegisterIp}>
+            <Button
+                variant="contained"
+                onClick={handleOpenRegisterIp}
+                sx={{
+                    width: '130px',
+                    ml: '4px',
+                    backgroundColor: 'button.light',
+                    borderRadius: '4px',
+                    border: '1px solid',
+                    borderColor: 'button.light',
+                    flex: 1,
+                    boxShadow: 'none',
+                    '&:hover': {
+                        backgroundColor: 'button.light',
+                        boxShadow: 'none',
+                    },
+                }}
+            >
                 {t('register_ip', 'users')}
             </Button>
             <AddIpDialog

@@ -1,11 +1,12 @@
-import { useInfiniteQuery, useQuery } from '@tanstack/react-query'
-import permission from '#/api/permission'
+import { useQuery } from '@tanstack/react-query'
 import { QUERY_KEYS } from '#/contents/queryKeys'
+import usePermissionSearchStore from '#/store/usePermissionSearchStore'
+import permission from '#/api/permission'
 
 export const useGetRoleMenuPermission = () => {
     const { data } = useQuery({
-        queryFn: permission.getRoleMenuPermission,
         queryKey: [QUERY_KEYS.permission.roleMenuPermission],
+        queryFn: permission.getRoleMenuPermission,
         select: (data) => data.data.data,
     })
 
@@ -13,11 +14,12 @@ export const useGetRoleMenuPermission = () => {
 }
 
 export const useGetRoleChangeUserList = () => {
-    const { data } = useInfiniteQuery({
-        queryFn: ({ pageParam, email, name, roldId }) =>
-            permission.getRoleChangeUserList({ page: pageParam, email, name, roldId }),
-        initialPageParam: 1,
-        queryKey: [QUERY_KEYS.permission.roleChangeUserList],
+    const { page, email, name, roleId } = usePermissionSearchStore()
+    const { data } = useQuery({
+        queryKey: [QUERY_KEYS.permission.roleChangeUserList, page, email, name, roleId],
+        queryFn: () => permission.getRoleChangeUserList({ page, email, name, roleId }),
+        select: (data) => data.data.data,
+        placeholderData: (data) => data,
     })
 
     return { data }

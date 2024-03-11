@@ -2,6 +2,7 @@ const style = {
     webnavBox: {
         '& .MuiPaper-root': {
             backgroundColor: 'background.default',
+            borderColor: 'color.sidemenu',
         },
         '& .MuiList-root': {
             pt: '0',

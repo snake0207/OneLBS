@@ -18,7 +18,7 @@ const style = {
     Title: {
         display: 'flex',
         alignItems: 'center',
-        padding: '11px 16px',
+        padding: '8px 16px',
         color: '#fff',
         backgroundColor: '#00418D',
         borderRadius: '8px 8px 0 0',

@@ -24,6 +24,10 @@ const EvChargingInfo = ({ data, isEditable, formik }) => {
         { key: 2, value: 2, label: t('evChargingInfo.speed.2', 'approval') },
         { key: 3, value: 3, label: t('evChargingInfo.speed.3', 'approval') },
     ])
+    const selectParkingFeeItems = useRef([
+        { key: 0, value: 0, label: t('evChargingInfo.isFree.0', 'approval') },
+        { key: 1, value: 1, label: t('evChargingInfo.isFree.1', 'approval') },
+    ])
     const { themeMode } = useLayoutStore()
 
     return (
@@ -55,7 +59,14 @@ const EvChargingInfo = ({ data, isEditable, formik }) => {
                     isEditable={isEditable}
                     formik={formik}
                 />
-                <EditableSelectColumn />
+                {data.parkingFee}
+                <EditableSelectColumn
+                    value={data.parkingFee}
+                    name={'evChargingInfo.parkingFee'}
+                    items={selectParkingFeeItems.current}
+                    isEditable={isEditable}
+                    formik={formik}
+                />
                 <Typography sx={{ color: 'text.main', fontSize: '18px' }}>
                     {data.maxWatt}kw
                 </Typography>

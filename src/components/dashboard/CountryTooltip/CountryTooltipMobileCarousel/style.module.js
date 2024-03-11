@@ -1,6 +1,5 @@
 const style = {
     europeBox: {
-        position: 'relative',
         overflow: 'hidden',
         width: '100%',
         padding: '10px 26px',
@@ -26,8 +25,8 @@ const style = {
         backgroundColor: 'rgba(0, 0, 0, 0.5) !important',
         color: 'rgba(255, 255, 255, 0.7) !important',
         position: 'absolute',
-        left: '0px',
-        top: '45%',
+        left: '7px',
+        top: '50%',
         width: '30px',
         height: '30px',
         transform: 'translateY(-50%)',
@@ -36,8 +35,8 @@ const style = {
         backgroundColor: 'rgba(0, 0, 0, 0.5) !important',
         color: 'rgba(255, 255, 255, 0.7) !important',
         position: 'absolute',
-        right: '0',
-        top: '45%',
+        right: '7px',
+        top: '50%',
         width: '30px',
         height: '30px',
         transform: 'translateY(-50%)',

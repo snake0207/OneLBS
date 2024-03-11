@@ -22,4 +22,7 @@ export const API_PATH = {
     approval: {
         history_list: '/approval-history-list',
     },
+    permission: {
+        role_menu_permission: '/user-auth/api/v1/auth/role-menu-permission',
+    },
 }

@@ -64,38 +64,52 @@ function IpManagePage() {
         <Box>
             <TitleBar title={t('top_menu.user_ip_access_management')} />
             <SearchFilter onSearch={handleSearch} />
-            <IpTabel
-                rows={users}
-                onEdit={handleEdit}
-                onDelete={handleDelete}
-                onChangePage={handleChangePage}
-            />
-            <Button
-                variant="contained"
-                onClick={handleOpenRegisterIp}
+            <Box
                 sx={{
-                    width: '130px',
-                    ml: '4px',
-                    backgroundColor: 'button.light',
-                    borderRadius: '4px',
-                    border: '1px solid',
-                    borderColor: 'button.light',
-                    flex: 1,
-                    boxShadow: 'none',
-                    '&:hover': {
-                        backgroundColor: 'button.light',
-                        boxShadow: 'none',
-                    },
+                    position: 'relative',
+                    width: '100%',
+                    borderRadius: '8px',
+                    p: '18px 20px',
+                    backgroundColor: 'background.contents',
+                    boxShadow: '0 3px 14px rgb(0 0 0 / 24%)',
                 }}
             >
-                {t('register_ip', 'users')}
-            </Button>
-            <AddIpDialog
-                user={selectedUser}
-                open={open}
-                onClose={handleClose}
-                onRegister={handleRegister}
-            />
+                <IpTabel
+                    rows={users}
+                    onEdit={handleEdit}
+                    onDelete={handleDelete}
+                    onChangePage={handleChangePage}
+                />
+                <Button
+                    variant="contained"
+                    onClick={handleOpenRegisterIp}
+                    sx={{
+                        position: 'absolute',
+                        right: '20px',
+                        bottom: '15px',
+                        width: '130px',
+                        ml: '4px',
+                        backgroundColor: 'button.light',
+                        borderRadius: '4px',
+                        border: '1px solid',
+                        borderColor: 'button.light',
+                        flex: 1,
+                        boxShadow: 'none',
+                        '&:hover': {
+                            backgroundColor: 'button.light',
+                            boxShadow: 'none',
+                        },
+                    }}
+                >
+                    {t('register_ip', 'users')}
+                </Button>
+                <AddIpDialog
+                    user={selectedUser}
+                    open={open}
+                    onClose={handleClose}
+                    onRegister={handleRegister}
+                />
+            </Box>
         </Box>
     )
 }

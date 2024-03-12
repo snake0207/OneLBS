@@ -12,16 +12,17 @@ const style = {
         },
     },
     searchBox: {
-        m: '0 0 16px 0',
         p: '0 !important',
         borderRadius: '8px',
         maxWidth: 'calc(100% - 0px) !important',
         backgroundColor: 'grey.search',
         boxShadow: '0 3px 14px rgb(0 0 0 / 24%)',
+        mb: '10px',
         '@media (max-width:1024px)': {
             position: 'relative',
             backgroundColor: 'transparent',
             boxShadow: 'none',
+            mb: '0px',
             '& .MuiStack-root': {
                 '& .MuiGrid2-root': {
                     backgroundColor: 'grey.search',

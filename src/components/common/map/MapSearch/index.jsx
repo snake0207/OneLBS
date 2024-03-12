@@ -303,6 +303,7 @@ const MapSearch = ({ formik, suggestionData }) => {
                         }}
                     >
                         <Autocomplete
+                            freeSolo
                             options={keywordOptions}
                             onInputChange={formik.handleChange}
                             size="small"

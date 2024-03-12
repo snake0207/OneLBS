@@ -61,13 +61,13 @@ function MapSearchPage() {
     const { data: suggestionsData } = useGetGpssSuggestions(useDebounce(searchFormik.values, 400))
     // poi 리스트 검색
     const {
-        data: poiListDataA,
+        data: poiListData,
         isLoading: isPoiListLoading,
         refetch: fetchPoiList,
         fetchNextPage,
     } = usePostGpssSearch(searchFormik.values)
     // poi 상세 검색
-    const { data: poiDetailDataA, refetch: fetchPoiDetail } = usePostGpssDetail({
+    const { data: poiDetailData, refetch: fetchPoiDetail } = usePostGpssDetail({
         ...searchFormik.values,
         poiId: [selectedPoi],
     })

@@ -21,6 +21,7 @@ const getApprover = (data) => {
 const getGpssSuggestions = (data) => {
     const queryParams = { ...data }
     delete queryParams.category
+    delete queryParams.polygonFilter
     return getAPI({
         endPoint: API_PATH.gpss.gpss_suggestion + new URLSearchParams(queryParams).toString(),
     })
@@ -32,8 +33,8 @@ const postGpssSearch = (data) => {
     queryParams.size = 20
     queryParams.from = queryParams.pageParam
     queryParams.targetCp = ['mcp', 'here']
-    // queryParams.radius = 10000
-    delete queryParams.polygonFilter
+    // queryParams.radius = 1000
+    // delete queryParams.polygonFilter
     delete queryParams.pageParam
     if (queryParams.keyword.length === 0) delete queryParams.keyword
     if (queryParams.category.length === 0) delete queryParams.category

@@ -20,7 +20,7 @@ const Header = ({ open, handleDrawerToggle }) => {
   const iconBackColor = "grey.100";
   const iconBackColorOpen = "grey.200";
 
-  console.log(theme.breakpoints);
+  console.log('theme.breakpoints ', theme.breakpoints);
   // common header
   const mainHeader = (
     <Toolbar>

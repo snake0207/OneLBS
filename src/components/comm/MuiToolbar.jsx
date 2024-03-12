@@ -1,29 +1,28 @@
 import PropTypes from "prop-types";
-import Box from "@mui/material/Box";
 import {
   GridToolbarColumnsButton,
   GridToolbarContainer,
   GridToolbarExport,
   GridToolbarFilterButton,
 } from "@mui/x-data-grid";
+import { Grid } from "@mui/material";
 
 const MuiToolbar = ({ children, tools }) => {
   return (
-    <Box>
-      <GridToolbarContainer
-        sx={{
-          display: "flex",
-          justifyContent: "space-between",
-          alignItems: "center",
-        }}
+    <GridToolbarContainer>
+      <Grid
+        container
+        justifyContent="space-between"
+        alignItems="flex-end"
+        rowSpacing={1}
       >
         {children && (
-          <Box flex={7} textAlign="left">
+          <Grid item sm={12} md={8.2}>
             {children}
-          </Box>
+          </Grid>
         )}
         {tools && (
-          <Box flex={4} textAlign="right">
+          <Grid item sm={12} md={3.4} textAlign="right">
             {tools.includes("column") && <GridToolbarColumnsButton />}
             {tools.includes("filter") && <GridToolbarFilterButton />}
             {tools.includes("export") && (
@@ -31,10 +30,10 @@ const MuiToolbar = ({ children, tools }) => {
                 printOptions={{ disableToolbarButton: true }}
               />
             )}
-          </Box>
+          </Grid>
         )}
-      </GridToolbarContainer>
-    </Box>
+      </Grid>
+    </GridToolbarContainer>
   );
 };
 

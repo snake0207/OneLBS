@@ -67,8 +67,8 @@ export const MuiMainButton = ({ name, title, href, onClick }) => {
 export const MuiSubButton = ({
   name,
   title,
-  medium,
-  outlined,
+  size = "small",
+  variant = "outlined",
   href,
   onClick,
 }) => {
@@ -78,10 +78,10 @@ export const MuiSubButton = ({
     <Button
       disableElevation
       fullWidth
-      size={medium ? "medium" : "small"}
+      size={size}
       color={buttonUI[_name].color}
-      href={href || null}
-      variant={outlined ? "outlined" : "contained"}
+      href={href}
+      variant={variant}
       onClick={onClick}
     >
       {title}

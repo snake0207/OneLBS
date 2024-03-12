@@ -8,9 +8,10 @@ const MuiPcDatePicker = (props) => {
       id={name}
       name={name}
       label={label}
-      format="YYYY-MM-DD"
+      format="MM/DD/YYYY"
       value={value}
       onChange={onChange}
+      sx={{ width: "100%" }}
       slotProps={{
         switchViewIcon: {
           sx: { color: "secondary.main", fontSize: "1.5rem" },

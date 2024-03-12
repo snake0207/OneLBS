@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Box, Stack, Typography } from "@mui/material";
+import { Box, Grid, Stack, Typography } from "@mui/material";
 import axios from "axios";
 import {
   MuiAlert,
@@ -24,7 +24,7 @@ const columns = [
   {
     field: "title",
     headerName: "Title",
-    flex: 1,
+    flex: 1.5,
     renderCell: (params) => (
       <Typography color="secondary.darker">{params.row.title}</Typography>
     ),
@@ -53,13 +53,11 @@ const columns = [
           <MuiSubButton
             name="edit"
             title="수정"
-            outlined
             onClick={() => console.log(`편집 버튼 click : ${params.row.id}`)}
           />
           <MuiSubButton
             name="delete"
             title="삭제"
-            outlined
             onClick={() => console.log(`삭제 버튼 click : ${params.row.id}`)}
           />
         </Stack>
@@ -75,11 +73,11 @@ const FormList = (props) => {
 
   const [error, setError] = useState("");
   const DATA_PER_PAGE = 50;
-  const [apiParams, setApiParams] = useState({
+  const [queryParams, setQueryParams] = useState({
     page: 1,
     rating: 8,
     sdate: dayjs(new Date()),
-    edate: dayjs(new Date()),
+    edate: dayjs(new Date()).add(7, 'day'),
   });
 
   const getMovies = async () => {
@@ -88,9 +86,9 @@ const FormList = (props) => {
         method: "get", // delete, post, put
         url: process.env.REACT_APP_MOVIE_URL,
         params: {
-          minimum_rating: apiParams.rating,
+          minimum_rating: queryParams.rating,
           limit: DATA_PER_PAGE,
-          page: apiParams.page,
+          page: queryParams.page,
           sort_by: "year",
         },
       });
@@ -119,7 +117,7 @@ const FormList = (props) => {
     const rowCount = (currPage + 1) * pageSize;
 
     if (currPage > 0 && rowCount >= data.movies.length) {
-      setApiParams({ ...apiParams, page: apiParams.page + 1 });
+      setQueryParams({ ...queryParams, page: queryParams.page + 1 });
       setApiCall((prev) => !prev);
     }
   };
@@ -132,7 +130,7 @@ const FormList = (props) => {
   };
 
   const handleSearchCallback = (searchWords) => {
-    setApiParams({ ...apiParams, rating: searchWords });
+    setQueryParams({ ...queryParams, rating: searchWords });
   };
 
   // 실행 버튼을 누른경우 API 호출할 수 있도록 한다
@@ -140,7 +138,7 @@ const FormList = (props) => {
     console.log("handleExecuteQuery call...");
 
     setData({ movie_count: 0, movies: [] });
-    setApiParams({ ...apiParams, page: 1 });
+    setQueryParams({ ...queryParams, page: 1 });
     setApiCall((prev) => !prev);
   };
 
@@ -155,57 +153,70 @@ const FormList = (props) => {
             rows={data.movies}
             rowCount={data.movie_count}
             columns={columns}
-            sort={{ field: "rating", orderby: "desc" }}
+            sort={{ field: "id", orderby: "desc" }}
             onPageChange={handleOnPageChange}
             onRowClick={handleRowClick}
             component={
-              <Box
-                display="flex"
+              <Grid
+                container
                 justifyContent="space-between"
                 alignItems="center"
+                rowSpacing={1.5}
+                columnSpacing={0.4}
               >
-                <Box flex={1.2} mr={0.2}>
+                <Grid item xs={10} sm={10} md={4}>
                   <MuiSearch startIcon callback={handleSearchCallback} />
-                </Box>
-                <Box flex={1.8}>
+                </Grid>
+                <Grid item xs={10} sm={10} md={6}>
                   <LocalizationProvider
                     dateAdapter={AdapterDayjs}
                     adapterLocale="ko"
                   >
-                    <Stack direction="row" spacing={0.2}>
-                      <MuiPcDatePicker
-                        name="sdate"
-                        label="시작일"
-                        value={apiParams.sdate}
-                        onChange={(value) =>
-                          setApiParams({ ...apiParams, sdate: dayjs(value) })
-                        }
-                      />
-                      <MuiPcDatePicker
-                        name="edate"
-                        label="종료일"
-                        value={apiParams.edate}
-                        onChange={(value) =>
-                          setApiParams({ ...apiParams, edate: dayjs(value) })
-                        }
-                      />
-                    </Stack>
+                    <Grid container alignItems="center">
+                      <Grid item xs={5.9}>
+                        <MuiPcDatePicker
+                          name="sdate"
+                          label="시작일"
+                          value={queryParams.sdate}
+                          onChange={(value) =>
+                            setQueryParams({
+                              ...queryParams,
+                              sdate: dayjs(value),
+                            })
+                          }
+                        />
+                      </Grid>
+                      <Grid item xs={0.2} />
+                      <Grid item xs={5.9}>
+                        <MuiPcDatePicker
+                          name="edate"
+                          label="종료일"
+                          value={queryParams.edate}
+                          onChange={(value) =>
+                            setQueryParams({
+                              ...queryParams,
+                              edate: dayjs(value),
+                            })
+                          }
+                        />
+                      </Grid>
+                    </Grid>
                   </LocalizationProvider>
-                </Box>
-                <Box flex={0.2} ml={0.4}>
+                </Grid>
+                <Grid item xs={1.8}>
                   <MuiSubButton
                     name="create"
-                    title="실행"
-                    medium={true}
+                    title="조회"
+                    variant="contained"
                     onClick={handleExecuteQuery}
                   />
-                </Box>
-              </Box>
+                </Grid>
+              </Grid>
             }
             activeTools={["column", "filter", "export"]}
             // 검색어 입력, 날짜를 변경한 경우만 page:1로 설정됨.
             // 이 정보를 기준으로 하단의 page를 1페이지로 이동시킬 수 있음
-            pageInit={apiParams.page === 1 ? true : false}
+            pageInit={queryParams.page === 1 ? true : false}
           />
         )
       )}

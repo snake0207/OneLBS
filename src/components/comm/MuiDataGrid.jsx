@@ -39,6 +39,7 @@ const gridProps = {
   },
 };
 
+// list 하단의 페이징 표시 영역
 const CustomPagination = ({ onPageChange, pageInit }) => {
   const apiRef = useGridApiContext();
   const selector = useGridSelector(apiRef, gridPageSelector);
@@ -73,10 +74,6 @@ const MuiDataGrid = ({
   activeTools,
   pageInit,
 }) => {
-  //
-  // console.log("apiCall : ", apiCall);
-  //
-
   return (
     <Box sx={{ ...gridBoxProps }}>
       <DataGrid

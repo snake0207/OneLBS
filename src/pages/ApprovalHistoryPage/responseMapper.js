@@ -107,44 +107,59 @@ const dealerInfo = (data) => {
  * @param res
  * @returns {{approvalInfo: *, poiId: *, category: *, status: string, basicInfo: {address: *, position: *, title: *}, evChargerInfo?: *, fuelInfo?: *, parkingInfo?: *, h2ChargingInfo?: *, dealerInfo?: *}}
  */
-const detailResponseDataMapper = (res) => {
-    const data = res?.data?.result[0]
+const detailResponseDataMapper = ({ data }) => {
+    if (!data?.data || !Object.keys(data?.data).length) return
+
+    console.log('RES >>>>>> ', data)
+    const requestData = data?.data?.request
+    const originData = requestData?.originData
+    const editData = requestData?.editData
     const basicData = {
-        status: 'rejected_approval',
         // category: 'h2Charging',
-        // status: res.data.status, // service에서 보내줄 결재이력 상태값
-        category: parseCategory(data) || '',
+        status: requestData?.status, // service에서 보내줄 결재이력 상태값
+        category: parseCategory(requestData) || '',
         approvalInfo: {
-            requestComment: res?.data.requestComment || '',
-            reviewerComment: res?.data.reviewerComment || '',
-            approverComment: res?.data.managerComment || '',
+            requestComment: requestData.requestComment || '',
+            reviewerComment: requestData.reviewerComment || '',
+            approverComment: requestData.managerComment || '',
             approvalLineContents: {
                 requester: {
-                    team: res?.data.userTeam || '',
-                    name: res?.data.userName || '',
-                    date: res?.data.requestDtString || '',
+                    id: requestData.userId,
+                    team: requestData.userTeam || '',
+                    name: requestData.userName || '',
+                    date: requestData.requestDtString || '',
                 },
                 reviewer: {
-                    team: res?.data.reviewerTeam || '',
-                    name: res?.data.reviewerName || '',
-                    date: res?.data.reviewDtString || '',
+                    id: requestData.reviewerId,
+                    team: requestData.reviewerTeam || '',
+                    name: requestData.reviewerName || '',
+                    date: requestData.reviewDtString || '',
                 },
                 approver: {
-                    team: res?.data.managerTeam || '',
-                    name: res?.data.managerName || '',
-                    date: res?.data.manageDtString || '',
+                    id: requestData.managerId,
+                    team: requestData.managerTeam || '',
+                    name: requestData.managerName || '',
+                    date: requestData.manageDtString || '',
                 },
             },
-            historyList: res?.data.historyList || [],
+            historyList: requestData.requestLog || [],
         },
-        poiId: data?.poiId || '',
+        poiId: requestData?.poiId || '',
         basicInfo: {
-            title: data?.title || '',
-            address: data?.address || '',
-            position: data?.position || {},
+            title: originData?.title || '',
+            address: originData?.address || '',
+            position: originData?.position || {},
+        },
+        editData: {
+            basicInfo: {
+                title: editData.title,
+                address: editData.address || '',
+                position: editData.position || {},
+            },
+            ...setCategoryData({ category: parseCategory(requestData) }, editData),
         },
     }
-    return setCategoryData(basicData, data)
+    return setCategoryData(basicData, requestData)
 }
 
 /**
@@ -187,15 +202,15 @@ const gpssListResponseDataMapper = (res) => {
 const setCategoryData = (basicData, originData) => {
     switch (basicData.category) {
         case 'evCharging':
-            return { ...basicData, evChargingInfo: evChargerInfo(originData.evCharging) }
+            return { ...basicData, evCharging: evChargerInfo(originData.evCharging) }
         case 'fuel':
-            return { ...basicData, fuelInfo: fuelInfo(originData.fuel) }
+            return { ...basicData, fuel: fuelInfo(originData.fuel) }
         case 'parking':
-            return { ...basicData, parkingInfo: parkingInfo(originData.parking) }
+            return { ...basicData, parking: parkingInfo(originData.parking) }
         case 'h2Charging':
-            return { ...basicData, h2ChargingInfo: h2ChargingInfo(originData.h2Charging) }
+            return { ...basicData, h2Charging: h2ChargingInfo(originData.h2Charging) }
         case 'dealerPoi':
-            return { ...basicData, dealerPoiInfo: dealerInfo(originData.dealerPoi) }
+            return { ...basicData, dealerPoi: dealerInfo(originData.dealerPoi) }
     }
 }
 

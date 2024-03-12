@@ -157,11 +157,9 @@ const gpssDetailResponseDataMapper = (res) => {
         category: parseCategory(data),
         cpType: parsePoiProviderType(data.poiId),
         poiId: data.poiId,
-        basicInfo: {
-            title: data.title,
-            address: data.address,
-            position: data.position,
-        },
+        title: data.title,
+        address: data.address,
+        position: data.position,
     }
     return setCategoryData(basicData, data)
 }

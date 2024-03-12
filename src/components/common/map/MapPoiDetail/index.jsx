@@ -43,11 +43,7 @@ const MapPoiDetail = ({ selectedPoi, setSelectedPoi, poiData }) => {
             <Box sx={style.mapDetailBox}>
                 <Box sx={style.mapDetail}>
                     {/* 상세 기본 정보 */}
-                    <BasicInfo
-                        poiData={parsedData.basicInfo}
-                        tabSelected={'info'}
-                        isEditable={isEditable}
-                    />
+                    <BasicInfo poiData={parsedData} tabSelected={'info'} isEditable={isEditable} />
                     {/* EV Charging */}
                     {!!parsedData.evChargingInfo && (
                         <Box>

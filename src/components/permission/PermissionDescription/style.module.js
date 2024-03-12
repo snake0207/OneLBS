@@ -4,6 +4,7 @@ const style = {
         justifyContent: 'flex-start',
         alignItems: 'center',
         p: '16px 14px',
+        mt: '10px',
         border: 0,
         backgroundColor: 'background.grayCard',
         borderRadius: '8px',

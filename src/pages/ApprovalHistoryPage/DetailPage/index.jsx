@@ -152,7 +152,7 @@ const ApprovalHistoryDetailPage = () => {
                             position: 'relative',
                             borderRadius: '0',
                             boxShadow: 'none',
-                            m: '-74px 0 0 0',
+                            m: '64px 0 0 0',
                             p: '0',
                             height: '100%',
                             overflowY: 'inherit',
@@ -274,7 +274,13 @@ const ApprovalHistoryDetailPage = () => {
                                     rows={3}
                                     value={formik.values['requestComment']}
                                     onChange={formik.handleChange}
-                                    sx={{ backgroundColor: 'form.main', borderRadius: '4px' }}
+                                    sx={{
+                                        backgroundColor: 'form.main',
+                                        borderRadius: '4px',
+                                        '& .MuiOutlinedInput-notchedOutline': {
+                                            borderColor: 'form.border',
+                                        },
+                                    }}
                                 />
                             ) : (
                                 <Typography>{formik.values['requestComment'] || '-'}</Typography>

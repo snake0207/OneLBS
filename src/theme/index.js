@@ -296,6 +296,7 @@ export const getThemeSettings = (mode) => ({
                       header: tokens.border[1000],
                       close: tokens.border[1000],
                       grayFlag: tokens.border[900],
+                      lineblueBoder: tokens.button[4000],
                   },
                   table: {
                       td: tokens.table[100],
@@ -439,6 +440,7 @@ export const getThemeSettings = (mode) => ({
                       header: tokens.border[300],
                       close: tokens.border[500],
                       grayFlag: tokens.border[500],
+                      lineblueBoder: tokens.button[600],
                   },
                   table: {
                       td: tokens.table[500],

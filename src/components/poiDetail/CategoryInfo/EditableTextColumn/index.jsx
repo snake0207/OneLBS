@@ -18,7 +18,7 @@ const EditableTextColumn = ({ value, name, isEditable, formik }) => {
     const editButtonIcon = themeMode === 'light' ? EditIcon : EditIconDark
     const saveButtonIcon = themeMode === 'light' ? SaveIcon : SaveIconDark
     const editButtonBackground = themeMode === 'light' ? '#CFE5FF' : '#002C5F'
-    const saveButtonBackground = themeMode === 'light' ? '#002C5F' : '#002C5F'
+    const saveButtonBackground = themeMode === 'light' ? '#002C5F' : '#0057BB'
 
     const handleClickInputButton = () => {
         setIsShowInput(true)

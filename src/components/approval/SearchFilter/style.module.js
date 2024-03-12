@@ -2,6 +2,7 @@ const style = {
     searchBox: {
         width: '100%',
         p: '16px 20px 12px 20px',
+        mb: '16px',
         '& .MuiGrid2-root': {
             mb: '3px',
         },

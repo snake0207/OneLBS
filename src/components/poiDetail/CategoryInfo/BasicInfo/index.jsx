@@ -554,7 +554,7 @@ const BasicInfo = ({ formik, poiData, tabSelected, isEditable }) => {
             ) : (
                 <Typography
                     variant={'body1'}
-                    sx={{ whiteSpace: 'pre-wrap', wordBreak: 'break-word' }}
+                    sx={{ whiteSpace: 'pre-wrap', wordBreak: 'break-word', color: 'text.main' }}
                 >
                     {JSON.stringify(jsonSample, null, 4)}
                 </Typography>

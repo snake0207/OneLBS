@@ -1,16 +1,9 @@
 import { Box, Pagination, PaginationItem } from '@mui/material'
 import { useState } from 'react'
-import ArrowBackIcon from '@mui/icons-material/ArrowBack'
-import ArrowForwardIcon from '@mui/icons-material/ArrowForward'
-
-import KeyboardDoubleArrowLeftTwoToneIcon from '@mui/icons-material/KeyboardDoubleArrowLeftTwoTone'
-import KeyboardDoubleArrowRightTwoToneIcon from '@mui/icons-material/KeyboardDoubleArrowRightTwoTone'
 import KeyboardArrowLeftTwoToneIcon from '@mui/icons-material/KeyboardArrowLeftTwoTone'
 import KeyboardArrowRightTwoToneIcon from '@mui/icons-material/KeyboardArrowRightTwoTone'
 
-import style from './style.module'
-
-const CommonPagination = ({ dataLength, onChangePageFunction }) => {
+const CommonPagination = ({ dataLength = 0, onChangePageFunction }) => {
     const [currentPage, setCurrentPage] = useState(1)
 
     const handleChangeCurrentPage = (event, page) => {

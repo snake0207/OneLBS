@@ -9,7 +9,7 @@ const style = {
         bgcolor: 'color.dashboardCnt',
         borderRadius: 2,
         boxShadow: '0 3px 14px rgb(0 0 0 / 24%)',
-        height: 'calc(100vh - 375px)',
+        height: 'calc(100vh - 367px)',
         justifyContent: 'center',
         '@media (max-width:1024px)': {
             boxShadow: 'none',

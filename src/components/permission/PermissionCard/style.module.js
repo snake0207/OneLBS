@@ -59,10 +59,6 @@ const style = {
         ml: '6px',
         p: '0 10px',
         boxShadow: 'none',
-        '&:hover': {
-            backgroundColor: 'button.main',
-            boxShadow: 'none',
-        },
     },
 
     cardContBox: {

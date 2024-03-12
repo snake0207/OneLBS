@@ -37,7 +37,7 @@ function POISearchPage() {
                 <Icon
                     style={{
                         display: 'flex',
-                        position: 'absolute',
+                        position: 'fixed',
                         top: ' 75px',
                         zIndex: '4',
                     }}
@@ -89,8 +89,8 @@ function POISearchPage() {
                                 width: '40px',
                                 height: '40px',
                                 minWidth: '40px',
-                                mt: '8px',
-                                ml: '8px',
+                                mt: '10px',
+                                ml: '10px',
                                 borderRadius: '8px',
                                 backgroundColor: '#0057BB',
                                 boxShadow: '0 3px 14px rgb(0 0 0 / 24%)',

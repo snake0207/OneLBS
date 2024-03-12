@@ -19,4 +19,12 @@ export const API_PATH = {
         gpss_detail: '/adminmgmt/api/v1/search/detail-search',
         gpss_suggestion: '/adminmgmt/api/v1/search/suggest',
     },
+    approval: {
+        history_list: '/approval-history-list',
+    },
+    permission: {
+        role_menu_permission: '/user-auth/api/v1/auth/role-menu-permission',
+        role_change_user_list: '/user-auth/api/v1/auth/role-change-user-list',
+        target_userId_role: (targetUserId) => `/user-auth/api/v1/auth/${targetUserId}/role`,
+    },
 }

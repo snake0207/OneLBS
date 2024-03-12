@@ -9,4 +9,11 @@ export const QUERY_KEYS = {
     auth: {
         getIp: 'get-ip',
     },
+    approval: {
+        getHistoryList: 'get_history_list',
+    },
+    permission: {
+        roleMenuPermission: 'role_menu_permission',
+        roleChangeUserList: 'role_change_user_list',
+    },
 }

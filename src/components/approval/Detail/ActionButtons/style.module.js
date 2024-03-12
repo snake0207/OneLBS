@@ -30,11 +30,11 @@ const style = {
     },
     lineButton: {
         borderRadius: '4px',
-        color: '#00418D',
         ml: '4px',
         flex: 1,
+        color: 'text.lineblue',
         border: '1px solid',
-        borderColor: 'button.whiteBoder',
+        borderColor: 'button.lineblue',
         backgroundColor: 'button.white',
         boxShadow: 'none',
         '&:hover': {

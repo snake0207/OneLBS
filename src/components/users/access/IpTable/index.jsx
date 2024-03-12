@@ -19,7 +19,7 @@ function IpTabel({ rows, onChangePage, onEdit, onDelete }) {
     }
 
     return (
-        <Box sx={style.contentBox}>
+        <Box>
             <Table sx={style.tableBox}>
                 <TableHead>
                     <TableRow>

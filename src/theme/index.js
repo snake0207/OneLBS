@@ -123,6 +123,7 @@ export const tokens = {
         700: '#05141f',
         800: '#1E3343',
         900: '#2B4D66',
+        1000: '#002C5F',
     },
     lnb: {
         100: '#fff',
@@ -155,6 +156,7 @@ export const tokens = {
         700: '#e2e2e2',
         800: '#385264',
         900: '#33aed6',
+        1000: '#a0a4a7',
     },
     dialog: {
         100: '#fff',
@@ -216,7 +218,6 @@ export const getThemeSettings = (mode) => ({
                       alert: tokens.color[1000],
                       alertBtn: tokens.color[5001],
                       dashboard: tokens.color[701],
-                      germanyBox: tokens.color[8001],
                       germany: tokens.color[9001],
                       dashboardCnt: tokens.color[300],
                       banner: tokens.color[5001],
@@ -224,6 +225,7 @@ export const getThemeSettings = (mode) => ({
                       closeBg: tokens.color[100],
                       swiper: tokens.color[900],
                       gusest: tokens.color[20001],
+                      sidemenu: tokens.color[600],
                   },
                   button: {
                       ...tokens.button,
@@ -235,7 +237,7 @@ export const getThemeSettings = (mode) => ({
                       gray: tokens.button[400],
                       white: tokens.button[100],
                       map: tokens.button[4000],
-                      lineblue: tokens.button[4000],
+                      lineblue: tokens.button[6000],
                       moreBtn: tokens.button[200],
                       lightblueBoder: tokens.button[1001],
                       blueBoder: tokens.button[1001],
@@ -255,6 +257,7 @@ export const getThemeSettings = (mode) => ({
                       dashboard: tokens.text[600],
                       close: tokens.text[500],
                       blue: tokens.text[200],
+                      lineblue: tokens.text[1000],
                   },
                   background: {
                       default: tokens.background[100],
@@ -271,6 +274,7 @@ export const getThemeSettings = (mode) => ({
                       mapTaps: tokens.background[200],
                       accordion: tokens.background[600],
                       grayCard: tokens.background[200],
+                      darkgray: tokens.background[900],
                   },
                   lnb: {
                       mobilelnb: tokens.lnb[100],
@@ -290,8 +294,9 @@ export const getThemeSettings = (mode) => ({
                       tabs: tokens.border[700],
                       tabSelected: tokens.border[500],
                       header: tokens.border[1000],
-                      map: tokens.border[700],
                       close: tokens.border[1000],
+                      grayFlag: tokens.border[900],
+                      lineblueBoder: tokens.button[4000],
                   },
                   table: {
                       td: tokens.table[100],
@@ -305,6 +310,7 @@ export const getThemeSettings = (mode) => ({
                       viewBorder: tokens.table[500],
                       viewTopBorder: tokens.table[200],
                       borderlight: tokens.table[200],
+                      menuTh: tokens.table[700],
                   },
                   dialog: {
                       main: tokens.dialog[100],
@@ -355,7 +361,6 @@ export const getThemeSettings = (mode) => ({
                       alert: tokens.color[7001],
                       alertBtn: tokens.color[100],
                       dashboard: tokens.color[100],
-                      germanyBox: tokens.color[1001],
                       germany: tokens.color[901],
                       dashboardCnt: tokens.color[701],
                       banner: tokens.color[10001],
@@ -364,6 +369,7 @@ export const getThemeSettings = (mode) => ({
                       closeBg: tokens.color[1001],
                       swiper: tokens.color[100],
                       gusest: tokens.color[30001],
+                      sidemenu: tokens.color[7001],
                   },
                   button: {
                       ...tokens.button,
@@ -375,7 +381,7 @@ export const getThemeSettings = (mode) => ({
                       lightgray: tokens.button[8000],
                       white: tokens.button[8000],
                       map: tokens.button[4000],
-                      lineblue: tokens.button[800],
+                      lineblue: tokens.button[9000],
                       moreBtn: tokens.button[9000],
                       lightblueBoder: tokens.button[700],
                       blueBoder: tokens.button[900],
@@ -395,6 +401,7 @@ export const getThemeSettings = (mode) => ({
                       dashboard: tokens.text[100],
                       close: tokens.text[400],
                       blue: tokens.text[300],
+                      lineblue: tokens.text[100],
                   },
                   background: {
                       default: tokens.background.main,
@@ -411,6 +418,7 @@ export const getThemeSettings = (mode) => ({
                       mapTaps: tokens.background[1000],
                       accordion: tokens.background[500],
                       grayCard: tokens.background[800],
+                      darkgray: tokens.background[300],
                   },
                   lnb: {
                       mobilelnb: tokens.lnb[200],
@@ -430,8 +438,9 @@ export const getThemeSettings = (mode) => ({
                       tabs: tokens.border[800],
                       tabSelected: tokens.border[600],
                       header: tokens.border[300],
-                      map: tokens.border[300],
                       close: tokens.border[500],
+                      grayFlag: tokens.border[500],
+                      lineblueBoder: tokens.button[600],
                   },
                   table: {
                       td: tokens.table[500],
@@ -445,6 +454,7 @@ export const getThemeSettings = (mode) => ({
                       viewBorder: tokens.table[800],
                       viewTopBorder: tokens.table[600],
                       borderlight: tokens.table[300],
+                      menuTh: tokens.table[1000],
                   },
                   dialog: {
                       main: tokens.dialog[400],

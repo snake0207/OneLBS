@@ -10,7 +10,7 @@ function Header1Depth() {
     const { themeMode } = useLayoutStore()
     return (
         <AppBar
-            position="absolute"
+            position="fixed"
             sx={{
                 backgroundColor: 'background.mobile',
                 boxShadow: 'none',

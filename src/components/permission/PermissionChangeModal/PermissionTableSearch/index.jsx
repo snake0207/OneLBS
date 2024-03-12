@@ -1,5 +1,4 @@
 import { Box, Button, Typography } from '@mui/material'
-import RefreshIcon from '@mui/icons-material/Refresh'
 import { useFormik } from 'formik'
 import TextInput from '#/components/common/input/TextInput'
 import Select from '#/components/common/Select'
@@ -7,14 +6,16 @@ import {
     usePermissionSearchActions,
     usePermissionSearchRoleIdState,
 } from '#/store/usePermissionSearchStore'
-import ResetIcon from '#/assets/resetIcon.svg'
-import style from './style.module'
+import { ROLE_SEARCH_SELECT_LIST } from '#/contents/constant'
 
 import t from '#/common/libs/trans'
 
+import style from './style.module'
+import ResetIcon from '#/assets/resetIcon.svg'
+
 const PermissionTableSearch = () => {
     const roleId = usePermissionSearchRoleIdState()
-    const { resetPermissionSearchStore } = usePermissionSearchActions()
+    const { resetPermissionSearchStore, setPermissionSearchStore } = usePermissionSearchActions()
 
     const formik = useFormik({
         initialValues: {
@@ -23,20 +24,12 @@ const PermissionTableSearch = () => {
             roleId,
         },
         onSubmit: (form) => {
-            console.log(form)
+            setPermissionSearchStore({ page: 1, ...form })
         },
     })
 
-    const roleList = [
-        { value: '0', label: '전체', key: 0 },
-        { value: '25', label: '일반 사용자', key: 1 },
-        { value: '26', label: '요청자', key: 2 },
-        { value: '27', label: '검토자', key: 3 },
-        { value: '28', label: '승인자', key: 4 },
-        { value: '29', label: '운영자', key: 5 },
-    ]
-
     const handleClickSearchRefresh = () => {
+        formik.resetForm()
         resetPermissionSearchStore()
     }
 
@@ -61,7 +54,12 @@ const PermissionTableSearch = () => {
                 </Box>
                 <Box sx={{ display: 'flex', alignItems: 'center', flex: 1, ml: '20px' }}>
                     <Typography sx={style.labelText}>{t('status', 'permission')}</Typography>
-                    <Select name={'roleId'} items={roleList} formik={formik} size="small" />
+                    <Select
+                        name={'roleId'}
+                        items={ROLE_SEARCH_SELECT_LIST}
+                        formik={formik}
+                        size="small"
+                    />
                 </Box>
                 <Button
                     variant="contained"

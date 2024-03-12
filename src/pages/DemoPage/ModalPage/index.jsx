@@ -14,7 +14,7 @@ const ModalPage = () => {
     const [isOpenOtpGuideModal, setIsOpenOtpGuideModal] = useState(false)
     const [isOpenPasswordChangeModal, setIsOpenPasswordChangeModal] = useState(false)
     const [isOpenPermissionChangeModal, setIsOpenPermissionChangeModal] = useState(false)
-    const [isOpenMenuChangeModal, setIsOpenMenuChangeModal] = useState(true)
+    const [isOpenMenuChangeModal, setIsOpenMenuChangeModal] = useState(false)
     return (
         <div>
             <h1>Modal</h1>

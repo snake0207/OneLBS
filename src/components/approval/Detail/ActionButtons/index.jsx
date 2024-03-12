@@ -2,14 +2,14 @@ import { Button } from '@mui/material'
 import t from '#/common/libs/trans.js'
 import style from './style.module'
 
-const requesterButtons = (status, clickAction, id) => {
+const requesterButtons = (status, clickAction) => {
     switch (status) {
         case 'temporary':
             return (
                 <>
                     <Button
                         variant="contained"
-                        onClick={() => clickAction('temporary', id)}
+                        onClick={() => clickAction('temporary')}
                         /* 버튼 클래스명 : darkBlueButton, lightButton, lineButton, blueButton */
                         sx={style.darkBlueButton}
                     >
@@ -17,7 +17,7 @@ const requesterButtons = (status, clickAction, id) => {
                     </Button>
                     <Button
                         variant="contained"
-                        onClick={() => clickAction('re_request', id)}
+                        onClick={() => clickAction('re_request')}
                         sx={style.blueButton}
                     >
                         {t(`actions.re_request`, 'approval')}
@@ -29,14 +29,14 @@ const requesterButtons = (status, clickAction, id) => {
                 <>
                     <Button
                         variant="contained"
-                        onClick={() => clickAction('temporary', id)}
+                        onClick={() => clickAction('temporary')}
                         sx={style.darkBlueButton}
                     >
                         {t(`actions.temporary`, 'approval')}
                     </Button>
                     <Button
                         variant="contained"
-                        onClick={() => clickAction('retrieve', id)}
+                        onClick={() => clickAction('retrieve')}
                         sx={style.lightButton}
                     >
                         {t(`actions.retrieve`, 'approval')}
@@ -48,14 +48,14 @@ const requesterButtons = (status, clickAction, id) => {
                 <>
                     <Button
                         variant="contained"
-                        onClick={() => clickAction('temporary', id)}
+                        onClick={() => clickAction('temporary')}
                         sx={style.darkBlueButton}
                     >
                         {t(`actions.temporary`, 'approval')}
                     </Button>
                     <Button
                         variant="contained"
-                        onClick={() => clickAction('retrieve', id)}
+                        onClick={() => clickAction('retrieve')}
                         sx={style.blueButton}
                     >
                         {t(`actions.retrieve`, 'approval')}
@@ -65,28 +65,28 @@ const requesterButtons = (status, clickAction, id) => {
     }
 }
 
-const reviewerButtons = (status, clickAction, id) => {
+const reviewerButtons = (status, clickAction) => {
     switch (status) {
         case 'request':
             return (
                 <>
                     <Button
                         variant="contained"
-                        onClick={() => clickAction('temporary', id)}
+                        onClick={() => clickAction('temporary')}
                         sx={style.darkBlueButton}
                     >
                         {t(`actions.temporary`, 'approval')}
                     </Button>
                     <Button
                         variant="contained"
-                        onClick={() => clickAction('approval', id)}
+                        onClick={() => clickAction('approval')}
                         sx={style.darkBlueButton}
                     >
                         {t(`actions.approval`, 'approval')}
                     </Button>
                     <Button
                         variant="contained"
-                        onClick={() => clickAction('reject_review', id)}
+                        onClick={() => clickAction('reject_review')}
                         sx={style.lineButton}
                     >
                         {t(`actions.reject`, 'approval')}
@@ -98,7 +98,7 @@ const reviewerButtons = (status, clickAction, id) => {
                 <>
                     <Button
                         variant="contained"
-                        onClick={() => clickAction('temporary', id)}
+                        onClick={() => clickAction('temporary')}
                         sx={style.darkBlueButton}
                     >
                         {t(`actions.temporary`, 'approval')}
@@ -110,14 +110,14 @@ const reviewerButtons = (status, clickAction, id) => {
                 <>
                     <Button
                         variant="contained"
-                        onClick={() => clickAction('temporary', id)}
+                        onClick={() => clickAction('temporary')}
                         sx={style.darkBlueButton}
                     >
                         {t(`actions.temporary`, 'approval')}
                     </Button>
                     <Button
                         variant="contained"
-                        onClick={() => clickAction('retrieve', id)}
+                        onClick={() => clickAction('retrieve')}
                         sx={style.lightButton}
                     >
                         {t(`actions.retrieve`, 'approval')}
@@ -129,14 +129,14 @@ const reviewerButtons = (status, clickAction, id) => {
                 <>
                     <Button
                         variant="contained"
-                        onClick={() => clickAction('temporary', id)}
+                        onClick={() => clickAction('temporary')}
                         sx={style.darkBlueButton}
                     >
                         {t(`actions.temporary`, 'approval')}
                     </Button>
                     <Button
                         variant="contained"
-                        onClick={() => clickAction('re_request', id)}
+                        onClick={() => clickAction('re_request')}
                         sx={style.blueButton}
                     >
                         {t(`actions.re_request`, 'approval')}
@@ -146,21 +146,21 @@ const reviewerButtons = (status, clickAction, id) => {
     }
 }
 
-const approverButtons = (status, clickAction, id) => {
+const approverButtons = (status, clickAction) => {
     switch (status) {
         case 'reviewed':
             return (
                 <>
                     <Button
                         variant="contained"
-                        onClick={() => clickAction('approval', id)}
+                        onClick={() => clickAction('approval')}
                         sx={style.darkBlueButton}
                     >
                         {t(`actions.approval`, 'approval')}
                     </Button>
                     <Button
                         variant="contained"
-                        onClick={() => clickAction('reject_approval', id)}
+                        onClick={() => clickAction('reject_approval')}
                         sx={style.lineButton}
                     >
                         {t(`actions.reject`, 'approval')}
@@ -170,14 +170,14 @@ const approverButtons = (status, clickAction, id) => {
     }
 }
 
-const ActionButtons = ({ type, status, clickAction, id }) => {
+const ActionButtons = ({ type, status, clickAction }) => {
     switch (type) {
         case 'requester':
-            return requesterButtons(status, clickAction, id)
+            return requesterButtons(status, clickAction)
         case 'reviewer':
-            return reviewerButtons(status, clickAction, id)
+            return reviewerButtons(status, clickAction)
         case 'approver':
-            return approverButtons(status, clickAction, id)
+            return approverButtons(status, clickAction)
     }
 }
 export default ActionButtons

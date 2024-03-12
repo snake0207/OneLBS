@@ -55,14 +55,13 @@ const EvChargingInfo = ({ data, isEditable, formik }) => {
             <AccordionDetails>
                 <EditableTextColumn
                     value={data.brand}
-                    name={'evChargingInfo.brand'}
+                    name={'evCharging.brand'}
                     isEditable={isEditable}
                     formik={formik}
                 />
-                {data.parkingFee}
                 <EditableSelectColumn
                     value={data.parkingFee}
-                    name={'evChargingInfo.parkingFee'}
+                    name={'evCharging.parkingFee'}
                     items={selectParkingFeeItems.current}
                     isEditable={isEditable}
                     formik={formik}
@@ -158,7 +157,7 @@ const EvChargingInfo = ({ data, isEditable, formik }) => {
                                       <Typography>{charger.id || '-'}</Typography>
                                       <EditableSelectColumn
                                           value={charger.speed}
-                                          name={`evChargingInfo.chargers.${index}.speed`}
+                                          name={`evCharging.chargers.${index}.speed`}
                                           items={selectSpeedItems.current}
                                           isEditable={isEditable}
                                           formik={formik}
@@ -166,7 +165,7 @@ const EvChargingInfo = ({ data, isEditable, formik }) => {
                                       />
                                       <EditableTextColumn
                                           value={`${charger.watt}kw`}
-                                          name={`evChargingInfo.chargers.${index}.watt`}
+                                          name={`evCharging.chargers.${index}.watt`}
                                           isEditable={isEditable}
                                           formik={formik}
                                       />
@@ -174,7 +173,7 @@ const EvChargingInfo = ({ data, isEditable, formik }) => {
                                       <Typography>{charger.lastUsedTime || '-'}</Typography>
                                       <EditableSelectColumn
                                           value={charger.type}
-                                          name={`evChargingInfo.chargers.${index}.type`}
+                                          name={`evCharging.chargers.${index}.type`}
                                           items={selectTypeItems.current}
                                           isEditable={isEditable}
                                           formik={formik}

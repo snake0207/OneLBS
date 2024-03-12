@@ -22,7 +22,20 @@ const VectorMapTooltip = ({ title, categoryCountList }) => {
                 <Typography>{title}</Typography>
             </Box>
             <Box ref={emblaRef} sx={{ overflow: 'hidden' }}>
-                <Box sx={{ display: 'flex', width: '100%' }}>
+                <Box
+                    sx={{
+                        display: 'flex',
+                        width: '100%',
+                        justifyContent: 'center',
+                        '@media (max-width:1024px)': {
+                            gap: '29px',
+                        },
+                        '@media (max-width:767px)': {
+                            gap: '0px',
+                            justifyContent: 'flex-start',
+                        },
+                    }}
+                >
                     {categoryCountList.map((item) => (
                         <Box key={item.category} sx={style.items}>
                             <CategoryCount

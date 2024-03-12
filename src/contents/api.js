@@ -24,5 +24,7 @@ export const API_PATH = {
     },
     permission: {
         role_menu_permission: '/user-auth/api/v1/auth/role-menu-permission',
+        role_change_user_list: '/user-auth/api/v1/auth/role-change-user-list',
+        target_userId_role: (targetUserId) => `/user-auth/api/v1/auth/${targetUserId}/role`,
     },
 }

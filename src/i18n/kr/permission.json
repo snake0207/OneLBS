@@ -12,6 +12,7 @@
     "search": "검색",
     "ACTIVE": "활성화",
     "INACTIVE": "비활성화",
+    "all": "전체",
     "menu_table_header": {
         "menu": "메뉴",
         "approval": "승인(Approval)",
@@ -68,5 +69,9 @@
     "placeholder": {
         "email": "이메일을 입력해 주세요",
         "name": "이름을 입력해 주세요"
+    },
+    "alert": {
+        "permission_change_confirm": "변경 하시겠습니까?",
+        "permission_change_success": "변경 되었습니다."
     }
 }

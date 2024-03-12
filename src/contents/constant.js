@@ -21,3 +21,33 @@ export const APPROVAL_STATUS = {
     rejected_review: { text: t('status.rejected_review', 'approval') },
     rejected_approval: { text: t('status.rejected_approval', 'approval') },
 }
+
+export const ROLE_SEARCH_SELECT_LIST = [
+    { value: 0, label: t('all', 'permission'), key: 0 },
+    { value: 25, label: t('permission_name.GUEST', 'permission'), key: 1 },
+    { value: 26, label: t('permission_name.USER', 'permission'), key: 2 },
+    { value: 27, label: t('permission_name.REVIEWER', 'permission'), key: 3 },
+    { value: 28, label: t('permission_name.MANAGER', 'permission'), key: 4 },
+    { value: 29, label: t('permission_name.ADMIN', 'permission'), key: 5 },
+]
+
+export const ROLE_LIST = [
+    { value: 25, label: t('permission_name.GUEST', 'permission'), key: 1 },
+    { value: 26, label: t('permission_name.USER', 'permission'), key: 2 },
+    { value: 27, label: t('permission_name.REVIEWER', 'permission'), key: 3 },
+    { value: 28, label: t('permission_name.MANAGER', 'permission'), key: 4 },
+    { value: 29, label: t('permission_name.ADMIN', 'permission'), key: 5 },
+]
+
+export const JOIN_ROLE_LIST = [
+    { value: '25', label: t('permission_name.GUEST', 'permission'), key: 1 },
+    { value: '26', label: t('permission_name.USER', 'permission'), key: 2 },
+    { value: '27', label: t('permission_name.REVIEWER', 'permission'), key: 3 },
+    { value: '28', label: t('permission_name.MANAGER', 'permission'), key: 4 },
+    { value: '29', label: t('permission_name.ADMIN', 'permission'), key: 5 },
+]
+
+export const TERMS_LIST = [
+    { value: 'Y', label: t('personal_info_consent', 'auth') },
+    { value: 'N', label: t('disagree', 'auth') },
+]

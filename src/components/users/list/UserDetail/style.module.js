@@ -84,6 +84,7 @@ const style = {
         height: 36,
         fontWeight: 400,
         backgroundColor: 'button.main',
+        boxShadow: 'none',
         '&:hover': {
             backgroundColor: 'button.main',
         },
@@ -95,6 +96,7 @@ const style = {
         color: '#0A5CBA',
         border: '1px solid #0A5CBA',
         backgroundColor: '#E3F0FF',
+        boxShadow: 'none',
         '&:hover': {
             backgroundColor: '#E3F0FF',
         },
@@ -107,6 +109,7 @@ const style = {
         color: 'white',
         fontWeight: 400,
         backgroundColor: 'button.light',
+        boxShadow: 'none',
         '&:hover': {
             backgroundColor: 'button.light',
         },
@@ -125,6 +128,7 @@ const style = {
         border: '1px solid',
         borderColor: 'button.lineblue',
         backgroundColor: 'button.white',
+        boxShadow: 'none',
         '&:hover': {
             backgroundColor: 'button.white',
         },

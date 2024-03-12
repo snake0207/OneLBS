@@ -60,14 +60,14 @@ const MapPoiContent = ({ isLast, isGpssSearch, selectedPoi, setSelectedPoi, poiD
                                             <Chip
                                                 label={'검토대기'}
                                                 sx={{
-                                                    color: 'button.lineblue',
+                                                    color: 'border.lineblueBoder',
                                                     width: '62px',
                                                     height: '24px',
                                                     fontSize: '12px',
                                                     fontWeight: 500,
                                                     backgroundColor: 'transparent',
                                                     border: '1px solid',
-                                                    borderColor: 'button.lineblue',
+                                                    borderColor: 'border.lineblueBoder',
                                                     '& .MuiChip-label': {
                                                         p: '0',
                                                     },

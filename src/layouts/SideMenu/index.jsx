@@ -38,7 +38,9 @@ import ViewModuleIcon from '#/assets/viewModuleIcon.svg'
 import ViewModuleIconDark from '#/assets/viewModuleIconDark.svg'
 import LogoIcon from '#/assets/logo.svg'
 import LogoIconDark from '#/assets/logoDark.svg'
-import DashboardIcon from '@mui/icons-material/Dashboard'
+import DashboardIcon from '#/assets/menuIcon.svg'
+import DashboardIconDark from '#/assets/menuIconDark.svg'
+import { Close } from '@mui/icons-material'
 
 import style from './style.module'
 import { useNavigate } from 'react-router-dom'
@@ -109,7 +111,11 @@ const getMenuIcon = (key, themeMode) => {
                         height: '20px',
                     }}
                 >
-                    {themeMode === 'light' ? <DashboardIcon /> : <DashboardIcon />}
+                    {themeMode === 'light' ? (
+                        <img src={DashboardIcon} />
+                    ) : (
+                        <img src={DashboardIconDark} />
+                    )}
                 </Icon>
             )
         case 'search_management':
@@ -253,7 +259,7 @@ const createMenuItems = (menuItems, themeMode) => {
 
 const SideMenu = ({ open, toggleDrawer }) => {
     const navigate = useNavigate()
-    const { themeMode } = useLayoutStore()
+    const { themeMode, openDrawer } = useLayoutStore()
     return (
         <>
             <BrowserView>
@@ -270,8 +276,8 @@ const SideMenu = ({ open, toggleDrawer }) => {
                         <Box sx={{ m: '24px 104px 30px 24px' }}>
                             <img src={LogoIcon} onClick={() => navigate('/')} />
                         </Box>
-                        <IconButton onClick={toggleDrawer}>
-                            <ChevronLeftIcon />
+                        <IconButton onClick={toggleDrawer} sx={{ mt: '-20px', color: 'text.gray' }}>
+                            {openDrawer && <Close />}
                         </IconButton>
                     </Toolbar>
                     <List component="nav">{createMenuItems(data, themeMode)}</List>

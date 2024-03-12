@@ -11,6 +11,7 @@ import {
     IconButton,
     Typography,
 } from '@mui/material'
+import { LoadingButton } from '@mui/lab'
 import { usePostJoin } from '#/hooks/queries/auth'
 import TextInput from '#/components/common/input/TextInput'
 import PasswordInput from '#/components/common/input/PasswordInput'
@@ -26,6 +27,7 @@ import joinIconDark from '#/assets/joinIconDark.svg'
 import CloseIcon from '@mui/icons-material/Close'
 import JoinSuccessModal from '#/components/auth/authForm/joinForm/JoinSuccessModal'
 import { getLayoutState } from '#/store/useLayoutStore'
+import { JOIN_ROLE_LIST, TERMS_LIST } from '#/contents/constant'
 
 import { formatJoinData } from '#/common/libs/formatData'
 import t from '#/common/libs/trans'
@@ -34,9 +36,6 @@ import BtnArrowIcon from '#/assets/btnArrowIcon.svg'
 import BtnArrowIconDark from '#/assets/btnArrowIconDark.svg'
 
 import style from './style.module'
-
-import joinList from './list.json'
-import { LoadingButton } from '@mui/lab'
 
 const JoinModal = ({ isOpen, onClose }) => {
     const { showPopup } = usePopupActions()
@@ -184,7 +183,7 @@ const JoinModal = ({ isOpen, onClose }) => {
                     <span style={{ color: 'red' }}>*</span>
                     {t('role', 'auth')}
                 </Typography>
-                <RadioInput radioList={joinList.roleList} name={'role'} formik={formik} />
+                <RadioInput radioList={JOIN_ROLE_LIST} name={'role'} formik={formik} />
                 {formik.values.role === '29' && <IpInputGroup formik={formik} />}
                 <Box sx={{ display: 'flex', justifyContent: 'space-between', mt: 2 }}>
                     <Typography variant="h6" sx={{ fontSize: 14 }}>
@@ -211,7 +210,7 @@ const JoinModal = ({ isOpen, onClose }) => {
                     {t('guide.terms_guide', 'auth')}
                 </Typography>
                 <RadioInput
-                    radioList={joinList.termsList}
+                    radioList={TERMS_LIST}
                     name={'terms'}
                     formik={formik}
                     isDisabled={true}

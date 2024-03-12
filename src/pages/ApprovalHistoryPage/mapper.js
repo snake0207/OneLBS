@@ -181,6 +181,7 @@ const gpssListResponseDataMapper = (res) => {
                 address: poi.address,
                 position: poi.position,
                 country: poi.country,
+                countryCode: poi.countryCode,
                 progress: poi.progress ?? null,
             }),
         ),

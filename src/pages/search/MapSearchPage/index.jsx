@@ -1,7 +1,6 @@
 import t from '#/common/libs/trans'
 import GoogleMapComponent from '#/components/common/map/googleMap'
 import TitleBar from '#/components/common/menu/TitleBar'
-
 import { Box, Button, Icon } from '@mui/material'
 import { BrowserView, MobileView } from 'react-device-detect'
 import MapSearch from '#/components/common/map/MapSearch/index.jsx'

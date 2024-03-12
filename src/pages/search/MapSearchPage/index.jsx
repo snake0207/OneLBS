@@ -43,7 +43,7 @@ function MapSearchPage() {
                 <Icon
                     style={{
                         display: 'flex',
-                        position: 'absolute',
+                        position: 'fixed',
                         top: ' 75px',
                         zIndex: '4',
                     }}

@@ -1,7 +1,8 @@
 import { useMutation, useQuery } from '@tanstack/react-query'
+import permission from '#/api/permission'
 import { QUERY_KEYS } from '#/contents/queryKeys'
 import usePermissionSearchStore from '#/store/usePermissionSearchStore'
-import permission from '#/api/permission'
+import { usePermissionMenuRoleIdState } from '#/store/usePermissionMenuStore'
 
 export const useGetRoleMenuPermission = () => {
     const { data } = useQuery({
@@ -29,4 +30,14 @@ export const usePutTargetUserIdRole = () => {
     return useMutation({
         mutationFn: ({ userId, roleId }) => permission.putTargetUserIdRole(userId, roleId),
     })
+}
+
+export const useGetRoleMenu = () => {
+    const roleId = usePermissionMenuRoleIdState()
+    const { data } = useQuery({
+        queryKey: [QUERY_KEYS.permission.getRoleMenu],
+        queryFn: () => permission.getRoleMenu({ roleId }),
+    })
+
+    return { data }
 }

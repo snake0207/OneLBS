@@ -16,8 +16,13 @@ const putTargetUserIdRole = (targetUserId, roleId) => {
     })
 }
 
+const getRoleMenu = (data) => {
+    return getAPI({ endPoint: API_PATH.permission.get_role_menu, data })
+}
+
 export default {
     getRoleMenuPermission,
     getRoleChangeUserList,
     putTargetUserIdRole,
+    getRoleMenu,
 }

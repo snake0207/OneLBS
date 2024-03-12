@@ -26,5 +26,6 @@ export const API_PATH = {
         role_menu_permission: '/user-auth/api/v1/auth/role-menu-permission',
         role_change_user_list: '/user-auth/api/v1/auth/role-change-user-list',
         target_userId_role: (targetUserId) => `/user-auth/api/v1/auth/${targetUserId}/role`,
+        get_role_menu: 'user-auth/api/v1/auth/get-role-menu',
     },
 }

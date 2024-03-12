@@ -27,7 +27,7 @@ export const useGetGpssSuggestions = (requestParam) => {
         enabled: !(requestParam.keyword.length === 0),
         staleTime: 5 * 1000,
     })
-    return { data: data?.data.data.data.result ?? [], refetch }
+    return { data: data?.data?.data?.data?.result ?? [], refetch }
 }
 
 export const usePostGpssSearch = (requestParam) => {
@@ -35,7 +35,9 @@ export const usePostGpssSearch = (requestParam) => {
         queryKey: [QUERY_KEYS.gpss.search],
         queryFn: ({ pageParam }) => gpss.postGpssSearch({ ...requestParam, pageParam }),
         initialPageParam: 0,
-        getNextPageParam: (lastPage, allPages, lastPageParam, allPageParams) => {},
+        getNextPageParam: (lastPage, allPages, lastPageParam, allPageParams) => {
+            return lastPageParam + 20
+        },
         enabled: false,
     })
 

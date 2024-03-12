@@ -63,13 +63,14 @@ function MapSearchPage() {
         data: poiListData,
         isLoading: isPoiListLoading,
         refetch: fetchPoiList,
-        fetchNextPage,
+        fetchNextPage: fetchPoiListNextPage,
     } = usePostGpssSearch(searchFormik.values)
     // poi 상세 검색
     const { data: poiDetailData, refetch: fetchPoiDetail } = usePostGpssDetail({
         ...searchFormik.values,
         poiId: [selectedPoi],
     })
+
     // poi 상세 검색
     useEffect(() => {
         if (selectedPoi) fetchPoiDetail()
@@ -137,6 +138,8 @@ function MapSearchPage() {
                                         setSelectedPoi={setSelectedPoi}
                                         isGpssSearch={true}
                                         setIsNewPoiCreateOpen={setIsNewPoiCreateOpen}
+                                        fetchPoiListNextPage={fetchPoiListNextPage}
+                                        isPoiListLoading={isPoiListLoading}
                                     />
                                 )}
                             </Box>

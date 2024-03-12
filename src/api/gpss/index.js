@@ -3,12 +3,18 @@ import { API_PATH } from '#/contents/api'
 
 // 검토자 조회
 const getReviewer = (data) => {
-    return getAPI({ endPoint: API_PATH.gpss.reviewer, data })
+    const queryParams = { name: data }
+    return getAPI({
+        endPoint: API_PATH.gpss.reviewer + new URLSearchParams(queryParams).toString(),
+    })
 }
 
 // 승인자 조회
 const getApprover = (data) => {
-    return getAPI({ endPoint: API_PATH.gpss.approver, data })
+    const queryParams = { name: data }
+    return getAPI({
+        endPoint: API_PATH.gpss.approver + new URLSearchParams(queryParams).toString(),
+    })
 }
 
 // gpss 추천어 검색

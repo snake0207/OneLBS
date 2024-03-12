@@ -4,20 +4,20 @@ import { QUERY_KEYS } from '#/contents/queryKeys'
 
 export const useGetReviewer = (userName) => {
     const { data, refetch } = useQuery({
-        queryKey: [QUERY_KEYS.gpss.reviewer, userName],
-        queryFn: gpss.getReviewer,
+        queryKey: [QUERY_KEYS.gpss.reviewer],
+        queryFn: () => gpss.getReviewer(userName),
         enabled: false,
     })
-    return { data, refetch }
+    return { data: data?.data.data.people, refetch }
 }
 
 export const useGetApprover = (userName) => {
     const { data, refetch } = useQuery({
-        queryKey: [QUERY_KEYS.gpss.approver, userName],
-        queryFn: gpss.getApprover,
+        queryKey: [QUERY_KEYS.gpss.approver],
+        queryFn: () => gpss.getApprover(userName),
         enabled: false,
     })
-    return { data, refetch }
+    return { data: data?.data.data.people, refetch }
 }
 
 export const useGetGpssSuggestions = (requestParam) => {

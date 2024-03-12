@@ -13,8 +13,8 @@ export const API_PATH = {
         defer_change: 'user-auth/api/v1/user/password/defer-change',
     },
     gpss: {
-        reviewer: '/reviewer',
-        approver: '/approver',
+        reviewer: '/user-auth/api/v1/auth/reviewer-search?',
+        approver: '/user-auth/api/v1/auth/manager-search?',
         gpss_search: '/adminmgmt/api/v1/search/unified-search',
         gpss_detail: '/adminmgmt/api/v1/search/detail-search',
         gpss_suggestion: '/adminmgmt/api/v1/search/suggest?',

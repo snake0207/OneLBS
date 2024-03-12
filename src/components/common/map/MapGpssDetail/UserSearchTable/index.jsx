@@ -55,10 +55,10 @@ const UserSearchTable = ({ data, ...props }) => {
                         <TableRow
                             key={idx}
                             hover
-                            onClick={() => handleClickSetClickedRow(data.userSeq)}
-                            selected={setIsSelected(data.userSeq)}
+                            onClick={() => handleClickSetClickedRow(data.email)}
+                            selected={setIsSelected(data.email)}
                         >
-                            <TableCell>{data.id}</TableCell>
+                            <TableCell>{data.email}</TableCell>
                             <TableCell>{data.name}</TableCell>
                             <TableCell>{data.company}</TableCell>
                         </TableRow>

@@ -34,11 +34,10 @@ const PermissionTableRow = ({
     const onChangeUserPermission = (event) => {
         showPopup('confirm', t('alert.permission_change_confirm', 'permission'), () => {
             mutate(
-                { targetUserId: userId, roleId },
+                { userId, roleId: event.value },
                 {
                     onSuccess: () => {
-                        setUserPermission(event.value)
-                        queryClient.fetchQuery({
+                        queryClient.invalidateQueries({
                             queryKey: [
                                 QUERY_KEYS.permission.roleChangeUserList,
                                 page,

@@ -2,23 +2,12 @@ import { Box, Table, TableBody, TableCell, TableHead, TableRow } from '@mui/mate
 import PermissionTableRow from '#/components/permission/PermissionChangeModal/PermissionTable/PermissionTableRow'
 import CommonPagination from '#/components/common/pagination/CommonPagination'
 import { useGetRoleChangeUserList } from '#/hooks/queries/permission'
-
-import t from '#/common/libs/trans'
-import style from './style.module'
-
+import { userPermissionTableHeader } from '#/contents/tableHeader'
 import { usePermissionSearchActions } from '#/store/usePermissionSearchStore'
 
-const PermissionTable = () => {
-    const permissionTableHeader = [
-        { field: 'No', headerName: 'No.' },
-        { field: 'email', headerName: t('email', 'permission') },
-        { field: 'name', headerName: t('name', 'permission') },
-        { field: 'company_name', headerName: t('company_name', 'permission') },
-        { field: 'team_name', headerName: t('team_name', 'permission') },
-        { field: 'status', headerName: t('status', 'permission') },
-        { field: 'permission', headerName: t('permission', 'permission') },
-    ]
+import style from './style.module'
 
+const PermissionTable = () => {
     const { data } = useGetRoleChangeUserList()
     const { setPermissionSearchPage } = usePermissionSearchActions()
 
@@ -31,7 +20,7 @@ const PermissionTable = () => {
             <Table sx={style.tableBox}>
                 <TableHead>
                     <TableRow>
-                        {permissionTableHeader.map((item) => (
+                        {userPermissionTableHeader.map((item) => (
                             <TableCell key={item.field}>{item.headerName}</TableCell>
                         ))}
                     </TableRow>

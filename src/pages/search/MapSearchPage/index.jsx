@@ -7,7 +7,7 @@ import { BrowserView, MobileView } from 'react-device-detect'
 import MapSearch from '#/components/common/map/MapSearch/index.jsx'
 import MapSearchList from '#/components/common/map/searchList/MapSearchList/index.jsx'
 import { useEffect, useState } from 'react'
-import poiDetailData from '#/mock/data/poiDetailData.json'
+import poiDetailData from '#/mock/data/poiMapDetailData.json'
 import poiListData from '#/mock/data/poiListData.json'
 import { useNavigate } from 'react-router-dom'
 import MapGpssDetail from '#/components/common/map/MapGpssDetail/index.jsx'
@@ -61,13 +61,13 @@ function MapSearchPage() {
     const { data: suggestionsData } = useGetGpssSuggestions(useDebounce(searchFormik.values, 400))
     // poi 리스트 검색
     const {
-        data: poiListData,
+        data: poiListDataA,
         isLoading: isPoiListLoading,
         refetch: fetchPoiList,
         fetchNextPage,
     } = usePostGpssSearch(searchFormik.values)
     // poi 상세 검색
-    const { data: poiDetailData, refetch: fetchPoiDetail } = usePostGpssDetail({
+    const { data: poiDetailDataA, refetch: fetchPoiDetail } = usePostGpssDetail({
         ...searchFormik.values,
         poiId: [selectedPoi],
     })

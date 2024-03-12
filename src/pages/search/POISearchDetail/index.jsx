@@ -1,5 +1,5 @@
 import { useParams } from 'react-router-dom'
-import poiDetailData from '#/mock/data/poiDetailData.json'
+import poiDetailData from '#/mock/data/poiMapDetailData.json'
 import MapPoiDetail from '#/components/common/map/MapPoiDetail/index.jsx'
 
 function POISearchDetail() {

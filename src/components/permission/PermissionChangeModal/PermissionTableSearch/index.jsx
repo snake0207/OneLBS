@@ -15,8 +15,8 @@ import ResetIcon from '#/assets/resetIcon.svg'
 
 const PermissionTableSearch = () => {
     const roleId = usePermissionSearchRoleIdState()
-    const { resetPermissionSearchStore } = usePermissionSearchActions()
-    const { setPermissionSearchStore } = usePermissionSearchActions()
+    const { resetPermissionSearchStore, setPermissionSearchStore } = usePermissionSearchActions()
+
     const formik = useFormik({
         initialValues: {
             email: '',

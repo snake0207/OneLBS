@@ -34,10 +34,10 @@ function MapSearchPage() {
     const [selectedPoi, setSelectedPoi] = useState(null)
     // 신규 poi 생성 컴포넌트 표출
     const [isNewPoiCreateOpen, setIsNewPoiCreateOpen] = useState(false)
+    const [showPoiList, setShowPoiList] = useState(false)
     // mobile search toggle
     const [showSearch, setShowSearch] = useState(false)
     const { actions: mapStoreActions, lat, lon, seLat, seLon, neLat, neLon } = useMapStore()
-
     const searchFormik = useFormik({
         initialValues: {
             country: [],
@@ -53,6 +53,8 @@ function MapSearchPage() {
         onSubmit: (form) => {
             console.log(form)
             console.log('mapBound =>', seLat, seLon, neLat, neLon)
+            fetchPoiList()
+            setShowPoiList(true)
         },
     })
     // 추천어 검색
@@ -60,6 +62,7 @@ function MapSearchPage() {
     // poi 리스트 검색
     const {
         data: poiListData,
+        isLoading: isPoiListLoading,
         refetch: fetchPoiList,
         fetchNextPage,
     } = usePostGpssSearch(searchFormik.values)
@@ -68,11 +71,6 @@ function MapSearchPage() {
         ...searchFormik.values,
         poiId: [selectedPoi],
     })
-
-    // poi 리스트 검색
-    const onHandleSubmitSearch = () => {
-        fetchPoiList()
-    }
     // poi 상세 검색
     useEffect(() => {
         if (selectedPoi) fetchPoiDetail()
@@ -131,18 +129,17 @@ function MapSearchPage() {
                         <Box sx={{ display: 'flex', flexDirection: 'colunm' }}>
                             <Box>
                                 {/* 지도 검색 */}
-                                <MapSearch
-                                    formik={searchFormik}
-                                    onHandleSubmitSearch={onHandleSubmitSearch}
-                                />
+                                <MapSearch formik={searchFormik} />
                                 {/* 검색 결과 */}
-                                <MapSearchList
-                                    searchResultArr={poiListData}
-                                    selectedPoi={selectedPoi}
-                                    setSelectedPoi={setSelectedPoi}
-                                    isGpssSearch={true}
-                                    setIsNewPoiCreateOpen={setIsNewPoiCreateOpen}
-                                />
+                                {showPoiList && (
+                                    <MapSearchList
+                                        searchResultArr={poiListData}
+                                        selectedPoi={selectedPoi}
+                                        setSelectedPoi={setSelectedPoi}
+                                        isGpssSearch={true}
+                                        setIsNewPoiCreateOpen={setIsNewPoiCreateOpen}
+                                    />
+                                )}
                             </Box>
                             {/* gpss 상세 */}
                             {poiDetailData && (

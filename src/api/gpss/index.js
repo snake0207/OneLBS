@@ -26,7 +26,7 @@ const postGpssSearch = (data) => {
     queryParams.size = 20
     queryParams.from = queryParams.pageParam
     queryParams.targetCp = ['mcp', 'here']
-    queryParams.radius = 10000
+    // queryParams.radius = 10000
     delete queryParams.polygonFilter
     delete queryParams.pageParam
     if (queryParams.keyword.length === 0) delete queryParams.keyword

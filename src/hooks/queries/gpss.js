@@ -31,8 +31,8 @@ export const useGetGpssSuggestions = (requestParam) => {
 }
 
 export const usePostGpssSearch = (requestParam) => {
-    const { data, fetchNextPage, refetch } = useInfiniteQuery({
-        queryKey: [QUERY_KEYS.gpss.search, requestParam.keyword, requestParam.category],
+    const { data, isLoading, fetchNextPage, refetch } = useInfiniteQuery({
+        queryKey: [QUERY_KEYS.gpss.search],
         queryFn: ({ pageParam }) => gpss.postGpssSearch({ ...requestParam, pageParam }),
         initialPageParam: 0,
         getNextPageParam: (lastPage, allPages, lastPageParam, allPageParams) => {},
@@ -42,6 +42,7 @@ export const usePostGpssSearch = (requestParam) => {
     return {
         data,
         refetch,
+        isLoading,
         fetchNextPage,
     }
 }

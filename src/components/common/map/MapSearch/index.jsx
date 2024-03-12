@@ -264,7 +264,7 @@ const countryCodeArr = [
 const languageCodeArr = ['ENG', 'KOR']
 const categoryCodeArr = ['ev Charging', 'fuel', 'parking', 'h2 Charging', 'dealerPoi']
 
-const MapSearch = ({ formik, suggestionData, onHandleSubmitSearch }) => {
+const MapSearch = ({ formik, suggestionData }) => {
     const { themeMode } = getLayoutState()
     const [isKeywordDisabled, setIsKeywordDisabled] = useState(true)
     useEffect(() => {
@@ -555,13 +555,13 @@ const MapSearch = ({ formik, suggestionData, onHandleSubmitSearch }) => {
                                         {themeMode === 'light' ? (
                                             <img
                                                 src={SearchIcon}
-                                                onClick={onHandleSubmitSearch}
+                                                onClick={formik.handleSubmit}
                                                 style={{ cursor: 'pointer' }}
                                             />
                                         ) : (
                                             <img
                                                 src={SearchIconDark}
-                                                onClick={onHandleSubmitSearch}
+                                                onClick={formik.handleSubmit}
                                                 style={{ cursor: 'pointer' }}
                                             />
                                         )}

@@ -9,10 +9,10 @@ const getRoleChangeUserList = (data) => {
     return getAPI({ endPoint: API_PATH.permission.role_change_user_list, data })
 }
 
-const putTargetUserIdRole = (data) => {
+const putTargetUserIdRole = (targetUserId, roleId) => {
     return putAPI({
-        endPoint: API_PATH.permission.targetUserIdRole(data.targetUserId),
-        data: data.roldId,
+        endPoint: API_PATH.permission.target_userId_role(targetUserId),
+        data: { roleId },
     })
 }
 

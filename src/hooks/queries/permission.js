@@ -27,6 +27,6 @@ export const useGetRoleChangeUserList = () => {
 
 export const usePutTargetUserIdRole = () => {
     return useMutation({
-        mutationFn: permission.putTargetUserIdRole,
+        mutationFn: ({ userId, roleId }) => permission.putTargetUserIdRole(userId, roleId),
     })
 }

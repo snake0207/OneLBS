@@ -286,7 +286,9 @@ const MapSearch = ({ formik, suggestionData }) => {
     useEffect(() => {
         if (formik.values.keyword.length !== 0) formik.setFieldValue('category', [])
     }, [formik.values.keyword])
-
+    useEffect(() => {
+        if (suggestionData) setKeywordOptions([...suggestionData])
+    }, [suggestionData])
     return (
         <Box
             sx={{
@@ -536,39 +538,50 @@ const MapSearch = ({ formik, suggestionData }) => {
                             )}
                         />
                     </Grid>
-                    <Grid item xs={12}>
-                        <TextField
-                            placeholder={t('input_keyword', 'common')}
+                    <Grid
+                        item
+                        xs={12}
+                        sx={{
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'space-between',
+                            gap: '6px',
+                        }}
+                    >
+                        <Autocomplete
+                            options={keywordOptions}
+                            onInputChange={formik.handleChange}
                             size="small"
-                            sx={{
-                                width: '100%',
-                                backgroundColor: 'form.main',
-                                borderRadius: '4px',
-                            }}
-                            name={'keyword'}
-                            onChange={formik.handleChange}
-                            value={formik.values.keyword}
+                            getOptionLabel={(option) => option.title}
                             disabled={isKeywordDisabled}
-                            InputProps={{
-                                endAdornment: (
-                                    <InputAdornment position="end">
-                                        {themeMode === 'light' ? (
-                                            <img
-                                                src={SearchIcon}
-                                                onClick={formik.handleSubmit}
-                                                style={{ cursor: 'pointer' }}
-                                            />
-                                        ) : (
-                                            <img
-                                                src={SearchIconDark}
-                                                onClick={formik.handleSubmit}
-                                                style={{ cursor: 'pointer' }}
-                                            />
-                                        )}
-                                    </InputAdornment>
-                                ),
-                            }}
+                            fullWidth
+                            renderInput={(params) => (
+                                <TextField
+                                    {...params}
+                                    placeholder={t('input_keyword', 'common')}
+                                    value={formik.values.keyword}
+                                    sx={{
+                                        width: '100%',
+                                        backgroundColor: 'form.main',
+                                        borderRadius: '4px',
+                                    }}
+                                    name={'keyword'}
+                                />
+                            )}
                         />
+                        {themeMode === 'light' ? (
+                            <img
+                                src={SearchIcon}
+                                onClick={formik.handleSubmit}
+                                style={{ cursor: 'pointer' }}
+                            />
+                        ) : (
+                            <img
+                                src={SearchIconDark}
+                                onClick={formik.handleSubmit}
+                                style={{ cursor: 'pointer' }}
+                            />
+                        )}
                     </Grid>
                 </Grid>
             </Box>

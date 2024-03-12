@@ -27,7 +27,7 @@ export const useGetGpssSuggestions = (requestParam) => {
         enabled: !(requestParam.keyword.length === 0),
         staleTime: 5 * 1000,
     })
-    return { data, refetch }
+    return { data: data?.data.data.data.result ?? [], refetch }
 }
 
 export const usePostGpssSearch = (requestParam) => {

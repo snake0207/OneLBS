@@ -58,7 +58,7 @@ function MapSearchPage() {
         },
     })
     // 추천어 검색
-    const { data: suggestionsData } = useGetGpssSuggestions(useDebounce(searchFormik.values, 400))
+    const { data: suggestionsData } = useGetGpssSuggestions(useDebounce(searchFormik.values, 300))
     // poi 리스트 검색
     const {
         data: poiListData,
@@ -129,7 +129,7 @@ function MapSearchPage() {
                         <Box sx={{ display: 'flex', flexDirection: 'colunm' }}>
                             <Box>
                                 {/* 지도 검색 */}
-                                <MapSearch formik={searchFormik} />
+                                <MapSearch formik={searchFormik} suggestionData={suggestionsData} />
                                 {/* 검색 결과 */}
                                 {showPoiList && (
                                     <MapSearchList

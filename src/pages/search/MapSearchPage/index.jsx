@@ -42,7 +42,7 @@ function MapSearchPage() {
             country: [],
             lat: '',
             lon: '',
-            category: [],
+            category: '',
             keyword: '',
             language: 'ENG',
             vehicleCode: 'ICE',

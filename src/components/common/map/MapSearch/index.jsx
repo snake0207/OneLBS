@@ -10,9 +10,19 @@ import { getLayoutState } from '#/store/useLayoutStore'
 import style from './style.module'
 import { useEffect, useState } from 'react'
 import { europeanCountries } from '#/contents/contryCode.js'
+import Select from '#/components/common/Select/index.jsx'
 
-const languageCodeArr = ['ENG', 'KOR']
-const categoryCodeArr = ['ev Charging', 'fuel', 'parking', 'h2 Charging', 'dealerPoi']
+const languageCodeArr = [
+    { key: 0, value: 'ENG', label: 'ENG' },
+    { key: 1, value: 'KOR', label: 'KOR' },
+]
+const categoryCodeArr = [
+    { key: 0, value: 'h-0001-0001', label: 'fuel' },
+    { key: 1, value: 'h-0001-0002', label: 'ev Charging' },
+    { key: 2, value: 'h-0001-0003', label: 'h2 Charging' },
+    { key: 3, value: 'h-0002-0001', label: 'parking' },
+    { key: 4, value: 'h-0003-0001', label: 'dealerPoi' },
+]
 
 const MapSearch = ({ formik, suggestionData }) => {
     const { themeMode } = getLayoutState()
@@ -202,44 +212,11 @@ const MapSearch = ({ formik, suggestionData }) => {
                         </Typography>
                     </Grid>
                     <Grid item xs={9}>
-                        <Autocomplete
-                            //disablePortal
-                            options={languageCodeArr}
-                            size="small"
+                        <Select
+                            formik={formik}
                             name={'language'}
-                            defaultValue={[languageCodeArr[0]]}
-                            onChange={(event, value) => {
-                                formik.setFieldValue(
-                                    'language',
-                                    value !== null ? value : formik.initialValues.language,
-                                )
-                            }}
-                            value={formik.values.language}
-                            renderInput={(params) => (
-                                <TextField
-                                    {...params}
-                                    placeholder={t('select', 'common')}
-                                    name={'language'}
-                                    sx={{
-                                        backgroundColor: 'form.main',
-                                        borderRadius: '4px',
-                                    }}
-                                    InputProps={{
-                                        ...params.InputProps,
-                                        endAdornment: (
-                                            <InputAdornment position="end">
-                                                <KeyboardArrowDownRoundedIcon
-                                                    sx={{
-                                                        position: 'absolute',
-                                                        right: '8px',
-                                                        color: 'text.lightblue',
-                                                    }}
-                                                />
-                                            </InputAdornment>
-                                        ),
-                                    }}
-                                />
-                            )}
+                            items={languageCodeArr}
+                            sx={{ height: '40px' }}
                         />
                     </Grid>
                     <Grid
@@ -252,44 +229,11 @@ const MapSearch = ({ formik, suggestionData }) => {
                         </Typography>
                     </Grid>
                     <Grid item xs={9}>
-                        <Autocomplete
-                            multiple
-                            //disablePortal
-                            options={categoryCodeArr}
-                            size="small"
+                        <Select
+                            formik={formik}
                             name={'category'}
-                            onChange={(event, value) => {
-                                formik.setFieldValue(
-                                    'category',
-                                    value !== null ? value : formik.initialValues.category,
-                                )
-                            }}
-                            value={formik.values.category}
-                            renderInput={(params) => (
-                                <TextField
-                                    {...params}
-                                    placeholder={t('select', 'common')}
-                                    name={'category'}
-                                    sx={{
-                                        backgroundColor: 'form.main',
-                                        borderRadius: '4px',
-                                    }}
-                                    InputProps={{
-                                        ...params.InputProps,
-                                        endAdornment: (
-                                            <InputAdornment position="end">
-                                                <KeyboardArrowDownRoundedIcon
-                                                    sx={{
-                                                        position: 'absolute',
-                                                        right: '8px',
-                                                        color: 'text.lightblue',
-                                                    }}
-                                                />
-                                            </InputAdornment>
-                                        ),
-                                    }}
-                                />
-                            )}
+                            items={categoryCodeArr}
+                            sx={{ height: '40px' }}
                         />
                     </Grid>
                     <Grid

@@ -36,7 +36,7 @@ const postGpssSearch = (data) => {
     // queryParams.radius = 1000
     // delete queryParams.polygonFilter
     delete queryParams.pageParam
-    if (queryParams.keyword.length === 0) delete queryParams.keyword
+    if (queryParams.keyword.length === 0) queryParams.keyword = 'NaN'
     if (queryParams.category.length === 0) delete queryParams.category
     return postAPI({ endPoint: API_PATH.gpss.gpss_search, data: { ...queryParams } })
 }

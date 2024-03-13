@@ -307,7 +307,7 @@ const MapSearch = ({ formik, suggestionData }) => {
                             options={keywordOptions}
                             onInputChange={formik.handleChange}
                             size="small"
-                            getOptionLabel={(option) => option.title}
+                            getOptionLabel={(option) => option.title || formik.values.keyword}
                             disabled={isKeywordDisabled}
                             fullWidth
                             renderInput={(params) => (

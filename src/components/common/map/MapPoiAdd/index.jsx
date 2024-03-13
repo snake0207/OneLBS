@@ -48,7 +48,7 @@ const MapPoiAdd = ({ setIsOpen, selectedPoi }) => {
             },
             dealerType: '7538',
             brand: 'ALL',
-            reason: '',
+            comment: '',
             reviewer: '',
             approver: '',
             category: '',
@@ -201,7 +201,7 @@ const MapPoiAdd = ({ setIsOpen, selectedPoi }) => {
                         multiline
                         fullWidth
                         placeholder={t('reason_for_approval_input', 'gpss')}
-                        name={'reason'}
+                        name={'comment'}
                         onChange={formik.handleChange}
                         onBlur={formik.handleBlur}
                         value={formik.values[name]}

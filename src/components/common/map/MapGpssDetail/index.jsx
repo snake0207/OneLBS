@@ -40,7 +40,7 @@ const MapGpssDetail = ({ selectedPoi, setSelectedPoi, poiData }) => {
     const parsedData = gpssDetailResponseDataMapper(poiData)
     const formik = useFormik({
         initialValues: {
-            reason: '',
+            comment: '',
             reviewer: '',
             approver: '',
             ...parsedData,
@@ -85,7 +85,7 @@ const MapGpssDetail = ({ selectedPoi, setSelectedPoi, poiData }) => {
     }
 
     const gpssRequestValidation = () => {
-        if (formik.values.reason === '') {
+        if (formik.values.comment === '') {
             popupAction.showPopup('alert', t('pop_up.reason_required', 'gpss'))
             return false
         }
@@ -232,7 +232,7 @@ const MapGpssDetail = ({ selectedPoi, setSelectedPoi, poiData }) => {
                                 multiline
                                 fullWidth
                                 placeholder={t('reason_for_approval_input', 'gpss')}
-                                name={'reason'}
+                                name={'comment'}
                                 onChange={formik.handleChange}
                                 onBlur={formik.handleBlur}
                                 value={formik.values[name]}

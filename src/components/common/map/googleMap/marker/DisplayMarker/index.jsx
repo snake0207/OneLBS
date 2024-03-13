@@ -4,16 +4,19 @@ import { useEffect, useState } from 'react'
 import { markerImage } from '#/common/libs/mapMarker.js'
 
 const DisplayMarker = ({ markerData }) => {
-    const { position, category, cpType } = markerData
-    const { lat, lon } = position.center
+    const { basicInfo, category, cpType } = markerData
+    const { lat, lon } = basicInfo.position.center
     const map = useGoogleMap()
     const [marker, setMarker] = useState(null)
     const [infoWindow, setInfoWindow] = useState(null)
     useEffect(() => {
-        if (!markerData) return
         map.panTo({ lat: lat, lng: lon })
-        map.setZoom(15)
-    }, [])
+        map.setZoom(19)
+        setTimeout(() => {
+            const swLng = map.getBounds().getSouthWest().lng()
+            map.panTo({ lat: lat, lng: (swLng + lon) / 2 })
+        }, 100)
+    }, [map])
     return (
         <Marker
             onLoad={(marker) => {
@@ -31,7 +34,7 @@ const DisplayMarker = ({ markerData }) => {
                     info.open({ anchor: marker, map: map })
                 }}
             >
-                <MapInfoWindow markerData={markerData} />
+                <MapInfoWindow markerData={basicInfo} />
             </InfoWindow>
         </Marker>
     )

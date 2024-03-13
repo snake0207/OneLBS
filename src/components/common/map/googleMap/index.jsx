@@ -63,6 +63,8 @@ const GoogleMapComponent = ({
         const { lat, lon } = poiArr[0].position.center
         map.panTo({ lat: lat, lng: lon })
         map.setZoom(19)
+        const swLng = map.getBounds().getSouthWest().lng()
+        map.panTo({ lat: lat, lng: (swLng + lon) / 2 })
     }, [selectedPoi])
 
     // 구글 검색 결과를 지도 bound로 설정

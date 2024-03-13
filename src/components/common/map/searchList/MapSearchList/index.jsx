@@ -100,6 +100,10 @@ const MapSearchList = ({
                                     display: 'flex',
                                     justifyContent: 'flex-end',
                                     backgroundColor: 'dialog.main',
+                                    borderBottom: '1px solid',
+                                    borderColor: 'border.lightgray',
+                                    mt: '8px',
+                                    pb: '10px',
                                     zIndex: 10,
                                 }}
                             >
@@ -110,6 +114,7 @@ const MapSearchList = ({
                                         fontSize: 13,
                                         fontWeight: 400,
                                         mr: '10px',
+
                                         backgroundColor: 'button.main',
                                     }}
                                 >

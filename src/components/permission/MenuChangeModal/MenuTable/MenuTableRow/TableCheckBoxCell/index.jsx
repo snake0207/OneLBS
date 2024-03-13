@@ -1,53 +1,41 @@
 import { Checkbox, TableCell } from '@mui/material'
-import { useFormik } from 'formik'
 
-const TableCheckBoxCell = ({ menuId, approvalYn, createYn, readYn, updateYn, deleteYn }) => {
-    const formik = useFormik({
-        initialValues: {
-            menuId,
-            approvalYn,
-            createYn,
-            readYn,
-            updateYn,
-            deleteYn,
-        },
-        onSubmit: (form) => {},
-    })
+const TableCheckBoxCell = ({ nestedRowIndex, rowIndex, formik }) => {
     return (
         <>
             <TableCell align="center">
                 <Checkbox
-                    name="approvalYn"
+                    name={`[${rowIndex}].children[${nestedRowIndex}].permission.approval`}
                     onChange={formik.handleChange}
-                    checked={formik.values.approvalYn}
+                    checked={formik.values[rowIndex].children[nestedRowIndex].permission.approval}
                 />
             </TableCell>
             <TableCell align="center">
                 <Checkbox
-                    name="createYn"
+                    name={`[${rowIndex}].children[${nestedRowIndex}].permission.create`}
                     onChange={formik.handleChange}
-                    checked={formik.values.createYn}
+                    checked={formik.values[rowIndex].children[nestedRowIndex].permission.create}
                 />
             </TableCell>
             <TableCell align="center">
                 <Checkbox
-                    name="readYn"
+                    name={`[${rowIndex}].children[${nestedRowIndex}].permission.read`}
                     onChange={formik.handleChange}
-                    checked={formik.values.readYn}
+                    checked={formik.values[rowIndex].children[nestedRowIndex].permission.read}
                 />
             </TableCell>
             <TableCell align="center">
                 <Checkbox
-                    name="updateYn"
+                    name={`[${rowIndex}].children[${nestedRowIndex}].permission.update`}
                     onChange={formik.handleChange}
-                    checked={formik.values.updateYn}
+                    checked={formik.values[rowIndex].children[nestedRowIndex].permission.update}
                 />
             </TableCell>
             <TableCell align="center">
                 <Checkbox
-                    name="deleteYn"
+                    name={`[${rowIndex}].children[${nestedRowIndex}].permission.delete`}
                     onChange={formik.handleChange}
-                    checked={formik.values.deleteYn}
+                    checked={formik.values[rowIndex].children[nestedRowIndex].permission.delete}
                 />
             </TableCell>
         </>

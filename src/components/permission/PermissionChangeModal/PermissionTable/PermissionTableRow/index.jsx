@@ -27,7 +27,6 @@ const PermissionTableRow = ({
         roleId: searchRoleId,
     } = usePermissionSearchStore()
     const { showPopup } = usePopupActions()
-    const [userPermission, setUserPermission] = useState(roleId)
     const queryClient = useQueryClient()
     const { mutate } = usePutTargetUserIdRole()
 
@@ -46,16 +45,15 @@ const PermissionTableRow = ({
                                 searchRoleId,
                             ],
                         })
+                        queryClient.invalidateQueries({
+                            queryKey: [QUERY_KEYS.permission.roleMenuPermission],
+                        })
                         showPopup('alert', t('alert.permission_change_success', 'permission'))
                     },
                 },
             )
         })
     }
-
-    useEffect(() => {
-        setUserPermission(roleId)
-    }, [roleId])
 
     return (
         <TableRow>
@@ -70,7 +68,7 @@ const PermissionTableRow = ({
                     name="roleId"
                     items={ROLE_LIST}
                     onChange={onChangeUserPermission}
-                    value={userPermission}
+                    value={roleId}
                     size="small"
                 />
             </TableCell>

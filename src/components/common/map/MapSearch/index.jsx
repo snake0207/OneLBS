@@ -51,23 +51,7 @@ const MapSearch = ({ formik, suggestionData }) => {
         if (suggestionData) setKeywordOptions([...suggestionData])
     }, [suggestionData])
     return (
-        <Box
-            sx={{
-                width: '350px',
-                maxHeight: '288px',
-                overflow: 'auto',
-                padding: '16px',
-                margin: '10px 10px 6px 10px',
-                borderRadius: '8px',
-                backgroundColor: 'dialog.main',
-                boxShadow: '0 3px 14px rgb(0 0 0 / 24%)',
-                opacity: '95%',
-                '@media (max-width:767px)': {
-                    margin: '10px 0px 6px 10px',
-                    width: 'calc(100% - 15px)',
-                },
-            }}
-        >
+        <Box sx={style.searchBox}>
             <Box>
                 <Grid container spacing={1} sx={style.item}>
                     <Grid
@@ -75,7 +59,7 @@ const MapSearch = ({ formik, suggestionData }) => {
                         xs={3}
                         sx={{ display: 'flex', justifyContent: 'start', alignItems: 'center' }}
                     >
-                        <Typography sx={{ fontSize: 15, fontWeight: 500, mt: 1 }}>
+                        <Typography sx={[style.labelText, { mt: 1 }]}>
                             {t('country', 'common')}
                         </Typography>
                     </Grid>
@@ -132,7 +116,9 @@ const MapSearch = ({ formik, suggestionData }) => {
                                                     sx={{
                                                         position: 'absolute',
                                                         right: '8px',
+                                                        top: '50%',
                                                         color: 'text.lightblue',
+                                                        transform: 'translateY(-50%)',
                                                     }}
                                                 />
                                             </InputAdornment>
@@ -147,9 +133,7 @@ const MapSearch = ({ formik, suggestionData }) => {
                         xs={3}
                         sx={{ display: 'flex', justifyContent: 'start', alignItems: 'center' }}
                     >
-                        <Typography sx={{ fontSize: 15, fontWeight: 500 }}>
-                            {t('lat', 'common')}
-                        </Typography>
+                        <Typography sx={style.labelText}>{t('lat', 'common')}</Typography>
                     </Grid>
                     <Grid item xs={9}>
                         <TextField
@@ -177,9 +161,7 @@ const MapSearch = ({ formik, suggestionData }) => {
                         xs={3}
                         sx={{ display: 'flex', justifyContent: 'start', alignItems: 'center' }}
                     >
-                        <Typography sx={{ fontSize: 15, fontWeight: 500 }}>
-                            {t('lon', 'common')}
-                        </Typography>
+                        <Typography sx={style.labelText}>{t('lon', 'common')}</Typography>
                     </Grid>
                     <Grid item xs={9}>
                         <TextField
@@ -207,9 +189,7 @@ const MapSearch = ({ formik, suggestionData }) => {
                         xs={3}
                         sx={{ display: 'flex', justifyContent: 'start', alignItems: 'center' }}
                     >
-                        <Typography sx={{ fontSize: 15, fontWeight: 500 }}>
-                            {t('language', 'common')}
-                        </Typography>
+                        <Typography sx={style.labelText}>{t('language', 'common')}</Typography>
                     </Grid>
                     <Grid item xs={9}>
                         <Select
@@ -224,9 +204,7 @@ const MapSearch = ({ formik, suggestionData }) => {
                         xs={3}
                         sx={{ display: 'flex', justifyContent: 'start', alignItems: 'center' }}
                     >
-                        <Typography sx={{ fontSize: 15, fontWeight: 500 }}>
-                            {t('category', 'common')}
-                        </Typography>
+                        <Typography sx={style.labelText}>{t('category', 'common')}</Typography>
                     </Grid>
                     <Grid item xs={9}>
                         <Select

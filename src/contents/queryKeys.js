@@ -16,5 +16,6 @@ export const QUERY_KEYS = {
     permission: {
         roleMenuPermission: 'role_menu_permission',
         roleChangeUserList: 'role_change_user_list',
+        getRoleMenu: 'get_role_menu',
     },
 }

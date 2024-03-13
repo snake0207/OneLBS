@@ -26,6 +26,9 @@ const style = {
             },
         },
     },
+    select: {
+        height: '40px',
+    },
 }
 
 export default style

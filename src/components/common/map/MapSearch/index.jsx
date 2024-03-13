@@ -196,7 +196,7 @@ const MapSearch = ({ formik, suggestionData }) => {
                             formik={formik}
                             name={'language'}
                             items={languageCodeArr}
-                            sx={{ height: '40px' }}
+                            sx={style.select}
                         />
                     </Grid>
                     <Grid
@@ -211,7 +211,7 @@ const MapSearch = ({ formik, suggestionData }) => {
                             formik={formik}
                             name={'category'}
                             items={categoryCodeArr}
-                            sx={{ height: '40px' }}
+                            sx={style.select}
                         />
                     </Grid>
                     <Grid

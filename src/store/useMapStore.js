@@ -8,8 +8,8 @@ const initailState = {
     hoveredPoi: null,
     lat: '',
     lon: '',
-    seLat: '',
-    seLon: '',
+    swLat: '',
+    swLon: '',
     neLat: '',
     neLon: '',
 }
@@ -20,9 +20,9 @@ const useMapStore = create(
         actions: {
             setHoveredPoi: (hoveredPoi) => set({ hoveredPoi }),
             setCoordinates: (lat, lon) => set({ lat, lon }),
-            setMapBounds: (seLat, seLon, neLat, neLon) => set({ seLat, seLon, neLat, neLon }),
+            setMapBounds: (swLat, swLon, neLat, neLon) => set({ swLat, swLon, neLat, neLon }),
             resetCoordinates: () => set({ lat: '', lon: '' }),
-            resetMapBounds: () => set({ seLat: '', seLon: '', neLat: '', neLon: '' }),
+            resetMapBounds: () => set({ swLat: '', swLon: '', neLat: '', neLon: '' }),
         },
     })),
 )

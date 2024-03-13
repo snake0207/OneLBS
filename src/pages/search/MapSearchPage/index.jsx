@@ -36,7 +36,7 @@ function MapSearchPage() {
     const [showPoiList, setShowPoiList] = useState(false)
     // mobile search toggle
     const [showSearch, setShowSearch] = useState(false)
-    const { actions: mapStoreActions, lat, lon, seLat, seLon, neLat, neLon } = useMapStore()
+    const { actions: mapStoreActions, lat, lon, swLat, swLon, neLat, neLon } = useMapStore()
     const searchFormik = useFormik({
         initialValues: {
             country: [],
@@ -51,7 +51,6 @@ function MapSearchPage() {
         validationSchema: mapSearchSchema,
         onSubmit: (form) => {
             console.log(form)
-            console.log('mapBound =>', seLat, seLon, neLat, neLon)
             fetchPoiList()
             setShowPoiList(true)
         },
@@ -86,8 +85,8 @@ function MapSearchPage() {
         searchFormik.setFieldValue('lon', lon)
     }, [lat])
     useEffect(() => {
-        searchFormik.setFieldValue('polygonFilter', [seLat, seLon, neLat, neLon])
-    }, [seLat])
+        searchFormik.setFieldValue('polygonFilter', [swLat, swLon, neLat, neLon])
+    }, [swLat])
 
     // mobile detail navigate
     const handlePOISelected = (id) => {

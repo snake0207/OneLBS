@@ -1,17 +1,39 @@
 import { Button, Table, TableBody, TableCell, TableHead, TableRow, Typography } from '@mui/material'
+import { useFormik } from 'formik'
 import MenuTableRow from '#/components/permission/MenuChangeModal/MenuTable/MenuTableRow'
 import { permissionLabelColor } from '#/contents/color'
 import { menuPermissionTableHeader } from '#/contents/tableHeader'
-import { useFormik } from 'formik'
+import { usePutModifyRoleMenu } from '#/hooks/queries/permission'
+import { usePermissionMenuRoleIdState } from '#/store/usePermissionMenuStore'
+import { usePopupActions } from '#/store/usePopupStore'
+
+import { formatPermissionMenuData } from '#/common/libs/formatData'
+import t from '#/common/libs/trans'
 
 import style from './style.module'
-import { formatPermissionMenuData } from '#/common/libs/formatData'
 
 const MenuTable = ({ data }) => {
+    const roleId = usePermissionMenuRoleIdState()
+    const { showPopup } = usePopupActions()
+    const { mutate } = usePutModifyRoleMenu()
+
     const formik = useFormik({
         initialValues: data,
         onSubmit: (form) => {
             console.log(formatPermissionMenuData(form))
+            showPopup('confirm', t('alert.permission_menu_change_confirm'), () => {
+                mutate(
+                    {
+                        roleId,
+                        menuPermissionList: form,
+                    },
+                    {
+                        onSuccess: () => {
+                            showPopup('alert', 'alert.permission_menu_change_success')
+                        },
+                    },
+                )
+            })
         },
     })
 

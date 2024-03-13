@@ -72,6 +72,8 @@
     },
     "alert": {
         "permission_change_confirm": "변경 하시겠습니까?",
-        "permission_change_success": "변경 되었습니다."
+        "permission_change_success": "변경 되었습니다.",
+        "permission_menu_change_confirm": "저장 하시겠습니까?",
+        "permission_menu_change_success": "저장 되었습니다."
     }
 }

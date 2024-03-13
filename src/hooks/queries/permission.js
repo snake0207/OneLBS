@@ -20,7 +20,6 @@ export const useGetRoleChangeUserList = () => {
         queryKey: [QUERY_KEYS.permission.roleChangeUserList, page, email, name, roleId],
         queryFn: () => permission.getRoleChangeUserList({ page, email, name, roleId }),
         select: (data) => data.data.data,
-        placeholderData: (data) => data,
     })
 
     return { data }
@@ -35,7 +34,7 @@ export const usePutTargetUserIdRole = () => {
 export const useGetRoleMenu = () => {
     const roleId = usePermissionMenuRoleIdState()
     const { data } = useQuery({
-        queryKey: [QUERY_KEYS.permission.getRoleMenu],
+        queryKey: [QUERY_KEYS.permission.getRoleMenu, roleId],
         queryFn: () => permission.getRoleMenu({ roleId }),
         select: (data) => data.data.data,
     })

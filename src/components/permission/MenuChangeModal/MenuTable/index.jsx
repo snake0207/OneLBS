@@ -1,8 +1,10 @@
 import { Button, Table, TableBody, TableCell, TableHead, TableRow, Typography } from '@mui/material'
+import { useQueryClient } from '@tanstack/react-query'
 import { useFormik } from 'formik'
 import MenuTableRow from '#/components/permission/MenuChangeModal/MenuTable/MenuTableRow'
 import { permissionLabelColor } from '#/contents/color'
 import { menuPermissionTableHeader } from '#/contents/tableHeader'
+import { QUERY_KEYS } from '#/contents/queryKeys'
 import { usePutModifyRoleMenu } from '#/hooks/queries/permission'
 import { usePermissionMenuRoleIdState } from '#/store/usePermissionMenuStore'
 import { usePopupActions } from '#/store/usePopupStore'
@@ -14,22 +16,31 @@ import style from './style.module'
 
 const MenuTable = ({ data }) => {
     const roleId = usePermissionMenuRoleIdState()
+    const queryClient = useQueryClient()
     const { showPopup } = usePopupActions()
     const { mutate } = usePutModifyRoleMenu()
 
     const formik = useFormik({
         initialValues: data,
         onSubmit: (form) => {
-            console.log(formatPermissionMenuData(form))
-            showPopup('confirm', t('alert.permission_menu_change_confirm'), () => {
+            showPopup('confirm', t('alert.permission_menu_change_confirm', 'permission'), () => {
                 mutate(
                     {
                         roleId,
-                        menuPermissionList: form,
+                        menuPermissionList: formatPermissionMenuData(form),
                     },
                     {
                         onSuccess: () => {
-                            showPopup('alert', 'alert.permission_menu_change_success')
+                            queryClient.invalidateQueries({
+                                queryKey: [QUERY_KEYS.permission.getRoleMenu, roleId],
+                            })
+                            queryClient.invalidateQueries({
+                                queryKey: [QUERY_KEYS.permission.roleMenuPermission],
+                            })
+                            showPopup(
+                                'alert',
+                                t('alert.permission_menu_change_success', 'permission'),
+                            )
                         },
                     },
                 )
@@ -58,7 +69,7 @@ const MenuTable = ({ data }) => {
                 </TableBody>
             </Table>
             <Button variant="contained" type="submit">
-                저장
+                {t('save', 'permission')}
             </Button>
         </form>
     )

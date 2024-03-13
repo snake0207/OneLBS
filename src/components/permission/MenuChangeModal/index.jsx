@@ -63,16 +63,6 @@ const MenuChangeModal = ({ isOpen, onClose }) => {
                     </Typography>
                     <Typography sx={style.gusestBox}>{roleName.toLowerCase()}</Typography>
                 </Box>
-                <Typography
-                    sx={{
-                        display: 'inline-flex',
-                        fontSize: '13px',
-                        color: 'text.main',
-                        marginBottom: '6px',
-                    }}
-                >
-                    {t('total_number_of_people', 'permission', { userCount: 50 })}
-                </Typography>
                 {data && <MenuTable data={data} />}
             </DialogContent>
         </Dialog>

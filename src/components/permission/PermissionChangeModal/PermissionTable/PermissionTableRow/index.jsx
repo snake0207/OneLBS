@@ -46,6 +46,9 @@ const PermissionTableRow = ({
                                 searchRoleId,
                             ],
                         })
+                        queryClient.invalidateQueries({
+                            queryKey: [QUERY_KEYS.permission.roleMenuPermission],
+                        })
                         showPopup('alert', t('alert.permission_change_success', 'permission'))
                     },
                 },

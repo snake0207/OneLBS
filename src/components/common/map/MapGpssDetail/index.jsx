@@ -16,6 +16,8 @@ import DealerPoiInfo from '#/components/poiDetail/CategoryInfo/DealerPoiInfo/ind
 import H2ChargingInfo from '#/components/poiDetail/CategoryInfo/H2ChargingInfo/index.jsx'
 import ApprovalSelect from '#/components/poiDetail/ApprovalSelect/index.jsx'
 import { isBrowser } from 'react-device-detect'
+import { extractChangedObjectOfChangedJson } from '#/common/libs/objectCheck.js'
+import { detailRequestDataMapper } from '#/pages/ApprovalHistoryPage/requestMapper.js'
 
 const MapGpssDetail = ({ selectedPoi, setSelectedPoi, poiData }) => {
     const isEditable = true
@@ -48,6 +50,13 @@ const MapGpssDetail = ({ selectedPoi, setSelectedPoi, poiData }) => {
         validationSchema: poiDetailSchema,
         onSubmit: (form) => {
             console.log(form)
+            const changedValues = extractChangedObjectOfChangedJson(
+                formik.initialValues,
+                formik.values,
+            )
+            // TODO id 관련 설정 추가
+            const parsedValues = detailRequestDataMapper(1000, changedValues)
+            console.log('parsedValues => ', parsedValues)
         },
     })
 

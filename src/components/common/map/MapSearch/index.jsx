@@ -305,16 +305,16 @@ const MapSearch = ({ formik, suggestionData }) => {
                         <Autocomplete
                             freeSolo
                             options={keywordOptions}
-                            onInputChange={formik.handleChange}
                             size="small"
                             getOptionLabel={(option) => option.title || formik.values.keyword}
                             disabled={isKeywordDisabled}
                             fullWidth
+                            value={formik.values.keyword}
                             renderInput={(params) => (
                                 <TextField
                                     {...params}
                                     placeholder={t('input_keyword', 'common')}
-                                    value={formik.values.keyword}
+                                    onChange={formik.handleChange}
                                     sx={{
                                         width: '100%',
                                         backgroundColor: 'form.main',

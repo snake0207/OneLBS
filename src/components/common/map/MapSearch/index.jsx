@@ -17,6 +17,7 @@ const languageCodeArr = [
     { key: 1, value: 'KOR', label: 'KOR' },
 ]
 const categoryCodeArr = [
+    { key: 5, value: '', label: null },
     { key: 0, value: 'h-0001-0001', label: 'fuel' },
     { key: 1, value: 'h-0001-0002', label: 'ev Charging' },
     { key: 2, value: 'h-0001-0003', label: 'h2 Charging' },

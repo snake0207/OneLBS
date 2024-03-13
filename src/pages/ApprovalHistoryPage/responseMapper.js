@@ -117,44 +117,44 @@ const detailResponseDataMapper = ({ data }) => {
     const basicData = {
         // category: 'h2Charging',
         status: requestData?.status, // service에서 보내줄 결재이력 상태값
-        category: parseCategory(requestData) || '',
+        category: parseCategory(requestData),
         approvalInfo: {
-            requestComment: requestData.requestComment || '',
-            reviewerComment: requestData.reviewerComment || '',
-            approverComment: requestData.managerComment || '',
+            requestComment: requestData.requestComment,
+            reviewerComment: requestData.reviewerComment,
+            approverComment: requestData.managerComment,
             approvalLineContents: {
                 requester: {
                     id: requestData.userId,
-                    team: requestData.userTeam || '',
-                    name: requestData.userName || '',
-                    date: requestData.requestDtString || '',
+                    team: requestData.userTeam,
+                    name: requestData.userName,
+                    date: requestData.requestDtString,
                 },
                 reviewer: {
                     id: requestData.reviewerId,
-                    team: requestData.reviewerTeam || '',
-                    name: requestData.reviewerName || '',
-                    date: requestData.reviewDtString || '',
+                    team: requestData.reviewerTeam,
+                    name: requestData.reviewerName,
+                    date: requestData.reviewDtString,
                 },
                 approver: {
                     id: requestData.managerId,
-                    team: requestData.managerTeam || '',
-                    name: requestData.managerName || '',
-                    date: requestData.manageDtString || '',
+                    team: requestData.managerTeam,
+                    name: requestData.managerName,
+                    date: requestData.manageDtString,
                 },
             },
-            historyList: requestData.requestLog || [],
+            historyList: requestData.requestLog,
         },
-        poiId: requestData?.poiId || '',
+        poiId: requestData?.poiId,
         basicInfo: {
-            title: originData?.title || '',
-            address: originData?.address || '',
-            position: originData?.position || {},
+            title: originData?.title,
+            address: originData?.address,
+            position: originData?.position,
         },
         editData: {
             basicInfo: {
                 title: editData.title,
-                address: editData.address || '',
-                position: editData.position || {},
+                address: editData.address,
+                position: editData.position,
             },
             ...setCategoryData({ category: parseCategory(requestData) }, editData),
         },
@@ -217,12 +217,12 @@ const setCategoryData = (basicData, originData) => {
 const countByTypeMapper = (total, counts) => {
     return {
         total,
-        temporary: counts.DRAFT,
-        request: counts.REVIEW_REQUESTED,
-        reviewed: counts.REVIEW_COMPLETED,
-        approved: counts.APPROVAL_COMPLETED,
-        rejected_review: counts.REVIEW_REJECTED,
-        rejected_approval: counts.APPROVAL_REJECTED,
+        temporary: counts.DRAFT || 0,
+        request: counts.REVIEW_REQUESTED || 0,
+        reviewed: counts.REVIEW_COMPLETED || 0,
+        approved: counts.APPROVAL_COMPLETED || 0,
+        rejected_review: counts.REVIEW_REJECTED || 0,
+        rejected_approval: counts.APPROVAL_REJECTED || 0,
     }
 }
 

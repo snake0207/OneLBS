@@ -39,7 +39,7 @@ const style = {
         alignItems: 'center',
         justifyContent: 'center',
         '&:hover': {
-            backgroundColor: 'button.lightblue',
+            backgroundColor: 'color.edit',
             boxShadow: 'none',
         },
     },

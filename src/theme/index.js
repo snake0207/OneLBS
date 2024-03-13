@@ -365,7 +365,7 @@ export const getThemeSettings = (mode) => ({
                       germany: tokens.color[901],
                       dashboardCnt: tokens.color[701],
                       banner: tokens.color[10001],
-                      edit: tokens.color[5001],
+                      edit: tokens.button[2000],
                       close: tokens.color[900],
                       closeBg: tokens.color[1001],
                       swiper: tokens.color[100],

@@ -59,11 +59,13 @@ const style = {
             },
         },
         '& .MuiButtonBase-root': {
-            borderBottom: '1px solid',
+            borderTop: '1px solid',
             borderColor: 'border.lnb',
         },
         '& .MuiList-root': {
-            pt: '0',
+            p: '0',
+            borderBottom: '1px solid',
+            borderColor: 'border.lnb',
             '& .MuiButtonBase-root': {
                 p: '15px 24px',
                 borderRadius: '0',
@@ -72,12 +74,12 @@ const style = {
         '& .MuiCollapse-root': {
             '& .MuiList-root': {
                 pb: '6px',
-                borderBottom: '1px solid',
-                borderColor: 'border.lnb',
+                mt: '-10px',
+                borderBottom: 'none',
                 backgroundColor: 'lnb.mobilelnbdeps',
                 '& .MuiButtonBase-root': {
                     p: '6px 24px 6px 52px',
-                    borderBottom: 'none',
+                    borderTop: 'none',
                     '& .MuiTypography-root ': {
                         color: 'lnb.mobilelnbText',
                         fontSize: 16,

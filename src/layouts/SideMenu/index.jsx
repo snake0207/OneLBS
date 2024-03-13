@@ -38,8 +38,11 @@ import ViewModuleIcon from '#/assets/viewModuleIcon.svg'
 import ViewModuleIconDark from '#/assets/viewModuleIconDark.svg'
 import LogoIcon from '#/assets/logo.svg'
 import LogoIconDark from '#/assets/logoDark.svg'
-import DashboardIcon from '#/assets/menuIcon.svg'
-import DashboardIconDark from '#/assets/menuIconDark.svg'
+import DashboardIcon from '#/assets/dashboardIcon.svg'
+import DashboardIconDark from '#/assets/dashboardIconDark.svg'
+import MenuIcon from '#/assets/menuIcon.svg'
+import MenuIconDark from '#/assets/menuIconDark.svg'
+
 import { Close } from '@mui/icons-material'
 
 import style from './style.module'
@@ -276,8 +279,24 @@ const SideMenu = ({ open, toggleDrawer }) => {
                         <Box sx={{ m: '24px 104px 30px 24px' }}>
                             <img src={LogoIcon} onClick={() => navigate('/')} />
                         </Box>
-                        <IconButton onClick={toggleDrawer} sx={{ mt: '-20px', color: 'text.gray' }}>
-                            {openDrawer && <Close />}
+                        <IconButton
+                            onClick={toggleDrawer}
+                            sx={{
+                                mt: '-30px',
+                                color: 'text.gray',
+                                backgroundColor: 'transparent',
+                                '&:hover': {
+                                    backgroundColor: 'transparent',
+                                },
+                            }}
+                        >
+                            {openDrawer ? (
+                                <Close sx={{ width: '20px', hegith: '20px' }} />
+                            ) : themeMode === 'light' ? (
+                                <img src={MenuIcon} width={20} height={20} />
+                            ) : (
+                                <img src={MenuIconDark} width={20} height={20} />
+                            )}
                         </IconButton>
                     </Toolbar>
                     <List component="nav">{createMenuItems(data, themeMode)}</List>
@@ -285,13 +304,32 @@ const SideMenu = ({ open, toggleDrawer }) => {
             </BrowserView>
             <MobileView>
                 <Drawer open={open} onClose={toggleDrawer} sx={style.navBox}>
-                    <Box sx={{ m: '56px 0 12px 24px' }}>
+                    <Box
+                        sx={{
+                            m: '56px 24px 12px 24px',
+                            display: 'flex',
+                            justifyContent: 'space-between',
+                        }}
+                    >
                         {themeMode === 'light' ? (
                             <img src={LogoIcon} onClick={() => navigate('/')} />
                         ) : (
                             <img src={LogoIconDark} onClick={() => navigate('/')} />
                         )}
+                        <IconButton
+                            onClick={toggleDrawer}
+                            sx={{
+                                width: '30px',
+                                height: '30px',
+                                color: 'text.gray',
+                                borderColor: 'transparent !important',
+                                border: 'none !important',
+                            }}
+                        >
+                            {openDrawer && <Close />}
+                        </IconButton>
                     </Box>
+
                     <UserInfo />
                     <List component="nav">
                         {createMenuItems(filterMobileMenuItems(data), themeMode)}

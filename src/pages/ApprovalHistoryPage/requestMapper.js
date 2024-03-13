@@ -2,7 +2,7 @@
 const evChargerInfo = (data) => {
     return Object.keys(data).reduce((acc, key) => {
         if (key === 'parkingFee') acc['pFee'] = data[key]
-        else if (key === 'chargers') acc['charger'] = data[key]
+        else if (key === 'chargers') acc['charger'] = objectToArray(data[key])
         else acc[key] = data[key]
 
         return acc
@@ -21,7 +21,7 @@ const parkingInfo = (data) => {
 
 const h2ChargingInfo = (data) => {
     return Object.keys(data).reduce((acc, key) => {
-        if (key === 'chargers') acc['charger'] = data[key]
+        if (key === 'chargers') acc['charger'] = objectToArray(data[key])
         else acc[key] = data[key]
 
         return acc
@@ -35,6 +35,13 @@ const dealerInfo = (data) => {
 
         return acc
     }, {})
+}
+
+const objectToArray = (obj) => {
+    return Object.keys(obj).reduce((acc, key) => {
+        acc.push({ ...obj[key] })
+        return acc
+    }, [])
 }
 
 /**

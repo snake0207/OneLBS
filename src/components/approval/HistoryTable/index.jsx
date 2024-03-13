@@ -11,7 +11,7 @@ import t from '#/common/libs/trans.js'
 
 import style from './style.module'
 
-const HistoryTable = ({ type, dataList, onClickRowFunction, currentPage }) => {
+const HistoryTable = ({ type, dataList, onClickRowFunction, currentPage, isPending }) => {
     const headers = [
         'No.',
         t('name', 'approval'),
@@ -68,7 +68,7 @@ const HistoryTable = ({ type, dataList, onClickRowFunction, currentPage }) => {
                         ) : (
                             <TableRow>
                                 <TableCell colSpan={headers.length} align={'center'}>
-                                    NO DATA
+                                    {isPending ? 'LOADING' : 'NO DATA'}
                                 </TableCell>
                             </TableRow>
                         )}

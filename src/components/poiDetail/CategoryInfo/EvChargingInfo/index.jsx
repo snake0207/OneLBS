@@ -24,6 +24,10 @@ const EvChargingInfo = ({ data, isEditable, formik }) => {
         { key: 2, value: 2, label: t('evChargingInfo.speed.2', 'approval') },
         { key: 3, value: 3, label: t('evChargingInfo.speed.3', 'approval') },
     ])
+    const selectParkingFeeItems = useRef([
+        { key: 0, value: 0, label: t('evChargingInfo.isFree.0', 'approval') },
+        { key: 1, value: 1, label: t('evChargingInfo.isFree.1', 'approval') },
+    ])
     const { themeMode } = useLayoutStore()
 
     return (
@@ -51,11 +55,17 @@ const EvChargingInfo = ({ data, isEditable, formik }) => {
             <AccordionDetails>
                 <EditableTextColumn
                     value={data.brand}
-                    name={'evChargingInfo.brand'}
+                    name={'evCharging.brand'}
                     isEditable={isEditable}
                     formik={formik}
                 />
-                <EditableSelectColumn />
+                <EditableSelectColumn
+                    value={data.parkingFee}
+                    name={'evCharging.parkingFee'}
+                    items={selectParkingFeeItems.current}
+                    isEditable={isEditable}
+                    formik={formik}
+                />
                 <Typography sx={{ color: 'text.main', fontSize: '18px' }}>
                     {data.maxWatt}kw
                 </Typography>
@@ -155,7 +165,7 @@ const EvChargingInfo = ({ data, isEditable, formik }) => {
                                       </Typography>
                                       <EditableSelectColumn
                                           value={charger.speed}
-                                          name={`evChargingInfo.chargers.${index}.speed`}
+                                          name={`evCharging.chargers.${index}.speed`}
                                           items={selectSpeedItems.current}
                                           isEditable={isEditable}
                                           formik={formik}
@@ -163,7 +173,7 @@ const EvChargingInfo = ({ data, isEditable, formik }) => {
                                       />
                                       <EditableTextColumn
                                           value={`${charger.watt}kw`}
-                                          name={`evChargingInfo.chargers.${index}.watt`}
+                                          name={`evCharging.chargers.${index}.watt`}
                                           isEditable={isEditable}
                                           formik={formik}
                                       />
@@ -186,7 +196,7 @@ const EvChargingInfo = ({ data, isEditable, formik }) => {
                                       </Typography>
                                       <EditableSelectColumn
                                           value={charger.type}
-                                          name={`evChargingInfo.chargers.${index}.type`}
+                                          name={`evCharging.chargers.${index}.type`}
                                           items={selectTypeItems.current}
                                           isEditable={isEditable}
                                           formik={formik}

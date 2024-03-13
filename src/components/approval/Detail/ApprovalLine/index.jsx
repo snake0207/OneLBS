@@ -47,7 +47,7 @@ const ApprovalLineContent = ({ title, color, process, content }) => {
                         }}
                         variant="body2"
                     >
-                        {content.team}
+                        {content?.team || '-'}
                     </Typography>
                     <Typography
                         sx={{
@@ -60,7 +60,7 @@ const ApprovalLineContent = ({ title, color, process, content }) => {
                             },
                         }}
                     >
-                        {content.name}
+                        {content?.name || '-'}
                     </Typography>
                     <Typography
                         sx={{
@@ -74,7 +74,7 @@ const ApprovalLineContent = ({ title, color, process, content }) => {
                         }}
                         variant="caption"
                     >
-                        {content.date}
+                        {content?.date || '-'}
                     </Typography>
                 </Box>
             </Card>
@@ -145,7 +145,7 @@ const ApprovalLine = ({ status, content }) => {
                         title={t('requester', 'approval')}
                         color={colors.current.request}
                         process={t('status.request', 'approval')}
-                        content={content.requester}
+                        content={content?.requester}
                     />
                 </Grid>
                 <Box sx={style.ArrowIos}>
@@ -166,9 +166,11 @@ const ApprovalLine = ({ status, content }) => {
                         title={t('reviewer', 'approval')}
                         color={colors.current.review}
                         process={
-                            isReject.current.review ? '반려' : t('status.reviewed', 'approval')
+                            isReject.current.review
+                                ? t('status.rejected', 'approval')
+                                : t('status.reviewed', 'approval')
                         }
-                        content={content.reviewer}
+                        content={content?.reviewer}
                     />
                 </Grid>
                 <Box sx={style.ArrowIos}>
@@ -189,9 +191,11 @@ const ApprovalLine = ({ status, content }) => {
                         title={t('approver', 'approval')}
                         color={colors.current.approval}
                         process={
-                            isReject.current.approval ? '반려' : t('status.approved', 'approval')
+                            isReject.current.approval
+                                ? t('status.rejected', 'approval')
+                                : t('status.approved', 'approval')
                         }
-                        content={content.approver}
+                        content={content?.approver}
                     />
                 </Grid>
             </Grid>

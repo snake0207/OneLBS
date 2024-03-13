@@ -11,6 +11,7 @@ export const QUERY_KEYS = {
     },
     approval: {
         getHistoryList: 'get_history_list',
+        getHistoryDetail: 'get_history_detail',
     },
     permission: {
         roleMenuPermission: 'role_menu_permission',

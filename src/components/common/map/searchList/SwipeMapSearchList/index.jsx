@@ -1,6 +1,6 @@
 import { Box, SwipeableDrawer, Typography } from '@mui/material'
 import { useEffect, useRef, useState } from 'react'
-import { gpssListResponseDataMapper } from '#/pages/ApprovalHistoryPage/mapper.js'
+import { gpssListResponseDataMapper } from '#/pages/ApprovalHistoryPage/responseMapper.js'
 import t from '#/common/libs/trans.js'
 import List from '@mui/material/List'
 import MapPoiContent from '#/components/common/map/searchList/MapSearchList/MapPoiContent/index.jsx'

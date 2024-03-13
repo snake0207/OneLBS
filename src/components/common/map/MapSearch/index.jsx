@@ -44,7 +44,7 @@ const MapSearch = ({ formik, suggestionData }) => {
         <Box
             sx={{
                 width: '350px',
-                maxHeight: '300px',
+                maxHeight: '288px',
                 overflow: 'auto',
                 padding: '16px',
                 margin: '10px 10px 6px 10px',

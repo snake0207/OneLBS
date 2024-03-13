@@ -66,6 +66,7 @@ const ApprovalLineContent = ({ title, color, process, content }) => {
                         sx={{
                             fontSize: 14,
                             display: 'flex',
+                            justifyContent: 'center',
                             '@media (max-width:767px)': {
                                 fontSize: 10,
                                 lineHeight: '12px',

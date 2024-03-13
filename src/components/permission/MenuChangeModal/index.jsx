@@ -1,7 +1,5 @@
-import { useFormik } from 'formik'
 import {
     Box,
-    Button,
     Dialog,
     DialogContent,
     DialogTitle,
@@ -12,11 +10,10 @@ import {
 import CloseIcon from '@mui/icons-material/Close'
 import MenuTable from '#/components/permission/MenuChangeModal/MenuTable'
 import { getLayoutState } from '#/store/useLayoutStore'
-import usePermissionMenuStore from '#/store/usePermissionMenuStore'
+import { usePermissionMenuRoleNameState } from '#/store/usePermissionMenuStore'
+import { useGetRoleMenu } from '#/hooks/queries/permission'
 
 import t from '#/common/libs/trans'
-
-import tableData from '#/components/permission/MenuChangeModal/MenuTable/table.json'
 
 import MenuChangeIcon from '#/assets/menuChangeIcon.svg'
 import MenuChangeIconDark from '#/assets/menuChangeIconDark.svg'
@@ -24,22 +21,8 @@ import style from './style.module'
 
 const MenuChangeModal = ({ isOpen, onClose }) => {
     const { themeMode } = getLayoutState()
-    const { roleName, roleId } = usePermissionMenuStore()
-    const initialValues = () => {
-        const list = []
-        tableData.forEach((listItem) =>
-            listItem.children.forEach((childrenItem) => list.push(childrenItem.permission)),
-        )
-        return list
-    }
-
-    const formik = useFormik({
-        initialValues: initialValues(),
-        onSubmit: (form) => {
-            console.log('submit')
-            console.log(form)
-        },
-    })
+    const roleName = usePermissionMenuRoleNameState()
+    const { data } = useGetRoleMenu()
 
     return (
         <Dialog open={isOpen} onClose={onClose} maxWidth="lg" sx={style.dialogBox}>
@@ -90,10 +73,7 @@ const MenuChangeModal = ({ isOpen, onClose }) => {
                 >
                     {t('total_number_of_people', 'permission', { userCount: 50 })}
                 </Typography>
-                <MenuTable />
-                <Button variant="contained" onSubmit={formik.handleSubmit}>
-                    저장
-                </Button>
+                {data && <MenuTable data={data} />}
             </DialogContent>
         </Dialog>
     )

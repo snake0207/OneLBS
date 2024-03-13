@@ -37,6 +37,7 @@ export const useGetRoleMenu = () => {
     const { data } = useQuery({
         queryKey: [QUERY_KEYS.permission.getRoleMenu],
         queryFn: () => permission.getRoleMenu({ roleId }),
+        select: (data) => data.data.data,
     })
 
     return { data }

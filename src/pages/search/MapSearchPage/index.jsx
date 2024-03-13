@@ -190,7 +190,7 @@ function MapSearchPage() {
                                 }}
                             >
                                 {/* 지도 검색 */}
-                                <MapSearch />
+                                <MapSearch formik={searchFormik} suggestionData={suggestionsData} />
                             </Box>
                         )}
                         {/* 검색 결과 */}
@@ -199,6 +199,9 @@ function MapSearchPage() {
                             searchResultArr={poiListData}
                             selectedPoi={selectedPoi}
                             setSelectedPoi={handlePOISelected}
+                            setIsNewPoiCreateOpen={setIsNewPoiCreateOpen}
+                            fetchPoiListNextPage={fetchPoiListNextPage}
+                            isPoiListLoading={isPoiListLoading}
                         />
                     </MobileView>
                 </Box>

@@ -11,11 +11,18 @@ const SwipeMapSearchList = ({
     selectedPoi,
     setSelectedPoi,
     isGpssSearch = false,
+    fetchPoiListNextPage,
+    isPoiListLoading,
 }) => {
     const [isResultNon, setIsResultNon] = useState(true)
     const [isTopBtnVisible, setIsTopBtnVisible] = useState(false)
     const [isDrawerOpen, setIsDrawerOpen] = useState(false)
     const poiList = useRef()
+    const [isApiFetching, setIsApiFetching] = useState(false)
+
+    useEffect(() => {
+        setIsApiFetching(isPoiListLoading)
+    }, [isPoiListLoading])
     const scrollToTop = () => {
         poiList.current.scrollTo({
             top: 0,
@@ -44,8 +51,17 @@ const SwipeMapSearchList = ({
     }, [])
 
     const handleScroll = () => {
+        // scroll top
         if (poiList.current.scrollTop > 30) setIsTopBtnVisible(true)
         else setIsTopBtnVisible(false)
+        // 무한 스크롤 구현
+        if (
+            poiList.current.scrollTop + poiList.current.clientHeight >=
+            poiList.current.scrollHeight - 200
+        ) {
+            if (isApiFetching) return
+            fetchPoiListNextPage()
+        }
     }
 
     return (

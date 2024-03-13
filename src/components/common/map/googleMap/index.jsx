@@ -54,7 +54,6 @@ const GoogleMapComponent = ({
     const [isDistanceFunctionOn, setIsDistanceFunctionOn] = useState(false)
 
     const parsedPoiSearchArr = gpssListResponseDataMapper(searchResultArr)
-    const parsedMarkerDetail = gpssDetailResponseDataMapper(markerDetailData)
     // poi 선택시 해당 poi 위치로 이동및 줌
     useEffect(() => {
         if (!parsedPoiSearchArr) return
@@ -176,7 +175,7 @@ const GoogleMapComponent = ({
                     </CustomControl>
                 </BrowserView>
                 {/* 외부 마커 데이터 출력 */}
-                {parsedMarkerDetail && <DisplayMarker markerData={parsedMarkerDetail} />}
+                {markerDetailData && <DisplayMarker markerData={markerDetailData} />}
                 {/* 지도 검색 결과 마커 데이터 출력*/}
                 {parsedPoiSearchArr &&
                     parsedPoiSearchArr.map((poiData) => (

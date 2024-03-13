@@ -18,7 +18,7 @@ import useLayoutStore from '#/store/useLayoutStore'
 
 import style from './style.module'
 import { useGetHistoryList } from '#/hooks/queries/approval.js'
-import { countByTypeMapper } from '#/pages/ApprovalHistoryPage/mapper.js'
+import { countByTypeMapper } from '#/pages/ApprovalHistoryPage/responseMapper.js'
 
 const ApprovalHistoryPage = () => {
     // TODO: 임시상태값 - temporary, request, reviewed, approved, rejected_review, rejected_approval,
@@ -26,19 +26,20 @@ const ApprovalHistoryPage = () => {
     const userType = getUserTypeFromPath(params.type || '')
     const navigator = useNavigate()
     const url = window.location.pathname
-    const listData = useGetHistoryList()
+    const { data: { requestList, count, typeCnt } = {}, isPending } = useGetHistoryList()
     const [listPerPage, setListPerPage] = useState([])
     const [totalCounts, setTotalCounts] = useState({})
     const [isLastView, setIsLastView] = useState(true)
     const currentPage = useRef(1)
 
     useEffect(() => {
-        if (listData?.requestList) {
-            setListPerPage(paginationData(listData.requestList, 1))
-            setTotalCounts(countByTypeMapper(listData.totalCnt, listData.typeCnt))
-            listData.requestList.length < 10 ? setIsLastView(true) : setIsLastView(false)
+        if (requestList) {
+            setListPerPage(paginationData(requestList, 1))
+            setTotalCounts(countByTypeMapper(count, typeCnt))
+
+            requestList.length < 10 ? setIsLastView(true) : setIsLastView(false)
         }
-    }, [listData])
+    }, [requestList])
 
     const paginationData = useCallback((total, curPage) => {
         const itemsPerPage = 10
@@ -52,7 +53,7 @@ const ApprovalHistoryPage = () => {
         currentPage.current = page
         // TODO: API GET
         console.log(`ACTIVE PAGE IS >> ${page}`)
-        setListPerPage(paginationData(listData.requestList, page))
+        setListPerPage(paginationData(requestList, page))
     }
 
     const handleSubmitFilter = (params) => {
@@ -62,7 +63,7 @@ const ApprovalHistoryPage = () => {
 
     const handleViewChange = () => {
         console.log(`VIEW MORE`)
-        const newData = paginationData(listData.requestList, currentPage.current + 1)
+        const newData = paginationData(requestList, currentPage.current + 1)
         if (newData.length > 0) setListPerPage([...listPerPage, ...newData])
         if (newData.length < 10) setIsLastView(true)
         currentPage.current++
@@ -104,8 +105,9 @@ const ApprovalHistoryPage = () => {
                     <TotalCount type={userType} counts={totalCounts} />
                     <HistoryTableMobile
                         type={userType}
-                        dummyData={listPerPage}
+                        dataList={listPerPage}
                         onClickRowFunction={handleClickRow}
+                        isPending={isPending}
                     />
                     {!isLastView && <ViewMoreButton onChangePageFunction={handleViewChange} />}
                 </MobileView>
@@ -116,9 +118,10 @@ const ApprovalHistoryPage = () => {
                         dataList={listPerPage}
                         onClickRowFunction={handleClickRow}
                         currentPage={currentPage.current}
+                        isPending={isPending}
                     />
                     <CommonPagination
-                        dataLength={listData?.totalCnt} // total element count
+                        dataLength={count} // total element count
                         onChangePageFunction={handlePageChange} // 페이지 변경 시 실행 함수
                     />
                 </BrowserView>

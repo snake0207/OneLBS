@@ -16,6 +16,9 @@ const style = {
         border: 0,
         backgroundColor: 'background.gray',
         borderRadius: '0 0 8px 8px',
+        '@media (max-width:1024px)': {
+            minHeight: '130px',
+        },
     },
     cardTitle: {
         display: 'flex',
@@ -36,6 +39,7 @@ const style = {
         },
     },
     cardContBox: {
+        minHeight: '152px',
         textAlign: 'center',
         display: 'flex',
         flexDirection: 'column',

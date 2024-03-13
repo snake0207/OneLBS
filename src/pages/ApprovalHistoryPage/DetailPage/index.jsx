@@ -4,14 +4,13 @@ import t from '#/common/libs/trans.js'
 import TitleBar from '#/components/common/menu/TitleBar/index.jsx'
 import { Box, Stack, TextField } from '@mui/material'
 import ApprovalLine from '#/components/approval/Detail/ApprovalLine/index.jsx'
-import { useCallback, useMemo, useState } from 'react'
+import { useCallback, useEffect, useMemo, useState } from 'react'
 import { useFormik } from 'formik'
 import ActionButtons from '#/components/approval/Detail/ActionButtons/index.jsx'
-import poiDetailData from '#/mock/data/poiDetailData.json'
 import Headline from '#/components/approval/Detail/Headline/index.jsx'
 import Comment from '#/components/approval/Detail/Comment/index.jsx'
 import { usePopupActions } from '#/store/usePopupStore.js'
-import { detailResponseDataMapper } from '#/pages/ApprovalHistoryPage/mapper.js'
+import { detailResponseDataMapper } from '#/pages/ApprovalHistoryPage/responseMapper.js'
 import InfoTab from '#/components/approval/Detail/InfoTab/index.jsx'
 import { getUserTypeFromPath } from '#/common/libs/approvalParser.js'
 import EvChargingInfo from '#/components/poiDetail/CategoryInfo/EvChargingInfo/index.jsx'
@@ -24,67 +23,73 @@ import ApprovalSelect from '#/components/poiDetail/ApprovalSelect/index.jsx'
 import { isBrowser } from 'react-device-detect'
 import Divider from '@mui/material/Divider'
 import DetailHistoryTable from '#/components/approval/Detail/DetailHistoryTable/index.jsx'
+import { useGetHistoryDetail, usePostHistoryTempSave } from '#/hooks/queries/approval.js'
+import { extractChangedObjectOfChangedJson } from '#/common/libs/objectCheck.js'
+import { detailRequestDataMapper } from '#/pages/ApprovalHistoryPage/requestMapper.js'
 
 const ApprovalHistoryDetailPage = () => {
     const params = useParams()
     const popupActions = usePopupActions()
     const userType = getUserTypeFromPath(params.type)
-    const parsedData = detailResponseDataMapper(poiDetailData)
+    const { data: detailData, isPending } = useGetHistoryDetail(parseInt(params.id)) // api data
+    const [parsedData, setParsedData] = useState()
     const [selectedReviewer, setSelectedReviewer] = useState(null)
     const [selectedApprover, setSelectedApprover] = useState(null)
+    const { mutate: tempSaveMutate, isPending: isTempSavePending } = usePostHistoryTempSave()
+
+    useEffect(() => {
+        if (!isPending && detailData) setParsedData(detailResponseDataMapper(detailData))
+    }, [detailData])
 
     // TODO: 추후 수정 api request 형식 확인해 {...parsedData}로 사용할 수 있을지 확인
     const categoryFormik = useCallback((data) => {
-        switch (data.category) {
+        switch (data?.category) {
             case 'evCharging':
                 return {
-                    evChargingInfo: {
-                        brand: data.evChargingInfo?.brand || '',
-                        parkingFee: data.evChargingInfo?.parkingFee || '',
-                        openingHours: data.evChargingInfo?.openingHours || [],
-                        chargers: data.evChargingInfo?.chargers || [],
+                    evCharging: {
+                        brand: data.evCharging?.brand || '',
+                        parkingFee: data.evCharging?.parkingFee ?? '',
+                        chargers: data.evCharging?.chargers || [],
                     },
                 }
             case 'fuel':
                 return {
-                    fuelInfo: {
-                        brand: data.fuelInfo.brand || '',
-                        price: data.fuelInfo.price || [],
-                        openingHours: data.fuelInfo.openingHours || [],
+                    fuel: {
+                        brand: data.fuel.brand || '',
+                        price: data.fuel.price || [],
                     },
                 }
             case 'parking':
                 return {
-                    parkingInfo: {
-                        brand: data.parkingInfo.brand || '',
-                        type: data.parkingInfo.type || '',
-                        price: data.parkingInfo.price || [],
-                        openingHours: data.parkingInfo.openingHours || [],
-                        congestion: data.parkingInfo.congestion || '',
+                    parking: {
+                        brand: data.parking.brand || '',
+                        type: data.parking.type || '',
+                        price: data.parking.price || [],
+                        congestion: data.parking.congestion || '',
                     },
                 }
             case 'h2Charging':
                 return {
-                    h2ChargingInfo: {
-                        brand: data.h2ChargingInfo.brand || '',
-                        openingHours: data.h2ChargingInfo.openingHours || [],
-                        chargers: data.h2ChargingInfo.chargers || [],
+                    h2Charging: {
+                        brand: data.h2Charging.brand || '',
+                        chargers: data.h2Charging.chargers || [],
                     },
                 }
             case 'dealerPoi':
                 return {
-                    dealerPoiInfo: {
-                        type: data.dealerPoiInfo.type || '',
-                        manufacturer: data.dealerPoiInfo.manufacturer || '',
+                    dealerPoi: {
+                        type: data.dealerPoi.type || '',
+                        manufacturer: data.dealerPoi.manufacturer || '',
                     },
                 }
         }
     }, [])
 
     const formik = useFormik({
+        enableReinitialize: true,
         initialValues: {
-            ...parsedData.approvalInfo,
-            ...parsedData.basicInfo,
+            ...parsedData?.approvalInfo,
+            ...parsedData?.basicInfo,
             ...categoryFormik(parsedData),
         },
     })
@@ -92,6 +97,7 @@ const ApprovalHistoryDetailPage = () => {
     console.log('FORMIK >> ', formik.values)
 
     const isEditable = useMemo(() => {
+        if (!parsedData) return false
         switch (userType) {
             case 'requester':
                 return (
@@ -104,26 +110,49 @@ const ApprovalHistoryDetailPage = () => {
             default:
                 return false
         }
-    }, [parsedData.status, userType])
+    }, [parsedData, userType])
 
-    const openAlertPopup = (action) => {
+    const requestByAction = (action) => {
+        console.log('ACTION >> ', action)
+        const changedValues = extractChangedObjectOfChangedJson(formik.initialValues, formik.values)
+        const parsedValues = detailRequestDataMapper(params.id, changedValues)
         if (formik.values['requestComment'] === '')
             popupActions.showPopup('alert', '승인 요청 이유를 입력해 주세요')
-        else {
-            // TODO: 기능구분
-            console.log('VALUES >> ', formik.values)
-            popupActions.showPopup('alert', t(`confirmed.${action}`, 'approval'))
-            formik.handleSubmit
+
+        // TODO: 기능구분
+        switch (action) {
+            case 'temporary':
+                temporarySaveAction(parsedValues)
+                break
         }
     }
 
-    const handleShowConfirmPopup = (action, id) => {
-        console.log(action, t(`modal.${action}`, 'approval'), id)
-        popupActions.showPopup('confirm', t(`modal.${action}`, 'approval'), () =>
-            openAlertPopup(action),
+    const handleShowConfirmPopup = (action) => {
+        console.log(action, t(`modal.${action}`, 'approval'))
+        popupActions.showPopup(
+            'confirm',
+            t(`modal.${action.split('_')[0].toLowerCase()}`, 'approval'),
+            () => requestByAction(action),
         )
     }
 
+    const openAlertPopup = (action) => {
+        popupActions.showPopup(
+            'alert',
+            t(`confirmed.${action.split('_')[0].toLowerCase()}`, 'approval'),
+        )
+    }
+
+    const temporarySaveAction = (form) => {
+        tempSaveMutate(
+            { type: userType, data: form },
+            {
+                onSuccess: () => openAlertPopup('temporary'),
+            },
+        )
+    }
+
+    if (isPending) return
     return (
         <>
             {isBrowser && <TitleBar title={t('detail', 'approval')} />}
@@ -162,8 +191,8 @@ const ApprovalHistoryDetailPage = () => {
                 >
                     {/* 결제라인 */}
                     <ApprovalLine
-                        status={parsedData.status}
-                        content={parsedData.approvalInfo.approvalLineContents}
+                        status={parsedData?.status}
+                        content={parsedData?.approvalInfo.approvalLineContents}
                     />
                     {/* 유저할당 */}
                     {isEditable && (
@@ -180,15 +209,15 @@ const ApprovalHistoryDetailPage = () => {
                     )}
                     {/* 정보 탭 */}
                     <InfoTab
-                        basicData={parsedData.basicInfo}
+                        basicData={parsedData?.basicInfo}
                         formik={formik}
                         isEditable={isEditable}
                     />
                     {/* 카테고리 */}
-                    {parsedData.category === 'evCharging' && (
+                    {parsedData?.category === 'evCharging' && (
                         <Box>
                             <EvChargingInfo
-                                data={parsedData.evChargingInfo}
+                                data={parsedData?.evCharging}
                                 isEditable={isEditable}
                                 formik={formik}
                             />
@@ -200,10 +229,10 @@ const ApprovalHistoryDetailPage = () => {
                             />
                         </Box>
                     )}
-                    {parsedData.category === 'fuel' && (
+                    {parsedData?.category === 'fuel' && (
                         <Box>
                             <FuelInfo
-                                data={parsedData.fuelInfo}
+                                data={parsedData?.fuel}
                                 isEditable={isEditable}
                                 formik={formik}
                             />
@@ -215,10 +244,10 @@ const ApprovalHistoryDetailPage = () => {
                             />
                         </Box>
                     )}
-                    {parsedData.category === 'parking' && (
+                    {parsedData?.category === 'parking' && (
                         <Box>
                             <ParkingInfo
-                                data={parsedData.parkingInfo}
+                                data={parsedData?.parking}
                                 isEditable={isEditable}
                                 formik={formik}
                             />
@@ -230,10 +259,10 @@ const ApprovalHistoryDetailPage = () => {
                             />
                         </Box>
                     )}
-                    {parsedData.category === 'h2Charging' && (
+                    {parsedData?.category === 'h2Charging' && (
                         <Box>
                             <H2ChargingInfo
-                                data={parsedData.h2ChargingInfo}
+                                data={parsedData?.h2Charging}
                                 isEditable={isEditable}
                                 formik={formik}
                             />
@@ -245,10 +274,10 @@ const ApprovalHistoryDetailPage = () => {
                             />
                         </Box>
                     )}
-                    {parsedData.category === 'dealerPoi' && (
+                    {parsedData?.category === 'dealerPoi' && (
                         <Box>
                             <DealerPoiInfo
-                                data={parsedData.dealerPoiInfo}
+                                data={parsedData?.dealerPoi}
                                 isEditable={isEditable}
                                 formik={formik}
                             />
@@ -290,19 +319,18 @@ const ApprovalHistoryDetailPage = () => {
                     {/* Comment */}
                     <Comment userType={userType} isEditable={isEditable} formik={formik} />
                     {/* 이력 */}
-                    <DetailHistoryTable historyList={parsedData.approvalInfo.historyList} />
+                    <DetailHistoryTable historyList={parsedData?.approvalInfo.historyList} />
                     {/* 버튼 */}
                     <Box sx={{ display: 'flex', mt: '30px' }}>
                         <ActionButtons
                             type={userType}
-                            status={parsedData.status}
+                            status={parsedData?.status}
                             clickAction={handleShowConfirmPopup}
-                            id={params.id}
                         />
                     </Box>
                 </Stack>
                 {/* 지도 영역 */}
-                {isBrowser && <GoogleMapComponent markerDetailData={poiDetailData} />}
+                {isBrowser && <GoogleMapComponent markerDetailData={parsedData} />}
             </Box>
         </>
     )

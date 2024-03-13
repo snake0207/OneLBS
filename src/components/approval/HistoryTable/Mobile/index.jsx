@@ -4,11 +4,11 @@ import t from '#/common/libs/trans.js'
 
 import style from './style.module'
 
-const HistoryTableMobile = ({ type, dummyData, onClickRowFunction }) => {
+const HistoryTableMobile = ({ type, dataList, onClickRowFunction, isPending }) => {
     return (
         <>
-            {dummyData?.length ? (
-                dummyData.map((data, index) => {
+            {dataList?.length ? (
+                dataList.map((data, index) => {
                     return (
                         <Stack
                             key={index}
@@ -102,7 +102,7 @@ const HistoryTableMobile = ({ type, dummyData, onClickRowFunction }) => {
                     )
                 })
             ) : (
-                <Typography align={'center'}>NO DATA</Typography>
+                <Typography align={'center'}>{isPending ? 'LOADING' : 'NO DATA'}</Typography>
             )}
         </>
     )

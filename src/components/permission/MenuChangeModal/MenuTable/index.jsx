@@ -68,7 +68,7 @@ const MenuTable = ({ data }) => {
                     ))}
                 </TableBody>
             </Table>
-            <Button variant="contained" type="submit">
+            <Button variant="contained" type="submit" sx={style.darkBlueButton}>
                 {t('save', 'permission')}
             </Button>
         </form>

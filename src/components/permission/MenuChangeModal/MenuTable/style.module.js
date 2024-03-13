@@ -31,10 +31,20 @@ const style = {
             },
         },
         '& .MuiInputBase-root': { fontSize: 14, height: '34px' },
-        tr: {
-            '&:hover': {
-                backgroundColor: 'table.hover',
-            },
+    },
+    darkBlueButton: {
+        display: 'flex',
+        width: '130px',
+        mt: '20px',
+        ml: 'auto',
+        backgroundColor: 'button.light',
+        borderRadius: '4px',
+        border: '1px solid',
+        borderColor: 'button.light',
+        boxShadow: 'none',
+        '&:hover': {
+            backgroundColor: 'button.light',
+            boxShadow: 'none',
         },
     },
 }

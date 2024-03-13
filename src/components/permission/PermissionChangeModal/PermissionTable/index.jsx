@@ -1,33 +1,32 @@
 import { Box, Table, TableBody, TableCell, TableHead, TableRow } from '@mui/material'
-
-import t from '#/common/libs/trans'
-
-import tableData from '#/components/permission/PermissionChangeModal/PermissionTable/table.json'
 import PermissionTableRow from '#/components/permission/PermissionChangeModal/PermissionTable/PermissionTableRow'
+import CommonPagination from '#/components/common/pagination/CommonPagination'
+import { useGetRoleChangeUserList } from '#/hooks/queries/permission'
+import { userPermissionTableHeader } from '#/contents/tableHeader'
+import { usePermissionSearchActions } from '#/store/usePermissionSearchStore'
+
+import style from './style.module'
 
 const PermissionTable = () => {
-    const permissionTableHeader = [
-        { field: 'No', headerName: 'No.' },
-        { field: 'email', headerName: t('email', 'permission') },
-        { field: 'name', headerName: t('name', 'permission') },
-        { field: 'company_name', headerName: t('company_name', 'permission') },
-        { field: 'team_name', headerName: t('team_name', 'permission') },
-        { field: 'status', headerName: t('status', 'permission') },
-        { field: 'permission', headerName: t('permission', 'permission') },
-    ]
+    const { data } = useGetRoleChangeUserList()
+    const { setPermissionSearchPage } = usePermissionSearchActions()
+
+    const handleChangePage = (page) => {
+        setPermissionSearchPage(page)
+    }
 
     return (
         <Box>
-            <Table>
+            <Table sx={style.tableBox}>
                 <TableHead>
                     <TableRow>
-                        {permissionTableHeader.map((item) => (
+                        {userPermissionTableHeader.map((item) => (
                             <TableCell key={item.field}>{item.headerName}</TableCell>
                         ))}
                     </TableRow>
                 </TableHead>
                 <TableBody>
-                    {tableData.list.map((item) => (
+                    {data?.list.map((item) => (
                         <PermissionTableRow
                             key={item.number}
                             number={item.number}
@@ -42,6 +41,10 @@ const PermissionTable = () => {
                     ))}
                 </TableBody>
             </Table>
+            <CommonPagination
+                dataLength={data?.totalPages}
+                onChangePageFunction={handleChangePage}
+            />
         </Box>
     )
 }

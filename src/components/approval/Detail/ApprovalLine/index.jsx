@@ -40,6 +40,7 @@ const ApprovalLineContent = ({ title, color, process, content }) => {
                         sx={{
                             fontSize: 14,
                             fontWeight: 500,
+                            wordBreak: 'break-word',
                             '@media (max-width:767px)': {
                                 fontSize: 9,
                             },
@@ -52,7 +53,8 @@ const ApprovalLineContent = ({ title, color, process, content }) => {
                         sx={{
                             fontSize: 18,
                             fontWeight: 600,
-                            color: 'tdxt.darkgray',
+                            color: 'text.darkgray',
+                            wordBreak: 'break-word',
                             '@media (max-width:767px)': {
                                 fontSize: 12,
                             },
@@ -64,6 +66,7 @@ const ApprovalLineContent = ({ title, color, process, content }) => {
                         sx={{
                             fontSize: 14,
                             display: 'flex',
+                            justifyContent: 'center',
                             '@media (max-width:767px)': {
                                 fontSize: 10,
                                 lineHeight: '12px',
@@ -135,7 +138,7 @@ const ApprovalLine = ({ status, content }) => {
 
     return (
         <Box>
-            <Typography>{t('line', 'approval')}</Typography>
+            <Typography sx={style.title}>{t('line', 'approval')}</Typography>
             <Grid container flexWrap={'nowrap'} sx={{ justifyContent: 'center' }}>
                 <Grid xs={4}>
                     <ApprovalLineContent

@@ -4,8 +4,8 @@ import { useEffect, useState } from 'react'
 import { markerImage } from '#/common/libs/mapMarker.js'
 
 const DisplayMarker = ({ markerData }) => {
-    const { basicInfo, category, cpType } = markerData
-    const { lat, lon } = basicInfo.position.center
+    const { position, category, cpType } = markerData
+    const { lat, lon } = position.center
     const map = useGoogleMap()
     const [marker, setMarker] = useState(null)
     const [infoWindow, setInfoWindow] = useState(null)
@@ -31,7 +31,7 @@ const DisplayMarker = ({ markerData }) => {
                     info.open({ anchor: marker, map: map })
                 }}
             >
-                <MapInfoWindow markerData={basicInfo} />
+                <MapInfoWindow markerData={markerData} />
             </InfoWindow>
         </Marker>
     )

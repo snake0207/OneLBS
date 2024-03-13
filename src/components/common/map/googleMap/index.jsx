@@ -11,15 +11,17 @@ import {
     gpssDetailResponseDataMapper,
     gpssListResponseDataMapper,
 } from '#/pages/ApprovalHistoryPage/responseMapper.js'
+import MarkerDiscription from '#/components/common/map/googleMap/CustomControl/MarkerDiscription/index.jsx'
+import { useMapActions } from '#/store/useMapStore.js'
 
 const mapStyle = {
     width: '100%',
     height: '100%',
 }
 
-const seoul = {
-    lat: 33.9326825,
-    lng: -118.2727244,
+const eu = {
+    lat: 49.5725329,
+    lng: 10.0539701,
 }
 
 /**
@@ -39,6 +41,7 @@ const GoogleMapComponent = ({
     setSelectedPoi,
 }) => {
     const [map, setMap] = useState(null)
+    const { setCoordinates, setMapBounds } = useMapActions()
     // 왼쪽 클릭
     const [clickedCoord, setClickedCoord] = useState({
         lat: null,
@@ -59,8 +62,23 @@ const GoogleMapComponent = ({
         if (poiArr.length === 0) return
         const { lat, lon } = poiArr[0].position.center
         map.panTo({ lat: lat, lng: lon })
-        map.setZoom(15)
+        map.setZoom(19)
     }, [selectedPoi])
+
+    // 구글 검색 결과를 지도 bound로 설정
+    useEffect(() => {
+        if (parsedPoiSearchArr && map) {
+            const bounds = new window.google.maps.LatLngBounds()
+            const latLngArr = parsedPoiSearchArr.map((it) => ({
+                lat: it.position.center.lat,
+                lng: it.position.center.lon,
+            }))
+            latLngArr.forEach((it) => {
+                bounds.extend(it)
+            })
+            map.fitBounds(bounds)
+        }
+    }, [searchResultArr, map])
 
     // 구글지도 라이브러리 init
     const { isLoaded } = useJsApiLoader({
@@ -77,10 +95,12 @@ const GoogleMapComponent = ({
     const getMapBounds = () => {
         if (!map) return
         const bounds = map.getBounds()
-        console.log(bounds.getNorthEast().lat())
-        console.log(bounds.getNorthEast().lng())
-        console.log(bounds.getSouthWest().lat())
-        console.log(bounds.getSouthWest().lng())
+        setMapBounds(
+            bounds.getSouthWest().lat(),
+            bounds.getSouthWest().lng(),
+            bounds.getNorthEast().lat(),
+            bounds.getNorthEast().lng(),
+        )
     }
 
     return (
@@ -91,6 +111,10 @@ const GoogleMapComponent = ({
                         lat: parseFloat(event.latLng.lat().toFixed(7)),
                         lng: parseFloat(event.latLng.lng().toFixed(7)),
                     })
+                    setCoordinates(
+                        parseFloat(event.latLng.lat().toFixed(7)),
+                        parseFloat(event.latLng.lng().toFixed(7)),
+                    )
                 }}
                 onRightClick={(event) => {
                     if (isDistanceFunctionOn) {
@@ -123,11 +147,15 @@ const GoogleMapComponent = ({
                     scaleControl: true,
                 }}
                 mapContainerStyle={mapStyle}
-                center={seoul}
-                zoom={12}
+                center={eu}
+                zoom={5}
                 onLoad={onLoad}
                 onUnmount={onUnmount}
             >
+                {/* 마커 정보 표시 */}
+                <CustomControl position="TOP_CENTER" style={{ top: '10px !important' }}>
+                    <MarkerDiscription />
+                </CustomControl>
                 {/* 지도내 클릭 위치 표시 마커 */}
                 <ClickMarker clickedCoord={clickedCoord} setClickedCoord={setClickedCoord} />
                 {/* 내 현재 위치 표시 마커 */}

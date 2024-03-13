@@ -46,8 +46,8 @@ const CommonPagination = ({ dataLength = 0, onChangePageFunction }) => {
                         border: '1px solid',
                         borderColor: 'paging.border',
                         color: 'paging.text',
-                        fontSize: '16px',
-                        fontWeight: 500,
+                        fontSize: '15px',
+                        fontWeight: 400,
                         '&:hover': {
                             backgroundColor: 'paging.selected',
                             border: '1px solid',

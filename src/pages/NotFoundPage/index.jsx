@@ -1,5 +1,4 @@
 import { Box, Button, Typography, Icon } from '@mui/material'
-import BrowserNotSupportedIcon from '@mui/icons-material/BrowserNotSupported'
 
 import t from '#/common/libs/trans'
 import { useNavigate } from 'react-router-dom'
@@ -35,9 +34,9 @@ function NotFoundPage() {
             <Button
                 variant="contained"
                 onClick={() => navigate('/login', { replace: true })}
-                sx={style.button}
+                sx={style.darkBlueButton}
             >
-                {t('login_page')}
+                {t('main_page')}
             </Button>
         </Box>
     )

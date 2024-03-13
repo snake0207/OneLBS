@@ -61,8 +61,11 @@ const SwipeMapSearchList = ({
             }}
             sx={{
                 '& .MuiDrawer-paper': {
-                    height: `calc(50% - 200px)`,
+                    height: `calc(50% - 75px)`,
                     overflowY: 'visible',
+                    '@media (max-width:767px)': {
+                        height: `calc(50% - 200px)`,
+                    },
                 },
             }}
         >
@@ -113,7 +116,7 @@ const SwipeMapSearchList = ({
                         alignItems: !isResultNon ? '' : 'center',
                         overflow: 'auto',
                         backgroundColor: 'background.main',
-                        '@media (max-width:767px)': {
+                        '@media (max-width:1028px)': {
                             width: '100%',
                             '& .MuiList-root': {
                                 pt: '0',

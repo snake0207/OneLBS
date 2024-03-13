@@ -14,16 +14,18 @@ const MapSearchList = ({
     setSelectedPoi,
     isGpssSearch = false,
     setIsNewPoiCreateOpen,
+    fetchPoiListNextPage,
+    isPoiListLoading,
 }) => {
     const [isResultNon, setIsResultNon] = useState(true)
     const [isTopBtnVisible, setIsTopBtnVisible] = useState(false)
     const poiList = useRef()
-    const scrollToTop = () => {
-        poiList.current.scrollTo({
-            top: 0,
-            behavior: 'smooth',
-        })
-    }
+    const [isApiFetching, setIsApiFetching] = useState(false)
+
+    useEffect(() => {
+        setIsApiFetching(isPoiListLoading)
+    }, [isPoiListLoading])
+
     const parsedList = gpssListResponseDataMapper(searchResultArr)
     // 검색 결과가 없을 때 처리
     useEffect(() => {
@@ -40,8 +42,24 @@ const MapSearchList = ({
     }, [])
 
     const handleScroll = () => {
+        // scroll top
         if (poiList.current.scrollTop > 30) setIsTopBtnVisible(true)
         else setIsTopBtnVisible(false)
+        // 무한 스크롤 구현
+        if (
+            poiList.current.scrollTop + poiList.current.clientHeight >=
+            poiList.current.scrollHeight - 200
+        ) {
+            if (isApiFetching) return
+            fetchPoiListNextPage()
+        }
+    }
+
+    const scrollToTop = () => {
+        poiList.current.scrollTo({
+            top: 0,
+            behavior: 'smooth',
+        })
     }
 
     const handleNewPoiOpen = () => {
@@ -56,7 +74,7 @@ const MapSearchList = ({
                 margin: '10px',
                 backgroundColor: 'dialog.main',
                 borderRadius: '8px',
-                minHeight: '130px',
+                minHeight: isResultNon ? '130px' : 'calc(100vh - 440px)',
                 maxHeight: isBrowser ? '480px' : 'calc(100vh - 620px)',
                 display: isResultNon ? 'flex' : '',
                 justifyContent: isResultNon ? 'center' : '',

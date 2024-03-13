@@ -1,51 +1,93 @@
 import t from '#/common/libs/trans'
 import GoogleMapComponent from '#/components/common/map/googleMap'
 import TitleBar from '#/components/common/menu/TitleBar'
-
-import { Box, Icon, Button, SwipeableDrawer } from '@mui/material'
+import { Box, Button, Icon } from '@mui/material'
 import { BrowserView, MobileView } from 'react-device-detect'
 import MapSearch from '#/components/common/map/MapSearch/index.jsx'
 import MapSearchList from '#/components/common/map/searchList/MapSearchList/index.jsx'
-import { useState } from 'react'
-import poiDetailData from '#/mock/data/poiDetailData.json'
+import { useEffect, useState } from 'react'
+import poiDetailData from '#/mock/data/poiMapDetailData.json'
 import poiListData from '#/mock/data/poiListData.json'
-import TuneIcon from '@mui/icons-material/Tune.js'
 import { useNavigate } from 'react-router-dom'
 import MapGpssDetail from '#/components/common/map/MapGpssDetail/index.jsx'
 import MapPoiAdd from '#/components/common/map/MapPoiAdd/index.jsx'
 import SearchIcon from '#/assets/searchIcon.svg'
-import SearchIconDark from '#/assets/searchIconLightDark.svg'
+import SearchIconDark from '#/assets/searchIconDark.svg'
 import FilterIcon from '#/assets/filterIcon.svg'
 import useLayoutStore from '#/store/useLayoutStore'
 import SwipeMapSearchList from '#/components/common/map/searchList/SwipeMapSearchList/index.jsx'
-
-const markerSampleData = [
-    {
-        poiId: 'ChIJsTbYQbjLwoARpbZRYUbnEP4',
-        address: '12021 Wilmington Ave, Los Angeles, CA 90059, USA',
-        position: {
-            center: {
-                lat: 33.9243791,
-                lon: -118.23941569999998,
-            },
-        },
-        title: 'PowerFlex Charging Station',
-        category: 'ev',
-    },
-]
+import { useFormik } from 'formik'
+import { mapSearchSchema } from '#/contents/validationSchema.js'
+import {
+    useGetGpssSuggestions,
+    usePostGpssDetail,
+    usePostGpssSearch,
+} from '#/hooks/queries/gpss.js'
+import useMapStore from '#/store/useMapStore.js'
+import { useDebounce } from '#/hooks/useDebounce.js'
 
 function MapSearchPage() {
     const navigate = useNavigate()
     const { themeMode } = useLayoutStore()
-    // 검색 결과
-    const [searchResultArr, setSearchResultArr] = useState([])
-    // TODO 장소 상세 정보 호출 api 연동
     // 선택한 poi
     const [selectedPoi, setSelectedPoi] = useState(null)
     // 신규 poi 생성 컴포넌트 표출
     const [isNewPoiCreateOpen, setIsNewPoiCreateOpen] = useState(false)
+    const [showPoiList, setShowPoiList] = useState(false)
     // mobile search toggle
     const [showSearch, setShowSearch] = useState(false)
+    const { actions: mapStoreActions, lat, lon, seLat, seLon, neLat, neLon } = useMapStore()
+    const searchFormik = useFormik({
+        initialValues: {
+            country: [],
+            lat: '',
+            lon: '',
+            category: [],
+            keyword: '',
+            language: 'ENG',
+            vehicleCode: 'ICE',
+            polygonFilter: [],
+        },
+        validationSchema: mapSearchSchema,
+        onSubmit: (form) => {
+            console.log(form)
+            console.log('mapBound =>', seLat, seLon, neLat, neLon)
+            fetchPoiList()
+            setShowPoiList(true)
+        },
+    })
+    // 추천어 검색
+    const { data: suggestionsData } = useGetGpssSuggestions(useDebounce(searchFormik.values, 300))
+    // poi 리스트 검색
+    const {
+        data: poiListData,
+        isLoading: isPoiListLoading,
+        refetch: fetchPoiList,
+        fetchNextPage: fetchPoiListNextPage,
+    } = usePostGpssSearch(searchFormik.values)
+    // poi 상세 검색
+    const { data: poiDetailData, refetch: fetchPoiDetail } = usePostGpssDetail({
+        ...searchFormik.values,
+        poiId: [selectedPoi],
+    })
+
+    // poi 상세 검색
+    useEffect(() => {
+        if (selectedPoi) fetchPoiDetail()
+    }, [selectedPoi])
+
+    // 위경도 좌표 초기화
+    useEffect(() => {
+        mapStoreActions.resetCoordinates()
+        mapStoreActions.resetMapBounds()
+    }, [])
+    useEffect(() => {
+        searchFormik.setFieldValue('lat', lat)
+        searchFormik.setFieldValue('lon', lon)
+    }, [lat])
+    useEffect(() => {
+        searchFormik.setFieldValue('polygonFilter', [seLat, seLon, neLat, neLon])
+    }, [seLat])
 
     // mobile detail navigate
     const handlePOISelected = (id) => {
@@ -59,7 +101,7 @@ function MapSearchPage() {
                 <Icon
                     style={{
                         display: 'flex',
-                        position: 'absolute',
+                        position: 'fixed',
                         top: ' 75px',
                         zIndex: '4',
                     }}
@@ -87,15 +129,19 @@ function MapSearchPage() {
                         <Box sx={{ display: 'flex', flexDirection: 'colunm' }}>
                             <Box>
                                 {/* 지도 검색 */}
-                                <MapSearch />
+                                <MapSearch formik={searchFormik} suggestionData={suggestionsData} />
                                 {/* 검색 결과 */}
-                                <MapSearchList
-                                    searchResultArr={poiListData}
-                                    selectedPoi={selectedPoi}
-                                    setSelectedPoi={setSelectedPoi}
-                                    isGpssSearch={true}
-                                    setIsNewPoiCreateOpen={setIsNewPoiCreateOpen}
-                                />
+                                {showPoiList && (
+                                    <MapSearchList
+                                        searchResultArr={poiListData}
+                                        selectedPoi={selectedPoi}
+                                        setSelectedPoi={setSelectedPoi}
+                                        isGpssSearch={true}
+                                        setIsNewPoiCreateOpen={setIsNewPoiCreateOpen}
+                                        fetchPoiListNextPage={fetchPoiListNextPage}
+                                        isPoiListLoading={isPoiListLoading}
+                                    />
+                                )}
                             </Box>
                             {/* gpss 상세 */}
                             {poiDetailData && (
@@ -121,8 +167,8 @@ function MapSearchPage() {
                                 width: '40px',
                                 height: '40px',
                                 minWidth: '40px',
-                                mt: '8px',
-                                ml: '8px',
+                                mt: '10px',
+                                ml: '10px',
                                 borderRadius: '8px',
                                 backgroundColor: '#0057BB',
                                 boxShadow: '0 3px 14px rgb(0 0 0 / 24%)',

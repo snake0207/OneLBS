@@ -21,8 +21,12 @@ const ApprovalSelect = ({
     setSelectedApprover,
     isReviewerShow,
 }) => {
-    const { data: reviewerData, refetch: getReviewer } = useGetReviewer(formik.values[reviewerName])
-    const { data: approverData, refetch: getApprover } = useGetApprover(formik.values[approverName])
+    const { data: reviewerData, refetch: fetchReviewer } = useGetReviewer(
+        formik.values[reviewerName],
+    )
+    const { data: approverData, refetch: fetchApprover } = useGetApprover(
+        formik.values[approverName],
+    )
 
     // 검토자 승인자 검색 클릭
     const [isSearchButtonClick, setIsSearchButtonClick] = useState({
@@ -38,13 +42,13 @@ const ApprovalSelect = ({
     const handleClickGetReviewer = () => {
         if (formik.values[reviewerName] === '') return
         handleClickSearchButton('reviewer')
-        // getReviewer()
+        fetchReviewer()
     }
     // 결제자 검색
     const handleClickGetApprover = () => {
         if (formik.values[approverName] === '') return
         handleClickSearchButton('approver')
-        // getApprover()
+        fetchApprover()
     }
     return (
         <Box>
@@ -92,19 +96,19 @@ const ApprovalSelect = ({
                             mt: '8px',
                         }}
                     >
-                        {isSearchButtonClick['reviewer'] && (
-                            <>
-                                <Typography sx={{ marginY: '16px' }}>
-                                    {t('search_no_result', 'common')}
-                                </Typography>
+                        {isSearchButtonClick['reviewer'] &&
+                            (reviewerData && reviewerData.length !== 0 ? (
                                 <UserSearchTable
-                                    data={dummyData}
+                                    data={reviewerData}
                                     tableType={GPSS_TABLE_TYPE.reviewer}
                                     selectedReviewer={selectedReviewer}
                                     setSelectedReviewer={setSelectedReviewer}
                                 />
-                            </>
-                        )}
+                            ) : (
+                                <Typography sx={{ marginY: '16px' }}>
+                                    {t('search_no_result', 'common')}
+                                </Typography>
+                            ))}
                     </Box>
                 </Box>
             )}
@@ -151,19 +155,19 @@ const ApprovalSelect = ({
                         mt: '8px',
                     }}
                 >
-                    {isSearchButtonClick['approver'] && (
-                        <>
-                            <Typography sx={{ marginY: '16px', color: 'text.darkgray' }}>
-                                {t('search_no_result', 'common')}
-                            </Typography>
+                    {isSearchButtonClick['approver'] &&
+                        (approverData && approverData.length !== 0 ? (
                             <UserSearchTable
-                                data={dummyData}
+                                data={approverData}
                                 tableType={GPSS_TABLE_TYPE.approver}
                                 selectedApprover={selectedApprover}
                                 setSelectedApprover={setSelectedApprover}
                             />
-                        </>
-                    )}
+                        ) : (
+                            <Typography sx={{ marginY: '16px', color: 'text.darkgray' }}>
+                                {t('search_no_result', 'common')}
+                            </Typography>
+                        ))}
                 </Box>
             </Box>
         </Box>

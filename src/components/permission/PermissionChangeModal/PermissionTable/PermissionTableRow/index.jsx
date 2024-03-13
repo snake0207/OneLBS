@@ -1,8 +1,14 @@
+import { useEffect, useState } from 'react'
+import { useQueryClient } from '@tanstack/react-query'
 import { TableCell, TableRow } from '@mui/material'
-import { useFormik } from 'formik'
+import Select from '#/components/common/Select'
+import { usePutTargetUserIdRole } from '#/hooks/queries/permission'
+import { usePopupActions } from '#/store/usePopupStore'
+import usePermissionSearchStore from '#/store/usePermissionSearchStore'
+import { QUERY_KEYS } from '#/contents/queryKeys'
+import { ROLE_LIST } from '#/contents/constant'
 
 import t from '#/common/libs/trans'
-import Select from '#/components/common/Select'
 
 const PermissionTableRow = ({
     number,
@@ -14,23 +20,42 @@ const PermissionTableRow = ({
     statusName,
     roleId,
 }) => {
-    const roleList = [
-        { value: '25', label: '일반 사용자', key: 1 },
-        { value: '26', label: '요청자', key: 2 },
-        { value: '27', label: '검토자', key: 3 },
-        { value: '28', label: '승인자', key: 4 },
-        { value: '29', label: '운영자', key: 5 },
-    ]
+    const {
+        page,
+        email: searchEmail,
+        name: searchName,
+        roleId: searchRoleId,
+    } = usePermissionSearchStore()
+    const { showPopup } = usePopupActions()
+    const [userPermission, setUserPermission] = useState(roleId)
+    const queryClient = useQueryClient()
+    const { mutate } = usePutTargetUserIdRole()
 
-    const formik = useFormik({
-        initialValues: {
-            roleId,
-        },
-        onSubmit: (form) => {
-            console.log(form)
-            console.log(userId)
-        },
-    })
+    const onChangeUserPermission = (event) => {
+        showPopup('confirm', t('alert.permission_change_confirm', 'permission'), () => {
+            mutate(
+                { userId, roleId: event.value },
+                {
+                    onSuccess: () => {
+                        queryClient.invalidateQueries({
+                            queryKey: [
+                                QUERY_KEYS.permission.roleChangeUserList,
+                                page,
+                                searchEmail,
+                                searchName,
+                                searchRoleId,
+                            ],
+                        })
+                        showPopup('alert', t('alert.permission_change_success', 'permission'))
+                    },
+                },
+            )
+        })
+    }
+
+    useEffect(() => {
+        setUserPermission(roleId)
+    }, [roleId])
 
     return (
         <TableRow>
@@ -41,7 +66,13 @@ const PermissionTableRow = ({
             <TableCell>{teamName}</TableCell>
             <TableCell>{t(`${statusName}`, 'permission')}</TableCell>
             <TableCell>
-                <Select name="roleId" items={roleList} formik={formik} size="small"></Select>
+                <Select
+                    name="roleId"
+                    items={ROLE_LIST}
+                    onChange={onChangeUserPermission}
+                    value={userPermission}
+                    size="small"
+                />
             </TableCell>
         </TableRow>
     )

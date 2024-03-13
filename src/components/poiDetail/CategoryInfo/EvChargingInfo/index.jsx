@@ -69,7 +69,11 @@ const EvChargingInfo = ({ data, isEditable, formik }) => {
                 <Typography sx={{ color: 'text.main', fontSize: '18px' }}>
                     {data.maxWatt}kw
                 </Typography>
-                <Typography sx={{ color: 'text.main', fontSize: '18px' }}>{data.status}</Typography>
+                <Typography
+                    sx={{ color: 'text.chargeblue', fontSize: '18px', fontWeight: 500, mt: '6px' }}
+                >
+                    {data.status}
+                </Typography>
                 <Accordion sx={style.accordionDepsBox}>
                     <AccordionSummary expandIcon={<ExpandMoreIcon />}>
                         <Typography
@@ -123,10 +127,12 @@ const EvChargingInfo = ({ data, isEditable, formik }) => {
                         {data.summary?.length
                             ? data.summary?.map((summary, index) => (
                                   <Box key={index}>
-                                      <Typography>{summary.type}</Typography>
-                                      <Typography>{summary.speed}</Typography>
-                                      <Typography>{summary.possibleCount}</Typography>
-                                      <Typography>{summary.watt}kw</Typography>
+                                      <Typography sx={{ mb: '6px' }}>{summary.type}</Typography>
+                                      <Typography sx={{ mb: '6px' }}>{summary.speed}</Typography>
+                                      <Typography sx={{ mb: '6px' }}>
+                                          {summary.possibleCount}
+                                      </Typography>
+                                      <Typography sx={{ mb: '6px' }}>{summary.watt}kw</Typography>
                                   </Box>
                               ))
                             : '-'}
@@ -154,7 +160,9 @@ const EvChargingInfo = ({ data, isEditable, formik }) => {
                         {data.chargers?.length
                             ? data.chargers.map((charger, index) => (
                                   <Grid container key={index} gap={2} direction={'column'}>
-                                      <Typography>{charger.id || '-'}</Typography>
+                                      <Typography sx={{ mb: '6px' }}>
+                                          {charger.id || '-'}
+                                      </Typography>
                                       <EditableSelectColumn
                                           value={charger.speed}
                                           name={`evCharging.chargers.${index}.speed`}
@@ -169,8 +177,23 @@ const EvChargingInfo = ({ data, isEditable, formik }) => {
                                           isEditable={isEditable}
                                           formik={formik}
                                       />
-                                      <Typography>{charger.status || '-'}</Typography>
-                                      <Typography>{charger.lastUsedTime || '-'}</Typography>
+                                      <Typography
+                                          sx={{
+                                              color: 'text.chargeblue',
+                                              fontSize: '16px',
+                                              fontWeight: 500,
+                                              mb: '6px',
+                                          }}
+                                      >
+                                          {charger.status || '-'}
+                                      </Typography>
+                                      <Typography
+                                          sx={{
+                                              mb: '6px',
+                                          }}
+                                      >
+                                          {charger.lastUsedTime || '-'}
+                                      </Typography>
                                       <EditableSelectColumn
                                           value={charger.type}
                                           name={`evCharging.chargers.${index}.type`}
@@ -180,7 +203,7 @@ const EvChargingInfo = ({ data, isEditable, formik }) => {
                                       />
                                       {charger.priceList?.map((price, index) => (
                                           <Fragment key={index}>
-                                              <Typography>
+                                              <Typography sx={{ mb: '6px' }}>
                                                   {price.price}
                                                   {price.currency}(1{price.currency} / 1
                                                   {price.priceUnit})

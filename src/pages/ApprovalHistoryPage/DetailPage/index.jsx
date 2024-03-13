@@ -173,7 +173,7 @@ const ApprovalHistoryDetailPage = () => {
                         backgroundColor: 'dialog.main',
                         opacity: '95%',
                         overflowY: 'auto',
-                        height: '98%',
+                        height: 'calc(100% - 32px)',
                         zIndex: 2,
                         borderRadius: '8px',
                         boxShadow: '0 4px 4px rgb(0 0 0 / 25%)',
@@ -181,10 +181,11 @@ const ApprovalHistoryDetailPage = () => {
                             position: 'relative',
                             borderRadius: '0',
                             boxShadow: 'none',
-                            m: '0',
+                            m: '64px 0 0 0',
                             p: '0',
                             height: '100%',
                             overflowY: 'inherit',
+                            opacity: '1',
                         },
                     }}
                 >
@@ -207,11 +208,11 @@ const ApprovalHistoryDetailPage = () => {
                         />
                     )}
                     {/* 정보 탭 */}
-                    {/*<InfoTab*/}
-                    {/*    basicData={parsedData?.basicInfo}*/}
-                    {/*    formik={formik}*/}
-                    {/*    isEditable={isEditable}*/}
-                    {/*/>*/}
+                    <InfoTab
+                        basicData={parsedData?.basicInfo}
+                        formik={formik}
+                        isEditable={isEditable}
+                    />
                     {/* 카테고리 */}
                     {parsedData?.category === 'evCharging' && (
                         <Box>
@@ -302,7 +303,13 @@ const ApprovalHistoryDetailPage = () => {
                                     rows={3}
                                     value={formik.values['requestComment']}
                                     onChange={formik.handleChange}
-                                    sx={{ backgroundColor: 'form.main', borderRadius: '4px' }}
+                                    sx={{
+                                        backgroundColor: 'form.main',
+                                        borderRadius: '4px',
+                                        '& .MuiOutlinedInput-notchedOutline': {
+                                            borderColor: 'form.border',
+                                        },
+                                    }}
                                 />
                             ) : (
                                 <Typography>{formik.values['requestComment'] || '-'}</Typography>
@@ -314,7 +321,7 @@ const ApprovalHistoryDetailPage = () => {
                     {/* 이력 */}
                     <DetailHistoryTable historyList={parsedData?.approvalInfo.historyList} />
                     {/* 버튼 */}
-                    <Box>
+                    <Box sx={{ display: 'flex', mt: '30px' }}>
                         <ActionButtons
                             type={userType}
                             status={parsedData?.status}

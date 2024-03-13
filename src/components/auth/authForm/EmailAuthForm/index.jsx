@@ -12,6 +12,8 @@ import {
 import { useFormik } from 'formik'
 import { Close } from '@mui/icons-material'
 import LoginIcon from '#/assets/loginIcon.svg'
+import LoginIconDark from '#/assets/loginIconDark.svg'
+import useLayoutStore from '#/store/useLayoutStore'
 
 import t from '#/common/libs/trans'
 import useTimerStore from '#/store/useTimerStore'
@@ -24,6 +26,7 @@ import { LoadingButton } from '@mui/lab'
 
 const EmailAuthForm = () => {
     const { time, actions } = useTimerStore()
+    const { themeMode } = useLayoutStore()
     const [isButtonDisabled, setIsButtonDisabled] = useState(false)
     const [isReSend, setIsReSend] = useState(false)
     const [isAuthCompleted, setIsAuthCompleted] = useState(false)
@@ -114,7 +117,17 @@ const EmailAuthForm = () => {
         <>
             <Box sx={{ display: 'flex', justifyContent: 'flex-start', marginBottom: '16px' }}>
                 <Icon sx={{ display: 'flex', width: 20, height: 20, alignItems: 'center' }}>
-                    <img src={LoginIcon} />
+                    {themeMode === 'light' ? (
+                        <img
+                            src={LoginIcon}
+                            style={{ verticalAlign: 'middle', paddingRight: '4px' }}
+                        />
+                    ) : (
+                        <img
+                            src={LoginIconDark}
+                            style={{ verticalAlign: 'middle', paddingRight: '4px' }}
+                        />
+                    )}
                 </Icon>
                 <Typography variant="h5" sx={style.loginTitle}>
                     {t('email_auth', 'auth')}

@@ -32,7 +32,7 @@ function AuthHeader() {
     }
 
     return (
-        <AppBar position="absolute">
+        <AppBar position="fixed" sx={{ color: 'transparent' }}>
             <Container
                 maxWidth="xl"
                 sx={{
@@ -41,6 +41,9 @@ function AuthHeader() {
                     borderBottom: '1px solid',
                     borderColor: 'border.main',
                     backgroundColor: 'background.mobile',
+                    '@media (max-width:1024px)': {
+                        borderColor: 'border.header',
+                    },
                 }}
             >
                 <Toolbar disableGutters>

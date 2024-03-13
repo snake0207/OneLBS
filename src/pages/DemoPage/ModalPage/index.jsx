@@ -5,6 +5,7 @@ import JoinModal from '#/components/auth/authForm/joinForm/JoinModal'
 import OtpGuideModal from '#/components/auth/authForm/CertifiedForm/otpGuideModal'
 import PasswordChangeModal from '#/components/dashboard/PasswordChangeModal'
 import PermissionChangeModal from '#/components/permission/PermissionChangeModal'
+import MenuChangeModal from '#/components/permission/MenuChangeModal'
 
 const ModalPage = () => {
     const [isOpenJoinModal, setIsOpenJoinModal] = useState(false)
@@ -13,6 +14,7 @@ const ModalPage = () => {
     const [isOpenOtpGuideModal, setIsOpenOtpGuideModal] = useState(false)
     const [isOpenPasswordChangeModal, setIsOpenPasswordChangeModal] = useState(false)
     const [isOpenPermissionChangeModal, setIsOpenPermissionChangeModal] = useState(false)
+    const [isOpenMenuChangeModal, setIsOpenMenuChangeModal] = useState(false)
     return (
         <div>
             <h1>Modal</h1>
@@ -50,6 +52,12 @@ const ModalPage = () => {
             <PermissionChangeModal
                 isOpen={isOpenPermissionChangeModal}
                 onClose={() => setIsOpenPermissionChangeModal(false)}
+            />
+            <h2>MenuChangeModal</h2>
+            <button onClick={() => setIsOpenMenuChangeModal(true)}>MenuChangeModal</button>
+            <MenuChangeModal
+                isOpen={isOpenMenuChangeModal}
+                onClose={() => setIsOpenMenuChangeModal(false)}
             />
         </div>
     )

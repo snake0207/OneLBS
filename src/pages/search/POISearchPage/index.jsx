@@ -1,7 +1,7 @@
 import t from '#/common/libs/trans'
 import GoogleMapComponent from '#/components/common/map/googleMap'
 import TitleBar from '#/components/common/menu/TitleBar'
-import { Box, Icon, Button } from '@mui/material'
+import { Box, Button, Icon } from '@mui/material'
 import { useNavigate } from 'react-router-dom'
 import { useState } from 'react'
 import { BrowserView, MobileView } from 'react-device-detect'
@@ -9,27 +9,12 @@ import MapSearch from '#/components/common/map/MapSearch/index.jsx'
 import MapSearchList from '#/components/common/map/searchList/MapSearchList/index.jsx'
 import poiListData from '#/mock/data/poiListData.json'
 import MapPoiDetail from '#/components/common/map/MapPoiDetail/index.jsx'
-import poiDetailData from '#/mock/data/poiDetailData.json'
+import poiDetailData from '#/mock/data/poiMapDetailData.json'
 import PoiSearchIcon from '#/assets/poiSearchIcon.svg'
 import PoiSearchIconDark from '#/assets/poiSearchIconDark.svg'
 import useLayoutStore from '#/store/useLayoutStore'
 import FilterIcon from '#/assets/filterIcon.svg'
 import SwipeMapSearchList from '#/components/common/map/searchList/SwipeMapSearchList/index.jsx'
-
-const markerSampleData = [
-    {
-        poiId: 'ChIJsTbYQbjLwoARpbZRYUbnEP4',
-        address: '12021 Wilmington Ave, Los Angeles, CA 90059, USA',
-        position: {
-            center: {
-                lat: 33.9243791,
-                lon: -118.23941569999998,
-            },
-        },
-        title: 'PowerFlex Charging Station',
-        category: 'ev',
-    },
-]
 
 function POISearchPage() {
     const navigate = useNavigate()
@@ -52,7 +37,7 @@ function POISearchPage() {
                 <Icon
                     style={{
                         display: 'flex',
-                        position: 'absolute',
+                        position: 'fixed',
                         top: ' 75px',
                         zIndex: '4',
                     }}
@@ -104,8 +89,8 @@ function POISearchPage() {
                                 width: '40px',
                                 height: '40px',
                                 minWidth: '40px',
-                                mt: '8px',
-                                ml: '8px',
+                                mt: '10px',
+                                ml: '10px',
                                 borderRadius: '8px',
                                 backgroundColor: '#0057BB',
                                 boxShadow: '0 3px 14px rgb(0 0 0 / 24%)',

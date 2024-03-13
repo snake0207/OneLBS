@@ -15,13 +15,13 @@
         "menuId": 121,
         "name": "Map",
         "menuUrl": "/search-management/map",
-        "label": "map"
+        "label": "search_map"
     },
     {
         "menuId": 131,
         "name": "Map",
         "menuUrl": "/poi-view/map",
-        "label": "map"
+        "label": "poi_map"
     },
     {
         "menuId": 141,

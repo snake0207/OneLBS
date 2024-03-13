@@ -2,6 +2,7 @@ const style = {
     searchBox: {
         width: '100%',
         p: '16px 20px 12px 20px',
+        mb: '16px',
         '& .MuiGrid2-root': {
             mb: '3px',
         },
@@ -49,6 +50,9 @@ const style = {
         borderRadius: '8px',
         backgroundColor: '#0057BB',
         boxShadow: '0 3px 14px rgb(0 0 0 / 24%)',
+        '&:hover': {
+            backgroundColor: '#0057BB',
+        },
     },
     select: {
         width: '100%',

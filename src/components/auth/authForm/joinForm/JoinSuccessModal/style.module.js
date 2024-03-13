@@ -1,13 +1,18 @@
 const style = {
     dialogBox: {
         '& .MuiDialog-paper': {
-            width: '70%',
+            width: '550px',
             backgroundColor: 'dialog.main',
             borderRadius: '8px',
             backgroundImage: 'none',
             border: '1px solid',
             borderColor: 'color.alert',
             boxShadow: '0 3px 14px rgb(0 0 0 / 24%)',
+            '@media (max-width:767px)': {
+                width: '100%',
+                maxHeight: 'calc(100% - 20px)',
+                m: '10px',
+            },
         },
     },
     title: {

@@ -1,10 +1,11 @@
 const style = {
     darkBlueButton: {
         width: '25%',
-        height: '30px',
         ml: '4px',
         backgroundColor: 'button.light',
         borderRadius: '4px',
+        border: '1px solid',
+        borderColor: 'button.light',
         flex: 1,
         boxShadow: 'none',
         '&:hover': {
@@ -14,11 +15,11 @@ const style = {
         '&:first-of-type': { ml: '0px' },
     },
     lightButton: {
-        width: '',
-        color: '#002C5F',
+        color: '#00418D',
         ml: '4px',
         backgroundColor: 'button.lightblue',
-        border: '1px solid #5b8cc5',
+        border: '1px solid',
+        borderColor: 'button.lightblueBoder',
         borderRadius: '4px',
         flex: 1,
         boxShadow: 'none',
@@ -29,10 +30,11 @@ const style = {
     },
     lineButton: {
         borderRadius: '4px',
-        color: '#002C5F',
         ml: '4px',
         flex: 1,
-        border: '1px solid #5b8cc5',
+        color: 'text.lineblue',
+        border: '1px solid',
+        borderColor: 'button.lineblue',
         backgroundColor: 'button.white',
         boxShadow: 'none',
         '&:hover': {
@@ -42,10 +44,11 @@ const style = {
     },
     blueButton: {
         width: '',
-        color: '#002C5F',
+        color: '#00418D',
         ml: '4px',
         backgroundColor: 'button.blue',
-        border: '1px solid #5b8cc5',
+        border: '1px solid',
+        borderColor: 'button.blueBoder',
         borderRadius: '4px',
         flex: 1,
         boxShadow: 'none',

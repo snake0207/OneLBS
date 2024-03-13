@@ -16,7 +16,6 @@ import UserInfo from './UserInfo'
 import t from '#/common/libs/trans'
 
 import { BrowserView, MobileView } from 'react-device-detect'
-import { data } from '#/mock/data/side_menu.json'
 import { filterMobileMenuItems } from '#/common/libs/menuTools'
 import LinkRouter from '#/components/common/menu/LinkRouter'
 
@@ -39,9 +38,14 @@ import ViewModuleIcon from '#/assets/viewModuleIcon.svg'
 import ViewModuleIconDark from '#/assets/viewModuleIconDark.svg'
 import LogoIcon from '#/assets/logo.svg'
 import LogoIconDark from '#/assets/logoDark.svg'
+import DashboardIcon from '#/assets/menuIcon.svg'
+import DashboardIconDark from '#/assets/menuIconDark.svg'
+import { Close } from '@mui/icons-material'
 
 import style from './style.module'
 import { useNavigate } from 'react-router-dom'
+
+import { data } from '#/mock/data/side_menu.json'
 
 const drawerWidth = 240
 
@@ -96,6 +100,22 @@ const getMenuIcon = (key, themeMode) => {
                     }}
                 >
                     {themeMode === 'light' ? <img src={UserIcon} /> : <img src={UserIconDark} />}
+                </Icon>
+            )
+        case 'dashboard':
+            return (
+                <Icon
+                    sx={{
+                        display: 'flex',
+                        width: '20px',
+                        height: '20px',
+                    }}
+                >
+                    {themeMode === 'light' ? (
+                        <img src={DashboardIcon} />
+                    ) : (
+                        <img src={DashboardIconDark} />
+                    )}
                 </Icon>
             )
         case 'search_management':
@@ -216,6 +236,7 @@ const createMenuItems = (menuItems, themeMode) => {
                         <ExpandMenuItem
                             key={index}
                             label={t(`top_menu.${item.label}`)}
+                            to={item.menuUrl}
                             iconNode={getMenuIcon(item.label, themeMode)}
                             items={item.children}
                         />
@@ -238,7 +259,7 @@ const createMenuItems = (menuItems, themeMode) => {
 
 const SideMenu = ({ open, toggleDrawer }) => {
     const navigate = useNavigate()
-    const { themeMode } = useLayoutStore()
+    const { themeMode, openDrawer } = useLayoutStore()
     return (
         <>
             <BrowserView>
@@ -255,11 +276,11 @@ const SideMenu = ({ open, toggleDrawer }) => {
                         <Box sx={{ m: '24px 104px 30px 24px' }}>
                             <img src={LogoIcon} onClick={() => navigate('/')} />
                         </Box>
-                        <IconButton onClick={toggleDrawer}>
-                            <ChevronLeftIcon />
+                        <IconButton onClick={toggleDrawer} sx={{ mt: '-20px', color: 'text.gray' }}>
+                            {openDrawer && <Close />}
                         </IconButton>
                     </Toolbar>
-                    <List component="nav">{createMenuItems(data.menuTree, themeMode)}</List>
+                    <List component="nav">{createMenuItems(data, themeMode)}</List>
                 </VariantDrawer>
             </BrowserView>
             <MobileView>
@@ -273,7 +294,7 @@ const SideMenu = ({ open, toggleDrawer }) => {
                     </Box>
                     <UserInfo />
                     <List component="nav">
-                        {createMenuItems(filterMobileMenuItems(data.menuTree), themeMode)}
+                        {createMenuItems(filterMobileMenuItems(data), themeMode)}
                     </List>
                 </Drawer>
             </MobileView>

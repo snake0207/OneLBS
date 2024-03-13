@@ -1,13 +1,18 @@
 const style = {
     dialogBox: {
         '& .MuiDialog-paper': {
-            width: '70%',
+            width: '550px',
             backgroundColor: 'dialog.main',
             borderRadius: '8px',
             backgroundImage: 'none',
             border: '1px solid',
             borderColor: 'color.alert',
             boxShadow: '0 3px 14px rgb(0 0 0 / 24%)',
+            '@media (max-width:767px)': {
+                width: '100%',
+                maxHeight: 'calc(100% - 20px)',
+                m: '10px',
+            },
         },
     },
     title: {
@@ -49,22 +54,27 @@ const style = {
         height: 36,
         fontWeight: 400,
         color: 'white',
-        backgroundColor: '#002C5F',
+        backgroundColor: 'button.light',
+        border: '1px solid',
+        borderColor: 'button.light',
         '&:hover': {
-            backgroundColor: '#002C5F',
+            backgroundColor: 'button.light',
+            boxShadow: 'none',
         },
     },
     lightButton: {
         width: '50%',
         height: 36,
-        color: '#002C5F',
+        color: '#00418D',
         ml: '2px',
         backgroundColor: 'button.lightblue',
-        border: '1px solid #5b8cc5',
+        border: '1px solid',
+        borderColor: 'button.lightblueBoder',
         flex: 1,
         boxShadow: 'none',
         '&:hover': {
             backgroundColor: 'button.lightblue',
+            boxShadow: 'none',
         },
     },
 }

@@ -1,10 +1,15 @@
 const style = {
     dialogBox: {
         '& .MuiDialog-paper': {
-            backgroundColor: 'dialog.main',
             width: '550px',
+            backgroundColor: 'dialog.main',
             borderRadius: '8px',
             backgroundImage: 'none',
+            '@media (max-width:1280px)': {
+                width: '100%',
+                maxHeight: 'calc(100% - 20px)',
+                m: '10px',
+            },
         },
     },
     close: {
@@ -58,12 +63,12 @@ const style = {
         fontSize: 14,
         fontWeight: 400,
         color: 'grey.darkgray',
-        bgcolor: 'button.lightgray',
+        backgroundColor: 'button.lightgray',
         boxShadow: 'none',
         border: '1px solid',
         borderColor: 'button.moreBtn',
         '&:hover': {
-            bgcolor: 'button.lightgray',
+            backgroundColor: 'button.lightgray',
             boxShadow: 'none',
         },
     },

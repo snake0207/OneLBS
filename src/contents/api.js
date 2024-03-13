@@ -13,13 +13,21 @@ export const API_PATH = {
         defer_change: 'user-auth/api/v1/user/password/defer-change',
     },
     gpss: {
-        reviewer: '/reviewer',
-        approver: '/approver',
+        reviewer: '/user-auth/api/v1/auth/reviewer-search?',
+        approver: '/user-auth/api/v1/auth/manager-search?',
+        gpss_search: '/adminmgmt/api/v1/search/unified-search',
+        gpss_detail: '/adminmgmt/api/v1/search/detail-search',
+        gpss_suggestion: '/adminmgmt/api/v1/search/suggest?',
     },
     approval: {
         history_list: '/adminmgmt/api/v1/history/all-histories',
         history_detail: '/adminmgmt/api/v1/history/history/detail',
         history_temp_save_requester: '/adminmgmt/api/v1/request/draft-requester',
         history_temp_save_reviewer: '/adminmgmt/api/v1/request/draft-reviewer',
+    },
+    permission: {
+        role_menu_permission: '/user-auth/api/v1/auth/role-menu-permission',
+        role_change_user_list: '/user-auth/api/v1/auth/role-change-user-list',
+        target_userId_role: (targetUserId) => `/user-auth/api/v1/auth/${targetUserId}/role`,
     },
 }

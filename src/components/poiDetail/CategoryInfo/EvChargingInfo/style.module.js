@@ -21,9 +21,6 @@ const style = {
                 },
             },
         },
-        '& .MuiTypography-root': {
-            color: 'text.darkgray',
-        },
         '&:before': {
             content: 'attr(title)',
             opacity: '0',
@@ -45,11 +42,35 @@ const style = {
         },
     },
     detailsBox: {
-        p: '12px !important',
-        borderRadius: '4px',
-        backgroundColor: 'background.accordion',
-        border: '1px solid',
-        borderColor: 'border.light',
+        '& .MuiGrid-container': {
+            p: '12px',
+            mb: '10px',
+
+            borderRadius: '4px',
+            backgroundColor: 'background.accordion',
+            border: '1px solid',
+            borderColor: 'border.light',
+            gap: 'inherit',
+            '& .MuiBox-root': {
+                p: '0',
+                mb: '8px',
+                mt: '0',
+                borderRadius: '4px',
+                backgroundColor: 'transparent',
+                border: 'none',
+                gap: 'inherit',
+            },
+        },
+        '& .MuiBox-root': {
+            p: '12px',
+            mb: '10px',
+            borderRadius: '4px',
+            backgroundColor: 'background.accordion',
+            border: '1px solid',
+            borderColor: 'border.light',
+            gap: 'inherit',
+        },
+
         color: 'text.darkgray',
     },
     summaryBox: {

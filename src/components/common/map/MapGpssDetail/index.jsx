@@ -38,14 +38,12 @@ const MapGpssDetail = ({ selectedPoi, setSelectedPoi, poiData }) => {
     }, [selectedPoi])
 
     const parsedData = gpssDetailResponseDataMapper(poiData)
-    const { basicInfo, ...restData } = parsedData
     const formik = useFormik({
         initialValues: {
             reason: '',
             reviewer: '',
             approver: '',
-            ...basicInfo,
-            ...restData,
+            ...parsedData,
         },
         validationSchema: poiDetailSchema,
         onSubmit: (form) => {
@@ -125,7 +123,7 @@ const MapGpssDetail = ({ selectedPoi, setSelectedPoi, poiData }) => {
                         {/* 상세 기본 정보 */}
                         <BasicInfo
                             formik={formik}
-                            poiData={parsedData.basicInfo}
+                            poiData={parsedData}
                             tabSelected={tabSelected}
                             isEditable={isEditable}
                         />
@@ -257,7 +255,7 @@ const MapGpssDetail = ({ selectedPoi, setSelectedPoi, poiData }) => {
                                 gap: '2px',
                                 mt: '30px',
                                 '@media (max-width:1024px)': {
-                                    mb: '20px',
+                                    pb: '20px',
                                 },
                             }}
                         >

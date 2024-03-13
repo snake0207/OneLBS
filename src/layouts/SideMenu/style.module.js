@@ -2,6 +2,7 @@ const style = {
     webnavBox: {
         '& .MuiPaper-root': {
             backgroundColor: 'background.default',
+            borderColor: 'color.sidemenu',
         },
         '& .MuiList-root': {
             pt: '0',
@@ -9,6 +10,7 @@ const style = {
             '& .MuiButtonBase-root': {
                 m: '3px 0',
                 borderRadius: '350px',
+
                 '& .MuiListItemIcon-root': {
                     minWidth: '30px',
                     mr: '8px',
@@ -29,8 +31,11 @@ const style = {
                     borderBottom: 'none',
                     '& .MuiTypography-root ': {
                         fontSize: 15,
+                        '&:hover': {
+                            color: '#007FA8',
+                        },
                     },
-                    '&:hover': { borderRadius: '350px' },
+                    '&:hover': { borderRadius: '350px', backgroundColor: 'background.default' },
                 },
             },
         },

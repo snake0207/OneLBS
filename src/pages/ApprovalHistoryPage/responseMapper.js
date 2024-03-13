@@ -166,17 +166,15 @@ const detailResponseDataMapper = ({ data }) => {
  * gpss 상세데이터 매퍼
  */
 const gpssDetailResponseDataMapper = (res) => {
-    if (!!res?.data?.result === false) return null
-    const data = res.data.result[0]
+    if (!!res?.data?.data?.data?.result === false) return null
+    const data = res.data.data.data.result[0]
     const basicData = {
         category: parseCategory(data),
         cpType: parsePoiProviderType(data.poiId),
         poiId: data.poiId,
-        basicInfo: {
-            title: data.title,
-            address: data.address,
-            position: data.position,
-        },
+        title: data.title,
+        address: data.address,
+        position: data.position,
     }
     return setCategoryData(basicData, data)
 }
@@ -185,18 +183,25 @@ const gpssDetailResponseDataMapper = (res) => {
  * gpss 리스트데이터 매퍼
  */
 const gpssListResponseDataMapper = (res) => {
-    if (!!res?.data?.result === false) return null
-    const dataArr = res.data.result
-    return dataArr.map((data) => ({
-        poiId: data.poiId,
-        cpType: parsePoiProviderType(data.poiId),
-        category: parseCategory(data),
-        title: data.title,
-        address: data.address,
-        position: data.position,
-        country: data.country,
-        progress: data.progress ?? null,
-    }))
+    if (!!res?.pages[0]?.data?.data?.data?.result === false) return null
+    const dataArr = res.pages
+    let poiDataArr = []
+    dataArr.map((page) =>
+        page.data.data.data.result.map((poi) =>
+            poiDataArr.push({
+                poiId: poi.poiId,
+                cpType: parsePoiProviderType(poi.poiId),
+                category: parseCategory(poi),
+                title: poi.title,
+                address: poi.address,
+                position: poi.position,
+                country: poi.country,
+                countryCode: poi.countryCode,
+                progress: poi.progress ?? null,
+            }),
+        ),
+    )
+    return poiDataArr
 }
 
 const setCategoryData = (basicData, originData) => {
@@ -211,6 +216,8 @@ const setCategoryData = (basicData, originData) => {
             return { ...basicData, h2Charging: h2ChargingInfo(originData.h2Charging) }
         case 'dealerPoi':
             return { ...basicData, dealerPoi: dealerInfo(originData.dealerPoi) }
+        default:
+            return basicData
     }
 }
 

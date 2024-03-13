@@ -4,8 +4,7 @@ import dummyData from '#/mock/data/approvalData.json'
 import poiDetailData from '#/mock/data/poiDetailData.json'
 
 export const getHistoryList = () => {
-    return dummyData
-    // return getAPI({ endPoint: API_PATH.approval.history_list })
+    return getAPI({ endPoint: API_PATH.approval.history_list })
 }
 
 export const getHistoryDetail = (requestId) => {

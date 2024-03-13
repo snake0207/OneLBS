@@ -17,7 +17,7 @@ export const API_PATH = {
         approver: '/approver',
     },
     approval: {
-        history_list: '/approval-history-list',
+        history_list: '/adminmgmt/api/v1/history/all-histories',
         history_detail: '/adminmgmt/api/v1/history/history/detail',
         history_temp_save_requester: '/adminmgmt/api/v1/request/draft-requester',
         history_temp_save_reviewer: '/adminmgmt/api/v1/request/draft-reviewer',

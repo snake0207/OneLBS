@@ -10,9 +10,11 @@
   "temporary_save": "임시저장",
   "edit_request": "수정요청",
   "delete_request": "삭제요청",
+  "create_request": "POI 생성 요청",
   "opening_hours": "이용 시간",
   "center_coordinates": "메인 좌표",
   "guide_coordinates": "가이드 좌표",
+  "create_poi": "POI 생성",
   "price" : {
     "title": "가격",
     "price": "가격",

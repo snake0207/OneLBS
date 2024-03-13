@@ -118,7 +118,7 @@ const MapSearchList = ({
                                         backgroundColor: 'button.main',
                                     }}
                                 >
-                                    POI생성
+                                    {t('create_poi', 'gpss')}
                                 </Button>
                             </Box>
                         )}

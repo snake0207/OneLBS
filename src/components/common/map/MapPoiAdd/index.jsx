@@ -5,22 +5,28 @@ import t from '#/common/libs/trans.js'
 import CloseIcon from '@mui/icons-material/Close.js'
 import { useFormik } from 'formik'
 import TextInput from '#/components/common/input/TextInput/index.jsx'
-import RadioInput from '#/components/common/Radio/index.jsx'
 import ApprovalSelect from '#/components/poiDetail/ApprovalSelect/index.jsx'
 import style from '#/components/common/map/MapPoiAdd/style.module.js'
+import Select from '#/components/common/Select/index.jsx'
 
+const brandSelect = [
+    { key: 0, value: 'ALL', label: 'ALL' },
+    { key: 1, value: 'H', label: 'H' },
+    { key: 2, value: 'K', label: 'K' },
+    { key: 3, value: 'Genesis', label: 'Genesis' },
+]
+const dealerSelect = [
+    { key: 0, value: '7538', label: 'Auto Dealership' },
+    { key: 1, value: '5511', label: 'Auto Service & Maintenance' },
+]
 const MapPoiAdd = ({ setIsOpen, selectedPoi }) => {
+    const [poiData, setPoiData] = useState({
+        dealerType: 'Auto Dealership',
+        brand: 'ALL',
+    })
     useEffect(() => {
         if (selectedPoi) setIsOpen(false)
     }, [selectedPoi])
-
-    const categoryList = [
-        { label: 'evCharging', value: 'evCharging' },
-        { label: 'fuel', value: 'fuel' },
-        { label: 'parking', value: 'parking' },
-        { label: 'h2Charging', value: 'h2Charging' },
-        { label: 'dealerPoi', value: 'dealerPoi' },
-    ]
 
     // 검토자 승인자
     const [selectedReviewer, setSelectedReviewer] = useState(null)
@@ -40,6 +46,8 @@ const MapPoiAdd = ({ setIsOpen, selectedPoi }) => {
                     lon: '',
                 },
             },
+            dealerType: '7538',
+            brand: 'ALL',
             reason: '',
             reviewer: '',
             approver: '',
@@ -49,6 +57,20 @@ const MapPoiAdd = ({ setIsOpen, selectedPoi }) => {
             console.log(form)
         },
     })
+
+    useEffect(() => {
+        setPoiData({
+            ...poiData,
+            dealerType:
+                formik.values.dealerType === '7438'
+                    ? 'Auto Dealership'
+                    : 'Auto Service & Maintenance',
+        })
+    }, [formik.values.dealerType])
+    useEffect(() => {
+        setPoiData({ ...poiData, brand: formik.values.brand })
+    }, [formik.values.brand])
+
     return (
         <Box sx={{ display: 'flex', margin: '10px' }}>
             <Box
@@ -64,7 +86,7 @@ const MapPoiAdd = ({ setIsOpen, selectedPoi }) => {
             >
                 <Box>
                     <Typography variant={'h6'} sx={{ fontSize: '20px', fontWeight: 600 }}>
-                        명칭
+                        {t('title', 'approval')}
                     </Typography>
                     <Box sx={{ height: '40px' }}>
                         <TextInput
@@ -76,7 +98,7 @@ const MapPoiAdd = ({ setIsOpen, selectedPoi }) => {
                 </Box>
                 <Box>
                     <Typography variant={'h6'} sx={{ fontSize: '20px', fontWeight: 600 }}>
-                        주소
+                        {t('address', 'approval')}
                     </Typography>
                     <Box sx={{ height: '40px' }}>
                         <TextInput
@@ -88,12 +110,12 @@ const MapPoiAdd = ({ setIsOpen, selectedPoi }) => {
                 </Box>
                 <Box>
                     <Typography variant={'h6'} sx={{ fontSize: '20px', fontWeight: 600 }}>
-                        메인 좌표
+                        {t('center_coordinates', 'gpss')}
                     </Typography>
                     <Divider sx={{ marginY: '5px' }} />
                     <Box>
                         <Typography variant={'h6'} sx={{ fontSize: '16px', fontWeight: 600 }}>
-                            위도
+                            {t('lat', 'approval')}
                         </Typography>
                         <Box sx={{ height: '40px' }}>
                             <TextInput
@@ -105,7 +127,7 @@ const MapPoiAdd = ({ setIsOpen, selectedPoi }) => {
                     </Box>
                     <Box>
                         <Typography variant={'h6'} sx={{ fontSize: '16px', fontWeight: 600 }}>
-                            경도
+                            {t('lon', 'approval')}
                         </Typography>
                         <Box sx={{ height: '40px' }}>
                             <TextInput
@@ -118,12 +140,12 @@ const MapPoiAdd = ({ setIsOpen, selectedPoi }) => {
                 </Box>
                 <Box>
                     <Typography variant={'h6'} sx={{ fontSize: '20px', fontWeight: 600 }}>
-                        가이드 좌표
+                        {t('guide_coordinates', 'gpss')}
                     </Typography>
                     <Divider sx={{ marginY: '5px' }} />
                     <Box>
                         <Typography variant={'h6'} sx={{ fontSize: '16px', fontWeight: 600 }}>
-                            위도
+                            {t('lat', 'approval')}
                         </Typography>
                         <Box sx={{ height: '40px' }}>
                             <TextInput
@@ -135,7 +157,7 @@ const MapPoiAdd = ({ setIsOpen, selectedPoi }) => {
                     </Box>
                     <Box>
                         <Typography variant={'h6'} sx={{ fontSize: '16px', fontWeight: 600 }}>
-                            경도
+                            {t('lon', 'approval')}
                         </Typography>
                         <Box sx={{ height: '40px' }}>
                             <TextInput
@@ -148,12 +170,15 @@ const MapPoiAdd = ({ setIsOpen, selectedPoi }) => {
                 </Box>
                 <Box>
                     <Typography sx={{ fontSize: 20, fontWeight: 600, color: '#00418D' }}>
-                        {t('category', 'common')}
+                        Dealer Poi
                     </Typography>
                     <Divider sx={{ marginY: '5px' }} />
                 </Box>
                 <Box>
-                    <RadioInput radioList={categoryList} name={'category'} formik={formik} />
+                    <Typography>{poiData.dealerType}</Typography>
+                    <Select formik={formik} name={'dealerType'} items={dealerSelect} />
+                    <Typography>{poiData.brand}</Typography>
+                    <Select formik={formik} name={'brand'} items={brandSelect} />
                 </Box>
                 <Box>
                     <Box>
@@ -205,7 +230,7 @@ const MapPoiAdd = ({ setIsOpen, selectedPoi }) => {
                         sx={style.blueButton}
                         onClick={formik.handleSubmit}
                     >
-                        Poi 생성 요청
+                        {t('create_request', 'gpss')}
                     </Button>
                 </Box>
             </Box>

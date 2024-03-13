@@ -57,11 +57,11 @@ const detailRequestDataMapper = (id, req) => {
         requestId: parseInt(id),
         editData: {
             ...req,
-            ...(req.evChargingInfo && { evCharging: evChargerInfo(req.evChargingInfo) }),
-            ...(req.fuelInfo && { fuel: req.fuelInfo }),
-            ...(req.parkingInfo && { parking: parkingInfo(req.parkingInfo) }),
-            ...(req.h2ChargingInfo && { h2Charging: h2ChargingInfo(req.h2ChargingInfo) }),
-            ...(req.dealerPoiInfo && { dealerPoi: dealerInfo(req.dealerPoiInfo) }),
+            ...(req.evCharging && { evCharging: evChargerInfo(req.evCharging) }),
+            ...(req.fuel && { fuel: req.fuel }),
+            ...(req.parking && { parking: parkingInfo(req.parking) }),
+            ...(req.h2Charging && { h2Charging: h2ChargingInfo(req.h2Charging) }),
+            ...(req.dealerPoi && { dealerPoi: dealerInfo(req.dealerPoi) }),
         },
     }
 }

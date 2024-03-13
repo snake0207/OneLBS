@@ -137,10 +137,10 @@ const MapGpssDetail = ({ selectedPoi, setSelectedPoi, poiData }) => {
                             isEditable={isEditable}
                         />
                         {/* EV Charging */}
-                        {!!parsedData.evChargingInfo && (
+                        {!!parsedData.evCharging && (
                             <Box>
                                 <EvChargingInfo
-                                    data={parsedData.evChargingInfo}
+                                    data={parsedData.evCharging}
                                     isEditable={isEditable}
                                     formik={formik}
                                 />
@@ -153,10 +153,10 @@ const MapGpssDetail = ({ selectedPoi, setSelectedPoi, poiData }) => {
                             </Box>
                         )}
                         {/* parking */}
-                        {!!parsedData.parkingInfo && (
+                        {!!parsedData.parking && (
                             <Box>
                                 <ParkingInfo
-                                    data={parsedData.parkingInfo}
+                                    data={parsedData.parking}
                                     isEditable={isEditable}
                                     formik={formik}
                                 />
@@ -169,10 +169,10 @@ const MapGpssDetail = ({ selectedPoi, setSelectedPoi, poiData }) => {
                             </Box>
                         )}
                         {/* fuel */}
-                        {!!parsedData.fuelInfo && (
+                        {!!parsedData.fuel && (
                             <Box>
                                 <FuelInfo
-                                    data={parsedData.fuelInfo}
+                                    data={parsedData.fuel}
                                     isEditable={isEditable}
                                     formik={formik}
                                 />
@@ -185,10 +185,10 @@ const MapGpssDetail = ({ selectedPoi, setSelectedPoi, poiData }) => {
                             </Box>
                         )}
                         {/* h2Charging */}
-                        {!!parsedData.h2ChargingInfo && (
+                        {!!parsedData.h2Charging && (
                             <Box>
                                 <H2ChargingInfo
-                                    data={parsedData.h2ChargingInfo}
+                                    data={parsedData.h2Charging}
                                     isEditable={isEditable}
                                     formik={formik}
                                 />
@@ -202,10 +202,10 @@ const MapGpssDetail = ({ selectedPoi, setSelectedPoi, poiData }) => {
                         )}
 
                         {/* dealerPoi */}
-                        {!!parsedData.dealerPoiInfo && (
+                        {!!parsedData.dealerPoi && (
                             <Box>
                                 <DealerPoiInfo
-                                    data={parsedData.dealerPoiInfo}
+                                    data={parsedData.dealerPoi}
                                     isEditable={isEditable}
                                     formik={formik}
                                 />

@@ -4,10 +4,11 @@ import PermissionLabel from '#/components/permission/PermissionCard/PermissionLa
 import PermissionChangeModal from '#/components/permission/PermissionChangeModal'
 import MenuChangeModal from '#/components/permission/MenuChangeModal'
 import { usePermissionSearchActions } from '#/store/usePermissionSearchStore'
-import style from './style.module.js'
 import { usePermissionMenuActions } from '#/store/usePermissionMenuStore'
 
 import t from '#/common/libs/trans'
+
+import style from './style.module.js'
 
 const PermissionCard = ({ permissionCardData }) => {
     const [isOpenMenuChangeModal, setIsOpenMenuChangeModal] = useState(false)

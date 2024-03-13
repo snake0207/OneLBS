@@ -15,40 +15,48 @@ export const formatIpAddress = (addr1, addr2, addr3, addr4) => {
 
 /**
  * 회원가입 데이터 가공 함수
- * @param {object} form 회원가입 form 데이터
+ * @param {object} formData 회원가입 form 데이터
  * @returns API body 데이터
  */
-export const formatJoinData = (form) => {
-    if (form.role !== '29')
+export const formatJoinData = (formData) => {
+    if (formData.role !== '29')
         return {
-            email: form.email,
-            password: encryptPasswordSHA256(form.password),
-            name: form.name,
-            company: form.company,
-            team: form.team,
-            role: parseInt(form.role),
-            terms: form.terms,
+            email: formData.email,
+            password: encryptPasswordSHA256(formData.password),
+            name: formData.name,
+            company: formData.company,
+            team: formData.team,
+            role: parseInt(formData.role),
+            terms: formData.terms,
         }
 
     const ipList = []
     for (let i = 0; i < 3; i++) {
         const address = formatIpAddress(
-            form[`ipAddress1_${i}`],
-            form[`ipAddress2_${i}`],
-            form[`ipAddress3_${i}`],
-            form[`ipAddress4_${i}`],
+            formData[`ipAddress1_${i}`],
+            formData[`ipAddress2_${i}`],
+            formData[`ipAddress3_${i}`],
+            formData[`ipAddress4_${i}`],
         )
-        ipList.push({ address, desc: form[`ipDescription_${i}`] })
+        ipList.push({ address, desc: formData[`ipDescription_${i}`] })
     }
 
     return {
-        email: form.email,
-        password: encryptPasswordSHA256(form.password),
-        name: form.name,
-        company: form.company,
-        team: form.team,
-        role: parseInt(form.role),
-        terms: form.terms,
+        email: formData.email,
+        password: encryptPasswordSHA256(formData.password),
+        name: formData.name,
+        company: formData.company,
+        team: formData.team,
+        role: parseInt(formData.role),
+        terms: formData.terms,
         ip: ipList.filter((item) => item.address !== ''),
     }
+}
+
+export const formatPermissionMenuData = (formData) => {
+    const list = []
+    formData.forEach((listItem) =>
+        listItem.children.forEach((childrenItem) => list.push(childrenItem.permission)),
+    )
+    return list
 }

@@ -42,3 +42,9 @@ export const useGetRoleMenu = () => {
 
     return { data }
 }
+
+export const usePutModifyRoleMenu = () => {
+    return useMutation({
+        mutationFn: permission.putModifyRoleMenu,
+    })
+}

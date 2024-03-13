@@ -118,6 +118,7 @@ const detailResponseDataMapper = ({ data }) => {
         // category: 'h2Charging',
         status: requestData?.status, // service에서 보내줄 결재이력 상태값
         category: parseCategory(requestData),
+        cpType: parsePoiProviderType(originData?.poiId),
         approvalInfo: {
             requestComment: requestData.requestComment,
             reviewerComment: requestData.reviewerComment,

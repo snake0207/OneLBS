@@ -8,9 +8,9 @@ RUN yarn config set "strict-ssl" false
 RUN yarn
 COPY . .
 # 현대 빌드
-# RUN yarn run build --mode production
+# RUN yarn run build:prod
 # 사내 빌드
-RUN yarn run build
+RUN yarn run build:dev
 
 FROM nginx
 COPY --from=reactBuilder /app/dist /usr/share/nginx/gpss

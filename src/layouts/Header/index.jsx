@@ -44,7 +44,6 @@ function Header({ toggleDrawer }) {
     const [, toggleFullScreen] = useFullScreen()
     const navigate = useNavigate()
     const { data } = useGetAskUserInfo()
-    console.log(data)
     const handleSelectUserMenu = (item) => {
         console.log(item)
 
@@ -93,7 +92,7 @@ function Header({ toggleDrawer }) {
                                 onSelect={handleSelectUserMenu}
                                 sx={style.dropdownText}
                             >
-                                {data.userName}
+                                {data && data.userName}
                             </Dropdown>
                             <Dropdown
                                 items={languages}

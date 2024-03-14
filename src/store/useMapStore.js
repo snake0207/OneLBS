@@ -4,11 +4,25 @@ import { create } from 'zustand'
 /**
  * 구글 지도에서 리스트 아이템에 마우스 hover 상태 관리
  */
+const initailState = {
+    hoveredPoi: null,
+    lat: '',
+    lon: '',
+    swLat: '',
+    swLon: '',
+    neLat: '',
+    neLon: '',
+}
+
 const useMapStore = create(
     devtools((set) => ({
-        hoveredPoi: null,
+        ...initailState,
         actions: {
             setHoveredPoi: (hoveredPoi) => set({ hoveredPoi }),
+            setCoordinates: (lat, lon) => set({ lat, lon }),
+            setMapBounds: (swLat, swLon, neLat, neLon) => set({ swLat, swLon, neLat, neLon }),
+            resetCoordinates: () => set({ lat: '', lon: '' }),
+            resetMapBounds: () => set({ swLat: '', swLon: '', neLat: '', neLon: '' }),
         },
     })),
 )

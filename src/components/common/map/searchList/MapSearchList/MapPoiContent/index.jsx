@@ -4,11 +4,10 @@ import ListItemText from '@mui/material/ListItemText'
 import ListItemButton from '@mui/material/ListItemButton'
 import { useMapActions } from '#/store/useMapStore.js'
 import Brightness1Icon from '@mui/icons-material/Brightness1'
-import { markerImage } from '#/common/libs/mapMarker.js'
-import DE from '#/assets/flag/DE.svg'
+import { flagImage, markerImage } from '#/common/libs/mapMarker.js'
 
 const MapPoiContent = ({ isLast, isGpssSearch, selectedPoi, setSelectedPoi, poiData }) => {
-    const { poiId, title, address, cpType, progress, country, category } = poiData
+    const { poiId, title, address, cpType, progress, countryCode, category } = poiData
     const { setHoveredPoi } = useMapActions()
     return (
         <>
@@ -100,7 +99,7 @@ const MapPoiContent = ({ isLast, isGpssSearch, selectedPoi, setSelectedPoi, poiD
                                             borderColor: 'border.grayFlag',
                                         }}
                                     >
-                                        <img src={DE} width={34} />
+                                        <img src={flagImage(countryCode)} width={34} />
                                     </Box>
                                 </Box>
                             </Box>

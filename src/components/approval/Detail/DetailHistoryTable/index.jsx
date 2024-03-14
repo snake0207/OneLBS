@@ -22,17 +22,25 @@ const DetailHistoryTable = ({ historyList }) => {
                     </TableRow>
                 </TableHead>
                 <TableBody>
-                    {historyList.map((history, index) => {
-                        return (
-                            <TableRow key={index}>
-                                <TableCell align={'center'}>{history.date}</TableCell>
-                                <TableCell align={'center'}>
-                                    {t(`status.${history.status}`, 'approval')}
-                                </TableCell>
-                                <TableCell>{history.history}</TableCell>
-                            </TableRow>
-                        )
-                    })}
+                    {historyList ? (
+                        historyList.map((history, index) => {
+                            return (
+                                <TableRow key={index}>
+                                    <TableCell align={'center'}>{history.date}</TableCell>
+                                    <TableCell align={'center'}>
+                                        {t(`status.${history.status}`, 'approval')}
+                                    </TableCell>
+                                    <TableCell>{history.history}</TableCell>
+                                </TableRow>
+                            )
+                        })
+                    ) : (
+                        <TableRow>
+                            <TableCell colSpan={3} align={'center'}>
+                                NO DATA
+                            </TableCell>
+                        </TableRow>
+                    )}
                 </TableBody>
             </Table>
         </Box>

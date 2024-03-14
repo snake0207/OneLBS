@@ -258,6 +258,7 @@ export const getThemeSettings = (mode) => ({
                       close: tokens.text[500],
                       blue: tokens.text[200],
                       lineblue: tokens.text[1000],
+                      chargeblue: tokens.button[3000],
                   },
                   background: {
                       default: tokens.background[100],
@@ -364,7 +365,7 @@ export const getThemeSettings = (mode) => ({
                       germany: tokens.color[901],
                       dashboardCnt: tokens.color[701],
                       banner: tokens.color[10001],
-                      edit: tokens.color[5001],
+                      edit: tokens.button[2000],
                       close: tokens.color[900],
                       closeBg: tokens.color[1001],
                       swiper: tokens.color[100],
@@ -402,6 +403,7 @@ export const getThemeSettings = (mode) => ({
                       close: tokens.text[400],
                       blue: tokens.text[300],
                       lineblue: tokens.text[100],
+                      chargeblue: tokens.button[100],
                   },
                   background: {
                       default: tokens.background.main,

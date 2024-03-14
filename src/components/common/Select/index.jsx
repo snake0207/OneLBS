@@ -41,11 +41,17 @@ function Select({ name, formik, value, items, label, onChange, ...props }) {
                 }}
                 {...props}
             >
-                {items.map((item) => (
-                    <MenuItem key={item.key} value={item.value}>
-                        {item.label}
-                    </MenuItem>
-                ))}
+                {items.map((item) =>
+                    item.value !== '' ? (
+                        <MenuItem key={item.key} value={item.value}>
+                            {item.label}
+                        </MenuItem>
+                    ) : (
+                        <MenuItem key={item.key} value={item.value} sx={{ display: 'none' }}>
+                            {item.label}
+                        </MenuItem>
+                    ),
+                )}
             </SelectBase>
         </FormControl>
     )

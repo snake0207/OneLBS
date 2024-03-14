@@ -18,10 +18,7 @@ function UserInfo() {
 
     return (
         <Box>
-            <Stack
-                spacing={1}
-                sx={{ p: '12px 24px', borderBottom: '1px solid', borderColor: 'border.lnb' }}
-            >
+            <Stack spacing={1} sx={{ p: '12px 24px' }}>
                 <Stack direction="row" spacing={1} alignItems="center">
                     <Icon
                         sx={{

@@ -15,7 +15,7 @@ import ResetIcon from '#/assets/resetIcon.svg'
 
 const PermissionTableSearch = () => {
     const roleId = usePermissionSearchRoleIdState()
-    const { resetPermissionSearchStore, setPermissionSearchStore } = usePermissionSearchActions()
+    const { setPermissionSearchStore } = usePermissionSearchActions()
 
     const formik = useFormik({
         initialValues: {
@@ -30,7 +30,12 @@ const PermissionTableSearch = () => {
 
     const handleClickSearchRefresh = () => {
         formik.resetForm()
-        resetPermissionSearchStore()
+        setPermissionSearchStore({
+            roleId: formik.initialValues.roleId,
+            page: 1,
+            email: '',
+            name: '',
+        })
     }
 
     return (

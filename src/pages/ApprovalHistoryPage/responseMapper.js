@@ -107,61 +107,75 @@ const dealerInfo = (data) => {
  * @param res
  * @returns {{approvalInfo: *, poiId: *, category: *, status: string, basicInfo: {address: *, position: *, title: *}, evChargerInfo?: *, fuelInfo?: *, parkingInfo?: *, h2ChargingInfo?: *, dealerInfo?: *}}
  */
-const detailResponseDataMapper = (res) => {
-    const data = res.data.result[0]
+const detailResponseDataMapper = ({ data }) => {
+    if (!data?.data || !Object.keys(data?.data).length) return
+
+    console.log('RES >>>>>> ', data)
+    const requestData = data?.data?.request
+    const originData = requestData?.originData
+    const editData = requestData?.editData
     const basicData = {
-        status: 'rejected_approval',
         // category: 'h2Charging',
-        // status: res.data.status, // service에서 보내줄 결재이력 상태값
-        category: parseCategory(data),
+        status: requestData?.status, // service에서 보내줄 결재이력 상태값
+        category: parseCategory(requestData),
+        cpType: parsePoiProviderType(originData?.poiId),
         approvalInfo: {
-            requestComment: res.data.requestComment,
-            reviewerComment: res.data.reviewerComment,
-            approverComment: res.data.managerComment,
+            requestComment: requestData.requestComment,
+            reviewerComment: requestData.reviewerComment,
+            approverComment: requestData.managerComment,
             approvalLineContents: {
                 requester: {
-                    team: res.data.userTeam,
-                    name: res.data.userName,
-                    date: res.data.requestDtString,
+                    id: requestData.userId,
+                    team: requestData.userTeam,
+                    name: requestData.userName,
+                    date: requestData.requestDtString,
                 },
                 reviewer: {
-                    team: res.data.reviewerTeam,
-                    name: res.data.reviewerName,
-                    date: res.data.reviewDtString,
+                    id: requestData.reviewerId,
+                    team: requestData.reviewerTeam,
+                    name: requestData.reviewerName,
+                    date: requestData.reviewDtString,
                 },
                 approver: {
-                    team: res.data.managerTeam,
-                    name: res.data.managerName,
-                    date: res.data.manageDtString,
+                    id: requestData.managerId,
+                    team: requestData.managerTeam,
+                    name: requestData.managerName,
+                    date: requestData.manageDtString,
                 },
             },
-            historyList: res.data.historyList,
+            historyList: requestData.requestLog,
         },
-        poiId: data.poiId,
+        poiId: requestData?.poiId,
         basicInfo: {
-            title: data.title,
-            address: data.address,
-            position: data.position,
+            title: originData?.title,
+            address: originData?.address,
+            position: originData?.position,
+        },
+        editData: {
+            basicInfo: {
+                title: editData.title,
+                address: editData.address,
+                position: editData.position,
+            },
+            ...setCategoryData({ category: parseCategory(requestData) }, editData),
         },
     }
-    return setCategoryData(basicData, data)
+    return setCategoryData(basicData, requestData)
 }
 
 /**
  * gpss 상세데이터 매퍼
  */
 const gpssDetailResponseDataMapper = (res) => {
-    if (!!res?.data?.result === false) return null
-    const data = res.data.result[0]
+    if (!!res?.data?.data?.data?.result === false) return null
+    const data = res.data.data.data.result[0]
     const basicData = {
         category: parseCategory(data),
         cpType: parsePoiProviderType(data.poiId),
         poiId: data.poiId,
-        basicInfo: {
-            title: data.title,
-            address: data.address,
-            position: data.position,
-        },
+        title: data.title,
+        address: data.address,
+        position: data.position,
     }
     return setCategoryData(basicData, data)
 }
@@ -170,44 +184,53 @@ const gpssDetailResponseDataMapper = (res) => {
  * gpss 리스트데이터 매퍼
  */
 const gpssListResponseDataMapper = (res) => {
-    if (!!res?.data?.result === false) return null
-    const dataArr = res.data.result
-    return dataArr.map((data) => ({
-        poiId: data.poiId,
-        cpType: parsePoiProviderType(data.poiId),
-        category: parseCategory(data),
-        title: data.title,
-        address: data.address,
-        position: data.position,
-        country: data.country,
-        progress: data.progress ?? null,
-    }))
+    if (!!res?.pages[0]?.data?.data?.data?.result === false) return null
+    const dataArr = res.pages
+    let poiDataArr = []
+    dataArr.map((page) =>
+        page.data.data.data.result.map((poi) =>
+            poiDataArr.push({
+                poiId: poi.poiId,
+                cpType: parsePoiProviderType(poi.poiId),
+                category: parseCategory(poi),
+                title: poi.title,
+                address: poi.address,
+                position: poi.position,
+                country: poi.country,
+                countryCode: poi.countryCode,
+                progress: poi.progress ?? null,
+            }),
+        ),
+    )
+    return poiDataArr
 }
 
 const setCategoryData = (basicData, originData) => {
     switch (basicData.category) {
         case 'evCharging':
-            return { ...basicData, evChargingInfo: evChargerInfo(originData.evCharging) }
+            return { ...basicData, evCharging: evChargerInfo(originData.evCharging) }
         case 'fuel':
-            return { ...basicData, fuelInfo: fuelInfo(originData.fuel) }
+            return { ...basicData, fuel: fuelInfo(originData.fuel) }
         case 'parking':
-            return { ...basicData, parkingInfo: parkingInfo(originData.parking) }
+            return { ...basicData, parking: parkingInfo(originData.parking) }
         case 'h2Charging':
-            return { ...basicData, h2ChargingInfo: h2ChargingInfo(originData.h2Charging) }
+            return { ...basicData, h2Charging: h2ChargingInfo(originData.h2Charging) }
         case 'dealerPoi':
-            return { ...basicData, dealerPoiInfo: dealerInfo(originData.dealerPoi) }
+            return { ...basicData, dealerPoi: dealerInfo(originData.dealerPoi) }
+        default:
+            return basicData
     }
 }
 
 const countByTypeMapper = (total, counts) => {
     return {
         total,
-        temporary: counts.DRAFT,
-        request: counts.REVIEW_REQUESTED,
-        reviewed: counts.REVIEW_COMPLETED,
-        approved: counts.APPROVAL_COMPLETED,
-        rejected_review: counts.REVIEW_REJECTED,
-        rejected_approval: counts.APPROVAL_REJECTED,
+        temporary: counts.DRAFT || 0,
+        request: counts.REVIEW_REQUESTED || 0,
+        reviewed: counts.REVIEW_COMPLETED || 0,
+        approved: counts.APPROVAL_COMPLETED || 0,
+        rejected_review: counts.REVIEW_REJECTED || 0,
+        rejected_approval: counts.APPROVAL_REJECTED || 0,
     }
 }
 

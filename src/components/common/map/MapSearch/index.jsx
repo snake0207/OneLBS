@@ -1,311 +1,58 @@
 import Box from '@mui/material/Box'
 import { Autocomplete, Grid, InputAdornment, TextField, Typography } from '@mui/material'
 //import SearchIcon from '@mui/icons-material/Search'
-import { useFormik } from 'formik'
-import { mapSearchSchema } from '#/contents/validationSchema.js'
 import t from '#/common/libs/trans.js'
-import { usePopupActions } from '#/store/usePopupStore.js'
 import SearchIcon from '#/assets/searchIcon.svg'
 import SearchIconDark from '#/assets/searchIconLightDark.svg'
 import KeyboardArrowDownRoundedIcon from '@mui/icons-material/KeyboardArrowDownRounded'
 
 import { getLayoutState } from '#/store/useLayoutStore'
 import style from './style.module'
+import { useEffect, useState } from 'react'
+import { europeanCountries } from '#/contents/contryCode.js'
+import Select from '#/components/common/Select/index.jsx'
 
-const countryCodeArr = [
-    'ABW',
-    'AFG',
-    'AGO',
-    'AIA',
-    'ALA',
-    'ALB',
-    'AND',
-    'ARE',
-    'ARG',
-    'ARM',
-    'ASM',
-    'ATA',
-    'ATF',
-    'ATG',
-    'AUS',
-    'AUT',
-    'AZE',
-    'BDI',
-    'BEL',
-    'BEN',
-    'BES',
-    'BFA',
-    'BGD',
-    'BGR',
-    'BHR',
-    'BHS',
-    'BIH',
-    'BLM',
-    'BLR',
-    'BLZ',
-    'BMU',
-    'BOL',
-    'BRA',
-    'BRB',
-    'BRN',
-    'BTN',
-    'BVT',
-    'BWA',
-    'CAF',
-    'CAN',
-    'CCK',
-    'CHE',
-    'CHL',
-    'CHN',
-    'CIV',
-    'CMR',
-    'COD',
-    'COG',
-    'COK',
-    'COL',
-    'COM',
-    'CPV',
-    'CRI',
-    'CUB',
-    'CUW',
-    'CXR',
-    'CYM',
-    'CYP',
-    'CZE',
-    'DEU',
-    'DJI',
-    'DMA',
-    'DNK',
-    'DOM',
-    'DZA',
-    'ECU',
-    'EGY',
-    'ERI',
-    'ESH',
-    'ESP',
-    'EST',
-    'ETH',
-    'FIN',
-    'FJI',
-    'FLK',
-    'FRA',
-    'FRO',
-    'FSM',
-    'GAB',
-    'GBR',
-    'GEO',
-    'GGY',
-    'GHA',
-    'GIB',
-    'GIN',
-    'GLP',
-    'GMB',
-    'GNB',
-    'GNQ',
-    'GRC',
-    'GRD',
-    'GRL',
-    'GTM',
-    'GUF',
-    'GUM',
-    'GUY',
-    'HKG',
-    'HMD',
-    'HND',
-    'HRV',
-    'HTI',
-    'HUN',
-    'IDN',
-    'IMN',
-    'IND',
-    'IOT',
-    'IRL',
-    'IRN',
-    'IRQ',
-    'ISL',
-    'ISR',
-    'ITA',
-    'JAM',
-    'JEY',
-    'JOR',
-    'JPN',
-    'KAZ',
-    'KEN',
-    'KGZ',
-    'KHM',
-    'KIR',
-    'KNA',
-    'KOR',
-    'KWT',
-    'LAO',
-    'LBN',
-    'LBR',
-    'LBY',
-    'LCA',
-    'LIE',
-    'LKA',
-    'LSO',
-    'LTU',
-    'LUX',
-    'LVA',
-    'MAC',
-    'MAF',
-    'MAR',
-    'MCO',
-    'MDA',
-    'MDG',
-    'MDV',
-    'MEX',
-    'MHL',
-    'MKD',
-    'MLI',
-    'MLT',
-    'MMR',
-    'MNE',
-    'MNG',
-    'MNP',
-    'MOZ',
-    'MRT',
-    'MSR',
-    'MTQ',
-    'MUS',
-    'MWI',
-    'MYS',
-    'MYT',
-    'NAM',
-    'NCL',
-    'NER',
-    'NFK',
-    'NGA',
-    'NIC',
-    'NIU',
-    'NLD',
-    'NOR',
-    'NPL',
-    'NRU',
-    'NZL',
-    'OMN',
-    'PAK',
-    'PAN',
-    'PCN',
-    'PER',
-    'PHL',
-    'PLW',
-    'PNG',
-    'POL',
-    'PRI',
-    'PRK',
-    'PRT',
-    'PRY',
-    'PSE',
-    'PYF',
-    'QAT',
-    'REU',
-    'ROU',
-    'RUS',
-    'RWA',
-    'SAU',
-    'SDN',
-    'SEN',
-    'SGP',
-    'SGS',
-    'SHN',
-    'SJM',
-    'SLB',
-    'SLE',
-    'SLV',
-    'SMR',
-    'SOM',
-    'SPM',
-    'SRB',
-    'SSD',
-    'STP',
-    'SUR',
-    'SVK',
-    'SVN',
-    'SWE',
-    'SWZ',
-    'SXM',
-    'SYC',
-    'SYR',
-    'TCA',
-    'TCD',
-    'TGO',
-    'THA',
-    'TJK',
-    'TKL',
-    'TKM',
-    'TLS',
-    'TON',
-    'TTO',
-    'TUN',
-    'TUR',
-    'TUV',
-    'TWN',
-    'TZA',
-    'UGA',
-    'UKR',
-    'UMI',
-    'URY',
-    'USA',
-    'UZB',
-    'VAT',
-    'VCT',
-    'VEN',
-    'VGB',
-    'VIR',
-    'VNM',
-    'VUT',
-    'WLF',
-    'WSM',
-    'YEM',
-    'ZAF',
-    'ZMB',
-    'ZWE',
+const languageCodeArr = [
+    { key: 0, value: 'ENG', label: 'ENG' },
+    { key: 1, value: 'KOR', label: 'KOR' },
 ]
-const languageCodeArr = ['ENG', 'KOR']
-const categoryCodeArr = ['ev Charging', 'fuel', 'parking', 'h2 Charging', 'dealerPoi']
+const categoryCodeArr = [
+    { key: 5, value: '', label: null },
+    { key: 0, value: 'h-0001-0001', label: 'fuel' },
+    { key: 1, value: 'h-0001-0002', label: 'ev Charging' },
+    { key: 2, value: 'h-0001-0003', label: 'h2 Charging' },
+    { key: 3, value: 'h-0002-0001', label: 'parking' },
+    { key: 4, value: 'h-0003-0001', label: 'dealerPoi' },
+]
 
-const MapSearch = () => {
-    const popupAction = usePopupActions()
-    const formik = useFormik({
-        initialValues: {
-            country: [],
-            lat: '',
-            lon: '',
-            category: [],
-            searchValue: '',
-            language: 'ENG',
-        },
-        validationSchema: mapSearchSchema,
-        onSubmit: (form) => {
-            console.log(form)
-            if (form.searchValue === '') {
-                popupAction.showPopup('alert', t('input_keyword', 'common'))
-                return
-            }
-        },
-    })
+const MapSearch = ({ formik, suggestionData }) => {
     const { themeMode } = getLayoutState()
+    const [isKeywordDisabled, setIsKeywordDisabled] = useState(true)
+    const [keywordOptions, setKeywordOptions] = useState([])
+    useEffect(() => {
+        // 국가 위/경도가 모두 입력되면 키워드 입력 가능
+        if (
+            formik.values.lat.length === 0 ||
+            formik.values.lon.length === 0 ||
+            formik.values.country.length === 0
+        ) {
+            setIsKeywordDisabled(true)
+            return
+        }
+        setIsKeywordDisabled(false)
+    }, [formik.values])
 
+    useEffect(() => {
+        if (formik.values.category.length !== 0) formik.setFieldValue('keyword', '')
+    }, [formik.values.category])
+    useEffect(() => {
+        if (formik.values.keyword.length !== 0) formik.setFieldValue('category', [])
+    }, [formik.values.keyword])
+    useEffect(() => {
+        if (suggestionData) setKeywordOptions([...suggestionData])
+    }, [suggestionData])
     return (
-        <Box
-            sx={{
-                width: '350px',
-                maxHeight: '300px',
-                overflow: 'auto',
-                padding: '16px',
-                margin: '10px 10px 6px 10px',
-                borderRadius: '8px',
-                backgroundColor: 'dialog.main',
-                boxShadow: '0 3px 14px rgb(0 0 0 / 24%)',
-                opacity: '95%',
-                '@media (max-width:767px)': {
-                    margin: '10px 0px 6px 10px',
-                    width: 'calc(100% - 15px)',
-                },
-            }}
-        >
+        <Box sx={style.searchBox}>
             <Box>
                 <Grid container spacing={1} sx={style.item}>
                     <Grid
@@ -313,7 +60,7 @@ const MapSearch = () => {
                         xs={3}
                         sx={{ display: 'flex', justifyContent: 'start', alignItems: 'center' }}
                     >
-                        <Typography sx={{ fontSize: 15, fontWeight: 500, mt: 1 }}>
+                        <Typography sx={[style.labelText, { mt: 1 }]}>
                             {t('country', 'common')}
                         </Typography>
                     </Grid>
@@ -321,7 +68,8 @@ const MapSearch = () => {
                         <Autocomplete
                             multiple
                             //disablePortal
-                            options={countryCodeArr}
+                            options={europeanCountries}
+                            getOptionLabel={(option) => option.alpha3}
                             size="small"
                             name={'country'}
                             sx={{
@@ -336,7 +84,9 @@ const MapSearch = () => {
                             onChange={(event, value) => {
                                 formik.setFieldValue(
                                     'country',
-                                    value !== null ? value : formik.initialValues.country,
+                                    value !== null
+                                        ? value.map((it) => it.alpha3)
+                                        : formik.initialValues.country,
                                 )
                             }}
                             renderInput={(params) => (
@@ -367,7 +117,9 @@ const MapSearch = () => {
                                                     sx={{
                                                         position: 'absolute',
                                                         right: '8px',
+                                                        top: '50%',
                                                         color: 'text.lightblue',
+                                                        transform: 'translateY(-50%)',
                                                     }}
                                                 />
                                             </InputAdornment>
@@ -382,9 +134,7 @@ const MapSearch = () => {
                         xs={3}
                         sx={{ display: 'flex', justifyContent: 'start', alignItems: 'center' }}
                     >
-                        <Typography sx={{ fontSize: 15, fontWeight: 500 }}>
-                            {t('lat', 'common')}
-                        </Typography>
+                        <Typography sx={style.labelText}>{t('lat', 'common')}</Typography>
                     </Grid>
                     <Grid item xs={9}>
                         <TextField
@@ -412,9 +162,7 @@ const MapSearch = () => {
                         xs={3}
                         sx={{ display: 'flex', justifyContent: 'start', alignItems: 'center' }}
                     >
-                        <Typography sx={{ fontSize: 15, fontWeight: 500 }}>
-                            {t('lon', 'common')}
-                        </Typography>
+                        <Typography sx={style.labelText}>{t('lon', 'common')}</Typography>
                     </Grid>
                     <Grid item xs={9}>
                         <TextField
@@ -442,49 +190,14 @@ const MapSearch = () => {
                         xs={3}
                         sx={{ display: 'flex', justifyContent: 'start', alignItems: 'center' }}
                     >
-                        <Typography sx={{ fontSize: 15, fontWeight: 500 }}>
-                            {t('language', 'common')}
-                        </Typography>
+                        <Typography sx={style.labelText}>{t('language', 'common')}</Typography>
                     </Grid>
                     <Grid item xs={9}>
-                        <Autocomplete
-                            //disablePortal
-                            options={languageCodeArr}
-                            size="small"
+                        <Select
+                            formik={formik}
                             name={'language'}
-                            defaultValue={[languageCodeArr[0]]}
-                            onChange={(event, value) => {
-                                formik.setFieldValue(
-                                    'language',
-                                    value !== null ? value : formik.initialValues.language,
-                                )
-                            }}
-                            value={formik.values.language}
-                            renderInput={(params) => (
-                                <TextField
-                                    {...params}
-                                    placeholder={t('select', 'common')}
-                                    name={'language'}
-                                    sx={{
-                                        backgroundColor: 'form.main',
-                                        borderRadius: '4px',
-                                    }}
-                                    InputProps={{
-                                        ...params.InputProps,
-                                        endAdornment: (
-                                            <InputAdornment position="end">
-                                                <KeyboardArrowDownRoundedIcon
-                                                    sx={{
-                                                        position: 'absolute',
-                                                        right: '8px',
-                                                        color: 'text.lightblue',
-                                                    }}
-                                                />
-                                            </InputAdornment>
-                                        ),
-                                    }}
-                                />
-                            )}
+                            items={languageCodeArr}
+                            sx={style.select}
                         />
                     </Grid>
                     <Grid
@@ -492,78 +205,61 @@ const MapSearch = () => {
                         xs={3}
                         sx={{ display: 'flex', justifyContent: 'start', alignItems: 'center' }}
                     >
-                        <Typography sx={{ fontSize: 15, fontWeight: 500 }}>
-                            {t('category', 'common')}
-                        </Typography>
+                        <Typography sx={style.labelText}>{t('category', 'common')}</Typography>
                     </Grid>
                     <Grid item xs={9}>
-                        <Autocomplete
-                            multiple
-                            //disablePortal
-                            options={categoryCodeArr}
-                            size="small"
+                        <Select
+                            formik={formik}
                             name={'category'}
-                            onChange={(event, value) => {
-                                formik.setFieldValue(
-                                    'category',
-                                    value !== null ? value : formik.initialValues.category,
-                                )
-                            }}
-                            value={formik.values.category}
+                            items={categoryCodeArr}
+                            sx={style.select}
+                        />
+                    </Grid>
+                    <Grid
+                        item
+                        xs={12}
+                        sx={{
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'space-between',
+                            gap: '6px',
+                        }}
+                    >
+                        <Autocomplete
+                            freeSolo
+                            options={keywordOptions}
+                            size="small"
+                            getOptionLabel={(option) => option.title || formik.values.keyword}
+                            disabled={isKeywordDisabled}
+                            fullWidth
+                            value={formik.values.keyword}
                             renderInput={(params) => (
                                 <TextField
                                     {...params}
-                                    placeholder={t('select', 'common')}
-                                    name={'category'}
+                                    placeholder={t('input_keyword', 'common')}
+                                    onChange={formik.handleChange}
                                     sx={{
+                                        width: '100%',
                                         backgroundColor: 'form.main',
                                         borderRadius: '4px',
                                     }}
-                                    InputProps={{
-                                        ...params.InputProps,
-                                        endAdornment: (
-                                            <InputAdornment position="end">
-                                                <KeyboardArrowDownRoundedIcon
-                                                    sx={{
-                                                        position: 'absolute',
-                                                        right: '8px',
-                                                        color: 'text.lightblue',
-                                                    }}
-                                                />
-                                            </InputAdornment>
-                                        ),
-                                    }}
+                                    name={'keyword'}
                                 />
                             )}
                         />
-                    </Grid>
-                    <Grid item xs={12}>
-                        <TextField
-                            placeholder={t('input_keyword', 'common')}
-                            size="small"
-                            sx={{
-                                width: '100%',
-                                backgroundColor: 'form.main',
-                                borderRadius: '4px',
-                            }}
-                            name={'searchValue'}
-                            onChange={formik.handleChange}
-                            value={formik.values.searchValue}
-                            InputProps={{
-                                endAdornment: (
-                                    <InputAdornment position="end">
-                                        {themeMode === 'light' ? (
-                                            <img src={SearchIcon} onClick={formik.handleSubmit} />
-                                        ) : (
-                                            <img
-                                                src={SearchIconDark}
-                                                onClick={formik.handleSubmit}
-                                            />
-                                        )}
-                                    </InputAdornment>
-                                ),
-                            }}
-                        />
+                        {themeMode === 'light' ? (
+                            <img
+                                src={SearchIcon}
+                                onClick={formik.handleSubmit}
+                                style={{ cursor: 'pointer' }}
+                            />
+                        ) : (
+                            <img
+                                src={SearchIconDark}
+                                onClick={formik.handleSubmit}
+                                style={{ cursor: 'pointer' }}
+                            />
+                        )}
                     </Grid>
                 </Grid>
             </Box>

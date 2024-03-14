@@ -104,7 +104,7 @@ const H2ChargingInfo = ({ data, isEditable, formik }) => {
                                 <Typography>{status}</Typography>
                                 <EditableSelectColumn
                                     value={speed}
-                                    name={`h2ChargingInfo.chargers.${index}.speed`}
+                                    name={`h2Charging.chargers.${index}.speed`}
                                     items={selectSpeedItems.current}
                                     isEditable={isEditable}
                                     formik={formik}

@@ -7,20 +7,22 @@ import {
     IconButton,
     Typography,
 } from '@mui/material'
-import InfoIcon from '@mui/icons-material/Info'
 import CloseIcon from '@mui/icons-material/Close'
+import MenuTable from '#/components/permission/MenuChangeModal/MenuTable'
 import { getLayoutState } from '#/store/useLayoutStore'
+import { usePermissionMenuRoleNameState } from '#/store/usePermissionMenuStore'
+import { useGetRoleMenu } from '#/hooks/queries/permission'
 
 import t from '#/common/libs/trans'
-import MenuTable from '#/components/permission/MenuChangeModal/MenuTable'
-import usePermissionMenuStore from '#/store/usePermissionMenuStore'
+
 import MenuChangeIcon from '#/assets/menuChangeIcon.svg'
 import MenuChangeIconDark from '#/assets/menuChangeIconDark.svg'
 import style from './style.module'
 
 const MenuChangeModal = ({ isOpen, onClose }) => {
     const { themeMode } = getLayoutState()
-    const { roleName, roleId } = usePermissionMenuStore()
+    const roleName = usePermissionMenuRoleNameState()
+    const { data } = useGetRoleMenu()
 
     return (
         <Dialog open={isOpen} onClose={onClose} maxWidth="lg" sx={style.dialogBox}>
@@ -61,17 +63,7 @@ const MenuChangeModal = ({ isOpen, onClose }) => {
                     </Typography>
                     <Typography sx={style.gusestBox}>{roleName.toLowerCase()}</Typography>
                 </Box>
-                <Typography
-                    sx={{
-                        display: 'inline-flex',
-                        fontSize: '13px',
-                        color: 'text.main',
-                        marginBottom: '6px',
-                    }}
-                >
-                    {t('total_number_of_people', 'permission', { userCount: 50 })}
-                </Typography>
-                <MenuTable />
+                {data && <MenuTable data={data} />}
             </DialogContent>
         </Dialog>
     )

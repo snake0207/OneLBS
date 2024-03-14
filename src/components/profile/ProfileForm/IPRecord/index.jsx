@@ -116,7 +116,8 @@ function IPRecord({ ip, ipAddresses, onAdd, onEdit, onDelete, onAutoInput }) {
                     justifyContent: 'space-between',
                     alignItems: 'center',
                     border: 'none',
-                    p: '6px 0px 0px 10px !important',
+                    p: '6px 0px 7px 10px !important',
+                    mt: '-1px',
                 }}
             >
                 <CheckBox
@@ -163,11 +164,13 @@ function IPRecord({ ip, ipAddresses, onAdd, onEdit, onDelete, onAutoInput }) {
                             minWidth: '44px',
                             height: 30,
                             ml: '4px',
-                            color: '#0A5CBA',
-                            border: '1px solid #0A5CBA',
-                            backgroundColor: 'white',
+                            color: 'text.lineblue',
+                            border: '1px solid',
+                            borderColor: 'button.lineblue',
+                            backgroundColor: 'button.white',
+                            boxShadow: 'none',
                             '&:hover': {
-                                backgroundColor: 'white',
+                                backgroundColor: 'button.white',
                             },
                         }}
                     >

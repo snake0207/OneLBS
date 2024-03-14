@@ -11,12 +11,12 @@ const PermissionManagementPage = () => {
     return (
         <Box>
             <TitleBar title={t('permission_list', 'permission')} />
+            <PermissionDescription />
             <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: '10px' }}>
                 {data?.list.map((item) => (
                     <PermissionCard key={item.roleId} permissionCardData={item} />
                 ))}
             </Box>
-            <PermissionDescription />
         </Box>
     )
 }

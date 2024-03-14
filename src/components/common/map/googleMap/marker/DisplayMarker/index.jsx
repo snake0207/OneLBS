@@ -10,10 +10,13 @@ const DisplayMarker = ({ markerData }) => {
     const [marker, setMarker] = useState(null)
     const [infoWindow, setInfoWindow] = useState(null)
     useEffect(() => {
-        if (!markerData) return
         map.panTo({ lat: lat, lng: lon })
-        map.setZoom(15)
-    }, [])
+        map.setZoom(19)
+        setTimeout(() => {
+            const swLng = map.getBounds().getSouthWest().lng()
+            map.panTo({ lat: lat, lng: (swLng + lon) / 2 })
+        }, 100)
+    }, [map])
     return (
         <Marker
             onLoad={(marker) => {

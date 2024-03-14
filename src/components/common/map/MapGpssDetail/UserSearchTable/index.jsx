@@ -12,30 +12,35 @@ const UserSearchTable = ({ data, ...props }) => {
         selectedReviewer,
         setSelectedReviewer,
     } = props
-    const handleClickSetClickedRow = (userSeq) => {
+    const handleClickSetClickedRow = (userSeq, data) => {
+        const userData = {
+            userId: data.userId,
+            userName: data.name,
+            userTeam: data.team,
+        }
         if (tableType === GPSS_TABLE_TYPE.reviewer) {
             const selected = selectedReviewer
             if (!selected) {
-                setSelectedReviewer(userSeq)
+                setSelectedReviewer(userData)
                 return
             }
-            if (selected === userSeq) setSelectedReviewer(null)
-            else setSelectedReviewer(userSeq)
+            if (selected.userId === userData.userId) setSelectedReviewer(null)
+            else setSelectedReviewer(userData)
         }
         if (tableType === GPSS_TABLE_TYPE.approver) {
             const selected = selectedApprover
             if (!selected) {
-                setSelectedApprover(userSeq)
+                setSelectedApprover(userData)
                 return
             }
-            if (selected === userSeq) selectedApprover(null)
-            else setSelectedApprover(userSeq)
+            if (selected.userId === userData.userId) selectedApprover(null)
+            else setSelectedApprover(userData)
         }
     }
 
     const setIsSelected = (userSeq) => {
-        if (tableType === GPSS_TABLE_TYPE.reviewer) return selectedReviewer === userSeq
-        if (tableType === GPSS_TABLE_TYPE.approver) return selectedApprover === userSeq
+        if (tableType === GPSS_TABLE_TYPE.reviewer) return selectedReviewer?.userId === userSeq
+        if (tableType === GPSS_TABLE_TYPE.approver) return selectedApprover?.userId === userSeq
     }
 
     return (
@@ -55,10 +60,10 @@ const UserSearchTable = ({ data, ...props }) => {
                         <TableRow
                             key={idx}
                             hover
-                            onClick={() => handleClickSetClickedRow(data.userSeq)}
-                            selected={setIsSelected(data.userSeq)}
+                            onClick={() => handleClickSetClickedRow(data.userId, data)}
+                            selected={setIsSelected(data.userId)}
                         >
-                            <TableCell>{data.id}</TableCell>
+                            <TableCell>{data.email}</TableCell>
                             <TableCell>{data.name}</TableCell>
                             <TableCell>{data.company}</TableCell>
                         </TableRow>

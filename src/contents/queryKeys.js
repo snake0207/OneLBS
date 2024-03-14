@@ -8,6 +8,7 @@ export const QUERY_KEYS = {
     },
     auth: {
         getIp: 'get-ip',
+        getAskUserInfo: 'get-ask-user-info',
     },
     approval: {
         getHistoryList: 'get_history_list',

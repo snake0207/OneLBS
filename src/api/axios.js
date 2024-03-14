@@ -1,19 +1,21 @@
 import axios from 'axios'
 import qs from 'qs'
-import useAuthStore from '#/store/useAuthStore'
 import auth from '#/api/auth'
 
 export const axiosInstance = axios.create({
     baseURL: import.meta.env.VITE_GW_BASE_URL,
     headers: {
         'Content-Type': 'application/json',
-        Authorization: `Bearer ${useAuthStore.getState().accessToken}`,
     },
     withCredentials: true,
 })
 
 axiosInstance.interceptors.request.use(
-    (config) => config,
+    (config) => {
+        const accessToken = `Bearer ${JSON.parse(localStorage.getItem('auth-storage')).state.accessToken}`
+        config.headers.Authorization = accessToken
+        return config
+    },
     (error) => Promise.reject(error),
 )
 

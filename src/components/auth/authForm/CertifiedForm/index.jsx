@@ -13,15 +13,14 @@ import OtpGuideModal from '#/components/auth/authForm/CertifiedForm/otpGuideModa
 import { usePostVerifyOtp } from '#/hooks/queries/auth'
 import useOtpStore from '#/store/useOtpStore'
 import { useAuthActions } from '#/store/useAuthStore'
-import { useUserActions } from '#/store/useUserStore'
 import useLayoutStore from '#/store/useLayoutStore'
+import { useAuthStepActions } from '#/store/useAuthStepStore'
 
 import t from '#/common/libs/trans'
 
 import style from './style.module'
 import LoginIcon from '#/assets/loginIcon.svg'
 import LoginIconDark from '#/assets/loginIconDark.svg'
-import { useAuthStepActions } from '#/store/useAuthStepStore'
 
 const CertifiedForm = () => {
     const [isOtpGuideOpen, setIsOtpGuideOpen] = useState(false)
@@ -29,7 +28,6 @@ const CertifiedForm = () => {
     const { mutate, isPending } = usePostVerifyOtp()
     const { twoFactorAuth, secretKey, twoFactorSecret, qrCodeUrl } = useOtpStore()
     const { setAccessToken } = useAuthActions()
-    const { setUserStore } = useUserActions()
     const { initAuthStep } = useAuthStepActions()
     const navigate = useNavigate()
 
@@ -50,13 +48,12 @@ const CertifiedForm = () => {
             mutate(
                 { ...form, twoFactorSecret },
                 {
-                    onSuccess: ({
+                    onSuccess: async ({
                         data: {
-                            data: { accessToken, permissions, pwChangeRequired, userId },
+                            data: { accessToken },
                         },
                     }) => {
-                        setAccessToken(accessToken)
-                        setUserStore(userId, permissions, pwChangeRequired)
+                        await setAccessToken(accessToken)
                         initAuthStep()
                         navigate('/')
                     },

@@ -77,6 +77,7 @@ export const useGetAskUserInfo = () => {
     const { data } = useQuery({
         queryFn: auth.getAskUserInfo,
         queryKey: [QUERY_KEYS.auth.getAskUserInfo],
+        select: (data) => data.data.data,
     })
 
     return { data }

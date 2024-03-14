@@ -8,8 +8,9 @@ const useApiError = () => {
     const { showPopup } = usePopupActions()
     const { changeAuthStep } = useAuthStepActions()
 
-    const handlerDefault = () => {
-        showPopup('alert', '500 서버 오류')
+    const handlerDefault = (httpStatus, errorMessage = '알 수 없는 오류') => {
+        console.log(`에러 코드 - ${httpStatus}`)
+        showPopup('alert', `${errorMessage}`)
     }
 
     const handler400Default = (errorMessage) => {
@@ -50,7 +51,7 @@ const useApiError = () => {
             return
         }
 
-        handlers.default()
+        handlers.default(httpStatus, errorMessage)
     }
 
     return handleError

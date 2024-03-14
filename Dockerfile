@@ -3,6 +3,7 @@
 FROM node:18.12.1 as reactBuilder
 WORKDIR /app
 COPY package.json yarn.lock ./
+RUN yarn config set "strict-ssl" false
 RUN yarn
 COPY . .
 RUN yarn run build --mode production

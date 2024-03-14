@@ -3,10 +3,14 @@
 FROM node:18.12.1 as reactBuilder
 WORKDIR /app
 COPY package.json yarn.lock ./
+# 현대 yarn옵션
 RUN yarn config set "strict-ssl" false
 RUN yarn
 COPY . .
-RUN yarn run build --mode production
+# 현대 빌드
+# RUN yarn run build --mode production
+# 사내 빌드
+RUN yarn run build
 
 FROM nginx
 COPY --from=reactBuilder /app/dist /usr/share/nginx/gpss

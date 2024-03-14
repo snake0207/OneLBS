@@ -5,7 +5,7 @@ WORKDIR /app
 COPY package.json yarn.lock ./
 RUN yarn
 COPY . .
-RUN yarn run build --mode production
+RUN yarn run build
 
 FROM nginx
 COPY --from=reactBuilder /app/dist /usr/share/nginx/gpss

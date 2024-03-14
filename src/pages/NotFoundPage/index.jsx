@@ -33,7 +33,7 @@ function NotFoundPage() {
             </Typography>
             <Button
                 variant="contained"
-                onClick={() => navigate('/login', { replace: true })}
+                onClick={() => navigate('/', { replace: true })}
                 sx={style.darkBlueButton}
             >
                 {t('main_page')}

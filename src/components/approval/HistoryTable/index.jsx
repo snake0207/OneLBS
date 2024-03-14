@@ -11,7 +11,7 @@ import t from '#/common/libs/trans.js'
 
 import style from './style.module'
 
-const HistoryTable = ({ type, dummyData, onClickRowFunction }) => {
+const HistoryTable = ({ type, dataList, onClickRowFunction, currentPage, isPending }) => {
     const headers = [
         'No.',
         t('name', 'approval'),
@@ -37,8 +37,8 @@ const HistoryTable = ({ type, dummyData, onClickRowFunction }) => {
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                        {dummyData?.length ? (
-                            dummyData.map((data, index) => {
+                        {dataList?.length ? (
+                            dataList.map((data, index) => {
                                 return (
                                     <TableRow
                                         key={data.id}
@@ -46,7 +46,7 @@ const HistoryTable = ({ type, dummyData, onClickRowFunction }) => {
                                         hover
                                         onClick={() => onClickRowFunction(data.id)}
                                     >
-                                        <TableCell>{dummyData.length - index}</TableCell>
+                                        <TableCell>{(currentPage - 1) * 10 + index + 1}</TableCell>
                                         <TableCell>{data.name}</TableCell>
                                         <TableCell>{data.region}</TableCell>
                                         {type === 'requester' ? null : (
@@ -68,7 +68,7 @@ const HistoryTable = ({ type, dummyData, onClickRowFunction }) => {
                         ) : (
                             <TableRow>
                                 <TableCell colSpan={headers.length} align={'center'}>
-                                    NO DATA
+                                    {isPending ? 'LOADING' : 'NO DATA'}
                                 </TableCell>
                             </TableRow>
                         )}

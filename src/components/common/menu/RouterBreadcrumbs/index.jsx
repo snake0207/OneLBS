@@ -39,7 +39,13 @@ const breadcrumbNameMap = () => ({
 
 function isAvailablePath(path) {
     // Exclude paths
-    const excludePaths = ['/mypage', '/search-management', '/poi-view', '/user-management']
+    const excludePaths = [
+        '/mypage',
+        '/search-management',
+        '/poi-view',
+        '/user-management',
+        '/permission-management',
+    ]
     return !excludePaths.includes(path)
 }
 

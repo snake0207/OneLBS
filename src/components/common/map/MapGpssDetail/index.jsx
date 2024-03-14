@@ -8,7 +8,7 @@ import { useFormik } from 'formik'
 import { poiDetailSchema } from '#/contents/validationSchema.js'
 import BasicInfo from '#/components/poiDetail/CategoryInfo/BasicInfo/index.jsx'
 import Divider from '@mui/material/Divider'
-import { gpssDetailResponseDataMapper } from '#/pages/ApprovalHistoryPage/mapper.js'
+import { gpssDetailResponseDataMapper } from '#/pages/ApprovalHistoryPage/responseMapper.js'
 import EvChargingInfo from '#/components/poiDetail/CategoryInfo/EvChargingInfo/index.jsx'
 import ParkingInfo from '#/components/poiDetail/CategoryInfo/ParkingInfo/index.jsx'
 import FuelInfo from '#/components/poiDetail/CategoryInfo/FuelInfo/index.jsx'
@@ -16,6 +16,8 @@ import DealerPoiInfo from '#/components/poiDetail/CategoryInfo/DealerPoiInfo/ind
 import H2ChargingInfo from '#/components/poiDetail/CategoryInfo/H2ChargingInfo/index.jsx'
 import ApprovalSelect from '#/components/poiDetail/ApprovalSelect/index.jsx'
 import { isBrowser } from 'react-device-detect'
+import { extractChangedObjectOfChangedJson } from '#/common/libs/objectCheck.js'
+import { detailRequestDataMapper } from '#/pages/ApprovalHistoryPage/requestMapper.js'
 
 const MapGpssDetail = ({ selectedPoi, setSelectedPoi, poiData }) => {
     const isEditable = true
@@ -38,18 +40,23 @@ const MapGpssDetail = ({ selectedPoi, setSelectedPoi, poiData }) => {
     }, [selectedPoi])
 
     const parsedData = gpssDetailResponseDataMapper(poiData)
-    const { basicInfo, ...restData } = parsedData
     const formik = useFormik({
         initialValues: {
-            reason: '',
+            comment: '',
             reviewer: '',
             approver: '',
-            ...basicInfo,
-            ...restData,
+            ...parsedData,
         },
         validationSchema: poiDetailSchema,
         onSubmit: (form) => {
             console.log(form)
+            const changedValues = extractChangedObjectOfChangedJson(
+                formik.initialValues,
+                formik.values,
+            )
+            // TODO id 관련 설정 추가
+            const parsedValues = detailRequestDataMapper(1000, changedValues)
+            console.log('parsedValues => ', parsedValues)
         },
     })
 
@@ -87,7 +94,7 @@ const MapGpssDetail = ({ selectedPoi, setSelectedPoi, poiData }) => {
     }
 
     const gpssRequestValidation = () => {
-        if (formik.values.reason === '') {
+        if (formik.values.comment === '') {
             popupAction.showPopup('alert', t('pop_up.reason_required', 'gpss'))
             return false
         }
@@ -125,15 +132,15 @@ const MapGpssDetail = ({ selectedPoi, setSelectedPoi, poiData }) => {
                         {/* 상세 기본 정보 */}
                         <BasicInfo
                             formik={formik}
-                            poiData={parsedData.basicInfo}
+                            poiData={parsedData}
                             tabSelected={tabSelected}
                             isEditable={isEditable}
                         />
                         {/* EV Charging */}
-                        {!!parsedData.evChargingInfo && (
+                        {!!parsedData.evCharging && (
                             <Box>
                                 <EvChargingInfo
-                                    data={parsedData.evChargingInfo}
+                                    data={parsedData.evCharging}
                                     isEditable={isEditable}
                                     formik={formik}
                                 />
@@ -146,10 +153,10 @@ const MapGpssDetail = ({ selectedPoi, setSelectedPoi, poiData }) => {
                             </Box>
                         )}
                         {/* parking */}
-                        {!!parsedData.parkingInfo && (
+                        {!!parsedData.parking && (
                             <Box>
                                 <ParkingInfo
-                                    data={parsedData.parkingInfo}
+                                    data={parsedData.parking}
                                     isEditable={isEditable}
                                     formik={formik}
                                 />
@@ -162,10 +169,10 @@ const MapGpssDetail = ({ selectedPoi, setSelectedPoi, poiData }) => {
                             </Box>
                         )}
                         {/* fuel */}
-                        {!!parsedData.fuelInfo && (
+                        {!!parsedData.fuel && (
                             <Box>
                                 <FuelInfo
-                                    data={parsedData.fuelInfo}
+                                    data={parsedData.fuel}
                                     isEditable={isEditable}
                                     formik={formik}
                                 />
@@ -178,10 +185,10 @@ const MapGpssDetail = ({ selectedPoi, setSelectedPoi, poiData }) => {
                             </Box>
                         )}
                         {/* h2Charging */}
-                        {!!parsedData.h2ChargingInfo && (
+                        {!!parsedData.h2Charging && (
                             <Box>
                                 <H2ChargingInfo
-                                    data={parsedData.h2ChargingInfo}
+                                    data={parsedData.h2Charging}
                                     isEditable={isEditable}
                                     formik={formik}
                                 />
@@ -195,10 +202,10 @@ const MapGpssDetail = ({ selectedPoi, setSelectedPoi, poiData }) => {
                         )}
 
                         {/* dealerPoi */}
-                        {!!parsedData.dealerPoiInfo && (
+                        {!!parsedData.dealerPoi && (
                             <Box>
                                 <DealerPoiInfo
-                                    data={parsedData.dealerPoiInfo}
+                                    data={parsedData.dealerPoi}
                                     isEditable={isEditable}
                                     formik={formik}
                                 />
@@ -234,7 +241,7 @@ const MapGpssDetail = ({ selectedPoi, setSelectedPoi, poiData }) => {
                                 multiline
                                 fullWidth
                                 placeholder={t('reason_for_approval_input', 'gpss')}
-                                name={'reason'}
+                                name={'comment'}
                                 onChange={formik.handleChange}
                                 onBlur={formik.handleBlur}
                                 value={formik.values[name]}

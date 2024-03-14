@@ -21,9 +21,6 @@ const style = {
                 },
             },
         },
-        '& .MuiTypography-root': {
-            color: 'text.darkgray',
-        },
         '&:before': {
             content: 'attr(title)',
             opacity: '0',
@@ -48,6 +45,7 @@ const style = {
         '& .MuiGrid-container': {
             p: '12px',
             mb: '10px',
+
             borderRadius: '4px',
             backgroundColor: 'background.accordion',
             border: '1px solid',

@@ -10,4 +10,13 @@ export const QUERY_KEYS = {
         getIp: 'get-ip',
         getAskUserInfo: 'get-ask-user-info',
     },
+    approval: {
+        getHistoryList: 'get_history_list',
+        getHistoryDetail: 'get_history_detail',
+    },
+    permission: {
+        roleMenuPermission: 'role_menu_permission',
+        roleChangeUserList: 'role_change_user_list',
+        getRoleMenu: 'get_role_menu',
+    },
 }

@@ -1,6 +1,6 @@
 import { Box, SwipeableDrawer, Typography } from '@mui/material'
 import { useEffect, useRef, useState } from 'react'
-import { gpssListResponseDataMapper } from '#/pages/ApprovalHistoryPage/mapper.js'
+import { gpssListResponseDataMapper } from '#/pages/ApprovalHistoryPage/responseMapper.js'
 import t from '#/common/libs/trans.js'
 import List from '@mui/material/List'
 import MapPoiContent from '#/components/common/map/searchList/MapSearchList/MapPoiContent/index.jsx'
@@ -11,11 +11,18 @@ const SwipeMapSearchList = ({
     selectedPoi,
     setSelectedPoi,
     isGpssSearch = false,
+    fetchPoiListNextPage,
+    isPoiListLoading,
 }) => {
     const [isResultNon, setIsResultNon] = useState(true)
     const [isTopBtnVisible, setIsTopBtnVisible] = useState(false)
     const [isDrawerOpen, setIsDrawerOpen] = useState(false)
     const poiList = useRef()
+    const [isApiFetching, setIsApiFetching] = useState(false)
+
+    useEffect(() => {
+        setIsApiFetching(isPoiListLoading)
+    }, [isPoiListLoading])
     const scrollToTop = () => {
         poiList.current.scrollTo({
             top: 0,
@@ -44,8 +51,17 @@ const SwipeMapSearchList = ({
     }, [])
 
     const handleScroll = () => {
+        // scroll top
         if (poiList.current.scrollTop > 30) setIsTopBtnVisible(true)
         else setIsTopBtnVisible(false)
+        // 무한 스크롤 구현
+        if (
+            poiList.current.scrollTop + poiList.current.clientHeight >=
+            poiList.current.scrollHeight - 200
+        ) {
+            if (isApiFetching) return
+            fetchPoiListNextPage()
+        }
     }
 
     return (
@@ -61,8 +77,11 @@ const SwipeMapSearchList = ({
             }}
             sx={{
                 '& .MuiDrawer-paper': {
-                    height: `calc(50% - 200px)`,
+                    height: `calc(50% - 75px)`,
                     overflowY: 'visible',
+                    '@media (max-width:767px)': {
+                        height: `calc(50% - 200px)`,
+                    },
                 },
             }}
         >
@@ -113,7 +132,7 @@ const SwipeMapSearchList = ({
                         alignItems: !isResultNon ? '' : 'center',
                         overflow: 'auto',
                         backgroundColor: 'background.main',
-                        '@media (max-width:767px)': {
+                        '@media (max-width:1028px)': {
                             width: '100%',
                             '& .MuiList-root': {
                                 pt: '0',

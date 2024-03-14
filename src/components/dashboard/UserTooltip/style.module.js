@@ -9,7 +9,7 @@ const style = {
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'center',
-        gap: isMobile ? 0 : 6,
+        gap: isMobile ? 0 : 3,
         padding: '10px 26px',
         '& .MuiBox-root': {
             width: '33%',
@@ -18,7 +18,7 @@ const style = {
     Title: {
         display: 'flex',
         alignItems: 'center',
-        padding: '11px 16px',
+        padding: '8px 16px',
         color: '#fff',
         backgroundColor: '#00418D',
         borderRadius: '8px 8px 0 0',

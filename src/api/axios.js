@@ -1,4 +1,5 @@
 import axios from 'axios'
+import qs from 'qs'
 import useAuthStore from '#/store/useAuthStore'
 import auth from '#/api/auth'
 
@@ -35,8 +36,14 @@ axiosInstance.interceptors.response.use(
     },
 )
 
-export const getAPI = ({ endPoint, axiosOption }) => {
-    return axiosInstance.get(endPoint, axiosOption)
+const generateQueryEndPoint = (endPoint, data) => {
+    const queryString = qs.stringify(data, { addQueryPrefix: true })
+
+    return `${endPoint}${queryString}`
+}
+
+export const getAPI = ({ endPoint, data, axiosOption }) => {
+    return axiosInstance.get(data ? generateQueryEndPoint(endPoint, data) : endPoint, axiosOption)
 }
 
 export const postAPI = ({ endPoint, data, axiosOption }) => {

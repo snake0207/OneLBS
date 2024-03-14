@@ -11,8 +11,8 @@ const MarkerDiscription = () => {
                 justifyContent: 'center',
                 borderRadius: '8px',
                 backgroundColor: '#05141F80',
-                width: '170px',
-                height: '60px',
+                width: '130px',
+                height: '42px',
                 paddingX: '14px',
                 gap: '10px',
             }}
@@ -26,8 +26,8 @@ const MarkerDiscription = () => {
                     gap: '6px',
                 }}
             >
-                <img src={PointBlueIcon} style={{ width: 13 }} />
-                <Typography variant={'h6'} color={'white'}>
+                <img src={PointBlueIcon} style={{ width: 8 }} />
+                <Typography variant={'h6'} color={'white'} sx={{ fontSize: '14px' }}>
                     MCP
                 </Typography>
             </Box>
@@ -40,8 +40,8 @@ const MarkerDiscription = () => {
                     gap: '6px',
                 }}
             >
-                <img src={PointRedIcon} style={{ width: 13 }} />
-                <Typography variant={'h6'} color={'white'}>
+                <img src={PointRedIcon} style={{ width: 8 }} />
+                <Typography variant={'h6'} color={'white'} sx={{ fontSize: '14px' }}>
                     Here
                 </Typography>
             </Box>

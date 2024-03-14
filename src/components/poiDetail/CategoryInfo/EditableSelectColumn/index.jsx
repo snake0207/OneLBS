@@ -17,8 +17,8 @@ const EditableSelectColumn = ({ value, name, items, isEditable, formik }) => {
     // 테마에 따른 아이콘, 배경색 삽입부
     const editButtonIcon = themeMode === 'light' ? EditIcon : EditIconDark
     const saveButtonIcon = themeMode === 'light' ? SaveIcon : SaveIconDark
-    const editButtonBackground = themeMode === 'light' ? '#CFE5FF' : '#002C5F'
-    const saveButtonBackground = themeMode === 'light' ? '#002C5F' : '#002C5F'
+    const editButtonBackground = themeMode === 'light' ? '#CFE5FF' : '#004699'
+    const saveButtonBackground = themeMode === 'light' ? '#002C5F' : '#0057BB'
 
     const handleClickInputButton = () => {
         setIsShowInput(true)
@@ -72,7 +72,13 @@ const EditableSelectColumn = ({ value, name, items, isEditable, formik }) => {
                         },
                     }}
                 >
-                    <Select name={name} formik={formik} items={items} disabled={isDisableInput} />
+                    <Select
+                        name={name}
+                        formik={formik}
+                        value={value}
+                        items={items}
+                        disabled={isDisableInput}
+                    />
                 </Box>
             )}
         </>

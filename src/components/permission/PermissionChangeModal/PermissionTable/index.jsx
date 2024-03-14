@@ -1,27 +1,24 @@
 import { Box, Table, TableBody, TableCell, TableHead, TableRow } from '@mui/material'
-
-import t from '#/common/libs/trans'
-
-import tableData from '#/components/permission/PermissionChangeModal/PermissionTable/table.json'
 import PermissionTableRow from '#/components/permission/PermissionChangeModal/PermissionTable/PermissionTableRow'
+import CommonPagination from '#/components/common/pagination/CommonPagination'
+import { userPermissionTableHeader } from '#/contents/tableHeader'
+import { usePermissionSearchActions } from '#/store/usePermissionSearchStore'
 
-const PermissionTable = () => {
-    const permissionTableHeader = [
-        { field: 'No', headerName: 'No.' },
-        { field: 'email', headerName: t('email', 'permission') },
-        { field: 'name', headerName: t('name', 'permission') },
-        { field: 'company_name', headerName: t('company_name', 'permission') },
-        { field: 'team_name', headerName: t('team_name', 'permission') },
-        { field: 'status', headerName: t('status', 'permission') },
-        { field: 'permission', headerName: t('permission', 'permission') },
-    ]
+import style from './style.module'
+
+const PermissionTable = ({ tableData }) => {
+    const { setPermissionSearchPage } = usePermissionSearchActions()
+
+    const handleChangePage = (page) => {
+        setPermissionSearchPage(page)
+    }
 
     return (
         <Box>
-            <Table>
+            <Table sx={style.tableBox}>
                 <TableHead>
                     <TableRow>
-                        {permissionTableHeader.map((item) => (
+                        {userPermissionTableHeader.map((item) => (
                             <TableCell key={item.field}>{item.headerName}</TableCell>
                         ))}
                     </TableRow>
@@ -42,6 +39,10 @@ const PermissionTable = () => {
                     ))}
                 </TableBody>
             </Table>
+            <CommonPagination
+                dataLength={tableData?.totalPages}
+                onChangePageFunction={handleChangePage}
+            />
         </Box>
     )
 }

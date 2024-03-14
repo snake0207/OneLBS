@@ -10,9 +10,11 @@
   "temporary_save": "temporary save",
   "edit_request": "edit",
   "delete_request": "delete",
+  "create_request": "create POI",
   "opening_hours": "Opening hours",
   "center_coordinates": "Center coordinates",
   "guide_coordinates": "Guide coordinates",
+  "create_poi": "Create POI",
   "price" : {
     "title": "Price",
     "price": "price",

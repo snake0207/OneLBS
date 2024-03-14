@@ -35,28 +35,32 @@
         "reviewed": "검토완료",
         "approved": "승인완료",
         "rejected_review": "검토반려",
-        "rejected_approval": "승인반려"
+        "rejected_approval": "승인반려",
+        "rejected": "반려"
     },
     "actions": {
         "temporary": "임시저장",
         "retrieve": "회수",
         "re_request": "재상신",
         "approval": "승인",
-        "reject": "반려"
+        "reject_review": "반려",
+        "reject_approval": "반려"
     },
     "modal": {
         "temporary": "임시저장 하시겠습니까?",
         "retrieve": "회수 하시겠습니까?",
         "re_request": "재상신 하시겠습니까?",
         "approval": "승인 하시겠습니까?",
-        "reject": "반려 하시겠습니까?"
+        "reject_review": "반려 하시겠습니까?",
+        "reject_approval": "반려 하시겠습니까?"
     },
     "confirmed": {
         "temporary": "임시저장 되었습니다",
         "retrieve": "회수 되었습니다",
         "re_request": "재상신 되었습니다",
         "approval": "승인 되었습니다",
-        "reject": "반려 되었습니다"
+        "reject_review": "반려 되었습니다",
+        "reject_approval": "반려 되었습니다"
     },
     "valid": {
         "title": "명칭",

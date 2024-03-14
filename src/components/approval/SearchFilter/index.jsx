@@ -212,7 +212,7 @@ const SearchFilter = ({ type, handleSubmitFilter, isMobile }) => {
                 sx={{
                     m: '0 20px 20px 0',
                     '@media (max-width:1024px)': {
-                        m: '0 0 20px 0',
+                        m: '0 0 16px 0',
                     },
                 }}
             >

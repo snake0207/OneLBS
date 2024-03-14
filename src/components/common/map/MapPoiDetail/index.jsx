@@ -12,7 +12,7 @@ import { getLayoutState } from '#/store/useLayoutStore'
 import { isBrowser } from 'react-device-detect'
 import Divider from '@mui/material/Divider'
 import BasicInfo from '#/components/poiDetail/CategoryInfo/BasicInfo/index.jsx'
-import { gpssDetailResponseDataMapper } from '#/pages/ApprovalHistoryPage/mapper.js'
+import { gpssDetailResponseDataMapper } from '#/pages/ApprovalHistoryPage/responseMapper.js'
 import EvChargingInfo from '#/components/poiDetail/CategoryInfo/EvChargingInfo/index.jsx'
 import ParkingInfo from '#/components/poiDetail/CategoryInfo/ParkingInfo/index.jsx'
 import FuelInfo from '#/components/poiDetail/CategoryInfo/FuelInfo/index.jsx'
@@ -43,11 +43,7 @@ const MapPoiDetail = ({ selectedPoi, setSelectedPoi, poiData }) => {
             <Box sx={style.mapDetailBox}>
                 <Box sx={style.mapDetail}>
                     {/* 상세 기본 정보 */}
-                    <BasicInfo
-                        poiData={parsedData.basicInfo}
-                        tabSelected={'info'}
-                        isEditable={isEditable}
-                    />
+                    <BasicInfo poiData={parsedData} tabSelected={'info'} isEditable={isEditable} />
                     {/* EV Charging */}
                     {!!parsedData.evChargingInfo && (
                         <Box>

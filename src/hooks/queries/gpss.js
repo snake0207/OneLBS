@@ -1,47 +1,58 @@
 import gpss from '#/api/gpss'
-import { useInfiniteQuery, useMutation, useQuery } from '@tanstack/react-query'
-import { QUERY_KEYS } from '#/contents/queryKeys.js'
+import { useInfiniteQuery, useQuery } from '@tanstack/react-query'
+import { QUERY_KEYS } from '#/contents/queryKeys'
+
 export const useGetReviewer = (userName) => {
     const { data, refetch } = useQuery({
-        queryKey: [QUERY_KEYS.gpss.reviewer, userName],
-        queryFn: gpss.getReviewer,
+        queryKey: [QUERY_KEYS.gpss.reviewer],
+        queryFn: () => gpss.getReviewer(userName),
         enabled: false,
     })
-    return { data, refetch }
+    return { data: data?.data.data.people, refetch }
 }
 
 export const useGetApprover = (userName) => {
     const { data, refetch } = useQuery({
-        queryKey: [QUERY_KEYS.gpss.approver, userName],
-        queryFn: gpss.getApprover,
+        queryKey: [QUERY_KEYS.gpss.approver],
+        queryFn: () => gpss.getApprover(userName),
         enabled: false,
     })
-    return { data, refetch }
+    return { data: data?.data.data.people, refetch }
 }
 
-export const useGetGpssSuggestions = (searchParam) => {
+export const useGetGpssSuggestions = (requestParam) => {
     const { data, refetch } = useQuery({
-        queryKey: [QUERY_KEYS.gpss.suggestion, searchParam.keyword],
-        queryFn: gpss.getGpssSuggestions,
-        enabled: false,
+        queryKey: [QUERY_KEYS.gpss.suggestion, requestParam.keyword],
+        queryFn: () => gpss.getGpssSuggestions(requestParam),
+        enabled: !(requestParam.keyword.length === 0),
         staleTime: 5 * 1000,
     })
-    return { data, refetch }
+    return { data: data?.data?.data?.data?.result ?? [], refetch }
 }
 
-export const usePostGpssSearch = (form) => {
-    const { data, fetchNextPage } = useInfiniteQuery({
-        queryKey: [QUERY_KEYS.gpss.search, form],
-        queryFn: ({ pageParam }) => gpss.postGpssSearch({ ...form, pageParam }),
+export const usePostGpssSearch = (requestParam) => {
+    const { data, isLoading, fetchNextPage, refetch } = useInfiniteQuery({
+        queryKey: [QUERY_KEYS.gpss.search],
+        queryFn: ({ pageParam }) => gpss.postGpssSearch({ ...requestParam, pageParam }),
         initialPageParam: 0,
-        getNextPageParam: (lastPage, allPages, lastPageParam, allPageParams) => {},
+        getNextPageParam: (lastPage, allPages, lastPageParam, allPageParams) => {
+            return lastPageParam + 20
+        },
+        enabled: false,
     })
+
+    return {
+        data,
+        refetch,
+        isLoading,
+        fetchNextPage,
+    }
 }
 
-export const usePostGpssDetail = (form) => {
+export const usePostGpssDetail = (requestParam) => {
     const { data, refetch } = useQuery({
-        queryKey: [QUERY_KEYS.gpss.detail, form.poiId],
-        queryFn: gpss.postGpssDetail,
+        queryKey: [QUERY_KEYS.gpss.detail, requestParam.poiId],
+        queryFn: () => gpss.postGpssDetail(requestParam),
         enabled: false,
     })
     return { data, refetch }

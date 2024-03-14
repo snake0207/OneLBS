@@ -36,7 +36,8 @@
         "reviewed": "Reviewed",
         "approved": "Approved",
         "rejected_review": "Review rejected",
-        "rejected_approval": "Approval rejected"
+        "rejected_approval": "Approval rejected",
+        "rejected": "Rejected"
     },
     "actions": {
         "temporary": "Temporary save",
@@ -57,7 +58,8 @@
         "retrieve": "Confirmed",
         "re_request": "Confirmed",
         "approval": "Confirmed",
-        "reject": "Confirmed"
+        "reject_review": "Confirmed",
+        "reject_approval": "Confirmed"
     },
     "valid": {
         "title": "title",

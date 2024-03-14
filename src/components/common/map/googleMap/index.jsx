@@ -10,17 +10,18 @@ import { BrowserView, isBrowser } from 'react-device-detect'
 import {
     gpssDetailResponseDataMapper,
     gpssListResponseDataMapper,
-} from '#/pages/ApprovalHistoryPage/mapper.js'
+} from '#/pages/ApprovalHistoryPage/responseMapper.js'
 import MarkerDiscription from '#/components/common/map/googleMap/CustomControl/MarkerDiscription/index.jsx'
+import { useMapActions } from '#/store/useMapStore.js'
 
 const mapStyle = {
     width: '100%',
     height: '100%',
 }
 
-const seoul = {
-    lat: 33.9326825,
-    lng: -118.2727244,
+const eu = {
+    lat: 49.5725329,
+    lng: 10.0539701,
 }
 
 /**
@@ -40,6 +41,7 @@ const GoogleMapComponent = ({
     setSelectedPoi,
 }) => {
     const [map, setMap] = useState(null)
+    const { setCoordinates, setMapBounds } = useMapActions()
     // 왼쪽 클릭
     const [clickedCoord, setClickedCoord] = useState({
         lat: null,
@@ -52,7 +54,6 @@ const GoogleMapComponent = ({
     const [isDistanceFunctionOn, setIsDistanceFunctionOn] = useState(false)
 
     const parsedPoiSearchArr = gpssListResponseDataMapper(searchResultArr)
-    const parsedMarkerDetail = gpssDetailResponseDataMapper(markerDetailData)
     // poi 선택시 해당 poi 위치로 이동및 줌
     useEffect(() => {
         if (!parsedPoiSearchArr) return
@@ -60,8 +61,25 @@ const GoogleMapComponent = ({
         if (poiArr.length === 0) return
         const { lat, lon } = poiArr[0].position.center
         map.panTo({ lat: lat, lng: lon })
-        map.setZoom(15)
+        map.setZoom(19)
+        const swLng = map.getBounds().getSouthWest().lng()
+        map.panTo({ lat: lat, lng: (swLng + lon) / 2 })
     }, [selectedPoi])
+
+    // 구글 검색 결과를 지도 bound로 설정
+    useEffect(() => {
+        if (parsedPoiSearchArr && map) {
+            const bounds = new window.google.maps.LatLngBounds()
+            const latLngArr = parsedPoiSearchArr.map((it) => ({
+                lat: it.position.center.lat,
+                lng: it.position.center.lon,
+            }))
+            latLngArr.forEach((it) => {
+                bounds.extend(it)
+            })
+            map.fitBounds(bounds)
+        }
+    }, [searchResultArr, map])
 
     // 구글지도 라이브러리 init
     const { isLoaded } = useJsApiLoader({
@@ -78,10 +96,12 @@ const GoogleMapComponent = ({
     const getMapBounds = () => {
         if (!map) return
         const bounds = map.getBounds()
-        console.log(bounds.getNorthEast().lat())
-        console.log(bounds.getNorthEast().lng())
-        console.log(bounds.getSouthWest().lat())
-        console.log(bounds.getSouthWest().lng())
+        setMapBounds(
+            bounds.getSouthWest().lat(),
+            bounds.getSouthWest().lng(),
+            bounds.getNorthEast().lat(),
+            bounds.getNorthEast().lng(),
+        )
     }
 
     return (
@@ -92,6 +112,10 @@ const GoogleMapComponent = ({
                         lat: parseFloat(event.latLng.lat().toFixed(7)),
                         lng: parseFloat(event.latLng.lng().toFixed(7)),
                     })
+                    setCoordinates(
+                        parseFloat(event.latLng.lat().toFixed(7)),
+                        parseFloat(event.latLng.lng().toFixed(7)),
+                    )
                 }}
                 onRightClick={(event) => {
                     if (isDistanceFunctionOn) {
@@ -124,8 +148,8 @@ const GoogleMapComponent = ({
                     scaleControl: true,
                 }}
                 mapContainerStyle={mapStyle}
-                center={seoul}
-                zoom={12}
+                center={eu}
+                zoom={5}
                 onLoad={onLoad}
                 onUnmount={onUnmount}
             >
@@ -151,7 +175,7 @@ const GoogleMapComponent = ({
                     </CustomControl>
                 </BrowserView>
                 {/* 외부 마커 데이터 출력 */}
-                {parsedMarkerDetail && <DisplayMarker markerData={parsedMarkerDetail} />}
+                {markerDetailData && <DisplayMarker markerData={markerDetailData} />}
                 {/* 지도 검색 결과 마커 데이터 출력*/}
                 {parsedPoiSearchArr &&
                     parsedPoiSearchArr.map((poiData) => (

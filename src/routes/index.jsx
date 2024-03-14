@@ -36,6 +36,7 @@ import MapSearchPage from '#/pages/search/MapSearchPage'
 import POISearchPage from '#/pages/search/POISearchPage'
 import MapSearchDetail from '#/pages/search/MapSearchDetail'
 import POISearchDetail from '#/pages/search/POISearchDetail'
+import DetailWithMobileLayout from '#/layouts/DetailWithMobileLayout/index.jsx'
 
 const Routes = () => {
     return useRoutes([
@@ -65,10 +66,6 @@ const Routes = () => {
                         },
                         // approval history
                         { path: '/approval/:type?', element: <ApprovalHistoryPage /> },
-                        {
-                            path: '/approval/:type?/detail/:id',
-                            element: <ApprovalHistoryDetailPage />,
-                        },
                     ],
                 },
                 {
@@ -77,6 +74,15 @@ const Routes = () => {
                         { path: '/components/layouts/detail', element: <MainPage /> },
                         { path: '/search-management/map/:id', element: <MapSearchDetail /> },
                         { path: '/poi-view/map/:id', element: <POISearchDetail /> },
+                    ],
+                },
+                {
+                    element: <DetailWithMobileLayout />,
+                    children: [
+                        {
+                            path: '/approval/:type?/detail/:id',
+                            element: <ApprovalHistoryDetailPage />,
+                        },
                     ],
                 },
             ],

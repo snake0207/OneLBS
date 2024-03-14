@@ -1,11 +1,4 @@
 const style = {
-    contentBox: {
-        width: '100%',
-        borderRadius: '8px',
-        p: '18px 20px',
-        backgroundColor: 'background.contents',
-        boxShadow: '0 3px 14px rgb(0 0 0 / 24%)',
-    },
     tableBox: {
         width: '100%',
         backgroundColor: 'table.td',

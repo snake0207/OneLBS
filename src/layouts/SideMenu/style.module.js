@@ -2,6 +2,7 @@ const style = {
     webnavBox: {
         '& .MuiPaper-root': {
             backgroundColor: 'background.default',
+            borderColor: 'color.sidemenu',
         },
         '& .MuiList-root': {
             pt: '0',
@@ -9,6 +10,7 @@ const style = {
             '& .MuiButtonBase-root': {
                 m: '3px 0',
                 borderRadius: '350px',
+
                 '& .MuiListItemIcon-root': {
                     minWidth: '30px',
                     mr: '8px',
@@ -29,8 +31,11 @@ const style = {
                     borderBottom: 'none',
                     '& .MuiTypography-root ': {
                         fontSize: 15,
+                        '&:hover': {
+                            color: '#007FA8',
+                        },
                     },
-                    '&:hover': { borderRadius: '350px' },
+                    '&:hover': { borderRadius: '350px', backgroundColor: 'background.default' },
                 },
             },
         },
@@ -54,11 +59,13 @@ const style = {
             },
         },
         '& .MuiButtonBase-root': {
-            borderBottom: '1px solid',
+            borderTop: '1px solid',
             borderColor: 'border.lnb',
         },
         '& .MuiList-root': {
-            pt: '0',
+            p: '0',
+            borderBottom: '1px solid',
+            borderColor: 'border.lnb',
             '& .MuiButtonBase-root': {
                 p: '15px 24px',
                 borderRadius: '0',
@@ -67,12 +74,12 @@ const style = {
         '& .MuiCollapse-root': {
             '& .MuiList-root': {
                 pb: '6px',
-                borderBottom: '1px solid',
-                borderColor: 'border.lnb',
+                mt: '-10px',
+                borderBottom: 'none',
                 backgroundColor: 'lnb.mobilelnbdeps',
                 '& .MuiButtonBase-root': {
                     p: '6px 24px 6px 52px',
-                    borderBottom: 'none',
+                    borderTop: 'none',
                     '& .MuiTypography-root ': {
                         color: 'lnb.mobilelnbText',
                         fontSize: 16,

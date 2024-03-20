@@ -52,16 +52,16 @@ const Routes = () => {
                         { path: '/search-management/map', element: <MapSearchPage /> },
                         { path: '/poi-view/map', element: <POISearchPage /> },
                         // user management
-                        { path: '/user-management/user-list', element: <UserListPage /> },
-                        { path: '/user-management/login-history', element: <LoginHistoryPage /> },
+                        { path: '/mgmt/account/userlist', element: <UserListPage /> },
+                        { path: '/mgmt/account/history', element: <LoginHistoryPage /> },
                         {
-                            path: '/user-management/role-history',
+                            path: '/mgmt/account/history',
                             element: <PermissionHistoryPage />,
                         },
                         { path: '/user-management/ip-access', element: <IpManagePage /> },
                         // permission management
                         {
-                            path: '/permission-management/permissions-list',
+                            path: '/mgmt/account/permission',
                             element: <PermissionManagementPage />,
                         },
                         // approval history

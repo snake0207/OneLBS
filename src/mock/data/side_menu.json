@@ -117,7 +117,7 @@
                     "name": "User List",
                     "menuOrder": 51,
                     "rootMenuId": 500,
-                    "menuUrl": "/mgmt/account/info",
+                    "menuUrl": "/mgmt/account/userlist",
                     "icon": "UserIcon",
                     "label": "사용자정보 관리"
                 },

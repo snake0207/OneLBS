@@ -2,6 +2,9 @@ import * as yup from 'yup'
 import t from '#/common/libs/trans.js'
 
 const HELPER_TEXT = {
+    useridRequired: t('userid_required', 'validation'),
+    useridMinLength: t('userid_min_length', 'validation'),
+    useridMaxLength: t('userid_max_length', 'validation'),
     emailRequired: t('email_required', 'validation'),
     emailNotMatch: t('email_not_match', 'validation'),
     passwordRequired: t('password_required', 'validation'),
@@ -40,7 +43,11 @@ const REGEXP = {
 }
 
 export const loginSchema = yup.object({
-    email: yup.string().email(HELPER_TEXT.emailNotMatch).required(HELPER_TEXT.emailRequired),
+    userid: yup
+        .string()
+        .min(8, HELPER_TEXT.useridMinLength)
+        .max(12, HELPER_TEXT.useridMaxLength)
+        .required(HELPER_TEXT.useridRequired),
     password: yup.string().required(HELPER_TEXT.passwordRequired),
 })
 

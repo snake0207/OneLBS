@@ -1,6 +1,6 @@
 import { Outlet } from 'react-router-dom'
 import { Box } from '@mui/material'
-import AuthHeader from '#/layouts/AuthLayout/AuthHeader'
+// import AuthHeader from '#/layouts/AuthLayout/AuthHeader'
 
 const AuthLayout = () => {
     return (
@@ -23,7 +23,7 @@ const AuthLayout = () => {
                     },
                 }}
             >
-                <AuthHeader />
+                {/* <AuthHeader /> */}
                 <Outlet />
             </Box>
         </Box>

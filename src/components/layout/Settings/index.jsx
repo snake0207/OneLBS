@@ -12,7 +12,7 @@ import FormLabel from '@mui/material/FormLabel'
 import Button from '@mui/material/Button'
 import useLayoutStore from '#/store/useLayoutStore'
 import { BrowserView, MobileView } from 'react-device-detect'
-import { Icon } from '@mui/material'
+import { Icon, Tooltip } from '@mui/material'
 
 import SettingIcon from '#/assets/settingIcon.svg'
 import SettingIconDark from '#/assets/settingIconDark.svg'
@@ -44,6 +44,7 @@ function Settings() {
     }
 
     const handleReset = () => {
+        handleClose()
         reset()
     }
 
@@ -52,40 +53,42 @@ function Settings() {
 
     return (
         <>
-            <IconButton aria-describedby={id} sx={{ p: 0 }} onClick={handleClick}>
-                <BrowserView>
-                    <Icon
-                        sx={{
-                            display: 'flex',
-                            width: '20px',
-                            height: '20px',
-                            ml: '8px',
-                        }}
-                    >
-                        {themeMode === 'light' ? (
-                            <img src={SettingIcon} />
-                        ) : (
-                            <img src={SettingIconDark} />
-                        )}
-                    </Icon>
-                </BrowserView>
-                <MobileView>
-                    <Icon
-                        sx={{
-                            display: 'flex',
-                            width: '21px',
-                            height: '20px',
-                            ml: '8px',
-                        }}
-                    >
-                        {themeMode === 'light' ? (
-                            <img src={SettingMobIcon} />
-                        ) : (
-                            <img src={SettingMobIconDark} />
-                        )}
-                    </Icon>
-                </MobileView>
-            </IconButton>
+            <Tooltip title="설정">
+                <IconButton aria-describedby={id} sx={{ p: 0 }} onClick={handleClick}>
+                    <BrowserView>
+                        <Icon
+                            sx={{
+                                display: 'flex',
+                                width: '20px',
+                                height: '20px',
+                                ml: '8px',
+                            }}
+                        >
+                            {themeMode === 'light' ? (
+                                <img src={SettingIcon} />
+                            ) : (
+                                <img src={SettingIconDark} />
+                            )}
+                        </Icon>
+                    </BrowserView>
+                    <MobileView>
+                        <Icon
+                            sx={{
+                                display: 'flex',
+                                width: '21px',
+                                height: '20px',
+                                ml: '8px',
+                            }}
+                        >
+                            {themeMode === 'light' ? (
+                                <img src={SettingMobIcon} />
+                            ) : (
+                                <img src={SettingMobIconDark} />
+                            )}
+                        </Icon>
+                    </MobileView>
+                </IconButton>
+            </Tooltip>
             <Popover
                 id={id}
                 open={open}
@@ -110,70 +113,28 @@ function Settings() {
                     }}
                 >
                     <FormControl>
-                        <MobileView>
-                            <FormLabel id="color-group-label">{t('color_mode')}</FormLabel>
-                            <RadioGroup
-                                row
-                                aria-labelledby="color-group-label"
-                                name="color-group"
-                                value={themeMode}
-                                onChange={handleColorMode}
-                            >
-                                <FormControlLabel
-                                    value="light"
-                                    control={<Radio />}
-                                    label={t('white')}
-                                />
-                                <FormControlLabel
-                                    value="dark"
-                                    control={<Radio />}
-                                    label={t('black')}
-                                />
-                            </RadioGroup>
-                        </MobileView>
-                        <BrowserView>
-                            <FormLabel id="color-group-label">{t('color_mode')}</FormLabel>
-                            <RadioGroup
-                                row
-                                aria-labelledby="color-group-label"
-                                name="color-group"
-                                value={themeMode}
-                                onChange={handleColorMode}
-                            >
-                                <FormControlLabel
-                                    value="light"
-                                    control={<Radio />}
-                                    label={t('white')}
-                                />
-                                <FormControlLabel
-                                    value="dark"
-                                    control={<Radio />}
-                                    label={t('black')}
-                                />
-                            </RadioGroup>
-                            <FormLabel id="sidebar-group-label">{t('sidebar')}</FormLabel>
-                            <RadioGroup
-                                row
-                                aria-labelledby="sidebar-group-label"
-                                name="sidebar-group"
-                                value={sidebar ? 'expand' : 'collapse'}
-                                onChange={handleSidebar}
-                            >
-                                <FormControlLabel
-                                    value={'expand'}
-                                    control={<Radio />}
-                                    label={t('expand')}
-                                />
-                                <FormControlLabel
-                                    value={'collapse'}
-                                    control={<Radio />}
-                                    label={t('collapse')}
-                                />
-                            </RadioGroup>
-                        </BrowserView>
+                        <FormLabel id="color-group-label">{'color_mode'}</FormLabel>
+                        <RadioGroup
+                            row
+                            aria-labelledby="color-group-label"
+                            name="color-group"
+                            value={themeMode}
+                            onChange={handleColorMode}
+                        >
+                            <FormControlLabel
+                                value="light"
+                                control={<Radio color="primary" />}
+                                label={'Light'}
+                            />
+                            <FormControlLabel
+                                value="dark"
+                                control={<Radio color="secondary" />}
+                                label={'Dark'}
+                            />
+                        </RadioGroup>
                     </FormControl>
                     <Button onClick={handleReset} sx={style.darkButton}>
-                        {t('reset')}
+                        {`초기화`}
                     </Button>
                 </Box>
             </Popover>

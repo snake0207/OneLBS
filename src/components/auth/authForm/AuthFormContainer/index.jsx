@@ -18,6 +18,7 @@ const AuthFormContainer = () => {
             {authStep === AUTH_STEP.passwordReset && <PasswordResetForm />}
             {authStep === AUTH_STEP.emailAuth && <EmailAuthForm />}
             {authStep === AUTH_STEP.join && <JoinFormMobile />}
+            {authStep === AUTH_STEP.findId && <div>Find ID...</div>}
         </>
     )
 }

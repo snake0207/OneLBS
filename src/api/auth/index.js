@@ -2,7 +2,8 @@ import { API_PATH } from '#/contents/api'
 import { getAPI, postAPI } from '../axios'
 
 const postLogin = (data) => {
-    return postAPI({ endPoint: API_PATH.auth.login, data })
+    return getAPI({ endPoint: API_PATH.auth.login, data })
+    // return postAPI({ endPoint: API_PATH.auth.login, data })
 }
 
 const postJoin = (data) => {

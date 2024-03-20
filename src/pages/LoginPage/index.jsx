@@ -1,75 +1,38 @@
-import { Box, Container, Stack } from '@mui/material'
-import CarouselOverview from '#/components/auth/CarouselOverview'
+import { Box } from '@mui/material'
+import Grid from '@mui/material/Unstable_Grid2/Grid2'
 import AuthFormContainer from '#/components/auth/authForm/AuthFormContainer'
-import { BrowserView, MobileView, isBrowser } from 'react-device-detect'
 
 function LoginPage() {
-    const dummyImageList = [
-        {
-            imgUrl: './assets/login-img1.svg',
-            title: 'AutoEver Global Search Info Service Management 1',
-            description:
-                'Enhancing the efficiency and effectiveness of global Search info service optimization',
-        },
-        {
-            imgUrl: './assets/login-img2.svg',
-            title: 'AutoEver Global Search Info Service Management 2',
-            description:
-                'Enhancing the efficiency and effectiveness of global Search info service optimization',
-        },
-        {
-            imgUrl: './assets/login-img3.svg',
-            title: 'AutoEver Global Search Info Service Management 3',
-            description:
-                'Enhancing the efficiency and effectiveness of global Search info service optimization',
-        },
-    ]
     return (
-        <Container
-            maxWidth={isBrowser && 'lg'}
-            sx={{
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                height: '100vh',
-                '@media (max-width:1024px)': {
-                    alignItems: 'flex-start',
-                    mt: '120px',
-                    height: 'calc(100vh - 120px);',
-                    display: 'block',
-                },
-            }}
-        >
-            <BrowserView>
-                <Stack
+        <Grid container sx={{ height: '100vh' }}>
+            <Grid
+                item="true"
+                xs={false}
+                sm={4}
+                md={7}
+                sx={{
+                    backgroundImage: `url('/loginSlide.png')`,
+                    backgroundRepeat: 'no-repeat',
+                    backgroundColor: (t) =>
+                        t.palette.mode === 'light' ? t.palette.grey[50] : t.palette.grey[900],
+                    backgroundSize: 'cover',
+                    backgroundPosition: 'center',
+                }}
+            />
+            <Grid item="true" xs={12} sm={8} md={5} elevation={6}>
+                <Box
                     sx={{
-                        justifyContent: 'space-between',
-                        flexDirection: 'row',
-                        border: '1px solid rgba(0, 0, 0, 0.12)',
+                        my: 8,
+                        mx: 4,
+                        display: 'flex',
+                        flexDirection: 'column',
+                        alignItems: 'center',
                     }}
                 >
-                    <Box sx={{ flex: 1 }}>
-                        <CarouselOverview dummyImageList={dummyImageList} />
-                    </Box>
-                    <Box
-                        sx={{
-                            display: 'flex',
-                            flexDirection: 'column',
-                            height: '100%',
-                            width: '600px',
-                            pt: 10,
-                            pl: 16,
-                            pr: 16,
-                        }}
-                    >
-                        <AuthFormContainer />
-                    </Box>
-                </Stack>
-            </BrowserView>
-            <MobileView>
-                <AuthFormContainer />
-            </MobileView>
-        </Container>
+                    <AuthFormContainer />
+                </Box>
+            </Grid>
+        </Grid>
     )
 }
 

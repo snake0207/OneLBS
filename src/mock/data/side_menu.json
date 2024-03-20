@@ -1,208 +1,141 @@
 {
     "data": [
         {
-            "menuId": 101,
+            "menuId": 100,
             "name": "Main(dashboard)",
-            "menuOrder": 0,
+            "menuOrder": 1,
             "rootMenuId": 100,
             "menuUrl": "/",
-            "label": "dashboard",
+            "label": "대시보드",
+            "icon": "dashboard",
             "children": []
         },
         {
-            "menuId": 120,
-            "name": "Search Management",
-            "menuOrder": 1,
-            "menuUrl": "",
-            "label": "search_management",
+            "menuId": 200,
+            "name": "서비스",
+            "menuOrder": 2,
+            "menuUrl": "/service",
+            "icon": "service",
+            "label": "서비스 현황",
             "children": [
                 {
-                    "menuId": 121,
-                    "name": "Map",
-                    "menuOrder": 1,
-                    "rootMenuId": 120,
+                    "menuId": 210,
+                    "name": "이력조회",
+                    "menuOrder": 21,
+                    "rootMenuId": 200,
                     "menuUrl": "/search-management/map",
-                    "label": "search_map"
+                    "label": "이력조회"
+                },
+                {
+                    "menuId": 220,
+                    "name": "위치 트리거 조회",
+                    "menuOrder": 22,
+                    "rootMenuId": 200,
+                    "menuUrl": "/search-management/map",
+                    "label": "위치 트리거 조회"
+                },
+                {
+                    "menuId": 230,
+                    "name": "통계",
+                    "menuOrder": 23,
+                    "rootMenuId": 200,
+                    "menuUrl": "/search-management/map",
+                    "label": "통계"
                 }
             ]
         },
         {
-            "menuId": 140,
-            "name": "Approval History Management",
+            "menuId": 300,
+            "name": "측위기반 정보 관리",
             "menuOrder": 3,
-            "menuUrl": "",
-            "label": "permit_history",
+            "menuUrl": "/facility",
+            "icon": "facility",
+            "label": "측위기반 정보 관리",
             "children": [
                 {
-                    "menuId": 141,
+                    "menuId": 310,
                     "name": "Full History View",
-                    "menuOrder": 1,
-                    "rootMenuId": 140,
-                    "menuUrl": "/approval",
-                    "label": "all_history"
+                    "menuOrder": 31,
+                    "rootMenuId": 300,
+                    "menuUrl": "/facility/station",
+                    "label": "시설정보"
                 },
                 {
-                    "menuId": 142,
+                    "menuId": 320,
                     "name": "User History View",
-                    "menuOrder": 2,
-                    "rootMenuId": 140,
-                    "menuUrl": "/approval/user-history",
-                    "label": "user_history"
-                },
-                {
-                    "menuId": 143,
-                    "name": "Reviewer History View",
-                    "menuOrder": 3,
-                    "rootMenuId": 140,
-                    "menuUrl": "/approval/reviewer-history",
-                    "label": "reviewer_history"
-                },
-                {
-                    "menuId": 144,
-                    "name": "Manager History View",
-                    "menuOrder": 4,
-                    "rootMenuId": 140,
-                    "menuUrl": "/approval/manager-history",
-                    "label": "manager_history"
+                    "menuOrder": 32,
+                    "rootMenuId": 300,
+                    "menuUrl": "/facility/sync-history",
+                    "label": "정보 현행화 이력"
                 }
             ]
         },
         {
-            "menuId": 150,
-            "name": "MCP POI Statistics",
+            "menuId": 400,
+            "name": "시스템 관리",
             "menuOrder": 4,
             "menuUrl": "",
-            "label": "mcp_poi_statistics",
+            "icon": "system",
+            "label": "시스템 관리",
             "children": [
                 {
-                    "menuId": 151,
-                    "name": "Hourly Statistics",
-                    "menuOrder": 1,
-                    "rootMenuId": 150,
-                    "menuUrl": "/mcp-poi/statistics/hourly",
-                    "label": "time_statistics"
+                    "menuId": 410,
+                    "name": "서비스 관리",
+                    "menuOrder": 41,
+                    "rootMenuId": 400,
+                    "menuUrl": "/mgmt/system/service",
+                    "label": "서비스 관리"
                 },
                 {
-                    "menuId": 152,
-                    "name": "Regional Statistics",
-                    "menuOrder": 2,
-                    "rootMenuId": 150,
-                    "menuUrl": "/mcp-poi/statistics/regional",
-                    "label": "area_statistics"
+                    "menuId": 420,
+                    "name": "단말 모델 관리",
+                    "menuOrder": 42,
+                    "rootMenuId": 400,
+                    "menuUrl": "/mgmt/system/model",
+                    "label": "단말 모델 관리"
                 },
                 {
-                    "menuId": 153,
-                    "name": "Content Provider Statistics",
-                    "menuOrder": 3,
-                    "rootMenuId": 150,
-                    "menuUrl": "/mcp-poi/statistics/content-provider",
-                    "label": "cp_statistics"
-                },
-                {
-                    "menuId": 154,
-                    "name": "User Statistics",
-                    "menuOrder": 4,
-                    "rootMenuId": 150,
-                    "menuUrl": "/mcp-poi/statistics/user",
-                    "label": "user_statistics"
+                    "menuId": 430,
+                    "name": "엔진설정 관리",
+                    "menuOrder": 43,
+                    "rootMenuId": 400,
+                    "menuUrl": "/mgmt/system/engine",
+                    "label": "엔진설정 관리"
                 }
             ]
         },
         {
-            "menuId": 160,
-            "name": "User Management",
+            "menuId": 500,
+            "name": "사용자 관리",
             "menuOrder": 5,
             "menuUrl": "",
-            "label": "user_management",
+            "icon": "account",
+            "label": "사용자 관리",
             "children": [
                 {
-                    "menuId": 161,
+                    "menuId": 510,
                     "name": "User List",
-                    "menuOrder": 1,
-                    "rootMenuId": 160,
-                    "menuUrl": "/user-management/user-list",
-                    "label": "user_list"
+                    "menuOrder": 51,
+                    "rootMenuId": 500,
+                    "menuUrl": "/mgmt/account/info",
+                    "icon": "UserIcon",
+                    "label": "사용자정보 관리"
                 },
                 {
-                    "menuId": 162,
+                    "menuId": 520,
                     "name": "User Login History",
-                    "menuOrder": 2,
-                    "rootMenuId": 160,
-                    "menuUrl": "/user-management/login-history",
-                    "label": "user_login_history"
+                    "menuOrder": 52,
+                    "rootMenuId": 500,
+                    "menuUrl": "/mgmt/account/permission",
+                    "label": "권한 관리"
                 },
                 {
-                    "menuId": 163,
-                    "name": "User Role History",
-                    "menuOrder": 3,
-                    "rootMenuId": 160,
-                    "menuUrl": "/user-management/role-history",
-                    "label": "user_permission_history"
-                },
-                {
-                    "menuId": 164,
-                    "name": "IP Access Management",
-                    "menuOrder": 4,
-                    "rootMenuId": 160,
-                    "menuUrl": "/user-management/ip-access",
-                    "label": "user_ip_access_management"
-                }
-            ]
-        },
-        {
-            "menuId": 170,
-            "name": "Permission Management",
-            "menuOrder": 6,
-            "menuUrl": "",
-            "label": "permission_management",
-            "children": [
-                {
-                    "menuId": 171,
-                    "name": "Permissions List",
-                    "menuOrder": 1,
-                    "rootMenuId": 170,
-                    "menuUrl": "/permission-management/permissions-list",
-                    "label": "permission_list"
-                }
-            ]
-        },
-        {
-            "menuId": 180,
-            "name": "Common",
-            "menuOrder": 7,
-            "label": "common",
-            "children": [
-                {
-                    "menuId": 181,
-                    "name": "Category Code Management",
-                    "menuOrder": 1,
-                    "rootMenuId": 180,
-                    "menuUrl": "/common/category-code-management",
-                    "label": "category_code_management"
-                },
-                {
-                    "menuId": 182,
-                    "name": "Country Code Management",
-                    "menuOrder": 2,
-                    "rootMenuId": 180,
-                    "menuUrl": "/common/country-code-management",
-                    "label": "country_code_management"
-                },
-                {
-                    "menuId": 183,
-                    "name": "Language Code Management",
-                    "menuOrder": 3,
-                    "rootMenuId": 180,
-                    "menuUrl": "/common/language-code-management",
-                    "label": "language_code_management"
-                },
-                {
-                    "menuId": 184,
-                    "name": "Login Page Image Management",
-                    "menuOrder": 4,
-                    "rootMenuId": 180,
-                    "menuUrl": "/common/login-page-image-management",
-                    "label": "login_page_image_management"
+                    "menuId": 530,
+                    "name": "사용자 이력 관리",
+                    "menuOrder": 53,
+                    "rootMenuId": 500,
+                    "menuUrl": "/mgmt/account/history",
+                    "label": "사용자이력 관리"
                 }
             ]
         }

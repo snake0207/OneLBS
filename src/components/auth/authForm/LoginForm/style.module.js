@@ -6,6 +6,7 @@ const style = {
         fontSize: 16,
         fontWeight: 500,
         ml: 0.4,
+        mb: 2,
     },
     subText: {
         fontSize: 12,
@@ -23,6 +24,13 @@ const style = {
     },
     TextInput: {
         flex: 0,
+    },
+    button: {
+        color: 'primary.light',
+        fontWeight: 400,
+        '&:hover': {
+            boxShadow: 'none',
+        },
     },
 }
 

@@ -1,8 +1,9 @@
 import { Outlet, useLocation } from 'react-router-dom'
-import { Box, Container } from '@mui/material'
+import { Box, Container, Divider } from '@mui/material'
 import Header from '#/layouts/Header'
 import SideMenu from '../SideMenu'
 import useLayoutStore from '#/store/useLayoutStore'
+import Footer from '#/layouts/Footer'
 
 const MainLayout = () => {
     const { sidebar, openDrawer, toggleDrawer } = useLayoutStore()
@@ -14,10 +15,9 @@ const MainLayout = () => {
             <Box
                 sx={{
                     display: 'flex',
-                    bgcolor: 'background.web',
+                    bgcolor: 'background.gray',
                     flexGrow: 1,
                     overflow: 'auto',
-                    height: 'auto',
                     minHeight: '100vh',
                     '@media (max-width:1024px)': {
                         bgcolor: pathname === '/' ? 'background.mainMobile' : 'background.mobile',
@@ -31,8 +31,8 @@ const MainLayout = () => {
                         mt: '50px',
                         mb: '10px',
                         pt: '56px',
-                        pl: '10px !important',
-                        pr: '10px !important',
+                        pl: '40px !important',
+                        pr: '40px !important',
                         maxWidth: '100% !important',
                         '@media (max-width:1024px)': {
                             pl: '20px !important',
@@ -44,6 +44,8 @@ const MainLayout = () => {
                     }}
                 >
                     <Outlet />
+                    <Divider sx={{ mt: 4, mb: 2 }} />
+                    <Footer pb={8} />
                 </Container>
             </Box>
         </Box>

@@ -1,4 +1,7 @@
 {
+    "userid_required": "아이디를 입력해 주세요.",
+    "userid_min_length": "8자 이상 입력해 주세요.",
+    "userid_max_length": "12자 이하로 입력해 주세요.",
     "email_required": "이메일을 입력해 주세요.",
     "email_not_match": "이메일을 형식이 맞지 않습니다.",
     "password_required": "비밀번호를 입력해 주세요.",

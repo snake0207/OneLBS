@@ -1,0 +1,43 @@
+{
+    "posts": [
+        {
+            "id": "1",
+            "title": "a title",
+            "views": 100
+        },
+        {
+            "id": "2",
+            "title": "another title",
+            "views": 200
+        }
+    ],
+    "comments": [
+        {
+            "id": "1",
+            "text": "a comment about post 1",
+            "postId": "1"
+        },
+        {
+            "id": "2",
+            "text": "another comment about post 1",
+            "postId": "1"
+        }
+    ],
+    "login": [
+        {
+            "userid": "acro0720",
+            "password": "123456",
+            "result": "0000",
+            "id": "327f"
+        },
+        {
+            "userid": "guest1234",
+            "password": "123456",
+            "result": "9001",
+            "id": "292f"
+        }
+    ],
+    "profile": {
+        "name": "typicode"
+    }
+}

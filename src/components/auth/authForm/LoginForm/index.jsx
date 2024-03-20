@@ -1,12 +1,11 @@
 import { useState } from 'react'
 import { BrowserView, isBrowser, isMobile } from 'react-device-detect'
 import { useFormik } from 'formik'
-import { Button, Typography, Box } from '@mui/material'
+import { Button, Typography, Box, Avatar, Stack, Divider } from '@mui/material'
 import { Icon } from '@mui/material'
 import { LoadingButton } from '@mui/lab'
 import TextInput from '#/components/common/input/TextInput'
 import PasswordInput from '#/components/common/input/PasswordInput'
-import FlexEndButtonContainer from '#/components/common/button/FlexEndButtonContainer'
 import AuthStepper from '#/components/auth/AuthStepper'
 import JoinModal from '#/components/auth/authForm/joinForm/JoinModal'
 import { AUTH_STEP } from '#/contents/constant'
@@ -21,11 +20,11 @@ import {
     encryptPasswordSHA256,
     encryptPasswordSHA256WithTime,
 } from '#/common/libs/encode'
-import t from '#/common/libs/trans'
 
 import style from './style.module'
-import LoginIcon from '#/assets/loginIcon.svg'
-import LoginIconDark from '#/assets/loginIconDark.svg'
+
+import LockOutlinedIcon from '@mui/icons-material/LockOutlined'
+import { Data } from '@react-google-maps/api'
 
 const LoginForm = () => {
     const { changeAuthStep } = useAuthStepActions()
@@ -37,34 +36,42 @@ const LoginForm = () => {
 
     const formik = useFormik({
         initialValues: {
-            email: '',
+            userid: '',
             password: '',
         },
         validationSchema: loginSchema,
         onSubmit: (form) => {
-            const password = encryptPasswordBase64WithTime(
-                encryptPasswordSHA256WithTime(encryptPasswordSHA256(form.password)),
-            )
+            // const password = encryptPasswordBase64WithTime(
+            //     encryptPasswordSHA256WithTime(encryptPasswordSHA256(form.password)),
+            // )
             mutate(
-                { ...form, password },
+                { ...form },
+                // { ...form, password },
                 {
-                    onSuccess: ({
-                        data: {
-                            data: { twoFactorAuth, twoFactorSecret, secretKey, qrCodeUrl },
-                        },
-                    }) => {
-                        if (twoFactorAuth === 'Y') {
-                            setTwoFactorSecret(twoFactorSecret)
-                            setTwoFactorAuth(twoFactorAuth)
-                        } else if (twoFactorAuth === 'N') {
-                            setOtpStore(twoFactorAuth, secretKey, twoFactorSecret, qrCodeUrl)
-                        }
-                        changeAuthStep(AUTH_STEP.certified)
+                    onSuccess: ({ data }) => {
+                        console.log(data)
                     },
+                    // onSuccess: ({
+                    //     data: {
+                    //         data: { twoFactorAuth, twoFactorSecret, secretKey, qrCodeUrl },
+                    //     },
+                    // }) => {
+                    //     if (twoFactorAuth === 'Y') {
+                    //         setTwoFactorSecret(twoFactorSecret)
+                    //         setTwoFactorAuth(twoFactorAuth)
+                    //     } else if (twoFactorAuth === 'N') {
+                    //         setOtpStore(twoFactorAuth, secretKey, twoFactorSecret, qrCodeUrl)
+                    //     }
+                    //     changeAuthStep(AUTH_STEP.certified)
+                    // },
                 },
             )
         },
     })
+
+    const handleClickFindUserId = () => {
+        changeAuthStep(AUTH_STEP.findId)
+    }
 
     const handleClickPasswordReset = () => {
         changeAuthStep(AUTH_STEP.passwordReset)
@@ -83,66 +90,42 @@ const LoginForm = () => {
 
     return (
         <>
-            <Box sx={{ display: 'flex', justifyContent: 'flex-start', mb: 5 }}>
-                <Icon sx={{ display: 'flex', width: 20, height: 20, alignItems: 'center' }}>
-                    {themeMode === 'light' ? (
-                        <img
-                            src={LoginIcon}
-                            style={{ verticalAlign: 'middle', paddingRight: '4px' }}
-                        />
-                    ) : (
-                        <img
-                            src={LoginIconDark}
-                            style={{ verticalAlign: 'middle', paddingRight: '4px' }}
-                        />
-                    )}
-                </Icon>
-                <Typography variant="h5" sx={style.loginTitle}>
-                    LOGIN
-                </Typography>
-            </Box>
-            <BrowserView>
-                <AuthStepper />
-                <Box sx={{ display: 'flex', justifyContent: 'flex-start' }}>
-                    <Typography sx={{ color: 'red' }}>*</Typography>
-                    <Typography variant="subtitle2" sx={style.subText}>
-                        {t('guide.login_input_guide', 'auth')}
-                    </Typography>
-                </Box>
-            </BrowserView>
-            <form onSubmit={formik.handleSubmit}>
+            <Avatar sx={{ m: 1, bgcolor: themeMode === 'light' ? 'primary.main' : 'gray.main' }}>
+                <LockOutlinedIcon />
+            </Avatar>
+            <Typography variant="h5" sx={style.loginTitle}>
+                LOGIN
+            </Typography>
+
+            <form onSubmit={formik.handleSubmit} style={{ width: '100%' }}>
                 <Typography variant="h6" sx={style.labelText}>
-                    {t('email', 'auth')}
+                    {`아이디`}
                 </Typography>
-                <TextInput
-                    name={'email'}
-                    placeholder={t('placeholder.email', 'auth')}
-                    formik={formik}
-                />
+                <TextInput name={'userid'} placeholder={`아이디를 입력하세요`} formik={formik} />
                 <Typography variant="h6" sx={style.labelText}>
-                    {t('password', 'auth')}
+                    {`비밀번호`}
                 </Typography>
                 <PasswordInput
                     name={'password'}
-                    placeholder={t('placeholder.password', 'auth')}
+                    placeholder={`비밀번호를 입력하세요`}
                     formik={formik}
                 />
-                <FlexEndButtonContainer>
+                <Stack sx={{ alignSelf: 'end', gap: 1, mt: '30px', width: '100%' }}>
                     <LoadingButton
+                        fullWidth
                         loading={isPending}
                         variant="contained"
                         type="submit"
                         sx={{
-                            bgcolor: 'button.main',
-                            width: '100%',
+                            mb: 1,
+                            bgcolor: 'primary.main',
                             fontWeight: 400,
                             '&:hover': {
-                                backgroundColor: 'button.main',
-                                boxShadow: 'none',
+                                backgroundColor: 'primary.dark',
                             },
                         }}
                     >
-                        {t('login', 'auth')}
+                        {`로그인`}
                     </LoadingButton>
                     <Box
                         sx={{
@@ -154,41 +137,43 @@ const LoginForm = () => {
                         }}
                     >
                         <Button
-                            variant="contained"
-                            type="button"
-                            onClick={handleClickJoin}
+                            fullWidth
+                            variant="text"
+                            onClick={handleClickFindUserId}
                             sx={{
-                                bgcolor: 'button.light',
-                                width: '100%',
-                                fontWeight: 400,
-                                '&:hover': {
-                                    backgroundColor: 'button.light',
-                                    boxShadow: 'none',
-                                },
+                                ...style.button,
+                                justifyContent: 'flex-end',
                             }}
                         >
-                            {t('join', 'auth')}
+                            {`아이디 찾기`}
                         </Button>
                         <Button
-                            variant="contained"
+                            fullWidth
+                            variant="text"
                             onClick={handleClickPasswordReset}
-                            type="button"
                             sx={{
-                                bgcolor: 'button.light',
-                                width: '100%',
-                                fontWeight: 400,
-                                textWrap: 'nowrap',
-                                '&:hover': {
-                                    backgroundColor: 'button.light',
-                                    boxShadow: 'none',
-                                },
+                                ...style.button,
                             }}
                         >
-                            {t('reset_password', 'auth')}
+                            {`비밀번호 재설정`}
+                        </Button>
+                        <Button
+                            fullWidth
+                            variant="text"
+                            onClick={handleClickJoin}
+                            sx={{
+                                ...style.button,
+                                justifyContent: 'flex-start',
+                            }}
+                        >
+                            {`회원가입`}
                         </Button>
                     </Box>
-                </FlexEndButtonContainer>
+                </Stack>
             </form>
+            <Typography color={'text.light'} sx={{ mt: 4, fontSize: '11px', fontStyle: 'italic' }}>
+                Copyright© OneLBS Admin 2024.
+            </Typography>
             <JoinModal isOpen={isOpenJoinModal} onClose={handleCloseJoinModal} />
         </>
     )

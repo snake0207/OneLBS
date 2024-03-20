@@ -22,6 +22,8 @@ const PasswordResetForm = () => {
     const { themeMode } = useLayoutStore()
     const { initAuthStep } = useAuthStepActions()
     const { showPopup } = usePopupActions()
+
+    
     const formik = useFormik({
         initialValues: {
             email: '',

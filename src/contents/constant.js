@@ -6,6 +6,7 @@ export const AUTH_STEP = {
     passwordReset: -1,
     emailAuth: -2,
     join: -3,
+    findId: -4,
 }
 
 export const GPSS_TABLE_TYPE = {

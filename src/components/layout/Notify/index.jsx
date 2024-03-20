@@ -4,7 +4,7 @@ import Box from '@mui/material/Box'
 import Badge from '@mui/material/Badge'
 import Popover from '@mui/material/Popover'
 import IconButton from '@mui/material/IconButton'
-import { Icon } from '@mui/material'
+import { Icon, Tooltip } from '@mui/material'
 import useLayoutStore from '#/store/useLayoutStore'
 
 import t from '#/common/libs/trans'
@@ -40,28 +40,35 @@ function Notify({ notifications }) {
 
     return (
         <>
-            <IconButton aria-describedby={id} size="large" color="inherit" onClick={handleClick}>
-                <Badge
-                    badgeContent={notifications.length}
-                    color="error"
-                    sx={{ width: '20px', height: '20px' }}
+            <Tooltip title="알림">
+                <IconButton
+                    aria-describedby={id}
+                    size="large"
+                    color="inherit"
+                    onClick={handleClick}
                 >
-                    <Icon
-                        sx={{
-                            display: 'flex',
-                            width: '20px',
-                            height: '20px',
-                            mr: '8px',
-                        }}
+                    <Badge
+                        badgeContent={notifications.length}
+                        color="error"
+                        sx={{ width: '20px', height: '20px' }}
                     >
-                        {themeMode === 'light' ? (
-                            <img src={AlramIcon} />
-                        ) : (
-                            <img src={AlramIconDark} />
-                        )}
-                    </Icon>
-                </Badge>
-            </IconButton>
+                        <Icon
+                            sx={{
+                                display: 'flex',
+                                width: '20px',
+                                height: '20px',
+                                mr: '8px',
+                            }}
+                        >
+                            {themeMode === 'light' ? (
+                                <img src={AlramIcon} />
+                            ) : (
+                                <img src={AlramIconDark} />
+                            )}
+                        </Icon>
+                    </Badge>
+                </IconButton>
+            </Tooltip>
             <Popover
                 id={id}
                 open={open}

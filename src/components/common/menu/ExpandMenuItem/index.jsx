@@ -8,15 +8,15 @@ import Collapse from '@mui/material/Collapse'
 
 import ExpandLess from '@mui/icons-material/ExpandLess'
 import ExpandMore from '@mui/icons-material/ExpandMore'
-import t from '#/common/libs/trans'
 import LinkRouter from '../LinkRouter'
 import useLayoutStore from '#/store/useLayoutStore'
 import { useNavigate } from 'react-router-dom'
+import { Tooltip } from '@mui/material'
 
 function ExpandMenuItem({ label, to, iconNode, items }) {
     const navigate = useNavigate()
     const [open, setOpen] = useState(false)
-    const { setDrawer } = useLayoutStore()
+    const { setDrawer, openDrawer } = useLayoutStore()
 
     useEffect(() => {
         if (open) {
@@ -49,7 +49,13 @@ function ExpandMenuItem({ label, to, iconNode, items }) {
                     },
                 }}
             >
-                <ListItemIcon>{iconNode}</ListItemIcon>
+                {openDrawer ? (
+                    <ListItemIcon>{iconNode}</ListItemIcon>
+                ) : (
+                    <Tooltip title={label} arrow placement="right-start">
+                        <ListItemIcon>{iconNode}</ListItemIcon>
+                    </Tooltip>
+                )}
                 <ListItemText primary={label} />{' '}
                 {items.length > 0 ? open ? <ExpandLess /> : <ExpandMore /> : <></>}
             </ListItemButton>
@@ -65,7 +71,7 @@ function ExpandMenuItem({ label, to, iconNode, items }) {
                                 sx={{ color: 'text.lnb' }}
                             >
                                 <ListItemButton sx={{ pl: 4 }}>
-                                    <ListItemText primary={t(`top_menu.${item?.label}`)} />
+                                    <ListItemText primary={item?.label} />
                                 </ListItemButton>
                             </LinkRouter>
                         )

@@ -1,6 +1,6 @@
 export const API_PATH = {
     auth: {
-        login: '/user-auth/api/v1/user/login',
+        login: '/login',
         join: '/user-auth/api/v1/user/register',
         confirm_eamil: '/user-auth/api/v1/user/confirm-email',
         verify_email: '/user-auth/api/v1/user/verify-email',

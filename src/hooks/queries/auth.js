@@ -10,6 +10,16 @@ export const usePostLogin = () => {
     })
 }
 
+export const useGetLogin = (queryParams = {}) => {
+    const { data } = useQuery({
+        queryFn: () => auth.getCaptcha(queryParams),
+        queryKey: ['get-captcha', queryParams],
+        select: (data) => data.data,
+    })
+
+    return { data }
+}
+
 export const usePostJoin = () => {
     return useMutation({
         mutationFn: auth.postJoin,
@@ -81,4 +91,21 @@ export const useGetAskUserInfo = () => {
     })
 
     return { data }
+}
+
+export const useGetCaptcha = (queryParams = {}) => {
+    return useQuery({
+        queryFn: () => auth.getCaptcha(queryParams),
+        queryKey: ['get-captcha', queryParams],
+    })
+}
+
+export const useGetAuthCode = (queryParams = {}) => {
+    return useQuery({
+        queryFn: () => auth.getAuthCode(queryParams),
+        queryKey: ['get-authcode', queryParams],
+        options: {
+            enabled: !!queryParams.userid,
+        },
+    })
 }

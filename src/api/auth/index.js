@@ -2,8 +2,7 @@ import { API_PATH } from '#/contents/api'
 import { getAPI, postAPI } from '../axios'
 
 const postLogin = (data) => {
-    return getAPI({ endPoint: API_PATH.auth.login, data })
-    // return postAPI({ endPoint: API_PATH.auth.login, data })
+    return postAPI({ endPoint: API_PATH.auth.login, data })
 }
 
 const postJoin = (data) => {
@@ -50,6 +49,14 @@ const getAskUserInfo = () => {
     return getAPI({ endPoint: API_PATH.auth.ask_user_info })
 }
 
+const getCaptcha = (data) => {
+    return getAPI({ endPoint: API_PATH.auth.captcha, data })
+}
+
+const getAuthCode = (data) => {
+    return getAPI({ endPoint: API_PATH.auth.authcode, data })
+}
+
 export default {
     postLogin,
     postJoin,
@@ -63,4 +70,6 @@ export default {
     postPasswordChange,
     postDeferChange,
     getAskUserInfo,
+    getCaptcha,         // captcha
+    getAuthCode,        // 인증코드
 }

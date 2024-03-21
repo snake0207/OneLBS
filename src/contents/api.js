@@ -12,6 +12,8 @@ export const API_PATH = {
         password_change: 'user-auth/api/v1/user/password/change',
         defer_change: 'user-auth/api/v1/user/password/defer-change',
         ask_user_info: '/user-auth/api/v1/user/ask-user-info',
+        captcha: '/captcha',
+        authcode: '/authcode',
     },
     gpss: {
         reviewer: '/user-auth/api/v1/auth/reviewer-search?',

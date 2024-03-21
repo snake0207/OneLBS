@@ -24,28 +24,14 @@ export const APPROVAL_STATUS = {
 }
 
 export const ROLE_SEARCH_SELECT_LIST = [
-    { value: 0, label: t('all', 'permission'), key: 0 },
-    { value: 25, label: t('permission_name.GUEST', 'permission'), key: 1 },
-    { value: 26, label: t('permission_name.USER', 'permission'), key: 2 },
-    { value: 27, label: t('permission_name.REVIEWER', 'permission'), key: 3 },
-    { value: 28, label: t('permission_name.MANAGER', 'permission'), key: 4 },
-    { value: 29, label: t('permission_name.ADMIN', 'permission'), key: 5 },
+    { value: 0, label: `전체`, key: 0 },
+    { value: 1, label: `운영자`, key: 1 },
+    { value: 9, label: `관리자`, key: 9 },
 ]
 
 export const ROLE_LIST = [
-    { value: 25, label: t('permission_name.GUEST', 'permission'), key: 1 },
-    { value: 26, label: t('permission_name.USER', 'permission'), key: 2 },
-    { value: 27, label: t('permission_name.REVIEWER', 'permission'), key: 3 },
-    { value: 28, label: t('permission_name.MANAGER', 'permission'), key: 4 },
-    { value: 29, label: t('permission_name.ADMIN', 'permission'), key: 5 },
-]
-
-export const JOIN_ROLE_LIST = [
-    { value: '25', label: t('permission_name.GUEST', 'permission'), key: 1 },
-    { value: '26', label: t('permission_name.USER', 'permission'), key: 2 },
-    { value: '27', label: t('permission_name.REVIEWER', 'permission'), key: 3 },
-    { value: '28', label: t('permission_name.MANAGER', 'permission'), key: 4 },
-    { value: '29', label: t('permission_name.ADMIN', 'permission'), key: 5 },
+    { value: 1, label: `운영자`, key: 1 },
+    { value: 9, label: `관리자`, key: 9 },
 ]
 
 export const TERMS_LIST = [

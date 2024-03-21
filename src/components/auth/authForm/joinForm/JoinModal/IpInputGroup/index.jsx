@@ -4,11 +4,10 @@ import { IpInput } from '#/components/common/input/IpInput'
 import { BrowserView } from 'react-device-detect'
 import { useGetUserIp } from '#/hooks/queries/auth'
 
-import t from '#/common/libs/trans'
-
 import style from './style.module'
 
 const IpInputGroup = ({ formik }) => {
+    const MAX_IP_COUNT = 4 // 5개, index=0 부터 시작
     const [ipInputCount, setIpInputCount] = useState(0)
 
     const { data } = useGetUserIp()
@@ -44,14 +43,14 @@ const IpInputGroup = ({ formik }) => {
                 </Typography>
                 <Button
                     onClick={handleClickAddIPInput}
-                    disabled={2 === ipInputCount}
+                    disabled={MAX_IP_COUNT === ipInputCount}
                     sx={style.btnDetaile}
                 >
-                    {t('add', 'auth')}
+                    {`추가`}
                 </Button>
             </Box>
             <Typography variant="body2" sx={{ color: 'text.main' }}>
-                {t('guide.ip_input_guide', 'auth')}
+                {`IP는 최대5개까지 입력 가능 합니다.`}
             </Typography>
             <Box sx={{ display: 'flex', gap: 1 }}>
                 <IpInput
@@ -77,7 +76,7 @@ const IpInputGroup = ({ formik }) => {
                                 checked={formik.values.isIpAutoAdd}
                             />
                         }
-                        label={t('auto_input', 'auth')}
+                        label={`자동입력`}
                         sx={{ mb: 'auto' }}
                     />
                 </BrowserView>

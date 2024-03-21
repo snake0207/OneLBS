@@ -12,7 +12,7 @@ import IpInputGroup from '#/components/auth/authForm/joinForm/JoinModal/IpInputG
 import RadioInput from '#/components/common/Radio'
 import PrivacyPolicyModal from '#/components/auth/authForm/joinForm/JoinModal/PrivacyPolicyModal'
 import JoinSuccessModal from '#/components/auth/authForm/joinForm/JoinSuccessModal'
-import { JOIN_ROLE_LIST, TERMS_LIST } from '#/contents/constant'
+import { ROLE_LIST, TERMS_LIST } from '#/contents/constant'
 
 import BtnArrowIcon from '#/assets/btnArrowIcon.svg'
 import BtnArrowIconDark from '#/assets/btnArrowIconDark.svg'
@@ -151,7 +151,7 @@ const JoinFormMobile = () => {
                 <span style={{ color: 'red' }}>*</span>
                 {t('role', 'auth')}
             </Typography>
-            <RadioInput radioList={JOIN_ROLE_LIST} name={'role'} formik={formik} />
+            <RadioInput radioList={ROLE_LIST} name={'role'} formik={formik} />
             {formik.values.role === '29' && <IpInputGroup formik={formik} />}
             <Box sx={{ display: 'flex', justifyContent: 'space-between', mt: 2 }}>
                 <Typography variant="h6" sx={[style.labelText, { mt: 0 }]}>

@@ -19,7 +19,6 @@ import RadioInput from '#/components/common/Radio'
 import { joinSchema } from '#/contents/validationSchema'
 import VerifyEmailForm from '#/components/auth/authForm/joinForm/JoinModal/VerifyEmailForm'
 import ConfirmEmailForm from '#/components/auth/authForm/joinForm/JoinModal/ConfirmEmailForm'
-import PrivacyPolicyModal from '#/components/auth/authForm/joinForm/JoinModal/PrivacyPolicyModal'
 import IpInputGroup from '#/components/auth/authForm/joinForm/JoinModal/IpInputGroup'
 import { usePopupActions } from '#/store/usePopupStore'
 import joinIcon from '#/assets/joinIcon.svg'
@@ -27,13 +26,10 @@ import joinIconDark from '#/assets/joinIconDark.svg'
 import CloseIcon from '@mui/icons-material/Close'
 import JoinSuccessModal from '#/components/auth/authForm/joinForm/JoinSuccessModal'
 import { getLayoutState } from '#/store/useLayoutStore'
-import { JOIN_ROLE_LIST, TERMS_LIST } from '#/contents/constant'
+import { ROLE_LIST } from '#/contents/constant'
 
 import { formatJoinData } from '#/common/libs/formatData'
 import t from '#/common/libs/trans'
-
-import BtnArrowIcon from '#/assets/btnArrowIcon.svg'
-import BtnArrowIconDark from '#/assets/btnArrowIconDark.svg'
 
 import style from './style.module'
 
@@ -41,7 +37,6 @@ const JoinModal = ({ isOpen, onClose }) => {
     const { showPopup } = usePopupActions()
     const { themeMode } = getLayoutState()
     const { mutate, isPending } = usePostJoin()
-    const [isOpenPrivacyPolicyModal, setIsOpenPrivacyPolicyModal] = useState(false)
     const [isOpenJoinSuccessModal, setIsOpenJoinSuccessModal] = useState(false)
 
     const formik = useFormik({
@@ -51,10 +46,7 @@ const JoinModal = ({ isOpen, onClose }) => {
             password: '',
             confirmPassword: '',
             name: '',
-            company: '',
-            team: '',
-            role: '25',
-            terms: 'N',
+            role: '1',  // 운영자, 9: 관리자
             ipAddress1_0: '',
             ipAddress2_0: '',
             ipAddress3_0: '',
@@ -70,6 +62,16 @@ const JoinModal = ({ isOpen, onClose }) => {
             ipAddress3_2: '',
             ipAddress4_2: '',
             ipDescription_2: '',
+            ipAddress1_3: '',
+            ipAddress2_3: '',
+            ipAddress3_3: '',
+            ipAddress4_3: '',
+            ipDescription_3: '',
+            ipAddress1_4: '',
+            ipAddress2_4: '',
+            ipAddress3_4: '',
+            ipAddress4_4: '',
+            ipDescription_4: '',
             isIpAutoAdd: true,
         },
         validationSchema: joinSchema,
@@ -86,11 +88,6 @@ const JoinModal = ({ isOpen, onClose }) => {
             })
         },
     })
-
-    const handleClosePrivacyPolicyModal = () => {
-        setIsOpenPrivacyPolicyModal(false)
-        formik.setFieldValue('terms', 'Y')
-    }
 
     const handleCloseJoinSuccessModal = () => {
         setIsOpenJoinSuccessModal(false)
@@ -112,7 +109,7 @@ const JoinModal = ({ isOpen, onClose }) => {
                             <img src={joinIconDark} style={{ display: 'flex', width: '24px' }} />
                         )}
                     </Icon>
-                    {t('join', 'auth')}
+                    {`회원가입`}
                 </Box>
                 <IconButton onClick={onClose}>
                     <CloseIcon sx={style.close} />
@@ -121,100 +118,48 @@ const JoinModal = ({ isOpen, onClose }) => {
             <DialogContent>
                 <Typography sx={style.subTitle}>
                     <span style={{ color: 'red' }}>*</span>
-                    {t('guide.required', 'auth')}
+                    {`필수 입력입니다.`}
                 </Typography>
                 <Typography variant="h6" sx={{ fontSize: 14 }}>
                     <span style={{ color: 'red' }}>*</span>
-                    {t('email', 'auth')}
+                    {`이메일`}
                 </Typography>
                 <VerifyEmailForm formik={formik} />
                 <Typography variant="h6" sx={{ fontSize: 14, mt: 2 }}>
                     <span style={{ color: 'red' }}>*</span>
-                    {t('confirm_email_code', 'auth')}
+                    {`메일인증코드`}
                 </Typography>
                 <ConfirmEmailForm formik={formik} />
                 <Typography variant="h6" sx={{ fontSize: 14, mt: 2 }}>
                     <span style={{ color: 'red' }}>*</span>
-                    {t('password', 'auth')}
+                    {`비밀번호`}
                 </Typography>
                 <PasswordInput
                     name={'password'}
-                    placeholder={t('placeholder.password', 'auth')}
-                    inputRule={t('guide.password_input_guide', 'auth')}
+                    placeholder={`비밀번호를 입력하세요`}
+                    inputRule={`8~16자 이내 영문대문자, 숫자, 특수문자가 반드시 포함되야 합니다.`}
                     formik={formik}
                 />
                 <Typography variant="h6" sx={style.labelText}>
                     <span style={{ color: 'red' }}>*</span>
-                    {t('confirm_password', 'auth')}
+                    {`비밀번호 확인`}
                 </Typography>
                 <PasswordInput
                     name={'confirmPassword'}
-                    placeholder={t('confirm_password', 'auth')}
+                    placeholder={`비밀번호 확인`}
                     formik={formik}
                 />
                 <Typography variant="h6" sx={style.labelText}>
                     <span style={{ color: 'red' }}>*</span>
-                    {t('name', 'auth')}
+                    {`이름`}
                 </Typography>
-                <TextInput
-                    name={'name'}
-                    placeholder={t('placeholder.name', 'auth')}
-                    formik={formik}
-                />
+                <TextInput name={'name'} placeholder={`이름을 입력하세요`} formik={formik} />
                 <Typography variant="h6" sx={style.labelText}>
                     <span style={{ color: 'red' }}>*</span>
-                    {t('company', 'auth')}
+                    {`권한`}
                 </Typography>
-                <TextInput
-                    name={'company'}
-                    placeholder={t('placeholder.company', 'auth')}
-                    formik={formik}
-                />
-                <Typography variant="h6" sx={style.labelText}>
-                    <span style={{ color: 'red' }}>*</span>
-                    {t('team', 'auth')}
-                </Typography>
-                <TextInput
-                    name={'team'}
-                    placeholder={t('placeholder.team', 'auth')}
-                    formik={formik}
-                />
-                <Typography variant="h6" sx={style.labelText}>
-                    <span style={{ color: 'red' }}>*</span>
-                    {t('role', 'auth')}
-                </Typography>
-                <RadioInput radioList={JOIN_ROLE_LIST} name={'role'} formik={formik} />
-                {formik.values.role === '29' && <IpInputGroup formik={formik} />}
-                <Box sx={{ display: 'flex', justifyContent: 'space-between', mt: 2 }}>
-                    <Typography variant="h6" sx={{ fontSize: 14 }}>
-                        <span style={{ color: 'red' }}>*</span>
-                        {t('consent_terms', 'auth')}
-                    </Typography>
-                    <Button
-                        variant="contained"
-                        onClick={() => setIsOpenPrivacyPolicyModal(true)}
-                        sx={style.btnDetaile}
-                    >
-                        {t('read_more', 'auth')}
-                        {themeMode === 'light' ? (
-                            <img src={BtnArrowIcon} style={{ width: '10px', marginLeft: '4px' }} />
-                        ) : (
-                            <img
-                                src={BtnArrowIconDark}
-                                style={{ width: '10px', marginLeft: '4px' }}
-                            />
-                        )}
-                    </Button>
-                </Box>
-                <Typography variant="overline" component="p" sx={style.infoText}>
-                    {t('guide.terms_guide', 'auth')}
-                </Typography>
-                <RadioInput
-                    radioList={TERMS_LIST}
-                    name={'terms'}
-                    formik={formik}
-                    isDisabled={true}
-                />
+                <RadioInput radioList={ROLE_LIST} name={'role'} formik={formik} />
+                <IpInputGroup formik={formik} />
             </DialogContent>
             <DialogActions>
                 <LoadingButton
@@ -225,13 +170,9 @@ const JoinModal = ({ isOpen, onClose }) => {
                     className="{classes.btn}"
                     sx={style.btnLarge}
                 >
-                    {t('join', 'auth')}
+                    {`회원가입`}
                 </LoadingButton>
             </DialogActions>
-            <PrivacyPolicyModal
-                isOpen={isOpenPrivacyPolicyModal}
-                onClose={handleClosePrivacyPolicyModal}
-            />
             <JoinSuccessModal
                 isOpen={isOpenJoinSuccessModal}
                 onClose={handleCloseJoinSuccessModal}

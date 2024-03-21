@@ -10,8 +10,6 @@ export const axiosInstance = axios.create({
     withCredentials: false,
 })
 
-console.log('BASE_URL', import.meta.env.VITE_GW_BASE_URL)
-
 axiosInstance.interceptors.request.use(
     (config) => {
         const accessToken = `Bearer ${JSON.parse(localStorage.getItem('auth-storage')).state.accessToken}`

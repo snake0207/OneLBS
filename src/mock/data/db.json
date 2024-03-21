@@ -27,17 +27,29 @@
         {
             "userid": "acro0720",
             "password": "123456",
-            "result": "0000",
-            "id": "327f"
+            "fields": {
+                "twoFactorAuth": "N",
+                "twoFactorSecret": "",
+                "secretKey": "5678n678shdfs567837^&*(",
+                "qrCodeUrl": "naver.com"
+            }
         },
         {
-            "userid": "guest1234",
+            "id": "49a1",
+            "userid": "acro0720",
             "password": "123456",
-            "result": "9001",
-            "id": "292f"
+            "authcode": "980909",
+            "secretText": "980765"
         }
     ],
     "profile": {
         "name": "typicode"
+    },
+    "captcha": {
+        "data": "captcha data example..."
+    },
+    "authcode": {
+        "userid": "acro0720",
+        "code": "889390"
     }
 }

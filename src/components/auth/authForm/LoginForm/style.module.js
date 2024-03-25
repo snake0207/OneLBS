@@ -20,10 +20,16 @@ const style = {
         fontWeight: 500,
         mt: 2,
         color: (theme) =>
-            theme.palette.mode === 'light' ? theme.palette.color[1001] : theme.palette.color[100],
+        theme.palette.mode === 'light' ? theme.palette.color[1001] : theme.palette.color[100],
     },
-    TextInput: {
-        flex: 0,
+    loadingButton: {
+        mb: 1,
+        fontSize: 13,
+        bgcolor: 'grey.darkgray',
+        // fontWeight: 500,
+        '&:hover': {
+            backgroundColor: 'primary.dark',
+        },
     },
     button: {
         color: 'primary.light',

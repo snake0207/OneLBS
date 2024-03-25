@@ -37,6 +37,7 @@ import POISearchPage from '#/pages/search/POISearchPage'
 import MapSearchDetail from '#/pages/search/MapSearchDetail'
 import POISearchDetail from '#/pages/search/POISearchDetail'
 import DetailWithMobileLayout from '#/layouts/DetailWithMobileLayout/index.jsx'
+import ServiceListPage from '#/pages/system/ServicePage'
 
 const Routes = () => {
     return useRoutes([
@@ -66,6 +67,11 @@ const Routes = () => {
                         },
                         // approval history
                         { path: '/approval/:type?', element: <ApprovalHistoryPage /> },
+
+                        // Working page
+                        { path: '/system/service', element: <ServiceListPage /> },
+                        { path: '/system/model', element: <ApprovalHistoryPage /> },
+                        { path: '/system/engine', element: <ApprovalHistoryPage /> },
                     ],
                 },
                 {

@@ -83,7 +83,7 @@
                     "name": "서비스 관리",
                     "menuOrder": 41,
                     "rootMenuId": 400,
-                    "menuUrl": "/mgmt/system/service",
+                    "menuUrl": "/system/service",
                     "label": "서비스 관리"
                 },
                 {
@@ -91,7 +91,7 @@
                     "name": "단말 모델 관리",
                     "menuOrder": 42,
                     "rootMenuId": 400,
-                    "menuUrl": "/mgmt/system/model",
+                    "menuUrl": "/system/model",
                     "label": "단말 모델 관리"
                 },
                 {
@@ -99,7 +99,7 @@
                     "name": "엔진설정 관리",
                     "menuOrder": 43,
                     "rootMenuId": 400,
-                    "menuUrl": "/mgmt/system/engine",
+                    "menuUrl": "/system/engine",
                     "label": "엔진설정 관리"
                 }
             ]

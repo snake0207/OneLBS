@@ -1,7 +1,7 @@
 import { Outlet, useLocation } from 'react-router-dom'
 import { Box, Container, Divider } from '@mui/material'
 import Header from '#/layouts/Header'
-import SideMenu from '../SideMenu'
+import SideMenu from '#/layouts/SideMenu'
 import useLayoutStore from '#/store/useLayoutStore'
 import Footer from '#/layouts/Footer'
 

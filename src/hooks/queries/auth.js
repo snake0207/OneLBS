@@ -93,19 +93,18 @@ export const useGetAskUserInfo = () => {
     return { data }
 }
 
-export const useGetCaptcha = (queryParams = {}) => {
+export const useGetCaptcha = (queryParams = {}, options) => {
     return useQuery({
-        queryFn: () => auth.getCaptcha(queryParams),
         queryKey: ['get-captcha', queryParams],
+        queryFn: () => auth.getCaptcha(queryParams),
+        ...options,
     })
 }
 
-export const useGetAuthCode = (queryParams = {}) => {
+export const useGetAuthCode = (queryParams = {}, options) => {
     return useQuery({
-        queryFn: () => auth.getAuthCode(queryParams),
         queryKey: ['get-authcode', queryParams],
-        options: {
-            enabled: !!queryParams.userid,
-        },
+        queryFn: () => auth.getAuthCode(queryParams.reqData),
+        ...options,
     })
 }

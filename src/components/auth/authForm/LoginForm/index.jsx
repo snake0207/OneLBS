@@ -10,7 +10,6 @@ import { loginSchema } from '#/contents/validationSchema'
 import { useGetAuthCode, useGetCaptcha, usePostLogin } from '#/hooks/queries/auth'
 import { useAuthStepActions } from '#/store/useAuthStepStore'
 import { getLayoutState } from '#/store/useLayoutStore'
-import useOtpStore from '#/store/useOtpStore'
 
 import {
     encryptPasswordBase64WithTime,
@@ -21,28 +20,35 @@ import {
 import style from './style.module'
 
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined'
-import { Data } from '@react-google-maps/api'
+import CachedOutlinedIcon from '@mui/icons-material/CachedOutlined'
+
+const MAX_REQ_AUTHCODE = 3
 
 const LoginForm = () => {
     const { changeAuthStep } = useAuthStepActions()
     const { mutate, isPending } = usePostLogin()
     const [captchaParams, setCaptchaParams] = useState({ id: Math.random() })
-    const [isOpenJoinModal, setIsOpenJoinModal] = useState(false)
     const [authCodeParams, setAuthCodeParams] = useState({
         reqTime: '',
-        userid: '',
+        reqData: { userid: '' },
+    })
+    const [state, setState] = useState({
+        isOpenJoinModal: false,
+        authcodeLimits: 0,
+        captchaLimits: 0,
     })
 
     const { data: respCaptcha } = useGetCaptcha(captchaParams)
-    const { data: respAuthcode, isLoading } = useGetAuthCode(authCodeParams)
+    const { data: respAuthcode, isLoading } = useGetAuthCode(authCodeParams, {
+        enabled: !!authCodeParams.reqData.userid,
+    })
 
-    console.log('respAuthcode : ', respAuthcode)
     const formik = useFormik({
         initialValues: {
             userid: '',
             password: '',
             authcode: '',
-            secretText: '',
+            captchaText: '',
         },
         validationSchema: loginSchema,
         onSubmit: (form) => {
@@ -54,15 +60,7 @@ const LoginForm = () => {
                 // { ...form, password },
                 {
                     onSuccess: ({ data }) => {
-                        console.log(data)
-                        const { twoFactorAuth, twoFactorSecret, secretKey, qrCodeUrl } = data.fields
-                        console.log(
-                            'fields : ',
-                            twoFactorAuth,
-                            twoFactorSecret,
-                            secretKey,
-                            qrCodeUrl,
-                        )
+                        console.log('response : ', data)
                         changeAuthStep(AUTH_STEP.certified)
                     },
                 },
@@ -79,27 +77,42 @@ const LoginForm = () => {
     }
 
     const handleClickJoin = () => {
-        setIsOpenJoinModal(true)
+        // setIsOpenJoinModal(true)
+        setState({ ...state, isOpenJoinModal: true })
     }
 
     const handleCloseJoinModal = () => {
-        setIsOpenJoinModal(false)
+        // setIsOpenJoinModal(false)
+        setState({ ...state, isOpenJoinModal: false })
     }
 
     const handleRequestAuthCode = () => {
+        // 인증번호 요청 건수 +1
+        // setAuthCodeReqLimits((limit) => limit + 1)
+        console.log(formik.values.userid.length)
+        setState({
+            ...state,
+            authcodeLimits: state.authcodeLimits + 1,
+        })
         formik.values.userid &&
             setAuthCodeParams({
-                // ...authCodeParams,
                 reqTime: Date.now(),
-                userid: formik.values.userid,
+                reqData: { userid: formik.values.userid },
             })
-        console.log(authCodeParams)
+    }
+
+    const handleRequestCaptcha = () => {
+        setCaptchaParams({ id: Math.random() })
+        setState({
+            ...state,
+            captchaLimits: state.captchaLimits + 1,
+        })
     }
 
     const { themeMode } = getLayoutState()
 
-    console.log('respCaptcha : ', respCaptcha)
-    console.log('formik : ', formik)
+    console.log('state : ', state)
+    // console.log('respCaptcha : ', respCaptcha)
 
     return (
         <>
@@ -123,49 +136,68 @@ const LoginForm = () => {
                     placeholder={`비밀번호를 입력하세요`}
                     formik={formik}
                 />
-                <Typography variant="h6" sx={style.labelText}>
-                    {`인증번호`}
-                </Typography>
                 <Box
                     sx={{
                         display: 'flex',
                         justifyContent: 'space-between',
                     }}
                 >
-                    <TextInput
-                        name={'authcode'}
-                        placeholder={`수신된 인증번호를 입력하세요`}
-                        formik={formik}
+                    <Box flex={1}>
+                        <Typography variant="h6" sx={style.labelText}>
+                            {`인증번호`}
+                        </Typography>
+                        <TextInput
+                            name={'authcode'}
+                            placeholder={`수신된 인증번호를 입력하세요`}
+                            formik={formik}
+                        />
+                    </Box>
+                    <Box>
+                        <Typography variant="h6" sx={style.labelText}>
+                            {`요청 횟수 (${state.authcodeLimits}/3)`}
+                        </Typography>
+                        <LoadingButton
+                            loading={isLoading}
+                            variant="contained"
+                            disabled={
+                                formik.values.userid?.length &&
+                                state.authcodeLimits < MAX_REQ_AUTHCODE
+                                    ? false
+                                    : true
+                            }
+                            onClick={handleRequestAuthCode}
+                            sx={{ ...style.loadingButton, pt: 1.1, pb: 1.1 }}
+                        >
+                            {`인증번호 요청`}
+                        </LoadingButton>
+                    </Box>
+                </Box>
+                <Typography variant="h6" sx={style.labelText}>
+                    {`아래 보안문자의 정보를 입력해 주세요.`}
+                </Typography>
+                <Stack direction="row">
+                    <CardMedia
+                        component="img"
+                        image={respCaptcha?.data?.data}
+                        sx={{
+                            border: `1px solid grey`,
+                            mb: 1,
+                            height: '56px',
+                            opacity: 0.5,
+                        }}
+                        alt={`보안문자`}
                     />
                     <LoadingButton
-                        loading={isLoading}
                         variant="contained"
-                        disabled={formik.values.userid?.length ? false : true}
-                        onClick={handleRequestAuthCode}
-                        sx={{
-                            ml: 0.5,
-                            mb: 2,
-                            bgcolor: 'grey.darkgray',
-                            fontWeight: 400,
-                            '&:hover': {
-                                backgroundColor: 'primary.dark',
-                            },
-                        }}
+                        disabled={state.captchaLimits < MAX_REQ_AUTHCODE ? false : true}
+                        startIcon={<CachedOutlinedIcon />}
+                        onClick={handleRequestCaptcha}
+                        sx={style.loadingButton}
                     >
-                        {`인증번호 요청`}
+                        {`Reload`}
                     </LoadingButton>
-                </Box>
-                <CardMedia
-                    component="img"
-                    image={respCaptcha?.data?.data}
-                    sx={{ border: `1px solid grey`, mt: 3, mb: 1, height: '56px', opacity: 0.5 }}
-                    alt={`보안문자`}
-                />
-                <TextInput
-                    name={'secretText'}
-                    placeholder={`화면에 보이는 문자를 입력해 주세요`}
-                    formik={formik}
-                />
+                </Stack>
+                <TextInput name={'captchaText'} placeholder={`보안문자 입력`} formik={formik} />
                 <Stack sx={{ alignSelf: 'end', gap: 1, mt: '30px', width: '100%' }}>
                     <LoadingButton
                         fullWidth
@@ -230,7 +262,7 @@ const LoginForm = () => {
             <Typography color={'text.light'} sx={{ mt: 4, fontSize: '11px', fontStyle: 'italic' }}>
                 Copyright© OneLBS Admin 2024.
             </Typography>
-            <JoinModal isOpen={isOpenJoinModal} onClose={handleCloseJoinModal} />
+            <JoinModal isOpen={state.isOpenJoinModal} onClose={handleCloseJoinModal} />
         </>
     )
 }

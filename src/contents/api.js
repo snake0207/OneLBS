@@ -35,4 +35,7 @@ export const API_PATH = {
         get_role_menu: 'user-auth/api/v1/auth/get-role-menu',
         modify_role_menu: 'user-auth/api/v1/auth/modify-role-menu',
     },
+    system: {
+        service_list: '/service',
+    },
 }

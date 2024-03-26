@@ -9,3 +9,9 @@ export const useGetServiceList = (queryParams = {}, options) => {
     })
     return { data: data?.data }
 }
+
+export const usePostRegisterService = () => {
+    return useMutation({
+        mutationFn: system.postRegisterService,
+    })
+}

@@ -34,6 +34,21 @@ const HELPER_TEXT = {
     searchLng: '경도를 입력해 주세요',
     ipRequired: 'IP 입력해 주세요.',
     ipNotMatch: 'IP 형식이 맞지 않습니다.',
+
+    serviceNameRequired: '서비스명을 입력해 주세요.',
+    serviceCodeRequired: '서비스코드를 입력해 주세요.',
+    cpNameRequired: '고객사명을 입력해 주세요.',
+    serviceProviderRequired: '서비스 제공사명을 입력해 주세요.',
+    userCheckRequired: '가입자 등록확인을 체크해 주세요.',
+    authCheckRequired: '상호인증확인을 체크해 주세요.',
+    respTimeRequired: '희망응답시간을 입력해 주세요.',
+    cellCheckRequired: '기지국측위 사용여부를 체크해 주세요.',
+    gpsCheckRequired: '위성측위 사용여부를 체크해 주세요.',
+    lppeCheckRequired: 'LPPe 사용여부를 체크해 주세요.',
+    lppRespTimeRequired: 'LPP 희망응답시간을 입력해 주세요.',
+    ksaCheckRequired: 'KSA 사용여부를 체크해 주세요.',
+    versionRequired: 'KSA 버전정보를 입력해 주세요.',
+    collectionCountRequired: 'KSA 수집횟수 정보를 입력해 주세요.',
 }
 
 const REGEXP = {
@@ -126,6 +141,24 @@ export const joinSchema = yup.object().shape({
     ipAddress3_2: yup.string().matches(REGEXP.ipNumber, HELPER_TEXT.ipNotMatch),
     ipAddress4_2: yup.string().matches(REGEXP.ipNumber, HELPER_TEXT.ipNotMatch),
     ipDescription_2: yup.string(),
+})
+
+export const registerServiceSchema = yup.object({
+    serviceName: yup.string().required(HELPER_TEXT.serviceNameRequired),
+    serviceCode: yup.string().required(HELPER_TEXT.serviceCodeRequired),
+    cpName: yup.string().required(HELPER_TEXT.cpNameRequired),
+    serviceProvider: yup.string().required(HELPER_TEXT.serviceProviderRequired),
+    userCheck: yup.string().required(HELPER_TEXT.userCheckRequired),
+    authCheck: yup.string().required(HELPER_TEXT.authCheckRequired),
+    
+    // respTime: yup.string().required(HELPER_TEXT.respTimeRequired),
+    // cellCheck: yup.string().required(HELPER_TEXT.cellCheckRequired),
+    // gpsCheck: yup.string().required(HELPER_TEXT.gpsCheckRequired),
+    // lppeCheck: yup.string().required(HELPER_TEXT.lppeCheckRequired),
+    // lppRespTime: yup.string().required(HELPER_TEXT.lppRespTimeRequired),
+    // ksaCheck: yup.string().required(HELPER_TEXT.ksaCheckRequired),
+    // version: yup.string().required(HELPER_TEXT.versionRequired),
+    // collectionCount: yup.string().required(HELPER_TEXT.collectionCountRequired),
 })
 
 export const otpSchema = yup.object({

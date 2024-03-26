@@ -18,7 +18,6 @@ const gridProps = {
     },
     '& .MuiDataGrid-columnHeaders': {
         color: 'white',
-        marginTop: '8px',
         fontSize: '15px',
         backgroundColor: '#009ACC',
     },
@@ -93,6 +92,7 @@ const CustomDataGrid = ({
             rows={rows}
             rowCount={rowCount}
             columns={columns}
+            rowHeight={48}
             initialState={{
                 sorting: {
                     sortModel: [{ field: sort.field, sort: sort.orderby }],

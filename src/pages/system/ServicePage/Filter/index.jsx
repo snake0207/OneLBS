@@ -1,7 +1,6 @@
 import { Box, Button, Table, TableCell, TableHead, TableRow } from '@mui/material'
 import TextInput from '#/components/common/input/TextInput'
 import { useFormik } from 'formik'
-import t from '#/common/libs/trans'
 import Select from '#/components/common/Select'
 
 import style from './style.module'
@@ -67,7 +66,7 @@ function SearchFilter({ onSearch }) {
                                 onClick={formik.handleSubmit}
                                 sx={style.searchButton}
                             >
-                                {t('search', 'users')}
+                                {`검색`}
                             </Button>
                         </TableCell>
                     </TableRow>

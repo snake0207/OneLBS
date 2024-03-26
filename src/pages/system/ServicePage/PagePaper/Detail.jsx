@@ -14,7 +14,7 @@ import {
 } from '@mui/material'
 import { useState } from 'react'
 import Select from '#/components/common/Select'
-import { gstStatusLabel, getPermissionList } from '#/common/libs/permission'
+import { gstStatusLabel, getPermissionList, getServiceTypeList } from '#/common/libs/permission'
 
 import CloseIcon from '@mui/icons-material/Close'
 
@@ -33,20 +33,20 @@ const ServiceDetail = ({
     onResetPassword,
     onApprove,
     onDeactivate,
-    onChangePermission,
+    onChangeServiceType,
 }) => {
-    const [permission, setPermission] = useState(0)
+    const [serviceType, setServiceType] = useState(0)
 
     useEffect(() => {
         if (open) {
-            setPermission(0)
+            setServiceType(row?.status)
         }
     }, [open, row])
 
-    const handleChangePermission = (item) => {
-        setPermission(item.value)
+    const handleChangeServiceType = (item) => {
+        setServiceType(item.value)
 
-        if (onChangePermission) onChangePermission(row, item)
+        if (onChangeServiceType) onChangeServiceType(row, item)
     }
 
     const handleStatusChange = (status) => {
@@ -95,21 +95,21 @@ const ServiceDetail = ({
                             <TableCell component="td">{row?.serviceCode}</TableCell>
                         </TableRow>
                         <TableRow>
-                            <TableCell>{`CP명`}</TableCell>
+                            <TableCell>{`고객사`}</TableCell>
                             <TableCell component="td">{row?.cpName}</TableCell>
                         </TableRow>
-                        {/* <TableRow>
+                        <TableRow>
                             <TableCell>{`서비스제공자`}</TableCell>
                             <TableCell component="td">{row?.serviceProvider}</TableCell>
                         </TableRow>
                         <TableRow>
-                            <TableCell>{`권한`}</TableCell>
+                            <TableCell>{`서비스 유형`}</TableCell>
                             <TableCell component="td">
                                 <Select
-                                    name="permission"
-                                    value={permission}
-                                    items={getPermissionList()}
-                                    onChange={handleChangePermission}
+                                    name="serviceType"
+                                    value={serviceType}
+                                    items={getServiceTypeList()}
+                                    onChange={handleChangeServiceType}
                                     style={{
                                         height: '40px',
                                         width: '80%',
@@ -121,25 +121,13 @@ const ServiceDetail = ({
                             </TableCell>
                         </TableRow>
                         <TableRow>
-                            <TableCell>{`상태`}</TableCell>
-                            <TableCell component="td">{gstStatusLabel(row?.status)}</TableCell>
-                        </TableRow>
-                        <TableRow>
                             <TableCell>{`등록일`}</TableCell>
                             <TableCell component="td">{row?.register_date}</TableCell>
                         </TableRow>
                         <TableRow>
                             <TableCell>{`승인일`}</TableCell>
-                            <TableCell component="td">{row?.approve_date}</TableCell>
+                            <TableCell component="td">{row?.change_date}</TableCell>
                         </TableRow>
-                        <TableRow>
-                            <TableCell>{`마지막 로그인`}</TableCell>
-                            <TableCell component="td">{row?.last_login_date}</TableCell>
-                        </TableRow>
-                        <TableRow>
-                            <TableCell>{`비고`}</TableCell>
-                            <TableCell component="td">{row?.remark}</TableCell>
-                        </TableRow> */}
                     </TableHead>
                 </Table>
             </DialogContent>

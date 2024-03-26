@@ -37,5 +37,6 @@ export const API_PATH = {
     },
     system: {
         service_list: '/service',
+        register: '/register',
     },
 }

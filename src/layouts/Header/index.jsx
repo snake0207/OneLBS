@@ -70,7 +70,7 @@ function Header({ toggleDrawer }) {
                     </Box>
                     <Box sx={{ flexGrow: 1, display: { xs: 'none' } }}></Box>
                     <Box sx={{ flexGrow: 0, display: 'flex', alignItems: 'center' }}>
-                        <Notify notifications={notifications} />
+                        {/* <Notify notifications={notifications} /> */}
                         <Dropdown
                             items={userMenus}
                             onSelect={handleSelectUserMenu}
@@ -80,7 +80,7 @@ function Header({ toggleDrawer }) {
                             {/* {data && data.userName} */}
                         </Dropdown>
 
-                        <Tooltip title="전체 화면">
+                        {/* <Tooltip title="전체 화면">
                             <IconButton sx={{ p: 0 }} onClick={() => toggleFullScreen()}>
                                 <Icon
                                     sx={{
@@ -98,8 +98,8 @@ function Header({ toggleDrawer }) {
                                     )}
                                 </Icon>
                             </IconButton>
-                        </Tooltip>
-                        <Settings />
+                        </Tooltip> */}
+                        {/* <Settings /> */}
                     </Box>
                 </Toolbar>
             </Container>

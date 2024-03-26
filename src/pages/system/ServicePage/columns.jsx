@@ -22,44 +22,45 @@ export const columns = [
     },
     {
         field: 'cpName',
-        headerName: '사업자명',
+        headerName: '고객사',
         flex: 1,
         renderCell: (params) => {
             return <Typography>{params.row.cpName}</Typography>
         },
     },
-    // {
-    //     field: 'serviceProvider',
-    //     headerName: '서비스제공자',
-    //     flex: 1,
-    //     renderCell: (params) => {
-    //         return <Typography>{params.row.serviceProvider}</Typography>
-    //     },
-    // },
-    // {
-    //     field: 'register_date',
-    //     headerName: '등록일',
-    //     flex: 1.2,
-    //     renderCell: (params) => {
-    //         return <Typography>{params.row.register_date}</Typography>
-    //     },
-    // },
-    // {
-    //     field: 'approve_date',
-    //     headerName: '승인일',
-    //     flex: 1.2,
-    //     renderCell: (params) => {
-    //         return <Typography>{params.row.approve_date}</Typography>
-    //     },
-    // },
-    // {
-    //     field: 'status',
-    //     headerName: '상태',
-    //     flex: 0.5,
-    //     renderCell: (params) => {
-    //         return <Typography>{params.row.status}</Typography>
-    //     },
-    // },
+    {
+        field: 'serviceProvider',
+        headerName: '서비스제공사',
+        flex: 1,
+        renderCell: (params) => {
+            return <Typography>{params.row.serviceProvider}</Typography>
+        },
+    },
+    {
+        field: 'status',
+        headerName: '서비스 유형',
+        flex: 1,
+        align: 'center',
+        renderCell: (params) => {
+            return <Typography>{params.row.status}</Typography>
+        },
+    },
+    {
+        field: 'register_date',
+        headerName: '등록일시',
+        flex: 1.2,
+        renderCell: (params) => {
+            return <Typography>{params.row.register_date}</Typography>
+        },
+    },
+    {
+        field: 'change_date',
+        headerName: '변경일시',
+        flex: 1.2,
+        renderCell: (params) => {
+            return <Typography>{params.row.change_date}</Typography>
+        },
+    },
 
     // {
     //     field: 'comment',

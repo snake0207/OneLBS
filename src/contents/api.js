@@ -36,7 +36,7 @@ export const API_PATH = {
         modify_role_menu: 'user-auth/api/v1/auth/modify-role-menu',
     },
     system: {
-        service_list: '/service',
-        register: '/register',
+        service_list: '/service-list',
+        register: '/service-register',
     },
 }

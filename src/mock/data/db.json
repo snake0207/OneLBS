@@ -59,7 +59,10 @@
         "userid": "acro0720",
         "code": "88931990"
     },
-    "service": {
+    "service-register": {
+        "result": "0000"
+    },
+    "service-list": {
         "count": 150,
         "lists": [
             {

@@ -139,11 +139,15 @@ const style = {
     table_set_option: {
         mb: 3,
         th: {
+            pt: 1,
+            pb: 1,
             width: '20%',
             border: `1px solid`,
             borderColor: 'table.viewTopBorder',
         },
         td: {
+            pt: 1,
+            pb: 1,
             width: '20%',
             border: `1px solid`,
             borderColor: 'table.viewTopBorder',

@@ -44,52 +44,59 @@ const CreateForm = () => {
     const [posMethod, setPosMethod] = useState(0)
     const [plane, setPlane] = useState(0)
     const [mode, setMode] = useState(0)
-    const [ksaCheck, setKsaCheck] = useState(false)
-    const [userCheck, setUserCheck] = useState(false)
-    const [authCheck, setAuthCheck] = useState(false)
-    const [cellCheck, setCellCheck] = useState(false)
-    const [gpsCheck, setGpsCheck] = useState(false)
-    const [lppeCheck, setLppeCheck] = useState(false)
-    const [ksaCellCheck, setKsaCellCheck] = useState(false)
-    const [ksaGnssCheck, setKsaGnssCheck] = useState(false)
-    const [ksaWifiCheck, setKsaWifiCheck] = useState(false)
-    const [ksaAtmosphericCheck, setKsaAtmosphericCheck] = useState(false)
-    const [ksaFlpCheck, setKsaFlpCheck] = useState(false)
+    const [fieldCheck, setFieldCheck] = useState({
+        userCheck: false,
+        authCheck: false,
+        cellCheck: false,
+        gpsCheck: false,
+        lppeCheck: false,
+        ksaCheck: false,
+        ksaCellCheck: false,
+        ksaGnssCheck: false,
+        ksaWifiCheck: false,
+        ksaAtmosphericCheck: false,
+        ksaFlpCheck: false,
+    })
+    // const [ksaCellCheck, setKsaCellCheck] = useState(false)
+    // const [ksaGnssCheck, setKsaGnssCheck] = useState(false)
+    // const [ksaWifiCheck, setKsaWifiCheck] = useState(false)
+    // const [ksaAtmosphericCheck, setKsaAtmosphericCheck] = useState(false)
+    // const [ksaFlpCheck, setKsaFlpCheck] = useState(false)
 
     const popupActions = usePopupActions()
     const formik = useFormik({
         initialValues: {
-            serviceName: '',
-            serviceCode: '',
-            cpName: '',
-            serviceProvider: '',
-            userCheck: false,
-            authCheck: false,
-            serviceType: 0,
-            // accuracy: 0,
-            // respTime: 0,
-            // cellCheck: 'N',
-            // posMethod: 0,
-            // gpsCheck: 'N',
-            // plane: 0,
-            // mode: 0,
-            // lppeCheck: 'N',
-            // lppRespTime: 0,
-            // ksaCheck: 'N',
-            // version: '',
-            // ksaCellCheck: 'N',
-            // ksaGnssCheck: 'N',
-            // ksaWifiCheck: 'N',
-            // ksaAtmosphericCheck: 'N',
-            // ksaFlpCheck: 'N',
-            // collectionCount: 0,
+            // serviceName: '',
+            // serviceCode: '',
+            // cpName: '',
+            // serviceProvider: '',
+            // userCheck: false,
+            // authCheck: false,
+            // serviceType: 0,
+            accuracy: 0,
+            respTime: '15',
+            cellCheck: 'N',
+            posMethod: 0,
+            gpsCheck: 'N',
+            plane: 0,
+            mode: 0,
+            lppeCheck: 'N',
+            lppRespTime: '',
+            ksaCheck: 'N',
+            version: '',
+            ksaCellCheck: 'N',
+            ksaGnssCheck: 'N',
+            ksaWifiCheck: 'N',
+            ksaAtmosphericCheck: 'N',
+            ksaFlpCheck: 'N',
+            collectionCount: '',
         },
         validationSchema: registerServiceSchema,
         onSubmit: (form) => {
-            const reqParams = { ...form, userCheck: userCheck, authCheck: authCheck }
-            console.log('onSubmit >> ', JSON.stringify(reqParams, null, 2))
+            const apiParams = { ...form, ...fieldCheck }
+            console.log('onSubmit >> ', JSON.stringify(apiParams, null, 2))
             mutate(
-                { ...reqParams },
+                { ...apiParams },
                 {
                     onSuccess: ({ data }) => {
                         console.log('response : ', data)
@@ -128,7 +135,7 @@ const CreateForm = () => {
             <TitleBar title={`서비스 가입`} />
             <form onSubmit={formik.handleSubmit} style={{ width: '100%' }}>
                 <Box sx={style.contentBox}>
-                    <Box display="flex" alignItems="center" mb={2}>
+                    {/* <Box display="flex" alignItems="center" mb={2}>
                         <CreateIcon />
                         <Typography
                             sx={{
@@ -171,17 +178,27 @@ const CreateForm = () => {
                                 <TableCell>{`가입자등록확인`}</TableCell>
                                 <TableCell component="td">
                                     <CheckBox
-                                        checked={userCheck}
-                                        onChange={() => setUserCheck((prev) => !prev)}
-                                        name="userCheck"
+                                        checked={fieldCheck.userCheck}
+                                        onChange={(e) =>
+                                            setFieldCheck({
+                                                ...fieldCheck,
+                                                userCheck: e.target.checked,
+                                            })
+                                        }
+                                        label=""
                                     />
                                 </TableCell>
                                 <TableCell>{`상호인증확인`}</TableCell>
                                 <TableCell component="td">
                                     <CheckBox
-                                        checked={authCheck}
-                                        onChange={() => setAuthCheck((prev) => !prev)}
-                                        name="authCheck"
+                                        checked={fieldCheck.authCheck}
+                                        onChange={(e) =>
+                                            setFieldCheck({
+                                                ...fieldCheck,
+                                                authCheck: e.target.checked,
+                                            })
+                                        }
+                                        label=""
                                     />
                                 </TableCell>
                             </TableRow>
@@ -206,10 +223,10 @@ const CreateForm = () => {
                                 <TableCell colSpan={2}></TableCell>
                             </TableRow>
                         </TableHead>
-                    </Table>
+                    </Table> */}
 
                     {/* 측위 기능 설정 */}
-                    {/* <Box display="flex" alignItems="center" mb={2}>
+                    <Box display="flex" alignItems="center" mb={2}>
                         <CreateIcon />
                         <Typography
                             sx={{
@@ -235,6 +252,7 @@ const CreateForm = () => {
                                         name="accuracy"
                                         value={accuracy}
                                         items={getAccuracys()}
+                                        formik={formik}
                                         onChange={(item) => setAccuracy(item.value)}
                                         style={{
                                             height: '40px',
@@ -251,21 +269,21 @@ const CreateForm = () => {
                                 </TableCell>
                             </TableRow>
                         </TableHead>
-                    </Table> */}
+                    </Table>
 
-                    {/* <Table sx={style.table_set_option}>
+                    <Table sx={style.table_set_option}>
                         <TableHead>
                             <TableRow>
                                 <TableCell>{`기지국측위`}</TableCell>
                                 <TableCell>{`사용`}</TableCell>
                                 <TableCell component="td">
-                                    <FormControlLabel
-                                        control={
-                                            <Checkbox
-                                                checked={cellCheck}
-                                                onChange={() => setCellCheck((prev) => !prev)}
-                                                name="cellCheck"
-                                            />
+                                    <CheckBox
+                                        checked={fieldCheck.cellCheck}
+                                        onChange={(e) =>
+                                            setFieldCheck({
+                                                ...fieldCheck,
+                                                cellCheck: e.target.checked,
+                                            })
                                         }
                                         label=""
                                     />
@@ -276,10 +294,10 @@ const CreateForm = () => {
                                         name="posMethod"
                                         value={posMethod}
                                         items={getPosMethods()}
+                                        formik={formik}
                                         onChange={(item) => setPosMethod(item.value)}
                                         style={{
                                             height: '40px',
-                                            width: '100%',
                                             fontSize: 14,
                                             backgroundColor: 'form.main',
                                             borderRadius: '4px',
@@ -291,13 +309,13 @@ const CreateForm = () => {
                                 <TableCell rowSpan={3}>{`위성 측위`}</TableCell>
                                 <TableCell>{`사용`}</TableCell>
                                 <TableCell component="td">
-                                    <FormControlLabel
-                                        control={
-                                            <Checkbox
-                                                checked={gpsCheck}
-                                                onChange={() => setGpsCheck((prev) => !prev)}
-                                                name="gpsCheck"
-                                            />
+                                    <CheckBox
+                                        checked={fieldCheck.gpsCheck}
+                                        onChange={(e) =>
+                                            setFieldCheck({
+                                                ...fieldCheck,
+                                                gpsCheck: e.target.checked,
+                                            })
                                         }
                                         label=""
                                     />
@@ -308,10 +326,10 @@ const CreateForm = () => {
                                         name="plane"
                                         value={plane}
                                         items={getPlanes()}
+                                        formik={formik}
                                         onChange={(item) => setPlane(item.value)}
                                         style={{
                                             height: '40px',
-                                            width: '100%',
                                             fontSize: 14,
                                             backgroundColor: 'form.main',
                                             borderRadius: '4px',
@@ -326,10 +344,10 @@ const CreateForm = () => {
                                         name="mode"
                                         value={mode}
                                         items={getModes()}
+                                        formik={formik}
                                         onChange={(item) => setMode(item.value)}
                                         style={{
                                             height: '40px',
-                                            width: '100%',
                                             fontSize: 14,
                                             backgroundColor: 'form.main',
                                             borderRadius: '4px',
@@ -338,13 +356,13 @@ const CreateForm = () => {
                                 </TableCell>
                                 <TableCell>{`LPPe 사용`}</TableCell>
                                 <TableCell>
-                                    <FormControlLabel
-                                        control={
-                                            <Checkbox
-                                                checked={lppeCheck}
-                                                onChange={() => setLppeCheck((prev) => !prev)}
-                                                name="lppeCheck"
-                                            />
+                                    <CheckBox
+                                        checked={fieldCheck.lppeCheck}
+                                        onChange={(e) =>
+                                            setFieldCheck({
+                                                ...fieldCheck,
+                                                lppeCheck: e.target.checked,
+                                            })
                                         }
                                         label=""
                                     />
@@ -361,13 +379,13 @@ const CreateForm = () => {
                                 <TableCell rowSpan={3}>{`KSA`}</TableCell>
                                 <TableCell>{`사용`}</TableCell>
                                 <TableCell>
-                                    <FormControlLabel
-                                        control={
-                                            <Checkbox
-                                                checked={ksaCheck}
-                                                onChange={() => setKsaCheck((prev) => !prev)}
-                                                name="ksaCheck"
-                                            />
+                                    <CheckBox
+                                        checked={fieldCheck.ksaCheck}
+                                        onChange={(e) =>
+                                            setFieldCheck({
+                                                ...fieldCheck,
+                                                ksaCheck: e.target.checked,
+                                            })
                                         }
                                         label=""
                                     />
@@ -381,61 +399,53 @@ const CreateForm = () => {
                                 <TableCell>{`수집 정보`}</TableCell>
                                 <TableCell colSpan={3}>
                                     <FormGroup row>
-                                        <FormControlLabel
-                                            control={
-                                                <Checkbox
-                                                    checked={ksaCellCheck}
-                                                    onChange={() =>
-                                                        setKsaCellCheck((prev) => !prev)
-                                                    }
-                                                    name="ksaCellCheck"
-                                                />
+                                        <CheckBox
+                                            checked={fieldCheck.ksaCellCheck}
+                                            onChange={(e) =>
+                                                setFieldCheck({
+                                                    ...fieldCheck,
+                                                    ksaCellCheck: e.target.checked,
+                                                })
                                             }
                                             label="CELL"
                                         />
-                                        <FormControlLabel
-                                            control={
-                                                <Checkbox
-                                                    checked={ksaGnssCheck}
-                                                    onChange={() =>
-                                                        setKsaGnssCheck((prev) => !prev)
-                                                    }
-                                                    name="ksaGnssCheck"
-                                                />
+                                        <CheckBox
+                                            checked={fieldCheck.ksaGnssCheck}
+                                            onChange={(e) =>
+                                                setFieldCheck({
+                                                    ...fieldCheck,
+                                                    ksaGnssCheck: e.target.checked,
+                                                })
                                             }
                                             label="GNSS"
                                         />
-                                        <FormControlLabel
-                                            control={
-                                                <Checkbox
-                                                    checked={ksaWifiCheck}
-                                                    onChange={() =>
-                                                        setKsaWifiCheck((prev) => !prev)
-                                                    }
-                                                    name="ksaWifiCheck"
-                                                />
+                                        <CheckBox
+                                            checked={fieldCheck.ksaWifiCheck}
+                                            onChange={(e) =>
+                                                setFieldCheck({
+                                                    ...fieldCheck,
+                                                    ksaWifiCheck: e.target.checked,
+                                                })
                                             }
                                             label="WiFi"
                                         />
-                                        <FormControlLabel
-                                            control={
-                                                <Checkbox
-                                                    checked={ksaAtmosphericCheck}
-                                                    onChange={() =>
-                                                        setKsaAtmosphericCheck((prev) => !prev)
-                                                    }
-                                                    name="ksaAtmosphericCheck"
-                                                />
+                                        <CheckBox
+                                            checked={fieldCheck.ksaAtmosphericCheck}
+                                            onChange={(e) =>
+                                                setFieldCheck({
+                                                    ...fieldCheck,
+                                                    ksaAtmosphericCheck: e.target.checked,
+                                                })
                                             }
                                             label="기압"
                                         />
-                                        <FormControlLabel
-                                            control={
-                                                <Checkbox
-                                                    checked={ksaFlpCheck}
-                                                    onChange={() => setKsaFlpCheck((prev) => !prev)}
-                                                    name="ksaFlpCheck"
-                                                />
+                                        <CheckBox
+                                            checked={fieldCheck.ksaFlpCheck}
+                                            onChange={(e) =>
+                                                setFieldCheck({
+                                                    ...fieldCheck,
+                                                    ksaFlpCheck: e.target.checked,
+                                                })
                                             }
                                             label="FLP"
                                         />
@@ -450,7 +460,7 @@ const CreateForm = () => {
                                 <TableCell colSpan={2}></TableCell>
                             </TableRow>
                         </TableHead>
-                    </Table> */}
+                    </Table>
 
                     {/* 하단 버튼 */}
                     <Box align={'right'}>

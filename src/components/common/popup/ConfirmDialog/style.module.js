@@ -1,7 +1,7 @@
 const style = {
     dialogBox: {
         '& .MuiDialog-paper': {
-            width: '250px',
+            // width: '250px',
             backgroundColor: 'dialog.main',
             borderRadius: '8px',
             backgroundImage: 'none',
@@ -22,7 +22,7 @@ const style = {
         p: '0 20px 20px 20px',
     },
     blueButton: {
-        width: '24%',
+        width: '30%',
         height: 36,
         p: 0,
         color: 'white',
@@ -33,12 +33,14 @@ const style = {
         },
     },
     lightButton: {
-        width: '24%',
+        width: '30%',
         height: 36,
         fontWeight: 500,
-        color: '#002C5F',
+        color: 'error.main',
+        // color: '#002C5F',
         border: '1px solid',
-        borderColor: 'color.alertBtn',
+        borderColor: 'error.main',
+        // borderColor: 'color.alertBtn',
         backgroundColor: 'white',
         '&:hover': {
             backgroundColor: 'white',

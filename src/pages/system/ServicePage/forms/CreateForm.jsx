@@ -30,11 +30,12 @@ import {
     getPlanes,
     getModes,
 } from '#/common/libs/permission'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { usePostRegisterService } from '#/hooks/queries/system'
 import CreateIcon from '@mui/icons-material/Create'
 import { registerServiceSchema } from '#/contents/validationSchema'
 import CheckBox from '#/components/common/input/CheckBox'
+import MuiDialog from '#/components/common/popup/MuiDialog/MuiDialog'
 
 const CreateForm = () => {
     const navigate = useNavigate()
@@ -57,11 +58,13 @@ const CreateForm = () => {
         ksaAtmosphericCheck: false,
         ksaFlpCheck: false,
     })
-    // const [ksaCellCheck, setKsaCellCheck] = useState(false)
-    // const [ksaGnssCheck, setKsaGnssCheck] = useState(false)
-    // const [ksaWifiCheck, setKsaWifiCheck] = useState(false)
-    // const [ksaAtmosphericCheck, setKsaAtmosphericCheck] = useState(false)
-    // const [ksaFlpCheck, setKsaFlpCheck] = useState(false)
+    const [state, setState] = useState({
+        save: false,
+        edit: false,
+        delete: false,
+        msg: '',
+        openDialog: false,
+    })
 
     const popupActions = usePopupActions()
     const formik = useFormik({
@@ -75,21 +78,21 @@ const CreateForm = () => {
             // serviceType: 0,
             accuracy: 0,
             respTime: '15',
-            cellCheck: 'N',
-            posMethod: 0,
-            gpsCheck: 'N',
-            plane: 0,
-            mode: 0,
-            lppeCheck: 'N',
-            lppRespTime: '',
-            ksaCheck: 'N',
-            version: '',
-            ksaCellCheck: 'N',
-            ksaGnssCheck: 'N',
-            ksaWifiCheck: 'N',
-            ksaAtmosphericCheck: 'N',
-            ksaFlpCheck: 'N',
-            collectionCount: '',
+            // cellCheck: 'N',
+            // posMethod: 0,
+            // gpsCheck: 'N',
+            // plane: 0,
+            // mode: 0,
+            // lppeCheck: 'N',
+            // lppRespTime: '',
+            // ksaCheck: 'N',
+            // version: '',
+            // ksaCellCheck: 'N',
+            // ksaGnssCheck: 'N',
+            // ksaWifiCheck: 'N',
+            // ksaAtmosphericCheck: 'N',
+            // ksaFlpCheck: 'N',
+            // collectionCount: '',
         },
         validationSchema: registerServiceSchema,
         onSubmit: (form) => {
@@ -110,25 +113,53 @@ const CreateForm = () => {
         },
     })
 
-    const handleEdit = () => {
-        console.log('handleEdit')
+    const handleClickSave = () => {
+        console.log('handleClickSave >> ', state)
+        setState((prevState) => ({
+            ...prevState,
+            save: true,
+            msg: '입력한 정보로 저장 하시겠습니까?',
+            openDialog: true,
+        }))
+        // formik.handleSubmit()
+    }
+    const handleClickEdit = () => {
+        console.log('handleClickEdit >> ', state)
+        setState((prevState) => ({
+            ...prevState,
+            edit: true,
+            msg: '수정한 정보로 저장 하시겠습니까?',
+            openDialog: true,
+        }))
+        // formik.handleSubmit()
+    }
+
+    const handleClickDelete = () => {
+        console.log('handleClickDelete >> ', state)
+        setState((prevState) => ({
+            ...prevState,
+            delete: true,
+            msg: '삭제하면 복구가 불가능합니다. 삭제 하시겠습니까?',
+            openDialog: true,
+        }))
+        // formik.handleReset()
+        // popupActions.showPopup(
+        //     'confirm',
+        //     `회원 탈퇴시 계정은 즉시 삭제됩니다. 회원 탈퇴 하시겠습니까?`,
+        //     () => {
+        //         // TODO: 회원탈퇴 API 호출
+        //         popupActions.showPopup('alert', `회원 탈퇴가 완료 되었습니다.`)
+        //         navigate('/login')
+        //     },
+        // )
+    }
+
+    const handleFormikSubmit = () => {
         formik.handleSubmit()
+        setState({ save: false, edit: false, delete: false, msg: '', openDialog: false })
     }
 
-    const handleWithdraw = () => {
-        console.log('handleWithdraw')
-
-        formik.handleReset()
-        popupActions.showPopup(
-            'confirm',
-            `회원 탈퇴시 계정은 즉시 삭제됩니다. 회원 탈퇴 하시겠습니까?`,
-            () => {
-                // TODO: 회원탈퇴 API 호출
-                popupActions.showPopup('alert', `회원 탈퇴가 완료 되었습니다.`)
-                navigate('/login')
-            },
-        )
-    }
+    console.log(state)
 
     return (
         <Box>
@@ -271,7 +302,7 @@ const CreateForm = () => {
                         </TableHead>
                     </Table>
 
-                    <Table sx={style.table_set_option}>
+                    {/* <Table sx={style.table_set_option}>
                         <TableHead>
                             <TableRow>
                                 <TableCell>{`기지국측위`}</TableCell>
@@ -460,7 +491,7 @@ const CreateForm = () => {
                                 <TableCell colSpan={2}></TableCell>
                             </TableRow>
                         </TableHead>
-                    </Table>
+                    </Table> */}
 
                     {/* 하단 버튼 */}
                     <Box align={'right'}>
@@ -471,19 +502,27 @@ const CreateForm = () => {
                             >
                                 {`취소`}
                             </Button>
-                            <Button type="submit" onClick={handleEdit} sx={style.bluelineButton}>
+                            <Button onClick={handleClickSave} sx={style.bluelineButton}>
                                 {`등록`}
                             </Button>
-                            <Button type="submit" onClick={handleEdit} sx={style.bluelineButton}>
+                            <Button onClick={handleClickEdit} sx={style.bluelineButton}>
                                 {`수정`}
                             </Button>
-                            <Button onClick={handleWithdraw} sx={style.lineButton}>
+                            <Button onClick={handleClickDelete} sx={style.lineButton}>
                                 {`삭제`}
                             </Button>
                         </Stack>
                     </Box>
                 </Box>
             </form>
+            {state.openDialog && (
+                <MuiDialog
+                    isOpen={state.openDialog}
+                    content={state.msg}
+                    onCancel={() => setOpenDialog(false)}
+                    onConfirm={handleFormikSubmit}
+                />
+            )}
         </Box>
     )
 }

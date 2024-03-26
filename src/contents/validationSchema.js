@@ -155,16 +155,16 @@ export const registerServiceSchema = yup.object({
         .string()
         .matches(/^\d+$/, HELPER_TEXT.IntegerRequired)
         .required(HELPER_TEXT.respTimeRequired),
-    cellCheck: yup.string().required(HELPER_TEXT.cellCheckRequired),
-    gpsCheck: yup.string().required(HELPER_TEXT.gpsCheckRequired),
-    lppeCheck: yup.string().required(HELPER_TEXT.lppeCheckRequired),
-    lppRespTime: yup
-        .string()
-        .matches(/^\d+$/, HELPER_TEXT.IntegerRequired)
-        .required(HELPER_TEXT.lppRespTimeRequired),
-    ksaCheck: yup.string().required(HELPER_TEXT.ksaCheckRequired),
-    version: yup.string().required(HELPER_TEXT.versionRequired),
-    collectionCount: yup.string().matches(/^[1-9]|10$/, `1부터 10까지의 `+ HELPER_TEXT.IntegerRequired).required(HELPER_TEXT.collectionCountRequired),
+    // cellCheck: yup.string().required(HELPER_TEXT.cellCheckRequired),
+    // gpsCheck: yup.string().required(HELPER_TEXT.gpsCheckRequired),
+    // lppeCheck: yup.string().required(HELPER_TEXT.lppeCheckRequired),
+    // lppRespTime: yup
+    //     .string()
+    //     .matches(/^\d+$/, HELPER_TEXT.IntegerRequired)
+    //     .required(HELPER_TEXT.lppRespTimeRequired),
+    // ksaCheck: yup.string().required(HELPER_TEXT.ksaCheckRequired),
+    // version: yup.string().required(HELPER_TEXT.versionRequired),
+    // collectionCount: yup.string().matches(/^[1-9]|10$/, `1부터 10까지의 `+ HELPER_TEXT.IntegerRequired).required(HELPER_TEXT.collectionCountRequired),
 })
 
 export const otpSchema = yup.object({

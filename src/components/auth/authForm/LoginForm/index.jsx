@@ -215,7 +215,7 @@ const LoginForm = () => {
                     >
                         {`로그인`}
                     </LoadingButton>
-                    <Box
+                    {/* <Box
                         sx={{
                             display: 'flex',
                             justifyContent: 'space-between',
@@ -256,7 +256,7 @@ const LoginForm = () => {
                         >
                             {`회원가입`}
                         </Button>
-                    </Box>
+                    </Box> */}
                 </Stack>
             </form>
             <Typography color={'text.light'} sx={{ mt: 4, fontSize: '11px', fontStyle: 'italic' }}>

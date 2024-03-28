@@ -1,16 +1,21 @@
 import { API_PATH } from '#/contents/api'
 import { getAPI, postAPI } from '../axios'
 
-const getServiceLists = (data) => {
+const getServices = (data) => {
     return getAPI({ endPoint: API_PATH.system.service_list, data })
 }
 
-const postRegisterService = (data) => {
+const getServiceCode = (data) => {
+    return getAPI({ endPoint: API_PATH.system.service_code, data })
+}
+
+const postServiceRegist = (data) => {
     console.log(data)
-    return postAPI({ endPoint: API_PATH.system.register, data })
+    return postAPI({ endPoint: API_PATH.system.service_regist, data })
 }
 
 export default {
-    getServiceLists, // 서비스 목록
-    postRegisterService, // 서비스 등록
+    getServices, // 서비스 목록
+    postServiceRegist, // 서비스 등록
+    getServiceCode, // 서비스코드 검색
 }

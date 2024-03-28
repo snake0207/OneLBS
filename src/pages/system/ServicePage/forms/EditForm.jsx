@@ -14,12 +14,13 @@ import {
 } from '@mui/material'
 import CreateIcon from '@mui/icons-material/Create'
 
-import TextInput from '#/components/common/input/TextInput'
 import TitleBar from '#/components/common/menu/TitleBar'
+import TextInput from '#/components/common/input/TextInput'
 import Select from '#/components/common/Select'
+import { usePostServiceRegist } from '#/hooks/queries/system'
+import { registServiceSchema } from '#/contents/validationSchema'
 import MuiDialog from '#/components/common/popup/MuiDialog'
 import { MuiMainButton } from '#/components/common/button/MuiButton'
-import CheckBox from '#/components/common/input/CheckBox'
 import {
     getServiceTypeList,
     getAccuracys,
@@ -27,13 +28,12 @@ import {
     getPlanes,
     getModes,
 } from '#/common/libs/service'
-import { usePostServiceRegist } from '#/hooks/queries/system'
-import { registServiceSchema } from '#/contents/validationSchema'
-import SearchPopup from './SearchPopup'
 
 import style from './style.module'
+import CheckBox from '#/components/common/input/CheckBox'
+import MuiAlert from '#/components/common/popup/MuiAlert'
 
-const CreateForm = () => {
+const EditForm = () => {
     const {
         state: { row },
     } = useLocation()
@@ -44,52 +44,53 @@ const CreateForm = () => {
     const [posMethod, setPosMethod] = useState(0)
     const [plane, setPlane] = useState(0)
     const [mode, setMode] = useState(0)
-    const [isOpenServicePopup, setIsOpenServicePopup] = useState(false)
     const [apiSuccess, setApiSuccess] = useState('')
-    const [fieldCheck, setFieldCheck] = useState({
-        userCheck: false,
-        authCheck: false,
-        cellCheck: false,
-        gpsCheck: false,
-        lppeCheck: false,
-        ksaCheck: false,
-        ksaCellCheck: false,
-        ksaGnssCheck: false,
-        ksaWifiCheck: false,
-        ksaAtmosphericCheck: false,
-        ksaFlpCheck: false,
-    })
     const [state, setState] = useState({
-        msg: '입력한 정보로 저장 하시겠습니까?',
+        edit: false,
+        delete: false,
+        msg: '',
         openDialog: false,
+    })
+    const [fieldCheck, setFieldCheck] = useState({
+        userCheck: row?.userCheck,
+        authCheck: row?.authCheck,
+        cellCheck: row?.cellCheck,
+        gpsCheck: row?.gpsCheck,
+        lppeCheck: row?.lppeCheck,
+        ksaCheck: row?.ksaCheck,
+        ksaCellCheck: row?.ksaCellCheck,
+        ksaGnssCheck: row?.ksaGnssCheck,
+        ksaWifiCheck: row?.ksaWifiCheck,
+        ksaAtmosphericCheck: row?.ksaAtmosphericCheck,
+        ksaFlpCheck: row?.ksaFlpCheck,
     })
 
     const formik = useFormik({
         initialValues: {
-            serviceName: '',
-            serviceCode: '',
-            cpName: '',
-            serviceProvider: '',
-            userCheck: false,
-            authCheck: false,
-            serviceType: 0,
-            accuracy: 0,
-            respTime: '15',
-            cellCheck: 'N',
-            posMethod: 0,
-            gpsCheck: 'N',
-            plane: 0,
-            mode: 0,
-            lppeCheck: 'N',
-            lppRespTime: '',
-            ksaCheck: 'N',
-            version: '',
-            ksaCellCheck: 'N',
-            ksaGnssCheck: 'N',
-            ksaWifiCheck: 'N',
-            ksaAtmosphericCheck: 'N',
-            ksaFlpCheck: 'N',
-            collectionCount: '',
+            serviceName: row?.serviceName,
+            serviceCode: row?.serviceCode,
+            cpName: row?.cpName,
+            serviceProvider: row?.serviceProvider,
+            userCheck: row?.userCheck,
+            authCheck: row?.authCheck,
+            serviceType: row?.serviceType,
+            accuracy: row?.accuracy,
+            respTime: row?.respTime,
+            cellCheck: row?.cellCheck,
+            posMethod: row?.posMethod,
+            gpsCheck: row?.gpsCheck,
+            plane: row?.plane,
+            mode: row?.mode,
+            lppeCheck: row?.lppeCheck,
+            lppRespTime: row?.lppRespTime,
+            ksaCheck: row?.ksaCheck,
+            version: row?.version,
+            ksaCellCheck: row?.ksaCellCheck,
+            ksaGnssCheck: row?.ksaGnssCheck,
+            ksaWifiCheck: row?.ksaWifiCheck,
+            ksaAtmosphericCheck: row?.ksaAtmosphericCheck,
+            ksaFlpCheck: row?.ksaFlpCheck,
+            collectionCount: row?.collectionCount,
         },
         validationSchema: registServiceSchema,
         onSubmit: (form) => {
@@ -105,10 +106,28 @@ const CreateForm = () => {
                 },
             )
         },
+        onReset: (values) => {
+            console.log('onReset', values)
+        },
     })
 
-    const handleClickSave = () => {
-        setState((prevState) => ({ ...prevState, openDialog: true }))
+    const handleClickEdit = () => {
+        setState((prevState) => ({
+            ...prevState,
+            edit: true,
+            msg: '수정한 정보로 저장 하시겠습니까?',
+            openDialog: true,
+        }))
+    }
+
+    const handleClickDelete = () => {
+        console.log('handleClickDelete >> ', state)
+        setState((prevState) => ({
+            ...prevState,
+            delete: true,
+            msg: '삭제하면 복구가 불가능합니다. 삭제 하시겠습니까?',
+            openDialog: true,
+        }))
     }
 
     const handleFormikSubmit = () => {
@@ -116,18 +135,14 @@ const CreateForm = () => {
         handleStateReset()
     }
     const handleStateReset = () => {
-        setState((prevState) => ({ ...prevState, openDialog: false }))
-    }
-
-    const handleOpenServicePopup = () => {
-        setIsOpenServicePopup(true)
+        setState({ edit: false, delete: false, msg: '', openDialog: false })
     }
 
     console.log('location state.row : ', row)
 
     return (
         <Box>
-            <TitleBar title={`서비스 등록`} />
+            <TitleBar title={`서비스 수정`} />
             <form onSubmit={formik.handleSubmit} style={{ width: '100%' }}>
                 <Box sx={style.contentBox}>
                     <Box display="flex" alignItems="center" mb={2}>
@@ -156,11 +171,7 @@ const CreateForm = () => {
                                 </TableCell>
                                 <TableCell>{`서비스코드`}</TableCell>
                                 <TableCell component="td">
-                                    <TextInput
-                                        name="serviceCode"
-                                        formik={formik}
-                                        editClick={handleOpenServicePopup}
-                                    />
+                                    <TextInput name="serviceCode" formik={formik} />
                                 </TableCell>
                             </TableRow>
                             <TableRow>
@@ -184,7 +195,7 @@ const CreateForm = () => {
                                                 userCheck: e.target.checked,
                                             })
                                         }
-                                        label={fieldCheck.userCheck ? '적용' : '미적용'}
+                                        label=""
                                     />
                                 </TableCell>
                                 <TableCell>{`상호인증확인`}</TableCell>
@@ -197,7 +208,7 @@ const CreateForm = () => {
                                                 authCheck: e.target.checked,
                                             })
                                         }
-                                        label={fieldCheck.authCheck ? '적용' : '미적용'}
+                                        label=""
                                     />
                                 </TableCell>
                             </TableRow>
@@ -284,7 +295,7 @@ const CreateForm = () => {
                                                 cellCheck: e.target.checked,
                                             })
                                         }
-                                        label={fieldCheck.cellCheck ? '적용' : '미적용'}
+                                        label=""
                                     />
                                 </TableCell>
                                 <TableCell>{`측위방법`}</TableCell>
@@ -316,7 +327,7 @@ const CreateForm = () => {
                                                 gpsCheck: e.target.checked,
                                             })
                                         }
-                                        label={fieldCheck.gpsCheck ? '적용' : '미적용'}
+                                        label=""
                                     />
                                 </TableCell>
                                 <TableCell>{`Plane`}</TableCell>
@@ -338,7 +349,7 @@ const CreateForm = () => {
                             </TableRow>
                             <TableRow>
                                 <TableCell>{`Mode`}</TableCell>
-                                <TableCell>
+                                <TableCell component="td">
                                     <Select
                                         name="mode"
                                         value={mode}
@@ -354,7 +365,7 @@ const CreateForm = () => {
                                     />
                                 </TableCell>
                                 <TableCell>{`LPPe 사용`}</TableCell>
-                                <TableCell>
+                                <TableCell component="td">
                                     <CheckBox
                                         checked={fieldCheck.lppeCheck}
                                         onChange={(e) =>
@@ -363,13 +374,13 @@ const CreateForm = () => {
                                                 lppeCheck: e.target.checked,
                                             })
                                         }
-                                        label={fieldCheck.lppeCheck ? '적용' : '미적용'}
+                                        label=""
                                     />
                                 </TableCell>
                             </TableRow>
                             <TableRow>
                                 <TableCell>{`LPP 희망응답시간(초)`}</TableCell>
-                                <TableCell>
+                                <TableCell component="td">
                                     <TextInput name="lppRespTime" formik={formik} />
                                 </TableCell>
                                 <TableCell colSpan={2}></TableCell>
@@ -377,7 +388,7 @@ const CreateForm = () => {
                             <TableRow>
                                 <TableCell rowSpan={3}>{`KSA`}</TableCell>
                                 <TableCell>{`사용`}</TableCell>
-                                <TableCell>
+                                <TableCell component="td">
                                     <CheckBox
                                         checked={fieldCheck.ksaCheck}
                                         onChange={(e) =>
@@ -386,17 +397,17 @@ const CreateForm = () => {
                                                 ksaCheck: e.target.checked,
                                             })
                                         }
-                                        label={fieldCheck.ksaCheck ? '적용' : '미적용'}
+                                        label=""
                                     />
                                 </TableCell>
                                 <TableCell>{`버전`}</TableCell>
-                                <TableCell>
+                                <TableCell component="td">
                                     <TextInput name="version" formik={formik} />
                                 </TableCell>
                             </TableRow>
                             <TableRow>
                                 <TableCell>{`수집 정보`}</TableCell>
-                                <TableCell colSpan={3}>
+                                <TableCell colSpan={3} component="td">
                                     <FormGroup row>
                                         <CheckBox
                                             checked={fieldCheck.ksaCellCheck}
@@ -453,7 +464,7 @@ const CreateForm = () => {
                             </TableRow>
                             <TableRow>
                                 <TableCell>{`수집 횟수`}</TableCell>
-                                <TableCell>
+                                <TableCell component="td">
                                     <TextInput name="collectionCount" formik={formik} />
                                 </TableCell>
                                 <TableCell colSpan={2}></TableCell>
@@ -466,15 +477,21 @@ const CreateForm = () => {
                         <Stack spacing={2} direction="row" sx={{ justifyContent: 'flex-end' }}>
                             <MuiMainButton
                                 disabled={isPending}
-                                name="list"
+                                name="cancel"
                                 title="취소"
                                 onClick={() => navigate('/system/service/list')}
                             />
                             <MuiMainButton
                                 disabled={isPending}
-                                name="create"
-                                title="저장"
-                                onClick={handleClickSave}
+                                name="edit"
+                                title="수정"
+                                onClick={handleClickEdit}
+                            />
+                            <MuiMainButton
+                                disabled={isPending}
+                                name="delete"
+                                title="삭제"
+                                onClick={handleClickDelete}
                             />
                         </Stack>
                     </Box>
@@ -495,19 +512,8 @@ const CreateForm = () => {
                     callback={() => setApiSuccess(false)}
                 />
             )}
-            {isOpenServicePopup && (
-                <SearchPopup
-                    isOpen={isOpenServicePopup}
-                    title={`서비스 코드 중복 체크`}
-                    onCancel={() => setIsOpenServicePopup(false)}
-                    onConfirm={(param) => {
-                        setIsOpenServicePopup(false)
-                        formik.setFieldValue('serviceCode', param)
-                    }}
-                />
-            )}
         </Box>
     )
 }
 
-export default CreateForm
+export default EditForm

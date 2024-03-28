@@ -5,7 +5,7 @@ function CheckBox({ checked, onChange, label = '', ...props }) {
     return (
         <FormControlLabel
             control={<CheckboxBase checked={checked} onChange={onChange} {...props} />}
-            label={label}
+            label={<span style={{ fontSize: '14px' }}>{label}</span>}
         />
     )
 }

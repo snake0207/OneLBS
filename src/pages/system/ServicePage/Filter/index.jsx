@@ -1,16 +1,17 @@
-import { Box, Button, Table, TableCell, TableHead, TableRow } from '@mui/material'
-import TextInput from '#/components/common/input/TextInput'
 import { useFormik } from 'formik'
+import { Box, Button, Table, TableCell, TableHead, TableRow } from '@mui/material'
+
 import Select from '#/components/common/Select'
+import TextInput from '#/components/common/input/TextInput'
+import { MuiSubButton } from '#/components/common/button/MuiButton'
 
 import style from './style.module'
+import { getServiceTypeList } from '#/common/libs/service'
 
 function SearchFilter({ onSearch }) {
-    const getServiceTypeList = () => [
-        { key: 0, value: 0, label: `전체` },
-        { key: 1, value: 1, label: `긴급` },
-        { key: 2, value: 2, label: `일반` },
-        { key: 3, value: 3, label: `예외` },
+    const unionServiceTypeList = () => [
+        { key: 9, value: 9, label: `전체` },
+        ...getServiceTypeList()
     ]
 
     const formik = useFormik({
@@ -50,7 +51,7 @@ function SearchFilter({ onSearch }) {
                             <Select
                                 name={'serviceType'}
                                 formik={formik}
-                                items={getServiceTypeList()}
+                                items={unionServiceTypeList()}
                                 sx={{
                                     width: '100%',
                                     height: 40,
@@ -60,14 +61,19 @@ function SearchFilter({ onSearch }) {
                             />
                         </TableCell>
                         <TableCell align="right">
-                            <Button
+                            {/* <Button
                                 variant="contained"
                                 color="primary"
                                 onClick={formik.handleSubmit}
                                 sx={style.searchButton}
                             >
                                 {`검색`}
-                            </Button>
+                            </Button> */}
+                            <MuiSubButton
+                                name="search"
+                                title="검색"
+                                onClick={formik.handleSubmit}
+                            />
                         </TableCell>
                     </TableRow>
                 </TableHead>

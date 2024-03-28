@@ -37,6 +37,7 @@ export const API_PATH = {
     },
     system: {
         service_list: '/service-list',
-        register: '/service-register',
+        service_regist: '/service-register',
+        service_code: '/service-code',
     },
 }

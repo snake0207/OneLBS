@@ -6,38 +6,25 @@ import Container from '@mui/material/Container'
 //import FullscreenIcon from '@mui/icons-material/Fullscreen'
 import useLayoutStore from '#/store/useLayoutStore'
 import { useGetAskUserInfo, usePostLogout } from '#/hooks/queries/auth'
-import { Icon, Tooltip } from '@mui/material'
 
-import t from '#/common/libs/trans'
 import Dropdown from '#/components/common/button/Dropdown'
-import useFullScreen from '#/hooks/useFullScreen'
-import Settings from '#/components/layout/Settings'
-import Notify from '#/components/layout/Notify'
-
-import notifications from '#/mock/data/notifications.json'
 import { useNavigate } from 'react-router-dom'
-import { BrowserView, MobileView } from 'react-device-detect'
 
 import MenuIcon from '#/assets/menuIcon.svg'
 import MenuIconDark from '#/assets/menuIconDark.svg'
-import UserIcon from '#/assets/userIcon.svg'
-import UserIconDark from '#/assets/userIconDark.svg'
-import FullscreenIcon from '#/assets/fullscreenIcon.svg'
-import FullscreenIconDark from '#/assets/fullscreenIconDark.svg'
 
 import style from './style.module'
 
 const userMenus = [
-    { key: 'profile', label: t('profile'), value: '/mypage/profile' },
-    { key: 'logout', label: t('logout'), value: '/login' },
+    { key: 'profile', label: `내 정보`, value: '/mypage/profile' },
+    { key: 'logout', label: `로그 아웃`, value: '/login' },
 ]
 
 function Header({ toggleDrawer }) {
     const { themeMode } = useLayoutStore()
     const { mutate } = usePostLogout()
-    const [, toggleFullScreen] = useFullScreen()
     const navigate = useNavigate()
-    const { data } = useGetAskUserInfo()
+    // const { data } = useGetAskUserInfo()
     const handleSelectUserMenu = (item) => {
         console.log(item)
 
@@ -79,27 +66,6 @@ function Header({ toggleDrawer }) {
                             {'Jone Doe'}
                             {/* {data && data.userName} */}
                         </Dropdown>
-
-                        {/* <Tooltip title="전체 화면">
-                            <IconButton sx={{ p: 0 }} onClick={() => toggleFullScreen()}>
-                                <Icon
-                                    sx={{
-                                        display: 'flex',
-                                        width: '17px',
-                                        height: '16px',
-                                        mr: '16px',
-                                        mr: '16px',
-                                    }}
-                                >
-                                    {themeMode === 'light' ? (
-                                        <img src={FullscreenIcon} />
-                                    ) : (
-                                        <img src={FullscreenIconDark} />
-                                    )}
-                                </Icon>
-                            </IconButton>
-                        </Tooltip> */}
-                        {/* <Settings /> */}
                     </Box>
                 </Toolbar>
             </Container>

@@ -86,7 +86,7 @@ export const usePostDeferChange = () => {
 export const useGetAskUserInfo = () => {
     const { data } = useQuery({
         queryFn: auth.getAskUserInfo,
-        queryKey: [QUERY_KEYS.auth.getAskUserInfo],
+        queryKey: ['get-ask-user-info'],
         select: (data) => data.data.data,
     })
 
@@ -94,6 +94,7 @@ export const useGetAskUserInfo = () => {
 }
 
 export const useGetCaptcha = (queryParams = {}, options) => {
+    console.log('queryParams : ', queryParams)
     return useQuery({
         queryKey: ['get-captcha', queryParams],
         queryFn: () => auth.getCaptcha(queryParams),
@@ -102,6 +103,7 @@ export const useGetCaptcha = (queryParams = {}, options) => {
 }
 
 export const useGetAuthCode = (queryParams = {}, options) => {
+    console.log('queryParams : ', queryParams)
     return useQuery({
         queryKey: ['get-authcode', queryParams],
         queryFn: () => auth.getAuthCode(queryParams.reqData),

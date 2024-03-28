@@ -83,7 +83,7 @@
                     "name": "서비스 관리",
                     "menuOrder": 41,
                     "rootMenuId": 400,
-                    "menuUrl": "/system/service",
+                    "menuUrl": "/system/service/list",
                     "label": "서비스 관리"
                 },
                 {

@@ -12,7 +12,7 @@ import { extractChangedObjectOfChangedJson } from '#/common/libs/objectCheck.js'
  * @param {boolean} IsDisabled input disabled 여부
  * @returns ReactNode
  */
-const TextInput = ({ name, formik, placeholder = null, inputRule = null, IsDisabled = false }) => {
+const TextInput = ({ name, formik, placeholder = null, inputRule = null, IsDisabled = false, editClick = null }) => {
     // formik 중첩구조 사용 시 value parsing 위한 함수
     const parseNameByPath = (obj, path) =>
         path.split('.').reduce((acc, current) => (acc ? acc[current] : ''), obj)
@@ -33,6 +33,7 @@ const TextInput = ({ name, formik, placeholder = null, inputRule = null, IsDisab
                     value={parseNameByPath(formik.values, name)}
                     onChange={formik.handleChange}
                     onBlur={formik.handleBlur}
+                    onClick={editClick}
                     error={
                         !!parseNameByPath(formik.touched, name) &&
                         !!parseNameByPath(formik.errors, name)
@@ -45,7 +46,7 @@ const TextInput = ({ name, formik, placeholder = null, inputRule = null, IsDisab
                         !!parseNameByPath(formik.touched, name) &&
                         parseNameByPath(formik.errors, name)
                     }
-                    sx={{ backgroundColor: 'form.main', borderRadius: '4px' }}
+                    sx={{ backgroundColor: 'form.main', borderRadius: '4px', fontSize: '8px' }}
                     InputProps={{
                         endAdornment: (
                             <InputAdornment position="end">

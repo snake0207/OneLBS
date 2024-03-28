@@ -8,7 +8,7 @@ import {
     Paper,
     Typography,
 } from '@mui/material'
-import { useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import Draggable from 'react-draggable'
 
 const PaperComponent = (props) => {
@@ -28,7 +28,6 @@ const PaperComponent = (props) => {
 const MuiDialog = ({ isOpen, draggable = true, title, content, onCancel, onConfirm }) => {
     const [open, setOpen] = useState(isOpen)
 
-    console.log('MuiDialog :', open)
     const handleCancel = () => {
         setOpen(false)
         onCancel()
@@ -44,11 +43,11 @@ const MuiDialog = ({ isOpen, draggable = true, title, content, onCancel, onConfi
         >
             <DialogTitle
                 id="draggable-dialog-title"
-                children={<Typography>{title}</Typography>}
+                children={<Typography sx={{ fontWeight: '500' }}>{title}</Typography>}
                 style={{ cursor: draggable && 'move' }}
             />
             <DialogContent>
-                <DialogContentText>{content}</DialogContentText>
+                <DialogContentText sx={{ fontSize: '15px' }}>{content}</DialogContentText>
             </DialogContent>
             <DialogActions>
                 <Button size="large" color="error" onClick={handleCancel}>

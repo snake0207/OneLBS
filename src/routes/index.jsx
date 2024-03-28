@@ -37,7 +37,7 @@ import POISearchPage from '#/pages/search/POISearchPage'
 import MapSearchDetail from '#/pages/search/MapSearchDetail'
 import POISearchDetail from '#/pages/search/POISearchDetail'
 import DetailWithMobileLayout from '#/layouts/DetailWithMobileLayout/index.jsx'
-import { ServiceCreatePage, ServiceListPage } from '#/pages/system/ServicePage'
+import { ServiceEditPage, ServiceListPage, ServiceRegistPage } from '#/pages/system/ServicePage'
 
 const Routes = () => {
     return useRoutes([
@@ -69,8 +69,9 @@ const Routes = () => {
                         { path: '/approval/:type?', element: <ApprovalHistoryPage /> },
 
                         // Working page
-                        { path: '/system/service', element: <ServiceListPage /> },
-                        { path: '/system/service/create', element: <ServiceCreatePage /> },
+                        { path: '/system/service/list', element: <ServiceListPage /> },
+                        { path: '/system/service/regist', element: <ServiceRegistPage /> },
+                        { path: '/system/service/edit', element: <ServiceEditPage /> },
                         { path: '/system/model', element: <ApprovalHistoryPage /> },
                         { path: '/system/engine', element: <ApprovalHistoryPage /> },
                     ],

@@ -1,4 +1,5 @@
-import ServiceListPage from './PagePaper/ServiceList'
-import ServiceCreatePage from './PagePaper/ServiceCreate'
+import ServiceListPage from './pages/ServiceList'
+import ServiceRegistPage from './pages/ServiceRegist'
+import ServiceEditPage from './pages/ServiceEdit'
 
-export { ServiceListPage, ServiceCreatePage }
+export { ServiceListPage, ServiceRegistPage, ServiceEditPage }

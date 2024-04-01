@@ -32,6 +32,7 @@ import { registServiceSchema } from '#/contents/validationSchema'
 import SearchPopup from './SearchPopup'
 
 import style from './style.module'
+import MuiAlert from '#/components/common/popup/MuiAlert'
 
 const CreateForm = () => {
     const {
@@ -128,7 +129,7 @@ const CreateForm = () => {
     return (
         <Box>
             <TitleBar title={`서비스 등록`} />
-            <form onSubmit={formik.handleSubmit} style={{ width: '100%' }}>
+            <form style={{ width: '100%' }}>
                 <Box sx={style.contentBox}>
                     <Box display="flex" alignItems="center" mb={2}>
                         <CreateIcon />

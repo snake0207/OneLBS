@@ -50,6 +50,12 @@ const HELPER_TEXT = {
     ksaCheckRequired: 'KSA 사용여부를 체크해 주세요.',
     versionRequired: 'KSA 버전정보를 입력해 주세요.',
     collectionCountRequired: 'KSA 수집횟수 정보를 입력해 주세요.',
+
+    ueNameRequired: '모델명을 입력해 주세요.',
+    ueCodeRequired: '코드명을 입력해 주세요.',
+    remarksRequired: '비고란을 입력해 주세요.',
+    suplVersionRequired: 'SUPL Ver정보 입력해 주세요.',
+    ksaVersionRequired: 'KSA Ver정보 입력해 주세요.',
 }
 
 const REGEXP = {
@@ -151,25 +157,35 @@ export const registServiceSchema = yup.object({
     serviceCode: yup.string().required(HELPER_TEXT.serviceCodeRequired),
     cpName: yup.string().required(HELPER_TEXT.cpNameRequired),
     serviceProvider: yup.string().required(HELPER_TEXT.serviceProviderRequired),
-    userCheck: yup.string().required(HELPER_TEXT.userCheckRequired),
-    authCheck: yup.string().required(HELPER_TEXT.authCheckRequired),
+    // userCheck: yup.string().required(HELPER_TEXT.userCheckRequired),
+    // authCheck: yup.string().required(HELPER_TEXT.authCheckRequired),
     respTime: yup
         .string()
         .matches(/^\d+$/, HELPER_TEXT.IntegerRequired)
         .required(HELPER_TEXT.respTimeRequired),
-    cellCheck: yup.string().required(HELPER_TEXT.cellCheckRequired),
-    gpsCheck: yup.string().required(HELPER_TEXT.gpsCheckRequired),
-    lppeCheck: yup.string().required(HELPER_TEXT.lppeCheckRequired),
+    // cellCheck: yup.string().required(HELPER_TEXT.cellCheckRequired),
+    // gpsCheck: yup.string().required(HELPER_TEXT.gpsCheckRequired),
+    // lppeCheck: yup.string().required(HELPER_TEXT.lppeCheckRequired),
     lppRespTime: yup
         .string()
         .matches(/^\d+$/, HELPER_TEXT.IntegerRequired)
         .required(HELPER_TEXT.lppRespTimeRequired),
-    ksaCheck: yup.string().required(HELPER_TEXT.ksaCheckRequired),
+    // ksaCheck: yup.string().required(HELPER_TEXT.ksaCheckRequired),
     version: yup.string().required(HELPER_TEXT.versionRequired),
     collectionCount: yup
         .string()
         .matches(/^[1-9]$|10$/, `1부터 10까지의 ` + HELPER_TEXT.IntegerRequired)
         .required(HELPER_TEXT.collectionCountRequired),
+})
+
+// 단말모델 등록, 수정 화면에서 사용
+// ~src/pages/system/UeModelPage/forms
+export const registUESchema = yup.object({
+    ueName: yup.string().required(HELPER_TEXT.ueNameRequired),
+    ueCode: yup.array(yup.string()).required(HELPER_TEXT.ueCodeRequired),
+    remarks: yup.string().required(HELPER_TEXT.remarksRequired),
+    suplVersion: yup.string().required(HELPER_TEXT.suplVersionRequired),
+    verksaVersionsion: yup.string().required(HELPER_TEXT.ksaVersionRequired),
 })
 
 export const otpSchema = yup.object({

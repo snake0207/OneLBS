@@ -478,7 +478,7 @@ const EditForm = () => {
                             <MuiMainButton
                                 disabled={isPending}
                                 name="cancel"
-                                title="취소"
+                                title="목록"
                                 onClick={() => navigate('/system/service/list')}
                             />
                             <MuiMainButton

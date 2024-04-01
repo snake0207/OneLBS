@@ -63,6 +63,7 @@ const CustomPagination = ({ onPageChange, pageInit }) => {
  */
 const CustomDataGrid = ({
     loading,
+    checkboxSelection = false,
     rows,
     rowCount,
     columns,
@@ -76,6 +77,7 @@ const CustomDataGrid = ({
     return (
         <DataGrid
             loading={loading}
+            checkboxSelection={checkboxSelection}
             slots={{
                 toolbar: CustomToolbar,
                 pagination: CustomPagination,

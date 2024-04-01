@@ -9,10 +9,8 @@ import LayoutPage from '#/pages/DemoPage/LayoutPage'
 import ButtonPage from '#/pages/DemoPage/ButtonPage'
 import SelectPage from '#/pages/DemoPage/SelectPage'
 import MapPage from '#/pages/DemoPage/MapPage/index.jsx'
-import LoginDemoPage from '#/pages/DemoPage/LoginPage'
 import PopupPage from '#/pages/DemoPage/PopupPage'
 import InputPage from '#/pages/DemoPage/InputPage'
-import ModalPage from '#/pages/DemoPage/ModalPage'
 import UserManagementDemo from '#/pages/DemoPage/UserManagementDemo'
 import UserLoginHistoryDemo from '#/pages/DemoPage/UserManagementDemo/UserLoginHistoryDemo'
 import UserPermissionDemo from '#/pages/DemoPage/UserManagementDemo/UserPermissionDemo'
@@ -38,6 +36,7 @@ import MapSearchDetail from '#/pages/search/MapSearchDetail'
 import POISearchDetail from '#/pages/search/POISearchDetail'
 import DetailWithMobileLayout from '#/layouts/DetailWithMobileLayout/index.jsx'
 import { ServiceEditPage, ServiceListPage, ServiceRegistPage } from '#/pages/system/ServicePage'
+import { UeModelEditPage, UeModelListPage, UeModelRegistPage } from '#/pages/system/UeModelPage'
 
 const Routes = () => {
     return useRoutes([
@@ -72,7 +71,9 @@ const Routes = () => {
                         { path: '/system/service/list', element: <ServiceListPage /> },
                         { path: '/system/service/regist', element: <ServiceRegistPage /> },
                         { path: '/system/service/edit', element: <ServiceEditPage /> },
-                        { path: '/system/model', element: <ApprovalHistoryPage /> },
+                        { path: '/system/ue/list', element: <UeModelListPage /> },
+                        { path: '/system/ue/regist', element: <UeModelRegistPage /> },
+                        { path: '/system/ue/edit', element: <UeModelEditPage /> },
                         { path: '/system/engine', element: <ApprovalHistoryPage /> },
                     ],
                 },
@@ -108,8 +109,6 @@ const Routes = () => {
                 { path: '/components/buttons', element: <ButtonPage /> },
                 { path: '/components/select', element: <SelectPage /> },
                 { path: '/components/maps', element: <MapPage /> },
-                { path: '/components/logins', element: <LoginDemoPage /> },
-                { path: '/components/modals', element: <ModalPage /> },
                 { path: '/components/popup', element: <PopupPage /> },
                 { path: '/components/tables', element: <TablePage /> },
                 { path: '/components/users', element: <UserManagementDemo /> },

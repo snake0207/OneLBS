@@ -1,128 +1,184 @@
 {
-  "posts": [
-    {
-      "id": "1",
-      "title": "a title",
-      "views": 100
+    "posts": [
+        {
+            "id": "1",
+            "title": "a title",
+            "views": 100
+        },
+        {
+            "id": "2",
+            "title": "another title",
+            "views": 200
+        },
+        {
+            "id": "34c8"
+        }
+    ],
+    "comments": [
+        {
+            "id": "1",
+            "text": "a comment about post 1",
+            "postId": "1"
+        },
+        {
+            "id": "2",
+            "text": "another comment about post 1",
+            "postId": "1"
+        }
+    ],
+    "login": [
+        {
+            "userid": "acro0720",
+            "password": "123456",
+            "fields": {
+                "twoFactorAuth": "N",
+                "twoFactorSecret": "",
+                "secretKey": "5678n678shdfs567837^&*(",
+                "qrCodeUrl": "naver.com"
+            },
+            "id": "54d4"
+        }
+    ],
+    "profile": {
+        "name": "typicode"
     },
-    {
-      "id": "2",
-      "title": "another title",
-      "views": 200
+    "captcha": {
+        "data": "captcha data example..."
     },
-    {
-      "id": "34c8"
+    "authcode": {
+        "userid": "acro0720",
+        "code": "239710"
+    },
+    "service-regist": [
+        {
+            "result": "0000",
+            "id": "cfa2"
+        },
+        {
+            "id": "28c9"
+        },
+        {
+            "id": "4a6b",
+            "serviceName": "Shanshan Airport",
+            "serviceCode": "SXJ",
+            "cpName": "Buzzdog",
+            "serviceProvider": "businessweek.com",
+            "userCheck": true,
+            "authCheck": false,
+            "serviceType": 0,
+            "accuracy": 2,
+            "respTime": 20,
+            "cellCheck": true,
+            "posMethod": 1,
+            "gpsCheck": false,
+            "plane": 0,
+            "mode": 0,
+            "lppeCheck": true,
+            "lppRespTime": 13,
+            "ksaCheck": true,
+            "version": "V1.7",
+            "ksaCellCheck": false,
+            "ksaGnssCheck": false,
+            "ksaWifiCheck": true,
+            "ksaAtmosphericCheck": false,
+            "ksaFlpCheck": true,
+            "collectionCount": "33"
+        }
+    ],
+    "service-code": {
+        "serviceCode": "acro",
+        "result": "0000",
+        "id": "5be7"
+    },
+    "service-list": {
+        "count": 150,
+        "lists": [
+            {
+                "id": 1,
+                "serviceName": "Shanshan Airport",
+                "serviceCode": "SXJ",
+                "cpName": "Buzzdog",
+                "serviceProvider": "businessweek.com",
+                "status": 1,
+                "register_date": "2023-04-01",
+                "change_date": "2023-11-06",
+                "accuracy": 2,
+                "respTime": 20,
+                "serviceType": 0,
+                "userCheck": true,
+                "authCheck": false,
+                "cellCheck": true,
+                "posMethod": 1,
+                "gpsCheck": false,
+                "plane": 0,
+                "mode": 0,
+                "lppeCheck": true,
+                "lppRespTime": 13,
+                "ksaCheck": true,
+                "version": "V1.7",
+                "ksaCellCheck": false,
+                "ksaGnssCheck": false,
+                "ksaWifiCheck": true,
+                "ksaAtmosphericCheck": false,
+                "ksaFlpCheck": true,
+                "collectionCount": 4
+            }
+        ]
+    },
+    "ue-regist": [
+        {
+            "id": "628b",
+            "lppEcidCheck": true,
+            "lppaEcidCheck": false,
+            "msaCheck": true,
+            "msbCheck": false,
+            "cpCheck": true,
+            "lppeCheck": false,
+            "suplVersion": "1",
+            "tlsCheck": true,
+            "emergencyCheck": false,
+            "ksaVersion": "4"
+        }
+    ],
+    "ue-list": {
+        "count": 73,
+        "lists": [
+            {
+                "id": 1,
+                "ueName": "SM700 series",
+                "ueCode": ["SM-701K", "SM-799S", "SB-200M"],
+                "remarks": "사업팀 요청",
+                "lppEcidCheck": true,
+                "lppaEcidCheck": false,
+                "msaCheck": true,
+                "msbCheck": false,
+                "cpCheck": true,
+                "lppeCheck": false,
+                "suplVersion": "2.3.9",
+                "tlsCheck": true,
+                "emergencyCheck": false,
+                "ksaVersion": "5.1.0",
+                "register_date": "2023-04-01",
+                "change_date": "2023-11-06"
+            },
+            {
+                "id": 2,
+                "ueName": "AP301",
+                "ueCode": ["AP-701K", "AP-799S", "AP-200M"],
+                "remarks": "2024.01.03 필드테스트",
+                "lppEcidCheck": true,
+                "lppaEcidCheck": false,
+                "msaCheck": true,
+                "msbCheck": false,
+                "cpCheck": true,
+                "lppeCheck": false,
+                "suplVersion": "1.1.0",
+                "tlsCheck": true,
+                "emergencyCheck": true,
+                "ksaVersion": "2.3.1",
+                "register_date": "2024-02-01",
+                "change_date": "2024-03-06"
+            }
+        ]
     }
-  ],
-  "comments": [
-    {
-      "id": "1",
-      "text": "a comment about post 1",
-      "postId": "1"
-    },
-    {
-      "id": "2",
-      "text": "another comment about post 1",
-      "postId": "1"
-    }
-  ],
-  "login": [
-    {
-      "userid": "acro0720",
-      "password": "123456",
-      "fields": {
-        "twoFactorAuth": "N",
-        "twoFactorSecret": "",
-        "secretKey": "5678n678shdfs567837^&*(",
-        "qrCodeUrl": "naver.com"
-      },
-      "id": "54d4"
-    }
-  ],
-  "profile": {
-    "name": "typicode"
-  },
-  "captcha": {
-    "data": "captcha data example..."
-  },
-  "authcode": {
-    "userid": "acro0720",
-    "code": "88931990"
-  },
-  "service-register": [
-    {
-      "result": "0000",
-      "id": "cfa2"
-    },
-    {
-      "id": "28c9"
-    },
-    {
-      "id": "4a6b",
-      "serviceName": "Shanshan Airport",
-      "serviceCode": "SXJ",
-      "cpName": "Buzzdog",
-      "serviceProvider": "businessweek.com",
-      "userCheck": true,
-      "authCheck": false,
-      "serviceType": 0,
-      "accuracy": 2,
-      "respTime": 20,
-      "cellCheck": true,
-      "posMethod": 1,
-      "gpsCheck": false,
-      "plane": 0,
-      "mode": 0,
-      "lppeCheck": true,
-      "lppRespTime": 13,
-      "ksaCheck": true,
-      "version": "V1.7",
-      "ksaCellCheck": false,
-      "ksaGnssCheck": false,
-      "ksaWifiCheck": true,
-      "ksaAtmosphericCheck": false,
-      "ksaFlpCheck": true,
-      "collectionCount": "33"
-    }
-  ],
-  "service-code": {
-    "serviceCode": "acro",
-    "result": "0000",
-    "id": "5be7"
-  },
-  "service-list": {
-    "count": 150,
-    "lists": [
-      {
-        "id": 1,
-        "serviceName": "Shanshan Airport",
-        "serviceCode": "SXJ",
-        "cpName": "Buzzdog",
-        "serviceProvider": "businessweek.com",
-        "status": 1,
-        "register_date": "2023-04-01",
-        "change_date": "2023-11-06",
-        "accuracy": 2,
-        "respTime": 20,
-        "serviceType": 0,
-        "userCheck": true,
-        "authCheck": false,
-        "cellCheck": true,
-        "posMethod": 1,
-        "gpsCheck": false,
-        "plane": 0,
-        "mode": 0,
-        "lppeCheck": true,
-        "lppRespTime": 13,
-        "ksaCheck": true,
-        "version": "V1.7",
-        "ksaCellCheck": false,
-        "ksaGnssCheck": false,
-        "ksaWifiCheck": true,
-        "ksaAtmosphericCheck": false,
-        "ksaFlpCheck": true,
-        "collectionCount": 4
-      }
-    ]
-  }
 }

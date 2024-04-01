@@ -12,6 +12,7 @@ export const API_PATH = {
         password_change: 'user-auth/api/v1/user/password/change',
         defer_change: 'user-auth/api/v1/user/password/defer-change',
         ask_user_info: '/user-auth/api/v1/user/ask-user-info',
+        // add
         captcha: '/captcha',
         authcode: '/authcode',
     },
@@ -37,7 +38,10 @@ export const API_PATH = {
     },
     system: {
         service_list: '/service-list',
-        service_regist: '/service-register',
+        service_regist: '/service-regist',
         service_code: '/service-code',
+        ue_list: '/ue-list',
+        ue_delete: '/ue-delete',
+        ue_regist: '/ue-regist',
     },
 }

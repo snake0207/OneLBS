@@ -94,7 +94,7 @@ export const useGetAskUserInfo = () => {
 }
 
 export const useGetCaptcha = (queryParams = {}, options) => {
-    console.log('queryParams : ', queryParams)
+    console.log('useGetCaptcha queryParams : ', queryParams)
     return useQuery({
         queryKey: ['get-captcha', queryParams],
         queryFn: () => auth.getCaptcha(queryParams),
@@ -103,7 +103,7 @@ export const useGetCaptcha = (queryParams = {}, options) => {
 }
 
 export const useGetAuthCode = (queryParams = {}, options) => {
-    console.log('queryParams : ', queryParams)
+    console.log('useGetAuthCode queryParams : ', queryParams)
     return useQuery({
         queryKey: ['get-authcode', queryParams],
         queryFn: () => auth.getAuthCode(queryParams.reqData),

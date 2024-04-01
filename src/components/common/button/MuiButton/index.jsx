@@ -69,11 +69,19 @@ export const MuiMainButton = ({ disabled, name, title, onClick }) => {
     )
 }
 
-export const MuiSubButton = ({ name, title, size = 'medium', variant = 'outlined', onClick }) => {
+export const MuiSubButton = ({
+    disabled = false,
+    name,
+    title,
+    size = 'medium',
+    variant = 'outlined',
+    onClick,
+}) => {
     const _name = name.toLowerCase()
 
     return (
         <Button
+            disabled={disabled}
             disableElevation
             size={size}
             color={buttonUI[_name].color}

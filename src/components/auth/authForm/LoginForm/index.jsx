@@ -21,10 +21,12 @@ import style from './style.module'
 
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined'
 import CachedOutlinedIcon from '@mui/icons-material/CachedOutlined'
+import { useNavigate } from 'react-router-dom'
 
 const MAX_REQ_AUTHCODE = 3
 
 const LoginForm = () => {
+    const navigate = useNavigate()
     const { changeAuthStep } = useAuthStepActions()
     const { mutate, isPending } = usePostLogin()
     const [captchaParams, setCaptchaParams] = useState({ id: Math.random() })
@@ -55,13 +57,17 @@ const LoginForm = () => {
             // const password = encryptPasswordBase64WithTime(
             //     encryptPasswordSHA256WithTime(encryptPasswordSHA256(form.password)),
             // )
+            const apiParams = { ...form }
+            console.log('onSubmit >> ', JSON.stringify(apiParams, null, 2))
             mutate(
-                { ...form },
+                { ...apiParams },
                 // { ...form, password },
                 {
                     onSuccess: ({ data }) => {
                         console.log('response : ', data)
+                        // data.data의 결과값을 확인 후 필요한 처리 수행
                         changeAuthStep(AUTH_STEP.certified)
+                        navigate('/')
                     },
                 },
             )
@@ -88,8 +94,7 @@ const LoginForm = () => {
 
     const handleRequestAuthCode = () => {
         // 인증번호 요청 건수 +1
-        // setAuthCodeReqLimits((limit) => limit + 1)
-        console.log(formik.values.userid.length)
+        console.log('인증번호 요청...')
         setState({
             ...state,
             authcodeLimits: state.authcodeLimits + 1,
@@ -102,6 +107,7 @@ const LoginForm = () => {
     }
 
     const handleRequestCaptcha = () => {
+        console.log('보안문자 요청...')
         setCaptchaParams({ id: Math.random() })
         setState({
             ...state,
@@ -112,6 +118,7 @@ const LoginForm = () => {
     const { themeMode } = getLayoutState()
 
     console.log('state : ', state)
+    console.log('respAuthcode : ', respAuthcode)
     // console.log('respCaptcha : ', respCaptcha)
 
     return (

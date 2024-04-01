@@ -91,7 +91,7 @@
                     "name": "단말 모델 관리",
                     "menuOrder": 42,
                     "rootMenuId": 400,
-                    "menuUrl": "/system/model",
+                    "menuUrl": "/system/ue/list",
                     "label": "단말 모델 관리"
                 },
                 {

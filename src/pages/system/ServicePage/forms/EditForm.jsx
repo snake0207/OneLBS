@@ -17,7 +17,7 @@ import CreateIcon from '@mui/icons-material/Create'
 import TitleBar from '#/components/common/menu/TitleBar'
 import TextInput from '#/components/common/input/TextInput'
 import Select from '#/components/common/Select'
-import { usePostServiceRegist } from '#/hooks/queries/system'
+import { usePostServiceRegist, usePostServiceUpdate } from '#/hooks/queries/system'
 import { registServiceSchema } from '#/contents/validationSchema'
 import MuiDialog from '#/components/common/popup/MuiDialog'
 import { MuiMainButton } from '#/components/common/button/MuiButton'
@@ -38,7 +38,7 @@ const EditForm = () => {
         state: { row },
     } = useLocation()
     const navigate = useNavigate()
-    const { mutate, isPending } = usePostServiceRegist()
+    const { mutate, isPending } = usePostServiceUpdate()
     const [serviceType, setServiceType] = useState(0)
     const [accuracy, setAccuracy] = useState(0)
     const [posMethod, setPosMethod] = useState(0)

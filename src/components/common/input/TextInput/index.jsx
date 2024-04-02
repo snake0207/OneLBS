@@ -10,8 +10,6 @@ import { extractChangedObjectOfChangedJson } from '#/common/libs/objectCheck.js'
  * @param {object} formik useformik return object
  * @param {string} inputRule 입력에 대한 가이드
  * @param {boolean} IsDisabled input disabled 여부
- * @param {boolean} multiline ㅡ multiline 여부
- * @param {number} rows multiline 'true' 인 경우 row수
  * @returns ReactNode
  */
 const TextInput = ({
@@ -21,8 +19,6 @@ const TextInput = ({
     inputRule = null,
     IsDisabled = false,
     editClick = null,
-    multiline = false,
-    rows,
 }) => {
     // formik 중첩구조 사용 시 value parsing 위한 함수
     const parseNameByPath = (obj, path) =>
@@ -40,8 +36,6 @@ const TextInput = ({
                 }}
             >
                 <TextField
-                    multiline={multiline}
-                    rows={multiline ? rows : undefined}
                     name={name}
                     value={parseNameByPath(formik.values, name)}
                     onChange={formik.handleChange}

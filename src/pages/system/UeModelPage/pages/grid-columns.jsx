@@ -8,21 +8,15 @@ export const columns = [
         renderCell: (params) => <Typography>{params.row.id}</Typography>,
     },
     {
-        field: 'ueCode',
-        headerName: '모델 코드',
-        flex: 1.3,
-        renderCell: (params) => <Typography color="primary">{params.row.ueCode}</Typography>,
-    },
-    {
         field: 'ueName',
         headerName: '모델명',
-        flex: 1,
-        renderCell: (params) => <Typography>{params.row.ueName}</Typography>,
+        flex: 1.5,
+        renderCell: (params) => <Typography color="primary">{params.row.ueName}</Typography>,
     },
     {
         field: 'remarks',
         headerName: '비고',
-        flex: 1,
+        flex: 1.5,
         renderCell: (params) => {
             return <Typography>{params.row.remarks}</Typography>
         },

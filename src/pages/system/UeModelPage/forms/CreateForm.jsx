@@ -11,9 +11,8 @@ import TitleBar from '#/components/common/menu/TitleBar'
 import MuiDialog from '#/components/common/popup/MuiDialog'
 import { MuiMainButton, MuiSubButton } from '#/components/common/button/MuiButton'
 import CheckBox from '#/components/common/input/CheckBox'
-import { usePostUeRegist } from '#/hooks/queries/system'
+import { usePostRegistUE } from '#/hooks/queries/system'
 import { registUESchema } from '#/contents/validationSchema'
-import SearchPopup from './SearchPopup'
 
 import style from './style.module'
 import MuiAlert from '#/components/common/popup/MuiAlert'
@@ -23,20 +22,9 @@ const CreateForm = () => {
         state: { row },
     } = useLocation()
     const navigate = useNavigate()
-    const [ueState, setUeState] = useState([])
-    const { mutate, isPending } = usePostUeRegist()
-    const [isOpenServicePopup, setIsOpenServicePopup] = useState(false)
+    const [ueCodes, setUeCodes] = useState([])
+    const { mutate, isPending } = usePostRegistUE()
     const [apiSuccess, setApiSuccess] = useState('')
-    const [fieldCheck, setFieldCheck] = useState({
-        lppEcidCheck: false,
-        lppaEcidCheck: false,
-        msaCheck: false,
-        msbCheck: false,
-        cpCheck: false,
-        lppeCheck: false,
-        tlsCheck: false,
-        emergencyCheck: false,
-    })
     const [state, setState] = useState({
         msg: '입력한 정보로 저장 하시겠습니까?',
         openDialog: false,
@@ -45,27 +33,28 @@ const CreateForm = () => {
     const formik = useFormik({
         initialValues: {
             ueName: '',
-            modelCode: '',
-            ueCode: [],
+            tmpModelCode: '',
+            ueCodes: [],
             remarks: '',
-            lppEcidCheck: false,
-            lppaEcidCheck: false,
-            msaCheck: false,
-            msbCheck: false,
-            cpCheck: false,
-            lppeCheck: false,
-            suplVersion: '',
-            tlsCheck: false,
-            emergencyCheck: false,
-            ksaVersion: '',
+            lppEcidCheck: 'N',
+            lppaEcidCheck: 'N',
+            msaCheck: 'N',
+            msbCheck: 'N',
+            cpCheck: 'N',
+            lppeCheck: 'N',
+            suplVersion: '1.0',
+            tlsCheck: 'N',
+            emergencyCheck: 'N',
+            ksaVersion: '1.0',
         },
         validationSchema: registUESchema,
         onSubmit: (form) => {
             const apiParams = {
                 ...form,
-                ...fieldCheck,
-                ueCode: [...ueState.map((item) => item.modelCode)],
+                ueCodes: [...ueCodes.map((item) => item.modelCode)],
             }
+            // 임시로 사용된 tmpModelCode 삭제
+            delete apiParams.tmpModelCode
             console.log('onSubmit >> ', JSON.stringify(apiParams, null, 2))
             mutate(
                 { ...apiParams },
@@ -92,21 +81,15 @@ const CreateForm = () => {
         setState((prevState) => ({ ...prevState, openDialog: false }))
     }
 
-    const handleOpenServicePopup = () => {
-        setIsOpenServicePopup(true)
-    }
-
     const handleInputUeCode = () => {
-        const ue = formik.values.modelCode
+        const ue = formik.values.tmpModelCode
         console.log('UE : ', ue)
-        setUeState((prev) => [{ id: Date.now(), modelCode: formik.values?.modelCode }, ...prev])
+        setUeCodes((prev) => [{ id: Date.now(), modelCode: formik.values?.tmpModelCode }, ...prev])
     }
 
     const handleRefreshUeCode = (id) => {
-        setUeState([...ueState.filter((item) => item.id != id)])
+        setUeCodes([...ueCodes.filter((item) => item.id != id)])
     }
-
-    console.log('UE-LIST : ', ueState)
 
     return (
         <Box>
@@ -114,7 +97,7 @@ const CreateForm = () => {
             <form style={{ width: '100%' }}>
                 <Box sx={style.contentBox}>
                     <Box display="flex" alignItems="center" mb={2}>
-                        <CreateIcon onClick={() => console.log('ICON CLICK')} />
+                        <CreateIcon />
                         <Typography
                             sx={{
                                 ml: 1,
@@ -142,7 +125,7 @@ const CreateForm = () => {
                                 <TableCell rowSpan={2}>{`모델 코드`}</TableCell>
                                 <TableCell component="td">
                                     <Stack direction="row" gap={1}>
-                                        <TextInput name="modelCode" formik={formik} />
+                                        <TextInput name="tmpModelCode" formik={formik} />
                                         <MuiSubButton
                                             name="create"
                                             title="추가"
@@ -162,7 +145,7 @@ const CreateForm = () => {
                                             borderColor: 'table.viewTopBorder',
                                         }}
                                     >
-                                        {ueState?.map((item) => (
+                                        {ueCodes?.map((item) => (
                                             <Box
                                                 key={item.id}
                                                 sx={{
@@ -222,27 +205,33 @@ const CreateForm = () => {
                                 <TableCell>{`LPP-ECID`}</TableCell>
                                 <TableCell component="td">
                                     <CheckBox
-                                        checked={fieldCheck.lppEcidCheck}
-                                        onChange={(e) =>
-                                            setFieldCheck({
-                                                ...fieldCheck,
-                                                lppEcidCheck: e.target.checked,
-                                            })
+                                        checked={formik.values.lppEcidCheck === 'Y' ? true : false}
+                                        onChange={(e) => {
+                                            formik.setFieldValue(
+                                                'lppEcidCheck',
+                                                e.target.value === 'Y' ? 'N' : 'Y',
+                                            )
+                                        }}
+                                        label={
+                                            formik.values.lppEcidCheck === 'Y' ? '적용' : '미적용'
                                         }
-                                        label={fieldCheck.lppEcidCheck ? '적용' : '미적용'}
+                                        value={formik.values.lppEcidCheck}
                                     />
                                 </TableCell>
                                 <TableCell>{`LPPa-ECID`}</TableCell>
                                 <TableCell component="td">
                                     <CheckBox
-                                        checked={fieldCheck.lppaEcidCheck}
-                                        onChange={(e) =>
-                                            setFieldCheck({
-                                                ...fieldCheck,
-                                                lppaEcidCheck: e.target.checked,
-                                            })
+                                        checked={formik.values.lppaEcidCheck === 'Y' ? true : false}
+                                        onChange={(e) => {
+                                            formik.setFieldValue(
+                                                'lppaEcidCheck',
+                                                e.target.value === 'Y' ? 'N' : 'Y',
+                                            )
+                                        }}
+                                        label={
+                                            formik.values.lppaEcidCheck === 'Y' ? '적용' : '미적용'
                                         }
-                                        label={fieldCheck.lppaEcidCheck ? '적용' : '미적용'}
+                                        value={formik.values.lppaEcidCheck}
                                     />
                                 </TableCell>
                             </TableRow>
@@ -251,27 +240,29 @@ const CreateForm = () => {
                                 <TableCell>{`MSA`}</TableCell>
                                 <TableCell component="td">
                                     <CheckBox
-                                        checked={fieldCheck.msaCheck}
-                                        onChange={(e) =>
-                                            setFieldCheck({
-                                                ...fieldCheck,
-                                                msaCheck: e.target.checked,
-                                            })
-                                        }
-                                        label={fieldCheck.msaCheck ? '적용' : '미적용'}
+                                        checked={formik.values.msaCheck === 'Y' ? true : false}
+                                        onChange={(e) => {
+                                            formik.setFieldValue(
+                                                'msaCheck',
+                                                e.target.value === 'Y' ? 'N' : 'Y',
+                                            )
+                                        }}
+                                        label={formik.values.msaCheck === 'Y' ? '적용' : '미적용'}
+                                        value={formik.values.msaCheck}
                                     />
                                 </TableCell>
                                 <TableCell>{`MSB`}</TableCell>
                                 <TableCell component="td">
                                     <CheckBox
-                                        checked={fieldCheck.msbCheck}
-                                        onChange={(e) =>
-                                            setFieldCheck({
-                                                ...fieldCheck,
-                                                msbCheck: e.target.checked,
-                                            })
-                                        }
-                                        label={fieldCheck.msbCheck ? '적용' : '미적용'}
+                                        checked={formik.values.msbCheck === 'Y' ? true : false}
+                                        onChange={(e) => {
+                                            formik.setFieldValue(
+                                                'msbCheck',
+                                                e.target.value === 'Y' ? 'N' : 'Y',
+                                            )
+                                        }}
+                                        label={formik.values.msbCheck === 'Y' ? '적용' : '미적용'}
+                                        value={formik.values.msbCheck}
                                     />
                                 </TableCell>
                             </TableRow>
@@ -279,27 +270,29 @@ const CreateForm = () => {
                                 <TableCell>{`CP`}</TableCell>
                                 <TableCell>
                                     <CheckBox
-                                        checked={fieldCheck.cpCheck}
-                                        onChange={(e) =>
-                                            setFieldCheck({
-                                                ...fieldCheck,
-                                                cpCheck: e.target.checked,
-                                            })
-                                        }
-                                        label={fieldCheck.cpCheck ? '적용' : '미적용'}
+                                        checked={formik.values.cpCheck === 'Y' ? true : false}
+                                        onChange={(e) => {
+                                            formik.setFieldValue(
+                                                'cpCheck',
+                                                e.target.value === 'Y' ? 'N' : 'Y',
+                                            )
+                                        }}
+                                        label={formik.values.cpCheck === 'Y' ? '적용' : '미적용'}
+                                        value={formik.values.cpCheck}
                                     />
                                 </TableCell>
                                 <TableCell>{`LPPe`}</TableCell>
                                 <TableCell>
                                     <CheckBox
-                                        checked={fieldCheck.lppeCheck}
-                                        onChange={(e) =>
-                                            setFieldCheck({
-                                                ...fieldCheck,
-                                                lppeCheck: e.target.checked,
-                                            })
-                                        }
-                                        label={fieldCheck.lppeCheck ? '적용' : '미적용'}
+                                        checked={formik.values.lppeCheck === 'Y' ? true : false}
+                                        onChange={(e) => {
+                                            formik.setFieldValue(
+                                                'lppeCheck',
+                                                e.target.value === 'Y' ? 'N' : 'Y',
+                                            )
+                                        }}
+                                        label={formik.values.lppeCheck === 'Y' ? '적용' : '미적용'}
+                                        value={formik.values.lppeCheck}
                                     />
                                 </TableCell>
                             </TableRow>
@@ -311,14 +304,15 @@ const CreateForm = () => {
                                 <TableCell>{`SUPL TLS`}</TableCell>
                                 <TableCell>
                                     <CheckBox
-                                        checked={fieldCheck.tlsCheck}
-                                        onChange={(e) =>
-                                            setFieldCheck({
-                                                ...fieldCheck,
-                                                tlsCheck: e.target.checked,
-                                            })
-                                        }
-                                        label={fieldCheck.tlsCheck ? '적용' : '미적용'}
+                                        checked={formik.values.tlsCheck === 'Y' ? true : false}
+                                        onChange={(e) => {
+                                            formik.setFieldValue(
+                                                'tlsCheck',
+                                                e.target.value === 'Y' ? 'N' : 'Y',
+                                            )
+                                        }}
+                                        label={formik.values.tlsCheck === 'Y' ? '적용' : '미적용'}
+                                        value={formik.values.tlsCheck}
                                     />
                                 </TableCell>
                             </TableRow>
@@ -326,14 +320,19 @@ const CreateForm = () => {
                                 <TableCell>{`SUPL Emergency Flag`}</TableCell>
                                 <TableCell>
                                     <CheckBox
-                                        checked={fieldCheck.emergencyCheck}
-                                        onChange={(e) =>
-                                            setFieldCheck({
-                                                ...fieldCheck,
-                                                emergencyCheck: e.target.checked,
-                                            })
+                                        checked={
+                                            formik.values.emergencyCheck === 'Y' ? true : false
                                         }
-                                        label={fieldCheck.emergencyCheck ? '적용' : '미적용'}
+                                        onChange={(e) => {
+                                            formik.setFieldValue(
+                                                'emergencyCheck',
+                                                e.target.value === 'Y' ? 'N' : 'Y',
+                                            )
+                                        }}
+                                        label={
+                                            formik.values.emergencyCheck === 'Y' ? '적용' : '미적용'
+                                        }
+                                        value={formik.values.emergencyCheck}
                                     />
                                 </TableCell>
                                 <TableCell colSpan={2}></TableCell>
@@ -383,17 +382,6 @@ const CreateForm = () => {
                     callback={() => setApiSuccess(false)}
                 />
             )}
-            {/* {isOpenServicePopup && (
-                <SearchPopup
-                    isOpen={isOpenServicePopup}
-                    title={`서비스 코드 중복 체크`}
-                    onCancel={() => setIsOpenServicePopup(false)}
-                    onConfirm={(param) => {
-                        setIsOpenServicePopup(false)
-                        formik.setFieldValue('serviceCode', param)
-                    }}
-                />
-            )} */}
         </Box>
     )
 }

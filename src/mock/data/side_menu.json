@@ -101,6 +101,22 @@
                     "rootMenuId": 400,
                     "menuUrl": "/system/engine",
                     "label": "엔진설정 관리"
+                },
+                {
+                    "menuId": 440,
+                    "name": "위치정보 처리내역",
+                    "menuOrder": 44,
+                    "rootMenuId": 400,
+                    "menuUrl": "/system/loctrans",
+                    "label": "위치정보 처리내역"
+                },
+                {
+                    "menuId": 450,
+                    "name": "위치이력 열람내역",
+                    "menuOrder": 45,
+                    "rootMenuId": 400,
+                    "menuUrl": "/system/locview",
+                    "label": "위치이력 열람내역"
                 }
             ]
         },

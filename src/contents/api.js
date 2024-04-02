@@ -37,11 +37,14 @@ export const API_PATH = {
         modify_role_menu: 'user-auth/api/v1/auth/modify-role-menu',
     },
     system: {
-        service_list: '/service-list',
         service_regist: '/service-regist',
+        service_list: '/service-list',
+        service_update: '/service-update',
         service_code: '/service-code',
-        ue_list: '/ue-list',
-        ue_delete: '/ue-delete',
         ue_regist: '/ue-regist',
+        ue_list: '/ue-list',
+        ue_update: '/ue-update',
+        ue_delete: '/ue-delete',
+        loc_trans: '/loc-trans',
     },
 }

@@ -26,26 +26,61 @@ export const usePostServiceRegist = () => {
         mutationFn: system.postServiceRegist,
     })
 }
+// 서비스 업데이트
+export const usePostServiceUpdate = () => {
+    return useMutation({
+        mutationFn: system.postServiceUpdate,
+    })
+}
 
-// 단말 모델 관리
+// ----------------- Start 단말 모델 관리 ----------------------------------
 // 단말 모델 리스트
-export const useGetUes = (queryParams = {}, options) => {
+export const useGetUEs = (queryParams = {}, options) => {
     const { data } = useQuery({
         queryKey: ['get-ue-lists', queryParams],
-        queryFn: () => system.getUes(queryParams),
+        queryFn: () => system.getUEs(queryParams),
         ...options,
     })
     return { data: data?.data }
 }
-// 단말 모델 삭제
-export const usePostUeDelete = () => {
+// 단말 모델 삭제(단일)
+export const useGetDeleteUE = (queryParams = {}, options) => {
+    const { data } = useQuery({
+        queryKey: ['delete-ue', queryParams],
+        queryFn: () => system.getDeleteUE(queryParams),
+        ...options,
+    })
+    return { data: data?.data }
+}
+// 단말 모델 삭제(복수)
+export const usePostDeleteUEs = (queryParams = {}, options) => {
     return useMutation({
-        mutationFn: system.usePostUeDelete,
+        mutationFn: system.postDeleteUEs,
     })
 }
 // 단말 모델 등록
-export const usePostUeRegist = () => {
+export const usePostRegistUE = () => {
     return useMutation({
-        mutationFn: system.postUeRegist,
+        mutationFn: system.postRegistUE,
     })
 }
+// 단말 모델 업데이트
+export const usePostUpdateUE = () => {
+    return useMutation({
+        mutationFn: system.postUpdateUE,
+    })
+}
+// ----------------- End of 단말 모델 관리 ----------------------------------
+
+// ----------------- Start 위치정보 처리이력 ----------------------------------
+// 단말 모델 리스트
+export const useGetLocTransList = (queryParams = {}, options) => {
+    console.log('useGetLocTransList : ', queryParams)
+    const { data } = useQuery({
+        queryKey: ['get-loctrans-lists', queryParams],
+        queryFn: () => system.getLocTransList(queryParams),
+        ...options,
+    })
+    return { data: data?.data }
+}
+// ----------------- End 위치정보 처리이력 ----------------------------------

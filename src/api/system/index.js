@@ -15,26 +15,53 @@ const postServiceRegist = (data) => {
     return postAPI({ endPoint: API_PATH.system.service_regist, data })
 }
 
-// 단말 모델 관리
-const getUes = (data) => {
+const postServiceUpdate = (data) => {
+    console.log(data)
+    return postAPI({ endPoint: API_PATH.system.service_update, data })
+}
+
+// ------------------ START 단말 모델 관리 -----------------------------
+const postRegistUE = (data) => {
+    console.log('postRegistUE : ', data)
+    return postAPI({ endPoint: API_PATH.system.ue_regist, data })
+}
+
+const getUEs = (data) => {
     return getAPI({ endPoint: API_PATH.system.ue_list, data })
 }
 
-const postUeDelete = (data) => {
-    console.log(data)
+const postUpdateUE = (data) => {
+    console.log('postUpdateUE : ', data)
+    return postAPI({ endPoint: API_PATH.system.ue_update, data })
+}
+
+const postDeleteUEs = (data) => {
+    console.log('postDeleteUEs : ', data)
     return postAPI({ endPoint: API_PATH.system.ue_delete, data })
 }
 
-const postUeRegist = (data) => {
-    console.log('postUeRegist : ', data)
-    return postAPI({ endPoint: API_PATH.system.ue_regist, data })
+const getDeleteUE = (data) => {
+    console.log(data)
+    return getAPI({ endPoint: API_PATH.system.ue_delete, data })
 }
+// ------------------ END 단말 모델 관리 -----------------------------
+
+// ------------------ START 위치정보 처리이력 -----------------------------
+const getLocTransList = (data) => {
+    return getAPI({ endPoint: API_PATH.system.loc_trans, data })
+}
+// ------------------ END 위치정보 처리이력 -----------------------------
 
 export default {
     getServices, // 서비스 목록
     postServiceRegist, // 서비스 등록
+    postServiceUpdate, // 서비스 업데이트
     getServiceCode, // 서비스코드 검색
-    getUes,
-    postUeDelete,
-    postUeRegist,
+    postRegistUE, // CREATE
+    getUEs, // READ
+    postUpdateUE, // UPDATE
+    postDeleteUEs, // DELETE-multi
+    getDeleteUE, // DELETE-one
+
+    getLocTransList,
 }

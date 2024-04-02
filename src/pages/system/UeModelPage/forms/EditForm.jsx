@@ -11,9 +11,8 @@ import TitleBar from '#/components/common/menu/TitleBar'
 import MuiDialog from '#/components/common/popup/MuiDialog'
 import { MuiMainButton, MuiSubButton } from '#/components/common/button/MuiButton'
 import CheckBox from '#/components/common/input/CheckBox'
-import { usePostUeRegist } from '#/hooks/queries/system'
+import { usePostDeleteUEs, usePostUpdateUE } from '#/hooks/queries/system'
 import { registUESchema } from '#/contents/validationSchema'
-import SearchPopup from './SearchPopup'
 
 import style from './style.module'
 import MuiAlert from '#/components/common/popup/MuiAlert'
@@ -23,90 +22,110 @@ const EditForm = () => {
         state: { row },
     } = useLocation()
     const navigate = useNavigate()
-    const [ueState, setUeState] = useState([])
-    const { mutate, isPending } = usePostUeRegist()
-    const [isOpenServicePopup, setIsOpenServicePopup] = useState(false)
+    // 수정을 위해 key 값인 id를 추가해 준다. 삭제 시 활용
+    const [ueCodes, setUeCodes] = useState([
+        ...row?.ueCodes.map((item) => ({ id: item, modelCode: item })),
+    ])
+    const { mutate: mutateDelete, isPending: isDeletePending } = usePostDeleteUEs()
+    const { mutate: mutateUpdate, isPending: isUpdatePending } = usePostUpdateUE()
     const [apiSuccess, setApiSuccess] = useState('')
-    const [fieldCheck, setFieldCheck] = useState({
-        lppEcidCheck: false,
-        lppaEcidCheck: false,
-        msaCheck: false,
-        msbCheck: false,
-        cpCheck: false,
-        lppeCheck: false,
-        tlsCheck: false,
-        emergencyCheck: false,
-    })
     const [state, setState] = useState({
-        msg: '입력한 정보로 저장 하시겠습니까?',
+        edit: false,
+        delete: false,
+        msg: '',
         openDialog: false,
     })
 
     const formik = useFormik({
         initialValues: {
-            ueName: '',
-            modelCode: '',
-            ueCode: [],
-            remarks: '',
-            lppEcidCheck: false,
-            lppaEcidCheck: false,
-            msaCheck: false,
-            msbCheck: false,
-            cpCheck: false,
-            lppeCheck: false,
-            suplVersion: '',
-            tlsCheck: false,
-            emergencyCheck: false,
-            ksaVersion: '',
+            ueName: row?.ueName,
+            tmpModelCode: '',
+            ueCodes: [],
+            remarks: row?.remarks,
+            lppEcidCheck: row?.lppEcidCheck,
+            lppaEcidCheck: row?.lppaEcidCheck,
+            msaCheck: row?.msaCheck,
+            msbCheck: row?.msbCheck,
+            cpCheck: row?.cpCheck,
+            lppeCheck: row?.lppeCheck,
+            suplVersion: row?.suplVersion,
+            tlsCheck: row?.tlsCheck,
+            emergencyCheck: row?.emergencyCheck,
+            ksaVersion: row?.ksaVersion,
         },
         validationSchema: registUESchema,
         onSubmit: (form) => {
+            console.log('handleFormikSubmit..')
             const apiParams = {
                 ...form,
-                ...fieldCheck,
-                ueCode: [...ueState.map((item) => item.modelCode)],
+                ueCodes: [...ueCodes.map((item) => item.modelCode)],
             }
+            // 임시로 사용된 tmpModelCode 삭제
+            delete apiParams.tmpModelCode
             console.log('onSubmit >> ', JSON.stringify(apiParams, null, 2))
-            mutate(
+            mutateUpdate(
                 { ...apiParams },
                 {
                     onSuccess: ({ data }) => {
-                        console.log('response : ', data)
-                        setApiSuccess(`API RESULT : ${data.id}`)
+                        console.log('update-response : ', data)
+                        setApiSuccess(`UPDATE API RESULT : ${data.id}`)
                     },
                 },
             )
         },
     })
 
-    const handleClickSave = () => {
-        setState((prevState) => ({ ...prevState, openDialog: true }))
+    const handleDeleteSubmit = () => {
+        console.log('handleDeleteSubmit...')
+        mutateDelete(
+            { ueNames: [row?.ueName] },
+            {
+                onSuccess: ({ data }) => {
+                    console.log('delete-response : ', data)
+                    setApiSuccess(`DELETE API RESULT : ${data.id}`)
+                },
+            },
+        )
     }
 
+    // 수정, 삭제 버튼 click시 공통으로 실행
     const handleFormikSubmit = () => {
-        console.log('handleFormikSubmit..')
-        formik.handleSubmit()
+        state.edit && formik.handleSubmit() // 수정
+        state.delete && handleDeleteSubmit() // 삭제
         handleStateReset()
     }
     const handleStateReset = () => {
-        setState((prevState) => ({ ...prevState, openDialog: false }))
-    }
-
-    const handleOpenServicePopup = () => {
-        setIsOpenServicePopup(true)
+        setState({ edit: false, delete: false, msg: '', openDialog: false })
     }
 
     const handleInputUeCode = () => {
-        const ue = formik.values.modelCode
-        console.log('UE : ', ue)
-        setUeState((prev) => [{ id: Date.now(), modelCode: formik.values?.modelCode }, ...prev])
+        const ue = formik.values.tmpModelCode
+        setUeCodes((prev) => [{ id: Date.now(), modelCode: formik.values?.tmpModelCode }, ...prev])
     }
 
     const handleRefreshUeCode = (id) => {
-        setUeState([...ueState.filter((item) => item.id != id)])
+        setUeCodes([...ueCodes.filter((item) => item.id != id)])
     }
 
-    console.log('UE-LIST : ', ueState)
+    const handleClickEdit = () => {
+        setState((prevState) => ({
+            ...prevState,
+            edit: true,
+            msg: '수정한 정보로 저장 하시겠습니까?',
+            openDialog: true,
+        }))
+    }
+
+    const handleClickDelete = () => {
+        setState((prevState) => ({
+            ...prevState,
+            delete: true,
+            msg: '삭제하면 복구가 불가능합니다. 삭제 하시겠습니까?',
+            openDialog: true,
+        }))
+    }
+
+    console.log('ueCodes : ', ueCodes)
 
     return (
         <Box>
@@ -114,7 +133,7 @@ const EditForm = () => {
             <form style={{ width: '100%' }}>
                 <Box sx={style.contentBox}>
                     <Box display="flex" alignItems="center" mb={2}>
-                        <CreateIcon onClick={() => console.log('ICON CLICK')} />
+                        <CreateIcon />
                         <Typography
                             sx={{
                                 ml: 1,
@@ -142,7 +161,7 @@ const EditForm = () => {
                                 <TableCell rowSpan={2}>{`모델 코드`}</TableCell>
                                 <TableCell component="td">
                                     <Stack direction="row" gap={1}>
-                                        <TextInput name="modelCode" formik={formik} />
+                                        <TextInput name="tmpModelCode" formik={formik} />
                                         <MuiSubButton
                                             name="create"
                                             title="추가"
@@ -162,7 +181,7 @@ const EditForm = () => {
                                             borderColor: 'table.viewTopBorder',
                                         }}
                                     >
-                                        {ueState?.map((item) => (
+                                        {ueCodes?.map((item) => (
                                             <Box
                                                 key={item.id}
                                                 sx={{
@@ -222,27 +241,33 @@ const EditForm = () => {
                                 <TableCell>{`LPP-ECID`}</TableCell>
                                 <TableCell component="td">
                                     <CheckBox
-                                        checked={fieldCheck.lppEcidCheck}
-                                        onChange={(e) =>
-                                            setFieldCheck({
-                                                ...fieldCheck,
-                                                lppEcidCheck: e.target.checked,
-                                            })
+                                        checked={formik.values.lppEcidCheck === 'Y' ? true : false}
+                                        onChange={(e) => {
+                                            formik.setFieldValue(
+                                                'lppEcidCheck',
+                                                e.target.value === 'Y' ? 'N' : 'Y',
+                                            )
+                                        }}
+                                        label={
+                                            formik.values.lppEcidCheck === 'Y' ? '적용' : '미적용'
                                         }
-                                        label={fieldCheck.lppEcidCheck ? '적용' : '미적용'}
+                                        value={formik.values.lppEcidCheck}
                                     />
                                 </TableCell>
                                 <TableCell>{`LPPa-ECID`}</TableCell>
                                 <TableCell component="td">
                                     <CheckBox
-                                        checked={fieldCheck.lppaEcidCheck}
-                                        onChange={(e) =>
-                                            setFieldCheck({
-                                                ...fieldCheck,
-                                                lppaEcidCheck: e.target.checked,
-                                            })
+                                        checked={formik.values.lppaEcidCheck === 'Y' ? true : false}
+                                        onChange={(e) => {
+                                            formik.setFieldValue(
+                                                'lppaEcidCheck',
+                                                e.target.value === 'Y' ? 'N' : 'Y',
+                                            )
+                                        }}
+                                        label={
+                                            formik.values.lppaEcidCheck === 'Y' ? '적용' : '미적용'
                                         }
-                                        label={fieldCheck.lppaEcidCheck ? '적용' : '미적용'}
+                                        value={formik.values.lppaEcidCheck}
                                     />
                                 </TableCell>
                             </TableRow>
@@ -251,27 +276,29 @@ const EditForm = () => {
                                 <TableCell>{`MSA`}</TableCell>
                                 <TableCell component="td">
                                     <CheckBox
-                                        checked={fieldCheck.msaCheck}
-                                        onChange={(e) =>
-                                            setFieldCheck({
-                                                ...fieldCheck,
-                                                msaCheck: e.target.checked,
-                                            })
-                                        }
-                                        label={fieldCheck.msaCheck ? '적용' : '미적용'}
+                                        checked={formik.values.msaCheck === 'Y' ? true : false}
+                                        onChange={(e) => {
+                                            formik.setFieldValue(
+                                                'msaCheck',
+                                                e.target.value === 'Y' ? 'N' : 'Y',
+                                            )
+                                        }}
+                                        label={formik.values.msaCheck === 'Y' ? '적용' : '미적용'}
+                                        value={formik.values.msaCheck}
                                     />
                                 </TableCell>
                                 <TableCell>{`MSB`}</TableCell>
                                 <TableCell component="td">
                                     <CheckBox
-                                        checked={fieldCheck.msbCheck}
-                                        onChange={(e) =>
-                                            setFieldCheck({
-                                                ...fieldCheck,
-                                                msbCheck: e.target.checked,
-                                            })
-                                        }
-                                        label={fieldCheck.msbCheck ? '적용' : '미적용'}
+                                        checked={formik.values.msbCheck === 'Y' ? true : false}
+                                        onChange={(e) => {
+                                            formik.setFieldValue(
+                                                'msbCheck',
+                                                e.target.value === 'Y' ? 'N' : 'Y',
+                                            )
+                                        }}
+                                        label={formik.values.msbCheck === 'Y' ? '적용' : '미적용'}
+                                        value={formik.values.msbCheck}
                                     />
                                 </TableCell>
                             </TableRow>
@@ -279,27 +306,29 @@ const EditForm = () => {
                                 <TableCell>{`CP`}</TableCell>
                                 <TableCell>
                                     <CheckBox
-                                        checked={fieldCheck.cpCheck}
-                                        onChange={(e) =>
-                                            setFieldCheck({
-                                                ...fieldCheck,
-                                                cpCheck: e.target.checked,
-                                            })
-                                        }
-                                        label={fieldCheck.cpCheck ? '적용' : '미적용'}
+                                        checked={formik.values.cpCheck === 'Y' ? true : false}
+                                        onChange={(e) => {
+                                            formik.setFieldValue(
+                                                'cpCheck',
+                                                e.target.value === 'Y' ? 'N' : 'Y',
+                                            )
+                                        }}
+                                        label={formik.values.cpCheck === 'Y' ? '적용' : '미적용'}
+                                        value={formik.values.cpCheck}
                                     />
                                 </TableCell>
                                 <TableCell>{`LPPe`}</TableCell>
                                 <TableCell>
                                     <CheckBox
-                                        checked={fieldCheck.lppeCheck}
-                                        onChange={(e) =>
-                                            setFieldCheck({
-                                                ...fieldCheck,
-                                                lppeCheck: e.target.checked,
-                                            })
-                                        }
-                                        label={fieldCheck.lppeCheck ? '적용' : '미적용'}
+                                        checked={formik.values.lppeCheck === 'Y' ? true : false}
+                                        onChange={(e) => {
+                                            formik.setFieldValue(
+                                                'lppeCheck',
+                                                e.target.value === 'Y' ? 'N' : 'Y',
+                                            )
+                                        }}
+                                        label={formik.values.lppeCheck === 'Y' ? '적용' : '미적용'}
+                                        value={formik.values.lppeCheck}
                                     />
                                 </TableCell>
                             </TableRow>
@@ -311,14 +340,15 @@ const EditForm = () => {
                                 <TableCell>{`SUPL TLS`}</TableCell>
                                 <TableCell>
                                     <CheckBox
-                                        checked={fieldCheck.tlsCheck}
-                                        onChange={(e) =>
-                                            setFieldCheck({
-                                                ...fieldCheck,
-                                                tlsCheck: e.target.checked,
-                                            })
-                                        }
-                                        label={fieldCheck.tlsCheck ? '적용' : '미적용'}
+                                        checked={formik.values.tlsCheck === 'Y' ? true : false}
+                                        onChange={(e) => {
+                                            formik.setFieldValue(
+                                                'tlsCheck',
+                                                e.target.value === 'Y' ? 'N' : 'Y',
+                                            )
+                                        }}
+                                        label={formik.values.tlsCheck === 'Y' ? '적용' : '미적용'}
+                                        value={formik.values.tlsCheck}
                                     />
                                 </TableCell>
                             </TableRow>
@@ -326,14 +356,19 @@ const EditForm = () => {
                                 <TableCell>{`SUPL Emergency Flag`}</TableCell>
                                 <TableCell>
                                     <CheckBox
-                                        checked={fieldCheck.emergencyCheck}
-                                        onChange={(e) =>
-                                            setFieldCheck({
-                                                ...fieldCheck,
-                                                emergencyCheck: e.target.checked,
-                                            })
+                                        checked={
+                                            formik.values.emergencyCheck === 'Y' ? true : false
                                         }
-                                        label={fieldCheck.emergencyCheck ? '적용' : '미적용'}
+                                        onChange={(e) => {
+                                            formik.setFieldValue(
+                                                'emergencyCheck',
+                                                e.target.value === 'Y' ? 'N' : 'Y',
+                                            )
+                                        }}
+                                        label={
+                                            formik.values.emergencyCheck === 'Y' ? '적용' : '미적용'
+                                        }
+                                        value={formik.values.emergencyCheck}
                                     />
                                 </TableCell>
                                 <TableCell colSpan={2}></TableCell>
@@ -353,16 +388,22 @@ const EditForm = () => {
                     <Box align={'right'}>
                         <Stack spacing={2} direction="row" sx={{ justifyContent: 'flex-end' }}>
                             <MuiMainButton
-                                disabled={isPending}
-                                name="list"
-                                title="취소"
+                                disabled={isDeletePending || isUpdatePending}
+                                name="cancel"
+                                title="목록"
                                 onClick={() => navigate('/system/ue/list')}
                             />
                             <MuiMainButton
-                                disabled={isPending}
-                                name="create"
-                                title="저장"
-                                onClick={handleClickSave}
+                                disabled={isDeletePending || isUpdatePending}
+                                name="edit"
+                                title="수정"
+                                onClick={handleClickEdit}
+                            />
+                            <MuiMainButton
+                                disabled={isDeletePending || isUpdatePending}
+                                name="delete"
+                                title="삭제"
+                                onClick={handleClickDelete}
                             />
                         </Stack>
                     </Box>
@@ -383,17 +424,6 @@ const EditForm = () => {
                     callback={() => setApiSuccess(false)}
                 />
             )}
-            {/* {isOpenServicePopup && (
-                <SearchPopup
-                    isOpen={isOpenServicePopup}
-                    title={`서비스 코드 중복 체크`}
-                    onCancel={() => setIsOpenServicePopup(false)}
-                    onConfirm={(param) => {
-                        setIsOpenServicePopup(false)
-                        formik.setFieldValue('serviceCode', param)
-                    }}
-                />
-            )} */}
         </Box>
     )
 }

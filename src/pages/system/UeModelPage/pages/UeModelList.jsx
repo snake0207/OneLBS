@@ -4,7 +4,7 @@ import { Box, Button, Typography } from '@mui/material'
 
 import TitleBar from '#/components/common/menu/TitleBar'
 import CustomDataGrid from '#/components/common/table/datagrid'
-import { useGetUes, usePostUeDelete } from '#/hooks/queries/system'
+import { useGetUEs, usePostDeleteUEs } from '#/hooks/queries/system'
 
 import SearchFilter from '../Filter'
 import { columns } from './grid-columns'
@@ -22,10 +22,10 @@ const UeModelList = () => {
         page: 1,
         limit: 50, // 1회 요청에 받을수 있는 데이터 수
     })
-    const { data: apiResult } = useGetUes(queryParams, {
+    const { data: apiResult } = useGetUEs(queryParams, {
         enabled: true,
     })
-    const { mutate, isPending } = usePostUeDelete()
+    const { mutate, isPending } = usePostDeleteUEs()
 
     // 검색 버튼 누른 경우
     const handleSearch = (values) => {

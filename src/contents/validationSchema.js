@@ -182,10 +182,10 @@ export const registServiceSchema = yup.object({
 // ~src/pages/system/UeModelPage/forms
 export const registUESchema = yup.object({
     ueName: yup.string().required(HELPER_TEXT.ueNameRequired),
-    ueCode: yup.array(yup.string()).required(HELPER_TEXT.ueCodeRequired),
+    ueCodes: yup.array(yup.string()).required(HELPER_TEXT.ueCodeRequired),
     remarks: yup.string().required(HELPER_TEXT.remarksRequired),
     suplVersion: yup.string().required(HELPER_TEXT.suplVersionRequired),
-    verksaVersionsion: yup.string().required(HELPER_TEXT.ksaVersionRequired),
+    ksaVersion: yup.string().required(HELPER_TEXT.ksaVersionRequired),
 })
 
 export const otpSchema = yup.object({

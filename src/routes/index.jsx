@@ -37,6 +37,7 @@ import POISearchDetail from '#/pages/search/POISearchDetail'
 import DetailWithMobileLayout from '#/layouts/DetailWithMobileLayout/index.jsx'
 import { ServiceEditPage, ServiceListPage, ServiceRegistPage } from '#/pages/system/ServicePage'
 import { UeModelEditPage, UeModelListPage, UeModelRegistPage } from '#/pages/system/UeModelPage'
+import { LocTransListPage } from '#/pages/system/LocTransPage'
 
 const Routes = () => {
     return useRoutes([
@@ -75,6 +76,7 @@ const Routes = () => {
                         { path: '/system/ue/regist', element: <UeModelRegistPage /> },
                         { path: '/system/ue/edit', element: <UeModelEditPage /> },
                         { path: '/system/engine', element: <ApprovalHistoryPage /> },
+                        { path: '/system/loctrans', element: <LocTransListPage /> },
                     ],
                 },
                 {

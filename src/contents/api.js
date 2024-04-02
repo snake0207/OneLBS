@@ -46,5 +46,6 @@ export const API_PATH = {
         ue_update: '/ue-update',
         ue_delete: '/ue-delete',
         loc_trans: '/loc-trans',
+        loc_view: '/loc-view',
     },
 }

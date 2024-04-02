@@ -297,5 +297,32 @@
                 "procCount": "130000"
             }
         ]
+    },
+    "loc-view": {
+        "count": 32,
+        "lists": [
+            {
+                "id": 1,
+                "view_date": "2024-01-09 18:01:03",
+                "viewer": "91628373",
+                "target": "01028782638",
+                "start_date": "2023-03-01",
+                "end_date": "2023-03-28",
+                "purpose": "VOC처리",
+                "contents": "위치제공이력",
+                "viewCount": "31"
+            },
+            {
+                "id": 2,
+                "view_date": "2023-04-11 21:10:11",
+                "viewer": "98702411",
+                "target": "01030012763",
+                "start_date": "2023-04-01",
+                "end_date": "2023-06-28",
+                "purpose": "고객요청",
+                "contents": "위치제공이력",
+                "viewCount": "1203"
+            }
+        ]
     }
 }

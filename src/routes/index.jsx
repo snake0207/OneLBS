@@ -38,6 +38,7 @@ import DetailWithMobileLayout from '#/layouts/DetailWithMobileLayout/index.jsx'
 import { ServiceEditPage, ServiceListPage, ServiceRegistPage } from '#/pages/system/ServicePage'
 import { UeModelEditPage, UeModelListPage, UeModelRegistPage } from '#/pages/system/UeModelPage'
 import { LocTransListPage } from '#/pages/system/LocTransPage'
+import { LocViewListPage } from '#/pages/system/LocViewPage'
 
 const Routes = () => {
     return useRoutes([
@@ -77,6 +78,7 @@ const Routes = () => {
                         { path: '/system/ue/edit', element: <UeModelEditPage /> },
                         { path: '/system/engine', element: <ApprovalHistoryPage /> },
                         { path: '/system/loctrans', element: <LocTransListPage /> },
+                        { path: '/system/locview', element: <LocViewListPage /> },
                     ],
                 },
                 {

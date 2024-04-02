@@ -1,15 +1,15 @@
 import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { Box, Button, Typography } from '@mui/material'
+import { Box } from '@mui/material'
 
 import TitleBar from '#/components/common/menu/TitleBar'
 import CustomDataGrid from '#/components/common/table/datagrid'
-import { useGetLocTransList } from '#/hooks/queries/system'
+import { useGetLocViewList } from '#/hooks/queries/system'
 
 import SearchFilter from '../Filter'
 import { columns } from './grid-columns'
 
-const LocTransList = () => {
+const LocViewList = () => {
     const navigate = useNavigate()
     const [isSearchClick, setIsSearchClick] = useState(true)
     const [fetchData, setFetchData] = useState({ count: 0, lists: [] })
@@ -19,7 +19,7 @@ const LocTransList = () => {
         page: 1,
         limit: 50, // 1회 요청에 받을수 있는 데이터 수
     })
-    const { data: apiResult } = useGetLocTransList(queryParams, {
+    const { data: apiResult } = useGetLocViewList(queryParams, {
         enabled: true,
     })
 
@@ -54,7 +54,7 @@ const LocTransList = () => {
 
     return (
         <Box>
-            <TitleBar title={`위치정보 처리 조회`} />
+            <TitleBar title={`위치이력 열람 내역`} />
             <SearchFilter onSearch={handleSearch} />
             {fetchData && (
                 <Box
@@ -82,4 +82,4 @@ const LocTransList = () => {
     )
 }
 
-export default LocTransList
+export default LocViewList

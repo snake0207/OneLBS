@@ -52,6 +52,12 @@ const getLocTransList = (data) => {
 }
 // ------------------ END 위치정보 처리이력 -----------------------------
 
+// ------------------ START 위치이력 열람내역 -----------------------------
+const getLocViewList = (data) => {
+    return getAPI({ endPoint: API_PATH.system.loc_view, data })
+}
+// ------------------ END 위치이력 열람내역 -----------------------------
+
 export default {
     getServices, // 서비스 목록
     postServiceRegist, // 서비스 등록
@@ -64,4 +70,6 @@ export default {
     getDeleteUE, // DELETE-one
 
     getLocTransList,
+
+    getLocViewList,
 }

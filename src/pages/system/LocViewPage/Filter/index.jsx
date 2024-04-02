@@ -10,22 +10,18 @@ import DatePickerInput from '#/components/common/input/DatePickerInput'
 import TimePickerInput from '#/components/common/input/TimePickerInput'
 
 function SearchFilter({ onSearch }) {
-    const getProcType = () => [
-        { key: 0, value: 0, label: `3개월 만료` },
-        { key: 1, value: 1, label: `6개월 만료` },
-    ]
     const formik = useFormik({
         initialValues: {
             start_date: '',
             end_date: '',
             start_time: '',
             end_time: '',
-            procType: 0,
+            viewer: '',
         },
         onSubmit: (values) => {
             const start_date = `${values.start_date.split('-').join('')}${values.start_time}`
             const end_date = `${values.end_date.split('-').join('')}${values.end_time}`
-            if (onSearch) onSearch({ start_date, end_date, procType: values.procType })
+            if (onSearch) onSearch({ start_date, end_date, viewer: values.viewer })
         },
     })
 
@@ -35,7 +31,7 @@ function SearchFilter({ onSearch }) {
                 <TableHead>
                     <TableRow>
                         <TableCell sx={{}} colSpan={3}>{`조회기간`}</TableCell>
-                        <TableCell sx={{}} colSpan={3}>{`처리유형`}</TableCell>
+                        <TableCell sx={{}} colSpan={3}>{`열람자`}</TableCell>
                     </TableRow>
                     <TableRow>
                         <TableCell sx={{ width: '64%' }} colSpan={3}>
@@ -53,17 +49,7 @@ function SearchFilter({ onSearch }) {
                             </Stack>
                         </TableCell>
                         <TableCell sx={{ width: '20%' }} colSpan={2}>
-                            <Select
-                                name={'procType'}
-                                formik={formik}
-                                items={getProcType()}
-                                sx={{
-                                    width: '100%',
-                                    height: 40,
-                                    backgroundColor: 'form.main',
-                                    borderRadius: '4px',
-                                }}
-                            />
+                            <TextInput name="viewer" formik={formik} />
                         </TableCell>
                         <TableCell align="right">
                             <MuiSubButton

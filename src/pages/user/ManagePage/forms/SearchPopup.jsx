@@ -1,6 +1,6 @@
 import { MuiSubButton } from '#/components/common/button/MuiButton'
 import TextInput from '#/components/common/input/TextInput'
-import { useGetServiceCodeDup } from '#/hooks/queries/system'
+import { useGetUserIdDup } from '#/hooks/queries/user'
 import {
     Button,
     Dialog,
@@ -34,10 +34,10 @@ const SearchPopup = ({ isOpen, draggable = true, title, onCancel, onConfirm }) =
     const [message, setMessage] = useState('')
     const [isFetchState, setIsFetchState] = useState(false)
     const [queryParams, setQueryParams] = useState({
-        serviceCode: '',
+        userid: '',
     })
 
-    const { data: apiResult } = useGetServiceCodeDup(queryParams, {
+    const { data: apiResult } = useGetUserIdDup(queryParams, {
         enabled: isFetchState,
     })
 
@@ -48,7 +48,7 @@ const SearchPopup = ({ isOpen, draggable = true, title, onCancel, onConfirm }) =
 
     const formik = useFormik({
         initialValues: {
-            serviceCode: '',
+            userid: '',
         },
         onSubmit: (values) => {
             setIsFetchState(true)
@@ -58,7 +58,8 @@ const SearchPopup = ({ isOpen, draggable = true, title, onCancel, onConfirm }) =
 
     useEffect(() => {
         if (apiResult) {
-            const msg = `* 조회하신 ${queryParams.serviceCode} 는 ${apiResult.result === '0000' ? '사용가능 합니다.' : '이미 사용중 입니다.'}`
+            console.log('apiResult : ', apiResult)
+            const msg = `* 조회하신 ${queryParams.userid} 는 ${apiResult.result === '0000' ? '사용가능 합니다.' : '이미 사용중 입니다.'}`
             setMessage(msg)
             setIsFetchState(false)
         }
@@ -83,8 +84,8 @@ const SearchPopup = ({ isOpen, draggable = true, title, onCancel, onConfirm }) =
                 }}
             />
             <DialogContent dividers={false}>
-                <Stack direction="row" mb={2}>
-                    <TextInput name="serviceCode" formik={formik} />
+                <Stack direction="row" mb={2} spacing={0.5}>
+                    <TextInput name="userid" formik={formik} />
                     <MuiSubButton name="search" title="검색" onClick={formik.handleSubmit} />
                 </Stack>
                 {apiResult && (
@@ -105,7 +106,7 @@ const SearchPopup = ({ isOpen, draggable = true, title, onCancel, onConfirm }) =
                         color="primary"
                         onClick={() => {
                             setOpen(false)
-                            onConfirm(queryParams.serviceCode)
+                            onConfirm(queryParams.userid)
                         }}
                         autoFocus
                     >

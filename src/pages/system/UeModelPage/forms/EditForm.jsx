@@ -129,7 +129,7 @@ const EditForm = () => {
 
     return (
         <Box>
-            <TitleBar title={`단말 모델 등록`} />
+            <TitleBar title={`단말 모델 정보 수정`} />
             <form style={{ width: '100%' }}>
                 <Box sx={style.contentBox}>
                     <Box display="flex" alignItems="center" mb={2}>

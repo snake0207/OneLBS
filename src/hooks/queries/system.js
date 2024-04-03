@@ -12,7 +12,7 @@ export const useGetServices = (queryParams = {}, options) => {
     return { data: data?.data }
 }
 // 서비스 등록 시 코드 중복 체크
-export const useGetServiceCode = (queryParams = {}, options) => {
+export const useGetServiceCodeDup = (queryParams = {}, options) => {
     const { data } = useQuery({
         queryKey: ['get-service-code', queryParams],
         queryFn: () => system.getServiceCode(queryParams),
@@ -70,9 +70,8 @@ export const usePostUpdateUE = () => {
         mutationFn: system.postUpdateUE,
     })
 }
-// ----------------- End of 단말 모델 관리 ----------------------------------
 
-// ----------------- Start 위치정보 처리이력 ----------------------------------
+// 위치정보 처리이력
 export const useGetLocTransList = (queryParams = {}, options) => {
     console.log('useGetLocTransList : ', queryParams)
     const { data } = useQuery({
@@ -82,9 +81,8 @@ export const useGetLocTransList = (queryParams = {}, options) => {
     })
     return { data: data?.data }
 }
-// ----------------- End 위치정보 처리이력 ----------------------------------
 
-// ----------------- Start 위치이력 열람내역 ----------------------------------
+// 위치이력 열람내역
 export const useGetLocViewList = (queryParams = {}, options) => {
     console.log('useGetLocViewList : ', queryParams)
     const { data } = useQuery({
@@ -94,4 +92,3 @@ export const useGetLocViewList = (queryParams = {}, options) => {
     })
     return { data: data?.data }
 }
-// ----------------- End 위치이력 열람내역 ----------------------------------

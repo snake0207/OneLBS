@@ -130,28 +130,27 @@
             "children": [
                 {
                     "menuId": 510,
-                    "name": "User List",
+                    "name": "User Management",
                     "menuOrder": 51,
                     "rootMenuId": 500,
-                    "menuUrl": "/mgmt/account/userlist",
-                    "icon": "UserIcon",
-                    "label": "사용자정보 관리"
+                    "menuUrl": "/user/manage/list",
+                    "label": "사용자 정보관리"
                 },
                 {
                     "menuId": 520,
-                    "name": "User Login History",
+                    "name": "User Permission",
                     "menuOrder": 52,
                     "rootMenuId": 500,
-                    "menuUrl": "/mgmt/account/permission",
+                    "menuUrl": "/user/permission",
                     "label": "권한 관리"
                 },
                 {
                     "menuId": 530,
-                    "name": "사용자 이력 관리",
+                    "name": "사용자 이력관리",
                     "menuOrder": 53,
                     "rootMenuId": 500,
-                    "menuUrl": "/mgmt/account/history",
-                    "label": "사용자이력 관리"
+                    "menuUrl": "/user/history",
+                    "label": "사용자 이력관리"
                 }
             ]
         }

@@ -56,6 +56,8 @@ const HELPER_TEXT = {
     remarksRequired: '비고란을 입력해 주세요.',
     suplVersionRequired: 'SUPL Ver정보 입력해 주세요.',
     ksaVersionRequired: 'KSA Ver정보 입력해 주세요.',
+
+    phoneNumberRequired: '전화번호를 입력해 주세요.',
 }
 
 const REGEXP = {
@@ -65,6 +67,7 @@ const REGEXP = {
     passwordIncludeNumber: /^(?=.*\d).*$/, // 숫자 1개 이상 포함
     passwordIncludeUppercase: /^(?=.*[A-Z]).*$/, // 영문 대문자 1개 이상 포함
     coordinates: /^([-+]?\d{1,3}(?:\.\d{1,7})?)$/, // 위경도
+    phoneNumber: /^\d{10}$|^\d{11}$/,
 }
 
 export const loginSchema = yup.object({
@@ -186,6 +189,19 @@ export const registUESchema = yup.object({
     remarks: yup.string().required(HELPER_TEXT.remarksRequired),
     suplVersion: yup.string().required(HELPER_TEXT.suplVersionRequired),
     ksaVersion: yup.string().required(HELPER_TEXT.ksaVersionRequired),
+})
+
+// 사용자관리 등록, 수정 화면에서 사용
+// ~src/pages/user/ManagePage/forms
+export const registUserSchema = yup.object({
+    userid: yup
+        .string()
+        // .min(8, HELPER_TEXT.useridMinLength)
+        .max(12, HELPER_TEXT.useridMaxLength)
+        .required(HELPER_TEXT.useridRequired),
+    company: yup.string().required(HELPER_TEXT.companyRequired),
+    phoneNo: yup.string().matches(REGEXP.phoneNumber, HELPER_TEXT.phoneNumberRequired),
+    ipAddr_1: yup.string().required(HELPER_TEXT.ipRequired),
 })
 
 export const otpSchema = yup.object({

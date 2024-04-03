@@ -20,14 +20,9 @@ import TablePage from '#/pages/DemoPage/TablePage'
 import ProfilePage from '#/pages/ProfilePage'
 import EmptyLayout from '#/layouts/EmptyLayout'
 import NotFoundPage from '#/pages/NotFoundPage'
-import UserListPage from '#/pages/users/UserListPage'
-import LoginHistoryPage from '#/pages/users/LoginHistoryPage'
-import PermissionHistoryPage from '#/pages/users/PermissionHistoryPage'
-import IpManagePage from '#/pages/users/IpManagePage'
 import DashboardPage from '#/pages/DemoPage/DashboardPage'
 import PrivateRoute from '#/routes/PrivateRoute'
 import PermissionManagementDemoPage from '#/pages/DemoPage/PermissionManagementDemoPage'
-import PermissionManagementPage from '#/pages/PermissionManagementPage'
 import ApprovalHistoryPage from '#/pages/ApprovalHistoryPage/index.jsx'
 import ApprovalHistoryDetailPage from '#/pages/ApprovalHistoryPage/DetailPage/index.jsx'
 import MapSearchPage from '#/pages/search/MapSearchPage'
@@ -39,6 +34,9 @@ import { ServiceEditPage, ServiceListPage, ServiceRegistPage } from '#/pages/sys
 import { UeModelEditPage, UeModelListPage, UeModelRegistPage } from '#/pages/system/UeModelPage'
 import { LocTransListPage } from '#/pages/system/LocTransPage'
 import { LocViewListPage } from '#/pages/system/LocViewPage'
+import { UserEditPage, UserListPage, UserRegistPage } from '#/pages/user/ManagePage'
+import { UserHistoryListPage } from '#/pages/user/HistoryPage'
+import { PermissionEditPage } from '#/pages/user/PermissionPage'
 
 const Routes = () => {
     return useRoutes([
@@ -53,19 +51,6 @@ const Routes = () => {
                         // search management
                         { path: '/search-management/map', element: <MapSearchPage /> },
                         { path: '/poi-view/map', element: <POISearchPage /> },
-                        // user management
-                        { path: '/mgmt/account/userlist', element: <UserListPage /> },
-                        { path: '/mgmt/account/history', element: <LoginHistoryPage /> },
-                        {
-                            path: '/mgmt/account/history',
-                            element: <PermissionHistoryPage />,
-                        },
-                        { path: '/user-management/ip-access', element: <IpManagePage /> },
-                        // permission management
-                        {
-                            path: '/mgmt/account/permission',
-                            element: <PermissionManagementPage />,
-                        },
                         // approval history
                         { path: '/approval/:type?', element: <ApprovalHistoryPage /> },
 
@@ -79,6 +64,12 @@ const Routes = () => {
                         { path: '/system/engine', element: <ApprovalHistoryPage /> },
                         { path: '/system/loctrans', element: <LocTransListPage /> },
                         { path: '/system/locview', element: <LocViewListPage /> },
+                        // user management
+                        { path: '/user/manage/regist', element: <UserRegistPage /> },
+                        { path: '/user/manage/list', element: <UserListPage /> },
+                        { path: '/user/manage/edit', element: <UserEditPage /> },
+                        { path: '/user/permission', element: <PermissionEditPage /> },
+                        { path: '/user/history', element: <UserHistoryListPage /> },
                     ],
                 },
                 {

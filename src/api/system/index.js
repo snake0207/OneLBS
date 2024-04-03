@@ -20,7 +20,7 @@ const postServiceUpdate = (data) => {
     return postAPI({ endPoint: API_PATH.system.service_update, data })
 }
 
-// ------------------ START 단말 모델 관리 -----------------------------
+// 단말 모델 관리
 const postRegistUE = (data) => {
     console.log('postRegistUE : ', data)
     return postAPI({ endPoint: API_PATH.system.ue_regist, data })
@@ -44,32 +44,27 @@ const getDeleteUE = (data) => {
     console.log(data)
     return getAPI({ endPoint: API_PATH.system.ue_delete, data })
 }
-// ------------------ END 단말 모델 관리 -----------------------------
 
-// ------------------ START 위치정보 처리이력 -----------------------------
+// 위치정보 처리이력
 const getLocTransList = (data) => {
     return getAPI({ endPoint: API_PATH.system.loc_trans, data })
 }
-// ------------------ END 위치정보 처리이력 -----------------------------
 
-// ------------------ START 위치이력 열람내역 -----------------------------
+// 위치이력 열람내역
 const getLocViewList = (data) => {
     return getAPI({ endPoint: API_PATH.system.loc_view, data })
 }
-// ------------------ END 위치이력 열람내역 -----------------------------
 
 export default {
-    getServices, // 서비스 목록
-    postServiceRegist, // 서비스 등록
-    postServiceUpdate, // 서비스 업데이트
-    getServiceCode, // 서비스코드 검색
-    postRegistUE, // CREATE
-    getUEs, // READ
-    postUpdateUE, // UPDATE
-    postDeleteUEs, // DELETE-multi
-    getDeleteUE, // DELETE-one
-
+    getServices,
+    postServiceRegist,
+    postServiceUpdate,
+    getServiceCode,
+    postRegistUE,
+    getUEs,
+    postUpdateUE,
+    postDeleteUEs,
+    getDeleteUE,
     getLocTransList,
-
     getLocViewList,
 }

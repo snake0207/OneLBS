@@ -27,7 +27,7 @@ const TimePickerInput = ({ name, formik, isDisable }) => {
                 ampm={false}
                 format={'HH'}
                 views={['hours']}
-                sx={{ width: '50%' }}
+                sx={{ width: '50%', backgroundColor: 'white' }}
                 // viewRenderers={{
                 //     hours: renderTimeViewClock,
                 //     minutes: renderTimeViewClock,

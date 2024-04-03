@@ -48,4 +48,13 @@ export const API_PATH = {
         loc_trans: '/loc-trans',
         loc_view: '/loc-view',
     },
+    user: {
+        user_regist: '/user-regist',
+        user_dup: '/user-dup',
+        user_list: '/user-list',
+        user_update: '/user-update',
+        user_delete: '/user-delete',
+        menu_permission: '/menu-permission',
+        user_history: '/user-history',
+    },
 }

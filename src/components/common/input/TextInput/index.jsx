@@ -25,7 +25,7 @@ const TextInput = ({
         path.split('.').reduce((acc, current) => (acc ? acc[current] : ''), obj)
 
     useEffect(() => {
-        console.log(extractChangedObjectOfChangedJson(formik.initialValues, formik.values))
+        // console.log(extractChangedObjectOfChangedJson(formik.initialValues, formik.values))
     }, [formik.values])
 
     return (

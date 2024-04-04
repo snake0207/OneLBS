@@ -40,7 +40,7 @@ const style = {
         width: '10%',
     },
     cellInput: {
-        width: '35%',
+        width: '15%',
     },
 }
 

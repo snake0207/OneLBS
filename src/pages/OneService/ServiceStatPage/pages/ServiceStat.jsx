@@ -78,7 +78,7 @@ const ServiceStat = () => {
                         sort={{ field: 'id', orderby: 'desc' }}
                         onPageChange={handleOnPageChange}
                         onRowClick={handleSelectRow}
-                        activeTools={['export']}
+                        activeTools={['export', 'column']}
                         pageInit={queryParams.page === 1 ? true : false}
                     />
                 </Box>

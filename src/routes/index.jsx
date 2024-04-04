@@ -38,7 +38,8 @@ import { UserEditPage, UserListPage, UserRegistPage } from '#/pages/OneUser/Mana
 import { UserHistoryListPage } from '#/pages/OneUser/HistoryPage'
 import { PermissionEditPage } from '#/pages/OneUser/PermissionPage'
 import { TriggerListPage } from '#/pages/OneService/TriggerPage'
-import { CloudStatPage } from '#/pages/OneService/CloudPage'
+import { CloudStatPage } from '#/pages/OneService/CloudStatPage'
+import { ServiceStatPage } from '#/pages/OneService/ServiceStatPage'
 
 const Routes = () => {
     return useRoutes([
@@ -57,6 +58,7 @@ const Routes = () => {
                         { path: '/approval/:type?', element: <ApprovalHistoryPage /> },
 
                         // 서비스 현황
+                        { path: '/service-status/service', element: <ServiceStatPage /> },
                         { path: '/service-status/cloud', element: <CloudStatPage /> },
                         { path: '/service-status/trigger', element: <TriggerListPage /> },
                         // 시스템 관리

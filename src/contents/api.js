@@ -59,6 +59,7 @@ export const API_PATH = {
         user_history: '/user-history',
     },
     service: {
+        service_stat: '/service-stat',
         cloud_stat: '/cloud-stat',
         trigger: '/trigger-list',
     },

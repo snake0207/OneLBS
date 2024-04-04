@@ -593,5 +593,23 @@
                 "coverage": 3.2
             }
         ]
+    },
+    "service-stat": {
+        "count": 11,
+        "lists": [
+            {
+                "id": 1,
+                "event_date": "2024-03-22 11:31:03",
+                "serviceCode": "safebox",
+                "ueModel": "SM-S928N",
+                "posInit": "NI",
+                "plane": "UP",
+                "posMethod": "AGNSS_MSB",
+                "total": 1000,
+                "succ": 900,
+                "succRate": 90,
+                "respTime": 5.7
+            }
+        ]
     }
 }

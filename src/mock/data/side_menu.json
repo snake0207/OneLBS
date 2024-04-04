@@ -12,35 +12,43 @@
         },
         {
             "menuId": 200,
-            "name": "서비스",
+            "name": "서비스 현황",
             "menuOrder": 2,
-            "menuUrl": "/service",
+            "menuUrl": "",
             "icon": "service",
             "label": "서비스 현황",
             "children": [
                 {
                     "menuId": 210,
-                    "name": "이력조회",
+                    "name": "서비스 이력조회",
                     "menuOrder": 21,
                     "rootMenuId": 200,
-                    "menuUrl": "/search-management/map",
-                    "label": "이력조회"
+                    "menuUrl": "/service-status/history/list",
+                    "label": "서비스 이력조회"
                 },
                 {
                     "menuId": 220,
-                    "name": "위치 트리거 조회",
+                    "name": "서비스 통계",
                     "menuOrder": 22,
                     "rootMenuId": 200,
-                    "menuUrl": "/search-management/map",
-                    "label": "위치 트리거 조회"
+                    "menuUrl": "/service-status/service",
+                    "label": "서비스 통계"
                 },
                 {
                     "menuId": 230,
-                    "name": "통계",
+                    "name": "크라우드소싱 통계",
                     "menuOrder": 23,
                     "rootMenuId": 200,
-                    "menuUrl": "/search-management/map",
-                    "label": "통계"
+                    "menuUrl": "/service-status/cloud",
+                    "label": "크라우드소싱 통계"
+                },
+                {
+                    "menuId": 240,
+                    "name": "위치 트리거 조회",
+                    "menuOrder": 24,
+                    "rootMenuId": 200,
+                    "menuUrl": "/service-status/trigger",
+                    "label": "위치 트리거 조회"
                 }
             ]
         },

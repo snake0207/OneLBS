@@ -30,13 +30,15 @@ import POISearchPage from '#/pages/search/POISearchPage'
 import MapSearchDetail from '#/pages/search/MapSearchDetail'
 import POISearchDetail from '#/pages/search/POISearchDetail'
 import DetailWithMobileLayout from '#/layouts/DetailWithMobileLayout/index.jsx'
-import { ServiceEditPage, ServiceListPage, ServiceRegistPage } from '#/pages/system/ServicePage'
-import { UeModelEditPage, UeModelListPage, UeModelRegistPage } from '#/pages/system/UeModelPage'
-import { LocTransListPage } from '#/pages/system/LocTransPage'
-import { LocViewListPage } from '#/pages/system/LocViewPage'
-import { UserEditPage, UserListPage, UserRegistPage } from '#/pages/user/ManagePage'
-import { UserHistoryListPage } from '#/pages/user/HistoryPage'
-import { PermissionEditPage } from '#/pages/user/PermissionPage'
+import { ServiceEditPage, ServiceListPage, ServiceRegistPage } from '#/pages/OneSystem/ServicePage'
+import { UeModelEditPage, UeModelListPage, UeModelRegistPage } from '#/pages/OneSystem/UeModelPage'
+import { LocTransListPage } from '#/pages/OneSystem/LocTransPage'
+import { LocViewListPage } from '#/pages/OneSystem/LocViewPage'
+import { UserEditPage, UserListPage, UserRegistPage } from '#/pages/OneUser/ManagePage'
+import { UserHistoryListPage } from '#/pages/OneUser/HistoryPage'
+import { PermissionEditPage } from '#/pages/OneUser/PermissionPage'
+import { TriggerListPage } from '#/pages/OneService/TriggerPage'
+import { CloudStatPage } from '#/pages/OneService/CloudPage'
 
 const Routes = () => {
     return useRoutes([
@@ -54,7 +56,10 @@ const Routes = () => {
                         // approval history
                         { path: '/approval/:type?', element: <ApprovalHistoryPage /> },
 
-                        // Working page
+                        // 서비스 현황
+                        { path: '/service-status/cloud', element: <CloudStatPage /> },
+                        { path: '/service-status/trigger', element: <TriggerListPage /> },
+                        // 시스템 관리
                         { path: '/system/service/list', element: <ServiceListPage /> },
                         { path: '/system/service/regist', element: <ServiceRegistPage /> },
                         { path: '/system/service/edit', element: <ServiceEditPage /> },
@@ -64,7 +69,7 @@ const Routes = () => {
                         { path: '/system/engine', element: <ApprovalHistoryPage /> },
                         { path: '/system/loctrans', element: <LocTransListPage /> },
                         { path: '/system/locview', element: <LocViewListPage /> },
-                        // user management
+                        // 사용자 관리
                         { path: '/user/manage/regist', element: <UserRegistPage /> },
                         { path: '/user/manage/list', element: <UserListPage /> },
                         { path: '/user/manage/edit', element: <UserEditPage /> },

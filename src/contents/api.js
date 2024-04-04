@@ -58,4 +58,8 @@ export const API_PATH = {
         permission_update: '/permission-update',
         user_history: '/user-history',
     },
+    service: {
+        cloud_stat: '/cloud-stat',
+        trigger: '/trigger-list',
+    },
 }

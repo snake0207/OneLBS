@@ -467,5 +467,195 @@
       "ipAddr_4": "",
       "ipAddr_5": "127.0.0.1"
     }
+  ],
+  "permission-info": {
+    "menus": [
+      {
+        "key": "L100_M000_S000",
+        "value": {
+          "admin": "N",
+          "operator": "N"
+        }
+      },
+      {
+        "key": "L200_M210_S000",
+        "value": {
+          "admin": "Y",
+          "operator": "N"
+        }
+      },
+      {
+        "key": "L200_M220_S000",
+        "value": {
+          "admin": "N",
+          "operator": "Y"
+        }
+      },
+      {
+        "key": "L200_M230_S000",
+        "value": {
+          "admin": "Y",
+          "operator": "N"
+        }
+      },
+      {
+        "key": "L200_M240_S000",
+        "value": {
+          "admin": "Y",
+          "operator": "Y"
+        }
+      }
+    ]
+  },
+  "permission-update": [
+    {
+      "id": "69ac",
+      "L100_M000_S000": {
+        "admin": "N",
+        "operator": "N"
+      },
+      "L200_M210_S000": {
+        "admin": "Y",
+        "operator": "N"
+      },
+      "L200_M220_S000": {
+        "admin": "N",
+        "operator": "Y"
+      },
+      "L200_M230_S000": {
+        "admin": "Y",
+        "operator": "N"
+      },
+      "L200_M240_S000": {
+        "admin": "N",
+        "operator": "N"
+      }
+    },
+    {
+      "id": "8d91",
+      "L100_M000_S000": {
+        "admin": "N",
+        "operator": "N"
+      },
+      "L200_M210_S000": {
+        "admin": "Y",
+        "operator": "N"
+      },
+      "L200_M220_S000": {
+        "admin": "N",
+        "operator": "Y"
+      },
+      "L200_M230_S000": {
+        "admin": "Y",
+        "operator": "N"
+      },
+      "L200_M240_S000": {
+        "admin": "Y",
+        "operator": "Y"
+      },
+      "L300_M310_S000": {
+        "admin": "",
+        "operator": ""
+      },
+      "L300_M320_S000": {
+        "admin": "",
+        "operator": "Y"
+      },
+      "L400_M410_S000": {
+        "admin": "",
+        "operator": "Y"
+      },
+      "L400_M420_S000": {
+        "admin": "Y",
+        "operator": ""
+      },
+      "L400_M430_S000": {
+        "admin": "Y",
+        "operator": ""
+      },
+      "L400_M440_S000": {
+        "admin": "Y",
+        "operator": "Y"
+      },
+      "L400_M450_S000": {
+        "admin": "",
+        "operator": ""
+      },
+      "L500_M510_S000": {
+        "admin": "Y",
+        "operator": ""
+      },
+      "L500_M520_S000": {
+        "admin": "",
+        "operator": "Y"
+      },
+      "L500_M530_S000": {
+        "admin": "",
+        "operator": ""
+      }
+    },
+    {
+      "id": "d15d",
+      "L100_M000_S000": {
+        "admin": "N",
+        "operator": "N"
+      },
+      "L200_M210_S000": {
+        "admin": "Y",
+        "operator": "N"
+      },
+      "L200_M220_S000": {
+        "admin": "N",
+        "operator": "Y"
+      },
+      "L200_M230_S000": {
+        "admin": "Y",
+        "operator": "N"
+      },
+      "L200_M240_S000": {
+        "admin": "Y",
+        "operator": "Y"
+      },
+      "L300_M310_S000": {
+        "admin": "",
+        "operator": ""
+      },
+      "L300_M320_S000": {
+        "admin": "",
+        "operator": "Y"
+      },
+      "L400_M410_S000": {
+        "admin": "",
+        "operator": "Y"
+      },
+      "L400_M420_S000": {
+        "admin": "Y",
+        "operator": ""
+      },
+      "L400_M430_S000": {
+        "admin": "Y",
+        "operator": ""
+      },
+      "L400_M440_S000": {
+        "admin": "Y",
+        "operator": "Y"
+      },
+      "L400_M450_S000": {
+        "admin": "",
+        "operator": ""
+      },
+      "L500_M510_S000": {
+        "admin": "Y",
+        "operator": ""
+      },
+      "L500_M520_S000": {
+        "admin": "",
+        "operator": "Y"
+      },
+      "L500_M530_S000": {
+        "admin": "Y",
+        "operator": "Y"
+      }
+    }
   ]
 }

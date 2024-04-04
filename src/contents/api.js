@@ -54,7 +54,8 @@ export const API_PATH = {
         user_list: '/user-list',
         user_update: '/user-update',
         user_delete: '/user-delete',
-        menu_permission: '/menu-permission',
+        permission_info: '/permission-info',
+        permission_update: '/permission-update',
         user_history: '/user-history',
     },
 }

@@ -41,6 +41,21 @@ export const usePostDeleteUser = () => {
     })
 }
 // 메뉴 권한 관리
+export const useGetMenuPermission = (queryParams = {}, options) => {
+    // console.log('useGetMenuPermission : ', queryParams)
+    const { data } = useQuery({
+        queryKey: ['get-user-permission', queryParams],
+        queryFn: () => user.getMenuPermission(queryParams),
+        ...options,
+    })
+    return { data: data?.data }
+}
+// 메뉴 권한 수정
+export const usePostUpdatePermission = () => {
+    return useMutation({
+        mutationFn: user.postUpdateMenuPermission,
+    })
+}
 // 사용자 이력관리
 export const useGetUserHistoryList = (queryParams = {}, options) => {
     console.log('useGetUserHistoryList : ', queryParams)

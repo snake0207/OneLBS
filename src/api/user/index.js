@@ -25,6 +25,14 @@ const postDeleteUser = (data) => {
     return postAPI({ endPoint: API_PATH.user.user_delete, data })
 }
 // 메뉴 권한 관리
+const getMenuPermission = (data) => {
+    return getAPI({ endPoint: API_PATH.user.permission_info, data })
+}
+// 메뉴 권한 업데이트
+const postUpdateMenuPermission = (data) => {
+    console.log('postUpdateMenuPermission : ', data)
+    return postAPI({ endPoint: API_PATH.user.permission_update, data })
+}
 // 사용자 이력관리
 const getUserHistoryList = (data) => {
     return getAPI({ endPoint: API_PATH.user.user_history, data })
@@ -36,5 +44,7 @@ export default {
     postRegistUser,
     postUpdateUser,
     postDeleteUser,
+    getMenuPermission,
+    postUpdateMenuPermission,
     getUserHistoryList,
 }

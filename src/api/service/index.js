@@ -1,6 +1,14 @@
 import { API_PATH } from '#/contents/api'
 import { getAPI, postAPI } from '../axios'
 
+// 서비스 이력
+const getServiceHistory = (data) => {
+    return getAPI({ endPoint: API_PATH.service.service_history, data })
+}
+// 서비스 이력 상세
+const getServiceHistoryDetail = (data) => {
+    return getAPI({ endPoint: API_PATH.service.service_history_detail, data })
+}
 // 서비스 통계
 const getServiceStat = (data) => {
     return getAPI({ endPoint: API_PATH.service.service_stat, data })
@@ -13,13 +21,10 @@ const getCloudStat = (data) => {
 const getTriggerList = (data) => {
     return getAPI({ endPoint: API_PATH.service.trigger, data })
 }
-// 사용자정보 삭제
-// const postDeleteUser = (data) => {
-//     console.log('postDeleteUser : ', data)
-//     return postAPI({ endPoint: API_PATH.user.user_delete, data })
-// }
 
 export default {
+    getServiceHistory,
+    getServiceHistoryDetail,
     getServiceStat,
     getCloudStat,
     getTriggerList,

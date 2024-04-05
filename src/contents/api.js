@@ -58,7 +58,13 @@ export const API_PATH = {
         permission_update: '/permission-update',
         user_history: '/user-history',
     },
+    facility: {
+        bts_search: '/facility-bts-search',
+        sync_history: '/facility-sync-history',
+    },
     service: {
+        service_history_detail: '/service-history-detail',
+        service_history: '/service-history',
         service_stat: '/service-stat',
         cloud_stat: '/cloud-stat',
         trigger: '/trigger-list',

@@ -23,7 +23,7 @@
                     "name": "서비스 이력조회",
                     "menuOrder": 21,
                     "rootMenuId": 200,
-                    "menuUrl": "/service-status/history/list",
+                    "menuUrl": "/service-status/history",
                     "label": "서비스 이력조회"
                 },
                 {
@@ -65,13 +65,21 @@
                     "name": "Full History View",
                     "menuOrder": 31,
                     "rootMenuId": 300,
-                    "menuUrl": "/facility/station",
-                    "label": "시설정보"
+                    "menuUrl": "/facility/bts",
+                    "label": "기지국 시설정보"
                 },
                 {
                     "menuId": 320,
-                    "name": "User History View",
+                    "name": "Full History View",
                     "menuOrder": 32,
+                    "rootMenuId": 300,
+                    "menuUrl": "/facility/wifi",
+                    "label": "WiFi 시설정보"
+                },
+                {
+                    "menuId": 330,
+                    "name": "User History View",
+                    "menuOrder": 33,
                     "rootMenuId": 300,
                     "menuUrl": "/facility/sync-history",
                     "label": "정보 현행화 이력"

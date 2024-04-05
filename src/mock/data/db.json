@@ -611,5 +611,143 @@
                 "respTime": 5.7
             }
         ]
+    },
+    "service-history": {
+        "count": 5,
+        "lists": [
+            {
+                "id": 1,
+                "center": "분당",
+                "req_date": "2024-03-22 11:31:03",
+                "resp_date": "2024-03-22 11:31:03",
+                "serviceCode": "safebox",
+                "opType": "POS_NI",
+                "reqNo": "01083301240",
+                "targetNo": "01083301240",
+                "posMethod": "CELL",
+                "ueModel": "SM-S911N",
+                "respCode": "0",
+                "respTime": 5.7
+            }
+        ]
+    },
+    "service-history-detail": {
+        "poslist": {
+            "count": 6,
+            "lists": [
+                { "posMethod": "CELL", "algorithm": "POP" },
+                { "posMethod": "GNSS", "algorithm": "GNSS" },
+                { "posMethod": "CELL", "algorithm": "POP" },
+                { "posMethod": "GNSS", "algorithm": "GNSS" },
+                { "posMethod": "CELL", "algorithm": "POP" },
+                { "posMethod": "GNSS", "algorithm": "GNSS" }
+            ]
+        },
+        "btslist": {
+            "count": 2,
+            "lists": [
+                { "type": "LTE", "cellid": "45008:4311043", "serving": "Serving" },
+                { "type": "LTE", "cellid": "45008:4307456", "serving": "Neighbor" }
+            ]
+        },
+        "wifilist": {
+            "count": 3,
+            "lists": [
+                {
+                    "mac": "FB-AE-C0-61-7E-F4",
+                    "ssid": "kt giga",
+                    "grade": 2,
+                    "band": 80,
+                    "rssi": -82,
+                    "status": "Used"
+                },
+                {
+                    "mac": "A1-18-A3-8F-76-42",
+                    "ssid": "kidsshop",
+                    "grade": 1,
+                    "band": 87,
+                    "rssi": -61,
+                    "status": "Invalid"
+                },
+                {
+                    "mac": "2D-62-7C-56-A8-EC",
+                    "ssid": "lansoprazole",
+                    "grade": 2,
+                    "band": 60,
+                    "rssi": -32,
+                    "status": "CELL_RANGEOVER"
+                }
+            ]
+        },
+        "translist": {
+            "count": 3,
+            "lists": [
+                {
+                    "system": "CAPRI",
+                    "posMethod": "",
+                    "respCode": "0",
+                    "message": "{'3Q2Y9wr2xlpFDdaph3iCfw/48yYLG/x6pPOUoNctwYbBBVl2V//A4PWdUrqiKkyGxL7h73jyQSSadZm+Rb0L6dQ=='}"
+                },
+                {
+                    "system": "GMLC",
+                    "posMethod": "CELL",
+                    "respCode": "0",
+                    "message": "{'3Q2Y9wr2xlpFDdaph3iCfw/48yYLG/x6pPOUoNctwYbBBVl2V//A4PWdUrqiKkyGxL7h73jyQSSadZm+Rb0L6dQ=='}"
+                },
+                {
+                    "system": "KSA",
+                    "posMethod": "KSA3",
+                    "respCode": "0",
+                    "message": "{'3Q2Y9wr2xlpFDdaph3iCfw/48yYLG/x6pPOUoNctwYbBBVl2V//A4PWdUrqiKkyGxL7h73jyQSSadZm+Rb0L6dQ=='}"
+                }
+            ]
+        }
+    },
+    "facility-sync-history": {
+        "count": 3,
+        "lists": [
+            {
+                "id": 23,
+                "btsType": 1,
+                "start_date": "2024-03-22 11:31:03",
+                "end_date": "2024-03-22 11:31:03",
+                "procTime": 10,
+                "rowCount": 5128140,
+                "syncCount": 7062172
+            },
+            {
+                "id": 30,
+                "btsType": 3,
+                "start_date": "2024-03-22 11:31:03",
+                "end_date": "2024-03-22 11:31:03",
+                "procTime": 57,
+                "rowCount": 8561746,
+                "syncCount": 8811661
+            },
+            {
+                "id": 78,
+                "btsType": 4,
+                "start_date": "2024-03-22 11:31:03",
+                "end_date": "2024-03-22 11:31:03",
+                "procTime": 14,
+                "rowCount": 960473,
+                "syncCount": 4588645
+            }
+        ]
+    },
+    "facility-bts-search": {
+        "id": 23,
+        "cellid": "32679739",
+        "mcc": "450",
+        "mnc": "08",
+        "pci": "587",
+        "tac": "",
+        "ruid": "",
+        "dongCode": "111110000",
+        "address": "서울시 종로구 세종로",
+        "latitude": 36.12345,
+        "longitude": 127.7652,
+        "create_date": "2024-03-22 11:31:03",
+        "update_date": "2024-03-22 11:31:03"
     }
 }

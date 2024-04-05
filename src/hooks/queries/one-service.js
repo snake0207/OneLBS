@@ -2,6 +2,26 @@ import service from '#/api/service'
 
 import { useMutation, useQuery } from '@tanstack/react-query'
 
+// 서비스 이력조회
+export const useGetServiceHistory = (queryParams = {}, options) => {
+    console.log('useGetServiceHistory : ', queryParams)
+    const { data } = useQuery({
+        queryKey: ['get-service-history', queryParams],
+        queryFn: () => service.getServiceHistory(queryParams),
+        ...options,
+    })
+    return { data: data?.data }
+}
+// 서비스 이력조회 상세
+export const useGetServiceHistoryDetail = (queryParams = {}, options) => {
+    console.log('useGetServiceHistoryDetail : ', queryParams)
+    const { data } = useQuery({
+        queryKey: ['get-service-history-detail', queryParams],
+        queryFn: () => service.getServiceHistoryDetail(queryParams),
+        ...options,
+    })
+    return { data: data?.data }
+}
 // 서비스 통계
 export const useGetServiceStat = (queryParams = {}, options) => {
     console.log('useGetServiceStat : ', queryParams)

@@ -40,6 +40,9 @@ import { PermissionEditPage } from '#/pages/OneUser/PermissionPage'
 import { TriggerListPage } from '#/pages/OneService/TriggerPage'
 import { CloudStatPage } from '#/pages/OneService/CloudStatPage'
 import { ServiceStatPage } from '#/pages/OneService/ServiceStatPage'
+import { ServiceHistoryDetailPage, ServiceHistoryPage } from '#/pages/OneService/HistoryPage'
+import { SyncHistoryPage } from '#/pages/OneFacility/SyncHistoryPage'
+import { BtsInfoMapPage } from '#/pages/OneFacility/BtsInfoPage'
 
 const Routes = () => {
     return useRoutes([
@@ -57,7 +60,15 @@ const Routes = () => {
                         // approval history
                         { path: '/approval/:type?', element: <ApprovalHistoryPage /> },
 
+                        // 측위기반 정보 관리
+                        { path: '/facility/bts', element: <BtsInfoMapPage /> },
+                        { path: '/facility/sync-history', element: <SyncHistoryPage /> },
                         // 서비스 현황
+                        { path: '/service-status/history', element: <ServiceHistoryPage /> },
+                        {
+                            path: '/service-status/history/detail',
+                            element: <ServiceHistoryDetailPage />,
+                        },
                         { path: '/service-status/service', element: <ServiceStatPage /> },
                         { path: '/service-status/cloud', element: <CloudStatPage /> },
                         { path: '/service-status/trigger', element: <TriggerListPage /> },

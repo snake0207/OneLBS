@@ -43,6 +43,7 @@ import { ServiceStatPage } from '#/pages/OneService/ServiceStatPage'
 import { ServiceHistoryDetailPage, ServiceHistoryPage } from '#/pages/OneService/HistoryPage'
 import { SyncHistoryPage } from '#/pages/OneFacility/SyncHistoryPage'
 import { BtsInfoMapPage } from '#/pages/OneFacility/BtsInfoPage'
+import { WifiInfoMapPage } from '#/pages/OneFacility/WiFiInfoPage'
 
 const Routes = () => {
     return useRoutes([
@@ -62,6 +63,7 @@ const Routes = () => {
 
                         // 측위기반 정보 관리
                         { path: '/facility/bts', element: <BtsInfoMapPage /> },
+                        { path: '/facility/wifi', element: <WifiInfoMapPage /> },
                         { path: '/facility/sync-history', element: <SyncHistoryPage /> },
                         // 서비스 현황
                         { path: '/service-status/history', element: <ServiceHistoryPage /> },

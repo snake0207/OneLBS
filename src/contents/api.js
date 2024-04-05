@@ -59,6 +59,10 @@ export const API_PATH = {
         user_history: '/user-history',
     },
     facility: {
+        wifi_search: '/facility-wifi-search',
+        wifi_regist: '/facility-wifi-regist',
+        wifi_delete: '/facility-wifi-delete',
+        wifi_update: '/facility-wifi-update',
         bts_search: '/facility-bts-search',
         sync_history: '/facility-sync-history',
     },

@@ -749,5 +749,18 @@
         "longitude": 127.7652,
         "create_date": "2024-03-22 11:31:03",
         "update_date": "2024-03-22 11:31:03"
+    },
+    "facility-wifi-search": {
+        "id": 23,
+        "mac": "00a554dd12bb",
+        "ssid": "0",
+        "grade": "08",
+        "band": "587",
+        "building": "",
+        "floor": "",
+        "latitude": 36.12345,
+        "longitude": 127.7652,
+        "create_date": "2024-03-22 11:31:03",
+        "update_date": "2024-03-22 11:31:03"
     }
 }

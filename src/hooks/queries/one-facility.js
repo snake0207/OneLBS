@@ -12,6 +12,34 @@ export const useGetFacilityBtsSearch = (queryParams = {}, options) => {
     })
     return { data: data?.data }
 }
+// WiFi 검색
+export const useGetFacilityWifiSearch = (queryParams = {}, options) => {
+    console.log('useGetFacilityWifiSearch : ', queryParams)
+    const { data } = useQuery({
+        queryKey: ['get-facility-wifi-search', queryParams],
+        queryFn: () => facility.getFacilityWifiSearch(queryParams),
+        ...options,
+    })
+    return { data: data?.data }
+}
+// WiFi 등록
+export const usePostFacilityRegistWifi = (queryParams = {}, options) => {
+    return useMutation({
+        mutationFn: facility.postFacilityRegistWiFi,
+    })
+}
+// WiFi 수정
+export const usePostFacilityUpdateWifi = (queryParams = {}, options) => {
+    return useMutation({
+        mutationFn: facility.postFacilityUpdateWiFi,
+    })
+}
+// WiFi 삭제
+export const usePostFacilityDeleteWifi = (queryParams = {}, options) => {
+    return useMutation({
+        mutationFn: facility.postFacilityDeleteWiFi,
+    })
+}
 // 서비스 이력조회
 export const useGetFacilitySyncHistory = (queryParams = {}, options) => {
     console.log('useGetFacilitySyncHistory : ', queryParams)

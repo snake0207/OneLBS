@@ -10,6 +10,7 @@ import {
     TableBody,
     IconButton,
     Stack,
+    Tooltip,
 } from '@mui/material'
 import PlaylistAddCheckOutlinedIcon from '@mui/icons-material/PlaylistAddCheckOutlined'
 import ToggleOffOutlinedIcon from '@mui/icons-material/ToggleOffOutlined'
@@ -131,13 +132,17 @@ const DetailForm = () => {
                     </Box>
                     <Box>
                         {modeToggle ? (
-                            <IconButton onClick={() => setModeToggle((prev) => !prev)}>
-                                <FormatColorTextOutlinedIcon />
-                            </IconButton>
+                            <Tooltip title={`수정모드로 전환`} arrow placement="bottom-start">
+                                <IconButton onClick={() => setModeToggle((prev) => !prev)}>
+                                    <EditNoteOutlinedIcon />
+                                </IconButton>
+                            </Tooltip>
                         ) : (
-                            <IconButton onClick={() => setModeToggle((prev) => !prev)}>
-                                <EditNoteOutlinedIcon />
-                            </IconButton>
+                            <Tooltip title={`신규 등록모드로 전환`} arrow placement="bottom-start">
+                                <IconButton onClick={() => setModeToggle((prev) => !prev)}>
+                                    <FormatColorTextOutlinedIcon />
+                                </IconButton>
+                            </Tooltip>
                         )}
                     </Box>
                 </Box>
@@ -187,7 +192,7 @@ const DetailForm = () => {
                 </Box>
 
                 {/* 측위 목록 */}
-                <Box sx={{ width: '100%', height: '400px', backgroundColor: 'lightgray' }}>
+                <Box sx={{ width: '100%', height: '400px', backgroundColor: 'lightgray', mb: 4 }}>
                     지도영역
                 </Box>
                 {/* 하단 버튼 */}
@@ -212,10 +217,10 @@ const DetailForm = () => {
                     <Box align={'right'}>
                         <Stack spacing={2} direction="row" sx={{ justifyContent: 'flex-end' }}>
                             <MuiMainButton
-                                disabled={isDeletePending || isUpdatePending}
-                                name="cancel"
-                                title="목록"
-                                onClick={() => navigate('/system/ue/list')}
+                                disabled={isRegistPending}
+                                name="list"
+                                title="초기화"
+                                onClick={() => console.log('Init....')}
                             />
                             <MuiMainButton
                                 disabled={isDeletePending || isUpdatePending}

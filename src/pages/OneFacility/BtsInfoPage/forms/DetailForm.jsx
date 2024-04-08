@@ -8,6 +8,7 @@ import TitleBar from '#/components/common/menu/TitleBar'
 import style from './style.module'
 import SearchFilter from '../Filter'
 import { useGetFacilityBtsSearch } from '#/hooks/queries/one-facility'
+import { OllehMap } from '#/components/common/map/ollehMap'
 
 const TitleArea = ({ title }) => {
     return (
@@ -101,7 +102,8 @@ const DetailForm = () => {
 
                 {/* 측위 목록 */}
                 <Box sx={{ width: '100%', height: '400px', backgroundColor: 'lightgray' }}>
-                    지도영역
+                    <OllehMap lat={apiResult?.latitude} lon={apiResult?.longitude} />
+                    {/* <OllehMap lat={957785.7} lon={1944017.52} /> */}
                 </Box>
             </Box>
         </Box>

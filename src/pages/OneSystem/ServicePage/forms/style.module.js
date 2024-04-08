@@ -89,8 +89,10 @@ const style = {
         },
     },
     cellTitle: {
-        color: 'white',
-        backgroundColor: '#009ACC',
+        // color: 'white',
+        // backgroundColor: '#009ACC',
+        // color: 'rgb(139, 161, 183)',
+        // backgroundColor: 'rgb(11, 41, 72)',
     },
 }
 

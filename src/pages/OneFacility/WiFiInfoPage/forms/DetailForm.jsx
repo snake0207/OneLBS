@@ -11,12 +11,10 @@ import {
     IconButton,
     Stack,
     Tooltip,
+    Button,
 } from '@mui/material'
 import PlaylistAddCheckOutlinedIcon from '@mui/icons-material/PlaylistAddCheckOutlined'
-import ToggleOffOutlinedIcon from '@mui/icons-material/ToggleOffOutlined'
-import ToggleOnOutlinedIcon from '@mui/icons-material/ToggleOnOutlined'
-import FormatColorTextOutlinedIcon from '@mui/icons-material/FormatColorTextOutlined'
-import EditNoteOutlinedIcon from '@mui/icons-material/EditNoteOutlined'
+import ChangeCircleOutlinedIcon from '@mui/icons-material/ChangeCircleOutlined'
 
 import TitleBar from '#/components/common/menu/TitleBar'
 
@@ -29,6 +27,24 @@ import {
     usePostFacilityUpdateWifi,
 } from '#/hooks/queries/one-facility'
 import { MuiMainButton } from '#/components/common/button/MuiButton'
+import { useFormik } from 'formik'
+import TextInput from '#/components/common/input/TextInput'
+import dayjs from 'dayjs'
+import MuiDialog from '#/components/common/popup/MuiDialog'
+import MuiAlert from '#/components/common/popup/MuiAlert'
+
+const formikInitValues = {
+    mac: '',
+    ssid: '',
+    grade: '',
+    band: '',
+    building: '',
+    floor: '',
+    latitude: '',
+    longitude: '',
+    create_date: '',
+    update_date: '',
+}
 
 const DetailForm = () => {
     const navigate = useNavigate()
@@ -38,6 +54,7 @@ const DetailForm = () => {
     const [state, setState] = useState({
         edit: false,
         delete: false,
+        save: false,
         msg: '',
         openDialog: false,
     })
@@ -45,7 +62,7 @@ const DetailForm = () => {
         page: 1,
         limit: 50, // 1회 요청에 받을수 있는 데이터 수
     })
-    const { mutate, isPending: isRegistPending } = usePostFacilityRegistWifi()
+    const { mutate: mutateRegist, isPending: isRegistPending } = usePostFacilityRegistWifi()
     const { mutate: mutateDelete, isPending: isDeletePending } = usePostFacilityDeleteWifi()
     const { mutate: mutateUpdate, isPending: isUpdatePending } = usePostFacilityUpdateWifi()
     const { data: apiResult } = useGetFacilityWifiSearch(
@@ -54,11 +71,46 @@ const DetailForm = () => {
             enabled: isSearchClick,
         },
     )
+    const formik = useFormik({
+        initialValues: formikInitValues,
+        // validationSchema: loginSchema,
+        onSubmit: (values) => {
+            const apiParams = { ...values }
+            console.log('onSubmit >> ', JSON.stringify(apiParams, null, 2))
+            const currentTime = dayjs()
+            mutateRegist(
+                { ...apiParams, create_date: currentTime.format('YYYY-MM-DD HH:mm:ss') },
+                {
+                    onSuccess: ({ data }) => {
+                        console.log('response : ', data)
+                        // data.data의 결과값을 확인 후 필요한 처리 수행
+                    },
+                },
+            )
+        },
+    })
 
     // 검색 버튼 누른 경우
     const handleSearch = (values) => {
         setIsSearchClick(true)
         setQueryParams({ ...queryParams, ...values, page: 1 })
+        setModeToggle(false)
+    }
+
+    const handleUpdateSubmit = () => {
+        console.log('handleUpdateSubmit...')
+        const currentTime = dayjs()
+        console.log('currentTime : ', currentTime)
+        mutateUpdate(
+            { ...formik.values, update_date: currentTime.format('YYYY-MM-DD HH:mm:ss') },
+            {
+                onSuccess: ({ data }) => {
+                    console.log('update-response : ', data)
+                    setApiSuccess(`UPDATE API RESULT `)
+                },
+            },
+        )
+        handleStateReset()
     }
 
     const handleDeleteSubmit = () => {
@@ -68,19 +120,37 @@ const DetailForm = () => {
             {
                 onSuccess: ({ data }) => {
                     console.log('delete-response : ', data)
-                    setApiSuccess(`DELETE API RESULT : ${data.id}`)
+                    setApiSuccess(`DELETE API RESULT `)
                 },
             },
         )
+        handleStateReset()
     }
 
     const handleFormikSubmit = () => {
-        state.edit && formik.handleSubmit() // 수정
+        state.save && formik.handleSubmit() // 수정
+        state.edit && handleUpdateSubmit() // 등록(신규)
         state.delete && handleDeleteSubmit() // 삭제
         handleStateReset()
     }
+
     const handleStateReset = () => {
-        setState({ edit: false, delete: false, msg: '', openDialog: false })
+        setState({ edit: false, delete: false, save: false, msg: '', openDialog: false })
+    }
+
+    const handleInputAllClear = () => {
+        console.log('handleInputAllClear...')
+        formik.setValues({ ...formikInitValues })
+        handleStateReset()
+    }
+
+    const handleClickSave = () => {
+        setState((prevState) => ({
+            ...prevState,
+            save: true,
+            msg: '입력한 정보로 저장 하시겠습니까?',
+            openDialog: true,
+        }))
     }
 
     const handleClickEdit = () => {
@@ -104,8 +174,7 @@ const DetailForm = () => {
     useEffect(() => {
         if (apiResult) {
             console.log('apiResult : ', apiResult)
-            // const { count, lists } = apiResult
-            // setFetchData({ ...apiResult })
+            formik.setValues({ ...apiResult })
             setIsSearchClick(false)
         }
     }, [apiResult, isSearchClick])
@@ -132,63 +201,85 @@ const DetailForm = () => {
                     </Box>
                     <Box>
                         {modeToggle ? (
-                            <Tooltip title={`수정모드로 전환`} arrow placement="bottom-start">
-                                <IconButton onClick={() => setModeToggle((prev) => !prev)}>
-                                    <EditNoteOutlinedIcon />
-                                </IconButton>
-                            </Tooltip>
+                            <Button
+                                type="text"
+                                onClick={() => {
+                                    apiResult && formik.setValues(apiResult)
+                                    setModeToggle((prev) => !prev)
+                                }}
+                                startIcon={<ChangeCircleOutlinedIcon />}
+                            >{`편집 화면으로 전환`}</Button>
                         ) : (
-                            <Tooltip title={`신규 등록모드로 전환`} arrow placement="bottom-start">
-                                <IconButton onClick={() => setModeToggle((prev) => !prev)}>
-                                    <FormatColorTextOutlinedIcon />
-                                </IconButton>
-                            </Tooltip>
+                            <Button
+                                type="text"
+                                onClick={() => {
+                                    handleInputAllClear()
+                                    setModeToggle((prev) => !prev)
+                                }}
+                                startIcon={<ChangeCircleOutlinedIcon />}
+                            >{`등록 화면으로 전환`}</Button>
                         )}
                     </Box>
                 </Box>
                 {/*  */}
                 <Box>
-                    <Table sx={style.table_base}>
-                        <TableBody>
-                            {/* row - 1, #009ACC */}
-                            <TableRow>
-                                <TableCell style={style.cellTitle}>{`MAC`}</TableCell>
-                                <TableCell style={style.cellInput}>{apiResult?.mac}</TableCell>
-                                <TableCell style={style.cellTitle}>{`SSID`}</TableCell>
-                                <TableCell style={style.cellInput}>{apiResult?.ssid}</TableCell>
-                                <TableCell style={style.cellTitle}>{`Grade`}</TableCell>
-                                <TableCell style={{ width: '20%' }}>{apiResult?.grade}</TableCell>
-                                <TableCell style={style.cellTitle}>{`Band`}</TableCell>
-                                <TableCell style={{ width: '20%' }}>{apiResult?.band}</TableCell>
-                            </TableRow>
-                            <TableRow>
-                                <TableCell style={style.cellTitle}>{`Building`}</TableCell>
-                                <TableCell style={style.cellInput}>{apiResult?.building}</TableCell>
-                                <TableCell style={style.cellTitle}>{`Floor`}</TableCell>
-                                <TableCell style={style.cellInput}>{apiResult?.floor}</TableCell>
-                                <TableCell style={style.cellTitle}>{``}</TableCell>
-                                <TableCell style={{ width: '20%' }}>{}</TableCell>
-                                <TableCell style={style.cellTitle}>{``}</TableCell>
-                                <TableCell style={{ width: '20%' }}>{}</TableCell>
-                            </TableRow>
-                            <TableRow>
-                                <TableCell style={style.cellTitle}>{`위도`}</TableCell>
-                                <TableCell style={style.cellInput}>{apiResult?.latitude}</TableCell>
-                                <TableCell style={style.cellTitle}>{`경도`}</TableCell>
-                                <TableCell style={style.cellInput}>
-                                    {apiResult?.longitude}
-                                </TableCell>
-                                <TableCell style={style.cellTitle}>{`생성일시`}</TableCell>
-                                <TableCell style={{ width: '20%' }}>
-                                    {apiResult?.create_date}
-                                </TableCell>
-                                <TableCell style={style.cellTitle}>{`갱신일시`}</TableCell>
-                                <TableCell style={{ width: '20%' }}>
-                                    {apiResult?.update_date}
-                                </TableCell>
-                            </TableRow>
-                        </TableBody>
-                    </Table>
+                    <form>
+                        <Table sx={style.table_base}>
+                            <TableBody>
+                                {/* row - 1, #009ACC */}
+                                <TableRow>
+                                    <TableCell style={style.cellTitle}>{`MAC`}</TableCell>
+                                    <TableCell style={style.cellInput}>
+                                        <TextInput name={`mac`} formik={formik} />
+                                    </TableCell>
+                                    <TableCell style={style.cellTitle}>{`SSID`}</TableCell>
+                                    <TableCell style={style.cellInput}>
+                                        <TextInput name={`ssid`} formik={formik} />
+                                    </TableCell>
+                                    <TableCell style={style.cellTitle}>{`Grade`}</TableCell>
+                                    <TableCell style={{ width: '20%' }}>
+                                        <TextInput name={`grade`} formik={formik} />
+                                    </TableCell>
+                                    <TableCell style={style.cellTitle}>{`Band`}</TableCell>
+                                    <TableCell style={{ width: '20%' }}>
+                                        <TextInput name={`band`} formik={formik} />
+                                    </TableCell>
+                                </TableRow>
+                                <TableRow>
+                                    <TableCell style={style.cellTitle}>{`Building`}</TableCell>
+                                    <TableCell style={style.cellInput}>
+                                        <TextInput name={`building`} formik={formik} />
+                                    </TableCell>
+                                    <TableCell style={style.cellTitle}>{`Floor`}</TableCell>
+                                    <TableCell style={style.cellInput}>
+                                        <TextInput name={`floor`} formik={formik} />
+                                    </TableCell>
+                                    <TableCell style={style.cellTitle}>{``}</TableCell>
+                                    <TableCell style={{ width: '20%' }}>{}</TableCell>
+                                    <TableCell style={style.cellTitle}>{``}</TableCell>
+                                    <TableCell style={{ width: '20%' }}>{}</TableCell>
+                                </TableRow>
+                                <TableRow>
+                                    <TableCell style={style.cellTitle}>{`위도`}</TableCell>
+                                    <TableCell style={style.cellInput}>
+                                        <TextInput name={`latitude`} formik={formik} />
+                                    </TableCell>
+                                    <TableCell style={style.cellTitle}>{`경도`}</TableCell>
+                                    <TableCell style={style.cellInput}>
+                                        <TextInput name={`longitude`} formik={formik} />
+                                    </TableCell>
+                                    <TableCell style={style.cellTitle}>{`생성일시`}</TableCell>
+                                    <TableCell style={{ width: '20%' }}>
+                                        <TextInput name={`create_date`} formik={formik} />
+                                    </TableCell>
+                                    <TableCell style={style.cellTitle}>{`갱신일시`}</TableCell>
+                                    <TableCell style={{ width: '20%' }}>
+                                        <TextInput name={`update_date`} formik={formik} />
+                                    </TableCell>
+                                </TableRow>
+                            </TableBody>
+                        </Table>
+                    </form>
                 </Box>
 
                 {/* 측위 목록 */}
@@ -201,27 +292,21 @@ const DetailForm = () => {
                         <Stack spacing={2} direction="row" sx={{ justifyContent: 'flex-end' }}>
                             <MuiMainButton
                                 disabled={isRegistPending}
-                                name="list"
+                                name="cancel"
                                 title="초기화"
-                                onClick={() => console.log('Init....')}
+                                onClick={handleInputAllClear}
                             />
                             <MuiMainButton
                                 disabled={isRegistPending}
                                 name="create"
                                 title="저장"
-                                onClick={() => console.log('SAVE....')}
+                                onClick={handleClickSave}
                             />
                         </Stack>
                     </Box>
                 ) : (
                     <Box align={'right'}>
                         <Stack spacing={2} direction="row" sx={{ justifyContent: 'flex-end' }}>
-                            <MuiMainButton
-                                disabled={isRegistPending}
-                                name="list"
-                                title="초기화"
-                                onClick={() => console.log('Init....')}
-                            />
                             <MuiMainButton
                                 disabled={isDeletePending || isUpdatePending}
                                 name="edit"

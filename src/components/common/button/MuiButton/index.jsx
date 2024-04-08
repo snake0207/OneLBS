@@ -2,6 +2,7 @@ import Button from '@mui/material/Button'
 import CreateIcon from '@mui/icons-material/Create'
 import ListIcon from '@mui/icons-material/List'
 import EditIcon from '@mui/icons-material/Edit'
+import NotInterestedOutlinedIcon from '@mui/icons-material/NotInterestedOutlined'
 import DeleteIcon from '@mui/icons-material/Delete'
 import SearchIcon from '@mui/icons-material/Search'
 import AnnouncementIcon from '@mui/icons-material/Announcement'
@@ -30,7 +31,7 @@ const buttonUI = {
     cancel: {
         color: 'warning',
         variant: 'outlined',
-        icon: <ListIcon aria-label="cancel" />,
+        icon: <NotInterestedOutlinedIcon aria-label="cancel" />,
     },
     search: {
         color: 'primary',

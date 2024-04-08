@@ -33,12 +33,12 @@ const style = {
         },
     },
     cellTitle: {
-        width: '10%',
+        width: '8%',
         color: 'white',
         backgroundColor: '#009ACC',
     },
     cellInput: {
-        width: '10%',
+        width: '12%',
     },
 }
 

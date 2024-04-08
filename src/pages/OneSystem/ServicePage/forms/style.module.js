@@ -88,6 +88,10 @@ const style = {
             },
         },
     },
+    cellTitle: {
+        color: 'white',
+        backgroundColor: '#009ACC',
+    },
 }
 
 export default style

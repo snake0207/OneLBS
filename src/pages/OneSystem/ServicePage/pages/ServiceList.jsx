@@ -15,10 +15,6 @@ const ServiceList = () => {
     const [isSearchClick, setIsSearchClick] = useState(true)
     const [fetchData, setFetchData] = useState({ count: 0, lists: [] })
     const [queryParams, setQueryParams] = useState({
-        serviceName: '',
-        serviceCode: '',
-        cpName: '',
-        serviceType: 9,
         page: 1,
         limit: 50, // 1회 요청에 받을수 있는 데이터 수
     })

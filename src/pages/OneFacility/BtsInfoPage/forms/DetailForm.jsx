@@ -100,10 +100,9 @@ const DetailForm = () => {
                     </TableBody>
                 </Table>
 
-                {/* 측위 목록 */}
+                {/* 지도 영역 */}
                 <Box sx={{ width: '100%', height: '400px', backgroundColor: 'lightgray' }}>
-                    <OllehMap lat={apiResult?.latitude} lon={apiResult?.longitude} />
-                    {/* <OllehMap lat={957785.7} lon={1944017.52} /> */}
+                    <OllehMap locations={[{ ...apiResult, title: apiResult?.cellid }]} />
                 </Box>
             </Box>
         </Box>

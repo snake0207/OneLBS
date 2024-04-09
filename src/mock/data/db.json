@@ -616,7 +616,7 @@
         "count": 5,
         "lists": [
             {
-                "id": 1,
+                "id": 3,
                 "center": "분당",
                 "req_date": "2024-03-22 11:31:03",
                 "resp_date": "2024-03-22 11:31:03",
@@ -627,7 +627,25 @@
                 "posMethod": "CELL",
                 "ueModel": "SM-S911N",
                 "respCode": "0",
-                "respTime": 5.7
+                "respTime": 5.7,
+                "latitude": 37.4887289,
+                "longitude": 127.0342486
+            },
+            {
+                "id": 19,
+                "center": "분당",
+                "req_date": "2024-03-22 11:31:03",
+                "resp_date": "2024-03-22 11:31:03",
+                "serviceCode": "safebox",
+                "opType": "POS_NI",
+                "reqNo": "01083301240",
+                "targetNo": "01083301240",
+                "posMethod": "GPS",
+                "ueModel": "SM-S911N",
+                "respCode": "0",
+                "respTime": 5.7,
+                "latitude": 37.485487,
+                "longitude": 127.035029
             }
         ]
     },
@@ -770,9 +788,9 @@
         "tac": "",
         "ruid": "",
         "dongCode": "111110000",
-        "address": "서울시 종로구 세종로",
-        "latitude": 958726,
-        "longitude": 1943383,
+        "address": "서울시 강남구 도곡로",
+        "latitude": 37.4887289,
+        "longitude": 127.0342486,
         "create_date": "2024-03-22 11:31:03",
         "update_date": "2024-03-22 11:31:03"
     },

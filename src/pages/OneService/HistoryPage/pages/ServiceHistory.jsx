@@ -8,11 +8,14 @@ import CustomDataGrid from '#/components/common/table/datagrid'
 import SearchFilter from '../Filter'
 import { columns } from './grid-columns'
 import { useGetServiceHistory, useGetServiceStat } from '#/hooks/queries/one-service'
+import { OllehMap } from '#/components/common/map/ollehMap'
+import { LabelImportantRounded } from '@mui/icons-material'
 
 const ServiceHistory = () => {
     const navigate = useNavigate()
     const [isSearchClick, setIsSearchClick] = useState(true)
     const [fetchData, setFetchData] = useState({ count: 0, lists: [] })
+    const [locations, setLocations] = useState([{ id: '', latitude: 0, longitude: 0, title: '' }])
     const [queryParams, setQueryParams] = useState({
         page: 1,
         limit: 50, // 1회 요청에 받을수 있는 데이터 수
@@ -24,13 +27,22 @@ const ServiceHistory = () => {
     // 검색 버튼 누른 경우
     const handleSearch = (values) => {
         setFetchData({ count: 0, lists: [] })
+        setLocations([])
         setIsSearchClick((prev) => !prev)
         setQueryParams({ ...queryParams, ...values, page: 1 })
     }
 
     // row 클릭한 경우 상세 페이지 노출
     const handleSelectRow = ({ row }) => {
+        console.log('row : ', row)
         navigate('/service-status/history/detail', { state: { row } })
+    }
+
+    // 지도 맵에서 특정 마커를 클릭한 경우 상세 페이지로 연결
+    const handleClickMapMarker = (id) => {
+        const record = fetchData.lists.filter((item) => item.id === id)
+        console.log('record : ', { ...record[0] })
+        navigate('/service-status/history/detail', { state: { row: record[0] } })
     }
 
     // 리스트 하단의 페이지 이동 버튼 click시 동작
@@ -47,6 +59,16 @@ const ServiceHistory = () => {
         if (apiResult) {
             const { count, lists } = apiResult
             setFetchData({ count: count, lists: [...fetchData.lists, ...lists] })
+            const nArrs = lists.map((item) => {
+                // const { latitude, longitude, posMethod: title } = item
+                return {
+                    id: item.id,
+                    latitude: item.latitude,
+                    longitude: item.longitude,
+                    title: item.posMethod,
+                }
+            })
+            setLocations(nArrs)
         }
     }, [apiResult, isSearchClick])
 
@@ -83,9 +105,21 @@ const ServiceHistory = () => {
                         // activeTools={['export', 'column']}
                         pageInit={queryParams.page === 1 ? true : false}
                     />
+
+                    {/* 지도 영역 */}
+                    <Box
+                        sx={{ mt: 3, width: '100%', height: '400px', backgroundColor: 'lightgray' }}
+                    >
+                        {fetchData.count > 0 && (
+                            <OllehMap
+                                locations={[...locations]}
+                                onClick={(param) => handleClickMapMarker(param)}
+                            />
+                        )}
+                    </Box>
                 </Box>
             )}
-            <Box
+            {/* <Box
                 sx={{
                     display: 'flex',
                     justifyContent: 'space-between',
@@ -100,7 +134,7 @@ const ServiceHistory = () => {
                 }}
             >
                 지도 영역
-            </Box>
+            </Box> */}
         </Box>
     )
 }

@@ -1,17 +1,6 @@
 var mapInstance
 
-const loadScript = () => {
-    const API_KEY = `1a395dbbf560c3a6801d1c178e74e3cf9b02d6fbd7eb5d1e66b67c96231e313cd12e4716`
-    var head = document.getElementsByTagName('head')[0]
-    var script = document.createElement('script')
-    script.type = 'text/javascript'
-    // script.onload = initialize;
-    script.src = `https://api.ktgis.com:10083/v3/olleh/mapAPI.js?key=${API_KEY}`
-
-    console.log('head : ', head)
-    console.log('script : ', script)
-    head.appendChild(script)
-}
+const getMapInstance = () => mapInstance
 
 const initMap = (lat, lon) => {
     console.log(lat, lon)
@@ -45,4 +34,4 @@ const drawMarker = (_map, iconUrl, locArrs, onClick) => {
     })
 }
 
-export default { loadScript, initMap, drawMarker }
+export default { getMapInstance, initMap, drawMarker }

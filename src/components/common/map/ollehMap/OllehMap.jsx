@@ -7,14 +7,8 @@ const OllehMap = ({ locations = [], onClick }) => {
     const [map, setMap] = useState(null)
 
     useEffect(() => {
-        const _map = ollehMap.initMap('map_div', locations[0])
-        ollehMap.drawMarker(
-            _map,
-            PositionIcon,
-            locations,
-            // locations[0].latitude > 0 ? locations : [posInit],
-            onClick,
-        )
+        const _map = ollehMap.initMap('map_div', locations[locations.length - 1])
+        ollehMap.drawMarker(_map, PositionIcon, locations, onClick)
     }, [])
 
     return (

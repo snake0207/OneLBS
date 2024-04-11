@@ -35,7 +35,7 @@ const drawMarker = (_mapInstance, iconUrl, locations, onClick) => {
                 size: new olleh.maps.Size(60, 60),
                 anchor: new olleh.maps.Point(60 / 2, 60 / 2),
             },
-            title: loc.title,
+            title: loc.title || loc.address,
             map: _mapInstance,
         })
         if (typeof onClick === 'function') {

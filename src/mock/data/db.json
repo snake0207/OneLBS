@@ -651,99 +651,59 @@
     },
     "service-history-detail": {
         "poslist": {
-            "count": 6,
+            "count": 3,
             "lists": [
                 {
+                    "id": "9AC",
                     "posMethod": "CELL",
-                    "algorithm": "POP"
+                    "algorithm": "POP",
+                    "address": "서울시 강남구 도곡로",
+                    "latitude": 37.487190,
+                    "longitude": 127.033935
                 },
                 {
+                    "id": "38E",
                     "posMethod": "GNSS",
-                    "algorithm": "GNSS"
+                    "algorithm": "GNSS",
+                    "address": "서울시 강남구 도곡로",
+                    "latitude": 37.486935,
+                    "longitude": 127.037046
                 },
                 {
-                    "posMethod": "CELL",
-                    "algorithm": "POP"
-                },
-                {
+                    "id": "29A",
                     "posMethod": "GNSS",
-                    "algorithm": "GNSS"
-                },
-                {
-                    "posMethod": "CELL",
-                    "algorithm": "POP"
-                },
-                {
-                    "posMethod": "GNSS",
-                    "algorithm": "GNSS"
+                    "algorithm": "GNSS",
+                    "address": "서울시 강남구 도곡로",
+                    "latitude": 37.485538,
+                    "longitude": 127.032240
                 }
             ]
         },
         "btslist": {
-            "count": 2,
+            "count": 0,
             "lists": [
-                {
-                    "type": "LTE",
-                    "cellid": "45008:4311043",
-                    "serving": "Serving"
-                },
-                {
-                    "type": "LTE",
-                    "cellid": "45008:4307456",
-                    "serving": "Neighbor"
-                }
             ]
         },
         "wifilist": {
-            "count": 3,
+            "count": 1,
             "lists": [
                 {
+                    "id": "FBC",
                     "mac": "FB-AE-C0-61-7E-F4",
                     "ssid": "kt giga",
                     "grade": 2,
                     "band": 80,
                     "rssi": -82,
-                    "status": "Used"
-                },
-                {
-                    "mac": "A1-18-A3-8F-76-42",
-                    "ssid": "kidsshop",
-                    "grade": 1,
-                    "band": 87,
-                    "rssi": -61,
-                    "status": "Invalid"
-                },
-                {
-                    "mac": "2D-62-7C-56-A8-EC",
-                    "ssid": "lansoprazole",
-                    "grade": 2,
-                    "band": 60,
-                    "rssi": -32,
-                    "status": "CELL_RANGEOVER"
+                    "status": "Used",
+                    "address": "서울시 강남구 도곡로",
+                    "latitude": 37.487973,
+                    "longitude": 127.039407
                 }
             ]
         },
         "translist": {
-            "count": 3,
+            "count": 0,
             "lists": [
-                {
-                    "system": "CAPRI",
-                    "posMethod": "",
-                    "respCode": "0",
-                    "message": "{'3Q2Y9wr2xlpFDdaph3iCfw/48yYLG/x6pPOUoNctwYbBBVl2V//A4PWdUrqiKkyGxL7h73jyQSSadZm+Rb0L6dQ=='}"
-                },
-                {
-                    "system": "GMLC",
-                    "posMethod": "CELL",
-                    "respCode": "0",
-                    "message": "{'3Q2Y9wr2xlpFDdaph3iCfw/48yYLG/x6pPOUoNctwYbBBVl2V//A4PWdUrqiKkyGxL7h73jyQSSadZm+Rb0L6dQ=='}"
-                },
-                {
-                    "system": "KSA",
-                    "posMethod": "KSA3",
-                    "respCode": "0",
-                    "message": "{'3Q2Y9wr2xlpFDdaph3iCfw/48yYLG/x6pPOUoNctwYbBBVl2V//A4PWdUrqiKkyGxL7h73jyQSSadZm+Rb0L6dQ=='}"
-                }
             ]
         }
     },

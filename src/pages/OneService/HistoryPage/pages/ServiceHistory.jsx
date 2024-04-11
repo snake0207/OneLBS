@@ -113,7 +113,7 @@ const ServiceHistory = () => {
                         {fetchData.count > 0 && (
                             <OllehMap
                                 locations={[...locations]}
-                                onClick={(param) => handleClickMapMarker(param)}
+                                onClick={(id) => handleClickMapMarker(id)}
                             />
                         )}
                     </Box>

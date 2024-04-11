@@ -20,6 +20,7 @@ import TitleBar from '#/components/common/menu/TitleBar'
 
 import style from './style.module'
 import { useGetServiceHistoryDetail } from '#/hooks/queries/one-service'
+import { OllehMap } from '#/components/common/map/ollehMap'
 
 const TitleArea = ({ title }) => {
     return (
@@ -51,6 +52,7 @@ const DetailForm = () => {
         wifilist: { count: 0, lists: [] },
         translist: { count: 0, lists: [] },
     })
+    const [locations, setLocations] = useState([])
     const { data: apiResult } = useGetServiceHistoryDetail(
         { id: row?.id },
         {
@@ -60,13 +62,20 @@ const DetailForm = () => {
 
     useEffect(() => {
         if (apiResult) {
-            console.log('apiResult : ', apiResult)
+            console.log('Detail apiResult : ', apiResult)
             // const { count, lists } = apiResult
+            const setLists = [
+                ...apiResult.poslist.lists,
+                ...apiResult.btslist.lists,
+                ...apiResult.wifilist.lists,
+                ...apiResult.translist.lists,
+            ]
             setFetchData({ ...apiResult })
+            setLocations(setLists)
         }
     }, [apiResult])
 
-    console.log('fetchData : ', fetchData)
+    console.log('Detail fetchData : ', fetchData)
 
     return (
         <Box>
@@ -271,7 +280,15 @@ const DetailForm = () => {
                             </TableContainer>
                         </Box>
                     </Box>
-                    <Box sx={{ width: '50%', backgroundColor: 'lightgray' }}>지도영역</Box>
+                    <Box sx={{ width: '50%', backgroundColor: 'lightgray' }}>
+                        {locations.length > 0 && (
+                            <OllehMap
+                                locations={[...locations]}
+                                onClick={(id) => console.log(`${id} Clicked...`)}
+                                // onClick={(id) => handleClickMapMarker(id)}
+                            />
+                        )}
+                    </Box>
                 </Box>
             </Box>
         </Box>

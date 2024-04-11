@@ -119,22 +119,6 @@ const ServiceHistory = () => {
                     </Box>
                 </Box>
             )}
-            {/* <Box
-                sx={{
-                    display: 'flex',
-                    justifyContent: 'space-between',
-                    width: '100%',
-                    minHeight: '400px',
-                    borderRadius: '8px',
-                    mt: '10px',
-                    mb: '10px',
-                    p: '16px 20px',
-                    backgroundColor: 'white',
-                    boxShadow: '0 3px 14px rgb(0 0 0 / 24%)',
-                }}
-            >
-                지도 영역
-            </Box> */}
         </Box>
     )
 }

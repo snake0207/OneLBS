@@ -14,8 +14,6 @@ import ListItemText from '@mui/material/ListItemText'
 import ExpandMenuItem from '#/components/common/menu/ExpandMenuItem'
 import UserInfo from './UserInfo'
 
-import { BrowserView, MobileView } from 'react-device-detect'
-import { filterMobileMenuItems } from '#/common/libs/menuTools'
 import LinkRouter from '#/components/common/menu/LinkRouter'
 
 import useLayoutStore from '#/store/useLayoutStore'

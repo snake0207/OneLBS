@@ -5,9 +5,7 @@ import UserTooltip from '#/components/dashboard/UserTooltip'
 import VectorMap from '#/components/dashboard/VectorMap'
 import ShortCutBanner from '#/components/dashboard/ShortCutBanner'
 import VectorMapTooltip from '#/components/dashboard/VectorMapTooltip'
-import PasswordChangeModal from '#/components/dashboard/PasswordChangeModal'
 import useLayoutStore from '#/store/useLayoutStore'
-import { useUserPwChangeRequiredState } from '#/store/useUserStore'
 
 import EvIcon from '#/assets/m_evIcon.svg'
 import EvIconDark from '#/assets/m_evIconDark.svg'
@@ -42,7 +40,6 @@ import style from './style.module'
 
 function MainPage() {
     const { themeMode } = useLayoutStore()
-    const pwChangeRequired = useUserPwChangeRequiredState()
     const countryMockData = [
         {
             lightIcon: <img src={EvIcon} />,
@@ -161,7 +158,6 @@ function MainPage() {
                     />
                 ))}
             </Box>
-            <PasswordChangeModal isOpen={pwChangeRequired} />
         </Box>
     )
 }

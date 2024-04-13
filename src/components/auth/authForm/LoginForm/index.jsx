@@ -1,11 +1,9 @@
 import { useEffect, useState } from 'react'
 import { useFormik } from 'formik'
-import { Button, Typography, Box, Avatar, Stack, Divider, CardMedia } from '@mui/material'
+import { Typography, Box, Avatar, Stack, CardMedia } from '@mui/material'
 import { LoadingButton } from '@mui/lab'
 import TextInput from '#/components/common/input/TextInput'
 import PasswordInput from '#/components/common/input/PasswordInput'
-import JoinModal from '#/components/auth/authForm/joinForm/JoinModal'
-import { AUTH_STEP } from '#/contents/constant'
 import { loginSchema } from '#/contents/validationSchema'
 import {
     useGetAuthCode,
@@ -13,7 +11,6 @@ import {
     usePostLogin,
     usePostSmsAuthCode,
 } from '#/hooks/queries/auth'
-import { useAuthStepActions } from '#/store/useAuthStepStore'
 import { getLayoutState } from '#/store/useLayoutStore'
 
 import {
@@ -33,7 +30,6 @@ const MAX_REQ_AUTHCODE = 3
 
 const LoginForm = () => {
     const navigate = useNavigate()
-    const { changeAuthStep } = useAuthStepActions()
     const { mutate, isPending } = usePostLogin()
     const [apiResultLogin, setApiResultLogin] = useState(null)
     // Captcha 관련
@@ -45,7 +41,6 @@ const LoginForm = () => {
     const [apiResultSmsAuthCode, setApiResultSmsAuthCode] = useState()
     const { mutate: smsAuthCodeMutate, isPending: isSmsAuthCodePending } = usePostSmsAuthCode()
     const [state, setState] = useState({
-        isOpenJoinModal: false,
         authcodeLimits: 0,
         captchaLimits: 0,
     })
@@ -73,7 +68,6 @@ const LoginForm = () => {
                         setApiResultLogin(data)
                         // data.data의 결과값을 확인 후 필요한 처리 수행
                         if (apiResultLogin.code === '0000') {
-                            changeAuthStep(AUTH_STEP.certified)
                             navigate('/')
                         }
                     },
@@ -81,11 +75,6 @@ const LoginForm = () => {
             )
         },
     })
-
-    const handleCloseJoinModal = () => {
-        // setIsOpenJoinModal(false)
-        setState({ ...state, isOpenJoinModal: false })
-    }
 
     // ID : 91143900
     // PW : new1234!
@@ -250,7 +239,6 @@ const LoginForm = () => {
             <Typography color={'text.light'} sx={{ mt: 4, fontSize: '11px', fontStyle: 'italic' }}>
                 Copyright© OneLBS Admin 2024.
             </Typography>
-            <JoinModal isOpen={state.isOpenJoinModal} onClose={handleCloseJoinModal} />
         </>
     )
 }

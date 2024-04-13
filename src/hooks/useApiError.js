@@ -1,12 +1,7 @@
 import { usePopupActions } from '#/store/usePopupStore'
-import { useAuthStepActions } from '#/store/useAuthStepStore'
-
-import t from '#/common/libs/trans'
-import { AUTH_STEP } from '#/contents/constant'
 
 const useApiError = () => {
     const { showPopup } = usePopupActions()
-    const { changeAuthStep } = useAuthStepActions()
 
     const handlerDefault = (httpStatus, errorMessage = '알 수 없는 오류') => {
         console.log(`에러 코드 - ${httpStatus}`)
@@ -18,11 +13,11 @@ const useApiError = () => {
     }
 
     const handler400inActive = () => {
-        showPopup('alert', t('400.10122', 'error'), () => changeAuthStep(AUTH_STEP.emailAuth))
+        showPopup('alert', `입력 오류가 5회 이상으로 해당 계정이 잠겼습니다.`)
     }
 
     const handler400failCount = (res) => {
-        showPopup('alert', t('400.failCount', 'error', { failCount: res.data.failCount }))
+        showPopup('alert', `오류 횟수 5회 오류 시 잠금 처리 됩니다.`)
     }
 
     const handlers = {

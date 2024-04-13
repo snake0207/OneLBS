@@ -84,74 +84,6 @@ export const loginSchema = yup.object({
     captcha: yup.string().required(HELPER_TEXT.captchaRequired),
 })
 
-export const joinSchema = yup.object().shape({
-    email: yup.string().email(HELPER_TEXT.emailNotMatch).required(HELPER_TEXT.emailRequired),
-    code: yup
-        .string()
-        .matches(REGEXP.verifyCode, HELPER_TEXT.emailCodeNotMatch)
-        .required(HELPER_TEXT.emailCodeRequired),
-    password: yup
-        .string()
-        .min(8, HELPER_TEXT.passwordMinLength)
-        .max(16, HELPER_TEXT.passwordMaxLength)
-        .matches(REGEXP.passwordIncludeChar, HELPER_TEXT.passwordNotIncludeChar)
-        .matches(REGEXP.passwordIncludeUppercase, HELPER_TEXT.passwordNotIncludeUppercase)
-        .matches(REGEXP.passwordIncludeNumber, HELPER_TEXT.passwordNotIncludeNumber)
-        .required(HELPER_TEXT.passwordRequired),
-    confirmPassword: yup
-        .string()
-        .min(8, HELPER_TEXT.passwordMinLength)
-        .max(16, HELPER_TEXT.passwordMaxLength)
-        .matches(REGEXP.passwordIncludeChar, HELPER_TEXT.passwordNotIncludeChar)
-        .matches(REGEXP.passwordIncludeUppercase, HELPER_TEXT.passwordNotIncludeUppercase)
-        .matches(REGEXP.passwordIncludeNumber, HELPER_TEXT.passwordNotIncludeNumber)
-        .oneOf([yup.ref('password'), null], HELPER_TEXT.confirmPasswordNotMatch)
-        .required(HELPER_TEXT.passwordRequired),
-    name: yup.string().min(2, HELPER_TEXT.nameLength).required(HELPER_TEXT.nameRequired),
-    ipAddress1_0: yup.string().when(['role', 'isIpAutoAdd'], {
-        is: (role, isIpAutoAdd) => role === '29' && !isIpAutoAdd,
-        then: () =>
-            yup
-                .string()
-                .matches(REGEXP.ipNumber, HELPER_TEXT.ipNotMatch)
-                .required(HELPER_TEXT.ipRequired),
-    }),
-    ipAddress2_0: yup.string().when(['role', 'isIpAutoAdd'], {
-        is: (role, isIpAutoAdd) => role === '29' && !isIpAutoAdd,
-        then: () =>
-            yup
-                .string()
-                .matches(REGEXP.ipNumber, HELPER_TEXT.ipNotMatch)
-                .required(HELPER_TEXT.ipRequired),
-    }),
-    ipAddress3_0: yup.string().when(['role', 'isIpAutoAdd'], {
-        is: (role, isIpAutoAdd) => role === '29' && !isIpAutoAdd,
-        then: () =>
-            yup
-                .string()
-                .matches(REGEXP.ipNumber, HELPER_TEXT.ipNotMatch)
-                .required(HELPER_TEXT.ipRequired),
-    }),
-    ipAddress4_0: yup.string().when(['role', 'isIpAutoAdd'], {
-        is: (role, isIpAutoAdd) => role === '29' && !isIpAutoAdd,
-        then: () =>
-            yup
-                .string()
-                .matches(REGEXP.ipNumber, HELPER_TEXT.ipNotMatch)
-                .required(HELPER_TEXT.ipRequired),
-    }),
-    ipDescription_0: yup.string(),
-    ipAddress1_1: yup.string().matches(REGEXP.ipNumber, HELPER_TEXT.ipNotMatch),
-    ipAddress2_1: yup.string().matches(REGEXP.ipNumber, HELPER_TEXT.ipNotMatch),
-    ipAddress3_1: yup.string().matches(REGEXP.ipNumber, HELPER_TEXT.ipNotMatch),
-    ipAddress4_1: yup.string().matches(REGEXP.ipNumber, HELPER_TEXT.ipNotMatch),
-    ipDescription_1: yup.string(),
-    ipAddress1_2: yup.string().matches(REGEXP.ipNumber, HELPER_TEXT.ipNotMatch),
-    ipAddress2_2: yup.string().matches(REGEXP.ipNumber, HELPER_TEXT.ipNotMatch),
-    ipAddress3_2: yup.string().matches(REGEXP.ipNumber, HELPER_TEXT.ipNotMatch),
-    ipAddress4_2: yup.string().matches(REGEXP.ipNumber, HELPER_TEXT.ipNotMatch),
-    ipDescription_2: yup.string(),
-})
 
 // 서비스 등록, 수정 화면에서 사용
 // ~src/pages/system/ServicePage/forms
@@ -211,38 +143,7 @@ export const otpSchema = yup.object({
         .required(HELPER_TEXT.otpRequired),
 })
 
-export const emailAuthSchema = yup.object({
-    email: yup.string().email(HELPER_TEXT.emailNotMatch).required(HELPER_TEXT.emailRequired),
-    code: yup
-        .string()
-        .matches(REGEXP.verifyCode, HELPER_TEXT.emailCodeNotMatch)
-        .required(HELPER_TEXT.emailCodeRequired),
-})
 
-export const passwordResetSchema = yup.object({
-    email: yup.string().email(HELPER_TEXT.emailNotMatch).required(HELPER_TEXT.emailRequired),
-    password: yup
-        .string()
-        .min(8, HELPER_TEXT.passwordMinLength)
-        .max(16, HELPER_TEXT.passwordMaxLength)
-        .matches(REGEXP.passwordIncludeChar, HELPER_TEXT.passwordNotIncludeChar)
-        .matches(REGEXP.passwordIncludeUppercase, HELPER_TEXT.passwordNotIncludeUppercase)
-        .matches(REGEXP.passwordIncludeNumber, HELPER_TEXT.passwordNotIncludeNumber)
-        .required(HELPER_TEXT.passwordRequired),
-    confirmPassword: yup
-        .string()
-        .min(8, HELPER_TEXT.passwordMinLength)
-        .max(16, HELPER_TEXT.passwordMaxLength)
-        .matches(REGEXP.passwordIncludeChar, HELPER_TEXT.passwordNotIncludeChar)
-        .matches(REGEXP.passwordIncludeUppercase, HELPER_TEXT.passwordNotIncludeUppercase)
-        .matches(REGEXP.passwordIncludeNumber, HELPER_TEXT.passwordNotIncludeNumber)
-        .oneOf([yup.ref('password'), null], HELPER_TEXT.confirmPasswordNotMatch)
-        .required(HELPER_TEXT.passwordRequired),
-    code: yup
-        .string()
-        .matches(REGEXP.verifyCode, HELPER_TEXT.otpNotMatch)
-        .required(HELPER_TEXT.otpRequired),
-})
 
 export const mapSearchSchema = yup.object({
     country: yup.array().of(yup.string()).min(1, HELPER_TEXT.searchCountry),
@@ -256,18 +157,6 @@ export const mapSearchSchema = yup.object({
         .required(HELPER_TEXT.searchLng),
 })
 
-export const poiDetailSchema = yup.object({
-    position: yup.object().shape({
-        center: yup.object().shape({
-            lat: yup.string().matches(REGEXP.coordinates, HELPER_TEXT.searchLat),
-            lon: yup.string().matches(REGEXP.coordinates, HELPER_TEXT.searchLng),
-        }),
-        guide: yup.object().shape({
-            lat: yup.string().matches(REGEXP.coordinates, HELPER_TEXT.searchLat),
-            lon: yup.string().matches(REGEXP.coordinates, HELPER_TEXT.searchLng),
-        }),
-    }),
-})
 
 export const passwordChangeSchema = yup.object({
     currentPassword: yup

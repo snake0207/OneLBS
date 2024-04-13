@@ -13,12 +13,12 @@ import IconButton from "@mui/material/IconButton";
  * @param { function } Object.callback - 
  * @returns 
  */
-const MuiAlert = ({ severity = "success", msg, autoHideDuration = 0, callback }) => {
+const MuiAlert = ({ severity = "success", msg, autoHideDuration = 0, callback = null }) => {
   const [autoClose, setAutoClose] = useState(false);
 
   const handleReset = () => {
     setAutoClose(true);
-    callback();
+    typeof callback === "function" && callback();
   };
 
   autoHideDuration > 0 && setTimeout(() => handleReset(), autoHideDuration);

@@ -44,17 +44,17 @@ const postPasswordChange = (data) => {
 const postDeferChange = () => {
     return postAPI({ endPoint: API_PATH.auth.defer_change })
 }
+const postSmsAuthCode = (data) => {
+    console.log('postSmsAuthCode : ', data)
+    return postAPI({ endPoint: API_PATH.auth.smscode, data })
+}
 
 const getAskUserInfo = () => {
     return getAPI({ endPoint: API_PATH.auth.ask_user_info })
 }
 
 const getCaptcha = (data) => {
-    return getAPI({ endPoint: API_PATH.auth.captcha, data })
-}
-
-const getAuthCode = (data) => {
-    return getAPI({ endPoint: API_PATH.auth.authcode, data })
+    return getAPI({ endPoint: API_PATH.auth.captcha, data, axiosOption: { responseType: 'blob' } })
 }
 
 export default {
@@ -70,6 +70,7 @@ export default {
     postPasswordChange,
     postDeferChange,
     getAskUserInfo,
-    getCaptcha,         // captcha
-    getAuthCode,        // 인증코드
+    
+    getCaptcha, // captcha
+    postSmsAuthCode,
 }

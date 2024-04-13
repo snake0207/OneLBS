@@ -11,6 +11,7 @@ export const useGetServices = (queryParams = {}, options) => {
     })
     return { data: data?.data }
 }
+
 // 서비스 등록 시 코드 중복 체크
 export const useGetServiceCodeDup = (queryParams = {}, options) => {
     const { data } = useQuery({

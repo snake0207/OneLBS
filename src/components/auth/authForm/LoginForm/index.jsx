@@ -7,7 +7,12 @@ import PasswordInput from '#/components/common/input/PasswordInput'
 import JoinModal from '#/components/auth/authForm/joinForm/JoinModal'
 import { AUTH_STEP } from '#/contents/constant'
 import { loginSchema } from '#/contents/validationSchema'
-import { useGetAuthCode, useGetCaptcha, usePostLogin } from '#/hooks/queries/auth'
+import {
+    useGetAuthCode,
+    useGetCaptcha,
+    usePostLogin,
+    usePostSmsAuthCode,
+} from '#/hooks/queries/auth'
 import { useAuthStepActions } from '#/store/useAuthStepStore'
 import { getLayoutState } from '#/store/useLayoutStore'
 
@@ -22,6 +27,7 @@ import style from './style.module'
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined'
 import CachedOutlinedIcon from '@mui/icons-material/CachedOutlined'
 import { useNavigate } from 'react-router-dom'
+import MuiAlert from '#/components/common/popup/MuiAlert'
 
 const MAX_REQ_AUTHCODE = 3
 
@@ -29,28 +35,27 @@ const LoginForm = () => {
     const navigate = useNavigate()
     const { changeAuthStep } = useAuthStepActions()
     const { mutate, isPending } = usePostLogin()
+    const [apiResultLogin, setApiResultLogin] = useState(null)
+    // Captcha 관련
+    const [apiResultCaptcha, setApiResultCaptcha] = useState(null)
+    const [isCaptcha, setIsCaptcha] = useState(true)
     const [captchaParams, setCaptchaParams] = useState({ id: Math.random() })
-    const [authCodeParams, setAuthCodeParams] = useState({
-        reqTime: '',
-        reqData: { userid: '' },
-    })
+    const { data: respCaptcha } = useGetCaptcha(captchaParams, { enabled: isCaptcha })
+    // SMS 인증코드 관련
+    const [apiResultSmsAuthCode, setApiResultSmsAuthCode] = useState()
+    const { mutate: smsAuthCodeMutate, isPending: isSmsAuthCodePending } = usePostSmsAuthCode()
     const [state, setState] = useState({
         isOpenJoinModal: false,
         authcodeLimits: 0,
         captchaLimits: 0,
     })
 
-    const { data: respCaptcha } = useGetCaptcha(captchaParams)
-    const { data: respAuthcode, isLoading } = useGetAuthCode(authCodeParams, {
-        enabled: !!authCodeParams.reqData.userid,
-    })
-
     const formik = useFormik({
         initialValues: {
-            userid: '',
+            userId: '',
             password: '',
-            authcode: '',
-            captchaText: '',
+            certNum: '',
+            captcha: '',
         },
         validationSchema: loginSchema,
         onSubmit: (form) => {
@@ -65,50 +70,48 @@ const LoginForm = () => {
                 {
                     onSuccess: ({ data }) => {
                         console.log('response : ', data)
+                        setApiResultLogin(data)
                         // data.data의 결과값을 확인 후 필요한 처리 수행
-                        changeAuthStep(AUTH_STEP.certified)
-                        navigate('/')
+                        if (apiResultLogin.code === '0000') {
+                            changeAuthStep(AUTH_STEP.certified)
+                            navigate('/')
+                        }
                     },
                 },
             )
         },
     })
 
-    const handleClickFindUserId = () => {
-        changeAuthStep(AUTH_STEP.findId)
-    }
-
-    const handleClickPasswordReset = () => {
-        changeAuthStep(AUTH_STEP.passwordReset)
-    }
-
-    const handleClickJoin = () => {
-        // setIsOpenJoinModal(true)
-        setState({ ...state, isOpenJoinModal: true })
-    }
-
     const handleCloseJoinModal = () => {
         // setIsOpenJoinModal(false)
         setState({ ...state, isOpenJoinModal: false })
     }
 
+    // ID : 91143900
+    // PW : new1234!
     const handleRequestAuthCode = () => {
         // 인증번호 요청 건수 +1
-        console.log('인증번호 요청...')
         setState({
             ...state,
             authcodeLimits: state.authcodeLimits + 1,
         })
-        formik.values.userid &&
-            setAuthCodeParams({
-                reqTime: Date.now(),
-                reqData: { userid: formik.values.userid },
-            })
+        // setAuthCodeParams({ userId: formik.values.userId })
+        smsAuthCodeMutate(
+            { userId: formik.values.userId },
+            {
+                onSuccess: ({ data }) => {
+                    console.log('sms response : ', data)
+                    setApiResultSmsAuthCode(data)
+                    // data.data의 결과값을 확인 후 필요한 처리 수행
+                },
+            },
+        )
     }
 
     const handleRequestCaptcha = () => {
         console.log('보안문자 요청...')
         setCaptchaParams({ id: Math.random() })
+        setIsCaptcha(true)
         setState({
             ...state,
             captchaLimits: state.captchaLimits + 1,
@@ -118,8 +121,17 @@ const LoginForm = () => {
     const { themeMode } = getLayoutState()
 
     console.log('state : ', state)
-    console.log('respAuthcode : ', respAuthcode)
-    // console.log('respCaptcha : ', respCaptcha)
+    // console.log('respAuthcode : ', respAuthcode)
+    console.log('respCaptcha : ', respCaptcha)
+
+    useEffect(() => {
+        if (respCaptcha) {
+            const blob = new Blob([respCaptcha.data], { type: 'image/jpeg' })
+            const imageUrl = URL.createObjectURL(blob)
+            setApiResultCaptcha(imageUrl)
+            setIsCaptcha(false)
+        }
+    }, [respCaptcha, isCaptcha])
 
     return (
         <>
@@ -134,7 +146,7 @@ const LoginForm = () => {
                 <Typography variant="h6" sx={style.labelText}>
                     {`아이디`}
                 </Typography>
-                <TextInput name={'userid'} placeholder={`아이디를 입력하세요`} formik={formik} />
+                <TextInput name={'userId'} placeholder={`아이디를 입력하세요`} formik={formik} />
                 <Typography variant="h6" sx={style.labelText}>
                     {`비밀번호`}
                 </Typography>
@@ -154,20 +166,25 @@ const LoginForm = () => {
                             {`인증번호`}
                         </Typography>
                         <TextInput
-                            name={'authcode'}
+                            name={'certNum'}
                             placeholder={`수신된 인증번호를 입력하세요`}
                             formik={formik}
                         />
+                        {apiResultSmsAuthCode?.code === '0000' && (
+                            <Typography sx={{ color: 'blue', fontSize: '10px' }}>
+                                인증번호 발송 완료. 3분안에 입력하세요.
+                            </Typography>
+                        )}
                     </Box>
                     <Box>
                         <Typography variant="h6" sx={style.labelText}>
                             {`요청 횟수 (${state.authcodeLimits}/3)`}
                         </Typography>
                         <LoadingButton
-                            loading={isLoading}
+                            loading={isSmsAuthCodePending}
                             variant="contained"
                             disabled={
-                                formik.values.userid?.length &&
+                                formik.values.userId?.length &&
                                 state.authcodeLimits < MAX_REQ_AUTHCODE
                                     ? false
                                     : true
@@ -185,15 +202,18 @@ const LoginForm = () => {
                 <Stack direction="row">
                     <CardMedia
                         component="img"
-                        image={respCaptcha?.data?.data}
+                        image={apiResultCaptcha}
+                        style={{
+                            objectFit: 'cover',
+                        }}
                         sx={{
-                            border: `1px solid grey`,
+                            border: `1px solid #BCBCBC`,
+                            borderRadius: '4px',
                             mb: 1,
-                            height: '56px',
-                            opacity: 0.5,
                         }}
                         alt={`보안문자`}
                     />
+
                     <LoadingButton
                         variant="contained"
                         disabled={state.captchaLimits < MAX_REQ_AUTHCODE ? false : true}
@@ -204,7 +224,7 @@ const LoginForm = () => {
                         {`Reload`}
                     </LoadingButton>
                 </Stack>
-                <TextInput name={'captchaText'} placeholder={`보안문자 입력`} formik={formik} />
+                <TextInput name={'captcha'} placeholder={`보안문자 입력`} formik={formik} />
                 <Stack sx={{ alignSelf: 'end', gap: 1, mt: '30px', width: '100%' }}>
                     <LoadingButton
                         fullWidth
@@ -222,50 +242,11 @@ const LoginForm = () => {
                     >
                         {`로그인`}
                     </LoadingButton>
-                    {/* <Box
-                        sx={{
-                            display: 'flex',
-                            justifyContent: 'space-between',
-                            alignItems: 'flex-start',
-                            gap: 0.5,
-                            height: 36,
-                        }}
-                    >
-                        <Button
-                            fullWidth
-                            variant="text"
-                            onClick={handleClickFindUserId}
-                            sx={{
-                                ...style.button,
-                                justifyContent: 'flex-end',
-                            }}
-                        >
-                            {`아이디 찾기`}
-                        </Button>
-                        <Button
-                            fullWidth
-                            variant="text"
-                            onClick={handleClickPasswordReset}
-                            sx={{
-                                ...style.button,
-                            }}
-                        >
-                            {`비밀번호 재설정`}
-                        </Button>
-                        <Button
-                            fullWidth
-                            variant="text"
-                            onClick={handleClickJoin}
-                            sx={{
-                                ...style.button,
-                                justifyContent: 'flex-start',
-                            }}
-                        >
-                            {`회원가입`}
-                        </Button>
-                    </Box> */}
                 </Stack>
             </form>
+            {apiResultLogin?.data && (
+                <MuiAlert msg={apiResultLogin.message} autoHideDuration={5000} callback={null} />
+            )}
             <Typography color={'text.light'} sx={{ mt: 4, fontSize: '11px', fontStyle: 'italic' }}>
                 Copyright© OneLBS Admin 2024.
             </Typography>

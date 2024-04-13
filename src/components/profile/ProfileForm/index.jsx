@@ -20,8 +20,6 @@ import * as yup from 'yup'
 import { usePopupActions } from '#/store/usePopupStore'
 import { useNavigate } from 'react-router'
 
-import user from '#/mock/data/user.json'
-
 import style from './style.module'
 
 function ProfileForm() {
@@ -29,10 +27,10 @@ function ProfileForm() {
     const popupActions = usePopupActions()
     const formik = useFormik({
         initialValues: {
-            email: user?.email,
-            name: user?.name,
-            company: user?.company,
-            team: user?.team,
+            email: '',
+            name: '',
+            company: '',
+            team: '',
             password: '',
             confirm_password: '',
         },
@@ -93,7 +91,7 @@ function ProfileForm() {
                     <TableHead>
                         <TableRow>
                             <TableCell>{t('email', 'profile')}</TableCell>
-                            <TableCell component="td">{user?.email}</TableCell>
+                            <TableCell component="td">{``}</TableCell>
                             <TableCell component="td"></TableCell>
                         </TableRow>
                         <TableRow>
@@ -155,10 +153,10 @@ function ProfileForm() {
                             </TableCell>
                             <TableCell component="td"></TableCell>
                         </TableRow>
-                        <IPManage ipAddresses={user?.ip_addresses} />
+                        <IPManage ipAddresses={``} />
                         <TableRow>
                             <TableCell>{t('permission', 'profile')}</TableCell>
-                            <TableCell component="td">{user?.permission}</TableCell>
+                            <TableCell component="td">{``}</TableCell>
                             <TableCell component="td"></TableCell>
                         </TableRow>
                     </TableHead>

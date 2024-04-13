@@ -49,10 +49,10 @@
     "profile": {
         "name": "typicode"
     },
-    "captcha": {
+    "api/captcha": {
         "data": "captcha data example..."
     },
-    "authcode": {
+    "api/sms": {
         "userid": "acro0720",
         "code": "239710"
     },
@@ -658,7 +658,7 @@
                     "posMethod": "CELL",
                     "algorithm": "POP",
                     "address": "서울시 강남구 도곡로",
-                    "latitude": 37.487190,
+                    "latitude": 37.48719,
                     "longitude": 127.033935
                 },
                 {
@@ -675,14 +675,13 @@
                     "algorithm": "GNSS",
                     "address": "서울시 강남구 도곡로",
                     "latitude": 37.485538,
-                    "longitude": 127.032240
+                    "longitude": 127.03224
                 }
             ]
         },
         "btslist": {
             "count": 0,
-            "lists": [
-            ]
+            "lists": []
         },
         "wifilist": {
             "count": 1,
@@ -703,8 +702,7 @@
         },
         "translist": {
             "count": 0,
-            "lists": [
-            ]
+            "lists": []
         }
     },
     "facility-sync-history": {
@@ -762,8 +760,8 @@
         "band": "587",
         "building": "서울시 종로구",
         "floor": "3F",
-        "latitude": 36.12345,
-        "longitude": 127.7652,
+        "latitude": 37.57059,
+        "longitude": 126.98484,
         "create_date": "2024-03-22 11:31:03",
         "update_date": "2024-03-22 11:31:03"
     },

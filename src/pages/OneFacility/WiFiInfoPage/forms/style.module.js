@@ -38,7 +38,10 @@ const style = {
         backgroundColor: '#009ACC',
     },
     cellInput: {
-        width: '12%',
+        width: '14%',
+    },
+    cellInputWide: {
+        width: '18%',
     },
 }
 

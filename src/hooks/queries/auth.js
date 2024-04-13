@@ -102,6 +102,12 @@ export const useGetCaptcha = (queryParams = {}, options) => {
     })
 }
 
+export const usePostSmsAuthCode = () => {
+    return useMutation({
+        mutationFn: auth.postSmsAuthCode,
+    })
+}
+
 export const useGetAuthCode = (queryParams = {}, options) => {
     console.log('useGetAuthCode queryParams : ', queryParams)
     return useQuery({

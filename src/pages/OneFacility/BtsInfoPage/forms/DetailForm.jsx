@@ -50,9 +50,6 @@ const DetailForm = () => {
 
     useEffect(() => {
         if (apiResult) {
-            console.log('apiResult : ', apiResult)
-            // const { count, lists } = apiResult
-            // setFetchData({ ...apiResult })
             setIsSearchClick(false)
         }
     }, [apiResult, isSearchClick])
@@ -101,8 +98,16 @@ const DetailForm = () => {
                 </Table>
 
                 {/* 지도 영역 */}
-                <Box sx={{ width: '100%', height: '400px', backgroundColor: 'lightgray' }}>
-                    <OllehMap locations={[{ ...apiResult, title: apiResult?.cellid }]} />
+                <Box sx={{ width: '100%', height: '400px' }}>
+                    {apiResult ? (
+                        <OllehMap locations={[{ ...apiResult }]} />
+                    ) : (
+                        <OllehMap
+                            locations={[
+                                { latitude: 37.3998912, longitude: 127.1279874, title: 'KT 분당' },
+                            ]}
+                        />
+                    )}
                 </Box>
             </Box>
         </Box>

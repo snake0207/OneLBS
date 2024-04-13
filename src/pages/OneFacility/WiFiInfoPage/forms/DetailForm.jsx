@@ -29,6 +29,7 @@ import TextInput from '#/components/common/input/TextInput'
 import dayjs from 'dayjs'
 import MuiDialog from '#/components/common/popup/MuiDialog'
 import MuiAlert from '#/components/common/popup/MuiAlert'
+import { OllehMap } from '#/components/common/map/ollehMap'
 
 const formikInitValues = {
     mac: '',
@@ -48,6 +49,9 @@ const DetailForm = () => {
     const [isSearchClick, setIsSearchClick] = useState(false)
     const [modeToggle, setModeToggle] = useState(false)
     const [apiSuccess, setApiSuccess] = useState('')
+    const [locations, setLocations] = useState([
+        { latitude: 37.3998912, longitude: 127.1279874, title: 'KT 분당' },
+    ])
     const [state, setState] = useState({
         edit: false,
         delete: false,
@@ -234,11 +238,11 @@ const DetailForm = () => {
                                         <TextInput name={`ssid`} formik={formik} />
                                     </TableCell>
                                     <TableCell style={style.cellTitle}>{`Grade`}</TableCell>
-                                    <TableCell style={{ width: '20%' }}>
+                                    <TableCell style={style.cellInputWide}>
                                         <TextInput name={`grade`} formik={formik} />
                                     </TableCell>
                                     <TableCell style={style.cellTitle}>{`Band`}</TableCell>
-                                    <TableCell style={{ width: '20%' }}>
+                                    <TableCell style={style.cellInputWide}>
                                         <TextInput name={`band`} formik={formik} />
                                     </TableCell>
                                 </TableRow>
@@ -252,9 +256,9 @@ const DetailForm = () => {
                                         <TextInput name={`floor`} formik={formik} />
                                     </TableCell>
                                     <TableCell style={style.cellTitle}>{``}</TableCell>
-                                    <TableCell style={{ width: '20%' }}>{}</TableCell>
+                                    <TableCell style={style.cellInputWide}>{}</TableCell>
                                     <TableCell style={style.cellTitle}>{``}</TableCell>
-                                    <TableCell style={{ width: '20%' }}>{}</TableCell>
+                                    <TableCell style={style.cellInputWide}>{}</TableCell>
                                 </TableRow>
                                 <TableRow>
                                     <TableCell style={style.cellTitle}>{`위도`}</TableCell>
@@ -266,11 +270,11 @@ const DetailForm = () => {
                                         <TextInput name={`longitude`} formik={formik} />
                                     </TableCell>
                                     <TableCell style={style.cellTitle}>{`생성일시`}</TableCell>
-                                    <TableCell style={{ width: '20%' }}>
+                                    <TableCell style={style.cellInputWide}>
                                         <TextInput name={`create_date`} formik={formik} />
                                     </TableCell>
                                     <TableCell style={style.cellTitle}>{`갱신일시`}</TableCell>
-                                    <TableCell style={{ width: '20%' }}>
+                                    <TableCell style={style.cellInputWide}>
                                         <TextInput name={`update_date`} formik={formik} />
                                     </TableCell>
                                 </TableRow>
@@ -280,8 +284,16 @@ const DetailForm = () => {
                 </Box>
 
                 {/* 측위 목록 */}
-                <Box sx={{ width: '100%', height: '400px', backgroundColor: 'lightgray', mb: 4 }}>
-                    지도영역
+                <Box sx={{ width: '100%', height: '400px', mb: 4 }}>
+                    {apiResult ? (
+                        <OllehMap locations={[{ ...apiResult }]} />
+                    ) : (
+                        <OllehMap
+                            locations={[
+                                { latitude: 37.3998912, longitude: 127.1279874, title: 'KT 분당' },
+                            ]}
+                        />
+                    )}
                 </Box>
                 {/* 하단 버튼 */}
                 {modeToggle ? (

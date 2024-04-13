@@ -45,7 +45,7 @@ const DetailForm = () => {
         state: { row },
     } = useLocation()
     const navigate = useNavigate()
-    const [apiSuccess, setApiSuccess] = useState('')
+    const [bounceRow, setBounceRow] = useState({})
     const [fetchData, setFetchData] = useState({
         poslist: { count: 0, lists: [] },
         btslist: { count: 0, lists: [] },
@@ -151,9 +151,14 @@ const DetailForm = () => {
                                                     style={{ width: '40%' }}
                                                 >{`알고리즘`}</TableCell>
                                             </TableRow>
+                                        </TableHead>
+                                        <TableBody>
                                             {fetchData?.poslist?.count ? (
                                                 fetchData.poslist.lists.map((item, idx) => (
-                                                    <TableRow key={idx}>
+                                                    <TableRow
+                                                        key={idx}
+                                                        onClick={() => setBounceRow(item)}
+                                                    >
                                                         <TableCell>
                                                             <PersonPinCircleOutlinedIcon />
                                                         </TableCell>
@@ -163,10 +168,13 @@ const DetailForm = () => {
                                                 ))
                                             ) : (
                                                 <TableRow>
-                                                    <TableCell>{`No data Found`}</TableCell>
+                                                    <TableCell
+                                                        colSpan={3}
+                                                        align={`center`}
+                                                    >{`No data Found`}</TableCell>
                                                 </TableRow>
                                             )}
-                                        </TableHead>
+                                        </TableBody>
                                     </Table>
                                 </TableContainer>
                             </Box>
@@ -187,9 +195,14 @@ const DetailForm = () => {
                                                     style={{ width: '30%' }}
                                                 >{`Serving`}</TableCell>
                                             </TableRow>
+                                        </TableHead>
+                                        <TableBody>
                                             {fetchData?.btslist?.count ? (
                                                 fetchData.btslist.lists.map((item, idx) => (
-                                                    <TableRow key={idx}>
+                                                    <TableRow
+                                                        key={idx}
+                                                        onClick={() => setBounceRow(item)}
+                                                    >
                                                         <TableCell>{item.type}</TableCell>
                                                         <TableCell>{item.cellid}</TableCell>
                                                         <TableCell>{item.serving}</TableCell>
@@ -197,10 +210,13 @@ const DetailForm = () => {
                                                 ))
                                             ) : (
                                                 <TableRow>
-                                                    <TableCell>{`No data Found`}</TableCell>
+                                                    <TableCell
+                                                        colSpan={3}
+                                                        align={`center`}
+                                                    >{`No data Found`}</TableCell>
                                                 </TableRow>
                                             )}
-                                        </TableHead>
+                                        </TableBody>
                                     </Table>
                                 </TableContainer>
                             </Box>
@@ -213,19 +229,24 @@ const DetailForm = () => {
                                         {/* row - 1 */}
                                         <TableRow style={{ backgroundColor: '#009ACC' }}>
                                             <TableCell style={{ width: '30%' }}>{`MAC`}</TableCell>
-                                            <TableCell style={{ width: '10%' }}>{`SSID`}</TableCell>
+                                            <TableCell style={{ width: '20%' }}>{`SSID`}</TableCell>
                                             <TableCell
                                                 style={{ width: '10%' }}
                                             >{`Grade`}</TableCell>
                                             <TableCell style={{ width: '10%' }}>{`Band`}</TableCell>
                                             <TableCell style={{ width: '10%' }}>{`RSSI`}</TableCell>
                                             <TableCell
-                                                style={{ width: '30%' }}
+                                                style={{ width: '20%' }}
                                             >{`Status`}</TableCell>
                                         </TableRow>
+                                    </TableHead>
+                                    <TableBody>
                                         {fetchData?.wifilist?.count ? (
                                             fetchData.wifilist.lists.map((item, idx) => (
-                                                <TableRow key={idx}>
+                                                <TableRow
+                                                    key={idx}
+                                                    onClick={() => setBounceRow(item)}
+                                                >
                                                     <TableCell>{item.mac}</TableCell>
                                                     <TableCell>{item.ssid}</TableCell>
                                                     <TableCell>{item.grade}</TableCell>
@@ -236,10 +257,13 @@ const DetailForm = () => {
                                             ))
                                         ) : (
                                             <TableRow>
-                                                <TableCell>{`No data Found`}</TableCell>
+                                                <TableCell
+                                                    colSpan={6}
+                                                    align={`center`}
+                                                >{`No data Found`}</TableCell>
                                             </TableRow>
                                         )}
-                                    </TableHead>
+                                    </TableBody>
                                 </Table>
                             </TableContainer>
                         </Box>
@@ -261,6 +285,8 @@ const DetailForm = () => {
                                             // style={{ width: '20%' }}
                                             >{`메시지 전문`}</TableCell>
                                         </TableRow>
+                                    </TableHead>
+                                    <TableBody>
                                         {fetchData?.translist?.count ? (
                                             fetchData.translist.lists.map((item, idx) => (
                                                 <TableRow key={idx}>
@@ -272,21 +298,20 @@ const DetailForm = () => {
                                             ))
                                         ) : (
                                             <TableRow>
-                                                <TableCell>{`No data Found`}</TableCell>
+                                                <TableCell
+                                                    colSpan={4}
+                                                    align={`center`}
+                                                >{`No data Found`}</TableCell>
                                             </TableRow>
                                         )}
-                                    </TableHead>
+                                    </TableBody>
                                 </Table>
                             </TableContainer>
                         </Box>
                     </Box>
-                    <Box sx={{ width: '50%', backgroundColor: 'lightgray' }}>
+                    <Box sx={{ width: '50%' }}>
                         {locations.length > 0 && (
-                            <OllehMap
-                                locations={[...locations]}
-                                onClick={(id) => console.log(`${id} Clicked...`)}
-                                // onClick={(id) => handleClickMapMarker(id)}
-                            />
+                            <OllehMap locations={[...locations]} bounceMarker={bounceRow} />
                         )}
                     </Box>
                 </Box>

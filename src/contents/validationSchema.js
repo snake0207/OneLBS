@@ -14,9 +14,9 @@ const HELPER_TEXT = {
     passwordNotIncludeChar: '반드시 특수문자가 포함되어야 됩니다.',
     passwordNotIncludeNumber: '반드시 숫자가 포함되어야 됩니다.',
     confirmPasswordNotMatch: '비밀번호가 일치하지 않습니다.',
-    authCodeRequired: '휴대폰으로 발송된 인증코드를 입력해 주세요.',
-    authCodeNotMatch: '6자리 숫자를 입력해 주세요.',
-    captchaTextRequired: '화면에 보이는 보안문자의 정보를 입력해 주세요.',
+    certNumRequired: '휴대폰으로 발송된 인증코드를 입력해 주세요.',
+    certNumNotMatch: '6자리 숫자를 입력해 주세요.',
+    captchaRequired: '화면에 보이는 보안문자의 정보를 입력해 주세요.',
     emailCodeNotVerify: '입력하신 인증코드가 유효하지 않습니다.',
     emailCodeRequired: '이메일 인증코드를 입력해 주세요.',
     emailCodeTimeOut: '입력 시간이 초과 하였습니다. 재 인증해 주세요.',
@@ -71,17 +71,17 @@ const REGEXP = {
 }
 
 export const loginSchema = yup.object({
-    userid: yup
+    userId: yup
         .string()
         .min(8, HELPER_TEXT.useridMinLength)
         .max(12, HELPER_TEXT.useridMaxLength)
         .required(HELPER_TEXT.useridRequired),
     password: yup.string().required(HELPER_TEXT.passwordRequired),
-    authcode: yup
+    certNum: yup
         .string()
-        .matches(REGEXP.verifyCode, HELPER_TEXT.authCodeNotMatch)
+        .matches(REGEXP.verifyCode, HELPER_TEXT.certNumNotMatch)
         .required(HELPER_TEXT.authCodeRequired),
-    captchaText: yup.string().required(HELPER_TEXT.captchaTextRequired),
+    captcha: yup.string().required(HELPER_TEXT.captchaRequired),
 })
 
 export const joinSchema = yup.object().shape({

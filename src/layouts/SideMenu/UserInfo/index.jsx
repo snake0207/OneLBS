@@ -6,7 +6,6 @@ import UserIconDark from '#/assets/userIconDark.svg'
 import LogoutIcon from '#/assets/logoutIcon.svg'
 import LogoutIconDark from '#/assets/logoutIconDark.svg'
 
-import user from '#/mock/data/user.json'
 
 function UserInfo() {
     const navigate = useNavigate()
@@ -39,7 +38,7 @@ function UserInfo() {
                         component="div"
                         sx={{ flex: 'auto', fontSize: 18, color: 'text.darkgray' }}
                     >
-                        {user?.name}
+                        {acro}
                     </Typography>
                     <IconButton onClick={handleLogout} sx={{ borderTop: 'none !important' }}>
                         <Icon
@@ -68,7 +67,7 @@ function UserInfo() {
                         color: 'text.darkgray',
                     }}
                 >
-                    {user?.permission}
+                    {Administrator}
                 </Typography>
             </Stack>
         </Box>

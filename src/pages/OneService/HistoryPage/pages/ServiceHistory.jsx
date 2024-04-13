@@ -15,7 +15,7 @@ const ServiceHistory = () => {
     const navigate = useNavigate()
     const [isSearchClick, setIsSearchClick] = useState(true)
     const [fetchData, setFetchData] = useState({ count: 0, lists: [] })
-    const [locations, setLocations] = useState([{ id: '', latitude: 0, longitude: 0, title: '' }])
+    const [locations, setLocations] = useState([])
     const [queryParams, setQueryParams] = useState({
         page: 1,
         limit: 50, // 1회 요청에 받을수 있는 데이터 수
@@ -107,13 +107,11 @@ const ServiceHistory = () => {
                     />
 
                     {/* 지도 영역 */}
-                    <Box
-                        sx={{ mt: 3, width: '100%', height: '400px', backgroundColor: 'lightgray' }}
-                    >
+                    <Box sx={{ mt: 3, width: '100%', height: '400px' }}>
                         {fetchData.count > 0 && (
                             <OllehMap
                                 locations={[...locations]}
-                                onClick={(id) => handleClickMapMarker(id)}
+                                onMarkerClick={(id) => handleClickMapMarker(id)}
                             />
                         )}
                     </Box>

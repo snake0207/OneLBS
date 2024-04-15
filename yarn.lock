@@ -3935,6 +3935,11 @@ mui-one-time-password-input@^2.0.1:
     react "^18.0.0"
     react-dom "^18.0.0"
 
+mui@^0.0.1:
+  version "0.0.1"
+  resolved "https://registry.yarnpkg.com/mui/-/mui-0.0.1.tgz#469a71f0932969526271ec939dc5959806590762"
+  integrity sha512-iB9zfxsJBcMkZ/SY6X+HGSPr4fftCZIQ76ZMH8iSMfVkidVzRtZlLW2gbWXUe+IMcj8JLv1p+dGKvPVlgtiocA==
+
 nanoid@^3.3.7:
   version "3.3.7"
   resolved "https://registry.npmjs.org/nanoid/-/nanoid-3.3.7.tgz"

@@ -5,6 +5,7 @@
     "type": "module",
     "scripts": {
         "dev": "vite",
+        "ipv4": "vite --host 172.21.225.145",
         "build": "vite build",
         "build:dev": "vite build --mode development",
         "build:prod": "vite build --mode production",
@@ -33,6 +34,7 @@
         "i18next": "^23.7.16",
         "i18next-browser-languagedetector": "^7.2.0",
         "json-server": "^1.0.0-alpha.23",
+        "mui": "^0.0.1",
         "mui-one-time-password-input": "^2.0.1",
         "prettier": "^3.1.1",
         "prop-types": "^15.7.2",

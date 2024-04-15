@@ -21,6 +21,9 @@ const gridProps = {
         fontSize: '15px',
         backgroundColor: '#009ACC',
     },
+    '& .MuiDataGrid-columnHeaderTitleContainer': {
+        justifyContent: 'center',
+    },
     '& .MuiDataGrid-cell': {
         borderBottom: `1px solid `,
         borderBottomColor: '#d1d1d1',
@@ -67,6 +70,7 @@ const CustomDataGrid = ({
     rows,
     rowCount,
     columns,
+    columnGroupingModel = null,
     sort,
     onPageChange,
     onRowClick,
@@ -74,6 +78,7 @@ const CustomDataGrid = ({
     activeTools,
     pageInit,
 }) => {
+    console.log(columnGroupingModel)
     return (
         <DataGrid
             loading={loading}
@@ -94,6 +99,8 @@ const CustomDataGrid = ({
             rows={rows}
             rowCount={rowCount}
             columns={columns}
+            experimentalFeatures={{ columnGrouping: true }}
+            columnGroupingModel={columnGroupingModel}
             rowHeight={48}
             initialState={{
                 sorting: {

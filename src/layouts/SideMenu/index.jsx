@@ -1,23 +1,13 @@
 import React from 'react'
 import List from '@mui/material/List'
 import IconButton from '@mui/material/IconButton'
-import ChevronLeftIcon from '@mui/icons-material/ChevronLeft'
-import { Drawer, Toolbar, Icon, Box } from '@mui/material'
+import { Toolbar, Icon, Box } from '@mui/material'
 import MuiDrawer from '@mui/material/Drawer'
 import { styled } from '@mui/material/styles'
 
-import AppRegistrationIcon from '@mui/icons-material/AppRegistration'
-import ListItemButton from '@mui/material/ListItemButton'
-import ListItemIcon from '@mui/material/ListItemIcon'
-import ListItemText from '@mui/material/ListItemText'
-
 import ExpandMenuItem from '#/components/common/menu/ExpandMenuItem'
-import UserInfo from './UserInfo'
-
-import LinkRouter from '#/components/common/menu/LinkRouter'
 
 import useLayoutStore from '#/store/useLayoutStore'
-import LogoIcon from '#/assets/logo.svg'
 import LogoIconDark from '#/assets/logoDark.svg'
 import MenuIcon from '#/assets/menuIcon.svg'
 import MenuIconDark from '#/assets/menuIconDark.svg'
@@ -29,12 +19,11 @@ import style from './style.module'
 import { data } from '#/mock/data/side_menu.json'
 
 import ErrorOutlineOutlinedIcon from '@mui/icons-material/ErrorOutlineOutlined'
-import SpaceDashboardOutlinedIcon from '@mui/icons-material/SpaceDashboardOutlined'
-import WorkHistoryOutlinedIcon from '@mui/icons-material/WorkHistoryOutlined'
-import SyncAltOutlinedIcon from '@mui/icons-material/SyncAltOutlined'
-import HubOutlinedIcon from '@mui/icons-material/HubOutlined'
+import DashboardCustomizeOutlinedIcon from '@mui/icons-material/DashboardCustomizeOutlined'
+import ManageSearchOutlinedIcon from '@mui/icons-material/ManageSearchOutlined'
+import PinDropOutlinedIcon from '@mui/icons-material/PinDropOutlined'
+import DevicesOtherOutlinedIcon from '@mui/icons-material/DevicesOtherOutlined'
 import ManageAccountsOutlinedIcon from '@mui/icons-material/ManageAccountsOutlined'
-import CottageOutlinedIcon from '@mui/icons-material/CottageOutlined'
 import { useNavigate } from 'react-router-dom'
 
 const drawerWidth = 240
@@ -80,10 +69,10 @@ const VariantDrawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 
 
 const getMenuIcon = (key, themeMode) => {
     const iconComponents = {
-        dashboard: <SpaceDashboardOutlinedIcon />,
-        service: <WorkHistoryOutlinedIcon />,
-        facility: <SyncAltOutlinedIcon />,
-        system: <HubOutlinedIcon />,
+        dashboard: <DashboardCustomizeOutlinedIcon />,
+        service: <ManageSearchOutlinedIcon />,
+        facility: <PinDropOutlinedIcon />,
+        system: <DevicesOtherOutlinedIcon />,
         account: <ManageAccountsOutlinedIcon />,
     }
 
@@ -107,16 +96,6 @@ const createMenuItems = (menuItems, themeMode) => {
                     )
                 }
             })}
-            <>
-                <LinkRouter to="/components" color="inherit" underline="none">
-                    <ListItemButton>
-                        <ListItemIcon>
-                            <AppRegistrationIcon />
-                        </ListItemIcon>
-                        <ListItemText primary="Components" />
-                    </ListItemButton>
-                </LinkRouter>
-            </>
         </React.Fragment>
     )
 }
@@ -137,7 +116,7 @@ const SideMenu = ({ open, toggleDrawer }) => {
                 }}
             >
                 <Box sx={{ m: '24px 104px 30px 24px' }}>
-                    <img src={LogoIcon} onClick={() => navigate('/')} />
+                    <img src={LogoIconDark} onClick={() => navigate('/')} />
                 </Box>
                 <IconButton
                     onClick={toggleDrawer}

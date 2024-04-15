@@ -6,7 +6,7 @@ import TitleBar from '#/components/common/menu/TitleBar'
 import CustomDataGrid from '#/components/common/table/datagrid'
 
 import SearchFilter from '../Filter'
-import { columns } from './grid-columns'
+import { columns, columnGroupingModel } from './grid-columns'
 import { useGetCloudStat } from '#/hooks/queries/one-service'
 
 const CloudStat = () => {
@@ -75,6 +75,7 @@ const CloudStat = () => {
                         rows={fetchData?.lists}
                         rowCount={fetchData?.count}
                         columns={columns}
+                        columnGroupingModel={columnGroupingModel}
                         sort={{ field: 'id', orderby: 'desc' }}
                         onPageChange={handleOnPageChange}
                         onRowClick={handleSelectRow}

@@ -3,38 +3,20 @@ import Box from '@mui/material/Box'
 import Toolbar from '@mui/material/Toolbar'
 import IconButton from '@mui/material/IconButton'
 import Container from '@mui/material/Container'
-//import FullscreenIcon from '@mui/icons-material/Fullscreen'
-import useLayoutStore from '#/store/useLayoutStore'
+import ExitToAppOutlinedIcon from '@mui/icons-material/ExitToAppOutlined'
 import { useGetAskUserInfo, usePostLogout } from '#/hooks/queries/auth'
 
-import Dropdown from '#/components/common/button/Dropdown'
 import { useNavigate } from 'react-router-dom'
 
-import MenuIcon from '#/assets/menuIcon.svg'
 import MenuIconDark from '#/assets/menuIconDark.svg'
 
 import style from './style.module'
-
-const userMenus = [
-    { key: 'profile', label: `내 정보`, value: '/mypage/profile' },
-    { key: 'logout', label: `로그 아웃`, value: '/login' },
-]
+import { Stack, Tooltip } from '@mui/material'
 
 function Header({ toggleDrawer }) {
-    const { themeMode } = useLayoutStore()
     const { mutate } = usePostLogout()
     const navigate = useNavigate()
     // const { data } = useGetAskUserInfo()
-    const handleSelectUserMenu = (item) => {
-        console.log(item)
-
-        if (item.key === 'logout') {
-            // clear auth token & user data
-            mutate()
-        }
-
-        navigate(item.value)
-    }
 
     return (
         <AppBar position="absolute" sx={style.header}>
@@ -48,25 +30,26 @@ function Header({ toggleDrawer }) {
                             aria-haspopup="true"
                             onClick={toggleDrawer}
                         >
-                            {themeMode === 'light' ? (
-                                <img src={MenuIcon} />
-                            ) : (
-                                <img src={MenuIconDark} />
-                            )}
+                            <img src={MenuIconDark} />
                         </IconButton>
                     </Box>
-                    <Box sx={{ flexGrow: 1, display: { xs: 'none' } }}></Box>
-                    <Box sx={{ flexGrow: 0, display: 'flex', alignItems: 'center' }}>
-                        {/* <Notify notifications={notifications} /> */}
-                        <Dropdown
-                            items={userMenus}
-                            onSelect={handleSelectUserMenu}
-                            sx={style.dropdownText}
+                    <Stack direction={`row`} spacing={1.5}>
+                        <Box
+                            sx={{
+                                display: 'flex',
+                                alignItems: 'center',
+                                fontSize: '14px',
+                                color: `text.gray`,
+                            }}
                         >
-                            {'Jone Doe'}
-                            {/* {data && data.userName} */}
-                        </Dropdown>
-                    </Box>
+                            {'acro 반갑습니다'}({`관리자`}){/* {data && data.userName} */}
+                        </Box>
+                        <Tooltip title={`로그아웃`}>
+                            <IconButton onClick={() => navigate('/login')}>
+                                <ExitToAppOutlinedIcon />
+                            </IconButton>
+                        </Tooltip>
+                    </Stack>
                 </Toolbar>
             </Container>
         </AppBar>

@@ -17,19 +17,23 @@ const UeModelList = () => {
     const [isSearchClick, setIsSearchClick] = useState(true)
     const [fetchData, setFetchData] = useState({ count: 0, lists: [] })
     const [queryParams, setQueryParams] = useState({
-        ueName: '',
-        ueCode: '',
         page: 1,
         limit: 50, // 1회 요청에 받을수 있는 데이터 수
     })
-    const { data: apiResult } = useGetUEs(queryParams, {
+    const {
+        data: apiResult,
+        isLoading,
+        refetch,
+    } = useGetUEs(queryParams, {
         enabled: true,
     })
     const [deleteUEs, setDeleteUEs] = useState({ ueCodes: [] })
+    const [deleteResult, setDeleteResult] = useState(false)
     const { mutate: deleteMutate, isPending } = usePostDeleteUEs()
 
     // 검색 버튼 누른 경우
     const handleSearch = (values) => {
+        console.log('search values : ', values)
         setFetchData({ count: 0, lists: [] })
         setIsSearchClick((prev) => !prev)
         setQueryParams({ ...queryParams, ...values, page: 1 })
@@ -62,7 +66,11 @@ const UeModelList = () => {
             { ...deleteUEs },
             {
                 onSuccess: ({ data }) => {
-                    console.log('response : ', data)
+                    console.log('Delete Response : ', data)
+                    data.id && setDeleteResult(true)
+                    setFetchData({ count: 0, lists: [] })
+                    refetch({ ...queryParams, queryKey: 'newDataKey' })
+                    // handleSearch({ ueName: '', ueCode: '' })
                 },
             },
         )
@@ -73,9 +81,9 @@ const UeModelList = () => {
             const { count, lists } = apiResult
             setFetchData({ count: count, lists: [...fetchData.lists, ...lists] })
         }
-    }, [apiResult, isSearchClick])
+    }, [apiResult, isSearchClick, deleteResult])
 
-    // console.log('fetchData : ', fetchData)
+    console.log('apiResult : ', apiResult)
 
     return (
         <Box>

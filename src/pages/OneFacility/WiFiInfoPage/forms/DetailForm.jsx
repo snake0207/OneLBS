@@ -38,10 +38,16 @@ const formikInitValues = {
     band: '',
     building: '',
     floor: '',
-    latitude: '',
-    longitude: '',
+    vap: {
+        utmk: { latitude: 0, longitude: 0 },
+        wgs84: { latitude: 0, longitude: 0 },
+    },
     create_date: '',
     update_date: '',
+    gridX: [],
+    gridY: [],
+    rssi: [],
+    dataCount: [],
 }
 
 const DetailForm = () => {
@@ -176,9 +182,17 @@ const DetailForm = () => {
         if (apiResult) {
             console.log('apiResult : ', apiResult)
             formik.setValues({ ...apiResult })
+            const vap = {
+                utmk: { longitude: apiResult.vap.utmk[0], latitude: apiResult.vap.utmk[1] },
+                wgs84: { longitude: apiResult.vap.wgs84[0], latitude: apiResult.vap.wgs84[1] },
+            }
+            console.log('vap : ', vap)
+            formik.setFieldValue('vap', vap)
             setIsSearchClick(false)
         }
     }, [apiResult, isSearchClick])
+
+    console.log('formik.values : ', formik.values)
 
     return (
         <Box>
@@ -263,11 +277,11 @@ const DetailForm = () => {
                                 <TableRow>
                                     <TableCell style={style.cellTitle}>{`위도`}</TableCell>
                                     <TableCell style={style.cellInput}>
-                                        <TextInput name={`latitude`} formik={formik} />
+                                        <TextInput name={`vap.wgs84.latitude`} formik={formik} />
                                     </TableCell>
                                     <TableCell style={style.cellTitle}>{`경도`}</TableCell>
                                     <TableCell style={style.cellInput}>
-                                        <TextInput name={`longitude`} formik={formik} />
+                                        <TextInput name={`vap.wgs84.longitude`} formik={formik} />
                                     </TableCell>
                                     <TableCell style={style.cellTitle}>{`생성일시`}</TableCell>
                                     <TableCell style={style.cellInputWide}>
@@ -286,7 +300,14 @@ const DetailForm = () => {
                 {/* 측위 목록 */}
                 <Box sx={{ width: '100%', height: '400px', mb: 4 }}>
                     {apiResult ? (
-                        <OllehMap locations={[{ ...apiResult }]} />
+                        <OllehMap
+                            locations={[
+                                {
+                                    ...formik.values.vap.wgs84,
+                                    title: formik.values.building,
+                                },
+                            ]}
+                        />
                     ) : (
                         <OllehMap
                             locations={[

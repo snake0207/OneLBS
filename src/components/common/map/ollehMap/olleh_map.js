@@ -1,4 +1,4 @@
-// import ktmap from "#/components/common/map/ollehMap/ktmap-all-desktop-min.js"
+import { HexGrid } from '#/components/common/map/ollehMap/js/jsHexGrid'
 
 const initPosKT = { latitude: 37.3998912, longitude: 127.1279874, title: 'KT 분당' }
 
@@ -51,6 +51,40 @@ const setBounceMarker = (location) => {
         title: location.title || location.address,
     })
     return _marker
+}
+
+const initHexGrid = () => {
+    var gridX = 127830;
+    var gridY = 224404;
+    var rssi = -80;
+    const grid25 = new HexGrid(10)
+    addHexGrid25Layer(grid25.getPolygonPaths(gridX, gridY), rssi);
+}
+
+const addHexGrid25Layer = (paths, rssi) => {
+    var list = [];
+    for (var idx in paths) {
+        list.push(new olleh.maps.UTMK(paths[idx].x, paths[idx].y));
+    }
+    
+    var color = "";
+    if (rssi >= -50) color = '#ff0000';
+    else if (rssi >= -60) color = '#ff6a00';
+    else if (rssi >= -70) color = '#ffd800';
+    else if (rssi >= -80) color = '#b6ff00';
+    else if (rssi >= -90) color = '#4cff00';
+    else color = '#0094ff';
+    
+    var hexGrid25Layer = new olleh.maps.vector.Polygon({
+        map: map,
+        paths: new olleh.maps.Path(list),
+        fillColor: color,
+        fillOpacity: 0.8,
+        strokeColor: '#0000ff',
+        strokeOpacity: 1,
+        strokeWeight: 1
+    });
+    return hexGrid25Layer;
 }
 
 export default { initMap, drawMarker, setBounceMarker }

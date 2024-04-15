@@ -37,12 +37,13 @@ export const usePostServiceUpdate = () => {
 // ----------------- Start 단말 모델 관리 ----------------------------------
 // 단말 모델 리스트
 export const useGetUEs = (queryParams = {}, options) => {
-    const { data } = useQuery({
+    console.log('useGetUEs : ', queryParams, options)
+    const { data, isLoading, refetch } = useQuery({
         queryKey: ['get-ue-lists', queryParams],
         queryFn: () => system.getUEs(queryParams),
         ...options,
     })
-    return { data: data?.data }
+    return { data: data?.data, isLoading, refetch }
 }
 // 단말 모델 삭제(단일)
 export const useGetDeleteUE = (queryParams = {}, options) => {

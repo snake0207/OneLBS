@@ -74,11 +74,11 @@ const CustomDataGrid = ({
     sort,
     onPageChange,
     onRowClick,
+    onRowSelectionChange = null,
     component,
     activeTools,
     pageInit,
 }) => {
-    console.log(columnGroupingModel)
     return (
         <DataGrid
             loading={loading}
@@ -116,6 +116,7 @@ const CustomDataGrid = ({
             // params.row.필드명
             // row에 별도의 동작 버튼을 둔 경우, 아래는 동작 안하도록 처리 필요
             onRowClick={(params) => onRowClick(params)}
+            onRowSelectionModelChange={checkboxSelection ? (param) => onRowSelectionChange(param) : null}
             sx={{ ...gridProps }}
         />
     )

@@ -25,7 +25,8 @@ const UeModelList = () => {
     const { data: apiResult } = useGetUEs(queryParams, {
         enabled: true,
     })
-    const { mutate, isPending } = usePostDeleteUEs()
+    const [deleteUEs, setDeleteUEs] = useState({ ueCodes: [] })
+    const { mutate: deleteMutate, isPending } = usePostDeleteUEs()
 
     // 검색 버튼 누른 경우
     const handleSearch = (values) => {
@@ -39,6 +40,11 @@ const UeModelList = () => {
         navigate('/system/ue/edit', { state: { row: row } })
     }
 
+    const handleRowSelectionChange = (checkArrs) => {
+        console.log('checkArrs : ', checkArrs)
+        setDeleteUEs({ ueCodes: [...checkArrs] })
+    }
+
     // 리스트 하단의 페이지 이동 버튼 click시 동작
     const handleOnPageChange = (currPage) => {
         const pageSize = parseInt(import.meta.env.VITE_LIST_PAGE_SIZE)
@@ -50,18 +56,16 @@ const UeModelList = () => {
     }
 
     const handleDeleteRows = () => {
-        console.log('Delete Checked list...')
+        deleteUEs.ueCodes.length > 0 && console.log('deleteUEs : ', deleteUEs)
         setOpenDeleteDialog(false)
-        // const deleteParams = []
-        // mutate(
-        //     {},
-        //     {
-        //         onSuccess: ({ data }) => {
-        //             console.log('response : ', data)
-        //         },
-        //     },
-        // )
-        // API 호출
+        deleteMutate(
+            { ...deleteUEs },
+            {
+                onSuccess: ({ data }) => {
+                    console.log('response : ', data)
+                },
+            },
+        )
     }
 
     useEffect(() => {
@@ -71,7 +75,7 @@ const UeModelList = () => {
         }
     }, [apiResult, isSearchClick])
 
-    console.log('fetchData : ', fetchData)
+    // console.log('fetchData : ', fetchData)
 
     return (
         <Box>
@@ -93,7 +97,8 @@ const UeModelList = () => {
                         >{`Total Count: ${fetchData.count}`}</Typography>
                         <Box sx={{ display: 'flex', justifyContent: 'space-between', gap: 2 }}>
                             <MuiSubButton
-                                disabled={isPending}
+                                // disabled={true}
+                                disabled={!deleteUEs.ueCodes.length ? true : false || isPending}
                                 name="delete"
                                 title="선택 삭제"
                                 onClick={() => setOpenDeleteDialog(true)}
@@ -116,6 +121,7 @@ const UeModelList = () => {
                         sort={{ field: 'id', orderby: 'desc' }}
                         onPageChange={handleOnPageChange}
                         onRowClick={handleSelectRow}
+                        onRowSelectionChange={handleRowSelectionChange}
                         pageInit={queryParams.page === 1 ? true : false}
                     />
                 </Box>
@@ -123,7 +129,7 @@ const UeModelList = () => {
             {openDeleteDialog && (
                 <MuiDialog
                     isOpen={openDeleteDialog}
-                    content={state.msg}
+                    content={`삭제하면 복구가 불가능합니다. 삭제 하시겠습니까?`}
                     onCancel={() => setOpenDeleteDialog(false)}
                     onConfirm={handleDeleteRows}
                 />

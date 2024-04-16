@@ -1,15 +1,11 @@
 import { Box } from '@mui/material'
-import Grid from '@mui/material/Unstable_Grid2/Grid2'
 import AuthFormContainer from '#/components/auth/authForm/AuthFormContainer'
 
 function LoginPage() {
     return (
-        <Grid container sx={{ height: '100vh' }}>
-            <Grid
-                item="true"
-                xs={false}
-                sm={4}
-                md={7}
+        <Box sx={{ display: 'flex', justifyContent: 'space-between', height: '100vh' }}>
+            <Box
+                flex={6}
                 sx={{
                     backgroundImage: `url('/loginSlide.png')`,
                     backgroundRepeat: 'no-repeat',
@@ -19,7 +15,7 @@ function LoginPage() {
                     backgroundPosition: 'center',
                 }}
             />
-            <Grid item="true" xs={12} sm={8} md={5} elevation={6}>
+            <Box flex={4}>
                 <Box
                     sx={{
                         my: 8,
@@ -31,8 +27,8 @@ function LoginPage() {
                 >
                     <AuthFormContainer />
                 </Box>
-            </Grid>
-        </Grid>
+            </Box>
+        </Box>
     )
 }
 

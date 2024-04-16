@@ -307,6 +307,9 @@ const DetailForm = () => {
                                     title: formik.values.building,
                                 },
                             ]}
+                            gridX={formik.values.gridX}
+                            gridY={formik.values.gridY}
+                            rssi={formik.values.rssi}
                         />
                     ) : (
                         <OllehMap

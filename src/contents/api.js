@@ -10,13 +10,14 @@ export const API_PATH = {
         logout: '/user-auth/api/v1/user/logout',
         password_change: 'user-auth/api/v1/user/password/change',
         defer_change: 'user-auth/api/v1/user/password/defer-change',
-        ask_user_info: '/user-auth/api/v1/user/ask-user-info',
         // add
         // captcha: '/captcha',
         // authcode: '/authcode',
+        dummyToken: '/dummy-token',
         smscode: '/api/sms',
-        captcha: '/api/captcha',
+        captcha: '/api-captcha',
         login: '/api/login',
+        ask_user_permission: '/ask-user-permission',
     },
     system: {
         service_regist: '/api/system/service/regist',

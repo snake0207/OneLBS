@@ -8,6 +8,7 @@ import { loginSchema } from '#/contents/validationSchema'
 import {
     useGetAuthCode,
     useGetCaptcha,
+    useGetDummyToken,
     usePostLogin,
     usePostSmsAuthCode,
 } from '#/hooks/queries/auth'
@@ -30,19 +31,22 @@ const MAX_REQ_AUTHCODE = 3
 
 const LoginForm = () => {
     const navigate = useNavigate()
-    const { mutate, isPending } = usePostLogin()
+    const { mutate: submitMutate, isPending } = usePostLogin()
     const [apiResultLogin, setApiResultLogin] = useState(null)
-    // Captcha 관련
+    // dummy token 요청 관련
+    const [isDummy, setIsDummy] = useState(true)
+    const { data: respDummyToken } = useGetDummyToken({}, { enabled: isDummy })
+
+    // Captcha 요청 관련
     const [apiResultCaptcha, setApiResultCaptcha] = useState(null)
-    const [isCaptcha, setIsCaptcha] = useState(true)
-    const [captchaParams, setCaptchaParams] = useState({ id: Math.random() })
+    const [isCaptcha, setIsCaptcha] = useState(false)
+    const [captchaParams, setCaptchaParams] = useState({ id: Math.random(), token: '' })
     const { data: respCaptcha } = useGetCaptcha(captchaParams, { enabled: isCaptcha })
     // SMS 인증코드 관련
     const [apiResultSmsAuthCode, setApiResultSmsAuthCode] = useState()
     const { mutate: smsAuthCodeMutate, isPending: isSmsAuthCodePending } = usePostSmsAuthCode()
     const [state, setState] = useState({
         authcodeLimits: 0,
-        captchaLimits: 0,
     })
 
     const formik = useFormik({
@@ -57,9 +61,9 @@ const LoginForm = () => {
             // const password = encryptPasswordBase64WithTime(
             //     encryptPasswordSHA256WithTime(encryptPasswordSHA256(form.password)),
             // )
-            const apiParams = { ...form }
+            const apiParams = { ...form, token: respDummyToken?.data.token }
             console.log('onSubmit >> ', JSON.stringify(apiParams, null, 2))
-            mutate(
+            submitMutate(
                 { ...apiParams },
                 // { ...form, password },
                 {
@@ -86,7 +90,7 @@ const LoginForm = () => {
         })
         // setAuthCodeParams({ userId: formik.values.userId })
         smsAuthCodeMutate(
-            { userId: formik.values.userId },
+            { userId: formik.values.userId, token: respDummyToken?.data.token },
             {
                 onSuccess: ({ data }) => {
                     console.log('sms response : ', data)
@@ -98,20 +102,11 @@ const LoginForm = () => {
     }
 
     const handleRequestCaptcha = () => {
-        console.log('보안문자 요청...')
-        setCaptchaParams({ id: Math.random() })
+        setCaptchaParams({ id: Math.random(), token: respDummyToken?.data.token })
         setIsCaptcha(true)
-        setState({
-            ...state,
-            captchaLimits: state.captchaLimits + 1,
-        })
     }
 
     const { themeMode } = getLayoutState()
-
-    console.log('state : ', state)
-    // console.log('respAuthcode : ', respAuthcode)
-    console.log('respCaptcha : ', respCaptcha)
 
     useEffect(() => {
         if (respCaptcha) {
@@ -120,7 +115,18 @@ const LoginForm = () => {
             setApiResultCaptcha(imageUrl)
             setIsCaptcha(false)
         }
-    }, [respCaptcha, isCaptcha])
+        if (respDummyToken) {
+            setIsDummy(false)
+            if (respDummyToken.data.code === '0000') {
+                setCaptchaParams({ ...captchaParams, token: respDummyToken.data.token })
+                setIsCaptcha(true)
+            }
+        }
+    }, [respDummyToken, isDummy, respCaptcha, isCaptcha])
+
+    // console.log('apiResultCaptcha : ', apiResultCaptcha)
+    // console.log('respCaptcha : ', respCaptcha)
+    // console.log('respDummyToken : ', respDummyToken)
 
     return (
         <>
@@ -189,23 +195,25 @@ const LoginForm = () => {
                     {`아래 보안문자의 정보를 입력해 주세요.`}
                 </Typography>
                 <Stack direction="row">
-                    <CardMedia
-                        component="img"
-                        image={apiResultCaptcha}
-                        style={{
-                            objectFit: 'cover',
-                        }}
-                        sx={{
-                            border: `1px solid #BCBCBC`,
-                            borderRadius: '4px',
-                            mb: 1,
-                        }}
-                        alt={`보안문자`}
-                    />
+                    {apiResultCaptcha && (
+                        <CardMedia
+                            component="img"
+                            image={apiResultCaptcha}
+                            style={{
+                                objectFit: 'cover',
+                            }}
+                            sx={{
+                                border: `1px solid #BCBCBC`,
+                                borderRadius: '4px',
+                                mb: 1,
+                            }}
+                            aria-label={`보안문자`}
+                        />
+                    )}
 
                     <LoadingButton
                         variant="contained"
-                        disabled={state.captchaLimits < MAX_REQ_AUTHCODE ? false : true}
+                        disabled={!respDummyToken?.data.token}
                         startIcon={<CachedOutlinedIcon />}
                         onClick={handleRequestCaptcha}
                         sx={style.loadingButton}

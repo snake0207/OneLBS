@@ -9,14 +9,6 @@ const postJoin = (data) => {
     return postAPI({ endPoint: API_PATH.auth.join, data })
 }
 
-const postVerifyEmail = (data) => {
-    return postAPI({ endPoint: API_PATH.auth.verify_email, data })
-}
-
-const postConfirmEmail = (data) => {
-    return postAPI({ endPoint: API_PATH.auth.confirm_eamil, data })
-}
-
 const getUserIp = () => {
     return getAPI({ endPoint: API_PATH.auth.get_ip })
 }
@@ -25,20 +17,8 @@ const postRenewToken = () => {
     return postAPI({ endPoint: API_PATH.auth.renew_token })
 }
 
-const postVerifyOtp = (data) => {
-    return postAPI({ endPoint: API_PATH.auth.verify_otp, data })
-}
-
-const postPasswordReset = (data) => {
-    return postAPI({ endPoint: API_PATH.auth.password_reset, data })
-}
-
 const postLogout = () => {
     return postAPI({ endPoint: API_PATH.auth.logout })
-}
-
-const postPasswordChange = (data) => {
-    return postAPI({ endPoint: API_PATH.auth.password_change, data })
 }
 
 const postDeferChange = () => {
@@ -49,8 +29,13 @@ const postSmsAuthCode = (data) => {
     return postAPI({ endPoint: API_PATH.auth.smscode, data })
 }
 
-const getAskUserInfo = () => {
-    return getAPI({ endPoint: API_PATH.auth.ask_user_info })
+const postAskUserPermission = (data) => {
+    console.log('postAskUserPermission : ', data)
+    return postAPI({ endPoint: API_PATH.auth.ask_user_permission, data })
+}
+
+const getDummyToken = (data) => {
+    return getAPI({ endPoint: API_PATH.auth.dummyToken, data })
 }
 
 const getCaptcha = (data) => {
@@ -60,17 +45,13 @@ const getCaptcha = (data) => {
 export default {
     postLogin,
     postJoin,
-    postVerifyEmail,
-    postConfirmEmail,
     getUserIp,
     postRenewToken,
-    postVerifyOtp,
-    postPasswordReset,
     postLogout,
-    postPasswordChange,
     postDeferChange,
-    getAskUserInfo,
-    
+    postAskUserPermission,
+
+    getDummyToken,
     getCaptcha, // captcha
     postSmsAuthCode,
 }

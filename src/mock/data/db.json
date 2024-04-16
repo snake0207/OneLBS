@@ -1,912 +1,1545 @@
 {
-    "posts": [
-        {
-            "id": "1",
-            "title": "a title",
-            "views": 100
-        },
-        {
-            "id": "2",
-            "title": "another title",
-            "views": 200
-        },
-        {
-            "id": "34c8"
-        }
-    ],
-    "comments": [
-        {
-            "id": "1",
-            "text": "a comment about post 1",
-            "postId": "1"
-        },
-        {
-            "id": "2",
-            "text": "another comment about post 1",
-            "postId": "1"
-        }
-    ],
-    "login": [
-        {
-            "userid": "acro0720",
-            "password": "123456",
-            "fields": {
-                "twoFactorAuth": "N",
-                "twoFactorSecret": "",
-                "secretKey": "5678n678shdfs567837^&*(",
-                "qrCodeUrl": "naver.com"
-            },
-            "id": "54d4"
-        },
-        {
-            "id": "641e",
-            "userid": "acro0720",
-            "password": "123456",
-            "authcode": "123456",
-            "captchaText": "frt34"
-        }
-    ],
-    "profile": {
-        "name": "typicode"
+  "posts": [
+    {
+      "id": "1",
+      "title": "a title",
+      "views": 100
     },
-    "api/captcha": {
-        "data": "captcha data example..."
+    {
+      "id": "2",
+      "title": "another title",
+      "views": 200
     },
-    "api/sms": {
-        "userid": "acro0720",
-        "code": "239710"
+    {
+      "id": "34c8"
+    }
+  ],
+  "comments": [
+    {
+      "id": "1",
+      "text": "a comment about post 1",
+      "postId": "1"
     },
-    "service-regist": [
-        {
-            "result": "0000",
-            "id": "cfa2"
-        },
-        {
-            "id": "28c9"
-        },
-        {
-            "id": "4a6b",
-            "serviceName": "Shanshan Airport",
-            "serviceCode": "SXJ",
-            "cpName": "Buzzdog",
-            "serviceProvider": "businessweek.com",
-            "userCheck": true,
-            "authCheck": false,
-            "serviceType": 0,
-            "accuracy": 2,
-            "respTime": 20,
-            "cellCheck": true,
-            "posMethod": 1,
-            "gpsCheck": false,
-            "plane": 0,
-            "mode": 0,
-            "lppeCheck": true,
-            "lppRespTime": 13,
-            "ksaCheck": true,
-            "version": "V1.7",
-            "ksaCellCheck": false,
-            "ksaGnssCheck": false,
-            "ksaWifiCheck": true,
-            "ksaAtmosphericCheck": false,
-            "ksaFlpCheck": true,
-            "collectionCount": "33"
-        }
-    ],
-    "service-code": {
-        "serviceCode": "acro",
-        "result": "0000",
-        "id": "5be7"
+    {
+      "id": "2",
+      "text": "another comment about post 1",
+      "postId": "1"
+    }
+  ],
+  "login": [
+    {
+      "userid": "acro0720",
+      "password": "123456",
+      "fields": {
+        "twoFactorAuth": "N",
+        "twoFactorSecret": "",
+        "secretKey": "5678n678shdfs567837^&*(",
+        "qrCodeUrl": "naver.com"
+      },
+      "id": "54d4"
     },
-    "service-list": {
-        "count": 150,
-        "lists": [
-            {
-                "id": 1,
-                "serviceName": "Shanshan Airport",
-                "serviceCode": "SXJ",
-                "cpName": "Buzzdog",
-                "serviceProvider": "businessweek.com",
-                "status": 1,
-                "register_date": "2023-04-01",
-                "change_date": "2023-11-06",
-                "accuracy": 2,
-                "respTime": 20,
-                "serviceType": 0,
-                "userCheck": "Y",
-                "authCheck": "N",
-                "cellCheck": "Y",
-                "posMethod": 1,
-                "gpsCheck": "N",
-                "plane": 0,
-                "mode": 0,
-                "lppeCheck": "Y",
-                "lppRespTime": 13,
-                "ksaCheck": "N",
-                "version": "V1.7",
-                "ksaCellCheck": "N",
-                "ksaGnssCheck": "N",
-                "ksaWifiCheck": "Y",
-                "ksaAtmosphericCheck": "N",
-                "ksaFlpCheck": "Y",
-                "collectionCount": 4
-            }
-        ]
+    {
+      "id": "641e",
+      "userid": "acro0720",
+      "password": "123456",
+      "authcode": "123456",
+      "captchaText": "frt34"
+    }
+  ],
+  "profile": {
+    "name": "typicode"
+  },
+  "api-captcha": {
+    "data": "captcha data example..."
+  },
+  "api/sms": {
+    "userid": "acro0720",
+    "code": "239710"
+  },
+  "dummy-token": {
+    "token": "45678hgbnm@#$%%^",
+    "code": "0000"
+  },
+  "ask-user-permission": [
+    {
+      "key": "L100_M000_S000",
+      "value": {
+        "admin": "N",
+        "operator": "N"
+      }
     },
-    "ue-regist": [
-        {
-            "id": "8335",
-            "ueName": "SM-700K",
-            "modelCode": "700K-2",
-            "ueCodes": ["700K-2", "700K-3", "700K-1"],
-            "remarks": "사업팀 요청",
-            "lppEcidCheck": "N",
-            "lppaEcidCheck": "N",
-            "msaCheck": "Y",
-            "msbCheck": "Y",
-            "cpCheck": "N",
-            "lppeCheck": "N",
-            "suplVersion": "2.1.1",
-            "tlsCheck": "N",
-            "emergencyCheck": "Y",
-            "ksaVersion": "3.0.0"
-        },
-        {
-            "id": "ad38",
-            "ueName": "SM-700K",
-            "ueCodes": ["700K-2", "700K-3", "700K-1"],
-            "remarks": "사업팀 요청",
-            "lppEcidCheck": "N",
-            "lppaEcidCheck": "N",
-            "msaCheck": "Y",
-            "msbCheck": "Y",
-            "cpCheck": "N",
-            "lppeCheck": "N",
-            "suplVersion": "2.1.1",
-            "tlsCheck": "N",
-            "emergencyCheck": "Y",
-            "ksaVersion": "3.0.0"
-        },
-        {
-            "id": "d8d2",
-            "ueName": "KSM-900S",
-            "ueCodes": ["900-4", "900-1"],
-            "remarks": "단말 검증용",
-            "lppEcidCheck": "N",
-            "lppaEcidCheck": "N",
-            "msaCheck": "Y",
-            "msbCheck": "Y",
-            "cpCheck": "Y",
-            "lppeCheck": "Y",
-            "suplVersion": "1.0",
-            "tlsCheck": "N",
-            "emergencyCheck": "Y",
-            "ksaVersion": "1.0"
-        }
-    ],
-    "api-system-ue-list": {
-        "count": 73,
-        "lists": [
-            {
-                "id": "8335",
-                "ueName": "SM-700S",
-                "ueCodes": ["700S-100", "700S-200"],
-                "remarks": "사업팀 요청",
-                "lppEcidCheck": "N",
-                "lppaEcidCheck": "N",
-                "msaCheck": "Y",
-                "msbCheck": "Y",
-                "cpCheck": "N",
-                "lppeCheck": "N",
-                "suplVersion": "2.1.1",
-                "tlsCheck": "N",
-                "emergencyCheck": "Y",
-                "ksaVersion": "3.0.0",
-                "register_date": "2023-04-01 11:23:01",
-                "change_date": "2023-11-06 19:02:15"
-            },
-            {
-                "id": "ad38",
-                "ueName": "AP-900S",
-                "ueCodes": ["900S-2", "900S-3", "900S-1"],
-                "remarks": "사업팀 요청",
-                "lppEcidCheck": "N",
-                "lppaEcidCheck": "N",
-                "msaCheck": "Y",
-                "msbCheck": "Y",
-                "cpCheck": "N",
-                "lppeCheck": "N",
-                "suplVersion": "2.1.1",
-                "tlsCheck": "N",
-                "emergencyCheck": "Y",
-                "ksaVersion": "3.0.0",
-                "register_date": "2023-05-01 15:00:10",
-                "change_date": "2023-07-06 13:22:08"
-            },
-            {
-                "id": "d8d2",
-                "ueName": "KSM-900S",
-                "ueCodes": ["900-4", "900-1"],
-                "remarks": "단말 검증용",
-                "lppEcidCheck": "N",
-                "lppaEcidCheck": "N",
-                "msaCheck": "Y",
-                "msbCheck": "Y",
-                "cpCheck": "Y",
-                "lppeCheck": "Y",
-                "suplVersion": "2.3.0",
-                "tlsCheck": "N",
-                "emergencyCheck": "Y",
-                "ksaVersion": "1.1.1",
-                "register_date": "2024-01-09 18:01:03",
-                "change_date": "2023-03-01 15:30:31"
-            }
-        ]
+    {
+      "id": "137c",
+      "userId": "acro"
     },
-    "ue-update": [
-        {
-            "id": "f440",
-            "ueName": "KSM-900S",
-            "ueCodes": ["800S-K", "900-4", "900-1"],
-            "remarks": "단말 검증용",
-            "lppEcidCheck": "N",
-            "lppaEcidCheck": "N",
-            "msaCheck": "Y",
-            "msbCheck": "Y",
-            "cpCheck": "Y",
-            "lppeCheck": "Y",
-            "suplVersion": "2.3.0",
-            "tlsCheck": "N",
-            "emergencyCheck": "Y",
-            "ksaVersion": "1.1.1"
-        },
-        {
-            "id": "0392",
-            "ueName": "KSM-900S",
-            "ueCodes": ["900-4", "900-1"],
-            "remarks": "단말 검증용",
-            "lppEcidCheck": "Y",
-            "lppaEcidCheck": "Y",
-            "msaCheck": "N",
-            "msbCheck": "N",
-            "cpCheck": "N",
-            "lppeCheck": "N",
-            "suplVersion": "2.3.0",
-            "tlsCheck": "N",
-            "emergencyCheck": "Y",
-            "ksaVersion": "1.1.1"
-        }
-    ],
-    "api-system-ue-delete": [
-        {
-            "id": "30f4",
-            "ueNames": ["KSM-900S"]
-        },
-        {
-            "id": "3df1",
-            "ueCodes": ["ad38", "d8d2"]
-        },
-        {
-            "id": "a75b",
-            "ueCodes": ["ad38", "d8d2"]
-        },
-        {
-            "id": "ac9d",
-            "ueCodes": ["ad38", "d8d2"]
-        },
-        {
-            "id": "28e5",
-            "ueCodes": ["ad38", "d8d2"]
-        },
-        {
-            "id": "c5a2",
-            "ueCodes": ["8335", "ad38"]
-        },
-        {
-            "id": "c95e",
-            "ueCodes": ["d8d2", "ad38"]
-        },
-        {
-            "id": "0970",
-            "ueCodes": ["ad38", "8335"]
-        },
-        {
-            "id": "9917",
-            "ueCodes": ["ad38", "8335"]
-        },
-        {
-            "id": "bdee",
-            "ueCodes": ["ad38", "d8d2"]
-        },
-        {
-            "id": "9f5c",
-            "ueCodes": ["ad38", "d8d2"]
-        },
-        {
-            "id": "b2d6",
-            "ueCodes": ["ad38", "8335"]
-        },
-        {
-            "id": "7fc7",
-            "ueCodes": ["8335", "ad38"]
-        },
-        {
-            "id": "8592",
-            "ueCodes": ["ad38", "8335"]
-        },
-        {
-            "id": "ff4a",
-            "ueCodes": ["ad38", "8335"]
-        },
-        {
-            "id": "186a",
-            "ueCodes": ["ad38", "8335"]
-        },
-        {
-            "id": "f778",
-            "ueCodes": ["ad38", "d8d2"]
-        },
-        {
-            "id": "536c",
-            "ueCodes": ["ad38", "d8d2"]
-        },
-        {
-            "id": "2efe",
-            "ueCodes": ["ad38", "d8d2"]
-        },
-        {
-            "id": "3201",
-            "ueCodes": ["ad38", "8335"]
-        },
-        {
-            "id": "9f26",
-            "ueCodes": ["ad38", "8335"]
-        }
-    ],
-    "loc-trans": {
-        "count": 87,
-        "lists": [
-            {
-                "id": 1,
-                "procType": "3개월 만료",
-                "center": "분당",
-                "start_date": "2024-01-09 18:01:03",
-                "end_date": "2023-03-01 15:30:31",
-                "procTime": "3",
-                "procCount": "100000"
-            },
-            {
-                "id": 3,
-                "procType": "6개월 만료",
-                "center": "대전",
-                "start_date": "2024-01-09 18:01:03",
-                "end_date": "2023-03-01 15:30:31",
-                "procTime": "2",
-                "procCount": "130000"
-            }
-        ]
+    {
+      "id": "2a40",
+      "userId": "acro"
     },
-    "loc-view": {
-        "count": 32,
-        "lists": [
-            {
-                "id": 1,
-                "view_date": "2024-01-09 18:01:03",
-                "viewer": "91628373",
-                "target": "01028782638",
-                "start_date": "2023-03-01",
-                "end_date": "2023-03-28",
-                "purpose": "VOC처리",
-                "contents": "위치제공이력",
-                "viewCount": "31"
-            },
-            {
-                "id": 2,
-                "view_date": "2023-04-11 21:10:11",
-                "viewer": "98702411",
-                "target": "01030012763",
-                "start_date": "2023-04-01",
-                "end_date": "2023-06-28",
-                "purpose": "고객요청",
-                "contents": "위치제공이력",
-                "viewCount": "1203"
-            }
-        ]
+    {
+      "id": "348b",
+      "userId": "acro"
     },
-    "user-list": {
-        "count": 21,
-        "lists": [
-            {
-                "id": 1,
-                "userid": "91628373",
-                "permission": 0,
-                "company": "아크로퓨처",
-                "loginFailCount": 2,
-                "lastLogin_date": "2024-03-09 18:25:03",
-                "regist_date": "2024-01-05 12:01:03",
-                "change_date": "2024-02-11 15:32:03",
-                "phoneNo": "01090901234",
-                "ipAddr_1": "192.168.0.112",
-                "ipAddr_2": "",
-                "ipAddr_3": "211.210.19.35",
-                "ipAddr_4": "",
-                "ipAddr_5": ""
-            },
-            {
-                "id": 2,
-                "userid": "97000234",
-                "permission": 1,
-                "company": "포인트아이",
-                "loginFailCount": 4,
-                "lastLogin_date": "2024-03-24 17:30:01",
-                "regist_date": "2024-02-09 18:01:03",
-                "change_date": "2024-03-05 09:25:34",
-                "phoneNo": "01030101440",
-                "ipAddr_1": "211.165.90.101",
-                "ipAddr_2": "127.0.0.1",
-                "ipAddr_3": "192.168.10.45",
-                "ipAddr_4": "",
-                "ipAddr_5": ""
-            }
-        ]
+    {
+      "id": "541f",
+      "userId": "acro"
     },
-    "user-history": {
-        "count": 23,
-        "lists": [
-            {
-                "id": 1,
-                "event_date": "2024-01-09 18:01:03",
-                "userid": "91628373",
-                "eventType": "권한변경",
-                "permission": "관리자",
-                "userIp": "211.236.35.19",
-                "contents": "운영자->관리자"
-            },
-            {
-                "id": 2,
-                "event_date": "2024-01-09 18:01:03",
-                "userid": "90128738",
-                "eventType": "로그인",
-                "permission": "운영자",
-                "userIp": "192.230.11.38",
-                "contents": "시스템관리 > 엔진설정 관리"
-            }
-        ]
+    {
+      "id": "dee0",
+      "userId": "acro"
     },
-    "user-dup": {
-        "userid": "user123",
-        "result": "0000",
-        "id": "5be7"
+    {
+      "id": "4afd",
+      "userId": "acro"
     },
-    "user-regist": [
-        {
-            "id": "0d33",
-            "company": "kt",
-            "phoneNo": "01090901234",
-            "permission": 0,
-            "ipAddr_1": "192.168.0.112",
-            "ipAddr_2": "",
-            "ipAddr_3": "211.210.19.35",
-            "ipAddr_4": "",
-            "ipAddr_5": "",
-            "userid": "sdfsettg"
-        }
-    ],
-    "user-delete": [
-        {
-            "userid": "user123",
-            "result": "9000",
-            "id": "5be7"
-        },
-        {
-            "id": "485c",
-            "userid": ["97000234"]
-        }
-    ],
-    "user-update": [
-        {
-            "id": "21ec",
-            "userid": "97000234",
-            "company": "포인트아이",
-            "phoneNo": "01030101440",
-            "permission": 1,
-            "ipAddr_1": "211.165.90.101",
-            "ipAddr_2": "",
-            "ipAddr_3": "192.168.10.45",
-            "ipAddr_4": "",
-            "ipAddr_5": "127.0.0.1"
-        }
-    ],
-    "permission-info": {
-        "menus": [
-            {
-                "key": "L100_M000_S000",
-                "value": {
-                    "admin": "N",
-                    "operator": "N"
-                }
-            },
-            {
-                "key": "L200_M210_S000",
-                "value": {
-                    "admin": "Y",
-                    "operator": "N"
-                }
-            },
-            {
-                "key": "L200_M220_S000",
-                "value": {
-                    "admin": "N",
-                    "operator": "Y"
-                }
-            },
-            {
-                "key": "L200_M230_S000",
-                "value": {
-                    "admin": "Y",
-                    "operator": "N"
-                }
-            },
-            {
-                "key": "L200_M240_S000",
-                "value": {
-                    "admin": "Y",
-                    "operator": "Y"
-                }
-            }
-        ]
+    {
+      "id": "2af9",
+      "userId": "acro"
     },
-    "permission-update": [
-        {
-            "id": "8d91",
-            "L100_M000_S000": {
-                "admin": "N",
-                "operator": "N"
-            },
-            "L200_M210_S000": {
-                "admin": "Y",
-                "operator": "N"
-            },
-            "L200_M220_S000": {
-                "admin": "N",
-                "operator": "Y"
-            },
-            "L200_M230_S000": {
-                "admin": "Y",
-                "operator": "N"
-            },
-            "L200_M240_S000": {
-                "admin": "Y",
-                "operator": "Y"
-            },
-            "L300_M310_S000": {
-                "admin": "",
-                "operator": ""
-            },
-            "L300_M320_S000": {
-                "admin": "",
-                "operator": "Y"
-            },
-            "L400_M410_S000": {
-                "admin": "",
-                "operator": "Y"
-            },
-            "L400_M420_S000": {
-                "admin": "Y",
-                "operator": ""
-            },
-            "L400_M430_S000": {
-                "admin": "Y",
-                "operator": ""
-            },
-            "L400_M440_S000": {
-                "admin": "Y",
-                "operator": "Y"
-            },
-            "L400_M450_S000": {
-                "admin": "",
-                "operator": ""
-            },
-            "L500_M510_S000": {
-                "admin": "Y",
-                "operator": ""
-            },
-            "L500_M520_S000": {
-                "admin": "",
-                "operator": "Y"
-            },
-            "L500_M530_S000": {
-                "admin": "",
-                "operator": ""
-            }
-        }
-    ],
-    "trigger-list": {
-        "count": 32,
-        "lists": [
-            {
-                "id": 1,
-                "reg_date": "2024-01-09 18:01:03",
-                "start_date": "2024-01-09 18:01:03",
-                "end_date": "2024-01-09 18:01:03",
-                "interval": "420",
-                "phoneNo": "01030101442",
-                "url": "KTF_Tracking/trigger/trigger_khub.jsp"
-            },
-            {
-                "id": 2,
-                "reg_date": "2024-01-09 18:01:03",
-                "start_date": "2024-01-09 18:01:03",
-                "end_date": "2024-01-09 18:01:03",
-                "interval": "300",
-                "phoneNo": "01020109090",
-                "url": "KTF_Tracking/trigger/trigger_khub.jsp"
-            }
-        ]
+    {
+      "id": "f929",
+      "userId": "acro"
     },
-    "cloud-stat": {
-        "count": 24,
-        "lists": [
-            {
-                "id": 1,
-                "event_date": "2024-01-09 18:01:03",
-                "processType": 1,
-                "total": 120000,
-                "unNormal": 809,
-                "unAccuracy": 320,
-                "outsideEffect": 710,
-                "apCount": 10000000,
-                "apUnNormal": 10000000,
-                "apOutsideEffect": 50000,
-                "coverage": 3.5
-            },
-            {
-                "id": 2,
-                "event_date": "2024-03-22 11:31:03",
-                "processType": 0,
-                "total": 310000,
-                "unNormal": 900,
-                "unAccuracy": 450,
-                "outsideEffect": 70,
-                "apCount": 13000000,
-                "apUnNormal": 12000000,
-                "apOutsideEffect": 82000,
-                "coverage": 3.2
-            }
-        ]
+    {
+      "id": "6938",
+      "userId": "acro"
     },
-    "service-stat": {
-        "count": 11,
-        "lists": [
-            {
-                "id": 1,
-                "event_date": "2024-03-22 11:31:03",
-                "serviceCode": "safebox",
-                "ueModel": "SM-S928N",
-                "posInit": "NI",
-                "plane": "UP",
-                "posMethod": "AGNSS_MSB",
-                "total": 1000,
-                "succ": 900,
-                "succRate": 90,
-                "respTime": 5.7
-            }
-        ]
+    {
+      "id": "cc53",
+      "userId": "acro"
     },
-    "service-history": {
-        "count": 5,
-        "lists": [
-            {
-                "id": 3,
-                "center": "분당",
-                "req_date": "2024-03-22 11:31:03",
-                "resp_date": "2024-03-22 11:31:03",
-                "serviceCode": "safebox",
-                "opType": "POS_NI",
-                "reqNo": "01083301240",
-                "targetNo": "01083301240",
-                "posMethod": "CELL",
-                "ueModel": "SM-S911N",
-                "respCode": "0",
-                "respTime": 5.7,
-                "latitude": 37.4887289,
-                "longitude": 127.0342486
-            },
-            {
-                "id": 19,
-                "center": "분당",
-                "req_date": "2024-03-22 11:31:03",
-                "resp_date": "2024-03-22 11:31:03",
-                "serviceCode": "safebox",
-                "opType": "POS_NI",
-                "reqNo": "01083301240",
-                "targetNo": "01083301240",
-                "posMethod": "GPS",
-                "ueModel": "SM-S911N",
-                "respCode": "0",
-                "respTime": 5.7,
-                "latitude": 37.485487,
-                "longitude": 127.035029
-            }
-        ]
+    {
+      "id": "bf61",
+      "userId": "acro"
     },
-    "service-history-detail": {
-        "poslist": {
-            "count": 3,
-            "lists": [
-                {
-                    "id": "9AC",
-                    "posMethod": "CELL",
-                    "algorithm": "POP",
-                    "address": "서울시 강남구 도곡로",
-                    "latitude": 37.48719,
-                    "longitude": 127.033935
-                },
-                {
-                    "id": "38E",
-                    "posMethod": "GNSS",
-                    "algorithm": "GNSS",
-                    "address": "서울시 강남구 도곡로",
-                    "latitude": 37.486935,
-                    "longitude": 127.037046
-                },
-                {
-                    "id": "29A",
-                    "posMethod": "GNSS",
-                    "algorithm": "GNSS",
-                    "address": "서울시 강남구 도곡로",
-                    "latitude": 37.485538,
-                    "longitude": 127.03224
-                }
-            ]
-        },
-        "btslist": {
-            "count": 0,
-            "lists": []
-        },
-        "wifilist": {
-            "count": 1,
-            "lists": [
-                {
-                    "id": "FBC",
-                    "mac": "FB-AE-C0-61-7E-F4",
-                    "ssid": "kt giga",
-                    "grade": 2,
-                    "band": 80,
-                    "rssi": -82,
-                    "status": "Used",
-                    "address": "서울시 강남구 도곡로",
-                    "latitude": 37.487973,
-                    "longitude": 127.039407
-                }
-            ]
-        },
-        "translist": {
-            "count": 0,
-            "lists": []
-        }
+    {
+      "id": "ffb2",
+      "userId": "acro"
     },
-    "facility-sync-history": {
-        "count": 3,
-        "lists": [
-            {
-                "id": 23,
-                "btsType": 1,
-                "start_date": "2024-03-22 11:31:03",
-                "end_date": "2024-03-22 11:31:03",
-                "procTime": 10,
-                "rowCount": 5128140,
-                "syncCount": 7062172
-            },
-            {
-                "id": 30,
-                "btsType": 3,
-                "start_date": "2024-03-22 11:31:03",
-                "end_date": "2024-03-22 11:31:03",
-                "procTime": 57,
-                "rowCount": 8561746,
-                "syncCount": 8811661
-            },
-            {
-                "id": 78,
-                "btsType": 4,
-                "start_date": "2024-03-22 11:31:03",
-                "end_date": "2024-03-22 11:31:03",
-                "procTime": 14,
-                "rowCount": 960473,
-                "syncCount": 4588645
-            }
-        ]
+    {
+      "id": "9e60",
+      "userId": "acro"
     },
-    "facility-bts-search": {
-        "id": 23,
-        "cellid": "32679739",
-        "mcc": "450",
-        "mnc": "08",
-        "pci": "587",
-        "tac": "",
-        "ruid": "",
-        "dongCode": "111110000",
-        "address": "서울시 강남구 도곡로",
-        "latitude": 37.4887289,
-        "longitude": 127.0342486,
-        "create_date": "2024-03-22 11:31:03",
-        "update_date": "2024-03-22 11:31:03"
+    {
+      "id": "0e43",
+      "userId": "acro"
     },
-    "facility-wifi-search": {
-        "id": 23,
-        "mac": "00a554dd12bb",
-        "ssid": "0",
-        "grade": "08",
-        "band": "587",
-        "building": "서울시 종로구",
-        "floor": "3F",
-        "create_date": "2024-03-22 11:31:03",
-        "update_date": "2024-03-22 11:31:03",
-        "vap": {
-            "utmk": [959094.97, 1916695.61],
-            "wgs84": [127.0387669, 37.2482396]
-        },
-        "gridX": [
-            127880, 127880, 127881, 127885, 127886, 127887, 127886, 127884, 127884, 127874, 127884,
-            127875, 127874, 127879, 127878, 127876, 127878, 127879, 127877, 127883, 127878, 127877,
-            127883, 127882, 127879, 127876, 127888, 127889, 127888, 127888, 127889, 127861, 127861,
-            127859, 127876, 127875, 127875, 127868, 127868, 127866, 127864, 127866, 127865, 127867,
-            127865, 127866, 127864, 127865, 127866, 127864, 127864, 127865, 127867, 127863, 127860,
-            127860, 127859, 127859
-        ],
-        "gridY": [
-            221320, 221321, 221320, 221323, 221322, 221322, 221323, 221318, 221319, 221322, 221317,
-            221322, 221323, 221321, 221320, 221322, 221321, 221320, 221322, 221319, 221322, 221321,
-            221318, 221319, 221322, 221321, 221322, 221321, 221320, 221321, 221320, 221353, 221352,
-            221328, 221295, 221295, 221296, 221324, 221325, 221323, 221326, 221324, 221327, 221325,
-            221326, 221325, 221327, 221325, 221326, 221324, 221325, 221324, 221326, 221325, 221326,
-            221327, 221327, 221326
-        ],
-        "rssi": [
-            -76.3, -76.3, -79.7, -84, -84, -85, -84, -77, -77, -77, -77, -77, -77, -72.5, -75, -61,
-            -73.7, -73.7, -61, -77, -75, -61, -77, -77, -75, -61, -85, -85, -85, -85, -85, -84, -84,
-            -72, -85, -85, -85, -79.5, -79.5, -77, -77, -77, -77, -77, -77, -77, -77, -77, -77, -77,
-            -77, -77, -77, -77, -72, -72, -72, -72
-        ],
-        "dataCount": [
-            6, 6, 3, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 4, 1, 1, 3, 3, 1, 1, 1, 1, 1, 1, 2, 1, 1, 1, 1,
-            1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1
-        ]
+    {
+      "id": "f656",
+      "userId": "acro"
     },
-    "facility-wifi-update": [
-        {
-            "id": 23,
-            "mac": "00a554dd12bb",
-            "ssid": "0",
-            "grade": "11",
-            "band": "999",
-            "building": "서울시 종로구",
-            "floor": "3F",
-            "latitude": 36.12345,
-            "longitude": 127.7652,
-            "create_date": "2024-03-22 11:31:03",
-            "update_date": "2024-04-08 10:14:33"
-        }
-    ],
-    "facility-wifi-delete": [
-        {
-            "id": "0a85",
-            "mac": "00a554dd12bb"
-        }
-    ],
-    "facility-wifi-regist": [
-        {
-            "id": "f34a",
-            "mac": "mac123",
-            "ssid": "",
-            "grade": "",
-            "band": "band",
-            "building": "",
-            "floor": "",
-            "latitude": "",
-            "longitude": "",
-            "create_date": "2024-04-08 10:54:01",
-            "update_date": ""
-        }
+    {
+      "id": "ba07",
+      "userId": "acro"
+    },
+    {
+      "id": "f55d",
+      "userId": "acro"
+    },
+    {
+      "id": "38ac",
+      "userId": "acro"
+    },
+    {
+      "id": "5284",
+      "userId": "acro"
+    },
+    {
+      "id": "203d",
+      "userId": "acro"
+    },
+    {
+      "id": "9a65",
+      "userId": "acro"
+    },
+    {
+      "id": "4e02",
+      "userId": "acro"
+    },
+    {
+      "id": "9c28",
+      "userId": "acro"
+    },
+    {
+      "id": "296e",
+      "userId": "acro"
+    },
+    {
+      "id": "52c4",
+      "userId": "acro"
+    },
+    {
+      "id": "1acf",
+      "userId": "acro"
+    },
+    {
+      "id": "098c",
+      "userId": "acro"
+    },
+    {
+      "id": "e370",
+      "userId": "acro"
+    },
+    {
+      "id": "ad80",
+      "userId": "acro"
+    },
+    {
+      "id": "dd9a",
+      "userId": "acro"
+    },
+    {
+      "id": "0bf5",
+      "userId": "acro"
+    },
+    {
+      "id": "12cc",
+      "userId": "acro"
+    },
+    {
+      "id": "f223",
+      "userId": "acro"
+    },
+    {
+      "id": "2990",
+      "userId": "acro"
+    },
+    {
+      "id": "1791",
+      "userId": "acro"
+    },
+    {
+      "id": "a85a",
+      "userId": "acro"
+    },
+    {
+      "id": "929a",
+      "userId": "acro"
+    },
+    {
+      "id": "8458",
+      "userId": "acro"
+    },
+    {
+      "id": "4976",
+      "userId": "acro"
+    },
+    {
+      "id": "b95e",
+      "userId": "acro"
+    },
+    {
+      "id": "22c5",
+      "userId": "acro"
+    },
+    {
+      "id": "fc3f",
+      "userId": "acro"
+    },
+    {
+      "id": "c928",
+      "userId": "acro"
+    },
+    {
+      "id": "fb07",
+      "userId": "acro"
+    },
+    {
+      "id": "5b45",
+      "userId": "acro"
+    },
+    {
+      "id": "8737",
+      "userId": "acro"
+    },
+    {
+      "id": "02a5",
+      "userId": "acro"
+    },
+    {
+      "id": "f6dd",
+      "userId": "acro"
+    },
+    {
+      "id": "6069",
+      "userId": "acro"
+    },
+    {
+      "id": "f813",
+      "userId": "acro"
+    },
+    {
+      "id": "3975",
+      "userId": "acro"
+    },
+    {
+      "id": "4d7b",
+      "userId": "acro"
+    },
+    {
+      "id": "64bf",
+      "userId": "acro"
+    },
+    {
+      "id": "1053",
+      "userId": "acro"
+    },
+    {
+      "id": "98bf",
+      "userId": "acro"
+    },
+    {
+      "id": "d06c",
+      "userId": "acro"
+    },
+    {
+      "id": "b75d",
+      "userId": "acro"
+    },
+    {
+      "id": "ba47",
+      "userId": "acro"
+    },
+    {
+      "id": "e004",
+      "userId": "acro"
+    },
+    {
+      "id": "240d",
+      "userId": "acro"
+    },
+    {
+      "id": "f9c9",
+      "userId": "acro"
+    },
+    {
+      "id": "2a96",
+      "userId": "acro"
+    },
+    {
+      "id": "c346",
+      "userId": "acro"
+    },
+    {
+      "id": "c1ba",
+      "userId": "acro"
+    },
+    {
+      "id": "88ea",
+      "userId": "acro"
+    },
+    {
+      "id": "76f2",
+      "userId": "acro"
+    },
+    {
+      "id": "933f",
+      "userId": "acro"
+    },
+    {
+      "id": "b51c",
+      "userId": "acro"
+    },
+    {
+      "id": "2975",
+      "userId": "acro"
+    },
+    {
+      "id": "6148",
+      "userId": "acro"
+    },
+    {
+      "id": "549d",
+      "userId": "acro"
+    },
+    {
+      "id": "2a95",
+      "userId": "acro"
+    },
+    {
+      "id": "f300",
+      "userId": "acro"
+    },
+    {
+      "id": "7ccb",
+      "userId": "acro"
+    },
+    {
+      "id": "26cf",
+      "userId": "acro"
+    },
+    {
+      "id": "9084",
+      "userId": "acro"
+    },
+    {
+      "id": "ea83",
+      "userId": "acro"
+    }
+  ],
+  "service-regist": [
+    {
+      "result": "0000",
+      "id": "cfa2"
+    },
+    {
+      "id": "28c9"
+    },
+    {
+      "id": "4a6b",
+      "serviceName": "Shanshan Airport",
+      "serviceCode": "SXJ",
+      "cpName": "Buzzdog",
+      "serviceProvider": "businessweek.com",
+      "userCheck": true,
+      "authCheck": false,
+      "serviceType": 0,
+      "accuracy": 2,
+      "respTime": 20,
+      "cellCheck": true,
+      "posMethod": 1,
+      "gpsCheck": false,
+      "plane": 0,
+      "mode": 0,
+      "lppeCheck": true,
+      "lppRespTime": 13,
+      "ksaCheck": true,
+      "version": "V1.7",
+      "ksaCellCheck": false,
+      "ksaGnssCheck": false,
+      "ksaWifiCheck": true,
+      "ksaAtmosphericCheck": false,
+      "ksaFlpCheck": true,
+      "collectionCount": "33"
+    }
+  ],
+  "service-code": {
+    "serviceCode": "acro",
+    "result": "0000",
+    "id": "5be7"
+  },
+  "service-list": {
+    "count": 150,
+    "lists": [
+      {
+        "id": 1,
+        "serviceName": "Shanshan Airport",
+        "serviceCode": "SXJ",
+        "cpName": "Buzzdog",
+        "serviceProvider": "businessweek.com",
+        "status": 1,
+        "register_date": "2023-04-01",
+        "change_date": "2023-11-06",
+        "accuracy": 2,
+        "respTime": 20,
+        "serviceType": 0,
+        "userCheck": "Y",
+        "authCheck": "N",
+        "cellCheck": "Y",
+        "posMethod": 1,
+        "gpsCheck": "N",
+        "plane": 0,
+        "mode": 0,
+        "lppeCheck": "Y",
+        "lppRespTime": 13,
+        "ksaCheck": "N",
+        "version": "V1.7",
+        "ksaCellCheck": "N",
+        "ksaGnssCheck": "N",
+        "ksaWifiCheck": "Y",
+        "ksaAtmosphericCheck": "N",
+        "ksaFlpCheck": "Y",
+        "collectionCount": 4
+      }
     ]
+  },
+  "ue-regist": [
+    {
+      "id": "8335",
+      "ueName": "SM-700K",
+      "modelCode": "700K-2",
+      "ueCodes": [
+        "700K-2",
+        "700K-3",
+        "700K-1"
+      ],
+      "remarks": "사업팀 요청",
+      "lppEcidCheck": "N",
+      "lppaEcidCheck": "N",
+      "msaCheck": "Y",
+      "msbCheck": "Y",
+      "cpCheck": "N",
+      "lppeCheck": "N",
+      "suplVersion": "2.1.1",
+      "tlsCheck": "N",
+      "emergencyCheck": "Y",
+      "ksaVersion": "3.0.0"
+    },
+    {
+      "id": "ad38",
+      "ueName": "SM-700K",
+      "ueCodes": [
+        "700K-2",
+        "700K-3",
+        "700K-1"
+      ],
+      "remarks": "사업팀 요청",
+      "lppEcidCheck": "N",
+      "lppaEcidCheck": "N",
+      "msaCheck": "Y",
+      "msbCheck": "Y",
+      "cpCheck": "N",
+      "lppeCheck": "N",
+      "suplVersion": "2.1.1",
+      "tlsCheck": "N",
+      "emergencyCheck": "Y",
+      "ksaVersion": "3.0.0"
+    },
+    {
+      "id": "d8d2",
+      "ueName": "KSM-900S",
+      "ueCodes": [
+        "900-4",
+        "900-1"
+      ],
+      "remarks": "단말 검증용",
+      "lppEcidCheck": "N",
+      "lppaEcidCheck": "N",
+      "msaCheck": "Y",
+      "msbCheck": "Y",
+      "cpCheck": "Y",
+      "lppeCheck": "Y",
+      "suplVersion": "1.0",
+      "tlsCheck": "N",
+      "emergencyCheck": "Y",
+      "ksaVersion": "1.0"
+    }
+  ],
+  "api-system-ue-list": {
+    "count": 73,
+    "lists": [
+      {
+        "id": "8335",
+        "ueName": "SM-700S",
+        "ueCodes": [
+          "700S-100",
+          "700S-200"
+        ],
+        "remarks": "사업팀 요청",
+        "lppEcidCheck": "N",
+        "lppaEcidCheck": "N",
+        "msaCheck": "Y",
+        "msbCheck": "Y",
+        "cpCheck": "N",
+        "lppeCheck": "N",
+        "suplVersion": "2.1.1",
+        "tlsCheck": "N",
+        "emergencyCheck": "Y",
+        "ksaVersion": "3.0.0",
+        "register_date": "2023-04-01 11:23:01",
+        "change_date": "2023-11-06 19:02:15"
+      },
+      {
+        "id": "ad38",
+        "ueName": "AP-900S",
+        "ueCodes": [
+          "900S-2",
+          "900S-3",
+          "900S-1"
+        ],
+        "remarks": "사업팀 요청",
+        "lppEcidCheck": "N",
+        "lppaEcidCheck": "N",
+        "msaCheck": "Y",
+        "msbCheck": "Y",
+        "cpCheck": "N",
+        "lppeCheck": "N",
+        "suplVersion": "2.1.1",
+        "tlsCheck": "N",
+        "emergencyCheck": "Y",
+        "ksaVersion": "3.0.0",
+        "register_date": "2023-05-01 15:00:10",
+        "change_date": "2023-07-06 13:22:08"
+      },
+      {
+        "id": "d8d2",
+        "ueName": "KSM-900S",
+        "ueCodes": [
+          "900-4",
+          "900-1"
+        ],
+        "remarks": "단말 검증용",
+        "lppEcidCheck": "N",
+        "lppaEcidCheck": "N",
+        "msaCheck": "Y",
+        "msbCheck": "Y",
+        "cpCheck": "Y",
+        "lppeCheck": "Y",
+        "suplVersion": "2.3.0",
+        "tlsCheck": "N",
+        "emergencyCheck": "Y",
+        "ksaVersion": "1.1.1",
+        "register_date": "2024-01-09 18:01:03",
+        "change_date": "2023-03-01 15:30:31"
+      }
+    ]
+  },
+  "ue-update": [
+    {
+      "id": "f440",
+      "ueName": "KSM-900S",
+      "ueCodes": [
+        "800S-K",
+        "900-4",
+        "900-1"
+      ],
+      "remarks": "단말 검증용",
+      "lppEcidCheck": "N",
+      "lppaEcidCheck": "N",
+      "msaCheck": "Y",
+      "msbCheck": "Y",
+      "cpCheck": "Y",
+      "lppeCheck": "Y",
+      "suplVersion": "2.3.0",
+      "tlsCheck": "N",
+      "emergencyCheck": "Y",
+      "ksaVersion": "1.1.1"
+    },
+    {
+      "id": "0392",
+      "ueName": "KSM-900S",
+      "ueCodes": [
+        "900-4",
+        "900-1"
+      ],
+      "remarks": "단말 검증용",
+      "lppEcidCheck": "Y",
+      "lppaEcidCheck": "Y",
+      "msaCheck": "N",
+      "msbCheck": "N",
+      "cpCheck": "N",
+      "lppeCheck": "N",
+      "suplVersion": "2.3.0",
+      "tlsCheck": "N",
+      "emergencyCheck": "Y",
+      "ksaVersion": "1.1.1"
+    }
+  ],
+  "api-system-ue-delete": [
+    {
+      "id": "30f4",
+      "ueNames": [
+        "KSM-900S"
+      ]
+    },
+    {
+      "id": "3df1",
+      "ueCodes": [
+        "ad38",
+        "d8d2"
+      ]
+    },
+    {
+      "id": "a75b",
+      "ueCodes": [
+        "ad38",
+        "d8d2"
+      ]
+    },
+    {
+      "id": "ac9d",
+      "ueCodes": [
+        "ad38",
+        "d8d2"
+      ]
+    },
+    {
+      "id": "28e5",
+      "ueCodes": [
+        "ad38",
+        "d8d2"
+      ]
+    },
+    {
+      "id": "c5a2",
+      "ueCodes": [
+        "8335",
+        "ad38"
+      ]
+    },
+    {
+      "id": "c95e",
+      "ueCodes": [
+        "d8d2",
+        "ad38"
+      ]
+    },
+    {
+      "id": "0970",
+      "ueCodes": [
+        "ad38",
+        "8335"
+      ]
+    },
+    {
+      "id": "9917",
+      "ueCodes": [
+        "ad38",
+        "8335"
+      ]
+    },
+    {
+      "id": "bdee",
+      "ueCodes": [
+        "ad38",
+        "d8d2"
+      ]
+    },
+    {
+      "id": "9f5c",
+      "ueCodes": [
+        "ad38",
+        "d8d2"
+      ]
+    },
+    {
+      "id": "b2d6",
+      "ueCodes": [
+        "ad38",
+        "8335"
+      ]
+    },
+    {
+      "id": "7fc7",
+      "ueCodes": [
+        "8335",
+        "ad38"
+      ]
+    },
+    {
+      "id": "8592",
+      "ueCodes": [
+        "ad38",
+        "8335"
+      ]
+    },
+    {
+      "id": "ff4a",
+      "ueCodes": [
+        "ad38",
+        "8335"
+      ]
+    },
+    {
+      "id": "186a",
+      "ueCodes": [
+        "ad38",
+        "8335"
+      ]
+    },
+    {
+      "id": "f778",
+      "ueCodes": [
+        "ad38",
+        "d8d2"
+      ]
+    },
+    {
+      "id": "536c",
+      "ueCodes": [
+        "ad38",
+        "d8d2"
+      ]
+    },
+    {
+      "id": "2efe",
+      "ueCodes": [
+        "ad38",
+        "d8d2"
+      ]
+    },
+    {
+      "id": "3201",
+      "ueCodes": [
+        "ad38",
+        "8335"
+      ]
+    },
+    {
+      "id": "9f26",
+      "ueCodes": [
+        "ad38",
+        "8335"
+      ]
+    }
+  ],
+  "loc-trans": {
+    "count": 87,
+    "lists": [
+      {
+        "id": 1,
+        "procType": "3개월 만료",
+        "center": "분당",
+        "start_date": "2024-01-09 18:01:03",
+        "end_date": "2023-03-01 15:30:31",
+        "procTime": "3",
+        "procCount": "100000"
+      },
+      {
+        "id": 3,
+        "procType": "6개월 만료",
+        "center": "대전",
+        "start_date": "2024-01-09 18:01:03",
+        "end_date": "2023-03-01 15:30:31",
+        "procTime": "2",
+        "procCount": "130000"
+      }
+    ]
+  },
+  "loc-view": {
+    "count": 32,
+    "lists": [
+      {
+        "id": 1,
+        "view_date": "2024-01-09 18:01:03",
+        "viewer": "91628373",
+        "target": "01028782638",
+        "start_date": "2023-03-01",
+        "end_date": "2023-03-28",
+        "purpose": "VOC처리",
+        "contents": "위치제공이력",
+        "viewCount": "31"
+      },
+      {
+        "id": 2,
+        "view_date": "2023-04-11 21:10:11",
+        "viewer": "98702411",
+        "target": "01030012763",
+        "start_date": "2023-04-01",
+        "end_date": "2023-06-28",
+        "purpose": "고객요청",
+        "contents": "위치제공이력",
+        "viewCount": "1203"
+      }
+    ]
+  },
+  "user-list": {
+    "count": 21,
+    "lists": [
+      {
+        "id": 1,
+        "userid": "91628373",
+        "permission": 0,
+        "company": "아크로퓨처",
+        "loginFailCount": 2,
+        "lastLogin_date": "2024-03-09 18:25:03",
+        "regist_date": "2024-01-05 12:01:03",
+        "change_date": "2024-02-11 15:32:03",
+        "phoneNo": "01090901234",
+        "ipAddr_1": "192.168.0.112",
+        "ipAddr_2": "",
+        "ipAddr_3": "211.210.19.35",
+        "ipAddr_4": "",
+        "ipAddr_5": ""
+      },
+      {
+        "id": 2,
+        "userid": "97000234",
+        "permission": 1,
+        "company": "포인트아이",
+        "loginFailCount": 4,
+        "lastLogin_date": "2024-03-24 17:30:01",
+        "regist_date": "2024-02-09 18:01:03",
+        "change_date": "2024-03-05 09:25:34",
+        "phoneNo": "01030101440",
+        "ipAddr_1": "211.165.90.101",
+        "ipAddr_2": "127.0.0.1",
+        "ipAddr_3": "192.168.10.45",
+        "ipAddr_4": "",
+        "ipAddr_5": ""
+      }
+    ]
+  },
+  "user-history": {
+    "count": 23,
+    "lists": [
+      {
+        "id": 1,
+        "event_date": "2024-01-09 18:01:03",
+        "userid": "91628373",
+        "eventType": "권한변경",
+        "permission": "관리자",
+        "userIp": "211.236.35.19",
+        "contents": "운영자->관리자"
+      },
+      {
+        "id": 2,
+        "event_date": "2024-01-09 18:01:03",
+        "userid": "90128738",
+        "eventType": "로그인",
+        "permission": "운영자",
+        "userIp": "192.230.11.38",
+        "contents": "시스템관리 > 엔진설정 관리"
+      }
+    ]
+  },
+  "user-dup": {
+    "userid": "user123",
+    "result": "0000",
+    "id": "5be7"
+  },
+  "user-regist": [
+    {
+      "id": "0d33",
+      "company": "kt",
+      "phoneNo": "01090901234",
+      "permission": 0,
+      "ipAddr_1": "192.168.0.112",
+      "ipAddr_2": "",
+      "ipAddr_3": "211.210.19.35",
+      "ipAddr_4": "",
+      "ipAddr_5": "",
+      "userid": "sdfsettg"
+    }
+  ],
+  "user-delete": [
+    {
+      "userid": "user123",
+      "result": "9000",
+      "id": "5be7"
+    },
+    {
+      "id": "485c",
+      "userid": [
+        "97000234"
+      ]
+    }
+  ],
+  "user-update": [
+    {
+      "id": "21ec",
+      "userid": "97000234",
+      "company": "포인트아이",
+      "phoneNo": "01030101440",
+      "permission": 1,
+      "ipAddr_1": "211.165.90.101",
+      "ipAddr_2": "",
+      "ipAddr_3": "192.168.10.45",
+      "ipAddr_4": "",
+      "ipAddr_5": "127.0.0.1"
+    }
+  ],
+  "permission-info": {
+    "menus": [
+      {
+        "key": "L100_M000_S000",
+        "value": {
+          "admin": "N",
+          "operator": "N"
+        }
+      },
+      {
+        "key": "L200_M210_S000",
+        "value": {
+          "admin": "Y",
+          "operator": "N"
+        }
+      },
+      {
+        "key": "L200_M220_S000",
+        "value": {
+          "admin": "N",
+          "operator": "Y"
+        }
+      },
+      {
+        "key": "L200_M230_S000",
+        "value": {
+          "admin": "Y",
+          "operator": "N"
+        }
+      },
+      {
+        "key": "L200_M240_S000",
+        "value": {
+          "admin": "Y",
+          "operator": "Y"
+        }
+      }
+    ]
+  },
+  "permission-update": [
+    {
+      "id": "8d91",
+      "L100_M000_S000": {
+        "admin": "N",
+        "operator": "N"
+      },
+      "L200_M210_S000": {
+        "admin": "Y",
+        "operator": "N"
+      },
+      "L200_M220_S000": {
+        "admin": "N",
+        "operator": "Y"
+      },
+      "L200_M230_S000": {
+        "admin": "Y",
+        "operator": "N"
+      },
+      "L200_M240_S000": {
+        "admin": "Y",
+        "operator": "Y"
+      },
+      "L300_M310_S000": {
+        "admin": "",
+        "operator": ""
+      },
+      "L300_M320_S000": {
+        "admin": "",
+        "operator": "Y"
+      },
+      "L400_M410_S000": {
+        "admin": "",
+        "operator": "Y"
+      },
+      "L400_M420_S000": {
+        "admin": "Y",
+        "operator": ""
+      },
+      "L400_M430_S000": {
+        "admin": "Y",
+        "operator": ""
+      },
+      "L400_M440_S000": {
+        "admin": "Y",
+        "operator": "Y"
+      },
+      "L400_M450_S000": {
+        "admin": "",
+        "operator": ""
+      },
+      "L500_M510_S000": {
+        "admin": "Y",
+        "operator": ""
+      },
+      "L500_M520_S000": {
+        "admin": "",
+        "operator": "Y"
+      },
+      "L500_M530_S000": {
+        "admin": "",
+        "operator": ""
+      }
+    }
+  ],
+  "trigger-list": {
+    "count": 32,
+    "lists": [
+      {
+        "id": 1,
+        "reg_date": "2024-01-09 18:01:03",
+        "start_date": "2024-01-09 18:01:03",
+        "end_date": "2024-01-09 18:01:03",
+        "interval": "420",
+        "phoneNo": "01030101442",
+        "url": "KTF_Tracking/trigger/trigger_khub.jsp"
+      },
+      {
+        "id": 2,
+        "reg_date": "2024-01-09 18:01:03",
+        "start_date": "2024-01-09 18:01:03",
+        "end_date": "2024-01-09 18:01:03",
+        "interval": "300",
+        "phoneNo": "01020109090",
+        "url": "KTF_Tracking/trigger/trigger_khub.jsp"
+      }
+    ]
+  },
+  "cloud-stat": {
+    "count": 24,
+    "lists": [
+      {
+        "id": 1,
+        "event_date": "2024-01-09 18:01:03",
+        "processType": 1,
+        "total": 120000,
+        "unNormal": 809,
+        "unAccuracy": 320,
+        "outsideEffect": 710,
+        "apCount": 10000000,
+        "apUnNormal": 10000000,
+        "apOutsideEffect": 50000,
+        "coverage": 3.5
+      },
+      {
+        "id": 2,
+        "event_date": "2024-03-22 11:31:03",
+        "processType": 0,
+        "total": 310000,
+        "unNormal": 900,
+        "unAccuracy": 450,
+        "outsideEffect": 70,
+        "apCount": 13000000,
+        "apUnNormal": 12000000,
+        "apOutsideEffect": 82000,
+        "coverage": 3.2
+      }
+    ]
+  },
+  "service-stat": {
+    "count": 11,
+    "lists": [
+      {
+        "id": 1,
+        "event_date": "2024-03-22 11:31:03",
+        "serviceCode": "safebox",
+        "ueModel": "SM-S928N",
+        "posInit": "NI",
+        "plane": "UP",
+        "posMethod": "AGNSS_MSB",
+        "total": 1000,
+        "succ": 900,
+        "succRate": 90,
+        "respTime": 5.7
+      }
+    ]
+  },
+  "service-history": {
+    "count": 5,
+    "lists": [
+      {
+        "id": 3,
+        "center": "분당",
+        "req_date": "2024-03-22 11:31:03",
+        "resp_date": "2024-03-22 11:31:03",
+        "serviceCode": "safebox",
+        "opType": "POS_NI",
+        "reqNo": "01083301240",
+        "targetNo": "01083301240",
+        "posMethod": "CELL",
+        "ueModel": "SM-S911N",
+        "respCode": "0",
+        "respTime": 5.7,
+        "latitude": 37.4887289,
+        "longitude": 127.0342486
+      },
+      {
+        "id": 19,
+        "center": "분당",
+        "req_date": "2024-03-22 11:31:03",
+        "resp_date": "2024-03-22 11:31:03",
+        "serviceCode": "safebox",
+        "opType": "POS_NI",
+        "reqNo": "01083301240",
+        "targetNo": "01083301240",
+        "posMethod": "GPS",
+        "ueModel": "SM-S911N",
+        "respCode": "0",
+        "respTime": 5.7,
+        "latitude": 37.485487,
+        "longitude": 127.035029
+      }
+    ]
+  },
+  "service-history-detail": {
+    "poslist": {
+      "count": 3,
+      "lists": [
+        {
+          "id": "9AC",
+          "posMethod": "CELL",
+          "algorithm": "POP",
+          "address": "서울시 강남구 도곡로",
+          "latitude": 37.48719,
+          "longitude": 127.033935
+        },
+        {
+          "id": "38E",
+          "posMethod": "GNSS",
+          "algorithm": "GNSS",
+          "address": "서울시 강남구 도곡로",
+          "latitude": 37.486935,
+          "longitude": 127.037046
+        },
+        {
+          "id": "29A",
+          "posMethod": "GNSS",
+          "algorithm": "GNSS",
+          "address": "서울시 강남구 도곡로",
+          "latitude": 37.485538,
+          "longitude": 127.03224
+        }
+      ]
+    },
+    "btslist": {
+      "count": 0,
+      "lists": []
+    },
+    "wifilist": {
+      "count": 1,
+      "lists": [
+        {
+          "id": "FBC",
+          "mac": "FB-AE-C0-61-7E-F4",
+          "ssid": "kt giga",
+          "grade": 2,
+          "band": 80,
+          "rssi": -82,
+          "status": "Used",
+          "address": "서울시 강남구 도곡로",
+          "latitude": 37.487973,
+          "longitude": 127.039407
+        }
+      ]
+    },
+    "translist": {
+      "count": 0,
+      "lists": []
+    }
+  },
+  "facility-sync-history": {
+    "count": 3,
+    "lists": [
+      {
+        "id": 23,
+        "btsType": 1,
+        "start_date": "2024-03-22 11:31:03",
+        "end_date": "2024-03-22 11:31:03",
+        "procTime": 10,
+        "rowCount": 5128140,
+        "syncCount": 7062172
+      },
+      {
+        "id": 30,
+        "btsType": 3,
+        "start_date": "2024-03-22 11:31:03",
+        "end_date": "2024-03-22 11:31:03",
+        "procTime": 57,
+        "rowCount": 8561746,
+        "syncCount": 8811661
+      },
+      {
+        "id": 78,
+        "btsType": 4,
+        "start_date": "2024-03-22 11:31:03",
+        "end_date": "2024-03-22 11:31:03",
+        "procTime": 14,
+        "rowCount": 960473,
+        "syncCount": 4588645
+      }
+    ]
+  },
+  "facility-bts-search": {
+    "id": 23,
+    "cellid": "32679739",
+    "mcc": "450",
+    "mnc": "08",
+    "pci": "587",
+    "tac": "",
+    "ruid": "",
+    "dongCode": "111110000",
+    "address": "서울시 강남구 도곡로",
+    "latitude": 37.4887289,
+    "longitude": 127.0342486,
+    "create_date": "2024-03-22 11:31:03",
+    "update_date": "2024-03-22 11:31:03"
+  },
+  "facility-wifi-search": {
+    "id": 23,
+    "mac": "00a554dd12bb",
+    "ssid": "0",
+    "grade": "08",
+    "band": "587",
+    "building": "서울시 종로구",
+    "floor": "3F",
+    "create_date": "2024-03-22 11:31:03",
+    "update_date": "2024-03-22 11:31:03",
+    "vap": {
+      "utmk": [
+        959094.97,
+        1916695.61
+      ],
+      "wgs84": [
+        127.0387669,
+        37.2482396
+      ]
+    },
+    "gridX": [
+      127880,
+      127880,
+      127881,
+      127885,
+      127886,
+      127887,
+      127886,
+      127884,
+      127884,
+      127874,
+      127884,
+      127875,
+      127874,
+      127879,
+      127878,
+      127876,
+      127878,
+      127879,
+      127877,
+      127883,
+      127878,
+      127877,
+      127883,
+      127882,
+      127879,
+      127876,
+      127888,
+      127889,
+      127888,
+      127888,
+      127889,
+      127861,
+      127861,
+      127859,
+      127876,
+      127875,
+      127875,
+      127868,
+      127868,
+      127866,
+      127864,
+      127866,
+      127865,
+      127867,
+      127865,
+      127866,
+      127864,
+      127865,
+      127866,
+      127864,
+      127864,
+      127865,
+      127867,
+      127863,
+      127860,
+      127860,
+      127859,
+      127859
+    ],
+    "gridY": [
+      221320,
+      221321,
+      221320,
+      221323,
+      221322,
+      221322,
+      221323,
+      221318,
+      221319,
+      221322,
+      221317,
+      221322,
+      221323,
+      221321,
+      221320,
+      221322,
+      221321,
+      221320,
+      221322,
+      221319,
+      221322,
+      221321,
+      221318,
+      221319,
+      221322,
+      221321,
+      221322,
+      221321,
+      221320,
+      221321,
+      221320,
+      221353,
+      221352,
+      221328,
+      221295,
+      221295,
+      221296,
+      221324,
+      221325,
+      221323,
+      221326,
+      221324,
+      221327,
+      221325,
+      221326,
+      221325,
+      221327,
+      221325,
+      221326,
+      221324,
+      221325,
+      221324,
+      221326,
+      221325,
+      221326,
+      221327,
+      221327,
+      221326
+    ],
+    "rssi": [
+      -76.3,
+      -76.3,
+      -79.7,
+      -84,
+      -84,
+      -85,
+      -84,
+      -77,
+      -77,
+      -77,
+      -77,
+      -77,
+      -77,
+      -72.5,
+      -75,
+      -61,
+      -73.7,
+      -73.7,
+      -61,
+      -77,
+      -75,
+      -61,
+      -77,
+      -77,
+      -75,
+      -61,
+      -85,
+      -85,
+      -85,
+      -85,
+      -85,
+      -84,
+      -84,
+      -72,
+      -85,
+      -85,
+      -85,
+      -79.5,
+      -79.5,
+      -77,
+      -77,
+      -77,
+      -77,
+      -77,
+      -77,
+      -77,
+      -77,
+      -77,
+      -77,
+      -77,
+      -77,
+      -77,
+      -77,
+      -77,
+      -72,
+      -72,
+      -72,
+      -72
+    ],
+    "dataCount": [
+      6,
+      6,
+      3,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      4,
+      1,
+      1,
+      3,
+      3,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      2,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      2,
+      2,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+    ]
+  },
+  "facility-wifi-update": [
+    {
+      "id": 23,
+      "mac": "00a554dd12bb",
+      "ssid": "0",
+      "grade": "11",
+      "band": "999",
+      "building": "서울시 종로구",
+      "floor": "3F",
+      "latitude": 36.12345,
+      "longitude": 127.7652,
+      "create_date": "2024-03-22 11:31:03",
+      "update_date": "2024-04-08 10:14:33"
+    }
+  ],
+  "facility-wifi-delete": [
+    {
+      "id": "0a85",
+      "mac": "00a554dd12bb"
+    }
+  ],
+  "facility-wifi-regist": [
+    {
+      "id": "f34a",
+      "mac": "mac123",
+      "ssid": "",
+      "grade": "",
+      "band": "band",
+      "building": "",
+      "floor": "",
+      "latitude": "",
+      "longitude": "",
+      "create_date": "2024-04-08 10:54:01",
+      "update_date": ""
+    }
+  ]
 }

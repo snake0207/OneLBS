@@ -4,7 +4,7 @@ import Toolbar from '@mui/material/Toolbar'
 import IconButton from '@mui/material/IconButton'
 import Container from '@mui/material/Container'
 import ExitToAppOutlinedIcon from '@mui/icons-material/ExitToAppOutlined'
-import { useGetAskUserInfo, usePostLogout } from '#/hooks/queries/auth'
+import { usePostAskUserPermission, usePostLogout } from '#/hooks/queries/auth'
 
 import { useNavigate } from 'react-router-dom'
 
@@ -12,11 +12,34 @@ import MenuIconDark from '#/assets/menuIconDark.svg'
 
 import style from './style.module'
 import { Stack, Tooltip } from '@mui/material'
+import { useEffect } from 'react'
 
 function Header({ toggleDrawer }) {
-    const { mutate } = usePostLogout()
     const navigate = useNavigate()
-    // const { data } = useGetAskUserInfo()
+    const { mutate: logoutMutate, isPending: logoutPending } = usePostLogout()
+    const { mutate: permissionMutate, isPending: permissionPending } = usePostAskUserPermission()
+    const handleLogout = () => {
+        logoutMutate(
+            { userId: 'acro' },
+            {
+                onSuccess: ({ data }) => {
+                    console.log('logout : ', data)
+                },
+            },
+        )
+        navigate('/login')
+    }
+
+    useEffect(() => {
+        permissionMutate(
+            { userId: 'acro' },
+            {
+                onSuccess: ({ data }) => {
+                    console.log('user-permission : ', data)
+                },
+            },
+        )
+    }, [])
 
     return (
         <AppBar position="absolute" sx={style.header}>
@@ -45,7 +68,7 @@ function Header({ toggleDrawer }) {
                             {'acro 반갑습니다'}({`관리자`}){/* {data && data.userName} */}
                         </Box>
                         <Tooltip title={`로그아웃`}>
-                            <IconButton onClick={() => navigate('/login')}>
+                            <IconButton onClick={handleLogout}>
                                 <ExitToAppOutlinedIcon />
                             </IconButton>
                         </Tooltip>

@@ -26,39 +26,6 @@ export const usePostJoin = () => {
     })
 }
 
-export const usePostEmailVerify = () => {
-    return useMutation({
-        mutationFn: auth.postVerifyEmail,
-    })
-}
-
-export const usePostConfirmEmail = () => {
-    return useMutation({
-        mutationFn: auth.postConfirmEmail,
-    })
-}
-
-export const useGetUserIp = () => {
-    const { data } = useQuery({
-        queryFn: auth.getUserIp,
-        queryKey: [QUERY_KEYS.auth.getIp],
-    })
-
-    return { data }
-}
-
-export const usePostVerifyOtp = () => {
-    return useMutation({
-        mutationFn: auth.postVerifyOtp,
-    })
-}
-
-export const usePostPasswordReset = () => {
-    return useMutation({
-        mutationFn: auth.postPasswordReset,
-    })
-}
-
 export const usePostLogout = () => {
     const { resetAccessToken } = useAuthActions()
     const { resetUserStore } = useUserActions()
@@ -71,30 +38,23 @@ export const usePostLogout = () => {
     })
 }
 
-export const usePostPasswordChange = () => {
-    return useMutation({
-        mutationFn: auth.postPasswordChange,
-    })
-}
-
 export const usePostDeferChange = () => {
     return useMutation({
         mutationFn: auth.postDeferChange,
     })
 }
 
-export const useGetAskUserInfo = () => {
-    const { data } = useQuery({
-        queryFn: auth.getAskUserInfo,
-        queryKey: ['get-ask-user-info'],
-        select: (data) => data.data.data,
+export const useGetDummyToken = (queryParams = {}, options) => {
+    // console.log('useGetDummyToken queryParams : ', queryParams)
+    return useQuery({
+        queryKey: ['get-dummy-token', queryParams],
+        queryFn: () => auth.getDummyToken(queryParams),
+        ...options,
     })
-
-    return { data }
 }
 
 export const useGetCaptcha = (queryParams = {}, options) => {
-    console.log('useGetCaptcha queryParams : ', queryParams)
+    // console.log('useGetCaptcha queryParams : ', queryParams)
     return useQuery({
         queryKey: ['get-captcha', queryParams],
         queryFn: () => auth.getCaptcha(queryParams),
@@ -105,6 +65,12 @@ export const useGetCaptcha = (queryParams = {}, options) => {
 export const usePostSmsAuthCode = () => {
     return useMutation({
         mutationFn: auth.postSmsAuthCode,
+    })
+}
+
+export const usePostAskUserPermission = () => {
+    return useMutation({
+        mutationFn: auth.postAskUserPermission,
     })
 }
 

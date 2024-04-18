@@ -27,8 +27,12 @@ function ExpandMenuItem({ label, to, iconNode, items }) {
     }
 
     const disabledListItem = (menuCode) => {
-        const permission = storePermissions.filter((item) => item.menuCode === menuCode)
-        const isYn = storeUserType === 'A' ? permission[0].adminYn : permission[0].operatorYn
+        const permission = storePermissions.filter((item) => item.menuCode === menuCode)[0]
+        if (!permission) {
+            console.log(`${menuCode} is not exist in side_menu.json`)
+            return true
+        }
+        const isYn = storeUserType === 'A' ? permission.adminYn : permission.operatorYn
         console.log(menuCode, ', permission : ', permission, ' > ', isYn)
         return isYn === 'N' ? true : false
     }

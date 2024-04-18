@@ -30,7 +30,6 @@ export const usePostLogout = () => {
     return useMutation({
         mutationFn: auth.postLogout,
         onSettled: () => {
-            console.log('>>>>>>>>>>>>>>>>>>>>')
             // resetAccessToken()
         },
     })

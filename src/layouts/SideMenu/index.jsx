@@ -26,6 +26,7 @@ import DevicesOtherOutlinedIcon from '@mui/icons-material/DevicesOtherOutlined'
 import ManageAccountsOutlinedIcon from '@mui/icons-material/ManageAccountsOutlined'
 import { useNavigate } from 'react-router-dom'
 
+
 const drawerWidth = 240
 
 const openedMixin = (theme) => ({

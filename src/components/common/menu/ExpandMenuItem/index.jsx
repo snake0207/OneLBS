@@ -12,22 +12,32 @@ import LinkRouter from '../LinkRouter'
 import useLayoutStore from '#/store/useLayoutStore'
 import { useNavigate } from 'react-router-dom'
 import { Tooltip } from '@mui/material'
+import { useUserTypeState, useUserPermissionsState } from '#/store/useUserStore'
 
 function ExpandMenuItem({ label, to, iconNode, items }) {
     const navigate = useNavigate()
     const [open, setOpen] = useState(false)
     const { setDrawer, openDrawer } = useLayoutStore()
+    const storeUserType = useUserTypeState()
+    const storePermissions = useUserPermissionsState()
+
+    const handleClick = () => {
+        if (items.length > 0) setOpen(!open)
+        else navigate(to)
+    }
+
+    const disabledListItem = (menuCode) => {
+        const permission = storePermissions.filter((item) => item.menuCode === menuCode)
+        const isYn = storeUserType === 'A' ? permission[0].adminYn : permission[0].operatorYn
+        console.log(menuCode, ', permission : ', permission, ' > ', isYn)
+        return isYn === 'N' ? true : false
+    }
 
     useEffect(() => {
         if (open) {
             setDrawer(true)
         }
     }, [open, setDrawer])
-
-    const handleClick = () => {
-        if (items.length > 0) setOpen(!open)
-        else navigate(to)
-    }
 
     return (
         <>
@@ -62,15 +72,20 @@ function ExpandMenuItem({ label, to, iconNode, items }) {
             <Collapse in={open} timeout="auto" unmountOnExit>
                 <List component="div" disablePadding>
                     {items.map((item) => {
+                        const disabled = disabledListItem(item?.menuCode)
                         return (
                             <LinkRouter
-                                key={item?.label}
+                                key={item?.menuCode}
                                 to={item?.menuUrl}
                                 color="inherit"
                                 underline="none"
-                                sx={{ color: 'text.lnb' }}
+                                sx={{
+                                    color: 'text.lnb',
+                                    pointerEvents: disabled ? 'none' : '',
+                                    cursor: disabled ? 'default' : 'pointer',
+                                }}
                             >
-                                <ListItemButton sx={{ pl: 4 }}>
+                                <ListItemButton disabled={disabled} sx={{ pl: 4 }}>
                                     <ListItemText primary={item?.label} />
                                 </ListItemButton>
                             </LinkRouter>

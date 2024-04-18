@@ -8,11 +8,11 @@ const initMap = (_div, location = { ...initPosKT }) => {
         center: new olleh.maps.LatLng(location.latitude, location.longitude),
         zoom: 12,
         mapTypeId: 'ROADMAP', // SATELLITE, HYBRID
-        panControl: true,
-        scaleControl: true,
-        mapTypeControl: true,
-        measureControl: true,
-        disableShadow: true,
+        // panControl: true,
+        // scaleControl: true,
+        // mapTypeControl: true,
+        // measureControl: true,
+        // disableShadow: true,
     }
     const map = new olleh.maps.Map(document.getElementById(_div), mapOpts)
 
@@ -36,7 +36,6 @@ const drawMarker = (_mapInstance, iconUrl, locations, bounceMarker, onMarkerClic
 }
 
 const setIconMarker = (location, iconUrl) => {
-    console.log('setIconMarker : ', location)
     const _marker = new olleh.maps.overlay.Marker({
         position: new olleh.maps.LatLng(location.latitude, location.longitude),
         icon: {
@@ -49,7 +48,6 @@ const setIconMarker = (location, iconUrl) => {
 }
 
 const setBounceMarker = (location) => {
-    console.log('setBounceMarker : ', location)
     const _marker = new olleh.maps.overlay.Marker({
         position: new olleh.maps.LatLng(location.latitude, location.longitude),
         animation: olleh.maps.overlay.Marker.BOUNCE, // 제자리에서 통통튀는 Bounce 애니메이션 동작

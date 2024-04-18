@@ -1,17 +1,17 @@
 {
     "data": [
         {
-            "menuId": 100,
+            "menuCode": "OM10000",
             "name": "Main(dashboard)",
             "menuOrder": 1,
-            "rootMenuId": 100,
+            "rootMenuCode": 100,
             "menuUrl": "/",
             "label": "대시보드",
             "icon": "dashboard",
             "children": []
         },
         {
-            "menuId": 200,
+            "menuCode": "OM20000",
             "name": "서비스 현황",
             "menuOrder": 2,
             "menuUrl": "",
@@ -19,41 +19,41 @@
             "label": "서비스 현황",
             "children": [
                 {
-                    "menuId": 210,
+                    "menuCode": "OM20100",
                     "name": "서비스 이력조회",
                     "menuOrder": 21,
-                    "rootMenuId": 200,
+                    "rootMenuCode": 200,
                     "menuUrl": "/service-status/history",
                     "label": "서비스 이력조회"
                 },
                 {
-                    "menuId": 220,
+                    "menuCode": "OM20200",
                     "name": "서비스 통계",
                     "menuOrder": 22,
-                    "rootMenuId": 200,
+                    "rootMenuCode": 200,
                     "menuUrl": "/service-status/service",
                     "label": "서비스 통계"
                 },
                 {
-                    "menuId": 230,
+                    "menuCode": "OM20300",
                     "name": "크라우드소싱 통계",
                     "menuOrder": 23,
-                    "rootMenuId": 200,
+                    "rootMenuCode": 200,
                     "menuUrl": "/service-status/cloud",
                     "label": "크라우드소싱 통계"
                 },
                 {
-                    "menuId": 240,
+                    "menuCode": "OM20400",
                     "name": "위치 트리거 조회",
                     "menuOrder": 24,
-                    "rootMenuId": 200,
+                    "rootMenuCode": 200,
                     "menuUrl": "/service-status/trigger",
                     "label": "위치 트리거 조회"
                 }
             ]
         },
         {
-            "menuId": 300,
+            "menuCode": "OM30000",
             "name": "측위기반 정보 관리",
             "menuOrder": 3,
             "menuUrl": "/facility",
@@ -61,33 +61,33 @@
             "label": "측위기반 정보 관리",
             "children": [
                 {
-                    "menuId": 310,
+                    "menuCode": "OM30100",
                     "name": "Full History View",
                     "menuOrder": 31,
-                    "rootMenuId": 300,
+                    "rootMenuCode": 300,
                     "menuUrl": "/facility/bts",
                     "label": "기지국 시설정보"
                 },
                 {
-                    "menuId": 320,
+                    "menuCode": "OM30200",
                     "name": "Full History View",
                     "menuOrder": 32,
-                    "rootMenuId": 300,
+                    "rootMenuCode": 300,
                     "menuUrl": "/facility/wifi",
                     "label": "WiFi 시설정보"
                 },
                 {
-                    "menuId": 330,
+                    "menuCode": "OM30300",
                     "name": "User History View",
                     "menuOrder": 33,
-                    "rootMenuId": 300,
+                    "rootMenuCode": 300,
                     "menuUrl": "/facility/sync-history",
                     "label": "정보 현행화 이력"
                 }
             ]
         },
         {
-            "menuId": 400,
+            "menuCode": "OM40000",
             "name": "시스템 관리",
             "menuOrder": 4,
             "menuUrl": "",
@@ -95,49 +95,49 @@
             "label": "시스템 관리",
             "children": [
                 {
-                    "menuId": 410,
+                    "menuCode": "OM40100",
                     "name": "서비스 관리",
                     "menuOrder": 41,
-                    "rootMenuId": 400,
+                    "rootMenuCode": 400,
                     "menuUrl": "/system/service/list",
                     "label": "서비스 관리"
                 },
                 {
-                    "menuId": 420,
+                    "menuCode": "OM40200",
                     "name": "단말 모델 관리",
                     "menuOrder": 42,
-                    "rootMenuId": 400,
+                    "rootMenuCode": 400,
                     "menuUrl": "/system/ue/list",
                     "label": "단말 모델 관리"
                 },
                 {
-                    "menuId": 430,
+                    "menuCode": "OM40300",
                     "name": "엔진설정 관리",
                     "menuOrder": 43,
-                    "rootMenuId": 400,
+                    "rootMenuCode": 400,
                     "menuUrl": "/system/engine",
                     "label": "엔진설정 관리"
                 },
                 {
-                    "menuId": 440,
+                    "menuCode": "OM40400",
                     "name": "위치정보 처리내역",
                     "menuOrder": 44,
-                    "rootMenuId": 400,
+                    "rootMenuCode": 400,
                     "menuUrl": "/system/loctrans",
                     "label": "위치정보 처리내역"
                 },
                 {
-                    "menuId": 450,
+                    "menuCode": "OM40500",
                     "name": "위치이력 열람내역",
                     "menuOrder": 45,
-                    "rootMenuId": 400,
+                    "rootMenuCode": 400,
                     "menuUrl": "/system/locview",
                     "label": "위치이력 열람내역"
                 }
             ]
         },
         {
-            "menuId": 500,
+            "menuCode": "OM50000",
             "name": "사용자 관리",
             "menuOrder": 5,
             "menuUrl": "",
@@ -145,26 +145,26 @@
             "label": "사용자 관리",
             "children": [
                 {
-                    "menuId": 510,
+                    "menuCode": "OM50100",
                     "name": "User Management",
                     "menuOrder": 51,
-                    "rootMenuId": 500,
+                    "rootMenuCode": 500,
                     "menuUrl": "/user/manage/list",
                     "label": "사용자 정보관리"
                 },
                 {
-                    "menuId": 520,
+                    "menuCode": "OM50200",
                     "name": "User Permission",
                     "menuOrder": 52,
-                    "rootMenuId": 500,
+                    "rootMenuCode": 500,
                     "menuUrl": "/user/permission",
                     "label": "권한 관리"
                 },
                 {
-                    "menuId": 530,
+                    "menuCode": "OM50300",
                     "name": "사용자 이력관리",
                     "menuOrder": 53,
-                    "rootMenuId": 500,
+                    "rootMenuCode": 500,
                     "menuUrl": "/user/history",
                     "label": "사용자 이력관리"
                 }

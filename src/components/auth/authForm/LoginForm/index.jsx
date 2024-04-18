@@ -13,6 +13,8 @@ import {
     usePostSmsAuthCode,
 } from '#/hooks/queries/auth'
 import { getLayoutState } from '#/store/useLayoutStore'
+import { useAuthActions } from '#/store/useAuthStore'
+import { useUserActions, useUserTypeState } from '#/store/useUserStore'
 
 import {
     encryptPasswordBase64WithTime,
@@ -31,8 +33,15 @@ const MAX_REQ_AUTHCODE = 3
 
 const LoginForm = () => {
     const navigate = useNavigate()
+    const { setAccessToken } = useAuthActions()
+    const { setUserTypeUserStore } = useUserActions()
+    const storeUserType = useUserTypeState()
     const { mutate: submitMutate, isPending } = usePostLogin()
-    const [apiResultLogin, setApiResultLogin] = useState(null)
+    const [apiResultLogin, setApiResultLogin] = useState({
+        code: '',
+        message: '',
+        data: { accessToken: '' },
+    })
     // dummy token 요청 관련
     const [isDummy, setIsDummy] = useState(true)
     const { data: respDummyToken } = useGetDummyToken({}, { enabled: isDummy })
@@ -40,7 +49,7 @@ const LoginForm = () => {
     // Captcha 요청 관련
     const [apiResultCaptcha, setApiResultCaptcha] = useState(null)
     const [isCaptcha, setIsCaptcha] = useState(false)
-    const [captchaParams, setCaptchaParams] = useState({ id: Math.random(), token: '' })
+    const [captchaParams, setCaptchaParams] = useState({ id: Math.random(), dummyToken: '' })
     const { data: respCaptcha } = useGetCaptcha(captchaParams, { enabled: isCaptcha })
     // SMS 인증코드 관련
     const [apiResultSmsAuthCode, setApiResultSmsAuthCode] = useState()
@@ -55,13 +64,14 @@ const LoginForm = () => {
             password: '',
             certNum: '',
             captcha: '',
+            dummyToken: '',
         },
         validationSchema: loginSchema,
         onSubmit: (form) => {
             // const password = encryptPasswordBase64WithTime(
             //     encryptPasswordSHA256WithTime(encryptPasswordSHA256(form.password)),
             // )
-            const apiParams = { ...form, token: respDummyToken?.data.token }
+            const apiParams = { ...form, dummyToken: respDummyToken?.data.data }
             console.log('onSubmit >> ', JSON.stringify(apiParams, null, 2))
             submitMutate(
                 { ...apiParams },
@@ -69,9 +79,12 @@ const LoginForm = () => {
                 {
                     onSuccess: ({ data }) => {
                         console.log('response : ', data)
-                        setApiResultLogin(data)
                         // data.data의 결과값을 확인 후 필요한 처리 수행
-                        if (apiResultLogin.code === '0000') {
+                        if (data?.code === '0000') {
+                            setApiResultLogin({ ...data })
+                            setAccessToken(data?.data.accessToken)
+                            setUserTypeUserStore(data?.data.userType)
+                            console.log('storeUserType : ', storeUserType)
                             navigate('/')
                         }
                     },
@@ -90,7 +103,7 @@ const LoginForm = () => {
         })
         // setAuthCodeParams({ userId: formik.values.userId })
         smsAuthCodeMutate(
-            { userId: formik.values.userId, token: respDummyToken?.data.token },
+            { userId: formik.values.userId, dummyToken: respDummyToken?.data.data },
             {
                 onSuccess: ({ data }) => {
                     console.log('sms response : ', data)
@@ -102,7 +115,7 @@ const LoginForm = () => {
     }
 
     const handleRequestCaptcha = () => {
-        setCaptchaParams({ id: Math.random(), token: respDummyToken?.data.token })
+        setCaptchaParams({ id: Math.random(), dummyToken: respDummyToken?.data.data })
         setIsCaptcha(true)
     }
 
@@ -110,23 +123,20 @@ const LoginForm = () => {
 
     useEffect(() => {
         if (respCaptcha) {
-            const blob = new Blob([respCaptcha.data], { type: 'image/jpeg' })
+            const blob = new Blob([respCaptcha?.data], { type: 'image/jpeg' })
             const imageUrl = URL.createObjectURL(blob)
             setApiResultCaptcha(imageUrl)
             setIsCaptcha(false)
         }
         if (respDummyToken) {
             setIsDummy(false)
-            if (respDummyToken.data.code === '0000') {
-                setCaptchaParams({ ...captchaParams, token: respDummyToken.data.token })
+            console.log('respDummyToken  : ', respDummyToken?.data)
+            if (respDummyToken?.data.code === '0000') {
+                setCaptchaParams({ ...captchaParams, dummyToken: respDummyToken?.data.data })
                 setIsCaptcha(true)
             }
         }
     }, [respDummyToken, isDummy, respCaptcha, isCaptcha])
-
-    // console.log('apiResultCaptcha : ', apiResultCaptcha)
-    // console.log('respCaptcha : ', respCaptcha)
-    // console.log('respDummyToken : ', respDummyToken)
 
     return (
         <>
@@ -206,6 +216,7 @@ const LoginForm = () => {
                                 border: `1px solid #BCBCBC`,
                                 borderRadius: '4px',
                                 mb: 1,
+                                p: 1,
                             }}
                             aria-label={`보안문자`}
                         />
@@ -213,7 +224,7 @@ const LoginForm = () => {
 
                     <LoadingButton
                         variant="contained"
-                        disabled={!respDummyToken?.data.token}
+                        disabled={!respDummyToken?.data.data}
                         startIcon={<CachedOutlinedIcon />}
                         onClick={handleRequestCaptcha}
                         sx={style.loadingButton}
@@ -226,6 +237,12 @@ const LoginForm = () => {
                     <LoadingButton
                         fullWidth
                         loading={isPending}
+                        disabled={
+                            !formik.values.userId ||
+                            !formik.values.password ||
+                            !formik.values.certNum ||
+                            !formik.values.captcha
+                        }
                         variant="contained"
                         type="submit"
                         sx={{

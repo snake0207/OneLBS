@@ -2,9 +2,8 @@ import { create } from 'zustand'
 import { persist, createJSONStorage } from 'zustand/middleware'
 
 const initialState = {
-    userId: null,
+    userType: 'O',
     permissions: [],
-    pwChangeRequired: false,
 }
 
 const useUserStore = create(
@@ -12,9 +11,8 @@ const useUserStore = create(
         (set) => ({
             ...initialState,
             actions: {
-                setUserStore: (userId, permissions, pwChangeRequired) =>
-                    set({ userId, permissions, pwChangeRequired }),
-                setPwChangeRequired: (pwChangeRequired) => set({ pwChangeRequired }),
+                setUserTypeUserStore: (userType) => set({ userType }),
+                setPermissionsUserStore: (permissions) => set({ permissions }),
                 resetUserStore: () => set(initialState),
             },
         }),
@@ -22,9 +20,8 @@ const useUserStore = create(
             name: 'user-storage',
             storage: createJSONStorage(() => localStorage),
             partialize: (state) => ({
-                userId: state.userId,
+                userType: state.userType,
                 permissions: state.permissions,
-                pwChangeRequired: state.pwChangeRequired,
             }),
         },
     ),
@@ -33,6 +30,5 @@ const useUserStore = create(
 export default useUserStore
 
 export const useUserActions = () => useUserStore((state) => state.actions)
-export const useUserIdState = () => useUserStore((state) => state.userId)
+export const useUserTypeState = () => useUserStore((state) => state.userType)
 export const useUserPermissionsState = () => useUserStore((state) => state.permissions)
-export const useUserPwChangeRequiredState = () => useUserStore((state) => state.pwChangeRequired)

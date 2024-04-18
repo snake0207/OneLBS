@@ -13,11 +13,12 @@ export const API_PATH = {
         // add
         // captcha: '/captcha',
         // authcode: '/authcode',
-        dummyToken: '/dummy-token',
+        dummyToken: '/api/dummy',
         smscode: '/api/sms',
-        captcha: '/api-captcha',
+        captcha: '/api/captcha',
         login: '/api/login',
-        ask_user_permission: '/ask-user-permission',
+        logout: '/api/logout',
+        ask_user_permission: '/api/users/authority/menu',
     },
     system: {
         service_regist: '/api/system/service/regist',

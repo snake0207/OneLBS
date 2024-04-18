@@ -2,7 +2,6 @@ import auth from '#/api/auth'
 import { QUERY_KEYS } from '#/contents/queryKeys'
 import { useMutation, useQuery } from '@tanstack/react-query'
 import { useAuthActions } from '#/store/useAuthStore'
-import { useUserActions } from '#/store/useUserStore'
 
 export const usePostLogin = () => {
     return useMutation({
@@ -27,13 +26,12 @@ export const usePostJoin = () => {
 }
 
 export const usePostLogout = () => {
-    const { resetAccessToken } = useAuthActions()
-    const { resetUserStore } = useUserActions()
+    // const { resetAccessToken } = useAuthActions()
     return useMutation({
         mutationFn: auth.postLogout,
         onSettled: () => {
-            resetAccessToken()
-            resetUserStore()
+            console.log('>>>>>>>>>>>>>>>>>>>>')
+            // resetAccessToken()
         },
     })
 }
@@ -68,9 +66,12 @@ export const usePostSmsAuthCode = () => {
     })
 }
 
-export const usePostAskUserPermission = () => {
-    return useMutation({
-        mutationFn: auth.postAskUserPermission,
+export const useGetAskUserPermission = (queryParams = {}, options) => {
+    console.log('useGetAskUserPermission queryParams : ', queryParams)
+    return useQuery({
+        queryKey: ['get-permissions', queryParams],
+        queryFn: () => auth.getAskUserPermission(queryParams.reqData),
+        ...options,
     })
 }
 

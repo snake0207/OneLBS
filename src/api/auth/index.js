@@ -29,11 +29,9 @@ const postSmsAuthCode = (data) => {
     return postAPI({ endPoint: API_PATH.auth.smscode, data })
 }
 
-const postAskUserPermission = (data) => {
-    console.log('postAskUserPermission : ', data)
-    return postAPI({ endPoint: API_PATH.auth.ask_user_permission, data })
+const getAskUserPermission = (data) => {
+    return getAPI({ endPoint: API_PATH.auth.ask_user_permission, data })
 }
-
 const getDummyToken = (data) => {
     return getAPI({ endPoint: API_PATH.auth.dummyToken, data })
 }
@@ -49,7 +47,8 @@ export default {
     postRenewToken,
     postLogout,
     postDeferChange,
-    postAskUserPermission,
+    
+    getAskUserPermission,
 
     getDummyToken,
     getCaptcha, // captcha

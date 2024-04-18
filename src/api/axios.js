@@ -7,13 +7,18 @@ export const axiosInstance = axios.create({
     headers: {
         'Content-Type': 'application/json',
     },
-    // withCredentials: true,
+    withCredentials: true,
 })
+
+const getToken = () => {
+    return `${JSON.parse(localStorage.getItem('auth-storage')).state.accessToken}`
+}
 
 axiosInstance.interceptors.request.use(
     (config) => {
-        const accessToken = `Bearer ${JSON.parse(localStorage.getItem('auth-storage')).state.accessToken}`
-        // config.headers.Authorization = accessToken
+        const accessToken = getToken()
+        accessToken && console.log('accessToken : ', accessToken)
+        if (accessToken) config.headers.Authorization = `Bearer ${accessToken}`
         return config
     },
     (error) => Promise.reject(error),

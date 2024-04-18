@@ -4,7 +4,7 @@ import Toolbar from '@mui/material/Toolbar'
 import IconButton from '@mui/material/IconButton'
 import Container from '@mui/material/Container'
 import ExitToAppOutlinedIcon from '@mui/icons-material/ExitToAppOutlined'
-import { usePostAskUserPermission, usePostLogout } from '#/hooks/queries/auth'
+import { useGetAskUserPermission, usePostLogout } from '#/hooks/queries/auth'
 
 import { useNavigate } from 'react-router-dom'
 
@@ -13,33 +13,39 @@ import MenuIconDark from '#/assets/menuIconDark.svg'
 import style from './style.module'
 import { Stack, Tooltip } from '@mui/material'
 import { useEffect } from 'react'
+import { useUserActions, useUserTypeState, useUserPermissionsState } from '#/store/useUserStore'
 
 function Header({ toggleDrawer }) {
     const navigate = useNavigate()
+    const { setPermissionsUserStore } = useUserActions()
+    const storeUserType = useUserTypeState()
+    const storePermissions = useUserPermissionsState()
     const { mutate: logoutMutate, isPending: logoutPending } = usePostLogout()
-    const { mutate: permissionMutate, isPending: permissionPending } = usePostAskUserPermission()
+    const { data: respPermissions } = useGetAskUserPermission({}, { enabled: true })
     const handleLogout = () => {
         logoutMutate(
-            { userId: 'acro' },
+            {},
             {
                 onSuccess: ({ data }) => {
                     console.log('logout : ', data)
                 },
             },
         )
-        navigate('/login')
+        // navigate('/login')
     }
 
     useEffect(() => {
-        permissionMutate(
-            { userId: 'acro' },
-            {
-                onSuccess: ({ data }) => {
-                    console.log('user-permission : ', data)
-                },
-            },
-        )
-    }, [])
+        if (respPermissions) {
+            console.log('user-permission : ', respPermissions?.data)
+            if (respPermissions?.data.code === '0000') {
+                setPermissionsUserStore(respPermissions?.data.data)
+                console.log('storePermissions : ', storePermissions)
+            }
+        }
+    }, [respPermissions])
+
+    console.log('storeUserType : ', storeUserType)
+    console.log('storePermissions : ', storePermissions)
 
     return (
         <AppBar position="absolute" sx={style.header}>

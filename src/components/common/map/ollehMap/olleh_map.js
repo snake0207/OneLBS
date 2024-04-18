@@ -59,10 +59,6 @@ const setBounceMarker = (location) => {
 }
 
 const drawHexGrid = (map, arrGridX, arrGridY, arrRssi) => {
-    console.log('arrGridX : ', arrGridX)
-    console.log('arrGridY : ', arrGridY)
-    console.log('arrRssi : ', arrRssi)
-
     for (let i = 0; i < arrGridX.length; i++) {
         const grid25 = new HexGrid(10)
         addHexGrid25Layer(map, grid25.getPolygonPaths(arrGridX[i], arrGridY[i]), arrRssi[i])

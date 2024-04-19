@@ -33,7 +33,7 @@ function ExpandMenuItem({ label, to, iconNode, items }) {
             return true
         }
         const isYn = storeUserType === 'A' ? permission.adminYn : permission.operatorYn
-        console.log(menuCode, ', permission : ', permission, ' > ', isYn)
+        // console.log(menuCode, ', permission : ', permission, ' > ', isYn)
         return isYn === 'N' ? true : false
     }
 
@@ -76,7 +76,8 @@ function ExpandMenuItem({ label, to, iconNode, items }) {
             <Collapse in={open} timeout="auto" unmountOnExit>
                 <List component="div" disablePadding>
                     {items.map((item) => {
-                        const disabled = disabledListItem(item?.menuCode)
+                        // const disabled = disabledListItem(item?.menuCode)
+                        const disabled = false
                         return (
                             <LinkRouter
                                 key={item?.menuCode}

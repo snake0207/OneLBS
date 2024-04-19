@@ -19,12 +19,6 @@ export const useGetLogin = (queryParams = {}) => {
     return { data }
 }
 
-export const usePostJoin = () => {
-    return useMutation({
-        mutationFn: auth.postJoin,
-    })
-}
-
 export const usePostLogout = () => {
     // const { resetAccessToken } = useAuthActions()
     return useMutation({
@@ -35,14 +29,7 @@ export const usePostLogout = () => {
     })
 }
 
-export const usePostDeferChange = () => {
-    return useMutation({
-        mutationFn: auth.postDeferChange,
-    })
-}
-
 export const useGetDummyToken = (queryParams = {}, options) => {
-    // console.log('useGetDummyToken queryParams : ', queryParams)
     return useQuery({
         queryKey: ['get-dummy-token', queryParams],
         queryFn: () => auth.getDummyToken(queryParams),
@@ -51,7 +38,6 @@ export const useGetDummyToken = (queryParams = {}, options) => {
 }
 
 export const useGetCaptcha = (queryParams = {}, options) => {
-    // console.log('useGetCaptcha queryParams : ', queryParams)
     return useQuery({
         queryKey: ['get-captcha', queryParams],
         queryFn: () => auth.getCaptcha(queryParams),
@@ -66,7 +52,6 @@ export const usePostSmsAuthCode = () => {
 }
 
 export const useGetAskUserPermission = (queryParams = {}, options) => {
-    console.log('useGetAskUserPermission queryParams : ', queryParams)
     return useQuery({
         queryKey: ['get-permissions', queryParams],
         queryFn: () => auth.getAskUserPermission(queryParams.reqData),
@@ -75,7 +60,6 @@ export const useGetAskUserPermission = (queryParams = {}, options) => {
 }
 
 export const useGetAuthCode = (queryParams = {}, options) => {
-    console.log('useGetAuthCode queryParams : ', queryParams)
     return useQuery({
         queryKey: ['get-authcode', queryParams],
         queryFn: () => auth.getAuthCode(queryParams.reqData),

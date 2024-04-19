@@ -999,9 +999,7 @@
       }
     ]
   },
-  "user-list": {
-    "count": 21,
-    "lists": [
+  "api-users-list": [
       {
         "id": 1,
         "userid": "91628373",
@@ -1034,8 +1032,7 @@
         "ipAddr_4": "",
         "ipAddr_5": ""
       }
-    ]
-  },
+    ],
   "user-history": {
     "count": 23,
     "lists": [

@@ -54,7 +54,6 @@ export const getAPI = ({ endPoint, data, axiosOption }) => {
 }
 
 export const postAPI = ({ endPoint, data, axiosOption }) => {
-    console.log(data, axiosOption)
     return axiosInstance.post(endPoint, data, axiosOption)
 }
 

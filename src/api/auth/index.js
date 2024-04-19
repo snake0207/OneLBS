@@ -5,14 +5,6 @@ const postLogin = (data) => {
     return postAPI({ endPoint: API_PATH.auth.login, data })
 }
 
-const postJoin = (data) => {
-    return postAPI({ endPoint: API_PATH.auth.join, data })
-}
-
-const getUserIp = () => {
-    return getAPI({ endPoint: API_PATH.auth.get_ip })
-}
-
 const postRenewToken = () => {
     return postAPI({ endPoint: API_PATH.auth.renew_token })
 }
@@ -21,11 +13,7 @@ const postLogout = () => {
     return postAPI({ endPoint: API_PATH.auth.logout })
 }
 
-const postDeferChange = () => {
-    return postAPI({ endPoint: API_PATH.auth.defer_change })
-}
 const postSmsAuthCode = (data) => {
-    console.log('postSmsAuthCode : ', data)
     return postAPI({ endPoint: API_PATH.auth.smscode, data })
 }
 
@@ -42,14 +30,9 @@ const getCaptcha = (data) => {
 
 export default {
     postLogin,
-    postJoin,
-    getUserIp,
     postRenewToken,
     postLogout,
-    postDeferChange,
-    
     getAskUserPermission,
-
     getDummyToken,
     getCaptcha, // captcha
     postSmsAuthCode,

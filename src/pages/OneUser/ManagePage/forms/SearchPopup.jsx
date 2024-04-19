@@ -34,7 +34,7 @@ const SearchPopup = ({ isOpen, draggable = true, title, onCancel, onConfirm }) =
     const [message, setMessage] = useState('')
     const [isFetchState, setIsFetchState] = useState(false)
     const [queryParams, setQueryParams] = useState({
-        userid: '',
+        userId: '',
     })
 
     const { data: apiResult } = useGetUserIdDup(queryParams, {
@@ -48,7 +48,7 @@ const SearchPopup = ({ isOpen, draggable = true, title, onCancel, onConfirm }) =
 
     const formik = useFormik({
         initialValues: {
-            userid: '',
+            userId: '',
         },
         onSubmit: (values) => {
             setIsFetchState(true)
@@ -59,7 +59,7 @@ const SearchPopup = ({ isOpen, draggable = true, title, onCancel, onConfirm }) =
     useEffect(() => {
         if (apiResult) {
             console.log('apiResult : ', apiResult)
-            const msg = `* 조회하신 ${queryParams.userid} 는 ${apiResult.result === '0000' ? '사용가능 합니다.' : '이미 사용중 입니다.'}`
+            const msg = `* 조회하신 ${apiResult.data}`
             setMessage(msg)
             setIsFetchState(false)
         }
@@ -85,7 +85,7 @@ const SearchPopup = ({ isOpen, draggable = true, title, onCancel, onConfirm }) =
             />
             <DialogContent dividers={false}>
                 <Stack direction="row" mb={2} spacing={0.5}>
-                    <TextInput name="userid" formik={formik} />
+                    <TextInput name="userId" formik={formik} />
                     <MuiSubButton name="search" title="검색" onClick={formik.handleSubmit} />
                 </Stack>
                 {apiResult && (
@@ -100,13 +100,13 @@ const SearchPopup = ({ isOpen, draggable = true, title, onCancel, onConfirm }) =
                 <Button size="large" color="error" onClick={handleCancel}>
                     취소
                 </Button>
-                {apiResult?.result === '0000' && (
+                {apiResult?.code === '0000' && (
                     <Button
                         size="large"
                         color="primary"
                         onClick={() => {
                             setOpen(false)
-                            onConfirm(queryParams.userid)
+                            onConfirm(queryParams.userId)
                         }}
                         autoFocus
                     >

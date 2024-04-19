@@ -36,7 +36,7 @@ function Header({ toggleDrawer }) {
 
     useEffect(() => {
         if (respPermissions) {
-            console.log('user-permission : ', respPermissions?.data)
+            // console.log('user-permission : ', respPermissions?.data)
             if (respPermissions?.data.code === '0000') {
                 setPermissionsUserStore(respPermissions?.data.data)
                 console.log('storePermissions : ', storePermissions)
@@ -44,8 +44,8 @@ function Header({ toggleDrawer }) {
         }
     }, [respPermissions])
 
-    console.log('storeUserType : ', storeUserType)
-    console.log('storePermissions : ', storePermissions)
+    // console.log('storeUserType : ', storeUserType)
+    // console.log('storePermissions : ', storePermissions)
 
     return (
         <AppBar position="absolute" sx={style.header}>

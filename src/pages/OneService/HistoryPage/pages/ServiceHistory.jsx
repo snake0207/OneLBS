@@ -7,9 +7,8 @@ import CustomDataGrid from '#/components/common/table/datagrid'
 
 import SearchFilter from '../Filter'
 import { columns } from './grid-columns'
-import { useGetServiceHistory, useGetServiceStat } from '#/hooks/queries/one-service'
+import { useGetServiceHistory } from '#/hooks/queries/one-service'
 import { OllehMap } from '#/components/common/map/ollehMap'
-import { LabelImportantRounded } from '@mui/icons-material'
 
 const ServiceHistory = () => {
     const navigate = useNavigate()

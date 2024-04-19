@@ -6,17 +6,17 @@ import { MuiSubButton } from '#/components/common/button/MuiButton'
 
 import style from './style.module'
 import Select from '#/components/common/Select'
-import { permissionTypeList } from '../permissionType'
+import { authTypeList } from '../authType'
 
 function SearchFilter({ onSearch }) {
-    const unionPermissionTypeList = () => [
-        { key: 9, value: 9, label: `전체` },
-        ...permissionTypeList(),
+    const unionAuthTypeList = () => [
+        { key: 'T', value: 'T', label: `전체` },
+        ...authTypeList(),
     ]
     const formik = useFormik({
         initialValues: {
             userId: '',
-            permission: 9,
+            authType: 'T',
         },
         onSubmit: (values) => {
             if (onSearch) onSearch(values)
@@ -31,9 +31,9 @@ function SearchFilter({ onSearch }) {
                         <TableCell sx={style.cellTitle}>{`권한`}</TableCell>
                         <TableCell sx={style.cellInput}>
                             <Select
-                                name={'permission'}
+                                name={'authType'}
                                 formik={formik}
-                                items={unionPermissionTypeList()}
+                                items={unionAuthTypeList()}
                                 sx={{
                                     width: '100%',
                                     height: 40,

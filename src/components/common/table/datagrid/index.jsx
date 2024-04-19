@@ -116,7 +116,9 @@ const CustomDataGrid = ({
             // params.row.필드명
             // row에 별도의 동작 버튼을 둔 경우, 아래는 동작 안하도록 처리 필요
             onRowClick={(params) => onRowClick(params)}
-            onRowSelectionModelChange={checkboxSelection ? (param) => onRowSelectionChange(param) : null}
+            onRowSelectionModelChange={
+                checkboxSelection ? (param) => onRowSelectionChange(param) : null
+            }
             sx={{ ...gridProps }}
         />
     )

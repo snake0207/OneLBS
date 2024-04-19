@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router'
 import { useLocation } from 'react-router-dom'
 import { useFormik } from 'formik'
@@ -15,13 +15,14 @@ import style from './style.module'
 import MuiAlert from '#/components/common/popup/MuiAlert'
 import { usePostDeleteUser, usePostUpdateUser } from '#/hooks/queries/user'
 import Select from '#/components/common/Select'
-import { permissionTypeList } from '../permissionType'
+import { authTypeList } from '../authType'
 
 const EditForm = () => {
     const {
         state: { row },
     } = useLocation()
     const navigate = useNavigate()
+    const [isLoading, setIsLoading] = useState(true)
     const { mutate: mutateDelete, isPending: isDeletePending } = usePostDeleteUser()
     const { mutate: mutateUpdate, isPending: isUpdatePending } = usePostUpdateUser()
     const [apiSuccess, setApiSuccess] = useState('')
@@ -34,21 +35,33 @@ const EditForm = () => {
 
     const formik = useFormik({
         initialValues: {
-            userid: row?.userid,
-            company: row?.company,
-            phoneNo: row?.phoneNo,
-            permission: row?.permission,
-            ipAddr_1: row?.ipAddr_1,
-            ipAddr_2: row?.ipAddr_2,
-            ipAddr_3: row?.ipAddr_3,
-            ipAddr_4: row?.ipAddr_4,
-            ipAddr_5: row?.ipAddr_5,
+            userId: row?.userId,
+            cropName: row?.cropName,
+            authType: row?.authType,
+            phoneNum: row?.phoneNum || '',
+            ipAddr_1: row?.ipAddr_1 || '',
+            ipAddr_2: row?.ipAddr_2 || '',
+            ipAddr_3: row?.ipAddr_3 || '',
+            ipAddr_4: row?.ipAddr_4 || '',
+            ipAddr_5: row?.ipAddr_5 || '',
         },
         validationSchema: registUserSchema,
         onSubmit: (form) => {
             console.log('handleFormikSubmit..')
+            const ipSet = new Set([
+                formik.values.ipAddr_1,
+                formik.values.ipAddr_2,
+                formik.values.ipAddr_3,
+                formik.values.ipAddr_4,
+                formik.values.ipAddr_5,
+            ])
+            const newArr = [...ipSet].filter((ip) => ip.length > 0)
             const apiParams = {
-                ...form,
+                userId: row?.userId,
+                cropName: formik.values.cropName,
+                phoneNum: formik.values.phoneNum,
+                authType: formik.values.authType,
+                ipAddr: [...newArr],
             }
             console.log('onSubmit >> ', JSON.stringify(apiParams, null, 2))
             mutateUpdate(
@@ -56,7 +69,7 @@ const EditForm = () => {
                 {
                     onSuccess: ({ data }) => {
                         console.log('update-response : ', data)
-                        setApiSuccess(`UPDATE API RESULT : ${data.id}`)
+                        setApiSuccess(`UPDATE RESULT : ${data?.data}(${data?.code})`)
                     },
                 },
             )
@@ -66,11 +79,11 @@ const EditForm = () => {
     const handleDeleteSubmit = () => {
         console.log('handleDeleteSubmit...')
         mutateDelete(
-            { userid: [row?.userid] },
+            { userId: row?.userId },
             {
                 onSuccess: ({ data }) => {
                     console.log('delete-response : ', data)
-                    setApiSuccess(`DELETE API RESULT : ${data.id}`)
+                    setApiSuccess(`DELETE RESULT : ${data?.data}(${data?.code})`)
                 },
             },
         )
@@ -78,6 +91,7 @@ const EditForm = () => {
 
     // 수정, 삭제 버튼 click시 공통으로 실행
     const handleFormikSubmit = () => {
+        console.log('state : ', state)
         state.edit && formik.handleSubmit() // 수정
         state.delete && handleDeleteSubmit() // 삭제
         handleStateReset()
@@ -104,7 +118,7 @@ const EditForm = () => {
         }))
     }
 
-    console.log('state.row : ', row)
+    // console.log('state.row : ', row)
 
     return (
         <Box>
@@ -132,26 +146,35 @@ const EditForm = () => {
                     <Table sx={style.table_info}>
                         <TableHead>
                             <TableRow>
-                                <TableCell>{`아이디`}</TableCell>
-                                <TableCell component="td">
-                                    <TextInput name="userid" formik={formik} IsDisabled={true} />
+                                <TableCell>
+                                    <span style={{ color: 'red', fontSize: '13px' }}>*</span>
+                                    {`아이디`}
                                 </TableCell>
-                                <TableCell>{`소속`}</TableCell>
                                 <TableCell component="td">
-                                    <TextInput name="company" formik={formik} />
+                                    <TextInput name="userId" formik={formik} IsDisabled={true} />
+                                </TableCell>
+                                <TableCell>
+                                    <span style={{ color: 'red', fontSize: '13px' }}>*</span>
+                                    {`소속`}
+                                </TableCell>
+                                <TableCell component="td">
+                                    <TextInput name="cropName" formik={formik} />
                                 </TableCell>
                             </TableRow>
                             <TableRow>
                                 <TableCell>{`전화번호`}</TableCell>
                                 <TableCell component="td">
-                                    <TextInput name="phoneNo" formik={formik} />
+                                    <TextInput name="phoneNum" formik={formik} />
                                 </TableCell>
-                                <TableCell>{`권한`}</TableCell>
+                                <TableCell>
+                                    <span style={{ color: 'red', fontSize: '13px' }}>*</span>
+                                    {`권한`}
+                                </TableCell>
                                 <TableCell component="td">
                                     <Select
-                                        name={'permission'}
+                                        name={'authType'}
                                         formik={formik}
-                                        items={permissionTypeList()}
+                                        items={authTypeList()}
                                         sx={{
                                             width: '100%',
                                             height: 40,
@@ -163,7 +186,10 @@ const EditForm = () => {
                             </TableRow>
                             <TableRow>
                                 <TableCell rowSpan={5}>{`접속 허용 IP 목록`}</TableCell>
-                                <TableCell>{`ip-address-1`}</TableCell>
+                                <TableCell>
+                                    <span style={{ color: 'red', fontSize: '13px' }}>*</span>
+                                    {`ip-address-1`}
+                                </TableCell>
                                 <TableCell component="td" colSpan={2}>
                                     <TextInput name="ipAddr_1" formik={formik} />
                                 </TableCell>
@@ -205,7 +231,7 @@ const EditForm = () => {
                                 disabled={isDeletePending || isUpdatePending}
                                 name="cancel"
                                 title="목록"
-                                onClick={() => navigate('/user/manage/list')}
+                                onClick={() => navigate(-1)}
                             />
                             <MuiMainButton
                                 disabled={isDeletePending || isUpdatePending}
@@ -235,7 +261,10 @@ const EditForm = () => {
                 <MuiAlert
                     msg={apiSuccess}
                     autoHideDuration={5000}
-                    callback={() => setApiSuccess(false)}
+                    callback={() => {
+                        setApiSuccess(false)
+                        navigate('/user/manage/list')
+                    }}
                 />
             )}
         </Box>

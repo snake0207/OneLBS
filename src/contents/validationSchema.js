@@ -2,9 +2,9 @@ import * as yup from 'yup'
 import t from '#/common/libs/trans.js'
 
 const HELPER_TEXT = {
-    useridRequired: '아이디를 입력해 주세요.',
-    useridMinLength: '8자 이상 입력해 주세요.',
-    useridMaxLength: '12자 이하로 입력해 주세요.',
+    userIdRequired: '아이디를 입력해 주세요.',
+    userIdMinLength: '8자 이상 입력해 주세요.',
+    userIdMaxLength: '12자 이하로 입력해 주세요.',
     emailRequired: '이메일을 입력해 주세요.',
     emailNotMatch: '이메일 형식이 맞지 않습니다.',
     passwordRequired: '비밀번호를 입력해 주세요.',
@@ -21,8 +21,8 @@ const HELPER_TEXT = {
     emailCodeRequired: '이메일 인증코드를 입력해 주세요.',
     emailCodeTimeOut: '입력 시간이 초과 하였습니다. 재 인증해 주세요.',
     emailCodeNotMatch: '6자리 숫자를 입력해 주세요.',
-    companyRequired: '회사명을 입력해 주세요.',
-    companyLength: '회사명은 한 글자 이상 입력해 주세요.',
+    cropNameRequired: '회사명을 입력해 주세요.',
+    cropNameLength: '회사명은 한 글자 이상 입력해 주세요.',
     teamRequired: '팀명을 입력해 주세요.',
     teamLength: '팀명은 한 글자 이상 입력해 주세요.',
     nameRequired: '이름을 입력해 주세요.',
@@ -84,7 +84,6 @@ export const loginSchema = yup.object({
     captcha: yup.string().required(HELPER_TEXT.captchaRequired),
 })
 
-
 // 서비스 등록, 수정 화면에서 사용
 // ~src/pages/system/ServicePage/forms
 export const registServiceSchema = yup.object({
@@ -126,13 +125,12 @@ export const registUESchema = yup.object({
 // 사용자관리 등록, 수정 화면에서 사용
 // ~src/pages/user/ManagePage/forms
 export const registUserSchema = yup.object({
-    userid: yup
+    userId: yup
         .string()
         // .min(8, HELPER_TEXT.useridMinLength)
-        .max(12, HELPER_TEXT.useridMaxLength)
-        .required(HELPER_TEXT.useridRequired),
-    company: yup.string().required(HELPER_TEXT.companyRequired),
-    phoneNo: yup.string().matches(REGEXP.phoneNumber, HELPER_TEXT.phoneNumberRequired),
+        .max(12, HELPER_TEXT.userIdMaxLength)
+        .required(HELPER_TEXT.userIdRequired),
+    cropName: yup.string().required(HELPER_TEXT.cropNameRequired),
     ipAddr_1: yup.string().required(HELPER_TEXT.ipRequired),
 })
 
@@ -142,8 +140,6 @@ export const otpSchema = yup.object({
         .matches(REGEXP.verifyCode, HELPER_TEXT.otpNotMatch)
         .required(HELPER_TEXT.otpRequired),
 })
-
-
 
 export const mapSearchSchema = yup.object({
     country: yup.array().of(yup.string()).min(1, HELPER_TEXT.searchCountry),
@@ -156,7 +152,6 @@ export const mapSearchSchema = yup.object({
         .matches(REGEXP.coordinates, HELPER_TEXT.searchLng)
         .required(HELPER_TEXT.searchLng),
 })
-
 
 export const passwordChangeSchema = yup.object({
     currentPassword: yup

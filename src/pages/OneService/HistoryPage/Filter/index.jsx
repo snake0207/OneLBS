@@ -22,18 +22,18 @@ import TextInput from '#/components/common/input/TextInput'
 function SearchFilter({ onSearch }) {
     const formik = useFormik({
         initialValues: {
-            start_date: '',
-            end_date: '',
+            startDate: '',
+            endDate: '',
             start_time: String(new Date().getHours()),
             end_time: String(new Date().getHours()),
             serviceCode: '',
             opType: '',
-            targetNo: '',
+            targetMdn: '',
         },
         onSubmit: (values) => {
-            const start_date = `${values.start_date.split('-').join('')}${values.start_time}`
-            const end_date = `${values.end_date.split('-').join('')}${values.end_time}`
-            if (onSearch) onSearch({ ...values, start_date, end_date })
+            const startDate = `${values.startDate.split('-').join('')}${values.start_time}`
+            const endDate = `${values.endDate.split('-').join('')}${values.end_time}`
+            if (onSearch) onSearch({ ...values, startDate, endDate })
         },
     })
 
@@ -70,7 +70,7 @@ function SearchFilter({ onSearch }) {
                         </TableCell>
                         <TableCell sx={style.cellTitle}>{`대상자`}</TableCell>
                         <TableCell sx={style.cellInput}>
-                            <TextInput name="targetNo" formik={formik} />
+                            <TextInput name="targetMdn" formik={formik} />
                         </TableCell>
                         <TableCell align="right">
                             <MuiSubButton

@@ -1,5 +1,11 @@
 import { Typography } from '@mui/material'
 
+const authTypeLabel = {
+    A: { label: `관리자` },
+    O: { label: `운영자` },
+    '00001': { label: `슈퍼관리자` },
+}
+
 export const columns = [
     {
         field: 'id',
@@ -8,25 +14,25 @@ export const columns = [
         renderCell: (params) => <Typography>{params.row.id}</Typography>,
     },
     {
-        field: 'userid',
+        field: 'userId',
         headerName: '아이디',
         flex: 1,
-        renderCell: (params) => <Typography color="primary">{params.row.userid}</Typography>,
+        renderCell: (params) => <Typography color="primary">{params.row.userId}</Typography>,
     },
     {
-        field: 'permission',
+        field: 'authType',
         headerName: '권한',
         flex: 0.8,
         renderCell: (params) => {
-            return <Typography>{params.row.permission}</Typography>
+            return <Typography>{authTypeLabel[params.row.authType].label}</Typography>
         },
     },
     {
-        field: 'company',
+        field: 'cropName',
         headerName: '소속',
         flex: 1,
         renderCell: (params) => {
-            return <Typography>{params.row.company}</Typography>
+            return <Typography>{params.row.cropName}</Typography>
         },
     },
     {
@@ -39,27 +45,27 @@ export const columns = [
         },
     },
     {
-        field: 'lastLogin_date',
+        field: 'lastLoginTime',
         headerName: '마지막 로그인',
         flex: 1.5,
         renderCell: (params) => {
-            return <Typography>{params.row.lastLogin_date}</Typography>
+            return <Typography>{params.row.lastLoginTime}</Typography>
         },
     },
     {
-        field: 'regist_date',
+        field: 'regDate',
         headerName: '등록일시',
         flex: 1.5,
         renderCell: (params) => {
-            return <Typography>{params.row.regist_date}</Typography>
+            return <Typography>{params.row.regDate}</Typography>
         },
     },
     {
-        field: 'change_date',
+        field: 'updDate',
         headerName: '변경일시',
         flex: 1.5,
         renderCell: (params) => {
-            return <Typography>{params.row.change_date}</Typography>
+            return <Typography>{params.row.updDate}</Typography>
         },
     },
 ]

@@ -16,9 +16,9 @@ const OllehMap = ({
     locations = [],
     onMarkerClick,
     bounceMarker = {},
-    gridX = [],
-    gridY = [],
-    rssi = [],
+    gridX,
+    gridY,
+    rssi,
 }) => {
     const [map, setMap] = useState()
     const IMAGE_URL = import.meta.env.VITE_HOME_IMAGE_URL

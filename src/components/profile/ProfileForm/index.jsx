@@ -15,7 +15,6 @@ import t from '#/common/libs/trans'
 import PasswordInput from '#/components/common/input/PasswordInput'
 import { useFormik } from 'formik'
 import TextInput from '#/components/common/input/TextInput'
-import IPManage from './IPManage'
 import * as yup from 'yup'
 import { usePopupActions } from '#/store/usePopupStore'
 import { useNavigate } from 'react-router'
@@ -153,7 +152,6 @@ function ProfileForm() {
                             </TableCell>
                             <TableCell component="td"></TableCell>
                         </TableRow>
-                        <IPManage ipAddresses={``} />
                         <TableRow>
                             <TableCell>{t('permission', 'profile')}</TableCell>
                             <TableCell component="td">{``}</TableCell>

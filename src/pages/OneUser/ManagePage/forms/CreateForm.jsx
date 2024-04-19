@@ -14,7 +14,7 @@ import { registUserSchema } from '#/contents/validationSchema'
 import style from './style.module'
 import MuiAlert from '#/components/common/popup/MuiAlert'
 import Select from '#/components/common/Select'
-import { permissionTypeList } from '../permissionType'
+import { authTypeList } from '../authType'
 import SearchPopup from './SearchPopup'
 import { usePostRegistUser } from '#/hooks/queries/user'
 
@@ -24,7 +24,6 @@ const CreateForm = () => {
     } = useLocation()
     const navigate = useNavigate()
     const [isOpenUserCheckPopup, setIsOpenUserCheckPopup] = useState(false)
-    const [ueCodes, setUeCodes] = useState([])
     const { mutate, isPending } = usePostRegistUser()
     const [apiSuccess, setApiSuccess] = useState('')
     const [state, setState] = useState({
@@ -34,10 +33,10 @@ const CreateForm = () => {
 
     const formik = useFormik({
         initialValues: {
-            userid: '',
-            company: '',
-            phoneNo: '',
-            permission: 1,
+            userId: '',
+            cropName: '',
+            phoneNum: '',
+            authType: 'O',
             ipAddr_1: '',
             ipAddr_2: '',
             ipAddr_3: '',
@@ -46,8 +45,20 @@ const CreateForm = () => {
         },
         validationSchema: registUserSchema,
         onSubmit: (form) => {
+            const ipSet = new Set([
+                formik.values.ipAddr_1,
+                formik.values.ipAddr_2,
+                formik.values.ipAddr_3,
+                formik.values.ipAddr_4,
+                formik.values.ipAddr_5,
+            ])
+            const newArr = [...ipSet].filter((ip) => ip.length > 0)
             const apiParams = {
-                ...form,
+                userId: formik.values.userId,
+                cropName: formik.values.cropName,
+                phoneNum: formik.values.phoneNum,
+                authType: formik.values.authType,
+                ipAddr: [...newArr],
             }
             console.log('onSubmit >> ', JSON.stringify(apiParams, null, 2))
             mutate(
@@ -55,7 +66,7 @@ const CreateForm = () => {
                 {
                     onSuccess: ({ data }) => {
                         console.log('response : ', data)
-                        setApiSuccess(`API RESULT : ${data.id}`)
+                        setApiSuccess(`API RESULT : ${data?.data}(${data?.code})`)
                     },
                 },
             )
@@ -73,12 +84,6 @@ const CreateForm = () => {
     }
     const handleStateReset = () => {
         setState((prevState) => ({ ...prevState, openDialog: false }))
-    }
-
-    const handleInputUeCode = () => {
-        const ue = formik.values.tmpModelCode
-        console.log('UE : ', ue)
-        setUeCodes((prev) => [{ id: Date.now(), modelCode: formik.values?.tmpModelCode }, ...prev])
     }
 
     const handleOpenUserCheckPopup = () => {
@@ -110,30 +115,39 @@ const CreateForm = () => {
                     <Table sx={style.table_info}>
                         <TableHead>
                             <TableRow>
-                                <TableCell>{`아이디`}</TableCell>
+                                <TableCell>
+                                    <span style={{ color: 'red', fontSize: '13px' }}>*</span>
+                                    {`아이디`}
+                                </TableCell>
                                 <TableCell component="td">
                                     <TextInput
-                                        name="userid"
+                                        name="userId"
                                         formik={formik}
                                         editClick={handleOpenUserCheckPopup}
                                     />
                                 </TableCell>
-                                <TableCell>{`소속`}</TableCell>
+                                <TableCell>
+                                    <span style={{ color: 'red', fontSize: '13px' }}>*</span>
+                                    {`소속`}
+                                </TableCell>
                                 <TableCell component="td">
-                                    <TextInput name="company" formik={formik} />
+                                    <TextInput name="cropName" formik={formik} />
                                 </TableCell>
                             </TableRow>
                             <TableRow>
                                 <TableCell>{`전화번호`}</TableCell>
                                 <TableCell component="td">
-                                    <TextInput name="phoneNo" formik={formik} />
+                                    <TextInput name="phoneNum" formik={formik} />
                                 </TableCell>
-                                <TableCell>{`권한`}</TableCell>
+                                <TableCell>
+                                    <span style={{ color: 'red', fontSize: '13px' }}>*</span>
+                                    {`권한`}
+                                </TableCell>
                                 <TableCell component="td">
                                     <Select
-                                        name={'permission'}
+                                        name={'authType'}
                                         formik={formik}
-                                        items={permissionTypeList()}
+                                        items={authTypeList()}
                                         sx={{
                                             width: '100%',
                                             height: 40,
@@ -145,7 +159,10 @@ const CreateForm = () => {
                             </TableRow>
                             <TableRow>
                                 <TableCell rowSpan={5}>{`접속 허용 IP 목록`}</TableCell>
-                                <TableCell>{`ip-address-1`}</TableCell>
+                                <TableCell>
+                                    <span style={{ color: 'red', fontSize: '13px' }}>*</span>
+                                    {`ip-address-1`}
+                                </TableCell>
                                 <TableCell component="td" colSpan={2}>
                                     <TextInput name="ipAddr_1" formik={formik} />
                                 </TableCell>
@@ -208,7 +225,10 @@ const CreateForm = () => {
                 <MuiAlert
                     msg={apiSuccess}
                     autoHideDuration={5000}
-                    callback={() => setApiSuccess(false)}
+                    callback={() => {
+                        setApiSuccess(false)
+                        navigate('/user/manage/list')
+                    }}
                 />
             )}
             {isOpenUserCheckPopup && (
@@ -218,7 +238,7 @@ const CreateForm = () => {
                     onCancel={() => setIsOpenUserCheckPopup(false)}
                     onConfirm={(param) => {
                         setIsOpenUserCheckPopup(false)
-                        formik.setFieldValue('userid', param)
+                        formik.setFieldValue('userId', param)
                     }}
                 />
             )}

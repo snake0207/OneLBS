@@ -3,18 +3,14 @@ import user from '#/api/user'
 import { useMutation, useQuery } from '@tanstack/react-query'
 
 // 사용자정보 목록
-export const useGetUserList = (queryParams = {}, options) => {
-    console.log('useGetUserList : ', queryParams)
-    const { data } = useQuery({
-        queryKey: ['get-user-lists', queryParams],
-        queryFn: () => user.getUserList(queryParams),
-        ...options,
+export const usePostUserList = () => {
+    return useMutation({
+        mutationFn: user.postUserList,
     })
-    return { data: data?.data }
 }
 // 사용자 등록 시 코드 중복 체크
 export const useGetUserIdDup = (queryParams = {}, options) => {
-    console.log('useGetUserIdDup : ', queryParams)
+    // console.log('useGetUserIdDup : ', queryParams)
     const { data } = useQuery({
         queryKey: ['get-userid-dup', queryParams],
         queryFn: () => user.getUserIdDup(queryParams),
@@ -57,6 +53,22 @@ export const usePostUpdatePermission = () => {
     })
 }
 // 사용자 이력관리
+export const usePostUserHistoryList = () => {
+    return useMutation({
+        mutationFn: user.postUserHistoryList,
+    })
+}
+
+export const useGetUserList = (queryParams = {}, options) => {
+    console.log('useGetUserList : ', queryParams)
+    const { data } = useQuery({
+        queryKey: ['get-user-lists', queryParams],
+        queryFn: () => user.getUserList(queryParams),
+        ...options,
+    })
+    return { data: data?.data }
+}
+
 export const useGetUserHistoryList = (queryParams = {}, options) => {
     console.log('useGetUserHistoryList : ', queryParams)
     const { data } = useQuery({

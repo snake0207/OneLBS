@@ -33,14 +33,14 @@ export const API_PATH = {
         loc_view: '/loc-view',
     },
     user: {
-        user_regist: '/user-regist',
-        user_dup: '/user-dup',
-        user_list: '/user-list',
-        user_update: '/user-update',
-        user_delete: '/user-delete',
-        permission_info: '/permission-info',
-        permission_update: '/permission-update',
-        user_history: '/user-history',
+        user_regist: '/api/users/regist', // 사용자정보 등록
+        user_dup: '/api/users/check',
+        user_list: '/api/users/list', // 사죵자정보 list
+        user_update: '/api/users/modify', // 사용자정보 수정
+        user_delete: '/api/users/delete', // 사용자정보 삭제
+        permission_info: '/api/users/authority/menu', // 권한정보 조회
+        permission_update: '/api/users/authority/menu', // 권한설정 저장
+        user_history: '/api/users/history', //
     },
     facility: {
         wifi_search: '/facility-wifi-search',
@@ -51,10 +51,10 @@ export const API_PATH = {
         sync_history: '/facility-sync-history',
     },
     service: {
-        service_history_detail: '/service-history-detail',
-        service_history: '/service-history',
-        service_stat: '/service-stat',
-        cloud_stat: '/cloud-stat',
-        trigger: '/trigger-list',
+        history_detail: '/api/service/history/detail',
+        history: '/api/services/history',
+        service_stat: '/api/service/stat',
+        crowd_stat: '/api/services/crowd',
+        trigger: '/api/services/trigger',
     },
 }

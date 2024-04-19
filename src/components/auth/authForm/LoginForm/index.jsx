@@ -84,7 +84,6 @@ const LoginForm = () => {
                             setApiResultLogin({ ...data })
                             setAccessToken(data?.data.accessToken)
                             setUserTypeUserStore(data?.data.userType)
-                            console.log('storeUserType : ', storeUserType)
                             navigate('/')
                         }
                     },

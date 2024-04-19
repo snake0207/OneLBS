@@ -27,7 +27,7 @@ const postDeleteUser = (data) => {
 }
 // 메뉴 권한 관리
 const getMenuPermission = (data) => {
-    return getAPI({ endPoint: API_PATH.user.permission_info, data })
+    return getAPI({ endPoint: API_PATH.user.permission_list, data })
 }
 // 메뉴 권한 업데이트
 const postUpdateMenuPermission = (data) => {

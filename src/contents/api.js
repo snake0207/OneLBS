@@ -18,7 +18,6 @@ export const API_PATH = {
         captcha: '/api/captcha',
         login: '/api/login',
         logout: '/api/logout',
-        ask_user_permission: '/api/users/authority/menu',
     },
     system: {
         service_regist: '/api/system/service/regist',
@@ -38,8 +37,8 @@ export const API_PATH = {
         user_list: '/api/users/list', // 사죵자정보 list
         user_update: '/api/users/modify', // 사용자정보 수정
         user_delete: '/api/users/delete', // 사용자정보 삭제
-        permission_info: '/api/users/authority/menu', // 권한정보 조회
-        permission_update: '/api/users/authority/menu', // 권한설정 저장
+        permission_list: '/api/users/authority/list', // 권한정보 조회
+        permission_update: '/api/users/authority/modify', // 권한설정 저장
         user_history: '/api/users/history', //
     },
     facility: {

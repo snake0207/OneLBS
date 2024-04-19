@@ -13,7 +13,7 @@ import { usePostUserList } from '#/hooks/queries/user'
 const UserList = () => {
     const navigate = useNavigate()
     const [fetchData, setFetchData] = useState({ count: 0, lists: [] })
-    const [isAction, setIsAction] = useState(false)
+    const [isAction, setIsAction] = useState(true)
     const [queryParams, setQueryParams] = useState({
         userId: '',
         authType: 'T',

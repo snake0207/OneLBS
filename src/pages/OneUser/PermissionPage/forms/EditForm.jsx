@@ -30,42 +30,41 @@ const EditForm = () => {
         },
     )
 
-    const findObject = (arrs, objKey) => {
-        return arrs.find((arr) => arr.key === objKey)
-    }
-
     const formik = useFormik({
         initialValues: {
-            L100_M000_S000: { admin: '', operator: '' },
-            L200_M210_S000: { admin: '', operator: '' },
-            L200_M220_S000: { admin: '', operator: '' },
-            L200_M230_S000: { admin: '', operator: '' },
-            L200_M240_S000: { admin: '', operator: '' },
-            L300_M310_S000: { admin: '', operator: '' },
-            L300_M320_S000: { admin: '', operator: '' },
-            L400_M410_S000: { admin: '', operator: '' },
-            L400_M420_S000: { admin: '', operator: '' },
-            L400_M430_S000: { admin: '', operator: '' },
-            L400_M440_S000: { admin: '', operator: '' },
-            L400_M450_S000: { admin: '', operator: '' },
-            L500_M510_S000: { admin: '', operator: '' },
-            L500_M520_S000: { admin: '', operator: '' },
-            L500_M530_S000: { admin: '', operator: '' },
+            OM10000: {},
+            OM20100: {},
+            OM20200: {},
+            OM20300: {},
+            OM20400: {},
+            OM30100: {},
+            OM30200: {},
+            OM30300: {},
+            OM40100: {},
+            OM40200: {},
+            OM40300: {},
+            OM40400: {},
+            OM40500: {},
+            OM50100: {},
+            OM50200: {},
+            OM50300: {},
         },
         // validationSchema: registUESchema,
         onSubmit: (form) => {
             console.log('handleFormikSubmit..')
-            const apiParams = {
-                ...form,
-            }
             // 임시로 사용된 tmpModelCode 삭제
+            const formikArray = Object.keys(formik.values).map((key) => formik.values[key])
+            console.log('formik Array : ', formikArray)
+            const apiParams = {
+                targetMenuInfo: [...formikArray],
+            }
             console.log('onSubmit >> ', JSON.stringify(apiParams, null, 2))
             mutateUpdate(
                 { ...apiParams },
                 {
                     onSuccess: ({ data }) => {
                         console.log('update-response : ', data)
-                        setApiSuccess(`UPDATE API RESULT : ${data.id}`)
+                        setApiSuccess(`UPDATE API RESULT : ${data?.data}(${data?.code})`)
                     },
                 },
             )
@@ -96,9 +95,12 @@ const EditForm = () => {
     useEffect(() => {
         if (apiResult) {
             console.log('apiResult : ', apiResult)
-            apiResult.menus.map((menu) =>
-                formik.setFieldValue(menu.key, findObject(apiResult?.menus, menu.key).value),
-            )
+            if (apiResult?.code === '0000') {
+                apiResult?.data.map((menu) => {
+                    delete menu.menuName
+                    formik.setFieldValue(menu.menuCode, { ...menu })
+                })
+            }
             setState((prevState) => ({
                 ...prevState,
                 query: false,
@@ -106,7 +108,7 @@ const EditForm = () => {
         }
     }, [apiResult])
 
-    console.log(formik.values)
+    // console.log(formik.values)
 
     return (
         <Box>
@@ -143,552 +145,525 @@ const EditForm = () => {
                         <TableBody>
                             {/* row - 2 */}
                             <TableRow>
-                                <TableCell>{`대시보드_100`}</TableCell>
+                                <TableCell>{`대시보드`}</TableCell>
                                 <TableCell>{``}</TableCell>
                                 <TableCell>{``}</TableCell>
                                 <TableCell component="td" sx={style.center}>
                                     <CheckBox
                                         checked={
-                                            formik.values.L100_M000_S000.admin === 'Y'
-                                                ? true
-                                                : false
+                                            formik.values.OM10000.adminYn === 'Y' ? true : false
                                         }
                                         onChange={(e) => {
                                             formik.setFieldValue(
-                                                'L100_M000_S000.admin',
+                                                'OM10000.adminYn',
                                                 e.target.value === 'Y' ? 'N' : 'Y',
                                             )
                                         }}
-                                        value={formik.values.L100_M000_S000.admin}
+                                        value={formik.values.OM10000.adminYn}
                                     />
                                 </TableCell>
                                 <TableCell component="td" sx={style.center}>
                                     <CheckBox
                                         checked={
-                                            formik.values.L100_M000_S000.operator === 'Y'
-                                                ? true
-                                                : false
+                                            formik.values.OM10000.operatorYn === 'Y' ? true : false
                                         }
                                         onChange={(e) => {
                                             formik.setFieldValue(
-                                                'L100_M000_S000.operator',
+                                                'OM10000.operatorYn',
                                                 e.target.value === 'Y' ? 'N' : 'Y',
                                             )
                                         }}
-                                        value={formik.values.L100_M000_S000.operator}
+                                        value={formik.values.OM10000.operatorYn}
                                     />
                                 </TableCell>
                             </TableRow>
                             {/* 서비스 현황 */}
                             <TableRow>
-                                <TableCell rowSpan={4}>{`서비스 현황_200`}</TableCell>
-                                <TableCell>{`서비스 이력 조회_210`}</TableCell>
+                                <TableCell rowSpan={4}>{`서비스 현황`}</TableCell>
+                                <TableCell>{`서비스 이력 조회`}</TableCell>
                                 <TableCell>{``}</TableCell>
                                 <TableCell component="td" sx={style.center}>
                                     <CheckBox
                                         checked={
-                                            formik.values.L200_M210_S000.admin === 'Y'
-                                                ? true
-                                                : false
+                                            formik.values.OM20100.adminYn === 'Y' ? true : false
                                         }
                                         onChange={(e) => {
                                             formik.setFieldValue(
-                                                'L200_M210_S000.admin',
+                                                'OM20100.adminYn',
                                                 e.target.value === 'Y' ? 'N' : 'Y',
                                             )
                                         }}
-                                        value={formik.values.L200_M210_S000.admin}
+                                        value={formik.values.OM20100.adminYn}
                                     />
                                 </TableCell>
                                 <TableCell component="td" sx={style.center}>
                                     <CheckBox
                                         checked={
-                                            formik.values.L200_M210_S000.operator === 'Y'
-                                                ? true
-                                                : false
+                                            formik.values.OM20100.operatorYn === 'Y' ? true : false
                                         }
                                         onChange={(e) => {
                                             formik.setFieldValue(
-                                                'L200_M210_S000.operator',
+                                                'OM20100.operatorYn',
                                                 e.target.value === 'Y' ? 'N' : 'Y',
                                             )
                                         }}
-                                        value={formik.values.L200_M210_S000.operator}
+                                        value={formik.values.OM20100.operatorYn}
+                                    />
+                                </TableCell>
+                            </TableRow>
+
+                            <TableRow>
+                                <TableCell>{`서비스 통계`}</TableCell>
+                                <TableCell>{``}</TableCell>
+                                <TableCell component="td" sx={style.center}>
+                                    <CheckBox
+                                        checked={
+                                            formik.values.OM20200.adminYn === 'Y' ? true : false
+                                        }
+                                        onChange={(e) => {
+                                            formik.setFieldValue(
+                                                'OM20200.adminYn',
+                                                e.target.value === 'Y' ? 'N' : 'Y',
+                                            )
+                                        }}
+                                        value={formik.values.OM20200.adminYn}
+                                    />
+                                </TableCell>
+                                <TableCell component="td" sx={style.center}>
+                                    <CheckBox
+                                        checked={
+                                            formik.values.OM20200.operatorYn === 'Y' ? true : false
+                                        }
+                                        onChange={(e) => {
+                                            formik.setFieldValue(
+                                                'OM20200.operatorYn',
+                                                e.target.value === 'Y' ? 'N' : 'Y',
+                                            )
+                                        }}
+                                        value={formik.values.OM20200.operatorYn}
                                     />
                                 </TableCell>
                             </TableRow>
                             <TableRow>
-                                <TableCell>{`위치 트리거 조회_220`}</TableCell>
+                                <TableCell>{`크라우드소싱 통계`}</TableCell>
                                 <TableCell>{``}</TableCell>
                                 <TableCell component="td" sx={style.center}>
                                     <CheckBox
                                         checked={
-                                            formik.values.L200_M220_S000.admin === 'Y'
-                                                ? true
-                                                : false
+                                            formik.values.OM20300.adminYn === 'Y' ? true : false
                                         }
                                         onChange={(e) => {
                                             formik.setFieldValue(
-                                                'L200_M220_S000.admin',
+                                                'OM20300.adminYn',
                                                 e.target.value === 'Y' ? 'N' : 'Y',
                                             )
                                         }}
-                                        value={formik.values.L200_M220_S000.admin}
+                                        value={formik.values.OM20300.adminYn}
                                     />
                                 </TableCell>
                                 <TableCell component="td" sx={style.center}>
                                     <CheckBox
                                         checked={
-                                            formik.values.L200_M220_S000.operator === 'Y'
-                                                ? true
-                                                : false
+                                            formik.values.OM20300.operatorYn === 'Y' ? true : false
                                         }
                                         onChange={(e) => {
                                             formik.setFieldValue(
-                                                'L200_M220_S000.operator',
+                                                'OM20300.operatorYn',
                                                 e.target.value === 'Y' ? 'N' : 'Y',
                                             )
                                         }}
-                                        value={formik.values.L200_M220_S000.operator}
+                                        value={formik.values.OM20300.operatorYn}
                                     />
                                 </TableCell>
                             </TableRow>
                             <TableRow>
-                                <TableCell>{`서비스 통계_230`}</TableCell>
+                                <TableCell>{`위치 트리거 조회`}</TableCell>
                                 <TableCell>{``}</TableCell>
                                 <TableCell component="td" sx={style.center}>
                                     <CheckBox
                                         checked={
-                                            formik.values.L200_M230_S000.admin === 'Y'
-                                                ? true
-                                                : false
+                                            formik.values.OM20400.adminYn === 'Y' ? true : false
                                         }
                                         onChange={(e) => {
                                             formik.setFieldValue(
-                                                'L200_M230_S000.admin',
+                                                'OM20400.adminYn',
                                                 e.target.value === 'Y' ? 'N' : 'Y',
                                             )
                                         }}
-                                        value={formik.values.L200_M230_S000.admin}
+                                        value={formik.values.OM20400.adminYn}
                                     />
                                 </TableCell>
                                 <TableCell component="td" sx={style.center}>
                                     <CheckBox
                                         checked={
-                                            formik.values.L200_M230_S000.operator === 'Y'
-                                                ? true
-                                                : false
+                                            formik.values.OM20400.operatorYn === 'Y' ? true : false
                                         }
                                         onChange={(e) => {
                                             formik.setFieldValue(
-                                                'L200_M230_S000.operator',
+                                                'OM20400.operatorYn',
                                                 e.target.value === 'Y' ? 'N' : 'Y',
                                             )
                                         }}
-                                        value={formik.values.L200_M230_S000.operator}
-                                    />
-                                </TableCell>
-                            </TableRow>
-                            <TableRow>
-                                <TableCell>{`크라우드소싱 통계_240`}</TableCell>
-                                <TableCell>{``}</TableCell>
-                                <TableCell component="td" sx={style.center}>
-                                    <CheckBox
-                                        checked={
-                                            formik.values.L200_M240_S000.admin === 'Y'
-                                                ? true
-                                                : false
-                                        }
-                                        onChange={(e) => {
-                                            formik.setFieldValue(
-                                                'L200_M240_S000.admin',
-                                                e.target.value === 'Y' ? 'N' : 'Y',
-                                            )
-                                        }}
-                                        value={formik.values.L200_M240_S000.admin}
-                                    />
-                                </TableCell>
-                                <TableCell component="td" sx={style.center}>
-                                    <CheckBox
-                                        checked={
-                                            formik.values.L200_M240_S000.operator === 'Y'
-                                                ? true
-                                                : false
-                                        }
-                                        onChange={(e) => {
-                                            formik.setFieldValue(
-                                                'L200_M240_S000.operator',
-                                                e.target.value === 'Y' ? 'N' : 'Y',
-                                            )
-                                        }}
-                                        value={formik.values.L200_M240_S000.operator}
+                                        value={formik.values.OM20400.operatorYn}
                                     />
                                 </TableCell>
                             </TableRow>
 
                             {/* 측위기반 정보 관리 */}
                             <TableRow>
-                                <TableCell rowSpan={2}>{`측위기반 정보 관리_300`}</TableCell>
-                                <TableCell>{`시설정보_310`}</TableCell>
+                                <TableCell rowSpan={3}>{`측위기반 정보 관리`}</TableCell>
+                                <TableCell>{`시설정보`}</TableCell>
                                 <TableCell>{``}</TableCell>
                                 <TableCell component="td" sx={style.center}>
                                     <CheckBox
                                         checked={
-                                            formik.values.L300_M310_S000.admin === 'Y'
-                                                ? true
-                                                : false
+                                            formik.values.OM30100.adminYn === 'Y' ? true : false
                                         }
                                         onChange={(e) => {
                                             formik.setFieldValue(
-                                                'L300_M310_S000.admin',
+                                                'OM30100.adminYn',
                                                 e.target.value === 'Y' ? 'N' : 'Y',
                                             )
                                         }}
-                                        value={formik.values.L300_M310_S000.admin}
+                                        value={formik.values.OM30100.adminYn}
                                     />
                                 </TableCell>
                                 <TableCell component="td" sx={style.center}>
                                     <CheckBox
                                         checked={
-                                            formik.values.L300_M310_S000.operator === 'Y'
-                                                ? true
-                                                : false
+                                            formik.values.OM30100.operatorYn === 'Y' ? true : false
                                         }
                                         onChange={(e) => {
                                             formik.setFieldValue(
-                                                'L300_M310_S000.operator',
+                                                'OM30100.operatorYn',
                                                 e.target.value === 'Y' ? 'N' : 'Y',
                                             )
                                         }}
-                                        value={formik.values.L300_M310_S000.operator}
+                                        value={formik.values.OM30100.operatorYn}
                                     />
                                 </TableCell>
                             </TableRow>
                             <TableRow>
-                                <TableCell>{`정보 현행화 이력_320`}</TableCell>
+                                <TableCell>{`WiFi 시설정보`}</TableCell>
                                 <TableCell>{``}</TableCell>
                                 <TableCell component="td" sx={style.center}>
                                     <CheckBox
                                         checked={
-                                            formik.values.L300_M320_S000.admin === 'Y'
-                                                ? true
-                                                : false
+                                            formik.values.OM30200.adminYn === 'Y' ? true : false
                                         }
                                         onChange={(e) => {
                                             formik.setFieldValue(
-                                                'L300_M320_S000.admin',
+                                                'OM30200.adminYn',
                                                 e.target.value === 'Y' ? 'N' : 'Y',
                                             )
                                         }}
-                                        value={formik.values.L300_M320_S000.admin}
+                                        value={formik.values.OM30200.adminYn}
                                     />
                                 </TableCell>
                                 <TableCell component="td" sx={style.center}>
                                     <CheckBox
                                         checked={
-                                            formik.values.L300_M320_S000.operator === 'Y'
-                                                ? true
-                                                : false
+                                            formik.values.OM30200.operatorYn === 'Y' ? true : false
                                         }
                                         onChange={(e) => {
                                             formik.setFieldValue(
-                                                'L300_M320_S000.operator',
+                                                'OM30200.operatorYn',
                                                 e.target.value === 'Y' ? 'N' : 'Y',
                                             )
                                         }}
-                                        value={formik.values.L300_M320_S000.operator}
+                                        value={formik.values.OM30200.operatorYn}
+                                    />
+                                </TableCell>
+                            </TableRow>
+                            <TableRow>
+                                <TableCell>{`정보 현행화 이력`}</TableCell>
+                                <TableCell>{``}</TableCell>
+                                <TableCell component="td" sx={style.center}>
+                                    <CheckBox
+                                        checked={
+                                            formik.values.OM30300.adminYn === 'Y' ? true : false
+                                        }
+                                        onChange={(e) => {
+                                            formik.setFieldValue(
+                                                'OM30300.adminYn',
+                                                e.target.value === 'Y' ? 'N' : 'Y',
+                                            )
+                                        }}
+                                        value={formik.values.OM30300.adminYn}
+                                    />
+                                </TableCell>
+                                <TableCell component="td" sx={style.center}>
+                                    <CheckBox
+                                        checked={
+                                            formik.values.OM30300.operatorYn === 'Y' ? true : false
+                                        }
+                                        onChange={(e) => {
+                                            formik.setFieldValue(
+                                                'OM30300.operatorYn',
+                                                e.target.value === 'Y' ? 'N' : 'Y',
+                                            )
+                                        }}
+                                        value={formik.values.OM30300.operatorYn}
                                     />
                                 </TableCell>
                             </TableRow>
                             {/* 시스템 관리 */}
                             <TableRow>
-                                <TableCell rowSpan={5}>{`시스템 관리_400`}</TableCell>
-                                <TableCell>{`서비스 관리_410`}</TableCell>
+                                <TableCell rowSpan={5}>{`시스템 관리`}</TableCell>
+                                <TableCell>{`서비스 관리`}</TableCell>
                                 <TableCell>{``}</TableCell>
                                 <TableCell component="td" sx={style.center}>
                                     <CheckBox
                                         checked={
-                                            formik.values.L400_M410_S000.admin === 'Y'
-                                                ? true
-                                                : false
+                                            formik.values.OM40100.adminYn === 'Y' ? true : false
                                         }
                                         onChange={(e) => {
                                             formik.setFieldValue(
-                                                'L400_M410_S000.admin',
+                                                'OM40100.adminYn',
                                                 e.target.value === 'Y' ? 'N' : 'Y',
                                             )
                                         }}
-                                        value={formik.values.L400_M410_S000.admin}
+                                        value={formik.values.OM40100.adminYn}
                                     />
                                 </TableCell>
                                 <TableCell component="td" sx={style.center}>
                                     <CheckBox
                                         checked={
-                                            formik.values.L400_M410_S000.operator === 'Y'
-                                                ? true
-                                                : false
+                                            formik.values.OM40100.operatorYn === 'Y' ? true : false
                                         }
                                         onChange={(e) => {
                                             formik.setFieldValue(
-                                                'L400_M410_S000.operator',
+                                                'OM40100.operatorYn',
                                                 e.target.value === 'Y' ? 'N' : 'Y',
                                             )
                                         }}
-                                        value={formik.values.L400_M410_S000.operator}
+                                        value={formik.values.OM40100.operatorYn}
                                     />
                                 </TableCell>
                             </TableRow>
                             <TableRow>
-                                <TableCell>{`단말 모델 관리_420`}</TableCell>
+                                <TableCell>{`단말 모델 관리`}</TableCell>
                                 <TableCell>{``}</TableCell>
                                 <TableCell component="td" sx={style.center}>
                                     <CheckBox
                                         checked={
-                                            formik.values.L400_M420_S000.admin === 'Y'
-                                                ? true
-                                                : false
+                                            formik.values.OM40200.adminYn === 'Y' ? true : false
                                         }
                                         onChange={(e) => {
                                             formik.setFieldValue(
-                                                'L400_M420_S000.admin',
+                                                'OM40200.adminYn',
                                                 e.target.value === 'Y' ? 'N' : 'Y',
                                             )
                                         }}
-                                        value={formik.values.L400_M420_S000.admin}
+                                        value={formik.values.OM40200.adminYn}
                                     />
                                 </TableCell>
                                 <TableCell component="td" sx={style.center}>
                                     <CheckBox
                                         checked={
-                                            formik.values.L400_M420_S000.operator === 'Y'
-                                                ? true
-                                                : false
+                                            formik.values.OM40200.operatorYn === 'Y' ? true : false
                                         }
                                         onChange={(e) => {
                                             formik.setFieldValue(
-                                                'L400_M420_S000.operator',
+                                                'OM40200.operatorYn',
                                                 e.target.value === 'Y' ? 'N' : 'Y',
                                             )
                                         }}
-                                        value={formik.values.L400_M420_S000.operator}
+                                        value={formik.values.OM40200.operatorYn}
                                     />
                                 </TableCell>
                             </TableRow>
                             <TableRow>
-                                <TableCell>{`엔진 설정 관리_430`}</TableCell>
+                                <TableCell>{`엔진 설정 관리`}</TableCell>
                                 <TableCell>{``}</TableCell>
                                 <TableCell component="td" sx={style.center}>
                                     <CheckBox
                                         checked={
-                                            formik.values.L400_M430_S000.admin === 'Y'
-                                                ? true
-                                                : false
+                                            formik.values.OM40300.adminYn === 'Y' ? true : false
                                         }
                                         onChange={(e) => {
                                             formik.setFieldValue(
-                                                'L400_M430_S000.admin',
+                                                'OM40300.adminYn',
                                                 e.target.value === 'Y' ? 'N' : 'Y',
                                             )
                                         }}
-                                        value={formik.values.L400_M430_S000.admin}
+                                        value={formik.values.OM40300.adminYn}
                                     />
                                 </TableCell>
                                 <TableCell component="td" sx={style.center}>
                                     <CheckBox
                                         checked={
-                                            formik.values.L400_M430_S000.operator === 'Y'
-                                                ? true
-                                                : false
+                                            formik.values.OM40300.operatorYn === 'Y' ? true : false
                                         }
                                         onChange={(e) => {
                                             formik.setFieldValue(
-                                                'L400_M430_S000.operator',
+                                                'OM40300.operatorYn',
                                                 e.target.value === 'Y' ? 'N' : 'Y',
                                             )
                                         }}
-                                        value={formik.values.L400_M430_S000.operator}
+                                        value={formik.values.OM40300.operatorYn}
                                     />
                                 </TableCell>
                             </TableRow>
                             <TableRow>
-                                <TableCell>{`위치정보 처리 내역_440`}</TableCell>
+                                <TableCell>{`위치정보 처리 내역`}</TableCell>
                                 <TableCell>{``}</TableCell>
                                 <TableCell component="td" sx={style.center}>
                                     <CheckBox
                                         checked={
-                                            formik.values.L400_M440_S000.admin === 'Y'
-                                                ? true
-                                                : false
+                                            formik.values.OM40400.adminYn === 'Y' ? true : false
                                         }
                                         onChange={(e) => {
                                             formik.setFieldValue(
-                                                'L400_M440_S000.admin',
+                                                'OM40400.adminYn',
                                                 e.target.value === 'Y' ? 'N' : 'Y',
                                             )
                                         }}
-                                        value={formik.values.L400_M440_S000.admin}
+                                        value={formik.values.OM40400.adminYn}
                                     />
                                 </TableCell>
                                 <TableCell component="td" sx={style.center}>
                                     <CheckBox
                                         checked={
-                                            formik.values.L400_M440_S000.operator === 'Y'
-                                                ? true
-                                                : false
+                                            formik.values.OM40400.operatorYn === 'Y' ? true : false
                                         }
                                         onChange={(e) => {
                                             formik.setFieldValue(
-                                                'L400_M440_S000.operator',
+                                                'OM40400.operatorYn',
                                                 e.target.value === 'Y' ? 'N' : 'Y',
                                             )
                                         }}
-                                        value={formik.values.L400_M440_S000.operator}
+                                        value={formik.values.OM40400.operatorYn}
                                     />
                                 </TableCell>
                             </TableRow>
                             <TableRow>
-                                <TableCell>{`위치이력 열람 내역_450`}</TableCell>
+                                <TableCell>{`위치이력 열람 내역`}</TableCell>
                                 <TableCell>{``}</TableCell>
                                 <TableCell component="td" sx={style.center}>
                                     <CheckBox
                                         checked={
-                                            formik.values.L400_M450_S000.admin === 'Y'
-                                                ? true
-                                                : false
+                                            formik.values.OM40500.adminYn === 'Y' ? true : false
                                         }
                                         onChange={(e) => {
                                             formik.setFieldValue(
-                                                'L400_M450_S000.admin',
+                                                'OM40500.adminYn',
                                                 e.target.value === 'Y' ? 'N' : 'Y',
                                             )
                                         }}
-                                        value={formik.values.L400_M450_S000.admin}
+                                        value={formik.values.OM40500.adminYn}
                                     />
                                 </TableCell>
                                 <TableCell component="td" sx={style.center}>
                                     <CheckBox
                                         checked={
-                                            formik.values.L400_M450_S000.operator === 'Y'
-                                                ? true
-                                                : false
+                                            formik.values.OM40500.operatorYn === 'Y' ? true : false
                                         }
                                         onChange={(e) => {
                                             formik.setFieldValue(
-                                                'L400_M450_S000.operator',
+                                                'OM40500.operatorYn',
                                                 e.target.value === 'Y' ? 'N' : 'Y',
                                             )
                                         }}
-                                        value={formik.values.L400_M450_S000.operator}
+                                        value={formik.values.OM40500.operatorYn}
                                     />
                                 </TableCell>
                             </TableRow>
                             {/* 사용자 관리 */}
                             <TableRow>
-                                <TableCell rowSpan={4}>{`사용자 관리_500`}</TableCell>
-                                <TableCell>{`사용자 정보 관리_510`}</TableCell>
+                                <TableCell rowSpan={4}>{`사용자 관리`}</TableCell>
+                                <TableCell>{`사용자 정보 관리`}</TableCell>
                                 <TableCell>{``}</TableCell>
                                 <TableCell component="td" sx={style.center}>
                                     <CheckBox
                                         checked={
-                                            formik.values.L500_M510_S000.admin === 'Y'
-                                                ? true
-                                                : false
+                                            formik.values.OM50100.adminYn === 'Y' ? true : false
                                         }
                                         onChange={(e) => {
                                             formik.setFieldValue(
-                                                'L500_M510_S000.admin',
+                                                'OM50100.adminYn',
                                                 e.target.value === 'Y' ? 'N' : 'Y',
                                             )
                                         }}
-                                        value={formik.values.L500_M510_S000.admin}
+                                        value={formik.values.OM50100.adminYn}
                                     />
                                 </TableCell>
                                 <TableCell component="td" sx={style.center}>
                                     <CheckBox
                                         checked={
-                                            formik.values.L500_M510_S000.operator === 'Y'
-                                                ? true
-                                                : false
+                                            formik.values.OM50100.operatorYn === 'Y' ? true : false
                                         }
                                         onChange={(e) => {
                                             formik.setFieldValue(
-                                                'L500_M510_S000.operator',
+                                                'OM50100.operatorYn',
                                                 e.target.value === 'Y' ? 'N' : 'Y',
                                             )
                                         }}
-                                        value={formik.values.L500_M510_S000.operator}
+                                        value={formik.values.OM50100.operatorYn}
                                     />
                                 </TableCell>
                             </TableRow>
                             <TableRow>
-                                <TableCell>{`권한 관리_520`}</TableCell>
+                                <TableCell>{`권한 관리`}</TableCell>
                                 <TableCell>{``}</TableCell>
                                 <TableCell component="td" sx={style.center}>
                                     <CheckBox
                                         checked={
-                                            formik.values.L500_M520_S000.admin === 'Y'
-                                                ? true
-                                                : false
+                                            formik.values.OM50200.adminYn === 'Y' ? true : false
                                         }
                                         onChange={(e) => {
                                             formik.setFieldValue(
-                                                'L500_M520_S000.admin',
+                                                'OM50200.adminYn',
                                                 e.target.value === 'Y' ? 'N' : 'Y',
                                             )
                                         }}
-                                        value={formik.values.L500_M520_S000.admin}
+                                        value={formik.values.OM50200.adminYn}
                                     />
                                 </TableCell>
                                 <TableCell component="td" sx={style.center}>
                                     <CheckBox
                                         checked={
-                                            formik.values.L500_M520_S000.operator === 'Y'
-                                                ? true
-                                                : false
+                                            formik.values.OM50200.operatorYn === 'Y' ? true : false
                                         }
                                         onChange={(e) => {
                                             formik.setFieldValue(
-                                                'L500_M520_S000.operator',
+                                                'OM50200.operatorYn',
                                                 e.target.value === 'Y' ? 'N' : 'Y',
                                             )
                                         }}
-                                        value={formik.values.L500_M520_S000.operator}
+                                        value={formik.values.OM50200.operatorYn}
                                     />
                                 </TableCell>
                             </TableRow>
                             <TableRow>
-                                <TableCell>{`사용자 이력 관리_530`}</TableCell>
+                                <TableCell>{`사용자 이력 관리`}</TableCell>
                                 <TableCell>{``}</TableCell>
                                 <TableCell component="td" sx={style.center}>
                                     <CheckBox
                                         checked={
-                                            formik.values.L500_M530_S000.admin === 'Y'
-                                                ? true
-                                                : false
+                                            formik.values.OM50300.adminYn === 'Y' ? true : false
                                         }
                                         onChange={(e) => {
                                             formik.setFieldValue(
-                                                'L500_M530_S000.admin',
+                                                'OM50300.adminYn',
                                                 e.target.value === 'Y' ? 'N' : 'Y',
                                             )
                                         }}
-                                        value={formik.values.L500_M530_S000.admin}
+                                        value={formik.values.OM50300.adminYn}
                                     />
                                 </TableCell>
                                 <TableCell component="td" sx={style.center}>
                                     <CheckBox
                                         checked={
-                                            formik.values.L500_M530_S000.operator === 'Y'
-                                                ? true
-                                                : false
+                                            formik.values.OM50300.operatorYn === 'Y' ? true : false
                                         }
                                         onChange={(e) => {
                                             formik.setFieldValue(
-                                                'L500_M530_S000.operator',
+                                                'OM50300.operatorYn',
                                                 e.target.value === 'Y' ? 'N' : 'Y',
                                             )
                                         }}
-                                        value={formik.values.L500_M530_S000.operator}
+                                        value={formik.values.OM50300.operatorYn}
                                     />
                                 </TableCell>
                             </TableRow>

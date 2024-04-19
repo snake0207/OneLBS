@@ -18,7 +18,7 @@ const postSmsAuthCode = (data) => {
 }
 
 const getAskUserPermission = (data) => {
-    return getAPI({ endPoint: API_PATH.auth.ask_user_permission, data })
+    return getAPI({ endPoint: API_PATH.user.permission_list, data })
 }
 const getDummyToken = (data) => {
     return getAPI({ endPoint: API_PATH.auth.dummyToken, data })

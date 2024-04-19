@@ -24,14 +24,12 @@ const UserList = () => {
 
     // 검색 버튼 누른 경우
     const handleSearch = (values) => {
-        console.log('values : ', values)
         setFetchData({ count: 0, lists: [] })
         setQueryParams({
             ...queryParams,
             ...values,
             page: 1,
         })
-        setIsAction(true)
     }
 
     // row 클릭한 경우 상세 페이지 노출
@@ -46,7 +44,6 @@ const UserList = () => {
 
         if (currPage > 0 && rowCount >= fetchData.lists.length) {
             setQueryParams({ ...queryParams, page: queryParams.page + 1 })
-            setIsAction(true)
         }
     }
 

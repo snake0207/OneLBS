@@ -7,25 +7,26 @@ import CustomDataGrid from '#/components/common/table/datagrid'
 
 import SearchFilter from '../Filter'
 import { columns } from './grid-columns'
-import { useGetUserHistoryList } from '#/hooks/queries/user'
+import { usePostUserHistoryList } from '#/hooks/queries/user'
 
 const UserHistoryList = () => {
     const navigate = useNavigate()
-    const [isSearchClick, setIsSearchClick] = useState(true)
     const [fetchData, setFetchData] = useState({ count: 0, lists: [] })
+    const [isAction, setIsAction] = useState(true)
     const [queryParams, setQueryParams] = useState({
         page: 1,
         limit: 50, // 1회 요청에 받을수 있는 데이터 수
     })
-    const { data: apiResult } = useGetUserHistoryList(queryParams, {
-        enabled: true,
-    })
+    const { mutate: searchMutate, isPending } = usePostUserHistoryList()
 
     // 검색 버튼 누른 경우
     const handleSearch = (values) => {
         setFetchData({ count: 0, lists: [] })
-        setIsSearchClick((prev) => !prev)
-        setQueryParams({ ...queryParams, ...values, page: 1 })
+        setQueryParams({
+            ...queryParams,
+            ...values,
+            page: 1,
+        })
     }
 
     // row 클릭한 경우 상세 페이지 노출
@@ -42,11 +43,26 @@ const UserHistoryList = () => {
     }
 
     useEffect(() => {
-        if (apiResult) {
-            const { count, lists } = apiResult
-            setFetchData({ count: count, lists: [...fetchData.lists, ...lists] })
-        }
-    }, [apiResult, isSearchClick])
+        console.log('callApi ...')
+        console.log('SEND queryParams : ', queryParams)
+        isAction &&
+            searchMutate(
+                { ...queryParams },
+                {
+                    onSuccess: ({ data }) => {
+                        console.log('Search response : ', data)
+                        // data.data의 결과값을 확인 후 필요한 처리 수행
+                        if (data?.code === '0000') {
+                            const { totalCount, lists } = data?.data
+                            setFetchData({
+                                count: totalCount,
+                                lists: [...fetchData.lists, ...lists],
+                            })
+                        }
+                    },
+                },
+            )
+    }, [queryParams])
 
     console.log('fetchData : ', fetchData)
 
@@ -67,7 +83,7 @@ const UserHistoryList = () => {
                     <CustomDataGrid
                         checkboxSelection={false}
                         rows={fetchData?.lists}
-                        rowCount={fetchData?.count}
+                        rowCount={fetchData?.totalCount}
                         columns={columns}
                         sort={{ field: 'id', orderby: 'desc' }}
                         onPageChange={handleOnPageChange}

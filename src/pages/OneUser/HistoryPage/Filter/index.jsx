@@ -10,29 +10,29 @@ import DatePickerInput from '#/components/common/input/DatePickerInput'
 import TimePickerInput from '#/components/common/input/TimePickerInput'
 
 function SearchFilter({ onSearch }) {
-    const eventTypeList = () => [
-        { key: 9, value: 9, label: `전체` },
-        { key: 0, value: 0, label: `로그인` },
-        { key: 1, value: 1, label: `권한변경` },
-        { key: 2, value: 2, label: `메뉴접근` },
+    const reqTypeList = () => [
+        { key: 'T', value: 'T', label: `전체` },
+        { key: 'L', value: 'L', label: `로그인` },
+        { key: 'A', value: 'A', label: `권한변경` },
+        { key: 'M', value: 'M', label: `메뉴접근` },
     ]
     const formik = useFormik({
         initialValues: {
-            start_date: '',
-            end_date: '',
+            startDate: '',
+            endDate: '',
             start_time: '',
             end_time: '',
-            eventType: 9,
+            reqType: 'L',
             userId: '',
         },
         onSubmit: (values) => {
-            const start_date = `${values.start_date.split('-').join('')}${values.start_time}`
-            const end_date = `${values.end_date.split('-').join('')}${values.end_time}`
+            const startDate = `${values.startDate.split('-').join('')}${values.start_time}`
+            const endDate = `${values.endDate.split('-').join('')}${values.end_time}`
             if (onSearch)
                 onSearch({
-                    start_date,
-                    end_date,
-                    eventType: values.eventType,
+                    startDate,
+                    endDate,
+                    reqType: values.reqType,
                     userId: values.userId,
                 })
         },
@@ -51,7 +51,7 @@ function SearchFilter({ onSearch }) {
                                 alignItems={'center'}
                                 width="100%"
                             >
-                                <DatePickerInput name={'start_date'} formik={formik} />
+                                <DatePickerInput name={'startDate'} formik={formik} />
                                 <TimePickerInput name={'start_time'} formik={formik} />
                             </Stack>
                         </TableCell>
@@ -59,9 +59,9 @@ function SearchFilter({ onSearch }) {
                         <TableCell sx={style.cellTitle}>{`구분`}</TableCell>
                         <TableCell sx={{ width: '20%' }}>
                             <Select
-                                name={'eventType'}
+                                name={'reqType'}
                                 formik={formik}
-                                items={eventTypeList()}
+                                items={reqTypeList()}
                                 sx={{
                                     width: '100%',
                                     height: 40,
@@ -79,7 +79,7 @@ function SearchFilter({ onSearch }) {
                                 alignItems={'center'}
                                 width="100%"
                             >
-                                <DatePickerInput name={'end_date'} formik={formik} />
+                                <DatePickerInput name={'endDate'} formik={formik} />
                                 <TimePickerInput name={'end_time'} formik={formik} />
                             </Stack>
                         </TableCell>

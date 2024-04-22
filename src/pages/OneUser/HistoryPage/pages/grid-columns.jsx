@@ -1,5 +1,17 @@
 import { Typography } from '@mui/material'
 
+const reqTypeLabel = {
+    T: { label: `전체` },
+    L: { label: `로그인` },
+    A: { label: `권한변경` },
+    M: { label: `메뉴접근` },
+}
+
+const authTypeLabel = {
+    A: { label: `관리자` },
+    O: { label: `운영자` },
+}
+
 export const columns = [
     {
         field: 'id',
@@ -8,49 +20,49 @@ export const columns = [
         renderCell: (params) => <Typography>{params.row.id}</Typography>,
     },
     {
-        field: 'event_date',
+        field: 'regDate',
         headerName: '일시',
-        flex: 1.5,
-        renderCell: (params) => <Typography color="primary">{params.row.event_date}</Typography>,
+        flex: 2,
+        renderCell: (params) => <Typography color="primary">{params.row.regDate}</Typography>,
     },
     {
-        field: 'userid',
+        field: 'userId',
         headerName: '열람자',
         flex: 1,
         renderCell: (params) => {
-            return <Typography>{params.row.userid}</Typography>
+            return <Typography>{params.row.userId}</Typography>
         },
     },
     {
-        field: 'eventType',
+        field: 'reqType',
         headerName: '이력 구분',
         flex: 1,
         renderCell: (params) => {
-            return <Typography>{params.row.eventType}</Typography>
+            return <Typography>{reqTypeLabel[params.row.reqType].label}</Typography>
         },
     },
     {
-        field: 'permission',
+        field: 'authType',
         headerName: '권한',
         flex: 1,
         renderCell: (params) => {
-            return <Typography>{params.row.permission}</Typography>
+            return <Typography>{authTypeLabel[params.row.authType].label}</Typography>
         },
     },
     {
-        field: 'userIp',
+        field: 'ipAddr',
         headerName: '접속 IP',
-        flex: 1.2,
+        flex: 1,
         renderCell: (params) => {
-            return <Typography>{params.row.userIp}</Typography>
+            return <Typography>{params.row.ipAddr}</Typography>
         },
     },
     {
-        field: 'contents',
+        field: 'detail',
         headerName: '내용',
         flex: 2,
         renderCell: (params) => {
-            return <Typography>{params.row.contents}</Typography>
+            return <Typography>{params.row.detail}</Typography>
         },
     },
 ]

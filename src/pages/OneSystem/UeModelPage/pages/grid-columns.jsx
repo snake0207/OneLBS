@@ -4,42 +4,37 @@ export const columns = [
     {
         field: 'id',
         headerName: 'ID',
-        flex: 1,
-        align: 'center',
+        flex: 0.8,
         renderCell: (params) => <Typography>{params.row.id}</Typography>,
     },
     {
-        field: 'ueName',
-        headerName: '모델명',
-        flex: 1.5,
-        align: 'center',
-        renderCell: (params) => <Typography color="primary">{params.row.ueName}</Typography>,
+        field: 'modelCode',
+        headerName: '모델코드',
+        flex: 1.2,
+        renderCell: (params) => <Typography color="primary">{params.row.modelCode}</Typography>,
     },
     {
-        field: 'remarks',
+        field: 'note',
         headerName: '비고',
-        flex: 1.5,
-        align: 'center',
+        flex: 2,
         renderCell: (params) => {
-            return <Typography>{params.row.remarks}</Typography>
+            return <Typography>{params.row.note}</Typography>
         },
     },
     {
-        field: 'register_date',
+        field: 'regDate',
         headerName: '등록일시',
-        flex: 1.2,
-        align: 'right',
+        flex: 1.5,
         renderCell: (params) => {
-            return <Typography>{params.row.register_date}</Typography>
+            return <Typography>{params.row.regDate}</Typography>
         },
     },
     {
-        field: 'change_date',
+        field: 'updDate',
         headerName: '변경일시',
-        flex: 1.2,
-        align: 'right',
+        flex: 1.5,
         renderCell: (params) => {
-            return <Typography>{params.row.change_date}</Typography>
+            return <Typography>{params.row.updDate}</Typography>
         },
     },
 ]

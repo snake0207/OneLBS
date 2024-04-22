@@ -37,8 +37,8 @@ const HELPER_TEXT = {
 
     serviceNameRequired: '서비스명을 입력해 주세요.',
     serviceCodeRequired: '서비스코드를 입력해 주세요.',
-    cpNameRequired: '고객사명을 입력해 주세요.',
-    serviceProviderRequired: '서비스 제공사명을 입력해 주세요.',
+    customerNameRequired: '고객사명을 입력해 주세요.',
+    cpNameRequired: '서비스 제공사명을 입력해 주세요.',
     userCheckRequired: '가입자 등록확인을 체크해 주세요.',
     authCheckRequired: '상호인증확인을 체크해 주세요.',
     respTimeRequired: '희망응답시간을 입력해 주세요.',
@@ -89,27 +89,27 @@ export const loginSchema = yup.object({
 export const registServiceSchema = yup.object({
     serviceName: yup.string().required(HELPER_TEXT.serviceNameRequired),
     serviceCode: yup.string().required(HELPER_TEXT.serviceCodeRequired),
+    customerName: yup.string().required(HELPER_TEXT.customerNameRequired),
     cpName: yup.string().required(HELPER_TEXT.cpNameRequired),
-    serviceProvider: yup.string().required(HELPER_TEXT.serviceProviderRequired),
     // userCheck: yup.string().required(HELPER_TEXT.userCheckRequired),
     // authCheck: yup.string().required(HELPER_TEXT.authCheckRequired),
-    respTime: yup
-        .string()
-        .matches(/^\d+$/, HELPER_TEXT.IntegerRequired)
-        .required(HELPER_TEXT.respTimeRequired),
+    // respTime: yup
+    //     .string()
+    //     .matches(/^\d+$/, HELPER_TEXT.IntegerRequired)
+    //     .required(HELPER_TEXT.respTimeRequired),
     // cellCheck: yup.string().required(HELPER_TEXT.cellCheckRequired),
     // gpsCheck: yup.string().required(HELPER_TEXT.gpsCheckRequired),
     // lppeCheck: yup.string().required(HELPER_TEXT.lppeCheckRequired),
-    lppRespTime: yup
-        .string()
-        .matches(/^\d+$/, HELPER_TEXT.IntegerRequired)
-        .required(HELPER_TEXT.lppRespTimeRequired),
+    // lppRespTime: yup
+    //     .string()
+    //     .matches(/^\d+$/, HELPER_TEXT.IntegerRequired)
+    //     .required(HELPER_TEXT.lppRespTimeRequired),
     // ksaCheck: yup.string().required(HELPER_TEXT.ksaCheckRequired),
-    version: yup.string().required(HELPER_TEXT.versionRequired),
-    collectionCount: yup
-        .string()
-        .matches(/^[1-9]$|10$/, `1부터 10까지의 ` + HELPER_TEXT.IntegerRequired)
-        .required(HELPER_TEXT.collectionCountRequired),
+    // version: yup.string().required(HELPER_TEXT.versionRequired),
+    // collectionCount: yup
+    //     .string()
+    //     .matches(/^[1-9]$|10$/, `1부터 10까지의 ` + HELPER_TEXT.IntegerRequired)
+    //     .required(HELPER_TEXT.collectionCountRequired),
 })
 
 // 단말모델 등록, 수정 화면에서 사용

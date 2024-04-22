@@ -56,8 +56,8 @@ const EditForm = () => {
         initialValues: {
             serviceName: row?.serviceName,
             serviceCode: row?.serviceCode,
+            customerName: row?.customerName,
             cpName: row?.cpName,
-            serviceProvider: row?.serviceProvider,
             userCheck: row?.userCheck,
             authCheck: row?.authCheck,
             serviceType: row?.serviceType,

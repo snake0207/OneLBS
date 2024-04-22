@@ -7,7 +7,8 @@ const TimePickerInput = ({ name, formik, isDisable }) => {
     const [timeError, setTimeError] = useState(null)
 
     const parseNameByPath = (obj, path) => {
-        const timeValue = path.split('.').reduce((acc, current) => (acc ? acc[current] : ''), obj)
+        const tmpHour = path.split('.').reduce((acc, current) => (acc ? acc[current] : ''), obj)
+        const timeValue = tmpHour < 10 ? `0${tmpHour}` : tmpHour
         return timeValue ? dayjs(timeValue, 'HH') : null
     }
 
@@ -21,6 +22,7 @@ const TimePickerInput = ({ name, formik, isDisable }) => {
             <TimePicker
                 name={name}
                 value={parseNameByPath(formik.values, name)}
+                // defaultValue={parseNameByPath(formik.values, name)}
                 onChange={handleChangeTime}
                 onError={handleTimeError}
                 disabled={isDisable}

@@ -24,8 +24,8 @@ function SearchFilter({ onSearch }) {
         initialValues: {
             start_date: '',
             end_date: '',
-            start_time: String(new Date().getTime()),
-            end_time: String(new Date().getTime()),
+            start_time: String(new Date().getHours()),
+            end_time: String(new Date().getHours()),
             btsType: 0,
         },
         onSubmit: (values) => {

@@ -11,6 +11,7 @@ import CustomToolbar from '#/components/common/table/toolbar'
 
 const gridProps = {
     height: '720px',
+    width: '100%',
     backgroundColor: '#FFFFFF',
     border: 'none',
     '& .MuiDataGrid-sortIcon': {
@@ -21,9 +22,9 @@ const gridProps = {
         fontSize: '15px',
         backgroundColor: '#009ACC',
     },
-    '& .MuiDataGrid-columnHeaderTitleContainer': {
-        justifyContent: 'center',
-    },
+    // '& .MuiDataGrid-columnHeaderTitleContainer': {
+    //     justifyContent: 'center',
+    // },
     '& .MuiDataGrid-cell': {
         borderBottom: `1px solid `,
         borderBottomColor: '#d1d1d1',

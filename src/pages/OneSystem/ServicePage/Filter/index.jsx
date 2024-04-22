@@ -1,25 +1,21 @@
 import { useFormik } from 'formik'
-import { Box, Button, Table, TableCell, TableHead, TableRow } from '@mui/material'
+import { Box, Table, TableCell, TableHead, TableRow } from '@mui/material'
 
 import Select from '#/components/common/Select'
 import TextInput from '#/components/common/input/TextInput'
 import { MuiSubButton } from '#/components/common/button/MuiButton'
 
 import style from './style.module'
-import { getServiceTypeList } from '#/common/libs/service'
+import { unionServiceTypeList } from '#/common/libs/service'
+
 
 function SearchFilter({ onSearch }) {
-    const unionServiceTypeList = () => [
-        { key: 9, value: 9, label: `전체` },
-        ...getServiceTypeList()
-    ]
-
     const formik = useFormik({
         initialValues: {
             serviceName: '',
             serviceCode: '',
-            cpName: '',
-            serviceType: 0,
+            customerName: '',
+            serviceType: 'T',
         },
         onSubmit: (values) => {
             if (onSearch) onSearch(values)
@@ -44,7 +40,7 @@ function SearchFilter({ onSearch }) {
                     <TableRow>
                         <TableCell sx={style.cellTitle}>{`고객사`}</TableCell>
                         <TableCell sx={style.cellInput}>
-                            <TextInput name="cpName" formik={formik} sx={{ width: '100%' }} />
+                            <TextInput name="customerName" formik={formik} sx={{ width: '100%' }} />
                         </TableCell>
                         <TableCell>{`서비스 유형`}</TableCell>
                         <TableCell sx={style.cellInput}>
@@ -61,14 +57,6 @@ function SearchFilter({ onSearch }) {
                             />
                         </TableCell>
                         <TableCell align="right">
-                            {/* <Button
-                                variant="contained"
-                                color="primary"
-                                onClick={formik.handleSubmit}
-                                sx={style.searchButton}
-                            >
-                                {`검색`}
-                            </Button> */}
                             <MuiSubButton
                                 name="search"
                                 title="검색"

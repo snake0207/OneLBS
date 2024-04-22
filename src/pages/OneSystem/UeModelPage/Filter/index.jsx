@@ -9,8 +9,7 @@ import style from './style.module'
 function SearchFilter({ onSearch }) {
     const formik = useFormik({
         initialValues: {
-            ueName: '',
-            ueCode: '',
+            modelCode: '',
         },
         onSubmit: (values) => {
             if (onSearch) onSearch(values)
@@ -22,13 +21,9 @@ function SearchFilter({ onSearch }) {
             <Table sx={style.tableBox}>
                 <TableHead>
                     <TableRow>
-                        <TableCell sx={style.cellTitle}>{`모델명`}</TableCell>
-                        <TableCell sx={style.cellInput}>
-                            <TextInput name="ueName" formik={formik} sx={{ width: '100%' }} />
-                        </TableCell>
                         <TableCell sx={style.cellTitle}>{`모델 코드`}</TableCell>
                         <TableCell sx={style.cellInput}>
-                            <TextInput name="ueCode" formik={formik} sx={{ width: '100%' }} />
+                            <TextInput name="modelCode" formik={formik} sx={{ width: '100%' }} />
                         </TableCell>
                         <TableCell align="right">
                             <MuiSubButton

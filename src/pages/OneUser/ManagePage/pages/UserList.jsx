@@ -18,7 +18,7 @@ const UserList = () => {
         userId: '',
         authType: 'T',
         page: 1,
-        limit: 50, // 1회 요청에 받을수 있는 데이터 수
+        limit: parseInt(import.meta.env.VITE_LIST_PAGE_LIMIT), // 1회 요청에 받을수 있는 데이터 수
     })
     const { mutate: searchMutate, isPending } = usePostUserList()
 
@@ -88,7 +88,7 @@ const UserList = () => {
                     <Box display="flex" justifyContent="space-between" alignItems="center">
                         <Typography
                             sx={{ fontSize: '14px' }}
-                        >{`Total Count: ${fetchData.count}`}</Typography>
+                        >{`Total Count: ${fetchData?.count}`}</Typography>
                         <Box sx={{ display: 'flex', justifyContent: 'space-between', gap: 2 }}>
                             <MuiSubButton
                                 disabled={isPending}
@@ -101,9 +101,8 @@ const UserList = () => {
                         </Box>
                     </Box>
                     <CustomDataGrid
-                        // checkboxSelection={false}
                         rows={fetchData?.lists}
-                        rowCount={fetchData?.totalCount}
+                        rowCount={fetchData?.count}
                         columns={columns}
                         sort={{ field: 'id', orderby: 'desc' }}
                         onPageChange={handleOnPageChange}

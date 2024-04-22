@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { Box } from '@mui/material'
+import { Box, Typography } from '@mui/material'
 
 import TitleBar from '#/components/common/menu/TitleBar'
 import CustomDataGrid from '#/components/common/table/datagrid'
@@ -14,8 +14,12 @@ const UserHistoryList = () => {
     const [fetchData, setFetchData] = useState({ count: 0, lists: [] })
     const [isAction, setIsAction] = useState(true)
     const [queryParams, setQueryParams] = useState({
+        startDate: '',
+        endDate: '',
+        reqType: 'T',
+        userId: '',
         page: 1,
-        limit: 50, // 1회 요청에 받을수 있는 데이터 수
+        limit: parseInt(import.meta.env.VITE_LIST_PAGE_LIMIT), // 1회 요청에 받을수 있는 데이터 수
     })
     const { mutate: searchMutate, isPending } = usePostUserHistoryList()
 
@@ -80,10 +84,15 @@ const UserHistoryList = () => {
                         boxShadow: '0 3px 14px rgb(0 0 0 / 24%)',
                     }}
                 >
+                    <Box display="flex" justifyContent="space-between" alignItems="center">
+                        <Typography
+                            sx={{ fontSize: '14px' }}
+                        >{`Total Count: ${fetchData?.count}`}</Typography>
+                    </Box>
                     <CustomDataGrid
-                        checkboxSelection={false}
+                        // checkboxSelection={false}
                         rows={fetchData?.lists}
-                        rowCount={fetchData?.totalCount}
+                        rowCount={fetchData?.count}
                         columns={columns}
                         sort={{ field: 'id', orderby: 'desc' }}
                         onPageChange={handleOnPageChange}

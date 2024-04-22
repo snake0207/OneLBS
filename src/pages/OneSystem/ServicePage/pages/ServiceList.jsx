@@ -16,7 +16,7 @@ const ServiceList = () => {
     const [fetchData, setFetchData] = useState({ count: 0, lists: [] })
     const [queryParams, setQueryParams] = useState({
         page: 1,
-        limit: 50, // 1회 요청에 받을수 있는 데이터 수
+        limit: parseInt(import.meta.env.VITE_LIST_PAGE_LIMIT), // 1회 요청에 받을수 있는 데이터 수
     })
     const { data: apiResult } = useGetServices(queryParams, {
         enabled: true,
@@ -46,8 +46,11 @@ const ServiceList = () => {
 
     useEffect(() => {
         if (apiResult) {
-            const { count, lists } = apiResult
-            setFetchData({ count: count, lists: [...fetchData.lists, ...lists] })
+            console.log('apiResult : ', apiResult)
+            if (apiResult?.code === '0000') {
+                const { totalCount, lists } = apiResult?.data
+                setFetchData({ count: totalCount, lists: [...fetchData.lists, ...lists] })
+            }
         }
     }, [apiResult, isSearchClick])
 

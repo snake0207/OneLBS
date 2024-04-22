@@ -18,9 +18,6 @@ import style from './style.module'
 import MuiAlert from '#/components/common/popup/MuiAlert'
 
 const CreateForm = () => {
-    const {
-        state: { row },
-    } = useLocation()
     const navigate = useNavigate()
     const [ueCodes, setUeCodes] = useState([])
     const { mutate, isPending } = usePostRegistUE()
@@ -32,10 +29,9 @@ const CreateForm = () => {
 
     const formik = useFormik({
         initialValues: {
-            ueName: '',
             tmpModelCode: '',
             ueCodes: [],
-            remarks: '',
+            note: '',
             lppEcidCheck: 'N',
             lppaEcidCheck: 'N',
             msaCheck: 'N',
@@ -116,12 +112,6 @@ const CreateForm = () => {
                     <Table sx={style.table_info}>
                         <TableHead>
                             <TableRow>
-                                <TableCell>{`모델 명`}</TableCell>
-                                <TableCell component="td" colSpan={3}>
-                                    <TextInput name="ueName" formik={formik} />
-                                </TableCell>
-                            </TableRow>
-                            <TableRow>
                                 <TableCell rowSpan={2}>{`모델 코드`}</TableCell>
                                 <TableCell component="td">
                                     <Stack direction="row" gap={1}>
@@ -173,7 +163,7 @@ const CreateForm = () => {
                             <TableRow>
                                 <TableCell>{`비고`}</TableCell>
                                 <TableCell component="td" colSpan={3}>
-                                    <TextInput name="remarks" formik={formik} />
+                                    <TextInput name="note" formik={formik} />
                                 </TableCell>
                             </TableRow>
                         </TableHead>

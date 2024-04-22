@@ -39,7 +39,7 @@ function Header({ toggleDrawer }) {
             // console.log('user-permission : ', respPermissions?.data)
             if (respPermissions?.data.code === '0000') {
                 setPermissionsUserStore(respPermissions?.data.data)
-                console.log('storePermissions : ', storePermissions)
+                // console.log('storePermissions : ', storePermissions)
             }
         }
     }, [respPermissions])

@@ -77,7 +77,7 @@ function ExpandMenuItem({ label, to, iconNode, items }) {
                 <List component="div" disablePadding>
                     {items.map((item) => {
                         // const disabled = disabledListItem(item?.menuCode)
-                        const disabled = false
+                        const disabled = import.meta.env.VITE_GW_BASE_URL === "true" ? true : false
                         return (
                             <LinkRouter
                                 key={item?.menuCode}

@@ -1,31 +1,42 @@
 // 서비스 유형
+
 export const getServiceTypeList = () => [
-    { key: 0, value: 0, label: `긴급` },
-    { key: 1, value: 1, label: `일반` },
-    { key: 2, value: 2, label: `예외` },
+    { key: 'E', value: 'E', label: `긴급` },
+    { key: 'N', value: 'N', label: `일반` },
+    { key: 'S', value: 'S', label: `안심` },
 ]
 
+export const getServiceTypeLabel = {
+    T: { label: `전체` },
+    E: { label: `긴급` },
+    N: { label: `일반` },
+    S: { label: `안심` },
+}
+
+export const unionServiceTypeList = () => [
+    { key: 'T', value: 'T', label: `전체` },
+    ...getServiceTypeList(),
+]
 // 정확도
 export const getAccuracys = () => [
-    { key: 0, value: 0, label: `HIGH` },
-    { key: 1, value: 1, label: `MID` },
-    { key: 2, value: 2, label: `LOW` },
+    { key: 0, value: `HIGH`, label: `HIGH` },
+    { key: 1, value: `MID`, label: `MID` },
+    { key: 2, value: `LOW`, label: `LOW` },
 ]
 
 // 측위방법
 export const getPosMethods = () => [
-    { key: 0, value: 0, label: `CellID` },
-    { key: 1, value: 1, label: `ECID` },
+    { key: 0, value: `CellID`, label: `CellID` },
+    { key: 1, value: `ECID`, label: `ECID` },
 ]
 
 // Plane
 export const getPlanes = () => [
-    { key: 0, value: 0, label: `UP` },
-    { key: 1, value: 1, label: `CP` },
+    { key: 0, value: `UP`, label: `UP` },
+    { key: 1, value: `CP`, label: `CP` },
 ]
 // Plane
 export const getModes = () => [
-    { key: 0, value: 0, label: `MSB` },
-    { key: 1, value: 1, label: `MSA` },
+    { key: 0, value: `MSB`, label: `MSB` },
+    { key: 1, value: `MSA`, label: `MSA` },
 ]
-

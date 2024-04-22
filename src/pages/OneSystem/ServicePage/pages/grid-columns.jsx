@@ -1,11 +1,11 @@
 import { Typography } from '@mui/material'
-import { Stack } from '@mui/system'
+import { getServiceTypeLabel } from '#/common/libs/service'
 
 export const columns = [
     {
         field: 'id',
         headerName: 'ID',
-        flex: 0.5,
+        flex: 0.8,
         renderCell: (params) => <Typography>{params.row.id}</Typography>,
     },
     {
@@ -21,66 +21,44 @@ export const columns = [
         renderCell: (params) => <Typography>{params.row.serviceCode}</Typography>,
     },
     {
-        field: 'cpName',
+        field: 'customerName',
         headerName: '고객사',
-        flex: 1,
+        flex: 1.5,
+        renderCell: (params) => {
+            return <Typography>{params.row.customerName}</Typography>
+        },
+    },
+    {
+        field: 'cpName',
+        headerName: '서비스제공사',
+        flex: 1.5,
         renderCell: (params) => {
             return <Typography>{params.row.cpName}</Typography>
         },
     },
     {
-        field: 'serviceProvider',
-        headerName: '서비스제공사',
-        flex: 1,
-        renderCell: (params) => {
-            return <Typography>{params.row.serviceProvider}</Typography>
-        },
-    },
-    {
-        field: 'status',
+        field: 'serviceType',
         headerName: '서비스 유형',
         flex: 1,
         align: 'center',
         renderCell: (params) => {
-            return <Typography>{params.row.status}</Typography>
+            return <Typography>{getServiceTypeLabel[params.row.serviceType].label}</Typography>
         },
     },
     {
-        field: 'register_date',
+        field: 'regDate',
         headerName: '등록일시',
-        flex: 1.2,
+        flex: 1.5,
         renderCell: (params) => {
-            return <Typography>{params.row.register_date}</Typography>
+            return <Typography>{params.row.regDate}</Typography>
         },
     },
     {
-        field: 'change_date',
+        field: 'updDate',
         headerName: '변경일시',
-        flex: 1.2,
+        flex: 1.5,
         renderCell: (params) => {
-            return <Typography>{params.row.change_date}</Typography>
+            return <Typography>{params.row.updDate}</Typography>
         },
     },
-
-    // {
-    //     field: 'comment',
-    //     headerName: 'Comment',
-    //     flex: 1,
-    //     renderCell: (params) => {
-    //         return (
-    //             <Stack direction="row" spacing={0.5}>
-    //                 <MuiSubButton
-    //                     name="edit"
-    //                     title="수정"
-    //                     onClick={() => console.log(`편집 버튼 click : ${params.row.id}`)}
-    //                 />
-    //                 <MuiSubButton
-    //                     name="delete"
-    //                     title="삭제"
-    //                     onClick={() => console.log(`삭제 버튼 click : ${params.row.id}`)}
-    //                 />
-    //             </Stack>
-    //         )
-    //     },
-    // },
 ]

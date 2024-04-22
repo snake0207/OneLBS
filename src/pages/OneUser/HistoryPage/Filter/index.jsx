@@ -20,8 +20,8 @@ function SearchFilter({ onSearch }) {
         initialValues: {
             startDate: '',
             endDate: '',
-            start_time: '',
-            end_time: '',
+            start_time: String(new Date().getHours()),
+            end_time: String(new Date().getHours()),
             reqType: 'L',
             userId: '',
         },

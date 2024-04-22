@@ -21,11 +21,11 @@ export const API_PATH = {
     },
     system: {
         service_regist: '/api/system/service/regist',
-        service_list: '/api/system/service',
+        service_list: '/api/system/service/list',
         service_update: '/api/system/service/modify',
         service_code: '/api/system/service/check',
         ue_regist: '/api/system/ue/regist',
-        ue_list: '/api-system-ue-list',
+        ue_list: '/api/system/ue/list',
         ue_update: '/api/system/ue/modify',
         ue_delete: '/api-system-ue-delete',
         loc_trans: '/loc-trans',

@@ -35,9 +35,6 @@ import style from './style.module'
 import MuiAlert from '#/components/common/popup/MuiAlert'
 
 const CreateForm = () => {
-    const {
-        state: { row },
-    } = useLocation()
     const navigate = useNavigate()
     const { mutate, isPending } = usePostServiceRegist()
     const [serviceType, setServiceType] = useState(0)
@@ -56,30 +53,45 @@ const CreateForm = () => {
         initialValues: {
             serviceName: '',
             serviceCode: '',
+            customerName: '',
             cpName: '',
-            serviceProvider: '',
-            userCheck: false,
-            authCheck: false,
-            serviceType: 0,
-            accuracy: 0,
-            respTime: '15',
-            cellCheck: 'N',
-            posMethod: 0,
-            gpsCheck: 'N',
-            plane: 0,
-            mode: 0,
-            lppeCheck: 'N',
-            lppRespTime: '',
-            ksaCheck: 'N',
-            version: '',
-            ksaCellCheck: 'N',
-            ksaGnssCheck: 'N',
-            ksaWifiCheck: 'N',
-            ksaAtmosphericCheck: 'N',
-            ksaFlpCheck: 'N',
-            collectionCount: '',
+            checkSubscriber: 'N',
+            checkCrossAuth: 'N',
+            serviceType: 'N',
+            roamCountryCheck: 'N',
+            smsSendDirectly: 'N',
+            smsSendMonthly: 'N',
+            smsCallbackNumber: '',
+            smsContent: '',
+            posConfig: {
+                requiredAccuracy: 'HIGH',
+                requiredTimeout: '15',
+                cellConfig: {
+                    use: 'N',
+                    method: 'CellID',
+                },
+                gnssConfig: {
+                    use: 'N',
+                    plane: 'CP',
+                    mode: 'MSA',
+                    lppe: 'N',
+                    lppRespTime: 0,
+                },
+                ksaConfig: {
+                    use: 'N',
+                    ver: 0,
+                    qos: {
+                        cell: 'N',
+                        gnss: 'N',
+                        wifi: 'N',
+                        pres: 'N',
+                        flp: 'N',
+                    },
+                    count: 0,
+                },
+            },
         },
-        validationSchema: registServiceSchema,
+        // validationSchema: registServiceSchema,
         onSubmit: (form) => {
             const apiParams = { ...form }
             console.log('onSubmit >> ', JSON.stringify(apiParams, null, 2))
@@ -111,8 +123,6 @@ const CreateForm = () => {
         setIsOpenServicePopup(true)
     }
 
-    console.log('location state.row : ', row)
-
     return (
         <Box>
             <TitleBar title={`서비스 등록`} />
@@ -138,11 +148,17 @@ const CreateForm = () => {
                     <Table sx={style.table_info}>
                         <TableHead>
                             <TableRow>
-                                <TableCell style={style.cellTitle}>{`서비스명`}</TableCell>
+                                <TableCell style={style.cellTitle}>
+                                    <span style={{ color: 'red', fontSize: '13px' }}>*</span>
+                                    {`서비스명`}
+                                </TableCell>
                                 <TableCell component="td">
                                     <TextInput name="serviceName" formik={formik} />
                                 </TableCell>
-                                <TableCell style={style.cellTitle}>{`서비스코드`}</TableCell>
+                                <TableCell style={style.cellTitle}>
+                                    <span style={{ color: 'red', fontSize: '13px' }}>*</span>
+                                    {`서비스코드`}
+                                </TableCell>
                                 <TableCell component="td">
                                     <TextInput
                                         name="serviceCode"
@@ -152,42 +168,58 @@ const CreateForm = () => {
                                 </TableCell>
                             </TableRow>
                             <TableRow>
-                                <TableCell style={style.cellTitle}>{`고객사`}</TableCell>
+                                <TableCell style={style.cellTitle}>
+                                    <span style={{ color: 'red', fontSize: '13px' }}>*</span>
+                                    {`고객사`}
+                                </TableCell>
+                                <TableCell component="td">
+                                    <TextInput name="customerName" formik={formik} />
+                                </TableCell>
+                                <TableCell style={style.cellTitle}>
+                                    <span style={{ color: 'red', fontSize: '13px' }}>*</span>
+                                    {`제공사`}
+                                </TableCell>
                                 <TableCell component="td">
                                     <TextInput name="cpName" formik={formik} />
-                                </TableCell>
-                                <TableCell style={style.cellTitle}>{`제공사`}</TableCell>
-                                <TableCell component="td">
-                                    <TextInput name="serviceProvider" formik={formik} />
                                 </TableCell>
                             </TableRow>
                             <TableRow>
                                 <TableCell style={style.cellTitle}>{`가입자등록확인`}</TableCell>
                                 <TableCell component="td">
                                     <CheckBox
-                                        checked={formik.values.userCheck === 'Y' ? true : false}
+                                        checked={
+                                            formik.values.checkSubscriber === 'Y' ? true : false
+                                        }
                                         onChange={(e) =>
                                             formik.setFieldValue(
-                                                'userCheck',
+                                                'checkSubscriber',
                                                 e.target.value === 'Y' ? 'N' : 'Y',
                                             )
                                         }
-                                        label={formik.values.userCheck === 'Y' ? `적용` : `미적용`}
-                                        value={formik.values.userCheck}
+                                        label={
+                                            formik.values.checkSubscriber === 'Y'
+                                                ? `적용`
+                                                : `미적용`
+                                        }
+                                        value={formik.values.checkSubscriber}
                                     />
                                 </TableCell>
                                 <TableCell style={style.cellTitle}>{`상호인증확인`}</TableCell>
                                 <TableCell component="td">
                                     <CheckBox
-                                        checked={formik.values.authCheck === 'Y' ? true : false}
+                                        checked={
+                                            formik.values.checkCrossAuth === 'Y' ? true : false
+                                        }
                                         onChange={(e) =>
                                             formik.setFieldValue(
-                                                'authCheck',
+                                                'checkCrossAuth',
                                                 e.target.value === 'Y' ? 'N' : 'Y',
                                             )
                                         }
-                                        label={formik.values.authCheck === 'Y' ? `적용` : `미적용`}
-                                        value={formik.values.authCheck}
+                                        label={
+                                            formik.values.checkCrossAuth === 'Y' ? `적용` : `미적용`
+                                        }
+                                        value={formik.values.checkCrossAuth}
                                     />
                                 </TableCell>
                             </TableRow>
@@ -209,7 +241,76 @@ const CreateForm = () => {
                                         }}
                                     />
                                 </TableCell>
-                                <TableCell colSpan={2}></TableCell>
+                                <TableCell style={style.cellTitle}>{`로밍국가확인용`}</TableCell>
+                                <TableCell component="td">
+                                    <CheckBox
+                                        checked={
+                                            formik.values.roamCountryCheck === 'Y' ? true : false
+                                        }
+                                        onChange={(e) =>
+                                            formik.setFieldValue(
+                                                'roamCountryCheck',
+                                                e.target.value === 'Y' ? 'N' : 'Y',
+                                            )
+                                        }
+                                        label={
+                                            formik.values.roamCountryCheck === 'Y'
+                                                ? `적용`
+                                                : `미적용`
+                                        }
+                                        value={formik.values.roamCountryCheck}
+                                    />
+                                </TableCell>
+                            </TableRow>
+                            <TableRow>
+                                <TableCell style={style.cellTitle}>{`위치제공 즉시통지`}</TableCell>
+                                <TableCell component="td">
+                                    <CheckBox
+                                        checked={
+                                            formik.values.smsSendDirectly === 'Y' ? true : false
+                                        }
+                                        onChange={(e) =>
+                                            formik.setFieldValue(
+                                                'smsSendDirectly',
+                                                e.target.value === 'Y' ? 'N' : 'Y',
+                                            )
+                                        }
+                                        label={
+                                            formik.values.smsSendDirectly === 'Y'
+                                                ? `적용`
+                                                : `미적용`
+                                        }
+                                        value={formik.values.smsSendDirectly}
+                                    />
+                                </TableCell>
+                                <TableCell style={style.cellTitle}>{`위치제공 월간통지`}</TableCell>
+                                <TableCell component="td">
+                                    <CheckBox
+                                        checked={
+                                            formik.values.smsSendMonthly === 'Y' ? true : false
+                                        }
+                                        onChange={(e) =>
+                                            formik.setFieldValue(
+                                                'smsSendMonthly',
+                                                e.target.value === 'Y' ? 'N' : 'Y',
+                                            )
+                                        }
+                                        label={
+                                            formik.values.smsSendMonthly === 'Y' ? `적용` : `미적용`
+                                        }
+                                        value={formik.values.smsSendMonthly}
+                                    />
+                                </TableCell>
+                            </TableRow>
+                            <TableRow>
+                                <TableCell style={style.cellTitle}>{`통지SMS콜백`}</TableCell>
+                                <TableCell component="td">
+                                    <TextInput name="smsCallbackNumber" formik={formik} />
+                                </TableCell>
+                                <TableCell style={style.cellTitle}>{`발송문구`}</TableCell>
+                                <TableCell component="td">
+                                    <TextInput name="smsContent" formik={formik} />
+                                </TableCell>
                             </TableRow>
                         </TableHead>
                     </Table>
@@ -238,8 +339,8 @@ const CreateForm = () => {
                                 <TableCell style={style.cellTitle}>{`희망 정확도`}</TableCell>
                                 <TableCell component="td">
                                     <Select
-                                        name="accuracy"
-                                        value={accuracy}
+                                        name="posConfig.requiredAccuracy"
+                                        value={`posConfig.requiredAccuracy`}
                                         items={getAccuracys()}
                                         formik={formik}
                                         onChange={(item) => setAccuracy(item.value)}
@@ -252,9 +353,12 @@ const CreateForm = () => {
                                         }}
                                     />
                                 </TableCell>
-                                <TableCell style={style.cellTitle}>{`희망 응답시간(초)`}</TableCell>
+                                <TableCell style={style.cellTitle}>
+                                    <span style={{ color: 'red', fontSize: '13px' }}>*</span>
+                                    {`희망 응답시간(초)`}
+                                </TableCell>
                                 <TableCell component="td">
-                                    <TextInput name="respTime" formik={formik} />
+                                    <TextInput name="posConfig.requiredTimeout" formik={formik} />
                                 </TableCell>
                             </TableRow>
                         </TableHead>
@@ -267,22 +371,30 @@ const CreateForm = () => {
                                 <TableCell style={style.cellTitle}>{`사용`}</TableCell>
                                 <TableCell component="td">
                                     <CheckBox
-                                        checked={formik.values.cellCheck === 'Y' ? true : false}
+                                        checked={
+                                            formik.values.posConfig.cellConfig.use === 'Y'
+                                                ? true
+                                                : false
+                                        }
                                         onChange={(e) =>
                                             formik.setFieldValue(
-                                                'cellCheck',
+                                                'posConfig.cellConfig.use',
                                                 e.target.value === 'Y' ? 'N' : 'Y',
                                             )
                                         }
-                                        label={formik.values.cellCheck === 'Y' ? `적용` : `미적용`}
-                                        value={formik.values.cellCheck}
+                                        label={
+                                            formik.values.posConfig.cellConfig.use === 'Y'
+                                                ? `적용`
+                                                : `미적용`
+                                        }
+                                        value={formik.values.posConfig.cellConfig.use}
                                     />
                                 </TableCell>
                                 <TableCell style={style.cellTitle}>{`측위방법`}</TableCell>
                                 <TableCell component="td">
                                     <Select
-                                        name="posMethod"
-                                        value={posMethod}
+                                        name="posConfig.cellConfig.method"
+                                        value={`posConfig.cellConfig.method`}
                                         items={getPosMethods()}
                                         formik={formik}
                                         onChange={(item) => setPosMethod(item.value)}
@@ -296,26 +408,37 @@ const CreateForm = () => {
                                 </TableCell>
                             </TableRow>
                             <TableRow>
-                                <TableCell style={style.cellTitle} rowSpan={3}>{`위성 측위`}</TableCell>
+                                <TableCell
+                                    style={style.cellTitle}
+                                    rowSpan={3}
+                                >{`위성 측위`}</TableCell>
                                 <TableCell style={style.cellTitle}>{`사용`}</TableCell>
                                 <TableCell component="td">
                                     <CheckBox
-                                        checked={formik.values.gpsCheck === 'Y' ? true : false}
+                                        checked={
+                                            formik.values.posConfig.gnssConfig.use === 'Y'
+                                                ? true
+                                                : false
+                                        }
                                         onChange={(e) =>
                                             formik.setFieldValue(
-                                                'gpsCheck',
+                                                'posConfig.gnssConfig.use',
                                                 e.target.value === 'Y' ? 'N' : 'Y',
                                             )
                                         }
-                                        label={formik.values.gpsCheck === 'Y' ? `적용` : `미적용`}
-                                        value={formik.values.gpsCheck}
+                                        label={
+                                            formik.values.posConfig.gnssConfig.use === 'Y'
+                                                ? `적용`
+                                                : `미적용`
+                                        }
+                                        value={formik.values.posConfig.gnssConfig.use}
                                     />
                                 </TableCell>
                                 <TableCell style={style.cellTitle}>{`Plane`}</TableCell>
                                 <TableCell component="td">
                                     <Select
-                                        name="plane"
-                                        value={plane}
+                                        name="posConfig.gnssConfig.plane"
+                                        value={`posConfig.gnssConfig.plane`}
                                         items={getPlanes()}
                                         formik={formik}
                                         onChange={(item) => setPlane(item.value)}
@@ -332,8 +455,8 @@ const CreateForm = () => {
                                 <TableCell style={style.cellTitle}>{`Mode`}</TableCell>
                                 <TableCell>
                                     <Select
-                                        name="mode"
-                                        value={mode}
+                                        name="posConfig.gnssConfig.mode"
+                                        value={`posConfig.gnssConfig.mode`}
                                         items={getModes()}
                                         formik={formik}
                                         onChange={(item) => setMode(item.value)}
@@ -348,22 +471,35 @@ const CreateForm = () => {
                                 <TableCell style={style.cellTitle}>{`LPPe 사용`}</TableCell>
                                 <TableCell>
                                     <CheckBox
-                                        checked={formik.values.lppeCheck === 'Y' ? true : false}
+                                        checked={
+                                            formik.values.posConfig.gnssConfig.lppe === 'Y'
+                                                ? true
+                                                : false
+                                        }
                                         onChange={(e) =>
                                             formik.setFieldValue(
-                                                'lppeCheck',
+                                                'posConfig.gnssConfig.lppe',
                                                 e.target.value === 'Y' ? 'N' : 'Y',
                                             )
                                         }
-                                        label={formik.values.lppeCheck === 'Y' ? `적용` : `미적용`}
-                                        value={formik.values.lppeCheck}
+                                        label={
+                                            formik.values.posConfig.gnssConfig.lppe === 'Y'
+                                                ? `적용`
+                                                : `미적용`
+                                        }
+                                        value={formik.values.posConfig.gnssConfig.lppe}
                                     />
                                 </TableCell>
                             </TableRow>
                             <TableRow>
-                                <TableCell style={style.cellTitle}>{`LPP 희망응답시간(초)`}</TableCell>
+                                <TableCell
+                                    style={style.cellTitle}
+                                >{`LPP 희망응답시간(초)`}</TableCell>
                                 <TableCell>
-                                    <TextInput name="lppRespTime" formik={formik} />
+                                    <TextInput
+                                        name="posConfig.gnssConfig.lppRespTime"
+                                        formik={formik}
+                                    />
                                 </TableCell>
                                 <TableCell colSpan={2}></TableCell>
                             </TableRow>
@@ -372,20 +508,31 @@ const CreateForm = () => {
                                 <TableCell style={style.cellTitle}>{`사용`}</TableCell>
                                 <TableCell>
                                     <CheckBox
-                                        checked={formik.values.ksaCheck === 'Y' ? true : false}
+                                        checked={
+                                            formik.values.posConfig.ksaConfig.use === 'Y'
+                                                ? true
+                                                : false
+                                        }
                                         onChange={(e) =>
                                             formik.setFieldValue(
-                                                'ksaCheck',
+                                                'posConfig.ksaConfig.use',
                                                 e.target.value === 'Y' ? 'N' : 'Y',
                                             )
                                         }
-                                        label={formik.values.ksaCheck === 'Y' ? `적용` : `미적용`}
-                                        value={formik.values.ksaCheck}
+                                        label={
+                                            formik.values.posConfig.ksaConfig.use === 'Y'
+                                                ? `적용`
+                                                : `미적용`
+                                        }
+                                        value={formik.values.posConfig.ksaConfig.use}
                                     />
                                 </TableCell>
-                                <TableCell style={style.cellTitle}>{`버전`}</TableCell>
+                                <TableCell style={style.cellTitle}>
+                                    <span style={{ color: 'red', fontSize: '13px' }}>*</span>
+                                    {`버전`}
+                                </TableCell>
                                 <TableCell>
-                                    <TextInput name="version" formik={formik} />
+                                    <TextInput name="posConfig.ksaConfig.ver" formik={formik} />
                                 </TableCell>
                             </TableRow>
                             <TableRow>
@@ -394,69 +541,77 @@ const CreateForm = () => {
                                     <FormGroup row>
                                         <CheckBox
                                             checked={
-                                                formik.values.ksaCellCheck === 'Y' ? true : false
-                                            }
-                                            onChange={(e) =>
-                                                formik.setFieldValue(
-                                                    'ksaCellCheck',
-                                                    e.target.value === 'Y' ? 'N' : 'Y',
-                                                )
-                                            }
-                                            value={formik.values.ksaCellCheck}
-                                            label={`CELL`}
-                                        />
-                                        <CheckBox
-                                            checked={
-                                                formik.values.ksaGnssCheck === 'Y' ? true : false
-                                            }
-                                            onChange={(e) =>
-                                                formik.setFieldValue(
-                                                    'ksaGnssCheck',
-                                                    e.target.value === 'Y' ? 'N' : 'Y',
-                                                )
-                                            }
-                                            value={formik.values.ksaGnssCheck}
-                                            label={`GNSS`}
-                                        />
-                                        <CheckBox
-                                            checked={
-                                                formik.values.ksaWifiCheck === 'Y' ? true : false
-                                            }
-                                            onChange={(e) =>
-                                                formik.setFieldValue(
-                                                    'ksaWifiCheck',
-                                                    e.target.value === 'Y' ? 'N' : 'Y',
-                                                )
-                                            }
-                                            value={formik.values.ksaWifiCheck}
-                                            label={`WiFi`}
-                                        />
-                                        <CheckBox
-                                            checked={
-                                                formik.values.ksaAtmosphericCheck === 'Y'
+                                                formik.values.posConfig.ksaConfig.qos.cell === 'Y'
                                                     ? true
                                                     : false
                                             }
                                             onChange={(e) =>
                                                 formik.setFieldValue(
-                                                    'ksaAtmosphericCheck',
+                                                    'posConfig.ksaConfig.qos.cell',
                                                     e.target.value === 'Y' ? 'N' : 'Y',
                                                 )
                                             }
-                                            value={formik.values.ksaAtmosphericCheck}
+                                            value={formik.values.posConfig.ksaConfig.qos.cell}
+                                            label={`CELL`}
+                                        />
+                                        <CheckBox
+                                            checked={
+                                                formik.values.posConfig.ksaConfig.qos.gnss === 'Y'
+                                                    ? true
+                                                    : false
+                                            }
+                                            onChange={(e) =>
+                                                formik.setFieldValue(
+                                                    'posConfig.ksaConfig.qos.gnss',
+                                                    e.target.value === 'Y' ? 'N' : 'Y',
+                                                )
+                                            }
+                                            value={formik.values.posConfig.ksaConfig.qos.gnss}
+                                            label={`GNSS`}
+                                        />
+                                        <CheckBox
+                                            checked={
+                                                formik.values.posConfig.ksaConfig.qos.wifi === 'Y'
+                                                    ? true
+                                                    : false
+                                            }
+                                            onChange={(e) =>
+                                                formik.setFieldValue(
+                                                    'posConfig.ksaConfig.qos.wifi',
+                                                    e.target.value === 'Y' ? 'N' : 'Y',
+                                                )
+                                            }
+                                            value={formik.values.posConfig.ksaConfig.qos.wifi}
+                                            label={`WiFi`}
+                                        />
+                                        <CheckBox
+                                            checked={
+                                                formik.values.posConfig.ksaConfig.qos.pres === 'Y'
+                                                    ? true
+                                                    : false
+                                            }
+                                            onChange={(e) =>
+                                                formik.setFieldValue(
+                                                    'posConfig.ksaConfig.qos.pres',
+                                                    e.target.value === 'Y' ? 'N' : 'Y',
+                                                )
+                                            }
+                                            value={formik.values.posConfig.ksaConfig.qos.pres}
                                             label={`기압`}
                                         />
                                         <CheckBox
                                             checked={
-                                                formik.values.ksaFlpCheck === 'Y' ? true : false
+                                                formik.values.posConfig.ksaConfig.qos.flp === 'Y'
+                                                    ? true
+                                                    : false
                                             }
                                             onChange={(e) =>
                                                 formik.setFieldValue(
-                                                    'ksaFlpCheck',
+                                                    'posConfig.ksaConfig.qos.flp',
                                                     e.target.value === 'Y' ? 'N' : 'Y',
                                                 )
                                             }
-                                            value={formik.values.ksaFlpCheck}
+                                            value={formik.values.posConfig.ksaConfig.qos.flp}
                                             label={`FLP`}
                                         />
                                     </FormGroup>
@@ -465,7 +620,7 @@ const CreateForm = () => {
                             <TableRow>
                                 <TableCell style={style.cellTitle}>{`수집 횟수`}</TableCell>
                                 <TableCell>
-                                    <TextInput name="collectionCount" formik={formik} />
+                                    <TextInput name="posConfig.ksaConfig.count" formik={formik} />
                                 </TableCell>
                                 <TableCell colSpan={2}></TableCell>
                             </TableRow>

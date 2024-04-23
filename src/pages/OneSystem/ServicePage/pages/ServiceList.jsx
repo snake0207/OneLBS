@@ -12,19 +12,20 @@ import { MuiSubButton } from '#/components/common/button/MuiButton'
 
 const ServiceList = () => {
     const navigate = useNavigate()
-    const [isAction, setIsAction] = useState(true)
+    const [isSearchClick, setIsSearchClick] = useState(true)
     const [fetchData, setFetchData] = useState({ count: 0, lists: [] })
     const [queryParams, setQueryParams] = useState({
         page: 1,
         limit: parseInt(import.meta.env.VITE_LIST_PAGE_LIMIT), // 1회 요청에 받을수 있는 데이터 수
     })
-    const { data: apiResult } = useGetServices(queryParams, {
-        enabled: isAction,
+    const { data: apiResult, refetch } = useGetServices(queryParams, {
+        enabled: true,
     })
 
     // 검색 버튼 누른 경우
     const handleSearch = (values) => {
         setFetchData({ count: 0, lists: [] })
+        setIsSearchClick((prev) => !prev)
         setQueryParams({ ...queryParams, ...values, page: 1 })
     }
 
@@ -51,7 +52,7 @@ const ServiceList = () => {
                 setFetchData({ count: totalCount, lists: [...fetchData.lists, ...lists] })
             }
         }
-    }, [queryParams, apiResult])
+    }, [apiResult, isSearchClick])
 
     // console.log('fetchData : ', fetchData)
 
@@ -59,39 +60,37 @@ const ServiceList = () => {
         <Box>
             <TitleBar title={`서비스 관리`} />
             <SearchFilter onSearch={handleSearch} />
-            {fetchData && (
-                <Box
-                    sx={{
-                        width: '100%',
-                        borderRadius: '8px',
-                        p: '18px 20px',
-                        backgroundColor: 'background.contents',
-                        boxShadow: '0 3px 14px rgb(0 0 0 / 24%)',
-                    }}
-                >
-                    <Box display="flex" justifyContent="space-between" alignItems="center">
-                        <Typography
-                            sx={{ fontSize: '14px' }}
-                        >{`Total Count: ${fetchData.count}`}</Typography>
-                        <MuiSubButton
-                            name="create"
-                            title="신규 등록"
-                            onClick={() =>
-                                navigate('/system/service/regist', { state: { row: 'acro0720' } })
-                            }
-                        />
-                    </Box>
-                    <CustomDataGrid
-                        rows={fetchData?.lists}
-                        rowCount={fetchData?.count}
-                        columns={columns}
-                        sort={{ field: 'id', orderby: 'desc' }}
-                        onPageChange={handleOnPageChange}
-                        onRowClick={handleSelectRow}
-                        pageInit={queryParams.page === 1 ? true : false}
+            <Box
+                sx={{
+                    width: '100%',
+                    borderRadius: '8px',
+                    p: '18px 20px',
+                    backgroundColor: 'background.contents',
+                    boxShadow: '0 3px 14px rgb(0 0 0 / 24%)',
+                }}
+            >
+                <Box display="flex" justifyContent="space-between" alignItems="center">
+                    <Typography
+                        sx={{ fontSize: '14px' }}
+                    >{`Total Count: ${fetchData.count}`}</Typography>
+                    <MuiSubButton
+                        name="create"
+                        title="신규 등록"
+                        onClick={() =>
+                            navigate('/system/service/regist', { state: { row: 'acro0720' } })
+                        }
                     />
                 </Box>
-            )}
+                <CustomDataGrid
+                    rows={fetchData?.lists}
+                    rowCount={fetchData?.count}
+                    columns={columns}
+                    sort={{ field: 'id', orderby: 'desc' }}
+                    onPageChange={handleOnPageChange}
+                    onRowClick={handleSelectRow}
+                    pageInit={queryParams.page === 1 ? true : false}
+                />
+            </Box>
         </Box>
     )
 }

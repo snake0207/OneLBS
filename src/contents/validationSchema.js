@@ -33,9 +33,8 @@ const HELPER_TEXT = {
     verRequired: 'KSA 버전정보를 입력해 주세요.',
     countRequired: 'KSA 수집횟수를 입력해 주세요.',
 
-    ueNameRequired: '모델명을 입력해 주세요.',
-    ueCodeRequired: '코드명을 입력해 주세요.',
-    remarksRequired: '비고란을 입력해 주세요.',
+    modelCodeRequired: '모델코드명을 입력해 주세요.',
+    noteRequired: '비고란을 입력해 주세요.',
     suplVersionRequired: 'SUPL Ver정보 입력해 주세요.',
     ksaVersionRequired: 'KSA Ver정보 입력해 주세요.',
 
@@ -107,11 +106,35 @@ export const registServiceSchema = yup.object({
 // 단말모델 등록, 수정 화면에서 사용
 // ~src/pages/system/UeModelPage/forms
 export const registUESchema = yup.object({
-    ueName: yup.string().required(HELPER_TEXT.ueNameRequired),
-    ueCodes: yup.array(yup.string()).required(HELPER_TEXT.ueCodeRequired),
-    remarks: yup.string().required(HELPER_TEXT.remarksRequired),
-    suplVersion: yup.string().required(HELPER_TEXT.suplVersionRequired),
-    ksaVersion: yup.string().required(HELPER_TEXT.ksaVersionRequired),
+    modelCode: yup.array(yup.string()).required(HELPER_TEXT.modelCodeRequired),
+    note: yup.string().required(HELPER_TEXT.noteRequired),
+    posConfig: yup.object({
+        gnssConfig: yup.object({
+            suplVer: yup.string().required(HELPER_TEXT.verRequired),
+        }),
+        ksaConfig: yup.object({
+            ver: yup
+                .string()
+                .matches(/^\d+$/, HELPER_TEXT.IntegerRequired)
+                .required(HELPER_TEXT.verRequired),
+        }),
+    }),
+})
+
+export const deleteUpdateUESchema = yup.object({
+    modelCode: yup.string().required(HELPER_TEXT.modelCodeRequired),
+    note: yup.string().required(HELPER_TEXT.noteRequired),
+    posConfig: yup.object({
+        gnssConfig: yup.object({
+            suplVer: yup.string().required(HELPER_TEXT.verRequired),
+        }),
+        ksaConfig: yup.object({
+            ver: yup
+                .string()
+                .matches(/^\d+$/, HELPER_TEXT.IntegerRequired)
+                .required(HELPER_TEXT.verRequired),
+        }),
+    }),
 })
 
 // 사용자관리 등록, 수정 화면에서 사용

@@ -15,22 +15,24 @@ const UeModelList = () => {
     const navigate = useNavigate()
     const [openDeleteDialog, setOpenDeleteDialog] = useState(false)
     const [isSearchClick, setIsSearchClick] = useState(true)
+    const [isQueryState, setIsQueryState] = useState(true)
     const [fetchData, setFetchData] = useState({ count: 0, lists: [] })
     const [queryParams, setQueryParams] = useState({
         page: 1,
         limit: parseInt(import.meta.env.VITE_LIST_PAGE_LIMIT), // 1회 요청에 받을수 있는 데이터 수
     })
     const { data: apiResult, refetch } = useGetUEs(queryParams, {
-        enabled: true,
+        enabled: setIsSearchClick && isQueryState,
     })
-    const [deleteUEs, setDeleteUEs] = useState({ ueCodes: [] })
+    const [deleteUEs, setDeleteUEs] = useState({ modelCodeList: [] })
     const [deleteResult, setDeleteResult] = useState(false)
     const { mutate: deleteMutate, isPending } = usePostDeleteUEs()
 
     // 검색 버튼 누른 경우
     const handleSearch = (values) => {
         setFetchData({ count: 0, lists: [] })
-        setIsSearchClick((prev) => !prev)
+        //setIsSearchClick((prev) => !prev)
+        setIsQueryState(true)
         setQueryParams({ ...queryParams, ...values, page: 1 })
     }
 
@@ -42,9 +44,9 @@ const UeModelList = () => {
     }
 
     const handleRowSelectionChange = (selectionModel) => {
-        console.log('selectionModel : ', selectionModel)
-
-        // setDeleteUEs({ ueCodes: [...selectionModel] })
+        const deleteRows = fetchData.lists.filter(item => selectionModel.includes(item.id))
+        console.log('selectionModel : ', selectionModel, deleteRows)
+        setDeleteUEs({ modelCodeList: [...deleteRows.map(item => item.modelCode)] })
     }
 
     // 리스트 하단의 페이지 이동 버튼 click시 동작
@@ -58,14 +60,14 @@ const UeModelList = () => {
     }
 
     const handleDeleteRows = () => {
-        deleteUEs.ueCodes.length > 0 && console.log('deleteUEs : ', deleteUEs)
+        deleteUEs.modelCodeList.length > 0 && console.log('deleteUEs : ', deleteUEs)
         setOpenDeleteDialog(false)
         deleteMutate(
             { ...deleteUEs },
             {
                 onSuccess: ({ data }) => {
                     console.log('Delete Response : ', data)
-                    data.id && setDeleteResult(true)
+                    data?.code === '0000' && setDeleteResult(true)
                     setFetchData({ count: 0, lists: [] })
                     refetch({ ...queryParams, queryKey: 'newDataKey' })
                     // handleSearch({ ueName: '', ueCode: '' })
@@ -79,18 +81,24 @@ const UeModelList = () => {
             console.log('apiResult : ', apiResult)
             if (apiResult?.code === '0000') {
                 const { totalCount, lists } = apiResult?.data
-                setFetchData({ count: totalCount, lists: [...fetchData.lists, ...lists] })
+                const newArr = new Set([...fetchData.lists, ...lists])
+                console.log('lists : ', lists)
+                console.log('fetchData : ', fetchData.lists)
+                console.log('newArr : ', newArr)
+                setFetchData({ count: totalCount, lists: [...newArr] })
+                setIsQueryState(false)
+                //setFetchData({ count: totalCount, lists: [...fetchData.lists, ...lists] })
             }
         }
     }, [apiResult, isSearchClick, deleteResult])
 
-    console.log('fetchData : ', fetchData)
+    //console.log('fetchData : ', fetchData)
 
     return (
         <Box>
             <TitleBar title={`단말 모델 관리`} />
             <SearchFilter onSearch={handleSearch} />
-            {fetchData && (
+            {fetchData?.lists && (
                 <Box
                     sx={{
                         width: '100%',
@@ -107,7 +115,7 @@ const UeModelList = () => {
                         <Box sx={{ display: 'flex', justifyContent: 'space-between', gap: 2 }}>
                             <MuiSubButton
                                 // disabled={true}
-                                disabled={!deleteUEs.ueCodes.length ? true : false || isPending}
+                                disabled={!deleteUEs.modelCodeList.length ? true : false || isPending}
                                 name="delete"
                                 title="선택 삭제"
                                 onClick={() => setOpenDeleteDialog(true)}

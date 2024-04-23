@@ -1,5 +1,5 @@
 import system from '#/api/system'
-import { useMutation, useQuery } from '@tanstack/react-query'
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 
 // 시스템 서비스 관리
 // 서비스 리스트
@@ -29,8 +29,12 @@ export const usePostServiceRegist = () => {
 }
 // 서비스 업데이트
 export const usePostServiceUpdate = () => {
+    const queryClient = useQueryClient()
     return useMutation({
         mutationFn: system.postServiceUpdate,
+        onSuccess: () => {
+            queryClient.invalidateQueries('get-service-lists')
+        },
     })
 }
 // 서비스 삭제

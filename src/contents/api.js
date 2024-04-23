@@ -28,7 +28,7 @@ export const API_PATH = {
         ue_regist: '/api/system/ue/regist',
         ue_list: '/api/system/ue/list',
         ue_update: '/api/system/ue/modify',
-        ue_delete: '/api-system-ue-delete',
+        ue_delete: '/api/system/ue/delete',
         loc_trans: '/loc-trans',
         loc_view: '/loc-view',
     },

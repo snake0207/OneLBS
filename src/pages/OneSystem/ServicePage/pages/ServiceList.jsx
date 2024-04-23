@@ -12,20 +12,19 @@ import { MuiSubButton } from '#/components/common/button/MuiButton'
 
 const ServiceList = () => {
     const navigate = useNavigate()
-    const [isSearchClick, setIsSearchClick] = useState(true)
+    const [isAction, setIsAction] = useState(true)
     const [fetchData, setFetchData] = useState({ count: 0, lists: [] })
     const [queryParams, setQueryParams] = useState({
         page: 1,
         limit: parseInt(import.meta.env.VITE_LIST_PAGE_LIMIT), // 1회 요청에 받을수 있는 데이터 수
     })
     const { data: apiResult } = useGetServices(queryParams, {
-        enabled: true,
+        enabled: isAction,
     })
 
     // 검색 버튼 누른 경우
     const handleSearch = (values) => {
         setFetchData({ count: 0, lists: [] })
-        setIsSearchClick((prev) => !prev)
         setQueryParams({ ...queryParams, ...values, page: 1 })
     }
 
@@ -52,9 +51,9 @@ const ServiceList = () => {
                 setFetchData({ count: totalCount, lists: [...fetchData.lists, ...lists] })
             }
         }
-    }, [apiResult, isSearchClick])
+    }, [queryParams, apiResult])
 
-    console.log('fetchData : ', fetchData)
+    // console.log('fetchData : ', fetchData)
 
     return (
         <Box>

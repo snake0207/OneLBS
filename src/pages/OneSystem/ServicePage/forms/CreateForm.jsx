@@ -37,11 +37,6 @@ import MuiAlert from '#/components/common/popup/MuiAlert'
 const CreateForm = () => {
     const navigate = useNavigate()
     const { mutate, isPending } = usePostServiceRegist()
-    const [serviceType, setServiceType] = useState(0)
-    const [accuracy, setAccuracy] = useState(0)
-    const [posMethod, setPosMethod] = useState(0)
-    const [plane, setPlane] = useState(0)
-    const [mode, setMode] = useState(0)
     const [isOpenServicePopup, setIsOpenServicePopup] = useState(false)
     const [apiSuccess, setApiSuccess] = useState('')
     const [state, setState] = useState({
@@ -86,12 +81,17 @@ const CreateForm = () => {
                         wifi: 'N',
                         pres: 'N',
                         flp: 'N',
+                        ble: 'N',
+                        mag: 'N',
+                        temp: 'N',
+                        light: 'N',
+                        act: 'N',
                     },
                     count: 0,
                 },
             },
         },
-        // validationSchema: registServiceSchema,
+        validationSchema: registServiceSchema,
         onSubmit: (form) => {
             const apiParams = { ...form }
             console.log('onSubmit >> ', JSON.stringify(apiParams, null, 2))
@@ -100,7 +100,7 @@ const CreateForm = () => {
                 {
                     onSuccess: ({ data }) => {
                         console.log('response : ', data)
-                        setApiSuccess(`API RESULT : ${data.id}`)
+                        setApiSuccess(`API RESULT : ${data.message}`)
                     },
                 },
             )
@@ -228,10 +228,8 @@ const CreateForm = () => {
                                 <TableCell component="td">
                                     <Select
                                         name="serviceType"
-                                        value={serviceType}
                                         items={getServiceTypeList()}
                                         formik={formik}
-                                        onChange={(item) => setServiceType(item.value)}
                                         style={{
                                             height: '40px',
                                             width: '100%',
@@ -340,10 +338,8 @@ const CreateForm = () => {
                                 <TableCell component="td">
                                     <Select
                                         name="posConfig.requiredAccuracy"
-                                        value={`posConfig.requiredAccuracy`}
                                         items={getAccuracys()}
                                         formik={formik}
-                                        onChange={(item) => setAccuracy(item.value)}
                                         style={{
                                             height: '40px',
                                             width: '100%',
@@ -394,10 +390,8 @@ const CreateForm = () => {
                                 <TableCell component="td">
                                     <Select
                                         name="posConfig.cellConfig.method"
-                                        value={`posConfig.cellConfig.method`}
                                         items={getPosMethods()}
                                         formik={formik}
-                                        onChange={(item) => setPosMethod(item.value)}
                                         style={{
                                             height: '40px',
                                             fontSize: 14,
@@ -438,10 +432,8 @@ const CreateForm = () => {
                                 <TableCell component="td">
                                     <Select
                                         name="posConfig.gnssConfig.plane"
-                                        value={`posConfig.gnssConfig.plane`}
                                         items={getPlanes()}
                                         formik={formik}
-                                        onChange={(item) => setPlane(item.value)}
                                         style={{
                                             height: '40px',
                                             fontSize: 14,
@@ -456,10 +448,8 @@ const CreateForm = () => {
                                 <TableCell>
                                     <Select
                                         name="posConfig.gnssConfig.mode"
-                                        value={`posConfig.gnssConfig.mode`}
                                         items={getModes()}
                                         formik={formik}
-                                        onChange={(item) => setMode(item.value)}
                                         style={{
                                             height: '40px',
                                             fontSize: 14,
@@ -613,6 +603,81 @@ const CreateForm = () => {
                                             }
                                             value={formik.values.posConfig.ksaConfig.qos.flp}
                                             label={`FLP`}
+                                        />
+                                        <CheckBox
+                                            checked={
+                                                formik.values.posConfig.ksaConfig.qos.ble === 'Y'
+                                                    ? true
+                                                    : false
+                                            }
+                                            onChange={(e) =>
+                                                formik.setFieldValue(
+                                                    'posConfig.ksaConfig.qos.ble',
+                                                    e.target.value === 'Y' ? 'N' : 'Y',
+                                                )
+                                            }
+                                            value={formik.values.posConfig.ksaConfig.qos.ble}
+                                            label={`BLE`}
+                                        />
+                                        <CheckBox
+                                            checked={
+                                                formik.values.posConfig.ksaConfig.qos.mag === 'Y'
+                                                    ? true
+                                                    : false
+                                            }
+                                            onChange={(e) =>
+                                                formik.setFieldValue(
+                                                    'posConfig.ksaConfig.qos.mag',
+                                                    e.target.value === 'Y' ? 'N' : 'Y',
+                                                )
+                                            }
+                                            value={formik.values.posConfig.ksaConfig.qos.mag}
+                                            label={`MAG`}
+                                        />
+                                        <CheckBox
+                                            checked={
+                                                formik.values.posConfig.ksaConfig.qos.temp === 'Y'
+                                                    ? true
+                                                    : false
+                                            }
+                                            onChange={(e) =>
+                                                formik.setFieldValue(
+                                                    'posConfig.ksaConfig.qos.temp',
+                                                    e.target.value === 'Y' ? 'N' : 'Y',
+                                                )
+                                            }
+                                            value={formik.values.posConfig.ksaConfig.qos.temp}
+                                            label={`TEMP`}
+                                        />
+                                        <CheckBox
+                                            checked={
+                                                formik.values.posConfig.ksaConfig.qos.light === 'Y'
+                                                    ? true
+                                                    : false
+                                            }
+                                            onChange={(e) =>
+                                                formik.setFieldValue(
+                                                    'posConfig.ksaConfig.qos.light',
+                                                    e.target.value === 'Y' ? 'N' : 'Y',
+                                                )
+                                            }
+                                            value={formik.values.posConfig.ksaConfig.qos.light}
+                                            label={`LIGHT`}
+                                        />
+                                        <CheckBox
+                                            checked={
+                                                formik.values.posConfig.ksaConfig.qos.act === 'Y'
+                                                    ? true
+                                                    : false
+                                            }
+                                            onChange={(e) =>
+                                                formik.setFieldValue(
+                                                    'posConfig.ksaConfig.qos.act',
+                                                    e.target.value === 'Y' ? 'N' : 'Y',
+                                                )
+                                            }
+                                            value={formik.values.posConfig.ksaConfig.qos.act}
+                                            label={`ACT`}
                                         />
                                     </FormGroup>
                                 </TableCell>

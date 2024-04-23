@@ -1,12 +1,9 @@
 import * as yup from 'yup'
-import t from '#/common/libs/trans.js'
 
 const HELPER_TEXT = {
     userIdRequired: '아이디를 입력해 주세요.',
     userIdMinLength: '8자 이상 입력해 주세요.',
     userIdMaxLength: '12자 이하로 입력해 주세요.',
-    emailRequired: '이메일을 입력해 주세요.',
-    emailNotMatch: '이메일 형식이 맞지 않습니다.',
     passwordRequired: '비밀번호를 입력해 주세요.',
     passwordMinLength: '8자 이상 입력해 주세요.',
     passwordMaxLength: '16자 이하로 입력해 주세요.',
@@ -17,19 +14,10 @@ const HELPER_TEXT = {
     certNumRequired: '휴대폰으로 발송된 인증코드를 입력해 주세요.',
     certNumNotMatch: '6자리 숫자를 입력해 주세요.',
     captchaRequired: '화면에 보이는 보안문자의 정보를 입력해 주세요.',
-    emailCodeNotVerify: '입력하신 인증코드가 유효하지 않습니다.',
-    emailCodeRequired: '이메일 인증코드를 입력해 주세요.',
-    emailCodeTimeOut: '입력 시간이 초과 하였습니다. 재 인증해 주세요.',
-    emailCodeNotMatch: '6자리 숫자를 입력해 주세요.',
     cropNameRequired: '회사명을 입력해 주세요.',
     cropNameLength: '회사명은 한 글자 이상 입력해 주세요.',
-    teamRequired: '팀명을 입력해 주세요.',
-    teamLength: '팀명은 한 글자 이상 입력해 주세요.',
     nameRequired: '이름을 입력해 주세요.',
     nameLength: '한 글자 이상 입력해 주세요.',
-    otpRequired: 'OTP를 입력해 주세요.',
-    otpNotMatch: '6자리 숫자를 입력해 주세요.',
-    searchCountry: '국가를 선택 해 주세요',
     searchLat: '위도를 입력해 주세요',
     searchLng: '경도를 입력해 주세요',
     ipRequired: 'IP 입력해 주세요.',
@@ -39,17 +27,11 @@ const HELPER_TEXT = {
     serviceCodeRequired: '서비스코드를 입력해 주세요.',
     customerNameRequired: '고객사명을 입력해 주세요.',
     cpNameRequired: '서비스 제공사명을 입력해 주세요.',
-    userCheckRequired: '가입자 등록확인을 체크해 주세요.',
-    authCheckRequired: '상호인증확인을 체크해 주세요.',
-    respTimeRequired: '희망응답시간을 입력해 주세요.',
+    requiredTimeoutRequired: '희망응답시간을 입력해 주세요.',
     IntegerRequired: '정수만 입력해 주세요.',
-    cellCheckRequired: '기지국측위 사용여부를 체크해 주세요.',
-    gpsCheckRequired: '위성측위 사용여부를 체크해 주세요.',
-    lppeCheckRequired: 'LPPe 사용여부를 체크해 주세요.',
     lppRespTimeRequired: 'LPP 희망응답시간을 입력해 주세요.',
-    ksaCheckRequired: 'KSA 사용여부를 체크해 주세요.',
-    versionRequired: 'KSA 버전정보를 입력해 주세요.',
-    collectionCountRequired: 'KSA 수집횟수 정보를 입력해 주세요.',
+    verRequired: 'KSA 버전정보를 입력해 주세요.',
+    countRequired: 'KSA 수집횟수를 입력해 주세요.',
 
     ueNameRequired: '모델명을 입력해 주세요.',
     ueCodeRequired: '코드명을 입력해 주세요.',
@@ -57,7 +39,9 @@ const HELPER_TEXT = {
     suplVersionRequired: 'SUPL Ver정보 입력해 주세요.',
     ksaVersionRequired: 'KSA Ver정보 입력해 주세요.',
 
+    phoneNumberNotMatch: '10~11자리 숫자를 입력해 주세요.',
     phoneNumberRequired: '전화번호를 입력해 주세요.',
+    smsContentRequired: 'SMS 발송문구를 입력해 주세요.',
 }
 
 const REGEXP = {
@@ -80,7 +64,7 @@ export const loginSchema = yup.object({
     certNum: yup
         .string()
         .matches(REGEXP.verifyCode, HELPER_TEXT.certNumNotMatch)
-        .required(HELPER_TEXT.authCodeRequired),
+        .required(HELPER_TEXT.certNumRequired),
     captcha: yup.string().required(HELPER_TEXT.captchaRequired),
 })
 
@@ -91,25 +75,33 @@ export const registServiceSchema = yup.object({
     serviceCode: yup.string().required(HELPER_TEXT.serviceCodeRequired),
     customerName: yup.string().required(HELPER_TEXT.customerNameRequired),
     cpName: yup.string().required(HELPER_TEXT.cpNameRequired),
-    // userCheck: yup.string().required(HELPER_TEXT.userCheckRequired),
-    // authCheck: yup.string().required(HELPER_TEXT.authCheckRequired),
-    // respTime: yup
-    //     .string()
-    //     .matches(/^\d+$/, HELPER_TEXT.IntegerRequired)
-    //     .required(HELPER_TEXT.respTimeRequired),
-    // cellCheck: yup.string().required(HELPER_TEXT.cellCheckRequired),
-    // gpsCheck: yup.string().required(HELPER_TEXT.gpsCheckRequired),
-    // lppeCheck: yup.string().required(HELPER_TEXT.lppeCheckRequired),
-    // lppRespTime: yup
-    //     .string()
-    //     .matches(/^\d+$/, HELPER_TEXT.IntegerRequired)
-    //     .required(HELPER_TEXT.lppRespTimeRequired),
-    // ksaCheck: yup.string().required(HELPER_TEXT.ksaCheckRequired),
-    // version: yup.string().required(HELPER_TEXT.versionRequired),
-    // collectionCount: yup
-    //     .string()
-    //     .matches(/^[1-9]$|10$/, `1부터 10까지의 ` + HELPER_TEXT.IntegerRequired)
-    //     .required(HELPER_TEXT.collectionCountRequired),
+    smsCallbackNumber: yup
+        .string()
+        .matches(REGEXP.phoneNumber, HELPER_TEXT.phoneNumberNotMatch)
+        .required(HELPER_TEXT.phoneNumberRequired),
+    smsContent: yup.string().required(HELPER_TEXT.smsContentRequired),
+    posConfig: yup.object({
+        requiredTimeout: yup
+            .string()
+            .matches(/^\d+$/, HELPER_TEXT.IntegerRequired)
+            .required(HELPER_TEXT.requiredTimeoutRequired),
+        gnssConfig: yup.object({
+            lppRespTime: yup
+                .string()
+                .matches(/^\d+$/, HELPER_TEXT.IntegerRequired)
+                .required(HELPER_TEXT.lppRespTimeRequired),
+        }),
+        ksaConfig: yup.object({
+            ver: yup
+                .string()
+                .matches(/^\d+$/, HELPER_TEXT.IntegerRequired)
+                .required(HELPER_TEXT.verRequired),
+            count: yup
+                .string()
+                .matches(/^[1-9]$|10$/, `1부터 10까지의 ` + HELPER_TEXT.IntegerRequired)
+                .required(HELPER_TEXT.countRequired),
+        }),
+    }),
 })
 
 // 단말모델 등록, 수정 화면에서 사용
@@ -132,51 +124,4 @@ export const registUserSchema = yup.object({
         .required(HELPER_TEXT.userIdRequired),
     cropName: yup.string().required(HELPER_TEXT.cropNameRequired),
     ipAddr_1: yup.string().required(HELPER_TEXT.ipRequired),
-})
-
-export const otpSchema = yup.object({
-    code: yup
-        .string()
-        .matches(REGEXP.verifyCode, HELPER_TEXT.otpNotMatch)
-        .required(HELPER_TEXT.otpRequired),
-})
-
-export const mapSearchSchema = yup.object({
-    country: yup.array().of(yup.string()).min(1, HELPER_TEXT.searchCountry),
-    lat: yup
-        .string()
-        .matches(REGEXP.coordinates, HELPER_TEXT.searchLat)
-        .required(HELPER_TEXT.searchLat),
-    lon: yup
-        .string()
-        .matches(REGEXP.coordinates, HELPER_TEXT.searchLng)
-        .required(HELPER_TEXT.searchLng),
-})
-
-export const passwordChangeSchema = yup.object({
-    currentPassword: yup
-        .string()
-        .min(8, HELPER_TEXT.passwordMinLength)
-        .max(16, HELPER_TEXT.passwordMaxLength)
-        .matches(REGEXP.passwordIncludeChar, HELPER_TEXT.passwordNotIncludeChar)
-        .matches(REGEXP.passwordIncludeUppercase, HELPER_TEXT.passwordNotIncludeUppercase)
-        .matches(REGEXP.passwordIncludeNumber, HELPER_TEXT.passwordNotIncludeNumber)
-        .required(HELPER_TEXT.passwordRequired),
-    password: yup
-        .string()
-        .min(8, HELPER_TEXT.passwordMinLength)
-        .max(16, HELPER_TEXT.passwordMaxLength)
-        .matches(REGEXP.passwordIncludeChar, HELPER_TEXT.passwordNotIncludeChar)
-        .matches(REGEXP.passwordIncludeUppercase, HELPER_TEXT.passwordNotIncludeUppercase)
-        .matches(REGEXP.passwordIncludeNumber, HELPER_TEXT.passwordNotIncludeNumber)
-        .required(HELPER_TEXT.passwordRequired),
-    confirmPassword: yup
-        .string()
-        .min(8, HELPER_TEXT.passwordMinLength)
-        .max(16, HELPER_TEXT.passwordMaxLength)
-        .matches(REGEXP.passwordIncludeChar, HELPER_TEXT.passwordNotIncludeChar)
-        .matches(REGEXP.passwordIncludeUppercase, HELPER_TEXT.passwordNotIncludeUppercase)
-        .matches(REGEXP.passwordIncludeNumber, HELPER_TEXT.passwordNotIncludeNumber)
-        .oneOf([yup.ref('password'), null], HELPER_TEXT.confirmPasswordNotMatch)
-        .required(HELPER_TEXT.passwordRequired),
 })

@@ -125,7 +125,7 @@ const EditForm = () => {
         }))
     }
 
-    console.log('ueCodes : ', ueCodes)
+    console.log('state.row : ', row)
 
     return (
         <Box>

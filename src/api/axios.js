@@ -1,6 +1,7 @@
 import axios from 'axios'
 import qs from 'qs'
 import auth from '#/api/auth'
+// import { useAuthActions } from '#/store/useAuthStore'
 
 export const axiosInstance = axios.create({
     baseURL: import.meta.env.VITE_GW_BASE_URL,
@@ -27,6 +28,7 @@ axiosInstance.interceptors.request.use(
 axiosInstance.interceptors.response.use(
     (response) => response,
     async (error) => {
+        console.log('response error : ', error)
         // if (error.response.status) {
         //     const prevRequest = error.config
         //     prevRequest._retry = true
@@ -34,7 +36,7 @@ axiosInstance.interceptors.response.use(
         // const newAccessToken = await auth.postRenewToken()
 
         //     prevRequest.headers.Authorization = `Bearer ${newAccessToken}`
-        //     useAuthStore.setState({ accessToken: newAccessToken })
+        // useAuthStore.setState({ accessToken: newAccessToken })
 
         //     return axiosInstance(prevRequest)
         // }

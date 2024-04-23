@@ -36,12 +36,15 @@ const UeModelList = () => {
 
     // row 클릭한 경우 상세 페이지 노출
     const handleSelectRow = ({ row }) => {
+        console.log('Row Clicked : ', row)
+        // if (row.modelCode)
         navigate('/system/ue/edit', { state: { row: row } })
     }
 
-    const handleRowSelectionChange = (checkArrs) => {
-        console.log('checkArrs : ', checkArrs)
-        setDeleteUEs({ ueCodes: [...checkArrs] })
+    const handleRowSelectionChange = (selectionModel) => {
+        console.log('selectionModel : ', selectionModel)
+
+        // setDeleteUEs({ ueCodes: [...selectionModel] })
     }
 
     // 리스트 하단의 페이지 이동 버튼 click시 동작

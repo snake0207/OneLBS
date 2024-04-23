@@ -20,6 +20,11 @@ const postServiceUpdate = (data) => {
     return postAPI({ endPoint: API_PATH.system.service_update, data })
 }
 
+const postServiceDelete = (data) => {
+    console.log(data)
+    return postAPI({ endPoint: API_PATH.system.service_delete, data })
+}
+
 // 단말 모델 관리
 const postRegistUE = (data) => {
     console.log('postRegistUE : ', data)
@@ -59,6 +64,7 @@ export default {
     getServices,
     postServiceRegist,
     postServiceUpdate,
+    postServiceDelete,
     getServiceCode,
     postRegistUE,
     getUEs,

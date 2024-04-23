@@ -58,7 +58,7 @@ const SearchPopup = ({ isOpen, draggable = true, title, onCancel, onConfirm }) =
 
     useEffect(() => {
         if (apiResult) {
-            const msg = `* 조회하신 ${queryParams.serviceCode} 는 ${apiResult.result === '0000' ? '사용가능 합니다.' : '이미 사용중 입니다.'}`
+            const msg = `* 조회하신 [${queryParams.serviceCode}]는 ${apiResult.code === '0000' ? '사용가능 합니다.' : '이미 사용중 입니다.'}`
             setMessage(msg)
             setIsFetchState(false)
         }
@@ -83,7 +83,7 @@ const SearchPopup = ({ isOpen, draggable = true, title, onCancel, onConfirm }) =
                 }}
             />
             <DialogContent dividers={false}>
-                <Stack direction="row" mb={2}>
+                <Stack direction="row" mb={2} mt={1}>
                     <TextInput name="serviceCode" formik={formik} />
                     <MuiSubButton name="search" title="검색" onClick={formik.handleSubmit} />
                 </Stack>
@@ -99,7 +99,7 @@ const SearchPopup = ({ isOpen, draggable = true, title, onCancel, onConfirm }) =
                 <Button size="large" color="error" onClick={handleCancel}>
                     취소
                 </Button>
-                {apiResult?.result === '0000' && (
+                {apiResult?.code === '0000' && (
                     <Button
                         size="large"
                         color="primary"

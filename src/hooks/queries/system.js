@@ -33,6 +33,12 @@ export const usePostServiceUpdate = () => {
         mutationFn: system.postServiceUpdate,
     })
 }
+// 서비스 삭제
+export const usePostServiceDelete = () => {
+    return useMutation({
+        mutationFn: system.postServiceDelete,
+    })
+}
 
 // ----------------- Start 단말 모델 관리 ----------------------------------
 // 단말 모델 리스트

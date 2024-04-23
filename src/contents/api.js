@@ -23,6 +23,7 @@ export const API_PATH = {
         service_regist: '/api/system/service/regist',
         service_list: '/api/system/service/list',
         service_update: '/api/system/service/modify',
+        service_delete: '/api/system/service/delete',
         service_code: '/api/system/service/check',
         ue_regist: '/api/system/ue/regist',
         ue_list: '/api/system/ue/list',

@@ -40,7 +40,6 @@ export const columns = [
         field: 'serviceType',
         headerName: '서비스 유형',
         flex: 1,
-        align: 'center',
         renderCell: (params) => {
             return <Typography>{getServiceTypeLabel[params.row.serviceType].label}</Typography>
         },

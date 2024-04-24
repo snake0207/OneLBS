@@ -1,6 +1,6 @@
 import { MuiSubButton } from '#/components/common/button/MuiButton'
 import TextInput from '#/components/common/input/TextInput'
-import { useGetServiceCode } from '#/hooks/queries/system'
+import { useGetUECodeDup } from '#/hooks/queries/system'
 import {
     Button,
     Dialog,
@@ -9,7 +9,6 @@ import {
     DialogTitle,
     Paper,
     Stack,
-    TextField,
     Typography,
 } from '@mui/material'
 import { useFormik } from 'formik'
@@ -38,7 +37,7 @@ const SearchPopup = ({ isOpen, draggable = true, title, onCancel, onConfirm }) =
         serviceCode: '',
     })
 
-    const { data: apiResult } = useGetServiceCode(queryParams, {
+    const { data: apiResult } = useGetUECodeDup(queryParams, {
         enabled: isFetchState,
     })
 
@@ -49,7 +48,7 @@ const SearchPopup = ({ isOpen, draggable = true, title, onCancel, onConfirm }) =
 
     const formik = useFormik({
         initialValues: {
-            serviceCode: '',
+            modelCode: '',
         },
         onSubmit: (values) => {
             setIsFetchState(true)
@@ -59,7 +58,7 @@ const SearchPopup = ({ isOpen, draggable = true, title, onCancel, onConfirm }) =
 
     useEffect(() => {
         if (apiResult) {
-            const msg = `* 조회하신 ${queryParams.serviceCode} 는 ${apiResult.result === '0000' ? '사용가능 합니다.' : '이미 사용중 입니다.'}`
+            const msg = `* 조회하신 ${queryParams.modelCode} 는 ${apiResult.code === '0000' ? '사용가능 합니다.' : '이미 사용중 입니다.'}`
             setMessage(msg)
             setIsFetchState(false)
         }
@@ -84,8 +83,8 @@ const SearchPopup = ({ isOpen, draggable = true, title, onCancel, onConfirm }) =
                 }}
             />
             <DialogContent dividers={false}>
-                <Stack direction="row" mb={2}>
-                    <TextInput name="serviceCode" formik={formik} />
+                <Stack direction="row" mb={2} mt={1}>
+                    <TextInput name="modelCode" formik={formik} />
                     <MuiSubButton name="search" title="검색" onClick={formik.handleSubmit} />
                 </Stack>
                 {apiResult && (
@@ -100,13 +99,13 @@ const SearchPopup = ({ isOpen, draggable = true, title, onCancel, onConfirm }) =
                 <Button size="large" color="error" onClick={handleCancel}>
                     취소
                 </Button>
-                {apiResult?.result === '0000' && (
+                {apiResult?.code === '0000' && (
                     <Button
                         size="large"
                         color="primary"
                         onClick={() => {
                             setOpen(false)
-                            onConfirm(queryParams.serviceCode)
+                            onConfirm(queryParams.modelCode)
                         }}
                         autoFocus
                     >

@@ -12,21 +12,22 @@ import { MuiSubButton } from '#/components/common/button/MuiButton'
 
 const ServiceList = () => {
     const navigate = useNavigate()
-    const [isSearchClick, setIsSearchClick] = useState(true)
+    const [isQueryState, setIsQueryState] = useState(true)
     const [fetchData, setFetchData] = useState({ count: 0, lists: [] })
     const [queryParams, setQueryParams] = useState({
         page: 1,
         limit: parseInt(import.meta.env.VITE_LIST_PAGE_LIMIT), // 1회 요청에 받을수 있는 데이터 수
+        cache: Math.random(),
     })
-    const { data: apiResult, refetch } = useGetServices(queryParams, {
-        enabled: true,
+    const { data: apiResult } = useGetServices(queryParams, {
+        enabled: isQueryState,
     })
 
     // 검색 버튼 누른 경우
     const handleSearch = (values) => {
         setFetchData({ count: 0, lists: [] })
-        setIsSearchClick((prev) => !prev)
         setQueryParams({ ...queryParams, ...values, page: 1 })
+        setIsQueryState(true)
     }
 
     // row 클릭한 경우 상세 페이지 노출
@@ -41,18 +42,19 @@ const ServiceList = () => {
 
         if (currPage > 0 && rowCount >= fetchData.lists.length) {
             setQueryParams({ ...queryParams, page: queryParams.page + 1 })
+            setIsQueryState(true)
         }
     }
 
     useEffect(() => {
-        if (apiResult) {
-            console.log('apiResult : ', apiResult)
+        if (isQueryState && apiResult) {
             if (apiResult?.code === '0000') {
                 const { totalCount, lists } = apiResult?.data
+                setIsQueryState(false)
                 setFetchData({ count: totalCount, lists: [...fetchData.lists, ...lists] })
             }
         }
-    }, [apiResult, isSearchClick])
+    }, [apiResult, queryParams])
 
     // console.log('fetchData : ', fetchData)
 

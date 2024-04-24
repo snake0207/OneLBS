@@ -6,8 +6,8 @@ const getServices = (data) => {
     return getAPI({ endPoint: API_PATH.system.service_list, data })
 }
 
-const getServiceCode = (data) => {
-    return getAPI({ endPoint: API_PATH.system.service_code, data })
+const getServiceCodeDup = (data) => {
+    return getAPI({ endPoint: API_PATH.system.service_dup, data })
 }
 
 const postServiceRegist = (data) => {
@@ -29,6 +29,11 @@ const postServiceDelete = (data) => {
 const postRegistUE = (data) => {
     console.log('postRegistUE : ', data)
     return postAPI({ endPoint: API_PATH.system.ue_regist, data })
+}
+
+// 단말 모델 중복 체크
+const getUECodeDup = (data) => {
+    return getAPI({ endPoint: API_PATH.system.ue_dup, data })
 }
 
 const getUEs = (data) => {
@@ -65,8 +70,9 @@ export default {
     postServiceRegist,
     postServiceUpdate,
     postServiceDelete,
-    getServiceCode,
+    getServiceCodeDup,
     postRegistUE,
+    getUECodeDup,
     getUEs,
     postUpdateUE,
     postDeleteUEs,

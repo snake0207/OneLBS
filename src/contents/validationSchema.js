@@ -30,8 +30,8 @@ const HELPER_TEXT = {
     requiredTimeoutRequired: '희망응답시간을 입력해 주세요.',
     IntegerRequired: '정수만 입력해 주세요.',
     lppRespTimeRequired: 'LPP 희망응답시간을 입력해 주세요.',
-    verRequired: 'KSA 버전정보를 입력해 주세요.',
-    countRequired: 'KSA 수집횟수를 입력해 주세요.',
+    verRequired: '버전정보를 입력해 주세요.',
+    countRequired: '수집횟수를 입력해 주세요.',
 
     modelCodeRequired: '모델코드명을 입력해 주세요.',
     noteRequired: '비고란을 입력해 주세요.',

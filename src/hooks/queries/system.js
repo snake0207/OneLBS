@@ -15,8 +15,8 @@ export const useGetServices = (queryParams = {}, options) => {
 // 서비스 등록 시 코드 중복 체크
 export const useGetServiceCodeDup = (queryParams = {}, options) => {
     const { data } = useQuery({
-        queryKey: ['get-service-code', queryParams],
-        queryFn: () => system.getServiceCode(queryParams),
+        queryKey: ['get-service-dup', queryParams],
+        queryFn: () => system.getServiceCodeDup(queryParams),
         ...options,
     })
     return { data: data?.data }
@@ -47,10 +47,13 @@ export const usePostServiceDelete = () => {
 // ----------------- Start 단말 모델 관리 ----------------------------------
 // 단말 모델 리스트
 export const useGetUEs = (queryParams = {}, options) => {
-    console.log('useGetUEs : ', queryParams, options)
+    const queryClient = useQueryClient()
     const { data, isLoading, refetch } = useQuery({
         queryKey: ['get-ue-lists', queryParams],
         queryFn: () => system.getUEs(queryParams),
+        onSuccess: () => {
+            queryClient.invalidateQueries({ queryKey: ['get-ue-lists'] })
+        },
         ...options,
     })
     return { data: data?.data, isLoading, refetch }
@@ -75,6 +78,16 @@ export const usePostRegistUE = () => {
     return useMutation({
         mutationFn: system.postRegistUE,
     })
+}
+// 단말 도델 중복 체크
+// 서비스 등록 시 코드 중복 체크
+export const useGetUECodeDup = (queryParams = {}, options) => {
+    const { data } = useQuery({
+        queryKey: ['get-ue-dup', queryParams],
+        queryFn: () => system.getUECodeDup(queryParams),
+        ...options,
+    })
+    return { data: data?.data }
 }
 // 단말 모델 업데이트
 export const usePostUpdateUE = () => {

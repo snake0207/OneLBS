@@ -18,7 +18,7 @@ const getToken = () => {
 axiosInstance.interceptors.request.use(
     (config) => {
         const accessToken = getToken()
-        accessToken && console.log('accessToken : ', accessToken)
+        // accessToken && console.log('accessToken : ', accessToken)
         if (accessToken) config.headers.Authorization = `Bearer ${accessToken}`
         return config
     },

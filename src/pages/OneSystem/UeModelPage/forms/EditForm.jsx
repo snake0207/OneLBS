@@ -42,14 +42,13 @@ const EditForm = () => {
                     lppa: row?.posConfig.cellConfig.lppa || 'N',
                 },
                 gnssConfig: {
-                    cp: row?.posConfig?.gnssConfig?.cp || 'N',
-                    emergencyFlag: row?.posConfig?.gnssConfig?.emergencyFlag || 'N',
-                    lppe: row?.posConfig?.gnssConfig?.lppe || 'N',
                     msa: row?.posConfig?.gnssConfig?.msa || 'N',
                     msb: row?.posConfig?.gnssConfig?.msb || 'N',
+                    cp: row?.posConfig?.gnssConfig?.cp || 'N',
+                    lppe: row?.posConfig?.gnssConfig?.lppe || 'N',
                     suplVer: row?.posConfig?.gnssConfig?.suplVer,
                     tls: row?.posConfig?.gnssConfig?.tls || 'N',
-                    up: row?.posConfig?.gnssConfig?.up || 'N',
+                    emergencyFlag: row?.posConfig?.gnssConfig?.emergencyFlag || 'N',
                 },
                 ksaConfig: {
                     ver: row?.posConfig?.ksaConfig?.ver || 0,
@@ -79,7 +78,7 @@ const EditForm = () => {
     const handleDeleteSubmit = () => {
         console.log('handleDeleteSubmit...')
         mutateDelete(
-            { modelCodeList: [row?.modelCode] },
+            { modelCode: [row?.modelCode] },
             {
                 onSuccess: ({ data }) => {
                     console.log('delete-response : ', data)
@@ -117,7 +116,7 @@ const EditForm = () => {
         }))
     }
 
-    console.log('state.row : ', row)
+    // console.log('state.row : ', row)
 
     return (
         <Box>
@@ -216,7 +215,7 @@ const EditForm = () => {
                                         }
                                         onChange={(e) => {
                                             formik.setFieldValue(
-                                                'posConfig.cellConfig.lpp',
+                                                'posConfig.cellConfig.lppa',
                                                 e.target.value === 'Y' ? 'N' : 'Y',
                                             )
                                         }}
@@ -431,9 +430,9 @@ const EditForm = () => {
             {apiSuccess && (
                 <MuiAlert
                     msg={apiSuccess}
-                    autoHideDuration={5000}
+                    autoHideDuration={3000}
                     callback={() => {
-                        setApiSuccess(false)
+                        setApiSuccess('')
                         navigate('/system/ue/list')
                     }}
                 />

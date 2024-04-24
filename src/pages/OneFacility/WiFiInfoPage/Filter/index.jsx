@@ -5,27 +5,13 @@ import { MuiSubButton } from '#/components/common/button/MuiButton'
 
 import style from './style.module'
 import Select from '#/components/common/Select'
-import DatePickerInput from '#/components/common/input/DatePickerInput'
-import TimePickerInput from '#/components/common/input/TimePickerInput'
-import CheckBox from '#/components/common/input/CheckBox'
 import TextInput from '#/components/common/input/TextInput'
-
-const sourceTypeList = () => [
-    { key: 0, value: 0, label: `WiNG` },
-    { key: 1, value: 1, label: `CS` },
-    { key: 2, value: 2, label: `VOC` },
-]
-
-const sourceTypeLabel = {
-    0: { label: 'WiNG' },
-    1: { label: 'CS' },
-    2: { label: 'VOC' },
-}
+import { wifiSourceTypeList } from '#/common/libs/facility'
 
 function SearchFilter({ onSearch }) {
     const formik = useFormik({
         initialValues: {
-            sourceType: 0,
+            wifiSourceType: 'W',
             mac: '',
         },
         onSubmit: (values) => {
@@ -41,9 +27,9 @@ function SearchFilter({ onSearch }) {
                         <TableCell style={style.cellTitle}>{`시설구분`}</TableCell>
                         <TableCell style={style.cellInput}>
                             <Select
-                                name={'sourceType'}
+                                name={'wifiSourceType'}
                                 formik={formik}
-                                items={sourceTypeList()}
+                                items={wifiSourceTypeList()}
                                 sx={{
                                     width: '100%',
                                     height: 40,
@@ -59,6 +45,7 @@ function SearchFilter({ onSearch }) {
                         </TableCell>
                         <TableCell align="right">
                             <MuiSubButton
+                                disabled={!formik.values.mac}
                                 name="search"
                                 title="검색"
                                 onClick={formik.handleSubmit}

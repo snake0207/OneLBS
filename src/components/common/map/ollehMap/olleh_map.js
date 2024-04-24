@@ -23,12 +23,12 @@ const drawMarker = (_mapInstance, iconUrl, locations, bounceMarker, onMarkerClic
     const locArrs = locations[0].latitude > 0 ? locations : [initPosKT]
     locArrs.map((loc) => {
         const _marker =
-            loc.id && loc.id === bounceMarker.id
+            loc.id && loc.cellid === bounceMarker.cellid
                 ? setBounceMarker(loc)
                 : setIconMarker(loc, iconUrl)
         if (typeof onMarkerClick === 'function') {
             _marker.onEvent('click', () => {
-                onMarkerClick(loc.id)
+                onMarkerClick(loc.cellid)
             })
         }
         _marker.setMap(_mapInstance)

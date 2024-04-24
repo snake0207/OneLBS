@@ -148,7 +148,7 @@ const EditForm = () => {
                                     {`모델 코드`}
                                 </TableCell>
                                 <TableCell component="td" colSpan={3}>
-                                    <TextInput name="modelCode" formik={formik} />
+                                    <TextInput name="modelCode" formik={formik} IsDisabled />
                                 </TableCell>
                             </TableRow>
                             <TableRow>

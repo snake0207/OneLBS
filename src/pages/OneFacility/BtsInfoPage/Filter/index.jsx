@@ -1,47 +1,23 @@
 import { useFormik } from 'formik'
-import { Box, Stack, Table, TableCell, TableHead, TableRow, Typography } from '@mui/material'
+import { Box, Table, TableCell, TableHead, TableRow } from '@mui/material'
 
 import { MuiSubButton } from '#/components/common/button/MuiButton'
 
 import style from './style.module'
 import Select from '#/components/common/Select'
-import DatePickerInput from '#/components/common/input/DatePickerInput'
-import TimePickerInput from '#/components/common/input/TimePickerInput'
-import CheckBox from '#/components/common/input/CheckBox'
 import TextInput from '#/components/common/input/TextInput'
-
-const networkTypeList = () => [
-    { key: 0, value: 0, label: `LTE` },
-    { key: 1, value: 1, label: `3G` },
-    { key: 2, value: 2, label: `5G` },
-]
-
-const networkTypeLabel = {
-    0: { label: 'LTE' },
-    1: { label: '3G' },
-    2: { label: '5G' },
-}
-
-const telecomTypeList = () => [
-    { key: 0, value: 0, label: `KT` },
-    { key: 1, value: 1, label: `SKT` },
-    { key: 2, value: 2, label: `U+` },
-]
-const telecomTypeLabel = {
-    0: { label: 'KT' },
-    1: { label: 'SKT' },
-    2: { label: 'U+' },
-}
+import { mncTypeList, networkTypeList } from '#/common/libs/facility'
 
 function SearchFilter({ onSearch }) {
     const formik = useFormik({
         initialValues: {
-            networkType: 0,
-            telecomType: 0,
-            cellid: '',
+            network: 'C4',
+            mnc: '08',
+            cellId: '',
         },
         onSubmit: (values) => {
-            if (onSearch) onSearch({ ...values })
+            const _mnc = values.network !== 'LTE' ? '08' : values.mnc
+            if (onSearch) onSearch({ ...values, mnc: _mnc })
         },
     })
 
@@ -53,7 +29,7 @@ function SearchFilter({ onSearch }) {
                         <TableCell style={style.cellTitle}>{`시설구분`}</TableCell>
                         <TableCell style={style.cellInput}>
                             <Select
-                                name={'networkType'}
+                                name={'network'}
                                 formik={formik}
                                 items={networkTypeList()}
                                 sx={{
@@ -64,26 +40,29 @@ function SearchFilter({ onSearch }) {
                                 }}
                             />
                         </TableCell>
-                        <TableCell style={style.cellInput}>
-                            <Select
-                                name={'telecomType'}
-                                formik={formik}
-                                items={telecomTypeList()}
-                                sx={{
-                                    width: '100%',
-                                    height: 40,
-                                    backgroundColor: 'form.main',
-                                    borderRadius: '4px',
-                                }}
-                            />
-                        </TableCell>
+                        {formik.values.network === 'C4' && (
+                            <TableCell style={style.cellInput}>
+                                <Select
+                                    name={'mnc'}
+                                    formik={formik}
+                                    items={mncTypeList()}
+                                    sx={{
+                                        width: '100%',
+                                        height: 40,
+                                        backgroundColor: 'form.main',
+                                        borderRadius: '4px',
+                                    }}
+                                />
+                            </TableCell>
+                        )}
                         <TableCell />
                         <TableCell style={style.cellTitle}>{`Cell-ID`}</TableCell>
                         <TableCell style={{ width: '20%' }}>
-                            <TextInput name="cellid" formik={formik} />
+                            <TextInput name="cellId" formik={formik} />
                         </TableCell>
                         <TableCell align="right">
                             <MuiSubButton
+                                disabled={!formik.values.cellId}
                                 name="search"
                                 title="검색"
                                 onClick={formik.handleSubmit}

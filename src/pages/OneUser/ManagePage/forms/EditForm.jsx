@@ -39,11 +39,11 @@ const EditForm = () => {
             cropName: row?.cropName,
             authType: row?.authType,
             phoneNum: row?.phoneNum || '',
-            ipAddr_1: row?.ipAddr_1 || '',
-            ipAddr_2: row?.ipAddr_2 || '',
-            ipAddr_3: row?.ipAddr_3 || '',
-            ipAddr_4: row?.ipAddr_4 || '',
-            ipAddr_5: row?.ipAddr_5 || '',
+            ipAddr_1: row?.ipAddr[0] || '',
+            ipAddr_2: row?.ipAddr[1] || '',
+            ipAddr_3: row?.ipAddr[2] || '',
+            ipAddr_4: row?.ipAddr[3] || '',
+            ipAddr_5: row?.ipAddr[4] || '',
         },
         validationSchema: registUserSchema,
         onSubmit: (form) => {
@@ -69,7 +69,7 @@ const EditForm = () => {
                 {
                     onSuccess: ({ data }) => {
                         console.log('update-response : ', data)
-                        setApiSuccess(`UPDATE RESULT : ${data?.data}(${data?.code})`)
+                        setApiSuccess(`UPDATE RESULT : ${data?.data}`)
                     },
                 },
             )
@@ -83,7 +83,7 @@ const EditForm = () => {
             {
                 onSuccess: ({ data }) => {
                     console.log('delete-response : ', data)
-                    setApiSuccess(`DELETE RESULT : ${data?.data}(${data?.code})`)
+                    setApiSuccess(`DELETE RESULT : ${data?.data}`)
                 },
             },
         )
@@ -91,7 +91,6 @@ const EditForm = () => {
 
     // 수정, 삭제 버튼 click시 공통으로 실행
     const handleFormikSubmit = () => {
-        console.log('state : ', state)
         state.edit && formik.handleSubmit() // 수정
         state.delete && handleDeleteSubmit() // 삭제
         handleStateReset()
@@ -260,11 +259,8 @@ const EditForm = () => {
             {apiSuccess && (
                 <MuiAlert
                     msg={apiSuccess}
-                    autoHideDuration={5000}
-                    callback={() => {
-                        setApiSuccess(false)
-                        navigate('/user/manage/list')
-                    }}
+                    autoHideDuration={3000}
+                    callback={() => navigate('/user/manage/list')}
                 />
             )}
         </Box>

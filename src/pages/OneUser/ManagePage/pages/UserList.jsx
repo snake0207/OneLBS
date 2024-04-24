@@ -13,9 +13,8 @@ import { usePostUserList } from '#/hooks/queries/user'
 const UserList = () => {
     const navigate = useNavigate()
     const [fetchData, setFetchData] = useState({ count: 0, lists: [] })
-    const [isAction, setIsAction] = useState(true)
+    const [isQueryState, setIsQueryState] = useState(true)
     const [queryParams, setQueryParams] = useState({
-        userId: '',
         authType: 'T',
         page: 1,
         limit: parseInt(import.meta.env.VITE_LIST_PAGE_LIMIT), // 1회 요청에 받을수 있는 데이터 수
@@ -30,6 +29,7 @@ const UserList = () => {
             ...values,
             page: 1,
         })
+        setIsQueryState(true)
     }
 
     // row 클릭한 경우 상세 페이지 노출
@@ -44,13 +44,12 @@ const UserList = () => {
 
         if (currPage > 0 && rowCount >= fetchData.lists.length) {
             setQueryParams({ ...queryParams, page: queryParams.page + 1 })
+            setIsQueryState(true)
         }
     }
 
     useEffect(() => {
-        console.log('callApi ...')
-        console.log('SEND queryParams : ', queryParams)
-        isAction &&
+        if (isQueryState) {
             searchMutate(
                 { ...queryParams },
                 {
@@ -59,6 +58,7 @@ const UserList = () => {
                         // data.data의 결과값을 확인 후 필요한 처리 수행
                         if (data?.code === '0000') {
                             const { totalCount, lists } = data?.data
+                            setIsQueryState(false)
                             setFetchData({
                                 count: totalCount,
                                 lists: [...fetchData.lists, ...lists],
@@ -67,9 +67,8 @@ const UserList = () => {
                     },
                 },
             )
+        }
     }, [queryParams])
-
-    console.log('fetchData : ', fetchData)
 
     return (
         <Box>

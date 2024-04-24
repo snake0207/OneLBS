@@ -44,12 +44,12 @@ export const API_PATH = {
         user_history: '/api/users/history', //
     },
     facility: {
-        wifi_search: '/facility-wifi-search',
-        wifi_regist: '/facility-wifi-regist',
-        wifi_delete: '/facility-wifi-delete',
-        wifi_update: '/facility-wifi-update',
-        bts_search: '/facility-bts-search',
-        sync_history: '/facility-sync-history',
+        wifi_search: '/api/facilities/wifi/detail',
+        wifi_regist: '/api/facilities/wifi/regist',
+        wifi_delete: '/api/facilities/wifi/delete',
+        wifi_update: '/api/facilities/wifi/modify',
+        bts_search: '/api/facilities/bts/detail',
+        sync_history: '/api/facilities/history/list',
     },
     service: {
         history_detail: '/api/service/history/detail',

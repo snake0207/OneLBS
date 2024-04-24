@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react'
-import { useNavigate } from 'react-router'
 import { Box, Table, TableHead, TableRow, TableCell, Typography, TableBody } from '@mui/material'
 import PlaylistAddCheckOutlinedIcon from '@mui/icons-material/PlaylistAddCheckOutlined'
 
@@ -29,23 +28,17 @@ const TitleArea = ({ title }) => {
 }
 
 const DetailForm = () => {
-    const navigate = useNavigate()
     const [isSearchClick, setIsSearchClick] = useState(false)
-    const [queryParams, setQueryParams] = useState({
-        page: 1,
-        limit: 50, // 1회 요청에 받을수 있는 데이터 수
+    const [queryParams, setQueryParams] = useState({})
+    const { data: apiResult } = useGetFacilityBtsSearch(queryParams, {
+        enabled: isSearchClick,
     })
-    const { data: apiResult } = useGetFacilityBtsSearch(
-        { queryParams },
-        {
-            enabled: isSearchClick,
-        },
-    )
 
     // 검색 버튼 누른 경우
     const handleSearch = (values) => {
+        console.log('values : ', values)
         setIsSearchClick(true)
-        setQueryParams({ ...queryParams, ...values, page: 1 })
+        setQueryParams({ ...queryParams, ...values })
     }
 
     useEffect(() => {
@@ -66,41 +59,53 @@ const DetailForm = () => {
                         {/* row - 1, #009ACC */}
                         <TableRow>
                             <TableCell style={style.cellTitle}>{`Cell-ID`}</TableCell>
-                            <TableCell style={style.cellInput}>{apiResult?.cellid}</TableCell>
+                            <TableCell style={style.cellInput}>{apiResult?.data?.cellId}</TableCell>
                             <TableCell style={style.cellTitle}>{`MCC`}</TableCell>
-                            <TableCell style={style.cellInput}>{apiResult?.mcc}</TableCell>
+                            <TableCell style={style.cellInput}>{apiResult?.data?.mcc}</TableCell>
                             <TableCell style={style.cellTitle}>{`MNC`}</TableCell>
-                            <TableCell style={{ width: '20%' }}>{apiResult?.mnc}</TableCell>
+                            <TableCell style={{ width: '20%' }}>{apiResult?.data?.mnc}</TableCell>
                             <TableCell style={style.cellTitle}>{`PCI`}</TableCell>
-                            <TableCell style={{ width: '20%' }}>{apiResult?.pci}</TableCell>
+                            <TableCell style={{ width: '20%' }}>{apiResult?.data?.pci}</TableCell>
                         </TableRow>
                         <TableRow>
                             <TableCell style={style.cellTitle}>{`TAC`}</TableCell>
-                            <TableCell style={style.cellInput}>{apiResult?.tac}</TableCell>
+                            <TableCell style={style.cellInput}>{apiResult?.data?.tac}</TableCell>
                             <TableCell style={style.cellTitle}>{`RUID`}</TableCell>
-                            <TableCell style={style.cellInput}>{apiResult?.ruid}</TableCell>
+                            <TableCell style={style.cellInput}>{apiResult?.data?.ruId}</TableCell>
                             <TableCell style={style.cellTitle}>{`동코드`}</TableCell>
-                            <TableCell style={{ width: '20%' }}>{apiResult?.dongCode}</TableCell>
+                            <TableCell style={{ width: '20%' }}>
+                                {apiResult?.data?.zipcode}
+                            </TableCell>
                             <TableCell style={style.cellTitle}>{`주소`}</TableCell>
-                            <TableCell style={{ width: '20%' }}>{apiResult?.address}</TableCell>
+                            <TableCell style={{ width: '20%' }}>
+                                {apiResult?.data?.address}
+                            </TableCell>
                         </TableRow>
                         <TableRow>
                             <TableCell style={style.cellTitle}>{`위도`}</TableCell>
-                            <TableCell style={style.cellInput}>{apiResult?.latitude}</TableCell>
+                            <TableCell style={style.cellInput}>
+                                {apiResult?.data?.latitude}
+                            </TableCell>
                             <TableCell style={style.cellTitle}>{`경도`}</TableCell>
-                            <TableCell style={style.cellInput}>{apiResult?.longitude}</TableCell>
+                            <TableCell style={style.cellInput}>
+                                {apiResult?.data?.longitude}
+                            </TableCell>
                             <TableCell style={style.cellTitle}>{`생성일시`}</TableCell>
-                            <TableCell style={{ width: '20%' }}>{apiResult?.create_date}</TableCell>
+                            <TableCell style={{ width: '20%' }}>
+                                {apiResult?.data?.regDate}
+                            </TableCell>
                             <TableCell style={style.cellTitle}>{`갱신일시`}</TableCell>
-                            <TableCell style={{ width: '20%' }}>{apiResult?.update_date}</TableCell>
+                            <TableCell style={{ width: '20%' }}>
+                                {apiResult?.data?.updDate}
+                            </TableCell>
                         </TableRow>
                     </TableBody>
                 </Table>
 
                 {/* 지도 영역 */}
                 <Box sx={{ width: '100%', height: '400px' }}>
-                    {apiResult ? (
-                        <OllehMap locations={[{ ...apiResult }]} />
+                    {apiResult?.code === "0000" ? (
+                        <OllehMap locations={[{ ...apiResult?.data }]} />
                     ) : (
                         <OllehMap
                             locations={[

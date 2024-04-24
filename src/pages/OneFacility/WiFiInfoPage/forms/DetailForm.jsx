@@ -65,19 +65,13 @@ const DetailForm = () => {
         msg: '',
         openDialog: false,
     })
-    const [queryParams, setQueryParams] = useState({
-        page: 1,
-        limit: 50, // 1회 요청에 받을수 있는 데이터 수
-    })
+    const [queryParams, setQueryParams] = useState({})
     const { mutate: mutateRegist, isPending: isRegistPending } = usePostFacilityRegistWifi()
     const { mutate: mutateDelete, isPending: isDeletePending } = usePostFacilityDeleteWifi()
     const { mutate: mutateUpdate, isPending: isUpdatePending } = usePostFacilityUpdateWifi()
-    const { data: apiResult } = useGetFacilityWifiSearch(
-        { queryParams },
-        {
-            enabled: isSearchClick,
-        },
-    )
+    const { data: apiResult } = useGetFacilityWifiSearch(queryParams, {
+        enabled: isSearchClick,
+    })
     const formik = useFormik({
         initialValues: formikInitValues,
         // validationSchema: loginSchema,
@@ -99,9 +93,9 @@ const DetailForm = () => {
 
     // 검색 버튼 누른 경우
     const handleSearch = (values) => {
-        setIsSearchClick(true)
-        setQueryParams({ ...queryParams, ...values, page: 1 })
         setModeToggle(false)
+        setIsSearchClick(true)
+        setQueryParams({ ...queryParams, ...values })
     }
 
     const handleUpdateSubmit = () => {
@@ -113,7 +107,7 @@ const DetailForm = () => {
             {
                 onSuccess: ({ data }) => {
                     console.log('update-response : ', data)
-                    setApiSuccess(`UPDATE API RESULT `)
+                    setApiSuccess(`UPDATE API RESULT ${data?.data}`)
                 },
             },
         )
@@ -127,7 +121,7 @@ const DetailForm = () => {
             {
                 onSuccess: ({ data }) => {
                     console.log('delete-response : ', data)
-                    setApiSuccess(`DELETE API RESULT `)
+                    setApiSuccess(`DELETE API RESULT ${data?.data}`)
                 },
             },
         )
@@ -181,18 +175,24 @@ const DetailForm = () => {
     useEffect(() => {
         if (apiResult) {
             console.log('apiResult : ', apiResult)
-            formik.setValues({ ...apiResult })
-            const vap = {
-                utmk: { longitude: apiResult.vap.utmk[0], latitude: apiResult.vap.utmk[1] },
-                wgs84: { longitude: apiResult.vap.wgs84[0], latitude: apiResult.vap.wgs84[1] },
+            if (apiResult?.code === '0000') {
+                formik.setValues({ ...apiResult?.data })
+                const vap = {
+                    utmk: {
+                        longitude: apiResult?.data?.vap?.utmk[0],
+                        latitude: apiResult?.data?.vap?.utmk[1],
+                    },
+                    wgs84: {
+                        longitude: apiResult?.data?.vap?.wgs84[0],
+                        latitude: apiResult?.data?.vap?.wgs84[1],
+                    },
+                }
+                console.log('vap : ', vap)
+                formik.setFieldValue('vap', vap)
+                setIsSearchClick(false)
             }
-            console.log('vap : ', vap)
-            formik.setFieldValue('vap', vap)
-            setIsSearchClick(false)
         }
     }, [apiResult, isSearchClick])
-
-    console.log('formik.values : ', formik.values)
 
     return (
         <Box>
@@ -219,7 +219,7 @@ const DetailForm = () => {
                             <Button
                                 type="text"
                                 onClick={() => {
-                                    apiResult && formik.setValues(apiResult)
+                                    apiResult?.code === '0000' && formik.setValues(apiResult?.data)
                                     setModeToggle((prev) => !prev)
                                 }}
                                 startIcon={<ChangeCircleOutlinedIcon />}
@@ -299,7 +299,7 @@ const DetailForm = () => {
 
                 {/* 측위 목록 */}
                 <Box sx={{ width: '100%', height: '400px', mb: 4 }}>
-                    {apiResult ? (
+                    {apiResult?.code === '0000' ? (
                         <OllehMap
                             locations={[
                                 {
@@ -367,8 +367,8 @@ const DetailForm = () => {
             {apiSuccess && (
                 <MuiAlert
                     msg={apiSuccess}
-                    autoHideDuration={5000}
-                    callback={() => setApiSuccess(false)}
+                    autoHideDuration={3000}
+                    callback={() => setApiSuccess('')}
                 />
             )}
         </Box>

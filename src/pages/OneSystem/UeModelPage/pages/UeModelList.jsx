@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { Box, Button, Typography } from '@mui/material'
+import { Box, Typography } from '@mui/material'
 
 import TitleBar from '#/components/common/menu/TitleBar'
 import CustomDataGrid from '#/components/common/table/datagrid'

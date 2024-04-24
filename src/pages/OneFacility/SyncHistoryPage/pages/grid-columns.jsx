@@ -1,66 +1,69 @@
+import { getBtsTypeLabel } from '#/common/libs/facility'
 import { Typography } from '@mui/material'
-
-const btsTypeLabel = {
-    0: { label: `3G 기지국` },
-    1: { label: `LTE 기지국(KT)` },
-    2: { label: `LTE 공동망 기지국(SKT)` },
-    3: { label: `LTE 공동망 기지국(U+)` },
-    4: { label: `5G 기지국` },
-    5: { label: `Wing WiFi` },
-}
 
 export const columns = [
     {
         field: 'id',
         headerName: 'ID',
-        flex: 0.8,
+        width: 100,
+        //flex: 1,
         renderCell: (params) => <Typography>{params.row.id}</Typography>,
     },
     {
-        field: 'btsType',
+        field: 'type',
         headerName: '구분',
-        flex: 1.5,
+        width: 180,
+        //flex: 1.5,
         renderCell: (params) => (
-            <Typography color="primary">{btsTypeLabel[params.row.btsType].label}</Typography>
+            <Typography color="primary">
+                {getBtsTypeLabel[params.row.type] !== undefined
+                    ? getBtsTypeLabel[params.row.type].label
+                    : `${params.row.type} is not exist`}
+            </Typography>
         ),
     },
     {
-        field: 'start_date',
+        field: 'startTime',
         headerName: '시작 일시',
-        flex: 1.5,
-        renderCell: (params) => <Typography>{params.row.start_date}</Typography>,
+        width: 200,
+        //flex: 1.5,
+        renderCell: (params) => <Typography>{params.row.startTime}</Typography>,
     },
     {
-        field: 'end_date',
+        field: 'finishTime',
         headerName: '종료 일시',
-        flex: 1.5,
-        renderCell: (params) => <Typography>{params.row.end_date}</Typography>,
+        width: 200,
+        //flex: 1.5,
+        renderCell: (params) => <Typography>{params.row.finishTime}</Typography>,
     },
     {
-        field: 'procTime',
+        field: 'elapsedTime',
         headerName: '소요시간(분)',
-        flex: 1,
+        width: 150,
         align: 'right',
+        //flex: 1,
         renderCell: (params) => {
-            return <Typography>{params.row.procTime}</Typography>
+            return <Typography>{params.row.elapsedTime}</Typography>
         },
     },
     {
-        field: 'rowCount',
+        field: 'rawCount',
         headerName: '원천 데이터 수',
-        flex: 1.2,
+        width: 200,
         align: 'right',
+        //flex: 1.5,
         renderCell: (params) => {
-            return <Typography>{params.row.rowCount}</Typography>
+            return <Typography>{params.row.rawCount.toLocaleString()}</Typography>
         },
     },
     {
-        field: 'syncCount',
+        field: 'updateCount',
         headerName: '현행화 데이터 수',
-        flex: 1.2,
+        width: 200,
         align: 'right',
+        //flex: 1.5,
         renderCell: (params) => {
-            return <Typography>{params.row.syncCount}</Typography>
+            return <Typography>{params.row.updateCount.toLocaleString()}</Typography>
         },
     },
 ]

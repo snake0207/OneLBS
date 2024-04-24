@@ -41,7 +41,7 @@ export const columns = [
         headerName: '서비스 유형',
         flex: 1,
         renderCell: (params) => {
-            return <Typography>{getServiceTypeLabel[params.row.serviceType].label}</Typography>
+            return <Typography>{getServiceTypeLabel[params.row.serviceType] !== undefined ? getServiceTypeLabel[params.row.serviceType].label : `${params.row.serviceType} is not exist`}</Typography>
         },
     },
     {

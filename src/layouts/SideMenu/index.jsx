@@ -1,14 +1,14 @@
 import React from 'react'
 import List from '@mui/material/List'
 import IconButton from '@mui/material/IconButton'
-import { Toolbar, Icon, Box } from '@mui/material'
+import { Toolbar, Icon, Box, CardMedia } from '@mui/material'
 import MuiDrawer from '@mui/material/Drawer'
 import { styled } from '@mui/material/styles'
 
 import ExpandMenuItem from '#/components/common/menu/ExpandMenuItem'
 
 import useLayoutStore from '#/store/useLayoutStore'
-import LogoIconDark from '#/assets/logoDark.svg'
+import LogoIconDark from '#/assets/onelbs-logo.png'
 import MenuIcon from '#/assets/menuIcon.svg'
 import MenuIconDark from '#/assets/menuIconDark.svg'
 
@@ -25,7 +25,6 @@ import PinDropOutlinedIcon from '@mui/icons-material/PinDropOutlined'
 import DevicesOtherOutlinedIcon from '@mui/icons-material/DevicesOtherOutlined'
 import ManageAccountsOutlinedIcon from '@mui/icons-material/ManageAccountsOutlined'
 import { useNavigate } from 'react-router-dom'
-
 
 const drawerWidth = 240
 
@@ -116,9 +115,18 @@ const SideMenu = ({ open, toggleDrawer }) => {
                     minHeight: '50px !important',
                 }}
             >
-                <Box sx={{ m: '24px 104px 30px 24px' }}>
-                    <img src={LogoIconDark} onClick={() => navigate('/')} />
-                </Box>
+                <CardMedia
+                    sx={{
+                        m: '24px 10px 30px 24px',
+                        width: '160px',
+                        height: '50px',
+                        cursor: 'pointer',
+                    }}
+                    component="img"
+                    image={LogoIconDark}
+                    alt="KT 홈페이지 이동"
+                    onClick={() => navigate('/')}
+                />
                 <IconButton
                     onClick={toggleDrawer}
                     sx={{

@@ -20,6 +20,7 @@ import { ServiceHistoryDetailPage, ServiceHistoryPage } from '#/pages/OneService
 import { SyncHistoryPage } from '#/pages/OneFacility/SyncHistoryPage'
 import { BtsInfoMapPage } from '#/pages/OneFacility/BtsInfoPage'
 import { WifiInfoMapPage } from '#/pages/OneFacility/WiFiInfoPage'
+import { EngineEditPage } from '#/pages/OneSystem/EnginePage'
 
 const Routes = () => {
     return useRoutes([
@@ -51,7 +52,7 @@ const Routes = () => {
                         { path: '/system/ue-list', element: <UeModelListPage /> },
                         { path: '/system/ue-regist', element: <UeModelRegistPage /> },
                         { path: '/system/ue-edit', element: <UeModelEditPage /> },
-                        { path: '/system/engine', element: <UeModelRegistPage /> },
+                        { path: '/system/engine', element: <EngineEditPage /> },
                         { path: '/system/loctrans', element: <LocTransListPage /> },
                         { path: '/system/locview', element: <LocViewListPage /> },
                         // 사용자 관리

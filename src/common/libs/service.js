@@ -40,3 +40,23 @@ export const getModes = () => [
     { key: 0, value: `MSB`, label: `MSB` },
     { key: 1, value: `MSA`, label: `MSA` },
 ]
+
+export const getDataTypeList = () => [
+    { key: 'S', value: 'S', label: `String` },
+    { key: 'I', value: 'I', label: `Integer` },
+    { key: 'D', value: 'D', label: `Double` },
+    { key: 'B', value: 'B', label: `Boolean` },
+    { key: 'AS', value: 'AS', label: `Array(String)` },
+    { key: 'AI', value: 'AI', label: `Array(Integer)` },
+    { key: 'AD', value: 'AD', label: `Array(Double)` },
+]
+
+export const getDataTypeLabel = {
+    S: { label: `String` },
+    I: { label: `Integer` },
+    D: { label: `Double` },
+    B: { label: `Boolean` },
+    AS: { label: `Array(String)` },
+    AI: { label: `Array(Integer)` },
+    AD: { label: `Array(Double)` },
+}

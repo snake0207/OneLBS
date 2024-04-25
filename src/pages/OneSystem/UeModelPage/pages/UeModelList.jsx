@@ -118,7 +118,7 @@ const UeModelList = () => {
                             name="create"
                             title="모델 등록"
                             onClick={() =>
-                                navigate('/system/ue/regist', { state: { row: 'acro0720' } })
+                                navigate('/system/ue-regist', { state: { row: 'acro0720' } })
                             }
                         />
                     </Box>

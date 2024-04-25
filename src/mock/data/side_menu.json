@@ -90,7 +90,7 @@
             "menuCode": "OM40000",
             "name": "시스템 관리",
             "menuOrder": 4,
-            "menuUrl": "",
+            "menuUrl": "/system",
             "icon": "system",
             "label": "시스템 관리",
             "children": [
@@ -99,16 +99,16 @@
                     "name": "서비스 관리",
                     "menuOrder": 41,
                     "rootMenuCode": 400,
-                    "menuUrl": "/system/service/list",
+                    "menuUrl": "/system/service-list",
                     "label": "서비스 관리"
                 },
                 {
                     "menuCode": "OM40200",
-                    "name": "단말 모델 관리",
+                    "name": "단말모델 관리",
                     "menuOrder": 42,
                     "rootMenuCode": 400,
-                    "menuUrl": "/system/ue/list",
-                    "label": "단말 모델 관리"
+                    "menuUrl": "/system/ue-list",
+                    "label": "단말모델 관리"
                 },
                 {
                     "menuCode": "OM40300",
@@ -140,7 +140,7 @@
             "menuCode": "OM50000",
             "name": "사용자 관리",
             "menuOrder": 5,
-            "menuUrl": "",
+            "menuUrl": "/user",
             "icon": "account",
             "label": "사용자 관리",
             "children": [
@@ -149,7 +149,7 @@
                     "name": "User Management",
                     "menuOrder": 51,
                     "rootMenuCode": 500,
-                    "menuUrl": "/user/manage/list",
+                    "menuUrl": "/user/user-list",
                     "label": "사용자 정보관리"
                 },
                 {

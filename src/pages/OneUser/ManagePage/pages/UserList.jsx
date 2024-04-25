@@ -34,7 +34,7 @@ const UserList = () => {
 
     // row 클릭한 경우 상세 페이지 노출
     const handleSelectRow = ({ row }) => {
-        navigate('/user/manage/edit', { state: { row: row } })
+        navigate('/user/user-edit', { state: { row: row } })
     }
 
     // 리스트 하단의 페이지 이동 버튼 click시 동작
@@ -94,7 +94,7 @@ const UserList = () => {
                                 name="create"
                                 title="사용자 등록"
                                 onClick={() =>
-                                    navigate('/user/manage/regist', { state: { row: 'acro0720' } })
+                                    navigate('/user/user-regist', { state: { row: 'acro0720' } })
                                 }
                             />
                         </Box>

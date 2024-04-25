@@ -5,36 +5,30 @@ import Typography from '@mui/material/Typography'
 import LinkRouter from '../LinkRouter'
 import NavigateNextIcon from '@mui/icons-material/NavigateNext'
 
-import t from '#/common/libs/trans'
-
 const breadcrumbNameMap = () => ({
-    '/mypage': t('mypage'),
-    '/mypage/profile': t('profile'),
-    // user management
-    '/user-management': t('top_menu.user_management'),
-    '/user-management/user-list': t('top_menu.user_list'),
-    '/user-management/login-history': t('top_menu.user_login_history'),
-    '/user-management/role-history': t('top_menu.user_permission_history'),
-    '/user-management/ip-access': t('top_menu.user_ip_access_management'),
-    // permission management
-    '/permission-management': t('top_menu.permission_management'),
-    '/permission-management/permissions-list': t('top_menu.permission_list'),
-    // search management
-    '/search-management': t('top_menu.search_management'),
-    '/search-management/map': t('top_menu.search_map'),
-    '/poi-view': t('top_menu.poi_search'),
-    '/poi-view/map': t('top_menu.poi_map'),
-    '/components': t('components'),
-    '/components/layouts': t('layouts'),
-    // approval history
-    '/approval': t('list_all', 'approval'),
-    '/approval/user-history': t('requester', 'approval'),
-    '/approval/reviewer-history': t('reviewer', 'approval'),
-    '/approval/manager-history': t('approver', 'approval'),
-    '/approval/detail': t('detail', 'approval'),
-    '/approval/user-history/detail': t('detail', 'approval'),
-    '/approval/reviewer-history/detail': t('detail', 'approval'),
-    '/approval/manager-history/detail': t('detail', 'approval'),
+    // 측위기반 정보관리
+    '/facility': `측위기반정보 관리`,
+    '/facility/bts': `기지국 시설정보`,
+    '/facility/wifi': `WiFi 시설정보`,
+    '/facility/sync-history': `정보현행화 이력`,
+    // 시스템 관리
+    '/system': `시스템 관리`,
+    '/system/service-list': `서비스 현황`,
+    '/system/service-regist': `서비스 등록`,
+    '/system/service-edit': `서비스 상세정보`,
+    '/system/ue-list': `단말모델 현황`,
+    '/system/ue-regist': `단말모델 등록`,
+    '/system/ue-edit': `단말모델 상세정보`,
+    '/system/engine': `엔진설정관리`,
+    '/system/loctrans': `위치정보 처리내역`,
+    '/system/locview': `위치정보 열람내역`,
+    // 사용자 관리
+    '/user': `사용자 관리`,
+    '/user/user-list': `사용자 현황`,
+    '/user/user-regist': `사용자 등록`,
+    '/user/user-edit': `사용자 상세정보`,
+    '/user/permission': `권한 관리`,
+    '/user/history': `사용자 이력관리`,
 })
 
 function isAvailablePath(path) {
@@ -69,9 +63,9 @@ function RouterBreadcrumbs() {
                 underline="hover"
                 color="inherit"
                 to="/"
-                sx={{ fontSize: '13px', color: 'text.gray' }}
+                sx={{ fontSize: '14px', color: 'text.darkgray', fontWeight: 'bold' }}
             >
-                {t('home')}
+                {`Home`}
             </LinkRouter>
             {pathnames.map((value, index) => {
                 const last = index === pathnames.length - 1

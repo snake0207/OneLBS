@@ -699,7 +699,7 @@ const CreateForm = () => {
                                 disabled={isPending}
                                 name="list"
                                 title="취소"
-                                onClick={() => navigate('/system/service/list')}
+                                onClick={() => navigate('/system/service-list')}
                             />
                             <MuiMainButton
                                 disabled={isPending}
@@ -722,8 +722,8 @@ const CreateForm = () => {
             {apiSuccess && (
                 <MuiAlert
                     msg={apiSuccess}
-                    autoHideDuration={5000}
-                    callback={() => setApiSuccess(false)}
+                    autoHideDuration={3000}
+                    callback={() => navigate(`/system/service-list`)}
                 />
             )}
             {isOpenServicePopup && (

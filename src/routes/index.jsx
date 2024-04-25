@@ -31,12 +31,6 @@ const Routes = () => {
                     element: <MainLayout />,
                     children: [
                         { path: '/', element: <MainPage /> },
-                        { path: '/mypage/profile', element: <ProfilePage /> },
-
-                        // 측위기반 정보 관리
-                        { path: '/facility/bts', element: <BtsInfoMapPage /> },
-                        { path: '/facility/wifi', element: <WifiInfoMapPage /> },
-                        { path: '/facility/sync-history', element: <SyncHistoryPage /> },
                         // 서비스 현황
                         { path: '/service-status/history', element: <ServiceHistoryPage /> },
                         {
@@ -46,20 +40,26 @@ const Routes = () => {
                         { path: '/service-status/service', element: <ServiceStatPage /> },
                         { path: '/service-status/cloud', element: <CloudStatPage /> },
                         { path: '/service-status/trigger', element: <TriggerListPage /> },
+                        // 측위기반 정보 관리
+                        { path: '/facility/bts', element: <BtsInfoMapPage /> },
+                        { path: '/facility/wifi', element: <WifiInfoMapPage /> },
+                        { path: '/facility/sync-history', element: <SyncHistoryPage /> },
                         // 시스템 관리
-                        { path: '/system/service/list', element: <ServiceListPage /> },
-                        { path: '/system/service/regist', element: <ServiceRegistPage /> },
-                        { path: '/system/service/edit', element: <ServiceEditPage /> },
-                        { path: '/system/ue/list', element: <UeModelListPage /> },
-                        { path: '/system/ue/regist', element: <UeModelRegistPage /> },
-                        { path: '/system/ue/edit', element: <UeModelEditPage /> },
+                        { path: '/system', element: <ServiceListPage /> },
+                        { path: '/system/service-list', element: <ServiceListPage /> },
+                        { path: '/system/service-regist', element: <ServiceRegistPage /> },
+                        { path: '/system/service-edit', element: <ServiceEditPage /> },
+                        { path: '/system/ue-list', element: <UeModelListPage /> },
+                        { path: '/system/ue-regist', element: <UeModelRegistPage /> },
+                        { path: '/system/ue-edit', element: <UeModelEditPage /> },
                         { path: '/system/engine', element: <UeModelRegistPage /> },
                         { path: '/system/loctrans', element: <LocTransListPage /> },
                         { path: '/system/locview', element: <LocViewListPage /> },
                         // 사용자 관리
-                        { path: '/user/manage/regist', element: <UserRegistPage /> },
-                        { path: '/user/manage/list', element: <UserListPage /> },
-                        { path: '/user/manage/edit', element: <UserEditPage /> },
+                        { path: '/user', element: <UserListPage /> },
+                        { path: '/user/user-list', element: <UserListPage /> },
+                        { path: '/user/user-regist', element: <UserRegistPage /> },
+                        { path: '/user/user-edit', element: <UserEditPage /> },
                         { path: '/user/permission', element: <PermissionEditPage /> },
                         { path: '/user/history', element: <UserHistoryListPage /> },
                     ],

@@ -730,7 +730,7 @@ const EditForm = () => {
                                 disabled={isPending}
                                 name="cancel"
                                 title="목록"
-                                onClick={() => navigate('/system/service/list')}
+                                onClick={() => navigate('/system/service-list')}
                             />
                             <MuiMainButton
                                 disabled={isPending}
@@ -759,11 +759,8 @@ const EditForm = () => {
             {apiResult && (
                 <MuiAlert
                     msg={apiResult}
-                    autoHideDuration={5000}
-                    callback={() => {
-                        setApiResult('')
-                        navigate('/system/service/list')
-                    }}
+                    autoHideDuration={3000}
+                    callback={() => navigate('/system/service-list')}
                 />
             )}
         </Box>

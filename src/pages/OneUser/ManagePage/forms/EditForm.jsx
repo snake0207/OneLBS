@@ -230,7 +230,7 @@ const EditForm = () => {
                                 disabled={isDeletePending || isUpdatePending}
                                 name="cancel"
                                 title="목록"
-                                onClick={() => navigate(-1)}
+                                onClick={() => navigate(`/user/user-list`)}
                             />
                             <MuiMainButton
                                 disabled={isDeletePending || isUpdatePending}
@@ -260,7 +260,7 @@ const EditForm = () => {
                 <MuiAlert
                     msg={apiSuccess}
                     autoHideDuration={3000}
-                    callback={() => navigate('/user/manage/list')}
+                    callback={() => navigate('/user/user-list')}
                 />
             )}
         </Box>

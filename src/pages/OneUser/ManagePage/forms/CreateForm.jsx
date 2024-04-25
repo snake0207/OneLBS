@@ -201,7 +201,7 @@ const CreateForm = () => {
                                 disabled={isPending}
                                 name="list"
                                 title="취소"
-                                onClick={() => navigate('/user/manage/list')}
+                                onClick={() => navigate('/user/user-list')}
                             />
                             <MuiMainButton
                                 disabled={isPending}
@@ -227,7 +227,7 @@ const CreateForm = () => {
                     autoHideDuration={5000}
                     callback={() => {
                         setApiSuccess(false)
-                        navigate('/user/manage/list')
+                        navigate('/user/user-list')
                     }}
                 />
             )}

@@ -32,7 +32,7 @@ const ServiceList = () => {
 
     // row 클릭한 경우 상세 페이지 노출
     const handleSelectRow = ({ row }) => {
-        navigate('/system/service/edit', { state: { row: row } })
+        navigate('/system/service-edit', { state: { row: row } })
     }
 
     // 리스트 하단의 페이지 이동 버튼 click시 동작
@@ -79,7 +79,7 @@ const ServiceList = () => {
                         name="create"
                         title="신규 등록"
                         onClick={() =>
-                            navigate('/system/service/regist', { state: { row: 'acro0720' } })
+                            navigate('/system/service-regist', { state: { row: 'acro0720' } })
                         }
                     />
                 </Box>

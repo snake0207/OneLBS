@@ -1,7 +1,7 @@
 const style = {
     searchBox: {
         display: 'flex',
-        justifyContent: 'space-between',
+        // justifyContent: 'space-between',
         width: '100%',
         borderRadius: '8px',
         mb: '10px',

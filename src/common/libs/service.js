@@ -30,6 +30,19 @@ export const getPosMethods = () => [
     { key: 1, value: `ECID`, label: `ECID` },
 ]
 
+// 서비스 통계 측위방법
+export const getStatPosMethods = () => [
+    { key: 0, value: `CELL`, label: `CELL` },
+    { key: 1, value: `ECID`, label: `ECID` },
+    { key: 2, value: `GUA`, label: `GUA` },
+    { key: 3, value: `GUB`, label: `GUB` },
+    { key: 4, value: `GCA`, label: `GCA` },
+    { key: 5, value: `GCB`, label: `GCB` },
+    { key: 6, value: `KSA2`, label: `KSA2` },
+    { key: 7, value: `KSA3`, label: `KSA3` },
+    { key: 8, value: `KSA4`, label: `KSA4` },
+]
+
 // Plane
 export const getPlanes = () => [
     { key: 0, value: `UP`, label: `UP` },
@@ -99,3 +112,9 @@ export const getCrowdTypeListLabel = {
     D: { label: `일간` },
     M: { label: `통합` },
 }
+
+export const getTimeTypeList = () => [
+    { key: 'M', value: 'M', label: `분별` },
+    { key: 'H', value: 'H', label: `시간별` },
+    { key: 'D', value: 'D', label: `일별` },
+]

@@ -33,11 +33,11 @@ export const useGetServiceStat = (queryParams = {}, options) => {
     return { data: data?.data }
 }
 // 크라우드소싱 통계
-export const useGetCloudStat = (queryParams = {}, options) => {
-    console.log('useGetCloudStat : ', queryParams)
+export const useGetCrowdStat = (queryParams = {}, options) => {
+    console.log('useGetCrowdStat : ', queryParams)
     const { data } = useQuery({
-        queryKey: ['get-cloud-stat', queryParams],
-        queryFn: () => service.getCloudStat(queryParams),
+        queryKey: ['get-crowd-stat', queryParams],
+        queryFn: () => service.getCrowdStat(queryParams),
         ...options,
     })
     return { data: data?.data }

@@ -52,10 +52,10 @@ export const API_PATH = {
         sync_history: '/api/facilities/history/list',
     },
     service: {
-        history_detail: '/api/service/history/detail',
-        history: '/api/services/history',
-        service_stat: '/api/service/stat',
-        crowd_stat: '/api/services/crowd',
-        trigger: '/api/services/trigger',
+        history_detail: '/api/services/history/detail',
+        history: '/api/services/history/list',
+        service_stat: '/api/service/stat/list',
+        crowd_stat: '/api/services/crowd/list',
+        trigger: '/api/services/trigger/list',
     },
 }

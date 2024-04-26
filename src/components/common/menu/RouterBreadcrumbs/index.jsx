@@ -6,6 +6,10 @@ import LinkRouter from '../LinkRouter'
 import NavigateNextIcon from '@mui/icons-material/NavigateNext'
 
 const breadcrumbNameMap = () => ({
+    // 서비스 현황
+    '/service-status': `서비스 현황`,
+    '/service-status/history': `서비스 이력`,
+    '/service-status/history/detail': `측위이력 상세정보`,
     // 측위기반 정보관리
     '/facility': `측위기반정보 관리`,
     '/facility/bts': `기지국 시설정보`,

@@ -39,7 +39,7 @@
                     "name": "크라우드소싱 통계",
                     "menuOrder": 23,
                     "rootMenuCode": 200,
-                    "menuUrl": "/service-status/cloud",
+                    "menuUrl": "/service-status/crowd",
                     "label": "크라우드소싱 통계"
                 },
                 {

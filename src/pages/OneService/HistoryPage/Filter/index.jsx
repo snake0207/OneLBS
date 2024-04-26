@@ -50,17 +50,17 @@ function SearchFilter({ onSearch }) {
                                 alignItems={'center'}
                                 width="100%"
                             >
-                                <DatePickerInput name={'start_date'} formik={formik} />
+                                <DatePickerInput name={'startDate'} formik={formik} />
                                 <TimePickerInput name={'start_time'} formik={formik} />
                                 <Typography>~</Typography>
-                                <DatePickerInput name={'end_date'} formik={formik} />
+                                <DatePickerInput name={'endDate'} formik={formik} />
                                 <TimePickerInput name={'end_time'} formik={formik} />
                             </Stack>
                         </TableCell>
                     </TableRow>
                     {/* Group by */}
                     <TableRow>
-                        <TableCell sx={style.cellTitle}>{`서비스`}</TableCell>
+                        <TableCell sx={style.cellTitle}>{`서비스코드`}</TableCell>
                         <TableCell sx={style.cellInput}>
                             <TextInput name="serviceCode" formik={formik} />
                         </TableCell>
@@ -74,6 +74,7 @@ function SearchFilter({ onSearch }) {
                         </TableCell>
                         <TableCell align="right">
                             <MuiSubButton
+                                disabled={!formik.values.startDate || !formik.values.endDate}
                                 name="search"
                                 title="검색"
                                 onClick={formik.handleSubmit}

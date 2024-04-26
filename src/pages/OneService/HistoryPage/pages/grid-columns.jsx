@@ -1,3 +1,4 @@
+import { getCenterLabel, getPosMethodHistoryLabel } from '#/common/libs/service'
 import { Typography } from '@mui/material'
 
 export const columns = [
@@ -10,25 +11,39 @@ export const columns = [
     {
         field: 'center',
         headerName: '센터',
-        flex: 1,
-        renderCell: (params) => <Typography color="primary">{params.row.center}</Typography>,
+        flex: 0.8,
+        renderCell: (params) => (
+            <Typography color="primary">
+                {getCenterLabel[params.row.center] !== undefined
+                    ? getCenterLabel[params.row.center].label
+                    : `${params.row.center} is not exist`}
+            </Typography>
+        ),
     },
     {
-        field: 'req_date',
+        field: 'reqDate',
         headerName: '요청일시',
         flex: 1.5,
-        renderCell: (params) => <Typography>{params.row.req_date}</Typography>,
+        renderCell: (params) => <Typography>{params.row.reqDate}</Typography>,
     },
     {
-        field: 'resp_date',
+        field: 'resDate',
         headerName: '응답일시',
         flex: 1.5,
-        renderCell: (params) => <Typography>{params.row.resp_date}</Typography>,
+        renderCell: (params) => <Typography>{params.row.resDate}</Typography>,
+    },
+    {
+        field: 'serviceName',
+        headerName: '서비스명',
+        flex: 1.2,
+        renderCell: (params) => {
+            return <Typography>{params.row.serviceName}</Typography>
+        },
     },
     {
         field: 'serviceCode',
-        headerName: '서비스',
-        flex: 1,
+        headerName: '서비스코드',
+        flex: 1.2,
         renderCell: (params) => {
             return <Typography>{params.row.serviceCode}</Typography>
         },
@@ -42,44 +57,43 @@ export const columns = [
         },
     },
     {
-        field: 'reqNo',
+        field: 'reqMdn',
         headerName: '요청자',
         flex: 1,
         renderCell: (params) => {
-            return <Typography>{params.row.reqNo}</Typography>
+            return <Typography>{params.row.reqMdn}</Typography>
         },
     },
     {
-        field: 'targetNo',
+        field: 'targetMdn',
         headerName: '대상자',
         flex: 1,
         renderCell: (params) => {
-            return <Typography>{params.row.targetNo}</Typography>
+            return <Typography>{params.row.targetMdn}</Typography>
         },
     },
     {
         field: 'posMethod',
         headerName: '측위 방식',
-        flex: 1.2,
-        renderCell: (params) => {
-            return <Typography>{params.row.posMethod}</Typography>
-        },
-    },
-    {
-        field: 'ueModel',
-        headerName: '단말 모델',
-        flex: 1.2,
-        renderCell: (params) => {
-            return <Typography>{params.row.ueModel}</Typography>
-        },
-    },
-    {
-        field: 'respCode',
-        headerName: '결과',
         flex: 1,
-        align: 'right',
         renderCell: (params) => {
-            return <Typography>{params.row.respCode}</Typography>
+            return <Typography>{getPosMethodHistoryLabel[params.row.posMethod].label}</Typography>
+        },
+    },
+    {
+        field: 'model',
+        headerName: '단말 모델',
+        flex: 1,
+        renderCell: (params) => {
+            return <Typography>{params.row.model}</Typography>
+        },
+    },
+    {
+        field: 'result',
+        headerName: '결과',
+        flex: 0.8,
+        renderCell: (params) => {
+            return <Typography>{params.row.result}</Typography>
         },
     },
     {

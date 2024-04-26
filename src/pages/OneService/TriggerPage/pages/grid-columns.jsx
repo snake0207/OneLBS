@@ -1,53 +1,71 @@
 import { Typography } from '@mui/material'
 
+const SCREEN_WIDTH = 1400
+
 export const columns = [
     {
         field: 'id',
         headerName: 'ID',
-        flex: 0.8,
+        width: SCREEN_WIDTH * (7 / 100),
+        // flex: 0.8,
         renderCell: (params) => <Typography>{params.row.id}</Typography>,
     },
     {
-        field: 'reg_date',
+        field: 'regDate',
         headerName: '등록 일시',
-        flex: 1.5,
-        renderCell: (params) => <Typography color="primary">{params.row.reg_date}</Typography>,
+        width: SCREEN_WIDTH * (12 / 100),
+        // flex: 1.5,
+        renderCell: (params) => <Typography>{params.row.regDate}</Typography>,
     },
     {
-        field: 'start_date',
+        field: 'startDate',
         headerName: '시작 일시',
-        flex: 1.5,
-        renderCell: (params) => <Typography>{params.row.start_date}</Typography>,
+        width: SCREEN_WIDTH * (12 / 100),
+        // flex: 1.5,
+        renderCell: (params) => <Typography>{params.row.startDate}</Typography>,
     },
     {
-        field: 'end_date',
+        field: 'endDate',
         headerName: '종료 일시',
-        flex: 1.5,
-        renderCell: (params) => <Typography>{params.row.end_date}</Typography>,
+        width: SCREEN_WIDTH * (12 / 100),
+        // flex: 1.5,
+        renderCell: (params) => <Typography>{params.row.endDate}</Typography>,
     },
     {
         field: 'interval',
         headerName: '주기(초)',
-        flex: 1,
+        width: SCREEN_WIDTH * (7 / 100),
+        // flex: 0.8,
         align: 'right',
         renderCell: (params) => {
             return <Typography>{params.row.interval}</Typography>
         },
     },
     {
-        field: 'phoneNo',
-        headerName: '전화번호',
-        flex: 1,
+        field: 'requestorMdn',
+        headerName: '요청자',
+        width: SCREEN_WIDTH * (10 / 100),
+        // flex: 1,
         renderCell: (params) => {
-            return <Typography>{params.row.phoneNo}</Typography>
+            return <Typography>{params.row.requestorMdn}</Typography>
         },
     },
     {
-        field: 'url',
-        headerName: 'URL',
-        flex: 2.5,
+        field: 'targetMdn',
+        headerName: '대상자',
+        width: SCREEN_WIDTH * (10 / 100),
+        // flex: 1,
         renderCell: (params) => {
-            return <Typography>{params.row.url}</Typography>
+            return <Typography>{params.row.targetMdn}</Typography>
+        },
+    },
+    {
+        field: 'urlPage',
+        headerName: 'URL',
+        width: SCREEN_WIDTH * (30 / 100),
+        // flex: 3,
+        renderCell: (params) => {
+            return <Typography>{params.row.urlPage}</Typography>
         },
     },
 ]

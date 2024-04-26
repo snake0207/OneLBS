@@ -12,6 +12,8 @@ import {
     IconButton,
     Button,
     TextField,
+    Checkbox,
+    FormControlLabel,
 } from '@mui/material'
 import SettingsSuggestOutlinedIcon from '@mui/icons-material/SettingsSuggestOutlined'
 
@@ -149,19 +151,15 @@ const EditForm = () => {
     // console.log(formik.values)
     const TableRowDraw = ({ idx, item }) => {
         const [value, setValue] = useState('')
+        const [valCheck, setValCheck] = useState(item.value === 'Y' ? true : false)
         const [nameValue, setNameValue] = useState('')
         const [selected, setSelected] = useState(0)
 
-        const handleChangeNameField = (e) => {
-            setNameValue(e.target.value)
-            console.log('before : ', JSON.stringify(fetchData.lists))
-            const _changeItem = { ...item, name: e.target.value }
-            console.log('Name changeitem : ', _changeItem)
-
-            // const _lists = fetchData.lists.filter((data) => data.id !== item.id)
-            // console.log('remove list : ', JSON.stringify(_lists))
-            // setFetchData((prevState) => ({ ...prevState, lists: [..._lists, _changeItem] }))
-            // console.log('after : ', JSON.stringify(fetchData.lists))
+        console.log('ITEM : ', item)
+        
+        const handleBlurField = () => {
+            const _lists = fetchData.lists.filter((data) => data.id !== item.id)
+            setFetchData({ count: fetchData.count, lists: [..._lists, item] })
         }
 
         const handleChangeValueField = (e) => {
@@ -173,7 +171,7 @@ const EditForm = () => {
 
         return (
             <TableRow>
-                <TableCell>{item.id}</TableCell>
+                <TableCell style={{ textAlign: 'right' }}>{item.id}</TableCell>
                 <TableCell>
                     {item.newFlag !== 'Y' ? (
                         item.name
@@ -184,8 +182,12 @@ const EditForm = () => {
                             type="text"
                             fullWidth
                             size="small"
-                            value={nameValue}
-                            onChange={handleChangeNameField}
+                            value={nameValue || item.name}
+                            onChange={(e) => {
+                                setNameValue(e.target.value)
+                                item.name = e.target.value
+                            }}
+                            onBlur={handleBlurField}
                         />
                     )}
                 </TableCell>
@@ -194,7 +196,6 @@ const EditForm = () => {
                         name={item.dataType}
                         items={getDataTypeList()}
                         value={item.dataType}
-                        // onChange={(param) => console.log(param)}
                         style={{
                             height: '40px',
                             width: '100%',
@@ -212,30 +213,45 @@ const EditForm = () => {
                             type="text"
                             fullWidth
                             size="small"
-                            value={value}
+                            value={value || item.value}
                             onChange={handleChangeValueField}
                         />
                     )}
                     {retValueStyle(item.dataType) === DataTypes.CHECKBOX && (
-                        <CheckBox
-                            checked={item.value === 'Y' ? true : false}
-                            onChange={(e) => (e.target.value === 'Y' ? 'N' : 'Y')}
-                            label={item.value === 'Y' ? '적용' : '미적용'}
-                            value={item.value}
+                        <FormControlLabel
+                            control={
+                                <Checkbox
+                                    checked={valCheck}
+                                    onChange={(e) => {
+                                        setValCheck(e.target.checked)
+                                        item.value = valCheck ? 'Y' : 'N'
+                                        handleBlurField()
+                                    }}
+                                    // value={item.value}
+                                />
+                            }
+                            label={valCheck ? '적용' : '미적용'}
                         />
                     )}
                     {retValueStyle(item.dataType) === DataTypes.ARRAY && (
-                        <TextField
-                            id={`${item.id}`}
-                            variant="outlined"
-                            type="text"
-                            fullWidth
-                            size="small"
-                            value={value}
-                            rows={5}
-                            onChange={handleChangeValueField}
-                            sx={{ height: '400px' }}
-                        />
+                        <Box sx={{ display: 'flex', alignItems: 'center' }}>
+                            <TextField
+                                id={`${item.id}`}
+                                variant="outlined"
+                                type="text"
+                                fullWidth
+                                size="small"
+                                value={value}
+                                onChange={handleChangeValueField}
+                                multiline={true}
+                                rows={3}
+                                sx={{
+                                    '& .MuiInputBase-input': {
+                                        height: '100px', // 원하는 높이로 설정
+                                    },
+                                }}
+                            />
+                        </Box>
                     )}
                 </TableCell>
                 <TableCell style={{ textAlign: 'center' }}>
@@ -276,11 +292,11 @@ const EditForm = () => {
                             <TableRow
                                 sx={{ backgroundColor: '#009ACC', position: 'sticky', top: 0 }}
                             >
-                                <TableCell sx={{ width: '8%' }}>{`번호`}</TableCell>
-                                <TableCell sx={{ width: '47%' }}>{`설정명`}</TableCell>
-                                <TableCell sx={{ width: '15%' }}>{`데이터 타입`}</TableCell>
-                                <TableCell sx={{ width: '20%' }}>{`값`}</TableCell>
-                                <TableCell sx={{ width: '10%' }}>{`삭제`}</TableCell>
+                                <TableCell style={{ width: '8%' }}>{`번호`}</TableCell>
+                                <TableCell style={{ width: '40%' }}>{`설정명`}</TableCell>
+                                <TableCell style={{ width: '15%' }}>{`데이터 타입`}</TableCell>
+                                <TableCell style={{ width: '27%' }}>{`값`}</TableCell>
+                                <TableCell style={{ width: '10%' }}>{`삭제`}</TableCell>
                             </TableRow>
                         </TableHead>
                         <TableBody>

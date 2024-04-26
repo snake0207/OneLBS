@@ -23,7 +23,7 @@ const gridProps = {
         backgroundColor: '#009ACC',
     },
     // '& .MuiDataGrid-columnHeaderTitleContainer': {
-    //     justifyContent: 'center',
+    //     justifyContent: 'right',
     // },
     '& .MuiDataGrid-cell': {
         borderBottom: `1px solid `,
@@ -53,6 +53,7 @@ const CustomPagination = ({ onPageChange, pageInit }) => {
 
     return <GridPagination onClick={() => onPageChange(selector)} />
 }
+
 /**
  * table 형태의 목록 정보를 보여준다
  *

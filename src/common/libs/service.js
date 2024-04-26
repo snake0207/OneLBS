@@ -60,3 +60,42 @@ export const getDataTypeLabel = {
     AI: { label: `Array(Integer)` },
     AD: { label: `Array(Double)` },
 }
+
+export const getCenterList = () => [
+    { key: 'BD', value: 'BD', label: `분당` },
+    { key: 'DR', value: 'DR', label: `대전` },
+]
+
+export const getCenterLabel = {
+    BD: { label: `분당` },
+    DR: { label: `대전` },
+}
+
+export const getPosMethodHistoryList = () => [
+    { key: 0, value: 0, label: `기지국` },
+    { key: 1, value: 1, label: `GPS` },
+    { key: 10, value: 10, label: `WiFi` },
+    { key: 11, value: 11, label: `복합측위` },
+]
+
+export const getPosMethodHistoryLabel = {
+    0: { label: `기지국` },
+    1: { label: `GPS` },
+    10: { label: `WiFi` },
+    11: { label: `복합측위` },
+}
+
+export const getCrowdTypeList = () => [
+    { key: 'D', value: 'D', label: `일간` },
+    { key: 'M', value: 'M', label: `통합` },
+]
+
+export const unionGetCrowdTypeList = () => [
+    { key: 'T', value: 'T', label: `전체` },
+    ...getCrowdTypeList(),
+]
+
+export const getCrowdTypeListLabel = {
+    D: { label: `일간` },
+    M: { label: `통합` },
+}

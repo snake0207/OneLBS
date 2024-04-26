@@ -6,11 +6,16 @@ import { MuiSubButton } from '#/components/common/button/MuiButton'
 
 import style from './style.module'
 
+import * as yup from 'yup'
+
 function SearchFilter({ onSearch }) {
     const formik = useFormik({
         initialValues: {
-            phoneNo: '',
+            targetMdn: '',
         },
+        validationSchema: yup.object({
+            targetMdn: yup.string().matches(/^\d{10}$|^\d{11}$/, `10~11자리 숫자를 입력해 주세요.`),
+        }),
         onSubmit: (values) => {
             if (onSearch) onSearch(values)
         },
@@ -22,8 +27,8 @@ function SearchFilter({ onSearch }) {
                 <TableHead>
                     <TableRow>
                         <TableCell sx={style.cellTitle}>{`전화번호`}</TableCell>
-                        <TableCell sx={{ width: '30%' }}>
-                            <TextInput name="phoneNo" formik={formik} />
+                        <TableCell style={{ width: '20%' }}>
+                            <TextInput name="targetMdn" formik={formik} />
                         </TableCell>
                         <TableCell align="right">
                             <MuiSubButton

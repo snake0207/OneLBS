@@ -54,7 +54,7 @@ const DetailForm = () => {
     })
     const [locations, setLocations] = useState([])
     const { data: apiResult } = useGetServiceHistoryDetail(
-        { id: row?.id },
+        { trId: row?.trId },
         {
             enabled: true,
         },

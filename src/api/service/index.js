@@ -14,7 +14,7 @@ const getServiceStat = (data) => {
     return getAPI({ endPoint: API_PATH.service.service_stat, data })
 }
 // 크라우드소싱 통계
-const getCloudStat = (data) => {
+const getCrowdStat = (data) => {
     return getAPI({ endPoint: API_PATH.service.crowd_stat, data })
 }
 // 트리거 목록
@@ -26,6 +26,6 @@ export default {
     getServiceHistory,
     getServiceHistoryDetail,
     getServiceStat,
-    getCloudStat,
+    getCrowdStat,
     getTriggerList,
 }

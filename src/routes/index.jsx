@@ -14,7 +14,7 @@ import { UserEditPage, UserListPage, UserRegistPage } from '#/pages/OneUser/Mana
 import { UserHistoryListPage } from '#/pages/OneUser/HistoryPage'
 import { PermissionEditPage } from '#/pages/OneUser/PermissionPage'
 import { TriggerListPage } from '#/pages/OneService/TriggerPage'
-import { CloudStatPage } from '#/pages/OneService/CloudStatPage'
+import { CrowdStatPage } from '#/pages/OneService/CrowdStatPage'
 import { ServiceStatPage } from '#/pages/OneService/ServiceStatPage'
 import { ServiceHistoryDetailPage, ServiceHistoryPage } from '#/pages/OneService/HistoryPage'
 import { SyncHistoryPage } from '#/pages/OneFacility/SyncHistoryPage'
@@ -38,7 +38,7 @@ const Routes = () => {
                             element: <ServiceHistoryDetailPage />,
                         },
                         { path: '/service-status/service', element: <ServiceStatPage /> },
-                        { path: '/service-status/cloud', element: <CloudStatPage /> },
+                        { path: '/service-status/crowd', element: <CrowdStatPage /> },
                         { path: '/service-status/trigger', element: <TriggerListPage /> },
                         // 측위기반 정보 관리
                         { path: '/facility/bts', element: <BtsInfoMapPage /> },

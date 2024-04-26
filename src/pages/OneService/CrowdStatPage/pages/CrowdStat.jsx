@@ -1,23 +1,21 @@
 import { useEffect, useState } from 'react'
-import { useNavigate } from 'react-router-dom'
 import { Box, Typography } from '@mui/material'
 
 import TitleBar from '#/components/common/menu/TitleBar'
 import CustomDataGrid from '#/components/common/table/datagrid'
 
 import SearchFilter from '../Filter'
-import { columns } from './grid-columns'
-import { useGetServiceStat } from '#/hooks/queries/one-service'
+import { columns, columnGroupingModel } from './grid-columns'
+import { useGetCrowdStat } from '#/hooks/queries/one-service'
 
-const ServiceStat = () => {
-    const navigate = useNavigate()
+const CrowdStat = () => {
     const [isQueryState, setIsQueryState] = useState(false)
     const [fetchData, setFetchData] = useState({ count: 0, lists: [] })
     const [queryParams, setQueryParams] = useState({
         page: 1,
         limit: parseInt(import.meta.env.VITE_LIST_PAGE_LIMIT), // 1회 요청에 받을수 있는 데이터 수
     })
-    const { data: apiResult } = useGetServiceStat(queryParams, {
+    const { data: apiResult } = useGetCrowdStat(queryParams, {
         enabled: isQueryState,
     })
 
@@ -56,7 +54,7 @@ const ServiceStat = () => {
 
     return (
         <Box>
-            <TitleBar title={`서비스 통계`} />
+            <TitleBar title={`크라우드소싱 통계`} />
             <SearchFilter onSearch={handleSearch} />
             <Box
                 sx={{
@@ -77,10 +75,11 @@ const ServiceStat = () => {
                     rows={fetchData?.lists}
                     rowCount={fetchData?.count}
                     columns={columns}
+                    columnGroupingModel={columnGroupingModel}
                     sort={{ field: 'id', orderby: 'desc' }}
                     onPageChange={handleOnPageChange}
                     onRowClick={handleSelectRow}
-                    activeTools={['export', 'column']}
+                    activeTools={['export']}
                     pageInit={queryParams.page === 1 ? true : false}
                 />
             </Box>
@@ -88,4 +87,4 @@ const ServiceStat = () => {
     )
 }
 
-export default ServiceStat
+export default CrowdStat

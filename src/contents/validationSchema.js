@@ -18,8 +18,6 @@ const HELPER_TEXT = {
     cropNameLength: '회사명은 한 글자 이상 입력해 주세요.',
     nameRequired: '이름을 입력해 주세요.',
     nameLength: '한 글자 이상 입력해 주세요.',
-    searchLat: '위도를 입력해 주세요',
-    searchLng: '경도를 입력해 주세요',
     ipRequired: 'IP 입력해 주세요.',
     ipNotMatch: 'IP 형식이 맞지 않습니다.',
 

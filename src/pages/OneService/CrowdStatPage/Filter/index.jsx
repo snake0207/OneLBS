@@ -6,27 +6,23 @@ import { MuiSubButton } from '#/components/common/button/MuiButton'
 import style from './style.module'
 import Select from '#/components/common/Select'
 import DatePickerInput from '#/components/common/input/DatePickerInput'
+import { unionGetCrowdTypeList } from '#/common/libs/service'
 
 function SearchFilter({ onSearch }) {
-    const procTypeList = () => [
-        { key: 9, value: 9, label: `전체` },
-        { key: 0, value: 0, label: `일간` },
-        { key: 1, value: 1, label: `종합` },
-    ]
     const formik = useFormik({
         initialValues: {
-            start_date: '',
-            end_date: '',
-            procType: 9,
+            startDate: '',
+            endDate: '',
+            crowdType: 'T',
         },
         onSubmit: (values) => {
-            const start_date = `${values.start_date.split('-').join('')}`
-            const end_date = `${values.end_date.split('-').join('')}`
+            const startDate = `${values.startDate.split('-').join('')}`
+            const endDate = `${values.endDate.split('-').join('')}`
             if (onSearch)
                 onSearch({
-                    start_date,
-                    end_date,
-                    procType: values.procType,
+                    startDate,
+                    endDate,
+                    crowdType: values.crowdType,
                 })
         },
     })
@@ -39,9 +35,9 @@ function SearchFilter({ onSearch }) {
                         <TableCell sx={style.cellTitle}>{`처리 구분`}</TableCell>
                         <TableCell sx={{ width: '15%' }}>
                             <Select
-                                name={'procType'}
+                                name={'crowdType'}
                                 formik={formik}
-                                items={procTypeList()}
+                                items={unionGetCrowdTypeList()}
                                 sx={{
                                     width: '100%',
                                     height: 40,
@@ -59,13 +55,14 @@ function SearchFilter({ onSearch }) {
                                 alignItems={'center'}
                                 width="100%"
                             >
-                                <DatePickerInput name={'start_date'} formik={formik} />
+                                <DatePickerInput name={'startDate'} formik={formik} />
                                 <Typography>~</Typography>
-                                <DatePickerInput name={'end_date'} formik={formik} />
+                                <DatePickerInput name={'endDate'} formik={formik} />
                             </Stack>
                         </TableCell>
                         <TableCell align="right">
                             <MuiSubButton
+                                disabled={!formik.values.startDate || !formik.values.endDate}
                                 name="search"
                                 title="검색"
                                 onClick={formik.handleSubmit}

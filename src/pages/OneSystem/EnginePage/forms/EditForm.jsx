@@ -161,16 +161,18 @@ const EditForm = () => {
         })
 
         console.log(item)
-        console.log(rowValue)
 
         const handleBlurField = () => {
+            console.log('handleBlur : ', item)
             const _lists = fetchData.lists.filter((data) => data.id !== item.id)
-            setFetchData({ count: fetchData.count, lists: [..._lists, item] })
+            setFetchData({
+                count: fetchData.count,
+                lists: [..._lists, item].sort((a, b) => a.id - b.id),
+            })
         }
 
         const handleChangeDataType = (param) => {
             const _dataType = param.value.toUpperCase()
-            console.log('Change... : ', param)
             // setRowValue((prev) => ({ ...prev, dataType: param.value, value: '' }))
             // item.dataType = param.value
             console.log(`CHANGE ${item.dataType} ===> ${_dataType}`)
@@ -190,9 +192,20 @@ const EditForm = () => {
             } else if (_dataType === 'B') {
                 setRowValue((prev) => ({ ...prev, dataType: param.value, value: false }))
                 item.value = item.value ? true : false
-            } else if (_dataType === 'AS' || _dataType === 'AI' || _dataType === 'AD') {
-                setRowValue((prev) => ({ ...prev, dataType: param.value, value: [...prev.value] }))
-                item.value = []
+            } else if (_dataType === 'AS') {
+                const _arr = item.value ? item.value.split(',') : ''
+                setRowValue((prev) => ({ ...prev, dataType: param.value, value: [..._arr] }))
+                item.value = [..._arr]
+            } else if (_dataType === 'AI') {
+                const _arr = item.value ? item.value.split(',').map((num) => parseInt(num)) : ''
+                setRowValue((prev) => ({ ...prev, dataType: param.value, value: [..._arr] }))
+                item.value = [..._arr]
+            } else if (_dataType === 'AD') {
+                const _arr = item.value
+                    ? item.value.split(',').map((float) => parseFloat(float))
+                    : ''
+                setRowValue((prev) => ({ ...prev, dataType: param.value, value: [..._arr] }))
+                item.value = [..._arr]
             }
             item.dataType = param.value
         }
@@ -222,9 +235,9 @@ const EditForm = () => {
                 </TableCell>
                 <TableCell>
                     <Select
-                        name={item.dataType || rowValue?.dataType}
+                        name={item.dataType}
                         items={getDataTypeList()}
-                        value={item.dataType || rowValue?.dataType}
+                        value={item.dataType}
                         onChange={(param) => handleChangeDataType(param)}
                         style={{
                             height: '40px',
@@ -243,7 +256,7 @@ const EditForm = () => {
                             type="text"
                             fullWidth
                             size="small"
-                            value={item.value || rowValue?.value}
+                            value={item.value}
                             onChange={(e) => {
                                 setRowValue((prev) => ({ ...prev, value: e.target.value }))
                                 item.value = e.target.value
@@ -255,7 +268,7 @@ const EditForm = () => {
                         <FormControlLabel
                             control={
                                 <Checkbox
-                                    checked={item.value || rowValue?.value}
+                                    checked={item.value}
                                     onChange={(e) => {
                                         setRowValue((prev) => ({
                                             ...prev,
@@ -278,7 +291,7 @@ const EditForm = () => {
                                 type="text"
                                 fullWidth
                                 size="small"
-                                value={item.value || rowValue?.value}
+                                value={item.value}
                                 onChange={(e) => {
                                     setRowValue((prev) => ({ ...prev, value: e.target.value }))
                                     item.value = e.target.value

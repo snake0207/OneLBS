@@ -31,16 +31,22 @@ export const getPosMethods = () => [
 ]
 
 // 서비스 통계 측위방법
+// export const getStatPosMethods = () => [
+//     { key: 0, value: `CELL`, label: `CELL` },
+//     { key: 1, value: `ECID`, label: `ECID` },
+//     { key: 2, value: `GUA`, label: `GUA` },
+//     { key: 3, value: `GUB`, label: `GUB` },
+//     { key: 4, value: `GCA`, label: `GCA` },
+//     { key: 5, value: `GCB`, label: `GCB` },
+//     { key: 6, value: `KSA2`, label: `KSA2` },
+//     { key: 7, value: `KSA3`, label: `KSA3` },
+//     { key: 8, value: `KSA4`, label: `KSA4` },
+// ]
 export const getStatPosMethods = () => [
     { key: 0, value: `CELL`, label: `CELL` },
-    { key: 1, value: `ECID`, label: `ECID` },
-    { key: 2, value: `GUA`, label: `GUA` },
-    { key: 3, value: `GUB`, label: `GUB` },
-    { key: 4, value: `GCA`, label: `GCA` },
-    { key: 5, value: `GCB`, label: `GCB` },
-    { key: 6, value: `KSA2`, label: `KSA2` },
-    { key: 7, value: `KSA3`, label: `KSA3` },
-    { key: 8, value: `KSA4`, label: `KSA4` },
+    { key: 1, value: `GPS`, label: `GPS` },
+    { key: 10, value: `WiFi`, label: `WiFi` },
+    { key: 11, value: `RGNSS`, label: `RGNSS` },
 ]
 
 export const unionGetStatPosMethods = () => [

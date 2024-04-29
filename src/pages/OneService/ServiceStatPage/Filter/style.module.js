@@ -14,33 +14,13 @@ const style = {
         th: {
             border: 0,
             color: 'text.darkgray',
-            p: '3px 10px 3px 0',
+            p: '6px 10px 6px 0',
         },
         input: {
             height: '40px',
             pt: 0,
             pb: 0,
         },
-    },
-    searchButton: {
-        fontSize: 15,
-        fontWeight: 400,
-        width: '69px',
-        height: '40px',
-        minWidth: 'auto',
-        backgroundColor: 'button.main',
-        padding: '6px',
-    },
-    inputDash: {
-        fontSize: 15,
-        display: 'flex',
-        alignItems: 'center',
-    },
-    cellTitle: {
-        width: '10%',
-    },
-    cellInput: {
-        width: '15%',
     },
 }
 

@@ -19,7 +19,8 @@ import DatePickerInput from '#/components/common/input/DatePickerInput'
 import TimePickerInput from '#/components/common/input/TimePickerInput'
 import CheckBox from '#/components/common/input/CheckBox'
 import TextInput from '#/components/common/input/TextInput'
-import { getPlanes, getStatPosMethods, getTimeTypeList } from '#/common/libs/service'
+import { getTimeTypeList, unionGetPlanes, unionGetStatPosMethods } from '#/common/libs/service'
+import * as yup from 'yup'
 
 function SearchFilter({ onSearch }) {
     const formik = useFormik({
@@ -28,30 +29,44 @@ function SearchFilter({ onSearch }) {
             startDate: '',
             endDate: '',
             start_time: '00',
-            end_time: '00',
+            end_time: String(new Date().getHours()),
             groupBy: {
-                service: '',
-                appId: '',
-                model: '',
-                opType: '',
-                posInit: '',
-                plane: '',
-                posMethod: '',
-                respCode: '',
+                service: false,
+                appId: false,
+                model: false,
+                opType: false,
+                posInit: false,
+                plane: false,
+                posMethod: false,
+                respCode: false,
             },
             service: '',
             appId: '',
             model: '',
             opType: '',
             posInit: '',
-            plane: 'CP',
-            posMethod: 'CELL',
+            plane: 'N',
+            posMethod: 'N',
             respCode: '',
         },
+        // validationSchema: yup.object({
+        //     startDate: yup.date().required(`검색 시작날짜를 입력해주세요`),
+        //     endDate: yup
+        //         .date()
+        //         .required(`검색 종료날짜를 입력해주세요`)
+        //         .min(yup.ref('startDate'), '종료날짜는 시작날짜 이후여야 합니다.'),
+        // }),
         onSubmit: (values) => {
             const startDate = `${values.startDate.split('-').join('')}${values.start_time}`
             const endDate = `${values.endDate.split('-').join('')}${values.end_time}`
-            if (onSearch) onSearch({ ...values, startDate, endDate })
+            const plane = values.plane === 'N' ? '' : values.plane
+            const posMethod = values.posMethod === 'N' ? '' : values.posMethod
+            if (onSearch) {
+                // API 불필요 field 삭제
+                delete values.start_time
+                delete values.end_time
+                onSearch({ ...values, startDate, endDate, plane, posMethod })
+            }
         },
     })
 
@@ -106,6 +121,7 @@ function SearchFilter({ onSearch }) {
                 </Box>
                 <Box sx={{ flex: 1 }}></Box>
             </Box>
+
             <Box
                 sx={{
                     width: '100%',
@@ -117,116 +133,108 @@ function SearchFilter({ onSearch }) {
                     <Typography>{`Group By`}</Typography>
                 </Box>
                 <Box sx={{ flex: 8 }}>
-                    <Table>
+                    <Table sx={style.tableBox}>
                         <TableHead>
-                            <TableCell sx={style.cellInput} colSpan={8}>
-                                <Box display={`flex`} justifyContent={`space-between`}>
-                                    <CheckBox
-                                        checked={
-                                            formik.values.groupBy.service === 'Y' ? true : false
-                                        }
-                                        onChange={(e) =>
-                                            formik.setFieldValue(
-                                                'groupBy.service',
-                                                e.target.value === 'Y' ? 'N' : 'Y',
-                                            )
-                                        }
-                                        value={formik.values.groupBy.service}
-                                        label={`서비스코드`}
-                                    />
-                                    <CheckBox
-                                        checked={formik.values.groupBy.appId === 'Y' ? true : false}
-                                        onChange={(e) =>
-                                            formik.setFieldValue(
-                                                'groupBy.appId',
-                                                e.target.value === 'Y' ? 'N' : 'Y',
-                                            )
-                                        }
-                                        value={formik.values.groupBy.appId}
-                                        label={`AppID`}
-                                    />
-                                    <CheckBox
-                                        checked={formik.values.groupBy.model === 'Y' ? true : false}
-                                        onChange={(e) =>
-                                            formik.setFieldValue(
-                                                'groupBy.model',
-                                                e.target.value === 'Y' ? 'N' : 'Y',
-                                            )
-                                        }
-                                        value={formik.values.groupBy.model}
-                                        label={`모델`}
-                                    />
-                                    <CheckBox
-                                        checked={
-                                            formik.values.groupBy.opType === 'Y' ? true : false
-                                        }
-                                        onChange={(e) =>
-                                            formik.setFieldValue(
-                                                'groupBy.opType',
-                                                e.target.value === 'Y' ? 'N' : 'Y',
-                                            )
-                                        }
-                                        value={formik.values.groupBy.opType}
-                                        label={`OP Type`}
-                                    />
-                                    <CheckBox
-                                        checked={
-                                            formik.values.groupBy.posInit === 'Y' ? true : false
-                                        }
-                                        onChange={(e) =>
-                                            formik.setFieldValue(
-                                                'groupBy.posInit',
-                                                e.target.value === 'Y' ? 'N' : 'Y',
-                                            )
-                                        }
-                                        value={formik.values.groupBy.posInit}
-                                        label={`POS INIT`}
-                                    />
-                                    <CheckBox
-                                        checked={formik.values.groupBy.plane === 'Y' ? true : false}
-                                        onChange={(e) =>
-                                            formik.setFieldValue(
-                                                'groupBy.plane',
-                                                e.target.value === 'Y' ? 'N' : 'Y',
-                                            )
-                                        }
-                                        value={formik.values.groupBy.plane}
-                                        label={`Plane`}
-                                    />
-                                    <CheckBox
-                                        checked={
-                                            formik.values.groupBy.posMethod === 'Y' ? true : false
-                                        }
-                                        onChange={(e) =>
-                                            formik.setFieldValue(
-                                                'groupBy.posMethod',
-                                                e.target.value === 'Y' ? 'N' : 'Y',
-                                            )
-                                        }
-                                        value={formik.values.groupBy.posMethod}
-                                        label={`측위방식`}
-                                    />
-                                    <CheckBox
-                                        checked={
-                                            formik.values.groupBy.respCode === 'Y' ? true : false
-                                        }
-                                        onChange={(e) =>
-                                            formik.setFieldValue(
-                                                'groupBy.respCode',
-                                                e.target.value === 'Y' ? 'N' : 'Y',
-                                            )
-                                        }
-                                        value={formik.values.groupBy.respCode}
-                                        label={`응답코드`}
-                                    />
-                                </Box>
-                            </TableCell>
+                            <TableRow>
+                                <TableCell colSpan={8}>
+                                    <Box display={`flex`} justifyContent={`space-between`}>
+                                        <CheckBox
+                                            checked={formik.values.groupBy.service}
+                                            onChange={(e) =>
+                                                formik.setFieldValue(
+                                                    'groupBy.service',
+                                                    e.target.checked,
+                                                )
+                                            }
+                                            value={formik.values.groupBy.service}
+                                            label={`서비스코드`}
+                                        />
+                                        <CheckBox
+                                            checked={formik.values.groupBy.appId}
+                                            onChange={(e) =>
+                                                formik.setFieldValue(
+                                                    'groupBy.appId',
+                                                    e.target.checked,
+                                                )
+                                            }
+                                            value={formik.values.groupBy.appId}
+                                            label={`AppID`}
+                                        />
+                                        <CheckBox
+                                            checked={formik.values.groupBy.model}
+                                            onChange={(e) =>
+                                                formik.setFieldValue(
+                                                    'groupBy.model',
+                                                    e.target.checked,
+                                                )
+                                            }
+                                            value={formik.values.groupBy.model}
+                                            label={`모델`}
+                                        />
+                                        <CheckBox
+                                            checked={formik.values.groupBy.opType}
+                                            onChange={(e) =>
+                                                formik.setFieldValue(
+                                                    'groupBy.opType',
+                                                    e.target.checked,
+                                                )
+                                            }
+                                            value={formik.values.groupBy.opType}
+                                            label={`OP Type`}
+                                        />
+                                        <CheckBox
+                                            checked={formik.values.groupBy.posInit}
+                                            onChange={(e) =>
+                                                formik.setFieldValue(
+                                                    'groupBy.posInit',
+                                                    e.target.checked,
+                                                )
+                                            }
+                                            value={formik.values.groupBy.posInit}
+                                            label={`POS INIT`}
+                                        />
+                                        <CheckBox
+                                            checked={formik.values.groupBy.plane}
+                                            onChange={(e) =>
+                                                formik.setFieldValue(
+                                                    'groupBy.plane',
+                                                    e.target.checked,
+                                                )
+                                            }
+                                            value={formik.values.groupBy.plane}
+                                            label={`Plane`}
+                                        />
+                                        <CheckBox
+                                            checked={formik.values.groupBy.posMethod}
+                                            onChange={(e) =>
+                                                formik.setFieldValue(
+                                                    'groupBy.posMethod',
+                                                    e.target.checked,
+                                                )
+                                            }
+                                            value={formik.values.groupBy.posMethod}
+                                            label={`측위방식`}
+                                        />
+                                        <CheckBox
+                                            checked={formik.values.groupBy.respCode}
+                                            onChange={(e) =>
+                                                formik.setFieldValue(
+                                                    'groupBy.respCode',
+                                                    e.target.checked,
+                                                )
+                                            }
+                                            value={formik.values.groupBy.respCode}
+                                            label={`응답코드`}
+                                        />
+                                    </Box>
+                                </TableCell>
+                            </TableRow>
                         </TableHead>
                     </Table>
                 </Box>
                 <Box sx={{ flex: 1 }}></Box>
             </Box>
-            <Divider />
+
             <Box
                 sx={{
                     width: '100%',
@@ -238,7 +246,7 @@ function SearchFilter({ onSearch }) {
                     <Typography>{`검색 조건`}</Typography>
                 </Box>
                 <Box sx={{ flex: 8 }}>
-                    <Table>
+                    <Table sx={style.tableBox}>
                         <TableHead>
                             <TableRow>
                                 <TableCell style={{ width: '10%' }}>{`서비스 코드`}</TableCell>
@@ -267,7 +275,7 @@ function SearchFilter({ onSearch }) {
                                 <TableCell style={{ width: '15%' }}>
                                     <Select
                                         name="plane"
-                                        items={getPlanes()}
+                                        items={unionGetPlanes()}
                                         formik={formik}
                                         style={{
                                             height: '40px',
@@ -282,7 +290,7 @@ function SearchFilter({ onSearch }) {
                                 <TableCell style={{ width: '15%' }}>
                                     <Select
                                         name="posMethod"
-                                        items={getStatPosMethods()}
+                                        items={unionGetStatPosMethods()}
                                         formik={formik}
                                         style={{
                                             height: '40px',
@@ -301,208 +309,23 @@ function SearchFilter({ onSearch }) {
                         </TableHead>
                     </Table>
                 </Box>
-                <Box sx={{ flex: 1, textAlign: 'right' }}>
-                    <MuiSubButton name="search" title="검색" onClick={formik.handleSubmit} />
+                <Box
+                    sx={{
+                        flex: 1,
+                        height: '100px',
+                        display: 'flex',
+                        alignItems: 'flex-end',
+                        pb: 0.5,
+                    }}
+                >
+                    <MuiSubButton
+                        disabled={!formik.values.startDate || !formik.values.endDate}
+                        name="search"
+                        title="검색"
+                        onClick={formik.handleSubmit}
+                    />
                 </Box>
             </Box>
-            {/* <Table sx={style.tableBox}>
-                <TableHead>
-                    <TableRow>
-                        <TableCell sx={style.cellTitle}>{`시간 구분`}</TableCell>
-                        <TableCell sx={style.cellInput}>
-                            <Select
-                                name={'dateType'}
-                                formik={formik}
-                                items={getTimeTypeList()}
-                                sx={{
-                                    width: '100%',
-                                    height: 40,
-                                    backgroundColor: 'form.main',
-                                    borderRadius: '4px',
-                                }}
-                            />
-                        </TableCell>
-                        <TableCell sx={style.cellTitle}>{`조회기간`}</TableCell>
-                        <TableCell sx={style.cellInput} colSpan={6}>
-                            <Stack
-                                direction={'row'}
-                                spacing={0.1}
-                                alignItems={'center'}
-                                width="100%"
-                            >
-                                <DatePickerInput name={'startDate'} formik={formik} />
-                                <TimePickerInput name={'start_time'} formik={formik} />
-                                <Typography>~</Typography>
-                                <DatePickerInput name={'endDate'} formik={formik} />
-                                <TimePickerInput name={'end_time'} formik={formik} />
-                            </Stack>
-                        </TableCell>
-                    </TableRow>
-
-                    <TableRow>
-                        <TableCell sx={style.cellTitle}>{`Group By`}</TableCell>
-                        <TableCell sx={style.cellInput} colSpan={8}>
-                            <Stack direction={`row`} spacing={4}>
-                                <CheckBox
-                                    checked={formik.values.groupBy.service === 'Y' ? true : false}
-                                    onChange={(e) =>
-                                        formik.setFieldValue(
-                                            'groupBy.service',
-                                            e.target.value === 'Y' ? 'N' : 'Y',
-                                        )
-                                    }
-                                    value={formik.values.groupBy.service}
-                                    label={`서비스코드`}
-                                />
-                                <CheckBox
-                                    checked={formik.values.groupBy.appId === 'Y' ? true : false}
-                                    onChange={(e) =>
-                                        formik.setFieldValue(
-                                            'groupBy.appId',
-                                            e.target.value === 'Y' ? 'N' : 'Y',
-                                        )
-                                    }
-                                    value={formik.values.groupBy.appId}
-                                    label={`AppID`}
-                                />
-                                <CheckBox
-                                    checked={formik.values.groupBy.model === 'Y' ? true : false}
-                                    onChange={(e) =>
-                                        formik.setFieldValue(
-                                            'groupBy.model',
-                                            e.target.value === 'Y' ? 'N' : 'Y',
-                                        )
-                                    }
-                                    value={formik.values.groupBy.model}
-                                    label={`모델`}
-                                />
-                                <CheckBox
-                                    checked={formik.values.groupBy.opType === 'Y' ? true : false}
-                                    onChange={(e) =>
-                                        formik.setFieldValue(
-                                            'groupBy.opType',
-                                            e.target.value === 'Y' ? 'N' : 'Y',
-                                        )
-                                    }
-                                    value={formik.values.groupBy.opType}
-                                    label={`OP Type`}
-                                />
-                                <CheckBox
-                                    checked={formik.values.groupBy.posInit === 'Y' ? true : false}
-                                    onChange={(e) =>
-                                        formik.setFieldValue(
-                                            'groupBy.posInit',
-                                            e.target.value === 'Y' ? 'N' : 'Y',
-                                        )
-                                    }
-                                    value={formik.values.groupBy.posInit}
-                                    label={`POS INIT`}
-                                />
-                                <CheckBox
-                                    checked={formik.values.groupBy.plane === 'Y' ? true : false}
-                                    onChange={(e) =>
-                                        formik.setFieldValue(
-                                            'groupBy.plane',
-                                            e.target.value === 'Y' ? 'N' : 'Y',
-                                        )
-                                    }
-                                    value={formik.values.groupBy.plane}
-                                    label={`Plane`}
-                                />
-                                <CheckBox
-                                    checked={formik.values.groupBy.posMethod === 'Y' ? true : false}
-                                    onChange={(e) =>
-                                        formik.setFieldValue(
-                                            'groupBy.posMethod',
-                                            e.target.value === 'Y' ? 'N' : 'Y',
-                                        )
-                                    }
-                                    value={formik.values.groupBy.posMethod}
-                                    label={`측위방식`}
-                                />
-                                <CheckBox
-                                    checked={formik.values.groupBy.respCode === 'Y' ? true : false}
-                                    onChange={(e) =>
-                                        formik.setFieldValue(
-                                            'groupBy.respCode',
-                                            e.target.value === 'Y' ? 'N' : 'Y',
-                                        )
-                                    }
-                                    value={formik.values.groupBy.respCode}
-                                    label={`응답코드`}
-                                />
-                            </Stack>
-                        </TableCell>
-                    </TableRow>
-                    
-                    <TableRow>
-                        <TableCell sx={style.cellTitle} rowSpan={2}>{`검색조건`}</TableCell>
-                        <TableCell sx={style.cellTitle}>{`서비스 코드`}</TableCell>
-                        <TableCell sx={style.cellInput}>
-                            <TextInput name="service" formik={formik} />
-                        </TableCell>
-                        <TableCell sx={style.cellTitle}>{`App ID`}</TableCell>
-                        <TableCell sx={style.cellInput}>
-                            <TextInput name="appId" formik={formik} />
-                        </TableCell>
-                        <TableCell sx={style.cellTitle}>{`단말 모델`}</TableCell>
-                        <TableCell sx={style.cellInput}>
-                            <TextInput name="model" formik={formik} />
-                        </TableCell>
-                        <TableCell sx={style.cellTitle}>{`OP Type`}</TableCell>
-                        <TableCell sx={style.cellInput}>
-                            <TextInput name="opType" formik={formik} />
-                        </TableCell>
-                    </TableRow>
-                    <TableRow>
-                        <TableCell sx={style.cellTitle}>{`Pos INIT`}</TableCell>
-                        <TableCell sx={style.cellInput}>
-                            <TextInput name="posInit" formik={formik} />
-                        </TableCell>
-                        <TableCell sx={style.cellTitle}>{`Plane`}</TableCell>
-                        <TableCell sx={style.cellInput}>
-                            <Select
-                                name="plane"
-                                items={getPlanes()}
-                                formik={formik}
-                                style={{
-                                    height: '40px',
-                                    width: '100%',
-                                    fontSize: 14,
-                                    backgroundColor: 'form.main',
-                                    borderRadius: '4px',
-                                }}
-                            />
-                        </TableCell>
-                        <TableCell sx={style.cellTitle}>{`측위 방식`}</TableCell>
-                        <TableCell sx={style.cellInput}>
-                            <Select
-                                name="posMethod"
-                                items={getStatPosMethods()}
-                                formik={formik}
-                                style={{
-                                    height: '40px',
-                                    width: '100%',
-                                    fontSize: 14,
-                                    backgroundColor: 'form.main',
-                                    borderRadius: '4px',
-                                }}
-                            />
-                        </TableCell>
-                        <TableCell sx={style.cellTitle}>{`응답 코드`}</TableCell>
-                        <TableCell sx={style.cellInput}>
-                            <TextInput name="respCode" formik={formik} />
-                        </TableCell>
-                        <TableCell align="right">
-                            <MuiSubButton
-                                name="search"
-                                title="검색"
-                                onClick={formik.handleSubmit}
-                            />
-                        </TableCell>
-                    </TableRow>
-                </TableHead>
-            </Table> */}
         </Box>
     )
 }

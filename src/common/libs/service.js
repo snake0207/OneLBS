@@ -43,11 +43,18 @@ export const getStatPosMethods = () => [
     { key: 8, value: `KSA4`, label: `KSA4` },
 ]
 
+export const unionGetStatPosMethods = () => [
+    { key: 'N', value: `N`, label: `NONE` },
+    ...getStatPosMethods(),
+]
+
 // Plane
 export const getPlanes = () => [
     { key: 0, value: `UP`, label: `UP` },
     { key: 1, value: `CP`, label: `CP` },
 ]
+
+export const unionGetPlanes = () => [{ key: 'N', value: `N`, label: `NONE` }, ...getPlanes()]
 // Plane
 export const getModes = () => [
     { key: 0, value: `MSB`, label: `MSB` },

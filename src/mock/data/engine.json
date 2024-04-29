@@ -22,7 +22,7 @@
             "id": 4,
             "name": "com.chronoengine.Tempsoft",
             "dataType": "B",
-            "value": "Y"
+            "value": true
         },
         {
             "id": 5,

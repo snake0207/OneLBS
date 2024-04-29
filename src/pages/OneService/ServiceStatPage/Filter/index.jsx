@@ -30,16 +30,14 @@ function SearchFilter({ onSearch }) {
             endDate: '',
             start_time: '00',
             end_time: String(new Date().getHours()),
-            groupBy: {
-                service: false,
-                appId: false,
-                model: false,
-                opType: false,
-                posInit: false,
-                plane: false,
-                posMethod: false,
-                respCode: false,
-            },
+            serviceCheck: false,
+            appIdCheck: false,
+            modelCheck: false,
+            opTypeCheck: false,
+            posInitCheck: false,
+            planeCheck: false,
+            posMethodCheck: false,
+            respCodeCheck: false,
             service: '',
             appId: '',
             model: '',
@@ -139,91 +137,82 @@ function SearchFilter({ onSearch }) {
                                 <TableCell colSpan={8}>
                                     <Box display={`flex`} justifyContent={`space-between`}>
                                         <CheckBox
-                                            checked={formik.values.groupBy.service}
+                                            checked={formik.values.serviceCheck}
                                             onChange={(e) =>
                                                 formik.setFieldValue(
-                                                    'groupBy.service',
+                                                    'serviceCheck',
                                                     e.target.checked,
                                                 )
                                             }
-                                            value={formik.values.groupBy.service}
+                                            value={formik.values.serviceCheck}
                                             label={`서비스코드`}
                                         />
                                         <CheckBox
-                                            checked={formik.values.groupBy.appId}
+                                            checked={formik.values.appIdCheck}
                                             onChange={(e) =>
-                                                formik.setFieldValue(
-                                                    'groupBy.appId',
-                                                    e.target.checked,
-                                                )
+                                                formik.setFieldValue('appIdCheck', e.target.checked)
                                             }
-                                            value={formik.values.groupBy.appId}
+                                            value={formik.values.appIdCheck}
                                             label={`AppID`}
                                         />
                                         <CheckBox
-                                            checked={formik.values.groupBy.model}
+                                            checked={formik.values.modelCheck}
                                             onChange={(e) =>
-                                                formik.setFieldValue(
-                                                    'groupBy.model',
-                                                    e.target.checked,
-                                                )
+                                                formik.setFieldValue('model', e.target.checked)
                                             }
-                                            value={formik.values.groupBy.model}
+                                            value={formik.values.modelCheck}
                                             label={`모델`}
                                         />
                                         <CheckBox
-                                            checked={formik.values.groupBy.opType}
+                                            checked={formik.values.opTypeCheck}
                                             onChange={(e) =>
                                                 formik.setFieldValue(
-                                                    'groupBy.opType',
+                                                    'opTypeCheck',
                                                     e.target.checked,
                                                 )
                                             }
-                                            value={formik.values.groupBy.opType}
+                                            value={formik.values.opTypeCheck}
                                             label={`OP Type`}
                                         />
                                         <CheckBox
-                                            checked={formik.values.groupBy.posInit}
+                                            checked={formik.values.posInitCheck}
                                             onChange={(e) =>
                                                 formik.setFieldValue(
-                                                    'groupBy.posInit',
+                                                    'posInitCheck',
                                                     e.target.checked,
                                                 )
                                             }
-                                            value={formik.values.groupBy.posInit}
+                                            value={formik.values.posInitCheck}
                                             label={`POS INIT`}
                                         />
                                         <CheckBox
-                                            checked={formik.values.groupBy.plane}
+                                            checked={formik.values.planeCheck}
                                             onChange={(e) =>
-                                                formik.setFieldValue(
-                                                    'groupBy.plane',
-                                                    e.target.checked,
-                                                )
+                                                formik.setFieldValue('planeCheck', e.target.checked)
                                             }
-                                            value={formik.values.groupBy.plane}
+                                            value={formik.values.planeCheck}
                                             label={`Plane`}
                                         />
                                         <CheckBox
-                                            checked={formik.values.groupBy.posMethod}
+                                            checked={formik.values.posMethodCheck}
                                             onChange={(e) =>
                                                 formik.setFieldValue(
-                                                    'groupBy.posMethod',
+                                                    'posMethodCheck',
                                                     e.target.checked,
                                                 )
                                             }
-                                            value={formik.values.groupBy.posMethod}
+                                            value={formik.values.posMethodCheck}
                                             label={`측위방식`}
                                         />
                                         <CheckBox
-                                            checked={formik.values.groupBy.respCode}
+                                            checked={formik.values.respCodeCheck}
                                             onChange={(e) =>
                                                 formik.setFieldValue(
-                                                    'groupBy.respCode',
+                                                    'respCodeCheck',
                                                     e.target.checked,
                                                 )
                                             }
-                                            value={formik.values.groupBy.respCode}
+                                            value={formik.values.respCodeCheck}
                                             label={`응답코드`}
                                         />
                                     </Box>

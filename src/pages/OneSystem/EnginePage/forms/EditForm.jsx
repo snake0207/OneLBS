@@ -20,7 +20,6 @@ import SettingsSuggestOutlinedIcon from '@mui/icons-material/SettingsSuggestOutl
 import TitleBar from '#/components/common/menu/TitleBar'
 import MuiDialog from '#/components/common/popup/MuiDialog'
 import { MuiMainButton } from '#/components/common/button/MuiButton'
-import CheckBox from '#/components/common/input/CheckBox'
 
 import style from './style.module'
 import MuiAlert from '#/components/common/popup/MuiAlert'
@@ -115,7 +114,10 @@ const EditForm = () => {
             'target : ',
             fetchData.lists.filter((item) => item.id === id),
         )
-        // setFetchData({ count: fetchData.count - 1, lists: [...fetchData.lists.map(item => item.id != id)]})
+        setFetchData({
+            count: fetchData.count - 1,
+            lists: [...fetchData.lists.filter((item) => item.id != id)],
+        })
     }
 
     useEffect(() => {
@@ -138,7 +140,9 @@ const EditForm = () => {
         }
     }, [apiResult])
 
-    console.log('fetchData : ', fetchData)
+    const handleShowData = () => {
+        console.log('fetchData : ', fetchData)
+    }
 
     const retValueStyle = (dataType) => {
         const _dataType = dataType.toUpperCase()
@@ -149,24 +153,48 @@ const EditForm = () => {
         else return DataTypes.UNKNOWN
     }
     // console.log(formik.values)
-    const TableRowDraw = ({ idx, item }) => {
-        const [value, setValue] = useState('')
-        const [valCheck, setValCheck] = useState(item.value === 'Y' ? true : false)
-        const [nameValue, setNameValue] = useState('')
-        const [selected, setSelected] = useState(0)
+    const CreateTableRow = ({ idx, item }) => {
+        const [rowValue, setRowValue] = useState({
+            name: '',
+            dataType: '',
+            value: 0 || 0.0 || '' || [],
+        })
 
-        console.log('ITEM : ', item)
-        
+        console.log(item)
+        console.log(rowValue)
+
         const handleBlurField = () => {
             const _lists = fetchData.lists.filter((data) => data.id !== item.id)
             setFetchData({ count: fetchData.count, lists: [..._lists, item] })
         }
 
-        const handleChangeValueField = (e) => {
-            setValue(e.target.value)
-            console.log('before : ', JSON.stringify(fetchData.lists))
-            const _changeItem = { ...item, value: e.target.value }
-            console.log('Value changeitem : ', _changeItem)
+        const handleChangeDataType = (param) => {
+            const _dataType = param.value.toUpperCase()
+            console.log('Change... : ', param)
+            // setRowValue((prev) => ({ ...prev, dataType: param.value, value: '' }))
+            // item.dataType = param.value
+            console.log(`CHANGE ${item.dataType} ===> ${_dataType}`)
+            if (_dataType === 'S') {
+                setRowValue((prev) => ({
+                    ...prev,
+                    dataType: param.value,
+                    value: String(item.value),
+                }))
+                item.value = String(item.value)
+            } else if (_dataType === 'I') {
+                setRowValue((prev) => ({ ...prev, dataType: param.value, value: 0 }))
+                item.value = 0
+            } else if (_dataType === 'D') {
+                setRowValue((prev) => ({ ...prev, dataType: param.value, value: 0.0 }))
+                item.value = 0.0
+            } else if (_dataType === 'B') {
+                setRowValue((prev) => ({ ...prev, dataType: param.value, value: false }))
+                item.value = item.value ? true : false
+            } else if (_dataType === 'AS' || _dataType === 'AI' || _dataType === 'AD') {
+                setRowValue((prev) => ({ ...prev, dataType: param.value, value: [...prev.value] }))
+                item.value = []
+            }
+            item.dataType = param.value
         }
 
         return (
@@ -182,9 +210,10 @@ const EditForm = () => {
                             type="text"
                             fullWidth
                             size="small"
-                            value={nameValue || item.name}
+                            value={item.name || rowValue?.name}
                             onChange={(e) => {
-                                setNameValue(e.target.value)
+                                // setNameValue(e.target.value)
+                                setRowValue((prev) => ({ ...prev, name: e.target.value }))
                                 item.name = e.target.value
                             }}
                             onBlur={handleBlurField}
@@ -193,9 +222,10 @@ const EditForm = () => {
                 </TableCell>
                 <TableCell>
                     <Select
-                        name={item.dataType}
+                        name={item.dataType || rowValue?.dataType}
                         items={getDataTypeList()}
-                        value={item.dataType}
+                        value={item.dataType || rowValue?.dataType}
+                        onChange={(param) => handleChangeDataType(param)}
                         style={{
                             height: '40px',
                             width: '100%',
@@ -213,24 +243,31 @@ const EditForm = () => {
                             type="text"
                             fullWidth
                             size="small"
-                            value={value || item.value}
-                            onChange={handleChangeValueField}
+                            value={item.value || rowValue?.value}
+                            onChange={(e) => {
+                                setRowValue((prev) => ({ ...prev, value: e.target.value }))
+                                item.value = e.target.value
+                            }}
+                            onBlur={handleBlurField}
                         />
                     )}
                     {retValueStyle(item.dataType) === DataTypes.CHECKBOX && (
                         <FormControlLabel
                             control={
                                 <Checkbox
-                                    checked={valCheck}
+                                    checked={item.value || rowValue?.value}
                                     onChange={(e) => {
-                                        setValCheck(e.target.checked)
-                                        item.value = valCheck ? 'Y' : 'N'
+                                        setRowValue((prev) => ({
+                                            ...prev,
+                                            value: e.target.checked,
+                                        }))
+                                        item.value = e.target.checked
                                         handleBlurField()
                                     }}
-                                    // value={item.value}
+                                    // value={rowValue?.value}
                                 />
                             }
-                            label={valCheck ? '적용' : '미적용'}
+                            label={item.value ? '적용' : '미적용'}
                         />
                     )}
                     {retValueStyle(item.dataType) === DataTypes.ARRAY && (
@@ -241,15 +278,12 @@ const EditForm = () => {
                                 type="text"
                                 fullWidth
                                 size="small"
-                                value={value}
-                                onChange={handleChangeValueField}
-                                multiline={true}
-                                rows={3}
-                                sx={{
-                                    '& .MuiInputBase-input': {
-                                        height: '100px', // 원하는 높이로 설정
-                                    },
+                                value={item.value || rowValue?.value}
+                                onChange={(e) => {
+                                    setRowValue((prev) => ({ ...prev, value: e.target.value }))
+                                    item.value = e.target.value
                                 }}
+                                onBlur={handleBlurField}
                             />
                         </Box>
                     )}
@@ -303,7 +337,7 @@ const EditForm = () => {
                             {/* row - 2 */}
                             {fetchData?.count > 0 &&
                                 fetchData?.lists.map((item, i) => (
-                                    <TableRowDraw key={item.id} idx={i} item={item} />
+                                    <CreateTableRow key={item.id} idx={i} item={item} />
                                 ))}
                         </TableBody>
                     </Table>
@@ -315,6 +349,7 @@ const EditForm = () => {
                         justifyContent={`flex-end`}
                         alignItems={`center`}
                     >
+                        <MuiMainButton name="list" title="Data Show" onClick={handleShowData} />
                         <MuiMainButton
                             disabled={isUpdatePending}
                             name="add"

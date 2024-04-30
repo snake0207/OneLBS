@@ -9,6 +9,7 @@ import {
     TableBody,
     Stack,
     Button,
+    TextField,
 } from '@mui/material'
 import PlaylistAddCheckOutlinedIcon from '@mui/icons-material/PlaylistAddCheckOutlined'
 import ChangeCircleOutlinedIcon from '@mui/icons-material/ChangeCircleOutlined'
@@ -72,6 +73,7 @@ const DetailForm = () => {
     const { data: apiResult } = useGetFacilityWifiSearch(queryParams, {
         enabled: isQueryState,
     })
+
     const formik = useFormik({
         initialValues: formikInitValues,
         // validationSchema: loginSchema,
@@ -94,8 +96,8 @@ const DetailForm = () => {
     // 검색 버튼 누른 경우
     const handleSearch = (values) => {
         setModeToggle(false)
-        setQueryParams({ ...queryParams, ...values })
         setIsQueryState(true)
+        setQueryParams({ ...queryParams, ...values })
     }
 
     const handleUpdateSubmit = () => {
@@ -176,6 +178,7 @@ const DetailForm = () => {
         if (isQueryState && apiResult) {
             console.log('apiResult : ', apiResult)
             if (apiResult?.code === '0000') {
+                setIsQueryState(false)
                 formik.setValues({ ...apiResult?.data })
                 const vap = {
                     utmk: {
@@ -187,7 +190,6 @@ const DetailForm = () => {
                         latitude: apiResult?.data?.vap?.wgs84[1],
                     },
                 }
-                setIsQueryState(false)
                 console.log('vap : ', vap)
                 formik.setFieldValue('vap', vap)
             }
@@ -253,30 +255,52 @@ const DetailForm = () => {
                                     </TableCell>
                                     <TableCell style={style.cellTitle}>{`Grade`}</TableCell>
                                     <TableCell style={style.cellInputWide}>
-                                        <TextInput name={`grade`} formik={formik} />
-                                    </TableCell>
-                                    <TableCell style={style.cellTitle}>{`Grade-신뢰도`}</TableCell>
-                                    <TableCell style={style.cellInputWide}>
-                                        {apiResult?.code === '0000' && (
-                                            <Typography>
-                                                {gradeTypeLabel[apiResult?.data?.grade].label}
-                                            </Typography>
+                                        {apiResult?.data?.hasOwnProperty('grade') ? (
+                                            <TextInput name={`grade`} formik={formik} />
+                                        ) : (
+                                            <Typography>{`grade not exist...`}</Typography>
                                         )}
+                                    </TableCell>
+                                    <TableCell style={style.cellTitle}>{`신뢰도`}</TableCell>
+                                    <TableCell style={style.cellInputWide}>
+                                        <Typography>
+                                            {apiResult?.data?.hasOwnProperty('grade')
+                                                ? gradeTypeLabel[formik.values.grade].label
+                                                : ''}
+                                        </Typography>
                                     </TableCell>
                                 </TableRow>
                                 <TableRow>
                                     <TableCell style={style.cellTitle}>{`Building`}</TableCell>
                                     <TableCell style={style.cellInput}>
-                                        <TextInput name={`building`} formik={formik} />
+                                        {apiResult?.data?.hasOwnProperty('building') ? (
+                                            <TextInput name={`building`} formik={formik} />
+                                        ) : (
+                                            <Typography
+                                                sx={{
+                                                    height: '40px',
+                                                    backgroundColor: `grey.search`,
+                                                }}
+                                            />
+                                        )}
                                     </TableCell>
                                     <TableCell style={style.cellTitle}>{`Floor`}</TableCell>
                                     <TableCell style={style.cellInput}>
-                                        <TextInput name={`floor`} formik={formik} />
+                                        {apiResult?.data?.hasOwnProperty('floor') ? (
+                                            <TextInput name={`floor`} formik={formik} />
+                                        ) : (
+                                            <Typography
+                                                sx={{
+                                                    height: '40px',
+                                                    backgroundColor: `grey.search`,
+                                                }}
+                                            />
+                                        )}
                                     </TableCell>
                                     <TableCell style={style.cellTitle}>{``}</TableCell>
-                                    <TableCell style={style.cellInputWide}>{}</TableCell>
+                                    <TableCell style={style.cellInputWide}>{``}</TableCell>
                                     <TableCell style={style.cellTitle}>{``}</TableCell>
-                                    <TableCell style={style.cellInputWide}>{}</TableCell>
+                                    <TableCell style={style.cellInputWide}>{``}</TableCell>
                                 </TableRow>
                                 <TableRow>
                                     <TableCell style={style.cellTitle}>{`위도`}</TableCell>
@@ -289,11 +313,29 @@ const DetailForm = () => {
                                     </TableCell>
                                     <TableCell style={style.cellTitle}>{`생성일시`}</TableCell>
                                     <TableCell style={style.cellInputWide}>
-                                        <TextInput name={`regDate`} formik={formik} />
+                                        {apiResult?.data?.hasOwnProperty('regDate') ? (
+                                            <TextInput name={`regDate`} formik={formik} />
+                                        ) : (
+                                            <Typography
+                                                sx={{
+                                                    height: '40px',
+                                                    backgroundColor: `grey.search`,
+                                                }}
+                                            />
+                                        )}
                                     </TableCell>
                                     <TableCell style={style.cellTitle}>{`갱신일시`}</TableCell>
                                     <TableCell style={style.cellInputWide}>
-                                        <TextInput name={`updDate`} formik={formik} />
+                                        {apiResult?.data?.hasOwnProperty('updDate') ? (
+                                            <TextInput name={`updDate`} formik={formik} />
+                                        ) : (
+                                            <Typography
+                                                sx={{
+                                                    height: '40px',
+                                                    backgroundColor: `grey.search`,
+                                                }}
+                                            />
+                                        )}
                                     </TableCell>
                                 </TableRow>
                             </TableBody>
@@ -308,12 +350,22 @@ const DetailForm = () => {
                             locations={[
                                 {
                                     ...formik.values.vap.wgs84,
-                                    title: formik.values.building,
+                                    title: formik.values.building || formik.values.ssid,
                                 },
                             ]}
-                            gridX={formik.values.gridX}
-                            gridY={formik.values.gridY}
-                            rssi={formik.values.rssi}
+                            gridX={
+                                apiResult?.data?.hasOwnProperty('gridX')
+                                    ? formik.values.gridX
+                                    : null
+                            }
+                            gridY={
+                                apiResult?.data?.hasOwnProperty('gridY')
+                                    ? formik.values.gridY
+                                    : null
+                            }
+                            rssi={
+                                apiResult?.data?.hasOwnProperty('rssi') ? formik.values.rssi : null
+                            }
                         />
                     ) : (
                         <OllehMap

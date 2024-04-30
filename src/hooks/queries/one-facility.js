@@ -14,7 +14,7 @@ export const useGetFacilityBtsSearch = (queryParams = {}, options) => {
 }
 // WiFi 검색
 export const useGetFacilityWifiSearch = (queryParams = {}, options) => {
-    console.log('useGetFacilityWifiSearch : ', queryParams)
+    console.log('useGetFacilityWifiSearch : ', queryParams, options)
     const { data } = useQuery({
         queryKey: ['get-facility-wifi-search', queryParams],
         queryFn: () => facility.getFacilityWifiSearch(queryParams),

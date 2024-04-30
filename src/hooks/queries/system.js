@@ -96,6 +96,22 @@ export const usePostUpdateUE = () => {
     })
 }
 
+// 엔진설정
+export const useGetEngine = (queryParams = {}, options) => {
+    const { data } = useQuery({
+        queryKey: ['get-engine', queryParams],
+        queryFn: () => system.getEngine(queryParams),
+        ...options,
+    })
+    return { data: data?.data }
+}
+
+export const usePostUpdateEngine = () => {
+    return useMutation({
+        mutationFn: system.postUpdateEngine,
+    })
+}
+
 // 위치정보 처리이력
 export const useGetLocTransList = (queryParams = {}, options) => {
     console.log('useGetLocTransList : ', queryParams)

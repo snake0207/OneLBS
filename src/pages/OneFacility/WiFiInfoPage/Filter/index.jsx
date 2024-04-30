@@ -11,7 +11,7 @@ import { wifiSourceTypeList } from '#/common/libs/facility'
 function SearchFilter({ onSearch }) {
     const formik = useFormik({
         initialValues: {
-            wifiSourceType: 'W',
+            source: 'W',
             mac: '',
         },
         onSubmit: (values) => {
@@ -27,7 +27,7 @@ function SearchFilter({ onSearch }) {
                         <TableCell style={style.cellTitle}>{`시설구분`}</TableCell>
                         <TableCell style={style.cellInput}>
                             <Select
-                                name={'wifiSourceType'}
+                                name={'source'}
                                 formik={formik}
                                 items={wifiSourceTypeList()}
                                 sx={{

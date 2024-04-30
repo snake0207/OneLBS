@@ -43,10 +43,10 @@ export const getPosMethods = () => [
 //     { key: 8, value: `KSA4`, label: `KSA4` },
 // ]
 export const getStatPosMethods = () => [
-    { key: 0, value: `CELL`, label: `CELL` },
-    { key: 1, value: `GPS`, label: `GPS` },
-    { key: 10, value: `WiFi`, label: `WiFi` },
-    { key: 11, value: `RGNSS`, label: `RGNSS` },
+    { key: 0, value: 0, label: `CELL` },
+    { key: 1, value: 1, label: `GPS` },
+    { key: 10, value: 10, label: `WiFi` },
+    { key: 11, value: 11, label: `RGNSS` },
 ]
 
 export const unionGetStatPosMethods = () => [

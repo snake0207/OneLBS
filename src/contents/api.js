@@ -30,6 +30,8 @@ export const API_PATH = {
         ue_list: '/api/system/ue/list',
         ue_update: '/api/system/ue/modify',
         ue_delete: '/api/system/ue/delete',
+        engine_detail: '/api/system/engine/detail',
+        engine_regist: '/api/system/engine/regist',
         loc_trans: '/loc-trans',
         loc_view: '/loc-view',
     },

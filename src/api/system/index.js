@@ -55,6 +55,16 @@ const getDeleteUE = (data) => {
     return getAPI({ endPoint: API_PATH.system.ue_delete, data })
 }
 
+// 엔진설정 정보
+const getEngine = (data) => {
+    return getAPI({ endPoint: API_PATH.system.engine_detail, data })
+}
+
+const postUpdateEngine = (data) => {
+    console.log('postUpdateEngine : ', data)
+    return postAPI({ endPoint: API_PATH.system.engine_regist, data })
+}
+
 // 위치정보 처리이력
 const getLocTransList = (data) => {
     return getAPI({ endPoint: API_PATH.system.loc_trans, data })
@@ -77,6 +87,8 @@ export default {
     postUpdateUE,
     postDeleteUEs,
     getDeleteUE,
+    getEngine,
+    postUpdateEngine,
     getLocTransList,
     getLocViewList,
 }

@@ -8,25 +8,41 @@ export const columns = [
         renderCell: (params) => <Typography>{params.row.id}</Typography>,
     },
     {
-        field: 'event_date',
+        field: 'statDate',
         headerName: '통계일',
         flex: 1.5,
-        renderCell: (params) => <Typography color="primary">{params.row.event_date}</Typography>,
+        renderCell: (params) => <Typography color="primary">{params.row.statDate}</Typography>,
     },
     {
-        field: 'serviceCode',
+        field: 'service',
         headerName: '서비스 코드',
         flex: 1,
         renderCell: (params) => {
-            return <Typography>{params.row.serviceCode}</Typography>
+            return <Typography>{params.row.service}</Typography>
         },
     },
     {
-        field: 'ueModel',
+        field: 'appId',
+        headerName: 'APP ID',
+        flex: 1,
+        renderCell: (params) => {
+            return <Typography>{params.row.appId}</Typography>
+        },
+    },
+    {
+        field: 'model',
         headerName: '단말 모델',
         flex: 1,
         renderCell: (params) => {
-            return <Typography>{params.row.ueModel}</Typography>
+            return <Typography>{params.row.model}</Typography>
+        },
+    },
+    {
+        field: 'opType',
+        headerName: 'OP Type',
+        flex: 1,
+        renderCell: (params) => {
+            return <Typography>{params.row.opType}</Typography>
         },
     },
     {
@@ -38,43 +54,59 @@ export const columns = [
         },
     },
     {
+        field: 'plane',
+        headerName: 'Plane',
+        flex: 1,
+        renderCell: (params) => {
+            return <Typography>{params.row.plane}</Typography>
+        },
+    },
+    {
         field: 'posMethod',
         headerName: '측위 방식',
-        flex: 1.2,
+        flex: 1,
         renderCell: (params) => {
             return <Typography>{params.row.posMethod}</Typography>
         },
     },
     {
-        field: 'total',
+        field: 'respCode',
+        headerName: '응답코드',
+        flex: 1,
+        renderCell: (params) => {
+            return <Typography>{params.row.respCode}</Typography>
+        },
+    },
+    {
+        field: 'count',
         headerName: '전체',
         flex: 1.2,
         renderCell: (params) => {
-            return <Typography>{params.row.total}</Typography>
+            return <Typography>{params.row.count.toLocaleString()}</Typography>
         },
     },
     {
-        field: 'succ',
+        field: 'successCnt',
         headerName: '성공',
         flex: 1,
         renderCell: (params) => {
-            return <Typography>{params.row.succ}</Typography>
+            return <Typography>{params.row.successCnt.toLocaleString()}</Typography>
         },
     },
     {
-        field: 'succRate',
+        field: 'successRate',
         headerName: '성공률(%)',
-        flex: 1.2,
+        flex: 1,
         renderCell: (params) => {
-            return <Typography>{params.row.succRate}</Typography>
+            return <Typography>{params.row.successRate}</Typography>
         },
     },
     {
-        field: 'respTime',
+        field: 'elapsedTime',
         headerName: '평균응답(초)',
-        flex: 1.2,
+        flex: 1,
         renderCell: (params) => {
-            return <Typography>{params.row.respTime}</Typography>
+            return <Typography>{params.row.elapsedTime}</Typography>
         },
     },
 ]

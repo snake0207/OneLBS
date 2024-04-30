@@ -158,7 +158,7 @@ function SearchFilter({ onSearch }) {
                                         <CheckBox
                                             checked={formik.values.modelCheck}
                                             onChange={(e) =>
-                                                formik.setFieldValue('model', e.target.checked)
+                                                formik.setFieldValue('modelCheck', e.target.checked)
                                             }
                                             value={formik.values.modelCheck}
                                             label={`모델`}

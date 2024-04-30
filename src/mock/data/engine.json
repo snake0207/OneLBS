@@ -11,24 +11,6 @@
             "name": "com.cbslocal.Andalax",
             "dataType": "I",
             "value": 7
-        },
-        {
-            "id": 3,
-            "name": "com.chronoengine.Tempsoft",
-            "dataType": "D",
-            "value": 1.23
-        },
-        {
-            "id": 4,
-            "name": "com.chronoengine.Tempsoft",
-            "dataType": "B",
-            "value": true
-        },
-        {
-            "id": 5,
-            "name": "com.chronoengine.Tempsoft",
-            "dataType": "AS",
-            "value": ["S1", "S2"]
         }
     ]
 }

@@ -9,7 +9,6 @@ import {
     TableCell,
     Typography,
     TableBody,
-    IconButton,
     Button,
     TextField,
     Checkbox,
@@ -23,11 +22,10 @@ import { MuiMainButton } from '#/components/common/button/MuiButton'
 
 import style from './style.module'
 import MuiAlert from '#/components/common/popup/MuiAlert'
-import { useGetMenuPermission, usePostUpdatePermission } from '#/hooks/queries/user'
 import { engineConfig } from '#/mock/data/engine.json'
-import TextInput from '#/components/common/input/TextInput'
 import Select from '#/components/common/Select'
-import { getDataTypeLabel, getDataTypeList } from '#/common/libs/service'
+import { getDataTypeList } from '#/common/libs/service'
+import { useGetEngine, usePostUpdateEngine } from '#/hooks/queries/system'
 
 const DataTypes = {
     TEXT: 0,
@@ -38,7 +36,7 @@ const DataTypes = {
 
 const EditForm = () => {
     const navigate = useNavigate()
-    const { mutate: mutateUpdate, isPending: isUpdatePending } = usePostUpdatePermission()
+    const { mutate: mutateUpdate, isPending: isUpdatePending } = usePostUpdateEngine()
     const [apiSuccess, setApiSuccess] = useState('')
     const [fetchData, setFetchData] = useState({ count: 0, lists: [] })
     const [state, setState] = useState({
@@ -47,7 +45,7 @@ const EditForm = () => {
         msg: '수정한 정보로 저장 하시겠습니까?',
         openDialog: false,
     })
-    const { data: apiResult } = useGetMenuPermission(
+    const { data: apiResult } = useGetEngine(
         {},
         {
             enabled: state.query,
@@ -56,7 +54,7 @@ const EditForm = () => {
 
     const formik = useFormik({
         initialValues: {
-            configList: [],
+            engineInfoList: [],
         },
         // validationSchema: registUESchema,
         onSubmit: (form) => {
@@ -64,19 +62,23 @@ const EditForm = () => {
             // 임시로 사용된 tmpModelCode 삭제
             const formikArray = Object.keys(formik.values).map((key) => formik.values[key])
             console.log('formik Array : ', formikArray)
+
+            fetchData?.lists?.id && delete fetchData?.lists.id
+            fetchData?.lists?.newFlag && delete fetchData?.lists.newFlag
+
             const apiParams = {
-                targetMenuInfo: [...formikArray],
+                engineInfoList: [...fetchData?.lists],
             }
             console.log('onSubmit >> ', JSON.stringify(apiParams, null, 2))
-            mutateUpdate(
-                { ...apiParams },
-                {
-                    onSuccess: ({ data }) => {
-                        console.log('update-response : ', data)
-                        setApiSuccess(`UPDATE API RESULT : ${data?.data}(${data?.code})`)
-                    },
-                },
-            )
+            // mutateUpdate(
+            //     { ...apiParams },
+            //     {
+            //         onSuccess: ({ data }) => {
+            //             console.log('update-response : ', data)
+            //             setApiSuccess(`UPDATE API RESULT : ${data?.data}(${data?.code})`)
+            //         },
+            //     },
+            // )
         },
     })
 
@@ -100,7 +102,7 @@ const EditForm = () => {
         setFetchData({ count: _count, lists: [...fetchData.lists, addObj] })
     }
 
-    const handleClickEdit = () => {
+    const handleClickCommit = () => {
         setState((prevState) => ({
             ...prevState,
             edit: true,
@@ -145,25 +147,56 @@ const EditForm = () => {
     }
 
     const retValueStyle = (dataType) => {
-        const _dataType = dataType.toUpperCase()
-        if (_dataType === 'S' || _dataType === 'I' || _dataType === 'D') return DataTypes.TEXT
-        else if (_dataType === 'B') return DataTypes.CHECKBOX
-        else if (_dataType === 'AS' || _dataType === 'AI' || _dataType === 'AD')
+        const _orgDataType = dataType.toUpperCase()
+        if (_orgDataType === 'S' || _orgDataType === 'I' || _orgDataType === 'D')
+            return DataTypes.TEXT
+        else if (_orgDataType === 'B') return DataTypes.CHECKBOX
+        else if (_orgDataType === 'AS' || _orgDataType === 'AI' || _orgDataType === 'AD')
             return DataTypes.ARRAY
         else return DataTypes.UNKNOWN
     }
     // console.log(formik.values)
     const CreateTableRow = ({ idx, item }) => {
-        const [rowValue, setRowValue] = useState({
-            name: '',
-            dataType: '',
-            value: 0 || 0.0 || '' || [],
-        })
+        const [rowValue, setRowValue] = useState({ ...item })
+        // const [rowValue, setRowValue] = useState({
+        //     name: '',
+        //     dataType: '',
+        //     value: 0 || 0.0 || false || '' || [],
+        // })
 
         console.log(item)
 
+        const convertItemValue = (_item) => {
+            const _convDataType = _item.dataType.toUpperCase()
+            let value = ''
+
+            if (_convDataType === 'S') {
+                value = String(_item.value)
+            } else if (_convDataType === 'I') {
+                value = parseInt(_item.value)
+            } else if (_convDataType === 'D') {
+                value = parseFloat(_item.value)
+            } else if (_convDataType === 'B') {
+                value = _item.value ? true : false
+            } else if (_convDataType === 'AS') {
+                value = _item.value || ''
+            } else if (_convDataType === 'AI') {
+                value = _item.value || ''
+            } else if (_convDataType === 'AD') {
+                value = _item.value || ''
+            } else {
+                console.warn('Unknown dataType, check select-box list...')
+            }
+            setRowValue((prev) => ({ ...prev, value }))
+
+            // return item
+        }
+
+        // 해당 자료에 대한 dataType 검사하여 해당 type으로 변환
         const handleBlurField = () => {
             console.log('handleBlur : ', item)
+            // const convItem = convertItemValue(item)
+            convertItemValue(item)
             const _lists = fetchData.lists.filter((data) => data.id !== item.id)
             setFetchData({
                 count: fetchData.count,
@@ -171,43 +204,28 @@ const EditForm = () => {
             })
         }
 
-        const handleChangeDataType = (param) => {
-            const _dataType = param.value.toUpperCase()
-            // setRowValue((prev) => ({ ...prev, dataType: param.value, value: '' }))
-            // item.dataType = param.value
-            console.log(`CHANGE ${item.dataType} ===> ${_dataType}`)
-            if (_dataType === 'S') {
-                setRowValue((prev) => ({
-                    ...prev,
-                    dataType: param.value,
-                    value: String(item.value),
-                }))
+        // 데이터타입을 변경할 경우 값을 초기화
+        const handleChangeSelectDataType = (param) => {
+            const _convDataType = param.value.toUpperCase()
+            console.log(`CHANGE ${item.dataType} ===> ${_convDataType}`)
+
+            if (_convDataType === 'S') {
                 item.value = String(item.value)
-            } else if (_dataType === 'I') {
-                setRowValue((prev) => ({ ...prev, dataType: param.value, value: 0 }))
-                item.value = 0
-            } else if (_dataType === 'D') {
-                setRowValue((prev) => ({ ...prev, dataType: param.value, value: 0.0 }))
-                item.value = 0.0
-            } else if (_dataType === 'B') {
-                setRowValue((prev) => ({ ...prev, dataType: param.value, value: false }))
+            } else if (_convDataType === 'I') {
+                item.value = 1
+            } else if (_convDataType === 'D') {
+                item.value = 1.0
+            } else if (_convDataType === 'B') {
                 item.value = item.value ? true : false
-            } else if (_dataType === 'AS') {
-                const _arr = item.value ? item.value.split(',') : ''
-                setRowValue((prev) => ({ ...prev, dataType: param.value, value: [..._arr] }))
-                item.value = [..._arr]
-            } else if (_dataType === 'AI') {
-                const _arr = item.value ? item.value.split(',').map((num) => parseInt(num)) : ''
-                setRowValue((prev) => ({ ...prev, dataType: param.value, value: [..._arr] }))
-                item.value = [..._arr]
-            } else if (_dataType === 'AD') {
-                const _arr = item.value
-                    ? item.value.split(',').map((float) => parseFloat(float))
-                    : ''
-                setRowValue((prev) => ({ ...prev, dataType: param.value, value: [..._arr] }))
-                item.value = [..._arr]
+            } else if (_convDataType === 'AS') {
+                item.value = item.value || ''
+            } else if (_convDataType === 'AI') {
+                item.value = 1
+            } else if (_convDataType === 'AD') {
+                item.value = 0.1
             }
             item.dataType = param.value
+            setRowValue((prev) => ({ ...prev, dataType: item.dataType, value: item.value }))
         }
 
         return (
@@ -223,7 +241,7 @@ const EditForm = () => {
                             type="text"
                             fullWidth
                             size="small"
-                            value={item.name || rowValue?.name}
+                            value={item.name}
                             onChange={(e) => {
                                 // setNameValue(e.target.value)
                                 setRowValue((prev) => ({ ...prev, name: e.target.value }))
@@ -238,7 +256,7 @@ const EditForm = () => {
                         name={item.dataType}
                         items={getDataTypeList()}
                         value={item.dataType}
-                        onChange={(param) => handleChangeDataType(param)}
+                        onChange={(param) => handleChangeSelectDataType(param)}
                         style={{
                             height: '40px',
                             width: '100%',
@@ -373,7 +391,7 @@ const EditForm = () => {
                             disabled={isUpdatePending}
                             name="create"
                             title="설정 저장"
-                            onClick={handleClickEdit}
+                            onClick={handleClickCommit}
                         />
                     </Box>
                 </Box>

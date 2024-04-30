@@ -9,6 +9,28 @@ import SearchFilter from '../Filter'
 import { columns } from './grid-columns'
 import { useGetServiceStat } from '#/hooks/queries/one-service'
 
+const filterColumns = (params) => {
+    console.log('params : ', params)
+    const _displayColumns = [
+        { field: 'id', headerName: 'ID', view: true },
+        { field: 'statDate', headerName: '통계일', view: true },
+        { field: 'service', headerName: '서비스 코드', view: params.serviceCheck },
+        { field: 'appId', headerName: 'APP ID', view: params.appIdCheck },
+        { field: 'model', headerName: '단말 모델', view: params.modelCheck },
+        { field: 'opType', headerName: 'OP Type', view: params.opTypeCheck },
+        { field: 'posInit', headerName: 'Pos INIT', view: params.posInitCheck },
+        { field: 'plane', headerName: 'Plane', view: params.planeCheck },
+        { field: 'posMethod', headerName: '측위 방식', view: params.posMethodCheck },
+        { field: 'respCode', headerName: '응답코드', view: params.respCodeCheck },
+        { field: 'count', headerName: '전체', view: true },
+        { field: 'successCnt', headerName: '성공', view: true },
+        { field: 'successRate', headerName: '성공률(%)', view: true },
+        { field: 'elapsedTime', headerName: '평균응답(초)', view: true },
+    ]
+
+    return _displayColumns.filter((item) => item.view)
+}
+
 const ServiceStat = () => {
     const navigate = useNavigate()
     const [isQueryState, setIsQueryState] = useState(false)
@@ -45,6 +67,7 @@ const ServiceStat = () => {
     useEffect(() => {
         if (isQueryState && apiResult) {
             if (apiResult?.code === '0000') {
+                console.log('filter : ', filterColumns(queryParams))
                 const { totalCount, lists } = apiResult?.data
                 setIsQueryState(false)
                 setFetchData({ count: totalCount, lists: [...fetchData.lists, ...lists] })
@@ -76,7 +99,7 @@ const ServiceStat = () => {
                 <CustomDataGrid
                     rows={fetchData?.lists}
                     rowCount={fetchData?.count}
-                    columns={columns}
+                    columns={fetchData?.count ? filterColumns(queryParams) : columns}
                     sort={{ field: 'id', orderby: 'desc' }}
                     onPageChange={handleOnPageChange}
                     onRowClick={handleSelectRow}

@@ -30,20 +30,20 @@ import dayjs from 'dayjs'
 import MuiDialog from '#/components/common/popup/MuiDialog'
 import MuiAlert from '#/components/common/popup/MuiAlert'
 import { OllehMap } from '#/components/common/map/ollehMap'
+import { gradeTypeLabel } from '#/common/libs/facility'
 
 const formikInitValues = {
     mac: '',
     ssid: '',
-    grade: '',
-    band: '',
+    grade: 0,
     building: '',
     floor: '',
     vap: {
         utmk: { latitude: 0, longitude: 0 },
         wgs84: { latitude: 0, longitude: 0 },
     },
-    create_date: '',
-    update_date: '',
+    regDate: '',
+    updDate: '',
     gridX: [],
     gridY: [],
     rssi: [],
@@ -52,7 +52,7 @@ const formikInitValues = {
 
 const DetailForm = () => {
     const navigate = useNavigate()
-    const [isSearchClick, setIsSearchClick] = useState(false)
+    const [isQueryState, setIsQueryState] = useState(false)
     const [modeToggle, setModeToggle] = useState(false)
     const [apiSuccess, setApiSuccess] = useState('')
     const [locations, setLocations] = useState([
@@ -70,7 +70,7 @@ const DetailForm = () => {
     const { mutate: mutateDelete, isPending: isDeletePending } = usePostFacilityDeleteWifi()
     const { mutate: mutateUpdate, isPending: isUpdatePending } = usePostFacilityUpdateWifi()
     const { data: apiResult } = useGetFacilityWifiSearch(queryParams, {
-        enabled: isSearchClick,
+        enabled: isQueryState,
     })
     const formik = useFormik({
         initialValues: formikInitValues,
@@ -94,8 +94,8 @@ const DetailForm = () => {
     // 검색 버튼 누른 경우
     const handleSearch = (values) => {
         setModeToggle(false)
-        setIsSearchClick(true)
         setQueryParams({ ...queryParams, ...values })
+        setIsQueryState(true)
     }
 
     const handleUpdateSubmit = () => {
@@ -173,7 +173,7 @@ const DetailForm = () => {
     }
 
     useEffect(() => {
-        if (apiResult) {
+        if (isQueryState && apiResult) {
             console.log('apiResult : ', apiResult)
             if (apiResult?.code === '0000') {
                 formik.setValues({ ...apiResult?.data })
@@ -187,12 +187,12 @@ const DetailForm = () => {
                         latitude: apiResult?.data?.vap?.wgs84[1],
                     },
                 }
+                setIsQueryState(false)
                 console.log('vap : ', vap)
                 formik.setFieldValue('vap', vap)
-                setIsSearchClick(false)
             }
         }
-    }, [apiResult, isSearchClick])
+    }, [apiResult, queryParams])
 
     return (
         <Box>
@@ -255,9 +255,13 @@ const DetailForm = () => {
                                     <TableCell style={style.cellInputWide}>
                                         <TextInput name={`grade`} formik={formik} />
                                     </TableCell>
-                                    <TableCell style={style.cellTitle}>{`Band`}</TableCell>
+                                    <TableCell style={style.cellTitle}>{`Grade-신뢰도`}</TableCell>
                                     <TableCell style={style.cellInputWide}>
-                                        <TextInput name={`band`} formik={formik} />
+                                        {apiResult?.code === '0000' && (
+                                            <Typography>
+                                                {gradeTypeLabel[apiResult?.data?.grade].label}
+                                            </Typography>
+                                        )}
                                     </TableCell>
                                 </TableRow>
                                 <TableRow>
@@ -285,11 +289,11 @@ const DetailForm = () => {
                                     </TableCell>
                                     <TableCell style={style.cellTitle}>{`생성일시`}</TableCell>
                                     <TableCell style={style.cellInputWide}>
-                                        <TextInput name={`create_date`} formik={formik} />
+                                        <TextInput name={`regDate`} formik={formik} />
                                     </TableCell>
                                     <TableCell style={style.cellTitle}>{`갱신일시`}</TableCell>
                                     <TableCell style={style.cellInputWide}>
-                                        <TextInput name={`update_date`} formik={formik} />
+                                        <TextInput name={`updDate`} formik={formik} />
                                     </TableCell>
                                 </TableRow>
                             </TableBody>

@@ -43,13 +43,19 @@ export const mncTypeLabel = {
 }
 
 export const wifiSourceTypeList = () => [
-  { key: 'W', value: 'W', label: `WING` },
-  { key: 'C', value: 'C', label: `CS` },
-  { key: 'V', value: 'V', label: `VOC` },
+    { key: 'W', value: 'W', label: `WING` },
+    { key: 'C', value: 'C', label: `CS` },
+    { key: 'V', value: 'V', label: `VOC` },
 ]
 
 export const wifiSourceTypeLabel = {
-  W: { label: 'WING' },
-  C: { label: 'CS' },
-  V: { label: 'VOC' },
+    W: { label: 'WING' },
+    C: { label: 'CS' },
+    V: { label: 'VOC' },
+}
+
+export const gradeTypeLabel = {
+    0: { label: '높음' },
+    1: { label: '보통' },
+    2: { label: '낮음' },
 }

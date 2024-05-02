@@ -28,7 +28,7 @@ axiosInstance.interceptors.request.use(
 axiosInstance.interceptors.response.use(
     (response) => response,
     async (error) => {
-        console.log('response error : ', error)
+        console.log('RESPONSE ERROR : ', error)
         // if (error.response.status) {
         //     const prevRequest = error.config
         //     prevRequest._retry = true

@@ -54,10 +54,8 @@ const EditForm = () => {
         initialValues: {
             engineInfoList: [],
         },
-        // validationSchema: registUESchema,
         onSubmit: (form) => {
             console.log('handleFormikSubmit..')
-            // 임시로 사용된 tmpModelCode 삭제
 
             const _engineArr = fetchData?.lists.map((item) => ({
                 name: item.name,
@@ -68,7 +66,7 @@ const EditForm = () => {
             const apiParams = {
                 engineInfoList: [..._engineArr],
             }
-            console.log('onSubmit >> ', JSON.stringify(apiParams, null, 2))
+            // console.log('onSubmit >> ', JSON.stringify(apiParams, null, 2))
             mutateUpdate(
                 { ...apiParams },
                 {
@@ -96,6 +94,7 @@ const EditForm = () => {
         state.edit && formik.handleSubmit() // 수정
         handleStateReset()
     }
+
     const handleStateReset = () => {
         setState((prevState) => ({
             ...prevState,
@@ -121,10 +120,6 @@ const EditForm = () => {
 
     const handleClickDelete = (id) => {
         console.log('Delete Row id : ', id)
-        console.log(
-            'target : ',
-            fetchData.lists.filter((item) => item.id === id),
-        )
         setFetchData({
             count: fetchData.count - 1,
             lists: [...fetchData.lists.filter((item) => item.id != id)],
@@ -132,31 +127,24 @@ const EditForm = () => {
     }
 
     useEffect(() => {
-        // if (apiResult) {
-        //     console.log('apiResult : ', apiResult)
-        //     if (apiResult?.code === '0000') {
-        //         apiResult?.data.map((menu) => {
-        //             delete menu.menuName
-        //             formik.setFieldValue(menu.menuCode, { ...menu })
-        //         })
-        //     }
-        //     setState((prevState) => ({
-        //         ...prevState,
-        //         query: false,
-        //     }))
-        // }
         if (apiResult) {
-            console.log(engineConfig)
-            setFetchData({
-                count: engineConfig.length,
-                lists: [...engineConfig].sort((a, b) => {
-                    if (a.name < b.name) return -1
-                    if (a.name > b.name) return 1
-                    return 0
-                }),
-            })
+            console.log('apiResult : ', apiResult)
+            if (apiResult?.code === '0000') {
+                setState((prevState) => ({
+                    ...prevState,
+                    query: false,
+                }))
+                setFetchData({
+                    count: apiResult?.data?.length,
+                    lists: [...apiResult?.data].sort((a, b) => {
+                        if (a.name < b.name) return -1
+                        if (a.name > b.name) return 1
+                        return 0
+                    }),
+                })
+            }
         }
-    }, [apiResult])
+    }, [apiResult, refetch])
 
     const retValueStyle = (dataType) => {
         const _orgDataType = dataType.toUpperCase()
@@ -167,16 +155,9 @@ const EditForm = () => {
             return DataTypes.ARRAY
         else return DataTypes.UNKNOWN
     }
-    // console.log(formik.values)
+
     const CreateTableRow = ({ idx, item }) => {
         const [rowValue, setRowValue] = useState({ ...item })
-        // const [rowValue, setRowValue] = useState({
-        //     name: '',
-        //     dataType: '',
-        //     value: 0 || 0.0 || false || '' || [],
-        // })
-
-        console.log(item)
 
         const convertItemValue = (_item) => {
             const _convDataType = _item.dataType.toUpperCase()
@@ -199,9 +180,6 @@ const EditForm = () => {
             } else {
                 console.warn('Unknown dataType, check select-box list...')
             }
-            // setRowValue((prev) => ({ ...prev, value }))
-
-            // return item
         }
 
         // 해당 자료에 대한 dataType 검사하여 해당 type으로 변환
@@ -255,9 +233,8 @@ const EditForm = () => {
                             size="small"
                             value={item.name}
                             onChange={(e) => {
-                                // setNameValue(e.target.value)
-                                setRowValue((prev) => ({ ...prev, name: e.target.value }))
                                 item.name = e.target.value
+                                setRowValue((prev) => ({ ...prev, name: e.target.value }))
                             }}
                             onBlur={handleBlurField}
                         />
@@ -288,8 +265,8 @@ const EditForm = () => {
                             size="small"
                             value={item.value}
                             onChange={(e) => {
-                                setRowValue((prev) => ({ ...prev, value: e.target.value }))
                                 item.value = e.target.value
+                                setRowValue((prev) => ({ ...prev, value: e.target.value }))
                             }}
                             onBlur={handleBlurField}
                         />
@@ -300,14 +277,12 @@ const EditForm = () => {
                                 <Checkbox
                                     checked={item.value}
                                     onChange={(e) => {
+                                        item.value = e.target.checked
                                         setRowValue((prev) => ({
                                             ...prev,
                                             value: e.target.checked,
                                         }))
-                                        item.value = e.target.checked
-                                        handleBlurField()
                                     }}
-                                    // value={rowValue?.value}
                                 />
                             }
                             label={item.value ? '적용' : '미적용'}
@@ -323,8 +298,8 @@ const EditForm = () => {
                                 size="small"
                                 value={item.value}
                                 onChange={(e) => {
-                                    setRowValue((prev) => ({ ...prev, value: e.target.value }))
                                     item.value = e.target.value
+                                    setRowValue((prev) => ({ ...prev, value: e.target.value }))
                                 }}
                                 onBlur={handleBlurField}
                             />

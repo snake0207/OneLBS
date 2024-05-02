@@ -35,7 +35,7 @@ function NotFoundPage() {
                 onClick={() => navigate('/', { replace: true })}
                 sx={style.darkBlueButton}
             >
-                {t('main_page')}
+                {`메인으로 이동`}
             </Button>
         </Box>
     )

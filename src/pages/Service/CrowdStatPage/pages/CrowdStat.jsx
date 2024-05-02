@@ -6,7 +6,7 @@ import CustomDataGrid from '#/components/common/table/datagrid'
 
 import SearchFilter from '../Filter'
 import { columns, columnGroupingModel } from './grid-columns'
-import { useGetCrowdStat } from '#/hooks/queries/one-service'
+import { useGetCrowdStat } from '#/hooks/queries/service'
 
 const CrowdStat = () => {
     const [isQueryState, setIsQueryState] = useState(false)

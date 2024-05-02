@@ -1,6 +1,7 @@
 import axios from 'axios'
 import qs from 'qs'
 import auth from '#/api/auth'
+import { usePostRefreshToken } from '#/hooks/queries/auth'
 // import { useAuthActions } from '#/store/useAuthStore'
 
 export const axiosInstance = axios.create({
@@ -12,7 +13,9 @@ export const axiosInstance = axios.create({
 })
 
 const getToken = () => {
-    return `${JSON.parse(localStorage.getItem('auth-storage')).state.accessToken}`
+    return localStorage.getItem('auth-storage')
+        ? JSON.parse(localStorage.getItem('auth-storage')).state.accessToken
+        : ''
 }
 
 axiosInstance.interceptors.request.use(
@@ -28,15 +31,15 @@ axiosInstance.interceptors.request.use(
 axiosInstance.interceptors.response.use(
     (response) => response,
     async (error) => {
-        console.log('RESPONSE ERROR : ', error)
-        // if (error.response.status) {
+        // console.log('RESPONSE ERROR : ', error)
+        // if (error.response.status === 401) {
         //     const prevRequest = error.config
         //     prevRequest._retry = true
 
-        // const newAccessToken = await auth.postRenewToken()
+        //     const newAccessToken = await auth.postRefreshToken()
 
         //     prevRequest.headers.Authorization = `Bearer ${newAccessToken}`
-        // useAuthStore.setState({ accessToken: newAccessToken })
+        //     useAuthStore.setState({ accessToken: newAccessToken })
 
         //     return axiosInstance(prevRequest)
         // }

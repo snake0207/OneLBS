@@ -7,7 +7,7 @@ import CustomDataGrid from '#/components/common/table/datagrid'
 
 import SearchFilter from '../Filter'
 import { columns } from './grid-columns'
-import { useGetTriggerList } from '#/hooks/queries/one-service'
+import { useGetTriggerList } from '#/hooks/queries/service'
 
 const TriggerList = () => {
     const navigate = useNavigate()

@@ -5,7 +5,7 @@ export const API_PATH = {
         captcha: '/api/captcha',
         login: '/api/login',
         logout: '/api/logout',
-        refresh: '/api/refresh',
+        refresh_token: '/api/refresh',
     },
     system: {
         service_regist: '/api/system/service/regist',

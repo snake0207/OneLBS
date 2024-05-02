@@ -7,7 +7,7 @@ import CustomDataGrid from '#/components/common/table/datagrid'
 
 import SearchFilter from '../Filter'
 import { columns } from './grid-columns'
-import { useGetServiceStat } from '#/hooks/queries/one-service'
+import { useGetServiceStat } from '#/hooks/queries/service'
 
 const filterColumns = (params) => {
     console.log('params : ', params)

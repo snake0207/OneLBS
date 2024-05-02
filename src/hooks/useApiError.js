@@ -11,35 +11,23 @@ const useApiError = () => {
     const handler400Default = (errorMessage) => {
         showPopup('alert', errorMessage)
     }
-
-    const handler400inActive = () => {
-        showPopup('alert', `입력 오류가 5회 이상으로 해당 계정이 잠겼습니다.`)
-    }
-
-    const handler400failCount = (res) => {
-        showPopup('alert', `오류 횟수 5회 오류 시 잠금 처리 됩니다.`)
+    const handler401Default = (errorMessage) => {
+        showPopup('alert', '로그인 유효시간 만료됨', () => location.replace('/login'))
     }
 
     const handlers = {
         default: handlerDefault,
         400: {
             default: handler400Default,
-            10118: handler400inActive,
-            10121: handler400failCount,
-            10122: handler400inActive,
-            10123: handler400failCount,
+        },
+        401: {
+            default: handler401Default,
         },
     }
 
     const handleError = (error) => {
-        const httpStatus = error.response.data.code
-        const subCode = error.response.data.subCode
+        const httpStatus = error.response.data.status
         const errorMessage = error.response.data.error
-
-        if (handlers[httpStatus]?.[subCode]) {
-            handlers[httpStatus][subCode](error.response.data)
-            return
-        }
 
         if (handlers[httpStatus]) {
             handlers[httpStatus].default(errorMessage)

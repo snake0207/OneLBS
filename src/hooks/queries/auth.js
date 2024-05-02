@@ -2,10 +2,17 @@ import auth from '#/api/auth'
 import { QUERY_KEYS } from '#/contents/queryKeys'
 import { useMutation, useQuery } from '@tanstack/react-query'
 import { useAuthActions } from '#/store/useAuthStore'
+import { useUserActions } from '#/store/useUserStore'
 
 export const usePostLogin = () => {
     return useMutation({
         mutationFn: auth.postLogin,
+    })
+}
+
+export const usePostRefreshToken = () => {
+    return useMutation({
+        mutationFn: auth.postRefreshToken,
     })
 }
 
@@ -20,11 +27,14 @@ export const useGetLogin = (queryParams = {}) => {
 }
 
 export const usePostLogout = () => {
-    // const { resetAccessToken } = useAuthActions()
+    const { resetAccessToken } = useAuthActions()
+    const { resetUserStore } = useUserActions()
+
     return useMutation({
         mutationFn: auth.postLogout,
         onSettled: () => {
-            // resetAccessToken()
+            resetAccessToken()
+            resetUserStore()
         },
     })
 }

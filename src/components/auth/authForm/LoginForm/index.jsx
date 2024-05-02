@@ -33,6 +33,8 @@ const MAX_REQ_AUTHCODE = 3
 
 const LoginForm = () => {
     const navigate = useNavigate()
+    const { resetAccessToken } = useAuthActions()
+    const { resetUserStore } = useUserActions()
     const { setAccessToken } = useAuthActions()
     const { setUserTypeUserStore } = useUserActions()
     const storeUserType = useUserTypeState()
@@ -131,6 +133,8 @@ const LoginForm = () => {
             setIsDummy(false)
             console.log('respDummyToken  : ', respDummyToken?.data)
             if (respDummyToken?.data.code === '0000') {
+                resetAccessToken()
+                resetUserStore()
                 setCaptchaParams({ ...captchaParams, dummyToken: respDummyToken?.data.data })
                 setIsCaptcha(true)
             }
@@ -223,7 +227,7 @@ const LoginForm = () => {
 
                     <LoadingButton
                         variant="contained"
-                        disabled={!respDummyToken?.data.data}
+                        disabled={!respDummyToken?.data?.data}
                         startIcon={<CachedOutlinedIcon />}
                         onClick={handleRequestCaptcha}
                         sx={style.loadingButton}

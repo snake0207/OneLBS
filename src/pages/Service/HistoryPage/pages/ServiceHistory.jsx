@@ -7,7 +7,7 @@ import CustomDataGrid from '#/components/common/table/datagrid'
 
 import SearchFilter from '../Filter'
 import { columns } from './grid-columns'
-import { useGetServiceHistory } from '#/hooks/queries/one-service'
+import { useGetServiceHistory } from '#/hooks/queries/service'
 import { OllehMap } from '#/components/common/map/ollehMap'
 
 const ServiceHistory = () => {

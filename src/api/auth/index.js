@@ -5,8 +5,8 @@ const postLogin = (data) => {
     return postAPI({ endPoint: API_PATH.auth.login, data })
 }
 
-const postRenewToken = () => {
-    return postAPI({ endPoint: API_PATH.auth.renew_token })
+const postRefreshToken = () => {
+    return postAPI({ endPoint: API_PATH.auth.refresh_token })
 }
 
 const postLogout = () => {
@@ -30,7 +30,7 @@ const getCaptcha = (data) => {
 
 export default {
     postLogin,
-    postRenewToken,
+    postRefreshToken,
     postLogout,
     getAskUserPermission,
     getDummyToken,

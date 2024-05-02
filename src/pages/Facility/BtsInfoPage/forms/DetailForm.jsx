@@ -6,7 +6,7 @@ import TitleBar from '#/components/common/menu/TitleBar'
 
 import style from './style.module'
 import SearchFilter from '../Filter'
-import { useGetFacilityBtsSearch } from '#/hooks/queries/one-facility'
+import { useGetFacilityBtsSearch } from '#/hooks/queries/facility'
 import { OllehMap } from '#/components/common/map/ollehMap'
 
 const TitleArea = ({ title }) => {
@@ -104,7 +104,7 @@ const DetailForm = () => {
 
                 {/* 지도 영역 */}
                 <Box sx={{ width: '100%', height: '400px' }}>
-                    {apiResult?.code === "0000" ? (
+                    {apiResult?.code === '0000' ? (
                         <OllehMap locations={[{ ...apiResult?.data }]} />
                     ) : (
                         <OllehMap

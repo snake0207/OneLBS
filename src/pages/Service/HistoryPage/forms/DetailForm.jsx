@@ -11,7 +11,6 @@ import {
     TableBody,
     Stack,
     TableContainer,
-    Paper,
 } from '@mui/material'
 import PlaylistAddCheckOutlinedIcon from '@mui/icons-material/PlaylistAddCheckOutlined'
 import PersonPinCircleOutlinedIcon from '@mui/icons-material/PersonPinCircleOutlined'
@@ -19,7 +18,7 @@ import PersonPinCircleOutlinedIcon from '@mui/icons-material/PersonPinCircleOutl
 import TitleBar from '#/components/common/menu/TitleBar'
 
 import style from './style.module'
-import { useGetServiceHistoryDetail } from '#/hooks/queries/one-service'
+import { useGetServiceHistoryDetail } from '#/hooks/queries/service'
 import { OllehMap } from '#/components/common/map/ollehMap'
 
 const TitleArea = ({ title }) => {

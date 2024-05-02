@@ -22,7 +22,7 @@ import {
     usePostFacilityDeleteWifi,
     usePostFacilityRegistWifi,
     usePostFacilityUpdateWifi,
-} from '#/hooks/queries/one-facility'
+} from '#/hooks/queries/facility'
 import { MuiMainButton } from '#/components/common/button/MuiButton'
 import { useFormik } from 'formik'
 import TextInput from '#/components/common/input/TextInput'

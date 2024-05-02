@@ -7,7 +7,7 @@ import CustomDataGrid from '#/components/common/table/datagrid'
 
 import SearchFilter from '../Filter'
 import { columns } from './grid-columns'
-import { useGetFacilitySyncHistory } from '#/hooks/queries/one-facility'
+import { useGetFacilitySyncHistory } from '#/hooks/queries/facility'
 
 const SyncHistory = () => {
     const navigate = useNavigate()

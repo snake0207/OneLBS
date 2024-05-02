@@ -9,7 +9,6 @@ import {
     TableBody,
     Stack,
     Button,
-    TextField,
 } from '@mui/material'
 import PlaylistAddCheckOutlinedIcon from '@mui/icons-material/PlaylistAddCheckOutlined'
 import ChangeCircleOutlinedIcon from '@mui/icons-material/ChangeCircleOutlined'
@@ -40,8 +39,8 @@ const formikInitValues = {
     building: '',
     floor: '',
     vap: {
-        utmk: { latitude: 0, longitude: 0 },
-        wgs84: { latitude: 0, longitude: 0 },
+        utmk: { latitude: '', longitude: '' },
+        wgs84: { latitude: '', longitude: '' },
     },
     regDate: '',
     updDate: '',
@@ -56,9 +55,6 @@ const DetailForm = () => {
     const [isQueryState, setIsQueryState] = useState(false)
     const [modeToggle, setModeToggle] = useState(false)
     const [apiSuccess, setApiSuccess] = useState('')
-    const [locations, setLocations] = useState([
-        { latitude: 37.3998912, longitude: 127.1279874, title: 'KT 분당' },
-    ])
     const [state, setState] = useState({
         edit: false,
         delete: false,
@@ -258,7 +254,12 @@ const DetailForm = () => {
                                         {apiResult?.data?.hasOwnProperty('grade') ? (
                                             <TextInput name={`grade`} formik={formik} />
                                         ) : (
-                                            <Typography>{`grade not exist...`}</Typography>
+                                            <Typography
+                                                sx={{
+                                                    height: '40px',
+                                                    backgroundColor: `grey.search`,
+                                                }}
+                                            />
                                         )}
                                     </TableCell>
                                     <TableCell style={style.cellTitle}>{`신뢰도`}</TableCell>

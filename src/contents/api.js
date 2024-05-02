@@ -1,23 +1,11 @@
 export const API_PATH = {
     auth: {
-        join: '/user-auth/api/v1/user/register',
-        confirm_eamil: '/user-auth/api/v1/user/confirm-email',
-        verify_email: '/user-auth/api/v1/user/verify-email',
-        get_ip: '/user-auth/api/v1/user/get-ip',
-        renew_token: '/user-auth/api/v1/user/renew-token',
-        verify_otp: '/user-auth/api/v1/user/verify-otp',
-        password_reset: '/user-auth/api/v1/user/password/reset',
-        logout: '/user-auth/api/v1/user/logout',
-        password_change: 'user-auth/api/v1/user/password/change',
-        defer_change: 'user-auth/api/v1/user/password/defer-change',
-        // add
-        // captcha: '/captcha',
-        // authcode: '/authcode',
         dummyToken: '/api/dummy',
         smscode: '/api/sms',
         captcha: '/api/captcha',
         login: '/api/login',
         logout: '/api/logout',
+        refresh: '/api/refresh',
     },
     system: {
         service_regist: '/api/system/service/regist',

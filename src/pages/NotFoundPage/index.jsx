@@ -1,6 +1,5 @@
 import { Box, Button, Typography, Icon } from '@mui/material'
 
-import t from '#/common/libs/trans'
 import { useNavigate } from 'react-router-dom'
 
 import ErrorIcon from '#/assets/errorIcon.svg'
@@ -26,10 +25,10 @@ function NotFoundPage() {
                 {themeMode === 'light' ? <img src={ErrorIcon} /> : <img src={ErrorIconDark} />}
             </Icon>
             <Typography variant="h3" component="h1" sx={style.title}>
-                {t('page_not_found')}
+                {`페이지 없음`}
             </Typography>
             <Typography variant="subtitle1" component="div" sx={style.detailBox}>
-                {t('page_not_found_message')}
+                {`해당 페이지를 찾을 수 없습니다.`}
             </Typography>
             <Button
                 variant="contained"

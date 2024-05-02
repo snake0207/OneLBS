@@ -10,7 +10,6 @@ import CompleteIcon from '#/assets/m_completeIcon.svg'
 import CompleteIconDark from '#/assets/m_completeIconDark.svg'
 import ArrowIcon from '#/assets/m_arrowIcon.svg'
 
-import t from '#/common/libs/trans'
 import useLayoutStore from '#/store/useLayoutStore'
 
 import style from './style.module'
@@ -18,17 +17,17 @@ import { isMobile } from 'react-device-detect'
 
 const userMockData = [
     {
-        categoryName: t('request_approval', 'dashboard'),
+        categoryName: `승인 요청`,
         lightIcon: <img src={ApprovalIcon} />,
         darkIcon: <img src={ApprovalIconDark} />,
     },
     {
-        categoryName: t('turn_back', 'dashboard'),
+        categoryName: `반려`,
         lightIcon: <img src={CompanionIcon} />,
         darkIcon: <img src={CompanionIconDark} />,
     },
     {
-        categoryName: t('approval_completed', 'dashboard'),
+        categoryName: `승인 완료`,
         lightIcon: <img src={CompleteIcon} />,
         darkIcon: <img src={CompleteIconDark} />,
     },

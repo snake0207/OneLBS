@@ -1,7 +1,6 @@
 import LinkRouter from '#/components/common/menu/LinkRouter'
 import { Box, Typography, Icon } from '@mui/material'
 
-import t from '#/common/libs/trans'
 import useLayoutStore from '#/store/useLayoutStore'
 import BannerarrowIcon from '#/assets/m_bannerarrowIcon.svg'
 import BannerarrowIconDark from '#/assets/m_bannerarrowIconDark.svg'
@@ -16,7 +15,7 @@ const ShortCutBanner = ({ bannerTitle, bannerDesc, path, icon }) => {
             </Typography>
             <Typography sx={style.subTitle}>{bannerDesc}</Typography>
             <LinkRouter to={path} sx={style.more}>
-                {t('read_more', 'dashboard')}
+                {`더보기`}
                 {themeMode === 'light' ? (
                     <img src={BannerarrowIcon} />
                 ) : (

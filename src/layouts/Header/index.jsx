@@ -27,7 +27,8 @@ function Header({ toggleDrawer }) {
             {},
             {
                 onSuccess: ({ data }) => {
-                    console.log('logout : ', data)
+                    console.log('logout-response : ', data)
+                    data?.code === '0000' && navigate('/login')
                 },
             },
         )
@@ -74,7 +75,7 @@ function Header({ toggleDrawer }) {
                             {'acro 반갑습니다'}({`관리자`}){/* {data && data.userName} */}
                         </Box>
                         <Tooltip title={`로그아웃`}>
-                            <IconButton onClick={handleLogout}>
+                            <IconButton disabled={logoutPending} onClick={handleLogout}>
                                 <ExitToAppOutlinedIcon />
                             </IconButton>
                         </Tooltip>

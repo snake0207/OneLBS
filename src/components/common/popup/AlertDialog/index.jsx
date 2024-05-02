@@ -4,7 +4,6 @@ import DialogActions from '@mui/material/DialogActions'
 import DialogContent from '@mui/material/DialogContent'
 import DialogContentText from '@mui/material/DialogContentText'
 import usePopupStore, { usePopupActions } from '#/store/usePopupStore'
-import t from '#/common/libs/trans'
 
 import style from './style.module'
 
@@ -31,7 +30,7 @@ function AlertDialog({ open, content }) {
             </DialogContent>
             <DialogActions sx={style.btnBox}>
                 <Button onClick={handleClose} autoFocus sx={style.blueButton}>
-                    {t('ok')}
+                    {`예`}
                 </Button>
             </DialogActions>
         </Dialog>

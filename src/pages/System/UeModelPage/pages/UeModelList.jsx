@@ -69,7 +69,7 @@ const UeModelList = () => {
                     if (data?.code === '0000') {
                         setFetchData({ count: 0, lists: [] })
                         setIsQueryState(true)
-                        refetch({ ...queryParams, queryKey: 'newDataKey' })
+                        refetch({ ...queryParams, queryKey: 'refresh-ues' })
                     }
                 },
             },

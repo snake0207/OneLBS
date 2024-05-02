@@ -98,12 +98,12 @@ export const usePostUpdateUE = () => {
 
 // 엔진설정
 export const useGetEngine = (queryParams = {}, options) => {
-    const { data } = useQuery({
+    const { data, refetch } = useQuery({
         queryKey: ['get-engine', queryParams],
         queryFn: () => system.getEngine(queryParams),
         ...options,
     })
-    return { data: data?.data }
+    return { data: data?.data, refetch }
 }
 
 export const usePostUpdateEngine = () => {

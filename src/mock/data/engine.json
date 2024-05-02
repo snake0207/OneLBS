@@ -2,15 +2,21 @@
     "engineConfig": [
         {
             "id": 1,
-            "name": "uk.co.telegraph.Konklab",
+            "name": "main",
             "dataType": "S",
             "value": "wbraben0@acquirethisname.com"
         },
         {
             "id": 2,
-            "name": "com.cbslocal.Andalax",
+            "name": "main.config.b",
             "dataType": "I",
             "value": 7
+        },
+        {
+            "id": 7,
+            "name": "main.config.a",
+            "dataType": "D",
+            "value": 8.2
         }
     ]
 }

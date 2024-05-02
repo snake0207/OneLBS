@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react'
-import { useNavigate } from 'react-router'
 import { useFormik } from 'formik'
 import {
     Box,
@@ -35,7 +34,6 @@ const DataTypes = {
 }
 
 const EditForm = () => {
-    const navigate = useNavigate()
     const { mutate: mutateUpdate, isPending: isUpdatePending } = usePostUpdateEngine()
     const [apiSuccess, setApiSuccess] = useState('')
     const [fetchData, setFetchData] = useState({ count: 0, lists: [] })
@@ -45,7 +43,7 @@ const EditForm = () => {
         msg: '수정한 정보로 저장 하시겠습니까?',
         openDialog: false,
     })
-    const { data: apiResult } = useGetEngine(
+    const { data: apiResult, refetch } = useGetEngine(
         {},
         {
             enabled: state.query,
@@ -60,25 +58,36 @@ const EditForm = () => {
         onSubmit: (form) => {
             console.log('handleFormikSubmit..')
             // 임시로 사용된 tmpModelCode 삭제
-            const formikArray = Object.keys(formik.values).map((key) => formik.values[key])
-            console.log('formik Array : ', formikArray)
 
-            fetchData?.lists?.id && delete fetchData?.lists.id
-            fetchData?.lists?.newFlag && delete fetchData?.lists.newFlag
+            const _engineArr = fetchData?.lists.map((item) => ({
+                name: item.name,
+                dataType: item.dataType,
+                value: item.value,
+            }))
 
             const apiParams = {
-                engineInfoList: [...fetchData?.lists],
+                engineInfoList: [..._engineArr],
             }
             console.log('onSubmit >> ', JSON.stringify(apiParams, null, 2))
-            // mutateUpdate(
-            //     { ...apiParams },
-            //     {
-            //         onSuccess: ({ data }) => {
-            //             console.log('update-response : ', data)
-            //             setApiSuccess(`UPDATE API RESULT : ${data?.data}(${data?.code})`)
-            //         },
-            //     },
-            // )
+            mutateUpdate(
+                { ...apiParams },
+                {
+                    onSuccess: ({ data }) => {
+                        console.log('update-response : ', data)
+                        setApiSuccess(`UPDATE API RESULT : ${data?.data}`)
+                        if (data?.code === '0000') {
+                            setFetchData({ count: 0, lists: [] })
+                            setState((prevState) => ({
+                                ...prevState,
+                                query: true,
+                                edit: false,
+                                openDialog: false,
+                            }))
+                            refetch({ queryParams: {}, queryKey: 'refresh-engine' })
+                        }
+                    },
+                },
+            )
         },
     })
 
@@ -97,7 +106,7 @@ const EditForm = () => {
 
     const handleClickAdd = () => {
         console.log('Add New Row')
-        const _count = fetchData.count + 1
+        const _count = Math.max(...fetchData?.lists.map((item) => item.id)) + 1
         const addObj = { id: _count, name: '', dataType: 'S', value: '', newFlag: 'Y' }
         setFetchData({ count: _count, lists: [...fetchData.lists, addObj] })
     }
@@ -138,13 +147,16 @@ const EditForm = () => {
         // }
         if (apiResult) {
             console.log(engineConfig)
-            setFetchData({ count: engineConfig.length, lists: [...engineConfig] })
+            setFetchData({
+                count: engineConfig.length,
+                lists: [...engineConfig].sort((a, b) => {
+                    if (a.name < b.name) return -1
+                    if (a.name > b.name) return 1
+                    return 0
+                }),
+            })
         }
     }, [apiResult])
-
-    const handleShowData = () => {
-        console.log('fetchData : ', fetchData)
-    }
 
     const retValueStyle = (dataType) => {
         const _orgDataType = dataType.toUpperCase()
@@ -187,7 +199,7 @@ const EditForm = () => {
             } else {
                 console.warn('Unknown dataType, check select-box list...')
             }
-            setRowValue((prev) => ({ ...prev, value }))
+            // setRowValue((prev) => ({ ...prev, value }))
 
             // return item
         }
@@ -200,7 +212,7 @@ const EditForm = () => {
             const _lists = fetchData.lists.filter((data) => data.id !== item.id)
             setFetchData({
                 count: fetchData.count,
-                lists: [..._lists, item].sort((a, b) => a.id - b.id),
+                lists: [..._lists, item],
             })
         }
 
@@ -216,7 +228,7 @@ const EditForm = () => {
             } else if (_convDataType === 'D') {
                 item.value = 1.0
             } else if (_convDataType === 'B') {
-                item.value = item.value ? true : false
+                item.value = true
             } else if (_convDataType === 'AS') {
                 item.value = item.value || ''
             } else if (_convDataType === 'AI') {
@@ -380,7 +392,6 @@ const EditForm = () => {
                         justifyContent={`flex-end`}
                         alignItems={`center`}
                     >
-                        <MuiMainButton name="list" title="Data Show" onClick={handleShowData} />
                         <MuiMainButton
                             disabled={isUpdatePending}
                             name="add"

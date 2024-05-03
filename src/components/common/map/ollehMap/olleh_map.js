@@ -1,30 +1,30 @@
 import { HexGrid } from '#/components/common/map/ollehMap/js/jsHexGrid.js'
 
+import PositionIcon from '#/components/common/map/ollehMap/img/position_red.png'
+import BtsIcon from '#/components/common/map/ollehMap/img/bts.png'
+import WifiGreenIcon from '#/components/common/map/ollehMap/img/map_pin_green.png'
+import WifiPuppleIcon from '#/components/common/map/ollehMap/img/map_pin_pupple.png'
+import CellIcon from '#/components/common/map/ollehMap/img/cell.png'
+import WiFiIcon from '#/components/common/map/ollehMap/img/wifi.png'
+import GnssIcon from '#/components/common/map/ollehMap/img/gnss.png'
+
 const initPosKT = { latitude: 37.3998912, longitude: 127.1279874, title: 'KT 분당' }
 const initMap = (_div, location = { ...initPosKT }, _zoom) => {
-    console.log('initMap-location : ', location)
     var mapOpts = {
         center: new olleh.maps.LatLng(location.latitude, location.longitude),
         zoom: _zoom,
         mapTypeId: 'ROADMAP', // SATELLITE, HYBRID
-        // panControl: true,
-        // scaleControl: true,
-        // mapTypeControl: true,
-        // measureControl: true,
-        // disableShadow: true,
     }
     const map = new olleh.maps.Map(document.getElementById(_div), mapOpts)
 
     return map
 }
 
-const drawMarker = (_mapInstance, iconUrl, locations, bounceMarker, onMarkerClick) => {
+const drawMarker = (_mapInstance, locations, bounceMarker, onMarkerClick) => {
     const locArrs = locations[0].latitude > 0 ? locations : [initPosKT]
     locArrs.map((loc) => {
         const _marker =
-            loc.id && loc.id === bounceMarker.id
-                ? setBounceMarker(loc)
-                : setIconMarker(loc, iconUrl)
+            loc.id && loc.id === bounceMarker.id ? setBounceMarker(loc) : setIconMarker(loc)
         if (typeof onMarkerClick === 'function') {
             _marker.onEvent('click', () => {
                 onMarkerClick(loc.id)
@@ -34,12 +34,25 @@ const drawMarker = (_mapInstance, iconUrl, locations, bounceMarker, onMarkerClic
     })
 }
 
-const setIconMarker = (location, iconUrl) => {
+const getIcon = (_location) => {
+    if (_location.id.includes('B_')) return BtsIcon
+    else if (_location.id.includes('W_')) {
+        return _location.band === 24 ? WifiGreenIcon : WifiPuppleIcon
+    } else if (_location.id.includes('P_')) {
+        if (_location.posMethod === 'CELL') return CellIcon
+        else if (_location.posMethod === 'WIFI') return WiFiIcon
+        else return GnssIcon
+    } else {
+        return PositionIcon
+    }
+}
+
+const setIconMarker = (location) => {
     const _marker = new olleh.maps.overlay.Marker({
         position: new olleh.maps.LatLng(location.latitude, location.longitude),
         icon: {
-            url: iconUrl,
-            size: new olleh.maps.Size(50, 50),
+            url: getIcon(location),
+            size: new olleh.maps.Size(28, 40),
         },
         title: location.title || location.address,
     })
@@ -52,6 +65,7 @@ const setBounceMarker = (location) => {
         animation: olleh.maps.overlay.Marker.BOUNCE, // 제자리에서 통통튀는 Bounce 애니메이션 동작
         title: location.title || location.address,
     })
+    _marker.setIcon(getIcon(location))
     return _marker
 }
 

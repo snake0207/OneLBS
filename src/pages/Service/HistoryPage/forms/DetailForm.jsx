@@ -13,7 +13,6 @@ import {
     TableContainer,
 } from '@mui/material'
 import PlaylistAddCheckOutlinedIcon from '@mui/icons-material/PlaylistAddCheckOutlined'
-import PersonPinCircleOutlinedIcon from '@mui/icons-material/PersonPinCircleOutlined'
 
 import TitleBar from '#/components/common/menu/TitleBar'
 
@@ -21,6 +20,10 @@ import style from './style.module'
 import { useGetServiceHistoryDetail } from '#/hooks/queries/service'
 import { OllehMap } from '#/components/common/map/ollehMap'
 import { getBtsTypeListLabel } from '#/common/libs/service'
+
+import CellIcon from '#/components/common/map/ollehMap/img/cell.png'
+import WiFiIcon from '#/components/common/map/ollehMap/img/wifi.png'
+import GnssIcon from '#/components/common/map/ollehMap/img/gnss.png'
 
 const TitleArea = ({ title }) => {
     return (
@@ -136,7 +139,7 @@ const DetailForm = () => {
                 >
                     <Box
                         sx={{
-                            width: '50%',
+                            width: '55%',
                             display: 'flex',
                             flexDirection: 'column',
                             justifyContent: 'space-between',
@@ -175,7 +178,27 @@ const DetailForm = () => {
                                                         }
                                                     >
                                                         <TableCell>
-                                                            <PersonPinCircleOutlinedIcon />
+                                                            {item.posMethod === 'CELL' && (
+                                                                <img
+                                                                    src={CellIcon}
+                                                                    width="20px"
+                                                                    height="30px"
+                                                                />
+                                                            )}
+                                                            {item.posMethod === 'WIFI' && (
+                                                                <img
+                                                                    src={WiFiIcon}
+                                                                    width="20px"
+                                                                    height="30px"
+                                                                />
+                                                            )}
+                                                            {item.posMethod === 'GNSS' && (
+                                                                <img
+                                                                    src={GnssIcon}
+                                                                    width="20px"
+                                                                    height="30px"
+                                                                />
+                                                            )}
                                                         </TableCell>
                                                         <TableCell>{item.posMethod}</TableCell>
                                                         <TableCell>{item.algo}</TableCell>
@@ -302,7 +325,7 @@ const DetailForm = () => {
                         </Box>
                         <Box sx={{ width: '100%' }}>
                             <TitleArea title={`하위 트랜잭션 목록`} />
-                            <TableContainer component={Box} style={{ maxHeight: 300 }}>
+                            <TableContainer style={{ maxHeight: 300 }}>
                                 <Table sx={style.table_base}>
                                     <TableHead>
                                         {/* row - 1 */}
@@ -314,15 +337,13 @@ const DetailForm = () => {
                                                 style={{ width: '20%' }}
                                             >{`측위방식`}</TableCell>
                                             <TableCell style={{ width: '15%' }}>{`응답`}</TableCell>
-                                            <TableCell
-                                            // style={{ width: '20%' }}
-                                            >{`메시지 전문`}</TableCell>
+                                            <TableCell style={{ width: '45%' }}>{`메시지 전문`}</TableCell>
                                         </TableRow>
                                     </TableHead>
                                     <TableBody>
                                         {fetchData?.transList?.totalCount ? (
                                             fetchData.transList.lists.map((item, idx) => (
-                                                <TableRow key={idx}>
+                                                <TableRow key={idx} style={{ width: '100%' }}>
                                                     <TableCell>{item.targetSystem}</TableCell>
                                                     <TableCell>{item.posMethod}</TableCell>
                                                     <TableCell>{item.result}</TableCell>
@@ -342,7 +363,7 @@ const DetailForm = () => {
                             </TableContainer>
                         </Box>
                     </Box>
-                    <Box sx={{ width: '50%' }}>
+                    <Box sx={{ width: '45%' }}>
                         {locations.length > 0 && (
                             <OllehMap locations={[...locations]} bounceMarker={bounceRow} />
                         )}

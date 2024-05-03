@@ -61,15 +61,16 @@ const ServiceHistory = () => {
                 const { totalCount, lists } = apiResult?.data
                 setIsQueryState(false)
                 setFetchData({ count: totalCount, lists: [...fetchData.lists, ...lists] })
-                const nArrs = lists.map((item) => {
-                    // const { latitude, longitude, posMethod: title } = item
-                    return {
-                        id: item.id,
-                        latitude: item.latitude,
-                        longitude: item.longitude,
-                        title: item.posMethod,
-                    }
-                })
+                const nArrs = lists.filter(
+                    (item) =>
+                        item.latitude &&
+                        item.longitude && {
+                            id: item.id,
+                            latitude: item.latitude,
+                            longitude: item.longitude,
+                            title: item.posMethod,
+                        },
+                )
                 setLocations(nArrs)
             }
         }
@@ -109,22 +110,14 @@ const ServiceHistory = () => {
 
                 {/* 지도 영역 */}
                 <Box sx={{ mt: 3, width: '100%', height: '400px' }}>
-                    {fetchData.count > 0 ? (
                         <OllehMap
-                            locations={[...locations]}
+                            locations={locations.length > 0 ? [...locations] : [{
+                                latitude: 37.3998912,
+                                longitude: 127.1279874,
+                                title: 'KT 분당',
+                            }]}
                             onMarkerClick={(id) => handleClickMapMarker(id)}
                         />
-                    ) : (
-                        <OllehMap
-                            locations={[
-                                {
-                                    latitude: 37.3998912,
-                                    longitude: 127.1279874,
-                                    title: 'KT 분당',
-                                },
-                            ]}
-                        />
-                    )}
                 </Box>
             </Box>
         </Box>

@@ -1,12 +1,11 @@
 import { HexGrid } from '#/components/common/map/ollehMap/js/jsHexGrid.js'
 
 const initPosKT = { latitude: 37.3998912, longitude: 127.1279874, title: 'KT 분당' }
-
-const initMap = (_div, location = { ...initPosKT }) => {
-    // console.log('initMap-location : ', location)
+const initMap = (_div, location = { ...initPosKT }, _zoom) => {
+    console.log('initMap-location : ', location)
     var mapOpts = {
         center: new olleh.maps.LatLng(location.latitude, location.longitude),
-        zoom: 12,
+        zoom: _zoom,
         mapTypeId: 'ROADMAP', // SATELLITE, HYBRID
         // panControl: true,
         // scaleControl: true,

@@ -16,7 +16,7 @@ export const columns = [
             <Typography color="primary">
                 {getCenterLabel[params.row.center] !== undefined
                     ? getCenterLabel[params.row.center].label
-                    : `${params.row.center} is not exist`}
+                    : `${params.row.center} is Unknown`}
             </Typography>
         ),
     },
@@ -77,7 +77,13 @@ export const columns = [
         headerName: '측위 방식',
         flex: 1,
         renderCell: (params) => {
-            return <Typography>{getPosMethodHistoryLabel[params.row.posMethod].label}</Typography>
+            return (
+                <Typography>
+                    {getPosMethodHistoryLabel[params.row.posMethod] !== undefined
+                        ? getPosMethodHistoryLabel[params.row.posMethod].label
+                        : `${params.row.posMethod} is Unknown`}
+                </Typography>
+            )
         },
     },
     {
@@ -99,7 +105,7 @@ export const columns = [
     {
         field: 'respTime',
         headerName: '응답시간(초)',
-        flex: 1.2,
+        flex: 1,
         align: 'right',
         renderCell: (params) => {
             return <Typography>{params.row.respTime}</Typography>

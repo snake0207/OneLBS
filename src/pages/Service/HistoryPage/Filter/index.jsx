@@ -24,7 +24,7 @@ function SearchFilter({ onSearch }) {
         initialValues: {
             startDate: '',
             endDate: '',
-            start_time: String(new Date().getHours()),
+            start_time: '00',
             end_time: String(new Date().getHours()),
             serviceCode: '',
             opType: '',

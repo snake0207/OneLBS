@@ -111,6 +111,18 @@ export const getPosMethodHistoryLabel = {
     11: { label: `복합측위` },
 }
 
+export const getBtsTypeList = () => [
+    { key: 3, value: 3, label: `WCDMA` },
+    { key: 4, value: 4, label: `LTE` },
+    { key: 5, value: 5, label: `5G` },
+]
+
+export const getBtsTypeListLabel = {
+    3: { label: `WCDMA` },
+    4: { label: `LTE` },
+    5: { label: `5G` },
+}
+
 export const getCrowdTypeList = () => [
     { key: 'D', value: 'D', label: `일간` },
     { key: 'M', value: 'M', label: `통합` },

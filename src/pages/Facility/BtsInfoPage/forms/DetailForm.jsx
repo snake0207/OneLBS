@@ -28,24 +28,27 @@ const TitleArea = ({ title }) => {
 }
 
 const DetailForm = () => {
-    const [isSearchClick, setIsSearchClick] = useState(false)
+    const [isQueryState, setIsQueryState] = useState(false)
     const [queryParams, setQueryParams] = useState({})
     const { data: apiResult } = useGetFacilityBtsSearch(queryParams, {
-        enabled: isSearchClick,
+        enabled: isQueryState,
     })
 
     // 검색 버튼 누른 경우
     const handleSearch = (values) => {
         console.log('values : ', values)
-        setIsSearchClick(true)
+        setIsQueryState(true)
         setQueryParams({ ...queryParams, ...values })
     }
 
     useEffect(() => {
-        if (apiResult) {
-            setIsSearchClick(false)
+        if (isQueryState && apiResult) {
+            console.log('apiResult : ', apiResult)
+            if (apiResult?.code === '0000') {
+                setIsQueryState(false)
+            }
         }
-    }, [apiResult, isSearchClick])
+    }, [apiResult, queryParams])
 
     return (
         <Box>

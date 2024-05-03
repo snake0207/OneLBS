@@ -208,7 +208,7 @@ const LoginForm = () => {
                     {`아래 보안문자의 정보를 입력해 주세요.`}
                 </Typography>
                 <Stack direction="row">
-                    {apiResultCaptcha && (
+                    {apiResultCaptcha ? (
                         <CardMedia
                             component="img"
                             image={apiResultCaptcha}
@@ -220,9 +220,13 @@ const LoginForm = () => {
                                 borderRadius: '4px',
                                 mb: 1,
                                 p: 1,
+                                display: 'flex',
+                                alignItems: 'center',
                             }}
                             aria-label={`보안문자`}
                         />
+                    ) : (
+                        <Typography>Loading...</Typography>
                     )}
 
                     <LoadingButton

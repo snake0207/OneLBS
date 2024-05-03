@@ -20,6 +20,7 @@ import TitleBar from '#/components/common/menu/TitleBar'
 import style from './style.module'
 import { useGetServiceHistoryDetail } from '#/hooks/queries/service'
 import { OllehMap } from '#/components/common/map/ollehMap'
+import { getBtsTypeListLabel } from '#/common/libs/service'
 
 const TitleArea = ({ title }) => {
     return (
@@ -46,10 +47,10 @@ const DetailForm = () => {
     const navigate = useNavigate()
     const [bounceRow, setBounceRow] = useState({})
     const [fetchData, setFetchData] = useState({
-        poslist: { count: 0, lists: [] },
-        btslist: { count: 0, lists: [] },
-        wifilist: { count: 0, lists: [] },
-        translist: { count: 0, lists: [] },
+        posList: { totalCount: 0, lists: [] },
+        btsList: { totalCount: 0, lists: [] },
+        wifiList: { totalCount: 0, lists: [] },
+        transList: { totalCount: 0, lists: [] },
     })
     const [locations, setLocations] = useState([])
     const { data: apiResult } = useGetServiceHistoryDetail(
@@ -58,23 +59,33 @@ const DetailForm = () => {
             enabled: true,
         },
     )
+    const filterArray = (sign = null, array) => {
+        return array
+            .filter((row) => row.latitude && row.longitude)
+            .map((item) => ({
+                ...item,
+                id: `${sign}_${item.id}`,
+                title: `${item.latitude}, ${item.longitude}`,
+            }))
+    }
 
     useEffect(() => {
         if (apiResult) {
             console.log('Detail apiResult : ', apiResult)
-            // const { count, lists } = apiResult
-            const setLists = [
-                ...apiResult.poslist.lists,
-                ...apiResult.btslist.lists,
-                ...apiResult.wifilist.lists,
-                ...apiResult.translist.lists,
-            ]
-            setFetchData({ ...apiResult })
-            setLocations(setLists)
+            if (apiResult?.code === '0000') {
+                const setLists = [
+                    ...filterArray('P', apiResult?.data?.posList.lists),
+                    ...filterArray('B', apiResult?.data?.btsList.lists),
+                    ...filterArray('W', apiResult?.data?.wifiList.lists),
+                ]
+                setFetchData({ ...apiResult?.data })
+                setLocations(setLists)
+            }
         }
     }, [apiResult])
 
     console.log('Detail fetchData : ', fetchData)
+    console.log('Detail locations : ', locations)
 
     return (
         <Box>
@@ -100,15 +111,15 @@ const DetailForm = () => {
                         </TableRow>
                         <TableRow>
                             <TableCell>{row?.center}</TableCell>
-                            <TableCell>{row?.req_date}</TableCell>
-                            <TableCell>{row?.resp_date}</TableCell>
-                            <TableCell>{row?.serviceCode}</TableCell>
+                            <TableCell>{row?.reqDate}</TableCell>
+                            <TableCell>{row?.resDate}</TableCell>
+                            <TableCell>{row?.serviceName}</TableCell>
                             <TableCell>{row?.opType}</TableCell>
-                            <TableCell>{row?.reqNo}</TableCell>
-                            <TableCell>{row?.targetNo}</TableCell>
+                            <TableCell>{row?.reqMdn}</TableCell>
+                            <TableCell>{row?.targetMdn}</TableCell>
                             <TableCell>{row?.posMethod}</TableCell>
-                            <TableCell>{row?.ueModel}</TableCell>
-                            <TableCell>{row?.respCode}</TableCell>
+                            <TableCell>{row?.model}</TableCell>
+                            <TableCell>{row?.result}</TableCell>
                             <TableCell>{row?.respTime}</TableCell>
                         </TableRow>
                     </TableHead>
@@ -152,17 +163,22 @@ const DetailForm = () => {
                                             </TableRow>
                                         </TableHead>
                                         <TableBody>
-                                            {fetchData?.poslist?.count ? (
-                                                fetchData.poslist.lists.map((item, idx) => (
+                                            {fetchData?.posList?.totalCount ? (
+                                                fetchData.posList.lists.map((item, idx) => (
                                                     <TableRow
                                                         key={idx}
-                                                        onClick={() => setBounceRow(item)}
+                                                        onClick={() =>
+                                                            setBounceRow({
+                                                                ...item,
+                                                                id: `P_${item.id}`,
+                                                            })
+                                                        }
                                                     >
                                                         <TableCell>
                                                             <PersonPinCircleOutlinedIcon />
                                                         </TableCell>
                                                         <TableCell>{item.posMethod}</TableCell>
-                                                        <TableCell>{item.algorithm}</TableCell>
+                                                        <TableCell>{item.algo}</TableCell>
                                                     </TableRow>
                                                 ))
                                             ) : (
@@ -196,15 +212,28 @@ const DetailForm = () => {
                                             </TableRow>
                                         </TableHead>
                                         <TableBody>
-                                            {fetchData?.btslist?.count ? (
-                                                fetchData.btslist.lists.map((item, idx) => (
+                                            {fetchData?.btsList?.totalCount ? (
+                                                fetchData.btsList.lists.map((item, idx) => (
                                                     <TableRow
                                                         key={idx}
-                                                        onClick={() => setBounceRow(item)}
+                                                        onClick={() =>
+                                                            setBounceRow({
+                                                                ...item,
+                                                                id: `B_${item.id}`,
+                                                            })
+                                                        }
                                                     >
-                                                        <TableCell>{item.type}</TableCell>
+                                                        <TableCell>
+                                                            {getBtsTypeListLabel[item.network] !==
+                                                            undefined
+                                                                ? getBtsTypeListLabel[item.network]
+                                                                      .label
+                                                                : `${item.network} Unknown`}
+                                                        </TableCell>
                                                         <TableCell>{item.cellid}</TableCell>
-                                                        <TableCell>{item.serving}</TableCell>
+                                                        <TableCell>
+                                                            {item.serving ? `serving` : `neighbor`}
+                                                        </TableCell>
                                                     </TableRow>
                                                 ))
                                             ) : (
@@ -240,11 +269,16 @@ const DetailForm = () => {
                                         </TableRow>
                                     </TableHead>
                                     <TableBody>
-                                        {fetchData?.wifilist?.count ? (
-                                            fetchData.wifilist.lists.map((item, idx) => (
+                                        {fetchData?.wifiList?.totalCount ? (
+                                            fetchData.wifiList.lists.map((item, idx) => (
                                                 <TableRow
                                                     key={idx}
-                                                    onClick={() => setBounceRow(item)}
+                                                    onClick={() =>
+                                                        setBounceRow({
+                                                            ...item,
+                                                            id: `W_${item.id}`,
+                                                        })
+                                                    }
                                                 >
                                                     <TableCell>{item.mac}</TableCell>
                                                     <TableCell>{item.ssid}</TableCell>
@@ -286,13 +320,13 @@ const DetailForm = () => {
                                         </TableRow>
                                     </TableHead>
                                     <TableBody>
-                                        {fetchData?.translist?.count ? (
-                                            fetchData.translist.lists.map((item, idx) => (
+                                        {fetchData?.transList?.totalCount ? (
+                                            fetchData.transList.lists.map((item, idx) => (
                                                 <TableRow key={idx}>
-                                                    <TableCell>{item.system}</TableCell>
+                                                    <TableCell>{item.targetSystem}</TableCell>
                                                     <TableCell>{item.posMethod}</TableCell>
-                                                    <TableCell>{item.respCode}</TableCell>
-                                                    <TableCell>{item.message}</TableCell>
+                                                    <TableCell>{item.result}</TableCell>
+                                                    <TableCell>{item.messages}</TableCell>
                                                 </TableRow>
                                             ))
                                         ) : (

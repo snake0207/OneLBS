@@ -72,7 +72,8 @@ function Header({ toggleDrawer }) {
                                 color: `text.gray`,
                             }}
                         >
-                            {'acro 반갑습니다'}({`관리자`}){/* {data && data.userName} */}
+                            {'acro 반갑습니다'}({storeUserType === 'A' ? `관리자` : `운영자`})
+                            {/* {data && data.userName} */}
                         </Box>
                         <Tooltip title={`로그아웃`}>
                             <IconButton disabled={logoutPending} onClick={handleLogout}>

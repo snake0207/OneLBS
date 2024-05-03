@@ -2,9 +2,7 @@ import { Box } from '@mui/material'
 import { isMobile } from 'react-device-detect'
 import CountryTooltip from '#/components/dashboard/CountryTooltip'
 import UserTooltip from '#/components/dashboard/UserTooltip'
-import VectorMap from '#/components/dashboard/VectorMap'
 import ShortCutBanner from '#/components/dashboard/ShortCutBanner'
-import VectorMapTooltip from '#/components/dashboard/VectorMapTooltip'
 import useLayoutStore from '#/store/useLayoutStore'
 
 import EvIcon from '#/assets/m_evIcon.svg'
@@ -142,10 +140,6 @@ function MainPage() {
             <Box sx={style.tooltipBox} style={{ flexDirection: isMobile ? 'column' : 'row' }}>
                 <UserTooltip />
                 <CountryTooltip title={'Europe'} categoryCountList={countryMockData} />
-            </Box>
-            <Box sx={style.mapBox}>
-                <VectorMap />
-                <VectorMapTooltip categoryCountList={VectorMapMockData} title={'국가명'} />
             </Box>
             <Box sx={style.bannerBox} style={{ flexDirection: isMobile ? 'column' : 'row' }}>
                 {shortCutMockData.map((item, idx) => (

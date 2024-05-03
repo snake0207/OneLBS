@@ -29,11 +29,9 @@ function ExpandMenuItem({ label, to, iconNode, items }) {
     const disabledListItem = (menuCode) => {
         const permission = storePermissions.filter((item) => item.menuCode === menuCode)[0]
         if (!permission) {
-            console.log(`${menuCode} is not exist in side_menu.json`)
             return true
         }
         const isYn = storeUserType === 'A' ? permission.adminYn : permission.operatorYn
-        // console.log(menuCode, ', permission : ', permission, ' > ', isYn)
         return isYn === 'N' ? true : false
     }
 
@@ -77,7 +75,10 @@ function ExpandMenuItem({ label, to, iconNode, items }) {
                 <List component="div" disablePadding>
                     {items.map((item) => {
                         // const disabled = disabledListItem(item?.menuCode)
-                        const disabled = import.meta.env.VITE_GW_BASE_URL === "true" ? true : false
+                        const disabled =
+                            import.meta.env.VITE_PERMISSION_CHECK === 'Y'
+                                ? disabledListItem(item?.menuCode)
+                                : false
                         return (
                             <LinkRouter
                                 key={item?.menuCode}

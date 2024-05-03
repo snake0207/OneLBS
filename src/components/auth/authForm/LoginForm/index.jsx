@@ -16,12 +16,6 @@ import { getLayoutState } from '#/store/useLayoutStore'
 import { useAuthActions } from '#/store/useAuthStore'
 import { useUserActions, useUserTypeState } from '#/store/useUserStore'
 
-import {
-    encryptPasswordBase64WithTime,
-    encryptPasswordSHA256,
-    encryptPasswordSHA256WithTime,
-} from '#/common/libs/encode'
-
 import style from './style.module'
 
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined'
@@ -70,9 +64,6 @@ const LoginForm = () => {
         },
         validationSchema: loginSchema,
         onSubmit: (form) => {
-            // const password = encryptPasswordBase64WithTime(
-            //     encryptPasswordSHA256WithTime(encryptPasswordSHA256(form.password)),
-            // )
             const apiParams = { ...form, dummyToken: respDummyToken?.data.data }
             console.log('onSubmit >> ', JSON.stringify(apiParams, null, 2))
             submitMutate(

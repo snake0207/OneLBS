@@ -15,7 +15,7 @@ const initMap = (_div, location = { ...initPosKT }, _zoom) => {
         zoom: _zoom,
         mapTypeId: 'ROADMAP', // SATELLITE, HYBRID
     }
-    const map = new olleh.maps.Map(document.getElementById(_div), mapOpts)
+    const map = new olleh.maps.Map(_div, mapOpts)
 
     return map
 }
@@ -35,13 +35,17 @@ const drawMarker = (_mapInstance, locations, bounceMarker, onMarkerClick) => {
 }
 
 const getIcon = (_location) => {
-    if (_location.id.includes('B_')) return BtsIcon
-    else if (_location.id.includes('W_')) {
-        return _location.band === 24 ? WifiGreenIcon : WifiPuppleIcon
-    } else if (_location.id.includes('P_')) {
-        if (_location.posMethod === 'CELL') return CellIcon
-        else if (_location.posMethod === 'WIFI') return WiFiIcon
-        else return GnssIcon
+    if (_location.hasOwnProperty('id')) {
+        if (_location.id.includes('B_')) return BtsIcon
+        else if (_location.id.includes('W_')) {
+            return _location.band === 24 ? WifiGreenIcon : WifiPuppleIcon
+        } else if (_location.id.includes('P_')) {
+            if (_location.posMethod === 'CELL') return CellIcon
+            else if (_location.posMethod === 'WIFI') return WiFiIcon
+            else return GnssIcon
+        } else {
+            return PositionIcon
+        }
     } else {
         return PositionIcon
     }

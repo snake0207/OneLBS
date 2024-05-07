@@ -98,10 +98,18 @@ const DetailForm = () => {
 
     const handleUpdateSubmit = () => {
         console.log('handleUpdateSubmit...')
-        const currentTime = dayjs()
-        console.log('currentTime : ', currentTime)
+        const updParams = {
+            mac: formik.values.mac,
+            ssid: formik.values.ssid,
+            grade: formik.values.grade || 0,
+            building: formik.values.building || '',
+            floor: formik.values.floor || '',
+            latitude: formik.values.vap.wgs84.latitude,
+            longitude: formik.values.vap.wgs84.longitude,
+            source: queryParams.source,
+        }
         mutateUpdate(
-            { ...formik.values, update_date: currentTime.format('YYYY-MM-DD HH:mm:ss') },
+            { ...updParams },
             {
                 onSuccess: ({ data }) => {
                     console.log('update-response : ', data)
@@ -115,7 +123,7 @@ const DetailForm = () => {
     const handleDeleteSubmit = () => {
         console.log('handleDeleteSubmit...')
         mutateDelete(
-            { mac: apiResult?.mac },
+            { mac: apiResult?.mac, source: queryParams.source },
             {
                 onSuccess: ({ data }) => {
                     console.log('delete-response : ', data)
@@ -251,7 +259,8 @@ const DetailForm = () => {
                                     </TableCell>
                                     <TableCell style={style.cellTitle}>{`Grade`}</TableCell>
                                     <TableCell style={style.cellInputWide}>
-                                        {apiResult?.data?.hasOwnProperty('grade') ? (
+                                        <TextInput name={`grade`} formik={formik} />
+                                        {/* {apiResult?.data?.hasOwnProperty('grade') ? (
                                             <TextInput name={`grade`} formik={formik} />
                                         ) : (
                                             <Typography
@@ -260,7 +269,7 @@ const DetailForm = () => {
                                                     backgroundColor: `grey.search`,
                                                 }}
                                             />
-                                        )}
+                                        )} */}
                                     </TableCell>
                                     <TableCell style={style.cellTitle}>{`신뢰도`}</TableCell>
                                     <TableCell style={style.cellInputWide}>
@@ -274,7 +283,8 @@ const DetailForm = () => {
                                 <TableRow>
                                     <TableCell style={style.cellTitle}>{`Building`}</TableCell>
                                     <TableCell style={style.cellInput}>
-                                        {apiResult?.data?.hasOwnProperty('building') ? (
+                                        <TextInput name={`building`} formik={formik} />
+                                        {/* {apiResult?.data?.hasOwnProperty('building') ? (
                                             <TextInput name={`building`} formik={formik} />
                                         ) : (
                                             <Typography
@@ -283,11 +293,12 @@ const DetailForm = () => {
                                                     backgroundColor: `grey.search`,
                                                 }}
                                             />
-                                        )}
+                                        )} */}
                                     </TableCell>
                                     <TableCell style={style.cellTitle}>{`Floor`}</TableCell>
                                     <TableCell style={style.cellInput}>
-                                        {apiResult?.data?.hasOwnProperty('floor') ? (
+                                        <TextInput name={`floor`} formik={formik} />
+                                        {/* {apiResult?.data?.hasOwnProperty('floor') ? (
                                             <TextInput name={`floor`} formik={formik} />
                                         ) : (
                                             <Typography
@@ -296,7 +307,7 @@ const DetailForm = () => {
                                                     backgroundColor: `grey.search`,
                                                 }}
                                             />
-                                        )}
+                                        )} */}
                                     </TableCell>
                                     <TableCell style={style.cellTitle}>{``}</TableCell>
                                     <TableCell style={style.cellInputWide}>{``}</TableCell>
@@ -314,7 +325,8 @@ const DetailForm = () => {
                                     </TableCell>
                                     <TableCell style={style.cellTitle}>{`생성일시`}</TableCell>
                                     <TableCell style={style.cellInputWide}>
-                                        {apiResult?.data?.hasOwnProperty('regDate') ? (
+                                        <TextInput name={`regDate`} formik={formik} />
+                                        {/* {apiResult?.data?.hasOwnProperty('regDate') ? (
                                             <TextInput name={`regDate`} formik={formik} />
                                         ) : (
                                             <Typography
@@ -323,11 +335,12 @@ const DetailForm = () => {
                                                     backgroundColor: `grey.search`,
                                                 }}
                                             />
-                                        )}
+                                        )} */}
                                     </TableCell>
                                     <TableCell style={style.cellTitle}>{`갱신일시`}</TableCell>
                                     <TableCell style={style.cellInputWide}>
-                                        {apiResult?.data?.hasOwnProperty('updDate') ? (
+                                        <TextInput name={`updDate`} formik={formik} />
+                                        {/* {apiResult?.data?.hasOwnProperty('updDate') ? (
                                             <TextInput name={`updDate`} formik={formik} />
                                         ) : (
                                             <Typography
@@ -336,7 +349,7 @@ const DetailForm = () => {
                                                     backgroundColor: `grey.search`,
                                                 }}
                                             />
-                                        )}
+                                        )} */}
                                     </TableCell>
                                 </TableRow>
                             </TableBody>

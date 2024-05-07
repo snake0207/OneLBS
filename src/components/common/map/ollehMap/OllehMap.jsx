@@ -23,13 +23,14 @@ const OllehMap = ({
     const IMAGE_URL = import.meta.env.VITE_HOME_IMAGE_URL
     // 처음 지도 로딩시에는 marker를 모두 그려준다.
     // 이후 목록에서 특정 행을 선택 한 경우 해당 marker는 bounce 시킨다
-
-    const _zoom = locations.length > 1 ? 7 : 12
+    const _zoom = locations.length > 1 ? 7 : 13
 
     useEffect(() => {
-        let _map = ollehMap.initMap('map_div', locations[locations.length - 1], _zoom)
-        // setIsLoading(false)
-        //
+        const _map = ollehMap.initMap(
+            document.getElementById('map_div'),
+            locations[locations.length - 1],
+            _zoom,
+        )
         ollehMap.drawMarker(_map, locations, bounceMarker, onMarkerClick)
         Array.isArray(gridX) &&
             Array.isArray(gridY) &&
@@ -48,11 +49,11 @@ const OllehMap = ({
                             bottom: 0,
                             position: 'absolute',
                             height: '100px',
-                            width: '40%',
-                            backgroundColor: `rgba(0, 0, 0, 0.8)`,
+                            width: '30%',
+                            backgroundColor: `rgba(0, 0, 0, 0.5)`,
                         }}
                     >
-                        <ImageList sx={{ ml: 1 }}>
+                        <ImageList sx={{ ml: 2 }}>
                             {rssiItems.map((item) => (
                                 <Stack
                                     direction={`row`}

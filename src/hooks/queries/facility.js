@@ -14,13 +14,13 @@ export const useGetFacilityBtsSearch = (queryParams = {}, options) => {
 }
 // WiFi 검색
 export const useGetFacilityWifiSearch = (queryParams = {}, options) => {
-    console.log('useGetFacilityWifiSearch : ', queryParams, options)
-    const { data } = useQuery({
+    // console.log('useGetFacilityWifiSearch : ', queryParams, options)
+    const { data, refetch } = useQuery({
         queryKey: ['get-facility-wifi-search', queryParams],
         queryFn: () => facility.getFacilityWifiSearch(queryParams),
         ...options,
     })
-    return { data: data?.data }
+    return { data: data?.data, refetch }
 }
 // WiFi 등록
 export const usePostFacilityRegistWifi = (queryParams = {}, options) => {

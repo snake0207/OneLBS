@@ -9,24 +9,23 @@ import WiFiIcon from '#/components/common/map/ollehMap/img/wifi.png'
 import GnssIcon from '#/components/common/map/ollehMap/img/gnss.png'
 
 const initPosKT = { longitude: 127.1279874, latitude: 37.3998912, title: 'KT 분당' }
-const mapInstance = { _map: null }
 
 const initMap = (_div, location, _zoom) => {
     var mapOpts = {
-        center: new olleh.maps.LatLng(location.latitude, location.longitude),
+        center: location,
+        // center: new olleh.maps.LatLng(location.latitude, location.longitude),
         zoom: _zoom,
         mapTypeId: 'ROADMAP', // SATELLITE, HYBRID
         panControl: false,
     }
-    const _map = new olleh.maps.Map(_div, mapOpts)
-    mapInstance._map = _map
-    return _map
+    return new olleh.maps.Map(_div, mapOpts)
 }
 
-const getMapInstance = () => mapInstance._map
+const setCenter = (location) => new olleh.maps.LatLng(location.latitude, location.longitude)
+
+const getCenter = (_mapInstance) => _mapInstance.getCenter()
 
 const drawMarker = (_mapInstance, locations, bounceMarker, onMarkerClick) => {
-    console.log('locations : ', locations)
     const locArrs = locations[0].latitude > 0 ? locations : [initPosKT]
     locArrs.map((loc) => {
         const _marker =
@@ -83,7 +82,7 @@ const setBounceMarker = (location) => {
 }
 
 const drawHexGrid = (map, arrGridX, arrGridY, arrRssi) => {
-    console.log('drawHexGrid : ', map, arrGridX)
+    // console.log('drawHexGrid : ', map, arrGridX)
     for (let i = 0; i < arrGridX.length; i++) {
         const grid25 = new HexGrid(10)
         addHexGrid25Layer(map, grid25.getPolygonPaths(arrGridX[i], arrGridY[i]), arrRssi[i])
@@ -116,4 +115,4 @@ const addHexGrid25Layer = (_map, paths, rssi) => {
     return hexGrid25Layer
 }
 
-export default { getMapInstance, initMap, drawMarker, setBounceMarker, drawHexGrid }
+export default { initMap, setCenter, getCenter, drawMarker, setBounceMarker, drawHexGrid }

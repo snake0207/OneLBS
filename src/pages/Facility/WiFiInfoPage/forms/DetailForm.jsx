@@ -52,6 +52,7 @@ const formikInitValues = {
 const DetailForm = () => {
     const navigate = useNavigate()
     const [isQueryState, setIsQueryState] = useState(false)
+    const [isSearchClick, setIsSearchClick] = useState(false)
     const [modeToggle, setModeToggle] = useState(false)
     const [apiSuccess, setApiSuccess] = useState('')
     const [state, setState] = useState({
@@ -65,8 +66,14 @@ const DetailForm = () => {
     const { mutate: mutateRegist, isPending: isRegistPending } = usePostFacilityRegistWifi()
     const { mutate: mutateDelete, isPending: isDeletePending } = usePostFacilityDeleteWifi()
     const { mutate: mutateUpdate, isPending: isUpdatePending } = usePostFacilityUpdateWifi()
+    const init_pos = {
+        longitude: 127.1279874,
+        latitude: 37.3998912,
+        title: 'KT 분당',
+    }
+    const [locations, setLocations] = useState({ ...init_pos })
     const { data: apiResult } = useGetFacilityWifiSearch(queryParams, {
-        enabled: isQueryState,
+        enabled: isQueryState && isSearchClick,
     })
 
     const formik = useFormik({
@@ -99,8 +106,9 @@ const DetailForm = () => {
     // 검색 버튼 누른 경우
     const handleSearch = (values) => {
         setModeToggle(false)
-        setIsQueryState(true)
         setQueryParams({ ...queryParams, ...values })
+        setIsQueryState(true)
+        setIsSearchClick(true)
     }
 
     const handleUpdateSubmit = () => {
@@ -121,6 +129,11 @@ const DetailForm = () => {
                 onSuccess: ({ data }) => {
                     console.log('update-response : ', data)
                     setApiSuccess(`UPDATE API RESULT ${data?.data}`)
+                    if (data?.code === '0000') {
+                        // 상태값 변경으로 refetch 수행
+                        setIsQueryState(true)
+                        setIsSearchClick(true)
+                    }
                 },
             },
         )
@@ -130,11 +143,16 @@ const DetailForm = () => {
     const handleDeleteSubmit = () => {
         console.log('handleDeleteSubmit...')
         mutateDelete(
-            { mac: apiResult?.mac, source: queryParams.source },
+            { mac: apiResult?.data?.mac, source: queryParams.source },
             {
                 onSuccess: ({ data }) => {
                     console.log('delete-response : ', data)
                     setApiSuccess(`DELETE API RESULT ${data?.data}`)
+                    if (data?.code === '0000') {
+                        // 상태값 변경으로 refetch 수행
+                        setIsQueryState(true)
+                        setIsSearchClick(true)
+                    }
                 },
             },
         )
@@ -155,7 +173,10 @@ const DetailForm = () => {
     const handleInputAllClear = () => {
         console.log('handleInputAllClear...')
         formik.setValues({ ...formikInitValues })
-        // handleStateReset()
+        setLocations(init_pos)
+        setQueryParams({ mac: '000000000', source: 'W' })
+        setIsQueryState(true)
+        setIsSearchClick(true)
     }
 
     const handleClickSave = () => {
@@ -188,8 +209,9 @@ const DetailForm = () => {
     useEffect(() => {
         if (isQueryState && apiResult) {
             console.log('apiResult : ', apiResult)
+            setIsQueryState(false)
+            setIsSearchClick(false)
             if (apiResult?.code === '0000') {
-                setIsQueryState(false)
                 formik.setValues({ ...apiResult?.data })
                 formik.setFieldValue('grade', apiResult?.data?.grade || 0)
                 formik.setFieldValue('building', apiResult?.data?.building || '')
@@ -206,11 +228,16 @@ const DetailForm = () => {
                     },
                 }
                 formik.setFieldValue('vap', vap)
+                setLocations({
+                    ...locations,
+                    ...vap.wgs84,
+                    title: apiResult?.data?.building || apiResult?.data?.ssid || '',
+                })
             }
         }
     }, [apiResult, queryParams])
 
-    // console.log('formik.values >> ', formik.values)
+    console.log('locations >> ', locations)
 
     return (
         <Box>
@@ -272,16 +299,6 @@ const DetailForm = () => {
                                     <TableCell style={style.cellTitle}>{`Grade`}</TableCell>
                                     <TableCell style={style.cellInputWide}>
                                         <TextInput name={`grade`} formik={formik} />
-                                        {/* {apiResult?.data?.hasOwnProperty('grade') ? (
-                                            <TextInput name={`grade`} formik={formik} />
-                                        ) : (
-                                            <Typography
-                                                sx={{
-                                                    height: '40px',
-                                                    backgroundColor: `grey.search`,
-                                                }}
-                                            />
-                                        )} */}
                                     </TableCell>
                                     <TableCell style={style.cellTitle}>{`신뢰도`}</TableCell>
                                     <TableCell style={style.cellInputWide}>
@@ -297,30 +314,10 @@ const DetailForm = () => {
                                     <TableCell style={style.cellTitle}>{`Building`}</TableCell>
                                     <TableCell style={style.cellInput}>
                                         <TextInput name={`building`} formik={formik} />
-                                        {/* {apiResult?.data?.hasOwnProperty('building') ? (
-                                            <TextInput name={`building`} formik={formik} />
-                                        ) : (
-                                            <Typography
-                                                sx={{
-                                                    height: '40px',
-                                                    backgroundColor: `grey.search`,
-                                                }}
-                                            />
-                                        )} */}
                                     </TableCell>
                                     <TableCell style={style.cellTitle}>{`Floor`}</TableCell>
                                     <TableCell style={style.cellInput}>
                                         <TextInput name={`floor`} formik={formik} />
-                                        {/* {apiResult?.data?.hasOwnProperty('floor') ? (
-                                            <TextInput name={`floor`} formik={formik} />
-                                        ) : (
-                                            <Typography
-                                                sx={{
-                                                    height: '40px',
-                                                    backgroundColor: `grey.search`,
-                                                }}
-                                            />
-                                        )} */}
                                     </TableCell>
                                     <TableCell style={style.cellTitle}>{``}</TableCell>
                                     <TableCell style={style.cellInputWide}>{``}</TableCell>
@@ -339,30 +336,10 @@ const DetailForm = () => {
                                     <TableCell style={style.cellTitle}>{`생성일시`}</TableCell>
                                     <TableCell style={style.cellInputWide}>
                                         <TextInput name={`regDate`} formik={formik} />
-                                        {/* {apiResult?.data?.hasOwnProperty('regDate') ? (
-                                            <TextInput name={`regDate`} formik={formik} />
-                                        ) : (
-                                            <Typography
-                                                sx={{
-                                                    height: '40px',
-                                                    backgroundColor: `grey.search`,
-                                                }}
-                                            />
-                                        )} */}
                                     </TableCell>
                                     <TableCell style={style.cellTitle}>{`갱신일시`}</TableCell>
                                     <TableCell style={style.cellInputWide}>
                                         <TextInput name={`updDate`} formik={formik} />
-                                        {/* {apiResult?.data?.hasOwnProperty('updDate') ? (
-                                            <TextInput name={`updDate`} formik={formik} />
-                                        ) : (
-                                            <Typography
-                                                sx={{
-                                                    height: '40px',
-                                                    backgroundColor: `grey.search`,
-                                                }}
-                                            />
-                                        )} */}
                                     </TableCell>
                                 </TableRow>
                             </TableBody>
@@ -372,15 +349,9 @@ const DetailForm = () => {
 
                 {/* 측위 목록 */}
                 <Box sx={{ width: '100%', height: '400px', mb: 4 }}>
-                    {apiResult?.code === '0000' ? (
+                    {!isQueryState && (
                         <OllehMap
-                            mapInit={false}
-                            locations={[
-                                {
-                                    ...formik.values.vap.wgs84,
-                                    title: formik.values.building || formik.values.ssid,
-                                },
-                            ]}
+                            locations={[locations]}
                             gridX={
                                 apiResult?.data?.hasOwnProperty('gridX')
                                     ? formik.values.gridX
@@ -394,13 +365,6 @@ const DetailForm = () => {
                             rssi={
                                 apiResult?.data?.hasOwnProperty('rssi') ? formik.values.rssi : null
                             }
-                        />
-                    ) : (
-                        <OllehMap
-                            mapInit={true}
-                            locations={[
-                                { latitude: 37.3998912, longitude: 127.1279874, title: 'KT 분당' },
-                            ]}
                         />
                     )}
                 </Box>

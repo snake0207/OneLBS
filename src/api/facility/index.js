@@ -17,12 +17,12 @@ const postFacilityRegistWiFi = (data) => {
 }
 // WiFi 수정
 const postFacilityUpdateWiFi = (data) => {
-    console.log('postFacilityUpdateWiFi : ', data)
+    // console.log('postFacilityUpdateWiFi : ', data)
     return postAPI({ endPoint: API_PATH.facility.wifi_update, data })
 }
 // WiFi 삭제
 const postFacilityDeleteWiFi = (data) => {
-    console.log('postFacilityDeleteWiFi : ', data)
+    // console.log('postFacilityDeleteWiFi : ', data)
     return postAPI({ endPoint: API_PATH.facility.wifi_delete, data })
 }
 

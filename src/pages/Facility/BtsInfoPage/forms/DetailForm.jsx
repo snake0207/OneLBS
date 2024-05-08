@@ -51,9 +51,9 @@ const DetailForm = () => {
     useEffect(() => {
         if (isQueryState && apiResult) {
             console.log('apiResult : ', apiResult)
+            setIsQueryState(false)
+            setIsSearchClick(false)
             if (apiResult?.code === '0000') {
-                setIsQueryState(false)
-                setIsSearchClick(false)
                 setLocations(apiResult?.data)
             }
         }

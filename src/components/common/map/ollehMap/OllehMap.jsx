@@ -13,35 +13,38 @@ const rssiItems = [
 ]
 
 const OllehMap = ({
-    locations = [],
+    locations,
     onMarkerClick,
     bounceMarker = {},
     gridX = null,
     gridY = null,
     rssi = null,
 }) => {
+    const [mapInstance, setMapInstance] = useState(null)
     const IMAGE_URL = import.meta.env.VITE_HOME_IMAGE_URL
     // 처음 지도 로딩시에는 marker를 모두 그려준다.
     // 이후 목록에서 특정 행을 선택 한 경우 해당 marker는 bounce 시킨다
     const _zoom = locations.length > 1 ? 7 : 13
-
+    // console.log('locations : ', locations)
     useEffect(() => {
-        const _map = ollehMap.initMap(
-            document.getElementById('map_div'),
-            locations[locations.length - 1],
-            _zoom,
-        )
-        ollehMap.drawMarker(_map, locations, bounceMarker, onMarkerClick)
+        if (mapInstance === null) {
+            const instance = ollehMap.initMap('map_div', locations[locations.length - 1], _zoom)
+            setMapInstance(instance)
+        }
+        ollehMap.drawMarker(mapInstance, locations, bounceMarker, onMarkerClick)
         Array.isArray(gridX) &&
+            gridX.length > 0 &&
             Array.isArray(gridY) &&
+            gridY.length > 0 &&
             Array.isArray(rssi) &&
-            ollehMap.drawHexGrid(_map, gridX, gridY, rssi)
+            rssi.length > 0 &&
+            ollehMap.drawHexGrid(mapInstance, gridX, gridY, rssi)
     }, [onMarkerClick, bounceMarker, locations])
     // onMarkerClick, bounceMarker
 
     return (
         <>
-            <div id="map_div" style={{ height: '100%', width: '100%' }}>
+            <div id="map_div" style={{ height: '100%', width: '100%', zIndex: 1 }}>
                 {Array.isArray(gridX) && Array.isArray(gridY) && Array.isArray(rssi) && (
                     <Box
                         sx={{
@@ -70,10 +73,6 @@ const OllehMap = ({
                                     <Typography sx={{ ml: 1, fontSize: '12px', color: 'white' }}>
                                         {item.title}
                                     </Typography>
-                                    {/* <ImageListItemBar
-                                    subtitle={<span>{item.title}</span>}
-                                    position="below"
-                                /> */}
                                 </Stack>
                             ))}
                         </ImageList>

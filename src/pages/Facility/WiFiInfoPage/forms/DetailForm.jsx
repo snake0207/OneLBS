@@ -26,7 +26,6 @@ import {
 import { MuiMainButton } from '#/components/common/button/MuiButton'
 import { useFormik } from 'formik'
 import TextInput from '#/components/common/input/TextInput'
-import dayjs from 'dayjs'
 import MuiDialog from '#/components/common/popup/MuiDialog'
 import MuiAlert from '#/components/common/popup/MuiAlert'
 import { OllehMap } from '#/components/common/map/ollehMap'
@@ -74,11 +73,19 @@ const DetailForm = () => {
         initialValues: formikInitValues,
         // validationSchema: loginSchema,
         onSubmit: (values) => {
-            const apiParams = { ...values }
+            const apiParams = {
+                mac: values.mac,
+                ssid: values.ssid,
+                grade: values.grade || 0,
+                building: values.building || '',
+                floor: values.floor || '',
+                latitude: values.vap.wgs84.latitude,
+                longitude: values.vap.wgs84.longitude,
+                source: queryParams.source || 'C',
+            }
             console.log('onSubmit >> ', JSON.stringify(apiParams, null, 2))
-            const currentTime = dayjs()
             mutateRegist(
-                { ...apiParams, create_date: currentTime.format('YYYY-MM-DD HH:mm:ss') },
+                { ...apiParams },
                 {
                     onSuccess: ({ data }) => {
                         console.log('response : ', data)
@@ -148,7 +155,7 @@ const DetailForm = () => {
     const handleInputAllClear = () => {
         console.log('handleInputAllClear...')
         formik.setValues({ ...formikInitValues })
-        handleStateReset()
+        // handleStateReset()
     }
 
     const handleClickSave = () => {
@@ -184,6 +191,10 @@ const DetailForm = () => {
             if (apiResult?.code === '0000') {
                 setIsQueryState(false)
                 formik.setValues({ ...apiResult?.data })
+                formik.setFieldValue('grade', apiResult?.data?.grade || 0)
+                formik.setFieldValue('building', apiResult?.data?.building || '')
+                formik.setFieldValue('floor', apiResult?.data?.floor || '')
+                formik.setFieldValue('updDate', apiResult?.data?.updDate || '')
                 const vap = {
                     utmk: {
                         longitude: apiResult?.data?.vap?.utmk[0],
@@ -194,11 +205,12 @@ const DetailForm = () => {
                         latitude: apiResult?.data?.vap?.wgs84[1],
                     },
                 }
-                console.log('vap : ', vap)
                 formik.setFieldValue('vap', vap)
             }
         }
     }, [apiResult, queryParams])
+
+    // console.log('formik.values >> ', formik.values)
 
     return (
         <Box>
@@ -274,7 +286,8 @@ const DetailForm = () => {
                                     <TableCell style={style.cellTitle}>{`신뢰도`}</TableCell>
                                     <TableCell style={style.cellInputWide}>
                                         <Typography>
-                                            {apiResult?.data?.hasOwnProperty('grade')
+                                            {apiResult?.data?.hasOwnProperty('grade') &&
+                                            apiResult?.data?.grade !== null
                                                 ? gradeTypeLabel[formik.values.grade].label
                                                 : ''}
                                         </Typography>
@@ -361,6 +374,7 @@ const DetailForm = () => {
                 <Box sx={{ width: '100%', height: '400px', mb: 4 }}>
                     {apiResult?.code === '0000' ? (
                         <OllehMap
+                            mapInit={false}
                             locations={[
                                 {
                                     ...formik.values.vap.wgs84,
@@ -383,6 +397,7 @@ const DetailForm = () => {
                         />
                     ) : (
                         <OllehMap
+                            mapInit={true}
                             locations={[
                                 { latitude: 37.3998912, longitude: 127.1279874, title: 'KT 분당' },
                             ]}

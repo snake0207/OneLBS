@@ -4,7 +4,7 @@ import { useMutation, useQuery } from '@tanstack/react-query'
 
 // 기지국 검색
 export const useGetFacilityBtsSearch = (queryParams = {}, options) => {
-    console.log('useGetFacilityBtsSearch : ', queryParams)
+    // console.log('useGetFacilityBtsSearch : ', queryParams)
     const { data } = useQuery({
         queryKey: ['get-facility-bts-search', queryParams],
         queryFn: () => facility.getFacilityBtsSearch(queryParams),

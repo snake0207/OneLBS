@@ -8,29 +8,35 @@ import CellIcon from '#/components/common/map/ollehMap/img/cell.png'
 import WiFiIcon from '#/components/common/map/ollehMap/img/wifi.png'
 import GnssIcon from '#/components/common/map/ollehMap/img/gnss.png'
 
-const initPosKT = { latitude: 37.3998912, longitude: 127.1279874, title: 'KT 분당' }
-const initMap = (_div, location = { ...initPosKT }, _zoom) => {
+const initPosKT = { longitude: 127.1279874, latitude: 37.3998912, title: 'KT 분당' }
+const mapInstance = { _map: null }
+
+const initMap = (_div, location, _zoom) => {
     var mapOpts = {
         center: new olleh.maps.LatLng(location.latitude, location.longitude),
         zoom: _zoom,
         mapTypeId: 'ROADMAP', // SATELLITE, HYBRID
+        panControl: false,
     }
-    const map = new olleh.maps.Map(_div, mapOpts)
-
-    return map
+    const _map = new olleh.maps.Map(_div, mapOpts)
+    mapInstance._map = _map
+    return _map
 }
 
+const getMapInstance = () => mapInstance._map
+
 const drawMarker = (_mapInstance, locations, bounceMarker, onMarkerClick) => {
+    console.log('locations : ', locations)
     const locArrs = locations[0].latitude > 0 ? locations : [initPosKT]
     locArrs.map((loc) => {
         const _marker =
             loc.id && loc.id === bounceMarker.id ? setBounceMarker(loc) : setIconMarker(loc)
+        _marker.setMap(_mapInstance)
         if (typeof onMarkerClick === 'function') {
             _marker.onEvent('click', () => {
                 onMarkerClick(loc.id)
             })
         }
-        _marker.setMap(_mapInstance)
     })
 }
 
@@ -52,6 +58,7 @@ const getIcon = (_location) => {
 }
 
 const setIconMarker = (location) => {
+    // console.log('setIconMarker : ', location)
     const _marker = new olleh.maps.overlay.Marker({
         position: new olleh.maps.LatLng(location.latitude, location.longitude),
         icon: {
@@ -60,6 +67,8 @@ const setIconMarker = (location) => {
         },
         title: location.title || location.address,
     })
+    // console.log(_marker)
+    // _marker.setIcon(getIcon(location))
     return _marker
 }
 
@@ -74,6 +83,7 @@ const setBounceMarker = (location) => {
 }
 
 const drawHexGrid = (map, arrGridX, arrGridY, arrRssi) => {
+    console.log('drawHexGrid : ', map, arrGridX)
     for (let i = 0; i < arrGridX.length; i++) {
         const grid25 = new HexGrid(10)
         addHexGrid25Layer(map, grid25.getPolygonPaths(arrGridX[i], arrGridY[i]), arrRssi[i])
@@ -106,4 +116,4 @@ const addHexGrid25Layer = (_map, paths, rssi) => {
     return hexGrid25Layer
 }
 
-export default { initMap, drawMarker, setBounceMarker, drawHexGrid }
+export default { getMapInstance, initMap, drawMarker, setBounceMarker, drawHexGrid }

@@ -13,6 +13,10 @@ const getServiceHistoryDetail = (data) => {
 const getServiceStat = (data) => {
     return getAPI({ endPoint: API_PATH.service.service_stat, data })
 }
+// 서비스 세부 통계
+const getServiceSubStat = (data) => {
+    return getAPI({ endPoint: API_PATH.service.service_sub_stat, data })
+}
 // 크라우드소싱 통계
 const getCrowdStat = (data) => {
     return getAPI({ endPoint: API_PATH.service.crowd_stat, data })
@@ -26,6 +30,7 @@ export default {
     getServiceHistory,
     getServiceHistoryDetail,
     getServiceStat,
+    getServiceSubStat,
     getCrowdStat,
     getTriggerList,
 }

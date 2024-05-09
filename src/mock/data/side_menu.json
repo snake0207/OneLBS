@@ -35,6 +35,14 @@
                     "label": "서비스 통계"
                 },
                 {
+                    "menuCode": "OM20500",
+                    "name": "서비스 세부 통계",
+                    "menuOrder": 25,
+                    "rootMenuCode": 200,
+                    "menuUrl": "/service-status/service-sub",
+                    "label": "서비스 세부 통계"
+                },
+                {
                     "menuCode": "OM20300",
                     "name": "크라우드소싱 통계",
                     "menuOrder": 23,

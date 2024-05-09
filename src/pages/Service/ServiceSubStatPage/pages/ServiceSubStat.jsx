@@ -7,7 +7,7 @@ import CustomDataGrid from '#/components/common/table/datagrid'
 
 import SearchFilter from '../Filter'
 import { columns } from './grid-columns'
-import { useGetServiceStat } from '#/hooks/queries/service'
+import { useGetServiceSubStat } from '#/hooks/queries/service'
 
 const filterColumns = (params) => {
     console.log('params : ', params)
@@ -19,8 +19,8 @@ const filterColumns = (params) => {
         { field: 'model', headerName: '단말 모델', view: params.modelCheck },
         { field: 'opType', headerName: 'OP Type', view: params.opTypeCheck },
         // { field: 'posInit', headerName: 'Pos INIT', view: params.posInitCheck },
-        // { field: 'plane', headerName: 'Plane', view: params.planeCheck },
-        // { field: 'posMethod', headerName: '측위 방식', view: params.posMethodCheck },
+        { field: 'plane', headerName: 'Plane', view: params.planeCheck },
+        { field: 'posMethod', headerName: '측위 방식', view: params.posMethodCheck },
         { field: 'respCode', headerName: '응답코드', view: params.respCodeCheck },
         { field: 'count', headerName: '전체', view: true },
         { field: 'successCnt', headerName: '성공', view: true },
@@ -48,7 +48,7 @@ const ServiceStat = () => {
         page: 1,
         limit: parseInt(import.meta.env.VITE_LIST_PAGE_LIMIT), // 1회 요청에 받을수 있는 데이터 수
     })
-    const { data: apiResult } = useGetServiceStat(queryParams, {
+    const { data: apiResult } = useGetServiceSubStat(queryParams, {
         enabled: isQueryState,
     })
 
@@ -88,7 +88,7 @@ const ServiceStat = () => {
 
     return (
         <Box>
-            <TitleBar title={`서비스 통계`} />
+            <TitleBar title={`서비스 세부 통계`} />
             <SearchFilter onSearch={handleSearch} />
             <Box
                 sx={{

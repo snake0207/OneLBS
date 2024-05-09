@@ -37,6 +37,7 @@ const EditForm = () => {
             OM20200: {},
             OM20300: {},
             OM20400: {},
+            OM20500: {},
             OM30100: {},
             OM30200: {},
             OM30300: {},
@@ -179,7 +180,7 @@ const EditForm = () => {
                             </TableRow>
                             {/* 서비스 현황 */}
                             <TableRow>
-                                <TableCell rowSpan={4}>{`서비스 현황`}</TableCell>
+                                <TableCell rowSpan={5}>{`서비스 현황`}</TableCell>
                                 <TableCell>{`서비스 이력 조회`}</TableCell>
                                 <TableCell>{``}</TableCell>
                                 <TableCell component="td" sx={style.center}>
@@ -227,6 +228,39 @@ const EditForm = () => {
                                             )
                                         }}
                                         value={formik.values.OM20200.adminYn}
+                                    />
+                                </TableCell>
+                                <TableCell component="td" sx={style.center}>
+                                    <CheckBox
+                                        checked={
+                                            formik.values.OM20200.operatorYn === 'Y' ? true : false
+                                        }
+                                        onChange={(e) => {
+                                            formik.setFieldValue(
+                                                'OM20200.operatorYn',
+                                                e.target.value === 'Y' ? 'N' : 'Y',
+                                            )
+                                        }}
+                                        value={formik.values.OM20200.operatorYn}
+                                    />
+                                </TableCell>
+                            </TableRow>
+
+                            <TableRow>
+                                <TableCell>{`서비스 세부 통계`}</TableCell>
+                                <TableCell>{``}</TableCell>
+                                <TableCell component="td" sx={style.center}>
+                                    <CheckBox
+                                        checked={
+                                            formik.values.OM20500.adminYn === 'Y' ? true : false
+                                        }
+                                        onChange={(e) => {
+                                            formik.setFieldValue(
+                                                'OM20500.adminYn',
+                                                e.target.value === 'Y' ? 'N' : 'Y',
+                                            )
+                                        }}
+                                        value={formik.values.OM20500.adminYn}
                                     />
                                 </TableCell>
                                 <TableCell component="td" sx={style.center}>

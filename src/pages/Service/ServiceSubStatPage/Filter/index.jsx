@@ -34,7 +34,7 @@ function SearchFilter({ onSearch }) {
             appIdCheck: false,
             modelCheck: false,
             opTypeCheck: false,
-            posInitCheck: false,
+            // posInitCheck: false,
             planeCheck: false,
             posMethodCheck: false,
             respCodeCheck: false,
@@ -42,7 +42,7 @@ function SearchFilter({ onSearch }) {
             appId: '',
             model: '',
             opType: '',
-            posInit: '',
+            // posInit: '',
             plane: 'N',
             posMethod: 'N',
             respCode: '',
@@ -80,7 +80,7 @@ function SearchFilter({ onSearch }) {
                 <Box sx={{ flex: 1 }}>
                     <Typography>{`시간 구분`}</Typography>
                 </Box>
-                <Box sx={{ flex: 5 }}>
+                <Box sx={{ flex: 7 }}>
                     <Table sx={style.tableBox}>
                         <TableHead>
                             <TableRow>
@@ -130,7 +130,7 @@ function SearchFilter({ onSearch }) {
                 <Box sx={{ flex: 1 }}>
                     <Typography>{`Group By`}</Typography>
                 </Box>
-                <Box sx={{ flex: 5 }}>
+                <Box sx={{ flex: 7 }}>
                     <Table sx={style.tableBox}>
                         <TableHead>
                             <TableRow>
@@ -184,7 +184,7 @@ function SearchFilter({ onSearch }) {
                                             }
                                             value={formik.values.posInitCheck}
                                             label={`POS INIT`}
-                                        />
+                                        /> */}
                                         <CheckBox
                                             checked={formik.values.planeCheck}
                                             onChange={(e) =>
@@ -203,7 +203,7 @@ function SearchFilter({ onSearch }) {
                                             }
                                             value={formik.values.posMethodCheck}
                                             label={`측위방식`}
-                                        /> */}
+                                        />
                                         <CheckBox
                                             checked={formik.values.respCodeCheck}
                                             onChange={(e) =>
@@ -234,36 +234,32 @@ function SearchFilter({ onSearch }) {
                 <Box sx={{ flex: 1 }}>
                     <Typography>{`검색 조건`}</Typography>
                 </Box>
-                <Box sx={{ flex: 8 }}>
+                <Box sx={{ flex: 7 }}>
                     <Table sx={style.tableBox}>
                         <TableHead>
                             <TableRow>
-                                <TableCell style={{ width: '7%' }}>{`서비스 코드`}</TableCell>
-                                <TableCell style={{ width: '10%' }}>
+                                <TableCell style={{ width: '10%' }}>{`서비스 코드`}</TableCell>
+                                <TableCell style={{ width: '15%' }}>
                                     <TextInput name="service" formik={formik} />
                                 </TableCell>
-                                <TableCell style={{ width: '7%' }}>{`App ID`}</TableCell>
-                                <TableCell style={{ width: '10%' }}>
+                                <TableCell style={{ width: '10%' }}>{`App ID`}</TableCell>
+                                <TableCell style={{ width: '15%' }}>
                                     <TextInput name="appId" formik={formik} />
                                 </TableCell>
-                                <TableCell style={{ width: '7%' }}>{`단말 모델`}</TableCell>
-                                <TableCell style={{ width: '10%' }}>
+                                <TableCell style={{ width: '10%' }}>{`단말 모델`}</TableCell>
+                                <TableCell style={{ width: '15%' }}>
                                     <TextInput name="model" formik={formik} />
                                 </TableCell>
-                                <TableCell style={{ width: '7%' }}>{`OP Type`}</TableCell>
-                                <TableCell style={{ width: '10%' }}>
+                                <TableCell style={{ width: '10%' }}>{`OP Type`}</TableCell>
+                                <TableCell style={{ width: '15%' }}>
                                     <TextInput name="opType" formik={formik} />
                                 </TableCell>
-                                <TableCell style={{ width: '7%' }}>{`응답 코드`}</TableCell>
-                                <TableCell style={{ width: '10%' }}>
-                                    <TextInput name="respCode" formik={formik} />
-                                </TableCell>
                             </TableRow>
-                            {/* <TableRow>
-                                <TableCell style={{ width: '10%' }}>{`Pos INIT`}</TableCell>
+                            <TableRow>
+                                {/* <TableCell style={{ width: '10%' }}>{`Pos INIT`}</TableCell>
                                 <TableCell style={{ width: '15%' }}>
                                     <TextInput name="posInit" formik={formik} />
-                                </TableCell>
+                                </TableCell> */}
                                 <TableCell style={{ width: '10%' }}>{`Plane`}</TableCell>
                                 <TableCell style={{ width: '15%' }}>
                                     <Select
@@ -298,7 +294,7 @@ function SearchFilter({ onSearch }) {
                                 <TableCell style={{ width: '15%' }}>
                                     <TextInput name="respCode" formik={formik} />
                                 </TableCell>
-                            </TableRow> */}
+                            </TableRow>
                         </TableHead>
                     </Table>
                 </Box>

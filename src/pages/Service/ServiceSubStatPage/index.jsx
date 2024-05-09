@@ -1,3 +1,3 @@
-import ServiceSubStat from './pages/ServiceSubStat'
+import ServiceSubStatPage from './pages/ServiceSubStat'
 
-export { ServiceSubStat }
+export { ServiceSubStatPage }

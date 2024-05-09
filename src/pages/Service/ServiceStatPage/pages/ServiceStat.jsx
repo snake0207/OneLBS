@@ -32,7 +32,7 @@ const filterColumns = (params) => {
     for (let obj of _displayColumns) {
         if (obj.view !== false) booleanCnt++
     }
-    console.log('booleanCnt : ', booleanCnt)
+
     if (booleanCnt > 6) return _displayColumns.filter((item) => item.view)
 
     for (let obj of _displayColumns) obj.view = true

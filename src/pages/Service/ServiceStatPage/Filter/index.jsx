@@ -34,7 +34,7 @@ function SearchFilter({ onSearch }) {
             appIdCheck: false,
             modelCheck: false,
             opTypeCheck: false,
-            posInitCheck: false,
+            // posInitCheck: false,
             planeCheck: false,
             posMethodCheck: false,
             respCodeCheck: false,
@@ -42,7 +42,7 @@ function SearchFilter({ onSearch }) {
             appId: '',
             model: '',
             opType: '',
-            posInit: '',
+            // posInit: '',
             plane: 'N',
             posMethod: 'N',
             respCode: '',
@@ -234,7 +234,7 @@ function SearchFilter({ onSearch }) {
                 <Box sx={{ flex: 1 }}>
                     <Typography>{`검색 조건`}</Typography>
                 </Box>
-                <Box sx={{ flex: 8 }}>
+                <Box sx={{ flex: 5 }}>
                     <Table sx={style.tableBox}>
                         <TableHead>
                             <TableRow>
@@ -259,56 +259,16 @@ function SearchFilter({ onSearch }) {
                                     <TextInput name="respCode" formik={formik} />
                                 </TableCell>
                             </TableRow>
-                            {/* <TableRow>
-                                <TableCell style={{ width: '10%' }}>{`Pos INIT`}</TableCell>
-                                <TableCell style={{ width: '15%' }}>
-                                    <TextInput name="posInit" formik={formik} />
-                                </TableCell>
-                                <TableCell style={{ width: '10%' }}>{`Plane`}</TableCell>
-                                <TableCell style={{ width: '15%' }}>
-                                    <Select
-                                        name="plane"
-                                        items={unionGetPlanes()}
-                                        formik={formik}
-                                        style={{
-                                            height: '40px',
-                                            width: '100%',
-                                            fontSize: 14,
-                                            backgroundColor: 'form.main',
-                                            borderRadius: '4px',
-                                        }}
-                                    />
-                                </TableCell>
-                                <TableCell style={{ width: '10%' }}>{`측위 방식`}</TableCell>
-                                <TableCell style={{ width: '15%' }}>
-                                    <Select
-                                        name="posMethod"
-                                        items={unionGetStatPosMethods()}
-                                        formik={formik}
-                                        style={{
-                                            height: '40px',
-                                            width: '100%',
-                                            fontSize: 14,
-                                            backgroundColor: 'form.main',
-                                            borderRadius: '4px',
-                                        }}
-                                    />
-                                </TableCell>
-                                <TableCell style={{ width: '10%' }}>{`응답 코드`}</TableCell>
-                                <TableCell style={{ width: '15%' }}>
-                                    <TextInput name="respCode" formik={formik} />
-                                </TableCell>
-                            </TableRow> */}
                         </TableHead>
                     </Table>
                 </Box>
                 <Box
                     sx={{
                         flex: 1,
-                        height: '100px',
+                        // height: '100px',
                         display: 'flex',
                         alignItems: 'flex-end',
-                        pb: 0.5,
+                        // pb: 0.5,
                     }}
                 >
                     <MuiSubButton

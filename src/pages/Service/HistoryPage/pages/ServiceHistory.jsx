@@ -20,7 +20,6 @@ const ServiceHistory = () => {
         latitude: 37.3998912,
         title: 'KT 분당',
     }
-    const [rowLocation, setRowLocation] = useState({ ...init_pos })
     const [locations, setLocations] = useState([init_pos])
     const [queryParams, setQueryParams] = useState({
         page: 1,
@@ -41,10 +40,7 @@ const ServiceHistory = () => {
 
     // row 클릭한 경우 상세 페이지 노출
     const handleSelectRow = ({ row }) => {
-        console.log('Click row : ', row)
-        // row.longitude &&
-        //     row.latitude &&
-        //     setRowLocation({ longitude: row.longitude, latitude: row.latitude, title: row.trId })
+        // console.log('Click row : ', row)
         navigate('/service-status/history/detail', { state: { row } })
     }
 
@@ -78,16 +74,17 @@ const ServiceHistory = () => {
                     .filter((row) => row.latitude && row.longitude)
                     .map((item) => ({
                         id: item.id,
+                        trId: item.trId,
                         latitude: item.latitude,
                         longitude: item.longitude,
                         title: item.resDate,
                     }))
-                setLocations([...nArrs, init_pos])
+                setLocations(nArrs)
             }
         }
     }, [apiResult, queryParams])
 
-    console.log('locations : ', locations)
+    // console.log('locations : ', locations)
 
     return (
         <Box>

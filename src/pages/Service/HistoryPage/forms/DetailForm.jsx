@@ -18,7 +18,7 @@ import TitleBar from '#/components/common/menu/TitleBar'
 
 import style from './style.module'
 import { useGetServiceHistoryDetail } from '#/hooks/queries/service'
-import { OllehMapIcons } from '#/components/common/map/ollehMap'
+import { OllehMap } from '#/components/common/map/ollehMap'
 import { getBtsTypeListLabel, getCenterLabel } from '#/common/libs/service'
 
 import CellIcon from '#/components/common/map/ollehMap/img/cell.png'
@@ -49,13 +49,12 @@ const DetailForm = () => {
     } = useLocation()
     const navigate = useNavigate()
     const [bounceRow, setBounceRow] = useState({})
-    const [fetchData, setFetchData] = useState({
-        posList: { totalCount: 0, lists: [] },
-        btsList: { totalCount: 0, lists: [] },
-        wifiList: { totalCount: 0, lists: [] },
-        transList: { totalCount: 0, lists: [] },
-    })
-    const [locations, setLocations] = useState([])
+    const init_pos = {
+        longitude: 127.1279874,
+        latitude: 37.3998912,
+        title: 'KT 분당',
+    }
+    const [locations, setLocations] = useState([init_pos])
     const [isQueryState, setIsQueryState] = useState(true)
     const { data: apiResult } = useGetServiceHistoryDetail(
         { trId: row?.trId },
@@ -64,17 +63,13 @@ const DetailForm = () => {
         },
     )
     const filterArray = (sign = null, array) => {
+        // 'P':측위목록, 'B':기지국목록, 'W':wifi목록
         return array
             .filter((row) => row.latitude && row.longitude)
             .map((item) => ({
                 ...item,
                 id: `${sign}_${item.id}`,
-                title:
-                    sign === 'P'
-                        ? `${item.latitude}, ${item.longitude}`
-                        : sign === 'B'
-                          ? item.cellid
-                          : item.mac,
+                title: sign === 'P' ? item.algo : sign === 'B' ? item.cellid : item.mac,
             }))
     }
 
@@ -87,15 +82,13 @@ const DetailForm = () => {
                     ...filterArray('B', apiResult?.data?.btsList.lists),
                     ...filterArray('W', apiResult?.data?.wifiList.lists),
                 ]
-                setFetchData({ ...apiResult?.data })
                 setLocations(setLists)
+                setIsQueryState(false)
             }
-            setIsQueryState(false)
         }
     }, [apiResult])
 
-    console.log('Detail fetchData : ', fetchData)
-    console.log('Detail locations : ', locations)
+    locations.length > 0 && console.log('Detail locations : ', locations)
 
     return (
         <Box>
@@ -171,16 +164,17 @@ const DetailForm = () => {
                                             </TableRow>
                                         </TableHead>
                                         <TableBody>
-                                            {fetchData?.posList?.totalCount ? (
-                                                fetchData.posList.lists.map((item, idx) => (
+                                            {apiResult?.data?.posList?.totalCount ? (
+                                                apiResult?.data?.posList?.lists.map((item, idx) => (
                                                     <TableRow
                                                         key={idx}
-                                                        onClick={() =>
-                                                            setBounceRow({
-                                                                ...item,
-                                                                id: `P_${item.id}`,
-                                                            })
-                                                        }
+                                                        onClick={() => {
+                                                            item.longitude > 0
+                                                                ? setBounceRow({
+                                                                      id: `P_${item.id}`,
+                                                                  })
+                                                                : null
+                                                        }}
                                                     >
                                                         <TableCell>
                                                             {item.posMethod === 'CELL' && (
@@ -240,16 +234,17 @@ const DetailForm = () => {
                                             </TableRow>
                                         </TableHead>
                                         <TableBody>
-                                            {fetchData?.btsList?.totalCount ? (
-                                                fetchData.btsList.lists.map((item, idx) => (
+                                            {apiResult?.data?.btsList?.totalCount ? (
+                                                apiResult?.data?.btsList.lists.map((item, idx) => (
                                                     <TableRow
                                                         key={idx}
-                                                        onClick={() =>
-                                                            setBounceRow({
-                                                                ...item,
-                                                                id: `B_${item.id}`,
-                                                            })
-                                                        }
+                                                        onClick={() => {
+                                                            item.longitude > 0
+                                                                ? setBounceRow({
+                                                                      id: `B_${item.id}`,
+                                                                  })
+                                                                : null
+                                                        }}
                                                     >
                                                         <TableCell>
                                                             {getBtsTypeListLabel[item.network] !==
@@ -297,16 +292,17 @@ const DetailForm = () => {
                                         </TableRow>
                                     </TableHead>
                                     <TableBody>
-                                        {fetchData?.wifiList?.totalCount ? (
-                                            fetchData.wifiList.lists.map((item, idx) => (
+                                        {apiResult?.data?.wifiList?.totalCount ? (
+                                            apiResult?.data?.wifiList?.lists.map((item, idx) => (
                                                 <TableRow
                                                     key={idx}
-                                                    onClick={() =>
-                                                        setBounceRow({
-                                                            ...item,
-                                                            id: `W_${item.id}`,
-                                                        })
-                                                    }
+                                                    onClick={() => {
+                                                        item.longitude > 0
+                                                            ? setBounceRow({
+                                                                  id: `W_${item.id}`,
+                                                              })
+                                                            : null
+                                                    }}
                                                 >
                                                     <TableCell>{item.mac}</TableCell>
                                                     <TableCell>{item.ssid}</TableCell>
@@ -348,8 +344,8 @@ const DetailForm = () => {
                                         </TableRow>
                                     </TableHead>
                                     <TableBody>
-                                        {fetchData?.transList?.totalCount ? (
-                                            fetchData.transList.lists.map((item, idx) => (
+                                        {apiResult?.data?.transList?.totalCount ? (
+                                            apiResult?.data?.transList?.lists.map((item, idx) => (
                                                 <TableRow key={idx} style={{ width: '100%' }}>
                                                     <TableCell>{item.targetSystem}</TableCell>
                                                     <TableCell>{item.posMethod}</TableCell>
@@ -371,8 +367,8 @@ const DetailForm = () => {
                         </Box>
                     </Box>
                     <Box sx={{ width: '48%' }}>
-                        {!isQueryState && locations.length > 0 && (
-                            <OllehMapIcons locations={[...locations]} bounceMarker={bounceRow} />
+                        {!isQueryState && (
+                            <OllehMap locations={[...locations]} bounceMarker={bounceRow} />
                         )}
                     </Box>
                 </Box>

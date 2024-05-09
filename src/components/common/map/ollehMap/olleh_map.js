@@ -1,4 +1,4 @@
-import { HexGrid } from '#/components/common/map/ollehMap/js/jsHexGrid.js'
+import { HexGrid } from '#/components/common/map/ollehMap/jsHexGrid.js'
 
 import PositionIcon from '#/components/common/map/ollehMap/img/position_red.png'
 import BtsIcon from '#/components/common/map/ollehMap/img/bts.png'
@@ -45,17 +45,20 @@ const drawMarker = (_mapInstance, locations, bounceMarker, onMarkerClick) => {
 }
 
 const getIcon = (_location) => {
-    if (_location.hasOwnProperty('id') && typeof _location.id === String) {
-        if (_location.id.includes('B_')) return BtsIcon
-        else if (_location.id.includes('W_')) {
-            return _location.band === 24 ? WifiGreenIcon : WifiPuppleIcon
-        } else if (_location.id.includes('P_')) {
-            if (_location.posMethod === 'CELL') return CellIcon
-            else if (_location.posMethod === 'WIFI') return WiFiIcon
-            else return GnssIcon
-        } else {
-            return PositionIcon
+    if (_location.hasOwnProperty('id')) {
+        if (typeof _location.id === 'string') {
+            if (_location.id.includes('B_')) return BtsIcon
+            else if (_location.id.includes('W_')) {
+                return _location.band === 24 ? WifiGreenIcon : WifiPuppleIcon
+            } else if (_location.id.includes('P_')) {
+                if (_location.posMethod === 'CELL') return CellIcon
+                else if (_location.posMethod === 'WIFI') return WiFiIcon
+                else return GnssIcon
+            } else {
+                return PositionIcon
+            }
         }
+        return PositionIcon
     } else {
         return PositionIcon
     }

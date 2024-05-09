@@ -21,7 +21,12 @@ const initMap = (_div, location, _zoom) => {
     return new olleh.maps.Map(_div, mapOpts)
 }
 
-const setCenter = (location) => new olleh.maps.LatLng(location.latitude, location.longitude)
+const initCenter = (location) => new olleh.maps.LatLng(location.latitude, location.longitude)
+
+const setCenter = (_mapInstance, _center) => {
+    if (!_mapInstance || !_center) return
+    _mapInstance.setCenter(_center)
+}
 
 const getCenter = (_mapInstance) => _mapInstance.getCenter()
 
@@ -30,17 +35,17 @@ const drawMarker = (_mapInstance, locations, bounceMarker, onMarkerClick) => {
     locArrs.map((loc) => {
         const _marker =
             loc.id && loc.id === bounceMarker.id ? setBounceMarker(loc) : setIconMarker(loc)
-        _marker.setMap(_mapInstance)
         if (typeof onMarkerClick === 'function') {
             _marker.onEvent('click', () => {
                 onMarkerClick(loc.id)
             })
         }
+        _marker.setMap(_mapInstance)
     })
 }
 
 const getIcon = (_location) => {
-    if (_location.hasOwnProperty('id')) {
+    if (_location.hasOwnProperty('id') && typeof _location.id === String) {
         if (_location.id.includes('B_')) return BtsIcon
         else if (_location.id.includes('W_')) {
             return _location.band === 24 ? WifiGreenIcon : WifiPuppleIcon
@@ -115,4 +120,12 @@ const addHexGrid25Layer = (_map, paths, rssi) => {
     return hexGrid25Layer
 }
 
-export default { initMap, setCenter, getCenter, drawMarker, setBounceMarker, drawHexGrid }
+export default {
+    initMap,
+    initCenter,
+    setCenter,
+    getCenter,
+    drawMarker,
+    setBounceMarker,
+    drawHexGrid,
+}

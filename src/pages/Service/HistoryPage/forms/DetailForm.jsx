@@ -18,8 +18,8 @@ import TitleBar from '#/components/common/menu/TitleBar'
 
 import style from './style.module'
 import { useGetServiceHistoryDetail } from '#/hooks/queries/service'
-import { OllehMap } from '#/components/common/map/ollehMap'
-import { getBtsTypeListLabel } from '#/common/libs/service'
+import { OllehMapIcons } from '#/components/common/map/ollehMap'
+import { getBtsTypeListLabel, getCenterLabel } from '#/common/libs/service'
 
 import CellIcon from '#/components/common/map/ollehMap/img/cell.png'
 import WiFiIcon from '#/components/common/map/ollehMap/img/wifi.png'
@@ -56,10 +56,11 @@ const DetailForm = () => {
         transList: { totalCount: 0, lists: [] },
     })
     const [locations, setLocations] = useState([])
+    const [isQueryState, setIsQueryState] = useState(true)
     const { data: apiResult } = useGetServiceHistoryDetail(
         { trId: row?.trId },
         {
-            enabled: true,
+            enabled: isQueryState,
         },
     )
     const filterArray = (sign = null, array) => {
@@ -68,12 +69,17 @@ const DetailForm = () => {
             .map((item) => ({
                 ...item,
                 id: `${sign}_${item.id}`,
-                title: `${item.latitude}, ${item.longitude}`,
+                title:
+                    sign === 'P'
+                        ? `${item.latitude}, ${item.longitude}`
+                        : sign === 'B'
+                          ? item.cellid
+                          : item.mac,
             }))
     }
 
     useEffect(() => {
-        if (apiResult) {
+        if (isQueryState && apiResult) {
             console.log('Detail apiResult : ', apiResult)
             if (apiResult?.code === '0000') {
                 const setLists = [
@@ -84,6 +90,7 @@ const DetailForm = () => {
                 setFetchData({ ...apiResult?.data })
                 setLocations(setLists)
             }
+            setIsQueryState(false)
         }
     }, [apiResult])
 
@@ -110,10 +117,10 @@ const DetailForm = () => {
                             <TableCell sx={{ width: '8%' }}>{`측위방식`}</TableCell>
                             <TableCell sx={{ width: '10%' }}>{`단말모델`}</TableCell>
                             <TableCell sx={{ width: '6%' }}>{`결과`}</TableCell>
-                            <TableCell sx={{ width: '8%' }}>{`응답시간`}</TableCell>
+                            <TableCell sx={{ width: '8%' }}>{`응답(초)`}</TableCell>
                         </TableRow>
                         <TableRow>
-                            <TableCell>{row?.center}</TableCell>
+                            <TableCell>{getCenterLabel[row?.center].label}</TableCell>
                             <TableCell>{row?.reqDate}</TableCell>
                             <TableCell>{row?.resDate}</TableCell>
                             <TableCell>{row?.serviceName}</TableCell>
@@ -146,17 +153,15 @@ const DetailForm = () => {
                             gap: 4,
                         }}
                     >
-                        <Stack direction="row" spacing={2} sx={{ width: '100%' }}>
+                        <Stack direction="row" spacing={1} sx={{ width: '100%' }}>
                             <Box sx={{ width: '50%' }}>
                                 <TitleArea title={`측위 목록`} />
-                                <TableContainer component={Box} style={{ maxHeight: 200 }}>
+                                <TableContainer component={Box} style={{ height: 200 }}>
                                     <Table sx={style.table_base}>
                                         <TableHead>
                                             {/* row - 1 */}
                                             <TableRow style={{ backgroundColor: '#009ACC' }}>
-                                                <TableCell
-                                                    style={{ width: '20%' }}
-                                                >{`마커`}</TableCell>
+                                                <TableCell style={{ width: '20%' }}>{``}</TableCell>
                                                 <TableCell
                                                     style={{ width: '40%' }}
                                                 >{`측위방식`}</TableCell>
@@ -218,7 +223,7 @@ const DetailForm = () => {
                             </Box>
                             <Box sx={{ width: '50%' }}>
                                 <TitleArea title={`기지국 목록`} />
-                                <TableContainer component={Box} style={{ maxHeight: 200 }}>
+                                <TableContainer component={Box} style={{ height: 200 }}>
                                     <Table sx={style.table_base}>
                                         <TableHead>
                                             {/* row - 1 */}
@@ -337,7 +342,9 @@ const DetailForm = () => {
                                                 style={{ width: '20%' }}
                                             >{`측위방식`}</TableCell>
                                             <TableCell style={{ width: '15%' }}>{`응답`}</TableCell>
-                                            <TableCell style={{ width: '45%' }}>{`메시지 전문`}</TableCell>
+                                            <TableCell
+                                                style={{ width: '45%' }}
+                                            >{`메시지 전문`}</TableCell>
                                         </TableRow>
                                     </TableHead>
                                     <TableBody>
@@ -363,9 +370,9 @@ const DetailForm = () => {
                             </TableContainer>
                         </Box>
                     </Box>
-                    <Box sx={{ width: '45%' }}>
-                        {locations.length > 0 && (
-                            <OllehMap locations={[...locations]} bounceMarker={bounceRow} />
+                    <Box sx={{ width: '48%' }}>
+                        {!isQueryState && locations.length > 0 && (
+                            <OllehMapIcons locations={[...locations]} bounceMarker={bounceRow} />
                         )}
                     </Box>
                 </Box>

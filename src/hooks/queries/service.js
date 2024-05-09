@@ -4,7 +4,7 @@ import { useMutation, useQuery } from '@tanstack/react-query'
 
 // 서비스 이력조회
 export const useGetServiceHistory = (queryParams = {}, options) => {
-    console.log('useGetServiceHistory : ', queryParams)
+    // console.log('useGetServiceHistory : ', queryParams)
     const { data } = useQuery({
         queryKey: ['get-service-history', queryParams],
         queryFn: () => service.getServiceHistory(queryParams),
@@ -14,7 +14,7 @@ export const useGetServiceHistory = (queryParams = {}, options) => {
 }
 // 서비스 이력조회 상세
 export const useGetServiceHistoryDetail = (queryParams = {}, options) => {
-    console.log('useGetServiceHistoryDetail : ', queryParams)
+    // console.log('useGetServiceHistoryDetail : ', queryParams)
     const { data } = useQuery({
         queryKey: ['get-service-history-detail', queryParams],
         queryFn: () => service.getServiceHistoryDetail(queryParams),

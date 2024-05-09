@@ -21,7 +21,7 @@ const ServiceHistory = () => {
         title: 'KT 분당',
     }
     const [rowLocation, setRowLocation] = useState({ ...init_pos })
-    const [locations, setLocations] = useState([])
+    const [locations, setLocations] = useState([init_pos])
     const [queryParams, setQueryParams] = useState({
         page: 1,
         limit: parseInt(import.meta.env.VITE_LIST_PAGE_LIMIT), // 1회 요청에 받을수 있는 데이터 수
@@ -42,10 +42,10 @@ const ServiceHistory = () => {
     // row 클릭한 경우 상세 페이지 노출
     const handleSelectRow = ({ row }) => {
         console.log('Click row : ', row)
-        row.longitude &&
-            row.latitude &&
-            setRowLocation({ longitude: row.longitude, latitude: row.latitude, title: row.trId })
-        // navigate('/service-status/history/detail', { state: { row } })
+        // row.longitude &&
+        //     row.latitude &&
+        //     setRowLocation({ longitude: row.longitude, latitude: row.latitude, title: row.trId })
+        navigate('/service-status/history/detail', { state: { row } })
     }
 
     // 지도 맵에서 특정 마커를 클릭한 경우 상세 페이지로 연결
@@ -74,22 +74,20 @@ const ServiceHistory = () => {
             if (apiResult?.code === '0000') {
                 const { totalCount, lists } = apiResult?.data
                 setFetchData({ count: totalCount, lists: [...fetchData.lists, ...lists] })
-                const nArrs = lists.filter(
-                    (item) =>
-                        item.latitude &&
-                        item.longitude && {
-                            id: item.id,
-                            latitude: item.latitude,
-                            longitude: item.longitude,
-                            title: item.posMethod,
-                        },
-                )
-                setLocations(nArrs)
+                const nArrs = lists
+                    .filter((row) => row.latitude && row.longitude)
+                    .map((item) => ({
+                        id: item.id,
+                        latitude: item.latitude,
+                        longitude: item.longitude,
+                        title: item.resDate,
+                    }))
+                setLocations([...nArrs, init_pos])
             }
         }
     }, [apiResult, queryParams])
 
-    console.log('fetchData : ', locations)
+    console.log('locations : ', locations)
 
     return (
         <Box>
@@ -122,10 +120,11 @@ const ServiceHistory = () => {
                 />
 
                 {/* 지도 영역 */}
+
                 <Box sx={{ mt: 3, width: '100%', height: '400px' }}>
                     {!isQueryState && (
                         <OllehMap
-                            locations={[rowLocation]}
+                            locations={[...locations]}
                             onMarkerClick={(id) => handleClickMapMarker(id)}
                         />
                     )}

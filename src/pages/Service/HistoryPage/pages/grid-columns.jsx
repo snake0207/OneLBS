@@ -40,14 +40,14 @@ export const columns = [
             return <Typography>{params.row.serviceName}</Typography>
         },
     },
-    {
-        field: 'serviceCode',
-        headerName: '서비스코드',
-        flex: 1.2,
-        renderCell: (params) => {
-            return <Typography>{params.row.serviceCode}</Typography>
-        },
-    },
+    // {
+    //     field: 'serviceCode',
+    //     headerName: '서비스코드',
+    //     flex: 1.2,
+    //     renderCell: (params) => {
+    //         return <Typography>{params.row.serviceCode}</Typography>
+    //     },
+    // },
     {
         field: 'opType',
         headerName: 'OP Type',
@@ -86,14 +86,14 @@ export const columns = [
             )
         },
     },
-    {
-        field: 'model',
-        headerName: '단말 모델',
-        flex: 1,
-        renderCell: (params) => {
-            return <Typography>{params.row.model}</Typography>
-        },
-    },
+    // {
+    //     field: 'model',
+    //     headerName: '단말 모델',
+    //     flex: 1,
+    //     renderCell: (params) => {
+    //         return <Typography>{params.row.model}</Typography>
+    //     },
+    // },
     {
         field: 'result',
         headerName: '결과',

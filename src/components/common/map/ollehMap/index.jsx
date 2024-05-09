@@ -1,3 +1,4 @@
-import OllehMap from './OllehMap';
+import OllehMap from './OllehMap'
+import OllehMapIcons from './OllehMapIcons'
 
-export { OllehMap }
+export { OllehMap, OllehMapIcons }

@@ -48,12 +48,12 @@ const DetailForm = () => {
         state: { row },
     } = useLocation()
     const navigate = useNavigate()
-    const [bounceRow, setBounceRow] = useState({})
     const init_pos = {
         longitude: 127.1279874,
         latitude: 37.3998912,
         title: 'KT 분당',
     }
+    const [bounceRow, setBounceRow] = useState({})
     const [locations, setLocations] = useState([init_pos])
     const [isQueryState, setIsQueryState] = useState(true)
     const { data: apiResult } = useGetServiceHistoryDetail(
@@ -86,7 +86,7 @@ const DetailForm = () => {
                 setIsQueryState(false)
             }
         }
-    }, [apiResult])
+    }, [apiResult, locations])
 
     locations.length > 0 && console.log('Detail locations : ', locations)
 
@@ -367,7 +367,7 @@ const DetailForm = () => {
                         </Box>
                     </Box>
                     <Box sx={{ width: '48%' }}>
-                        {!isQueryState && (
+                        {!isQueryState && locations.length > 0 && (
                             <OllehMap locations={[...locations]} bounceMarker={bounceRow} />
                         )}
                     </Box>

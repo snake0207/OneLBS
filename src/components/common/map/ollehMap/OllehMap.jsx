@@ -28,22 +28,41 @@ const OllehMap = ({
     console.log(locations, _zoom)
     useEffect(() => {
         const _center = ollehMap.initCenter(Array.isArray(locations) ? locations[0] : locations)
+
         if (mapInstance === null) {
             console.log(`mapInstance is create...`)
             const instance = ollehMap.initMap('map_div', _center, _zoom)
             setMapInstance(instance)
         }
-        ollehMap.setCenter(mapInstance, _center)
-        ollehMap.drawMarker(mapInstance, locations, bounceMarker, onMarkerClick)
-        // 전파맵 그리기
-        Array.isArray(gridX) &&
-            gridX.length > 0 &&
-            Array.isArray(gridY) &&
-            gridY.length > 0 &&
-            Array.isArray(rssi) &&
-            rssi.length > 0 &&
-            ollehMap.drawHexGrid(mapInstance, gridX, gridY, rssi)
-    }, [onMarkerClick, bounceMarker, locations])
+
+        return () => {
+            console.log('olleh map unmount')
+            setMapInstance(null)
+        }
+    }, [])
+
+    useEffect(() => {
+        const _center = ollehMap.initCenter(Array.isArray(locations) ? locations[0] : locations)
+
+        // if (mapInstance === null) {
+        //     console.log(`mapInstance is create...`)
+        //     const instance = ollehMap.initMap('map_div', _center, _zoom)
+        //     setMapInstance(instance)
+        // }
+        if (mapInstance) {
+            ollehMap.setCenter(mapInstance, _center)
+
+            ollehMap.drawMarker(mapInstance, locations, bounceMarker, onMarkerClick)
+            // 전파맵 그리기
+            Array.isArray(gridX) &&
+                gridX.length > 0 &&
+                Array.isArray(gridY) &&
+                gridY.length > 0 &&
+                Array.isArray(rssi) &&
+                rssi.length > 0 &&
+                ollehMap.drawHexGrid(mapInstance, gridX, gridY, rssi)
+        }
+    }, [onMarkerClick, bounceMarker, locations, mapInstance])
     // onMarkerClick, bounceMarker
 
     return (

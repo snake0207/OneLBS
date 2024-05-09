@@ -26,7 +26,7 @@ const ServiceHistory = () => {
         limit: parseInt(import.meta.env.VITE_LIST_PAGE_LIMIT), // 1회 요청에 받을수 있는 데이터 수
     })
     const { data: apiResult } = useGetServiceHistory(queryParams, {
-        enabled: isQueryState && isSearchClick,
+        enabled: isQueryState,
     })
 
     // 검색 버튼 누른 경우
@@ -35,7 +35,7 @@ const ServiceHistory = () => {
         setLocations([])
         setQueryParams({ ...queryParams, ...values, page: 1 })
         setIsQueryState(true)
-        setIsSearchClick(true)
+        // setIsSearchClick(true)
     }
 
     // row 클릭한 경우 상세 페이지 노출
@@ -59,14 +59,14 @@ const ServiceHistory = () => {
         if (currPage > 0 && rowCount >= fetchData.lists.length) {
             setQueryParams({ ...queryParams, page: queryParams.page + 1 })
             setIsQueryState(true)
-            setIsSearchClick(true)
+            // setIsSearchClick(true)
         }
     }
 
     useEffect(() => {
         if (isQueryState && apiResult) {
             setIsQueryState(false)
-            setIsSearchClick(false)
+            // setIsSearchClick(false)
             if (apiResult?.code === '0000') {
                 const { totalCount, lists } = apiResult?.data
                 setFetchData({ count: totalCount, lists: [...fetchData.lists, ...lists] })

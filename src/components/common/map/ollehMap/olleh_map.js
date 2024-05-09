@@ -31,16 +31,17 @@ const setCenter = (_mapInstance, _center) => {
 const getCenter = (_mapInstance) => _mapInstance.getCenter()
 
 const drawMarker = (_mapInstance, locations, bounceMarker, onMarkerClick) => {
+    console.log('drawMarker mapInstance', _mapInstance, locations, bounceMarker)
     const locArrs = locations[0].latitude > 0 ? locations : [initPosKT]
     locArrs.map((loc) => {
         const _marker =
-            loc.id && loc.id === bounceMarker.id ? setBounceMarker(loc) : setIconMarker(loc)
+            loc.id && loc.id === bounceMarker?.id ? setBounceMarker(loc) : setIconMarker(loc)
+        _marker.setMap(_mapInstance)
         if (typeof onMarkerClick === 'function') {
             _marker.onEvent('click', () => {
                 onMarkerClick(loc.id)
             })
         }
-        _marker.setMap(_mapInstance)
     })
 }
 
@@ -74,7 +75,6 @@ const setIconMarker = (location) => {
         },
         title: location.title || location.address,
     })
-    // console.log(_marker)
     // _marker.setIcon(getIcon(location))
     return _marker
 }

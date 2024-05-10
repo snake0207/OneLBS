@@ -33,8 +33,9 @@ const drawMarker = (_mapInstance, locations, bounceMarker, onMarkerClick) => {
     // console.log('drawMarker mapInstance', _mapInstance, locations, bounceMarker)
     locations.map((loc) => {
         const _marker = setIconMarker(loc)
-
-        _marker.setAnimation(loc.id === bounceMarker?.id ? olleh.maps.overlay.Marker.BOUNCE : null)
+        if (loc.id && loc.id === bounceMarker?.id) {
+            _marker.setAnimation(olleh.maps.overlay.Marker.BOUNCE)
+        }
         _marker.setMap(_mapInstance)
 
         if (typeof onMarkerClick === 'function') {

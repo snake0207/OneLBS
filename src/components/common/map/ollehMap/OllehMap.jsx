@@ -65,7 +65,7 @@ const OllehMap = ({
 
             ollehMap.drawMarker(mapInstance, locations, bounceMarker, onMarkerClick)
             // table click row에 대한 해당 아이콘 위치를 지도 중심으로 이동
-            if (bounceMarker.latitude && bounceMarker.longitude) {
+            if (bounceMarker.latitude > 0 && bounceMarker.longitude > 0) {
                 ollehMap.setCenter(
                     mapInstance,
                     ollehMap.initCenter(bounceMarker.latitude, bounceMarker.longitude),

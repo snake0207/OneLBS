@@ -21,6 +21,7 @@ import { SyncHistoryPage } from '#/pages/Facility/SyncHistoryPage'
 import { BtsInfoMapPage } from '#/pages/Facility/BtsInfoPage'
 import { WifiInfoMapPage } from '#/pages/Facility/WiFiInfoPage'
 import { EngineEditPage } from '#/pages/System/EnginePage'
+import { ServiceSubStatPage } from '#/pages/Service/ServiceSubStatPage';
 
 const Routes = () => {
     return useRoutes([
@@ -38,6 +39,7 @@ const Routes = () => {
                             element: <ServiceHistoryDetailPage />,
                         },
                         { path: '/service-status/service', element: <ServiceStatPage /> },
+                        { path: '/service-status/service-sub', element: <ServiceSubStatPage /> },
                         { path: '/service-status/crowd', element: <CrowdStatPage /> },
                         { path: '/service-status/trigger', element: <TriggerListPage /> },
                         // 측위기반 정보 관리

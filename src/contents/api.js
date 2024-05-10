@@ -45,6 +45,7 @@ export const API_PATH = {
         history_detail: '/api/services/history/detail',
         history: '/api/services/history/list',
         service_stat: '/api/services/stat/list',
+        service_sub_stat: '/api/services/sub/stat/list',
         crowd_stat: '/api/services/crowd/list',
         trigger: '/api/services/trigger/list',
     },

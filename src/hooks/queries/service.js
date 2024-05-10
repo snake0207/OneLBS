@@ -32,6 +32,16 @@ export const useGetServiceStat = (queryParams = {}, options) => {
     })
     return { data: data?.data }
 }
+// 서비스 세부 통계
+export const useGetServiceSubStat = (queryParams = {}, options) => {
+    console.log('useGetServiceSubStat : ', queryParams)
+    const { data } = useQuery({
+        queryKey: ['get-service-sub-stat', queryParams],
+        queryFn: () => service.getServiceSubStat(queryParams),
+        ...options,
+    })
+    return { data: data?.data }
+}
 // 크라우드소싱 통계
 export const useGetCrowdStat = (queryParams = {}, options) => {
     console.log('useGetCrowdStat : ', queryParams)

@@ -53,22 +53,22 @@ export const columns = [
     //         return <Typography>{params.row.posInit}</Typography>
     //     },
     // },
-    // {
-    //     field: 'plane',
-    //     headerName: 'Plane',
-    //     flex: 1,
-    //     renderCell: (params) => {
-    //         return <Typography>{params.row.plane}</Typography>
-    //     },
-    // },
-    // {
-    //     field: 'posMethod',
-    //     headerName: '측위 방식',
-    //     flex: 1,
-    //     renderCell: (params) => {
-    //         return <Typography>{params.row.posMethod}</Typography>
-    //     },
-    // },
+    {
+        field: 'plane',
+        headerName: 'Plane',
+        flex: 1,
+        renderCell: (params) => {
+            return <Typography>{params.row.plane}</Typography>
+        },
+    },
+    {
+        field: 'posMethod',
+        headerName: '측위 방식',
+        flex: 1,
+        renderCell: (params) => {
+            return <Typography>{params.row.posMethod}</Typography>
+        },
+    },
     {
         field: 'respCode',
         headerName: '응답코드',

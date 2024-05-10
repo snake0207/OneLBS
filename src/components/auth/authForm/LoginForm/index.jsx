@@ -31,6 +31,8 @@ const LoginForm = () => {
     const { resetUserStore } = useUserActions()
     const { setAccessToken } = useAuthActions()
     const { setUserTypeUserStore } = useUserActions()
+    const { setUserIdUserStore } = useUserActions()
+    const { setUserCropNameUserStore } = useUserActions()
     const storeUserType = useUserTypeState()
     const { mutate: submitMutate, isPending } = usePostLogin()
     const [apiResultLogin, setApiResultLogin] = useState({
@@ -77,6 +79,8 @@ const LoginForm = () => {
                             setApiResultLogin({ ...data })
                             setAccessToken(data?.data.accessToken)
                             setUserTypeUserStore(data?.data.userType)
+                            setUserIdUserStore(data?.data.userId)
+                            setUserCropNameUserStore(data?.data.cropName)
                             navigate('/')
                         }
                     },

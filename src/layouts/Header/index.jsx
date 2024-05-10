@@ -13,12 +13,20 @@ import MenuIconDark from '#/assets/menuIconDark.svg'
 import style from './style.module'
 import { Stack, Tooltip } from '@mui/material'
 import { useEffect } from 'react'
-import { useUserActions, useUserTypeState, useUserPermissionsState } from '#/store/useUserStore'
+import {
+    useUserActions,
+    useUserTypeState,
+    useUserPermissionsState,
+    useUserIdState,
+    useCropNameState,
+} from '#/store/useUserStore'
 
 function Header({ toggleDrawer }) {
     const navigate = useNavigate()
     const { setPermissionsUserStore } = useUserActions()
     const storeUserType = useUserTypeState()
+    const storeUserId = useUserIdState()
+    const storeCropName = useCropNameState()
     const storePermissions = useUserPermissionsState()
     const { mutate: logoutMutate, isPending: logoutPending } = usePostLogout()
     const { data: respPermissions } = useGetAskUserPermission({}, { enabled: true })
@@ -72,7 +80,7 @@ function Header({ toggleDrawer }) {
                                 color: `text.gray`,
                             }}
                         >
-                            {'acro 반갑습니다'}({storeUserType === 'A' ? `관리자` : `운영자`})
+                            {`${storeCropName}`} {`${storeUserId}`}({storeUserType === 'A' ? `관리자` : `운영자`})
                             {/* {data && data.userName} */}
                         </Box>
                         <Tooltip title={`로그아웃`}>

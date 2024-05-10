@@ -19,7 +19,11 @@ import TitleBar from '#/components/common/menu/TitleBar'
 import style from './style.module'
 import { useGetServiceHistoryDetail } from '#/hooks/queries/service'
 import { OllehMap } from '#/components/common/map/ollehMap'
-import { getBtsTypeListLabel, getCenterLabel } from '#/common/libs/service'
+import {
+    getBtsTypeListLabel,
+    getCenterLabel,
+    getPosMethodHistoryLabel,
+} from '#/common/libs/service'
 
 import CellIcon from '#/components/common/map/ollehMap/img/cell.png'
 import WiFiIcon from '#/components/common/map/ollehMap/img/wifi.png'
@@ -62,20 +66,21 @@ const DetailForm = () => {
             enabled: isQueryState,
         },
     )
-    const filterArray = (sign = null, array) => {
+    const filterArray = (sign, array) => {
         // 'P':측위목록, 'B':기지국목록, 'W':wifi목록
         return array
             .filter((row) => row.latitude && row.longitude)
             .map((item) => ({
                 ...item,
                 id: `${sign}_${item.id}`,
-                title: sign === 'P' ? item.algo : sign === 'B' ? item.cellid : item.mac,
+                title: sign === 'P' ? item.algo : sign === 'B' ? `${item.cellid}` : `${item.mac}`,
             }))
     }
 
     useEffect(() => {
         if (isQueryState && apiResult) {
             console.log('Detail apiResult : ', apiResult)
+            setIsQueryState(false)
             if (apiResult?.code === '0000') {
                 const setLists = [
                     ...filterArray('P', apiResult?.data?.posList.lists),
@@ -83,7 +88,6 @@ const DetailForm = () => {
                     ...filterArray('W', apiResult?.data?.wifiList.lists),
                 ]
                 setLocations(setLists)
-                setIsQueryState(false)
             }
         }
     }, [apiResult, locations])
@@ -120,7 +124,7 @@ const DetailForm = () => {
                             <TableCell>{row?.opType}</TableCell>
                             <TableCell>{row?.reqMdn}</TableCell>
                             <TableCell>{row?.targetMdn}</TableCell>
-                            <TableCell>{row?.posMethod}</TableCell>
+                            <TableCell>{getPosMethodHistoryLabel[row?.posMethod].label}</TableCell>
                             <TableCell>{row?.model}</TableCell>
                             <TableCell>{row?.result}</TableCell>
                             <TableCell>{row?.respTime}</TableCell>
@@ -171,31 +175,32 @@ const DetailForm = () => {
                                                         onClick={() => {
                                                             item.longitude > 0
                                                                 ? setBounceRow({
+                                                                      ...item,
                                                                       id: `P_${item.id}`,
                                                                   })
                                                                 : null
                                                         }}
                                                     >
-                                                        <TableCell>
+                                                        <TableCell style={{ textAlign: 'center' }}>
                                                             {item.posMethod === 'CELL' && (
                                                                 <img
                                                                     src={CellIcon}
                                                                     width="20px"
-                                                                    height="30px"
+                                                                    height="28px"
                                                                 />
                                                             )}
                                                             {item.posMethod === 'WIFI' && (
                                                                 <img
                                                                     src={WiFiIcon}
                                                                     width="20px"
-                                                                    height="30px"
+                                                                    height="28px"
                                                                 />
                                                             )}
                                                             {item.posMethod === 'GNSS' && (
                                                                 <img
                                                                     src={GnssIcon}
                                                                     width="20px"
-                                                                    height="30px"
+                                                                    height="28px"
                                                                 />
                                                             )}
                                                         </TableCell>
@@ -241,6 +246,7 @@ const DetailForm = () => {
                                                         onClick={() => {
                                                             item.longitude > 0
                                                                 ? setBounceRow({
+                                                                      ...item,
                                                                       id: `B_${item.id}`,
                                                                   })
                                                                 : null
@@ -299,6 +305,7 @@ const DetailForm = () => {
                                                     onClick={() => {
                                                         item.longitude > 0
                                                             ? setBounceRow({
+                                                                  ...item,
                                                                   id: `W_${item.id}`,
                                                               })
                                                             : null
@@ -306,9 +313,15 @@ const DetailForm = () => {
                                                 >
                                                     <TableCell>{item.mac}</TableCell>
                                                     <TableCell>{item.ssid}</TableCell>
-                                                    <TableCell>{item.grade}</TableCell>
-                                                    <TableCell>{item.band}</TableCell>
-                                                    <TableCell>{item.rssi}</TableCell>
+                                                    <TableCell style={{ textAlign: 'right' }}>
+                                                        {item.grade}
+                                                    </TableCell>
+                                                    <TableCell style={{ textAlign: 'right' }}>
+                                                        {item.band}
+                                                    </TableCell>
+                                                    <TableCell style={{ textAlign: 'right' }}>
+                                                        {item.rssi}
+                                                    </TableCell>
                                                     <TableCell>{item.status}</TableCell>
                                                 </TableRow>
                                             ))
@@ -346,11 +359,15 @@ const DetailForm = () => {
                                     <TableBody>
                                         {apiResult?.data?.transList?.totalCount ? (
                                             apiResult?.data?.transList?.lists.map((item, idx) => (
-                                                <TableRow key={idx} style={{ width: '100%' }}>
-                                                    <TableCell>{item.targetSystem}</TableCell>
+                                                <TableRow key={idx}>
+                                                    <TableCell style={{ width: '20%' }}>
+                                                        {item.targetSystem}
+                                                    </TableCell>
                                                     <TableCell>{item.posMethod}</TableCell>
                                                     <TableCell>{item.result}</TableCell>
-                                                    <TableCell>{item.messages}</TableCell>
+                                                    <TableCell style={{ width: '45%' }}>
+                                                        {item.messages}
+                                                    </TableCell>
                                                 </TableRow>
                                             ))
                                         ) : (

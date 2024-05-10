@@ -47,7 +47,7 @@ const ServiceHistory = () => {
     // 지도 맵에서 특정 마커를 클릭한 경우 상세 페이지로 연결
     const handleClickMapMarker = (id) => {
         const record = fetchData.lists.filter((item) => item.id === id)
-        console.log('record : ', { ...record[0] })
+        // console.log('record : ', { ...record[0] })
         navigate('/service-status/history/detail', { state: { row: record[0] } })
     }
 

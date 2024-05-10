@@ -29,22 +29,20 @@ const TitleArea = ({ title }) => {
 
 const DetailForm = () => {
     const [isQueryState, setIsQueryState] = useState(false)
-    const [isSearchClick, setIsSearchClick] = useState(false)
     const [queryParams, setQueryParams] = useState({})
     const init_pos = {
         longitude: 127.1279874,
         latitude: 37.3998912,
         title: 'KT 분당',
     }
-    const [locations, setLocations] = useState({ ...init_pos })
+    const [locations, setLocations] = useState([init_pos])
     const { data: apiResult } = useGetFacilityBtsSearch(queryParams, {
-        enabled: isQueryState && isSearchClick,
+        enabled: isQueryState,
     })
 
     // 검색 버튼 누른 경우
     const handleSearch = (values) => {
         setIsQueryState(true)
-        setIsSearchClick(true)
         setQueryParams({ ...queryParams, ...values })
     }
 
@@ -52,9 +50,8 @@ const DetailForm = () => {
         if (isQueryState && apiResult) {
             console.log('apiResult : ', apiResult)
             setIsQueryState(false)
-            setIsSearchClick(false)
             if (apiResult?.code === '0000') {
-                setLocations(apiResult?.data)
+                setLocations([apiResult?.data])
             }
         }
     }, [apiResult, queryParams])
@@ -116,7 +113,9 @@ const DetailForm = () => {
 
                 {/* 지도 영역 */}
                 <Box sx={{ width: '100%', height: '400px' }}>
-                    {!isQueryState && <OllehMap locations={[locations]} />}
+                    {!isQueryState && locations.length && (
+                        <OllehMap locations={[...locations]} />
+                    )}
                 </Box>
             </Box>
         </Box>

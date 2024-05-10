@@ -8,20 +8,19 @@ import CellIcon from '#/components/common/map/ollehMap/img/cell.png'
 import WiFiIcon from '#/components/common/map/ollehMap/img/wifi.png'
 import GnssIcon from '#/components/common/map/ollehMap/img/gnss.png'
 
-const initPosKT = { longitude: 127.1279874, latitude: 37.3998912, title: 'KT 분당' }
-
 const initMap = (_div, location, _zoom) => {
-    var mapOpts = {
+    const mapOpts = {
         center: location,
-        // center: new olleh.maps.LatLng(location.latitude, location.longitude),
         zoom: _zoom,
         mapTypeId: 'ROADMAP', // SATELLITE, HYBRID
         panControl: false,
     }
-    return new olleh.maps.Map(_div, mapOpts)
+
+    const map = new olleh.maps.Map(_div, mapOpts)
+    return map || null
 }
 
-const initCenter = (location) => new olleh.maps.LatLng(location.latitude, location.longitude)
+const initCenter = (lat, lng) => new olleh.maps.LatLng(lat, lng)
 
 const setCenter = (_mapInstance, _center) => {
     if (!_mapInstance || !_center) return
@@ -31,12 +30,13 @@ const setCenter = (_mapInstance, _center) => {
 const getCenter = (_mapInstance) => _mapInstance.getCenter()
 
 const drawMarker = (_mapInstance, locations, bounceMarker, onMarkerClick) => {
-    console.log('drawMarker mapInstance', _mapInstance, locations, bounceMarker)
-    const locArrs = locations[0].latitude > 0 ? locations : [initPosKT]
-    locArrs.map((loc) => {
-        const _marker =
-            loc.id && loc.id === bounceMarker?.id ? setBounceMarker(loc) : setIconMarker(loc)
+    // console.log('drawMarker mapInstance', _mapInstance, locations, bounceMarker)
+    locations.map((loc) => {
+        const _marker = setIconMarker(loc)
+
+        _marker.setAnimation(loc.id === bounceMarker?.id ? olleh.maps.overlay.Marker.BOUNCE : null)
         _marker.setMap(_mapInstance)
+
         if (typeof onMarkerClick === 'function') {
             _marker.onEvent('click', () => {
                 onMarkerClick(loc.id)
@@ -66,26 +66,13 @@ const getIcon = (_location) => {
 }
 
 const setIconMarker = (location) => {
-    // console.log('setIconMarker : ', location)
     const _marker = new olleh.maps.overlay.Marker({
         position: new olleh.maps.LatLng(location.latitude, location.longitude),
         icon: {
             url: getIcon(location),
-            size: new olleh.maps.Size(28, 40),
         },
         title: location.title || location.address,
     })
-    // _marker.setIcon(getIcon(location))
-    return _marker
-}
-
-const setBounceMarker = (location) => {
-    const _marker = new olleh.maps.overlay.Marker({
-        position: new olleh.maps.LatLng(location.latitude, location.longitude),
-        animation: olleh.maps.overlay.Marker.BOUNCE, // 제자리에서 통통튀는 Bounce 애니메이션 동작
-        title: location.title || location.address,
-    })
-    _marker.setIcon(getIcon(location))
     return _marker
 }
 
@@ -123,12 +110,71 @@ const addHexGrid25Layer = (_map, paths, rssi) => {
     return hexGrid25Layer
 }
 
+const toRadians = (degrees) => {
+    return (degrees * Math.PI) / 180
+}
+
+const getDistance = (minLat, minLon, maxLat, maxLon) => {
+    return calcDistance(minLat, minLon, maxLat, maxLon)
+}
+
+const calcDistance = (minLat, minLon, maxLat, maxLon) => {
+    const earthRadiusKm = 6371
+
+    const dLat = toRadians(maxLat - minLat)
+    const dLon = toRadians(maxLon - minLon)
+
+    const a =
+        Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+        Math.cos(toRadians(minLat)) *
+            Math.cos(toRadians(maxLat)) *
+            Math.sin(dLon / 2) *
+            Math.sin(dLon / 2)
+
+    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a))
+
+    const distance = earthRadiusKm * c
+    return distance
+}
+
+const getZoomLevel = (distance) => {
+    const miter = Math.floor(distance * 1000)
+    if (miter > 660000) return 1
+    else if (miter > 460000) return 2
+    else if (miter > 230000) return 3
+    else if (miter > 120000) return 4
+    else if (miter > 60000) return 5
+    else if (miter > 30000) return 6
+    else if (miter > 15000) return 8
+    else if (miter > 7000) return 9
+    else if (miter > 3500) return 10
+    else if (miter > 1900) return 11
+    else if (miter > 900) return 12
+    else if (miter > 400) return 13
+    else return 14
+}
+
+const minMax = (locations) => {
+    if (!Array.isArray(locations)) return
+    const xArrs = locations.map((row) => row.longitude)
+    const yArrs = locations.map((row) => row.latitude)
+
+    return {
+        minLat: Math.min(...yArrs), // 위도 최소
+        minLon: Math.min(...xArrs), // 경도 최소
+        maxLat: Math.max(...yArrs), // 위도 최대
+        maxLon: Math.max(...xArrs), // 경도 최대
+    }
+}
+
 export default {
     initMap,
     initCenter,
     setCenter,
     getCenter,
     drawMarker,
-    setBounceMarker,
     drawHexGrid,
+    getDistance,
+    getZoomLevel,
+    minMax,
 }

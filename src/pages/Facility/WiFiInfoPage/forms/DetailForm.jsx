@@ -52,7 +52,6 @@ const formikInitValues = {
 const DetailForm = () => {
     const navigate = useNavigate()
     const [isQueryState, setIsQueryState] = useState(false)
-    const [isSearchClick, setIsSearchClick] = useState(false)
     const [modeToggle, setModeToggle] = useState(false)
     const [apiSuccess, setApiSuccess] = useState('')
     const [state, setState] = useState({
@@ -71,9 +70,9 @@ const DetailForm = () => {
         latitude: 37.3998912,
         title: 'KT 분당',
     }
-    const [locations, setLocations] = useState({ ...init_pos })
+    const [locations, setLocations] = useState([init_pos])
     const { data: apiResult } = useGetFacilityWifiSearch(queryParams, {
-        enabled: isQueryState && isSearchClick,
+        enabled: isQueryState,
     })
 
     const formik = useFormik({
@@ -108,7 +107,6 @@ const DetailForm = () => {
         setModeToggle(false)
         setQueryParams({ ...queryParams, ...values })
         setIsQueryState(true)
-        setIsSearchClick(true)
     }
 
     const handleUpdateSubmit = () => {
@@ -132,7 +130,6 @@ const DetailForm = () => {
                     if (data?.code === '0000') {
                         // 상태값 변경으로 refetch 수행
                         setIsQueryState(true)
-                        setIsSearchClick(true)
                     }
                 },
             },
@@ -151,7 +148,6 @@ const DetailForm = () => {
                     if (data?.code === '0000') {
                         // 상태값 변경으로 refetch 수행
                         setIsQueryState(true)
-                        setIsSearchClick(true)
                     }
                 },
             },
@@ -173,10 +169,9 @@ const DetailForm = () => {
     const handleInputAllClear = () => {
         console.log('handleInputAllClear...')
         formik.setValues({ ...formikInitValues })
-        setLocations(init_pos)
+        setLocations([init_pos])
         setQueryParams({ mac: '000000000', source: 'W' })
         setIsQueryState(true)
-        setIsSearchClick(true)
     }
 
     const handleClickSave = () => {
@@ -210,7 +205,6 @@ const DetailForm = () => {
         if (isQueryState && apiResult) {
             console.log('apiResult : ', apiResult)
             setIsQueryState(false)
-            setIsSearchClick(false)
             if (apiResult?.code === '0000') {
                 formik.setValues({ ...apiResult?.data })
                 formik.setFieldValue('grade', apiResult?.data?.grade || 0)
@@ -228,11 +222,13 @@ const DetailForm = () => {
                     },
                 }
                 formik.setFieldValue('vap', vap)
-                setLocations({
-                    ...locations,
-                    ...vap.wgs84,
-                    title: apiResult?.data?.building || apiResult?.data?.ssid || '',
-                })
+                setLocations([
+                    {
+                        ...locations,
+                        ...vap.wgs84,
+                        title: apiResult?.data?.building || apiResult?.data?.ssid || '',
+                    },
+                ])
             }
         }
     }, [apiResult, queryParams])
@@ -349,9 +345,9 @@ const DetailForm = () => {
 
                 {/* 측위 목록 */}
                 <Box sx={{ width: '100%', height: '400px', mb: 4 }}>
-                    {!isQueryState && (
+                    {!isQueryState && locations.length && (
                         <OllehMap
-                            locations={[locations]}
+                            locations={[...locations]}
                             gridX={
                                 apiResult?.data?.hasOwnProperty('gridX')
                                     ? formik.values.gridX

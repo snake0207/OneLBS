@@ -119,7 +119,7 @@ const ServiceHistory = () => {
                 {/* 지도 영역 */}
 
                 <Box sx={{ mt: 3, width: '100%', height: '400px' }}>
-                    {!isQueryState && (
+                    {!isQueryState && locations.length > 0 && (
                         <OllehMap
                             locations={[...locations]}
                             onMarkerClick={(id) => handleClickMapMarker(id)}

@@ -19,7 +19,13 @@ import DatePickerInput from '#/components/common/input/DatePickerInput'
 import TimePickerInput from '#/components/common/input/TimePickerInput'
 import CheckBox from '#/components/common/input/CheckBox'
 import TextInput from '#/components/common/input/TextInput'
-import { getTimeTypeList, unionGetPlanes, unionGetStatPosMethods } from '#/common/libs/service'
+import {
+    getTimeTypeList,
+    unionGetPlanes,
+    unionGetStatOpTypes,
+    unionGetStatPosMethods,
+    unionGetStatRespCodes,
+} from '#/common/libs/service'
 import * as yup from 'yup'
 
 function SearchFilter({ onSearch }) {
@@ -41,11 +47,11 @@ function SearchFilter({ onSearch }) {
             service: '',
             appId: '',
             model: '',
-            opType: '',
+            opType: 'N',
             // posInit: '',
             plane: 'N',
             posMethod: 'N',
-            respCode: '',
+            respCode: 'N',
         },
         // validationSchema: yup.object({
         //     startDate: yup.date().required(`검색 시작날짜를 입력해주세요`),
@@ -57,13 +63,15 @@ function SearchFilter({ onSearch }) {
         onSubmit: (values) => {
             const startDate = `${values.startDate.split('-').join('')}${values.start_time}`
             const endDate = `${values.endDate.split('-').join('')}${values.end_time}`
+            const opType = values.opType === 'N' ? '' : values.opType
             const plane = values.plane === 'N' ? '' : values.plane
             const posMethod = values.posMethod === 'N' ? '' : values.posMethod
+            const respCode = values.respCode === 'N' ? '' : values.respCode
             if (onSearch) {
                 // API 불필요 field 삭제
                 delete values.start_time
                 delete values.end_time
-                onSearch({ ...values, startDate, endDate, plane, posMethod })
+                onSearch({ ...values, startDate, endDate, opType, plane, posMethod, respCode })
             }
         },
     })
@@ -252,7 +260,19 @@ function SearchFilter({ onSearch }) {
                                 </TableCell>
                                 <TableCell style={{ width: '10%' }}>{`OP Type`}</TableCell>
                                 <TableCell style={{ width: '15%' }}>
-                                    <TextInput name="opType" formik={formik} />
+                                    <Select
+                                        name="opType"
+                                        items={unionGetStatOpTypes()}
+                                        formik={formik}
+                                        style={{
+                                            height: '40px',
+                                            width: '100%',
+                                            fontSize: 14,
+                                            backgroundColor: 'form.main',
+                                            borderRadius: '4px',
+                                        }}
+                                    />
+                                    {/* <TextInput name="opType" formik={formik} /> */}
                                 </TableCell>
                             </TableRow>
                             <TableRow>
@@ -292,7 +312,19 @@ function SearchFilter({ onSearch }) {
                                 </TableCell>
                                 <TableCell style={{ width: '10%' }}>{`응답 코드`}</TableCell>
                                 <TableCell style={{ width: '15%' }}>
-                                    <TextInput name="respCode" formik={formik} />
+                                    <Select
+                                        name="respCode"
+                                        items={unionGetStatRespCodes()}
+                                        formik={formik}
+                                        style={{
+                                            height: '40px',
+                                            width: '100%',
+                                            fontSize: 14,
+                                            backgroundColor: 'form.main',
+                                            borderRadius: '4px',
+                                        }}
+                                    />
+                                    {/* <TextInput name="respCode" formik={formik} /> */}
                                 </TableCell>
                             </TableRow>
                         </TableHead>

@@ -12,6 +12,7 @@ import {
     Stack,
     TableContainer,
 } from '@mui/material'
+import CloseIcon from '@mui/icons-material/Close'
 import PlaylistAddCheckOutlinedIcon from '@mui/icons-material/PlaylistAddCheckOutlined'
 
 import TitleBar from '#/components/common/menu/TitleBar'
@@ -28,6 +29,30 @@ import {
 import CellIcon from '#/components/common/map/ollehMap/img/cell.png'
 import WiFiIcon from '#/components/common/map/ollehMap/img/wifi.png'
 import GnssIcon from '#/components/common/map/ollehMap/img/gnss.png'
+
+// todo 중복 코드 제거
+const MainTitleArea = ({ title }) => {
+    const navigate = useNavigate()
+    return (
+        <Box display="flex" alignItems="center" mb={2}>
+            <PlaylistAddCheckOutlinedIcon />
+            <Typography
+                sx={{
+                    ml: 1,
+                    fontSize: '16px',
+                    fontWeight: 500,
+                    color: 'text.darkgray',
+                }}
+            >
+                {title}
+            </Typography>
+            <CloseIcon
+                sx={{ align: 'right', marginLeft: 'auto' }}
+                onClick={() => navigate(-1)}
+            ></CloseIcon>
+        </Box>
+    )
+}
 
 const TitleArea = ({ title }) => {
     return (
@@ -51,7 +76,7 @@ const DetailForm = () => {
     const {
         state: { row },
     } = useLocation()
-    const navigate = useNavigate()
+
     const init_pos = {
         longitude: 127.1279874,
         latitude: 37.3998912,
@@ -98,8 +123,7 @@ const DetailForm = () => {
         <Box>
             <TitleBar title={`측위 결과 상세`} />
             <Box sx={style.contentBox}>
-                <TitleArea title={`측위 결과 요약`} />
-
+                <MainTitleArea title={`측위 결과 요약`} />
                 <Table sx={style.table_base}>
                     <TableHead>
                         {/* row - 1 */}

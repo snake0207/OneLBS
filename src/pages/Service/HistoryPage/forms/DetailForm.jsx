@@ -78,12 +78,12 @@ const DetailForm = () => {
     } = useLocation()
 
     const init_pos = {
-        longitude: 127.1279874,
         latitude: 37.3998912,
+        longitude: 127.1279874,
         title: 'KT 분당',
     }
     const [bounceRow, setBounceRow] = useState({})
-    const [locations, setLocations] = useState([init_pos])
+    const [locations, setLocations] = useState([])
     const [isQueryState, setIsQueryState] = useState(true)
     const { data: apiResult } = useGetServiceHistoryDetail(
         { trId: row?.trId },
@@ -105,17 +105,19 @@ const DetailForm = () => {
     useEffect(() => {
         if (isQueryState && apiResult) {
             console.log('Detail apiResult : ', apiResult)
-            setIsQueryState(false)
             if (apiResult?.code === '0000') {
                 const setLists = [
                     ...filterArray('P', apiResult?.data?.posList.lists),
                     ...filterArray('B', apiResult?.data?.btsList.lists),
                     ...filterArray('W', apiResult?.data?.wifiList.lists),
                 ]
-                setLocations(setLists)
+                setLocations((prev) => setLists)
+            } else {
+                setLocations((prev) => [init_pos])
             }
+            setIsQueryState(false)
         }
-    }, [apiResult, locations])
+    }, [apiResult])
 
     locations.length > 0 && console.log('Detail locations : ', locations)
 
@@ -140,19 +142,30 @@ const DetailForm = () => {
                             <TableCell sx={{ width: '6%' }}>{`결과`}</TableCell>
                             <TableCell sx={{ width: '8%' }}>{`응답(초)`}</TableCell>
                         </TableRow>
-                        <TableRow>
-                            <TableCell>{getCenterLabel[row?.center].label}</TableCell>
-                            <TableCell>{row?.reqDate}</TableCell>
-                            <TableCell>{row?.resDate}</TableCell>
-                            <TableCell>{row?.serviceName}</TableCell>
-                            <TableCell>{row?.opType}</TableCell>
-                            <TableCell>{row?.reqMdn}</TableCell>
-                            <TableCell>{row?.targetMdn}</TableCell>
-                            <TableCell>{getPosMethodHistoryLabel[row?.posMethod].label}</TableCell>
-                            <TableCell>{row?.model}</TableCell>
-                            <TableCell>{row?.result}</TableCell>
-                            <TableCell>{row?.respTime}</TableCell>
-                        </TableRow>
+                        {row?.center ? (
+                            <TableRow>
+                                <TableCell>{getCenterLabel[row?.center].label}</TableCell>
+                                <TableCell>{row?.reqDate}</TableCell>
+                                <TableCell>{row?.resDate}</TableCell>
+                                <TableCell>{row?.serviceName}</TableCell>
+                                <TableCell>{row?.opType}</TableCell>
+                                <TableCell>{row?.reqMdn}</TableCell>
+                                <TableCell>{row?.targetMdn}</TableCell>
+                                <TableCell>
+                                    {getPosMethodHistoryLabel[row?.posMethod].label}
+                                </TableCell>
+                                <TableCell>{row?.model}</TableCell>
+                                <TableCell>{row?.result}</TableCell>
+                                <TableCell>{row?.respTime}</TableCell>
+                            </TableRow>
+                        ) : (
+                            <TableRow>
+                                <TableCell
+                                    colSpan={11}
+                                    align={`center`}
+                                >{`No data Found`}</TableCell>
+                            </TableRow>
+                        )}
                     </TableHead>
                 </Table>
 
@@ -407,7 +420,7 @@ const DetailForm = () => {
                             </TableContainer>
                         </Box>
                     </Box>
-                    <Box sx={{ width: '48%' }}>
+                    <Box sx={{ width: '48%', mt: 5 }}>
                         {!isQueryState && locations.length > 0 && (
                             <OllehMap locations={[...locations]} bounceMarker={bounceRow} />
                         )}

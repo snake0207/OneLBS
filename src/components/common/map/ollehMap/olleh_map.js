@@ -29,22 +29,7 @@ const setCenter = (_mapInstance, _center) => {
 
 const getCenter = (_mapInstance) => _mapInstance.getCenter()
 
-const drawMarker = (_mapInstance, locations, bounceMarker, onMarkerClick) => {
-    // console.log('drawMarker mapInstance', _mapInstance, locations, bounceMarker)
-    locations.map((loc) => {
-        const _marker = setIconMarker(loc)
-        if (loc.id && loc.id === bounceMarker?.id) {
-            _marker.setAnimation(olleh.maps.overlay.Marker.BOUNCE)
-        }
-        _marker.setMap(_mapInstance)
-
-        if (typeof onMarkerClick === 'function') {
-            _marker.onEvent('click', () => {
-                onMarkerClick(loc.id)
-            })
-        }
-    })
-}
+const setZoomLevel = (_mapInstance, _zoom) => _mapInstance.setZoom(_zoom)
 
 const getIcon = (_location) => {
     if (_location.hasOwnProperty('id')) {
@@ -66,15 +51,32 @@ const getIcon = (_location) => {
     }
 }
 
-const setIconMarker = (location) => {
+const drawMarker = (_mapInstance, loc, isBounce = false, onMarkerClick) => {
     const _marker = new olleh.maps.overlay.Marker({
-        position: new olleh.maps.LatLng(location.latitude, location.longitude),
-        icon: {
-            url: getIcon(location),
-        },
-        title: location.title || location.address,
+        position: new olleh.maps.LatLng(loc.latitude, loc.longitude),
+        animation: isBounce ? olleh.maps.overlay.Marker.BOUNCE : '',
+        title: loc.title || loc.address,
+        map: _mapInstance,
     })
+    _marker.setIcon(getIcon(loc))
+
+    if (typeof onMarkerClick === 'function') {
+        _marker.onEvent('click', () => {
+            console.log('marker click event occured... : ', loc.id)
+            onMarkerClick(loc.id)
+        })
+    }
+
     return _marker
+    // _marker.setMap(_mapInstance)
+}
+
+const clearMarker = (markerArrs) => {
+    markerArrs.map((marker) => {
+        // console.log(marker._id, ' is detach..')
+        marker.detach()
+        marker.setMap(null)
+    })
 }
 
 const drawHexGrid = (map, arrGridX, arrGridY, arrRssi) => {
@@ -173,9 +175,11 @@ export default {
     initCenter,
     setCenter,
     getCenter,
-    drawMarker,
+    setZoomLevel,
     drawHexGrid,
     getDistance,
     getZoomLevel,
     minMax,
+    drawMarker,
+    clearMarker,
 }

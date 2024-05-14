@@ -49,9 +49,31 @@ export const getStatPosMethods = () => [
 //     { key: 11, value: 11, label: `RGNSS` },
 // ]
 
+// 서비스 세부 통계 응답 코드
+export const getStatRespCodes = () => [
+    { key: 0, value: `SUCCESS`, label: `SUCCESS` },
+    { key: 1, value: `FAIL`, label: `FAIL` },
+]
+
+// 서비스 세부 통계 OP TYPE
+export const getStatOpTypes = () => [
+    { key: 0, value: `POS_NI`, label: `POS_NI` },
+    { key: 1, value: `POS_SI`, label: `POS_SI` },
+]
+
 export const unionGetStatPosMethods = () => [
     { key: 'N', value: `N`, label: `NONE` },
     ...getStatPosMethods(),
+]
+
+export const unionGetStatRespCodes = () => [
+    { key: 'N', value: `N`, label: `NONE` },
+    ...getStatRespCodes(),
+]
+
+export const unionGetStatOpTypes = () => [
+    { key: 'N', value: `N`, label: `NONE` },
+    ...getStatOpTypes(),
 ]
 
 // Plane

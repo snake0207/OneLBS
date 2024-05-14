@@ -96,7 +96,7 @@ export const MuiSubButton = ({
             variant={variant}
             onClick={onClick}
             startIcon={_name === 'search' && buttonUI[_name].icon}
-            sx={{ width: '100px' }}
+            sx={{ width: '100.1px' }}
         >
             {title}
         </Button>

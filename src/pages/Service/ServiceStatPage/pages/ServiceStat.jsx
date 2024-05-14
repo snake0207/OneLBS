@@ -12,32 +12,22 @@ import { useGetServiceStat } from '#/hooks/queries/service'
 const filterColumns = (params) => {
     console.log('params : ', params)
     const _displayColumns = [
-        { field: 'id', headerName: 'ID', view: true },
-        { field: 'statDate', headerName: '통계일', view: true },
-        { field: 'service', headerName: '서비스 코드', view: params.serviceCheck },
-        { field: 'appId', headerName: 'APP ID', view: params.appIdCheck },
-        { field: 'model', headerName: '단말 모델', view: params.modelCheck },
-        { field: 'opType', headerName: 'OP Type', view: params.opTypeCheck },
-        // { field: 'posInit', headerName: 'Pos INIT', view: params.posInitCheck },
-        // { field: 'plane', headerName: 'Plane', view: params.planeCheck },
-        // { field: 'posMethod', headerName: '측위 방식', view: params.posMethodCheck },
-        { field: 'respCode', headerName: '응답코드', view: params.respCodeCheck },
-        { field: 'count', headerName: '전체', view: true },
-        { field: 'successCnt', headerName: '성공', view: true },
-        { field: 'successRate', headerName: '성공률(%)', view: true },
-        { field: 'elapsedTime', headerName: '평균응답(초)', view: true },
+        { field: 'id', flex: 0.8, headerName: 'ID', view: true },
+        { field: 'statDate', flex: 1.2, headerName: '통계일', view: true },
+        { field: 'service', flex: 1, headerName: '서비스 코드', view: params.serviceCheck },
+        { field: 'appId', flex: 1, headerName: 'APP ID', view: params.appIdCheck },
+        { field: 'model', flex: 1, headerName: '단말 모델', view: params.modelCheck },
+        { field: 'opType', flex: 1, headerName: 'OP Type', view: params.opTypeCheck },
+        { field: 'respCode', flex: 1, headerName: '응답코드', view: params.respCodeCheck },
+        { field: 'count', flex: 1, headerName: '전체', view: true },
+        { field: 'successCnt', flex: 1, headerName: '성공', view: true },
+        { field: 'successRate', flex: 1, headerName: '성공률(%)', view: true },
+        { field: 'elapsedTime', flex: 1, headerName: '평균응답(초)', view: true },
     ]
 
-    let booleanCnt = 0
-    for (let obj of _displayColumns) {
-        if (obj.view !== false) booleanCnt++
-    }
-
+    let booleanCnt = _displayColumns.filter((obj) => obj.view !== false).length
     if (booleanCnt > 6) return _displayColumns.filter((item) => item.view)
-
-    for (let obj of _displayColumns) obj.view = true
-    return _displayColumns
-    // return _displayColumns.filter((item) => item.view)
+    else return _displayColumns.map((item) => ({ ...item, view: true }))
 }
 
 const ServiceStat = () => {
@@ -74,15 +64,15 @@ const ServiceStat = () => {
     }
 
     useEffect(() => {
-        if (isQueryState && apiResult) {
-            if (apiResult?.code === '0000') {
-                console.log('filter : ', filterColumns(queryParams))
-                const { totalCount, lists } = apiResult?.data
-                setIsQueryState(false)
-                setFetchData({ count: totalCount, lists: [...fetchData.lists, ...lists] })
-            }
+        if (isQueryState && apiResult && apiResult.code === '0000' && apiResult.data) {
+            const { totalCount, lists } = apiResult.data
+            setIsQueryState(false)
+            setFetchData((prevData) => ({
+                count: totalCount,
+                lists: [...prevData.lists, ...lists],
+            }))
         }
-    }, [apiResult, queryParams])
+    }, [isQueryState, apiResult])
 
     console.log('fetchData : ', fetchData)
 

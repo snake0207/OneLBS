@@ -1,15 +1,5 @@
 import { useFormik } from 'formik'
-import {
-    Box,
-    Divider,
-    FormGroup,
-    Stack,
-    Table,
-    TableCell,
-    TableHead,
-    TableRow,
-    Typography,
-} from '@mui/material'
+import { Box, Stack, Table, TableCell, TableHead, TableRow, Typography } from '@mui/material'
 
 import { MuiSubButton } from '#/components/common/button/MuiButton'
 
@@ -19,8 +9,7 @@ import DatePickerInput from '#/components/common/input/DatePickerInput'
 import TimePickerInput from '#/components/common/input/TimePickerInput'
 import CheckBox from '#/components/common/input/CheckBox'
 import TextInput from '#/components/common/input/TextInput'
-import { getTimeTypeList, unionGetPlanes, unionGetStatPosMethods } from '#/common/libs/service'
-import * as yup from 'yup'
+import { getTimeTypeList } from '#/common/libs/service'
 
 function SearchFilter({ onSearch }) {
     const formik = useFormik({
@@ -34,36 +23,22 @@ function SearchFilter({ onSearch }) {
             appIdCheck: false,
             modelCheck: false,
             opTypeCheck: false,
-            // posInitCheck: false,
-            planeCheck: false,
-            posMethodCheck: false,
             respCodeCheck: false,
             service: '',
             appId: '',
             model: '',
             opType: '',
-            // posInit: '',
-            plane: 'N',
-            posMethod: 'N',
             respCode: '',
         },
-        // validationSchema: yup.object({
-        //     startDate: yup.date().required(`검색 시작날짜를 입력해주세요`),
-        //     endDate: yup
-        //         .date()
-        //         .required(`검색 종료날짜를 입력해주세요`)
-        //         .min(yup.ref('startDate'), '종료날짜는 시작날짜 이후여야 합니다.'),
-        // }),
+
         onSubmit: (values) => {
             const startDate = `${values.startDate.split('-').join('')}${values.start_time}`
             const endDate = `${values.endDate.split('-').join('')}${values.end_time}`
-            const plane = values.plane === 'N' ? '' : values.plane
-            const posMethod = values.posMethod === 'N' ? '' : values.posMethod
             if (onSearch) {
                 // API 불필요 field 삭제
                 delete values.start_time
                 delete values.end_time
-                onSearch({ ...values, startDate, endDate, plane, posMethod })
+                onSearch({ ...values, startDate, endDate })
             }
         },
     })
@@ -174,36 +149,6 @@ function SearchFilter({ onSearch }) {
                                             value={formik.values.opTypeCheck}
                                             label={`OP Type`}
                                         />
-                                        {/* <CheckBox
-                                            checked={formik.values.posInitCheck}
-                                            onChange={(e) =>
-                                                formik.setFieldValue(
-                                                    'posInitCheck',
-                                                    e.target.checked,
-                                                )
-                                            }
-                                            value={formik.values.posInitCheck}
-                                            label={`POS INIT`}
-                                        />
-                                        <CheckBox
-                                            checked={formik.values.planeCheck}
-                                            onChange={(e) =>
-                                                formik.setFieldValue('planeCheck', e.target.checked)
-                                            }
-                                            value={formik.values.planeCheck}
-                                            label={`Plane`}
-                                        />
-                                        <CheckBox
-                                            checked={formik.values.posMethodCheck}
-                                            onChange={(e) =>
-                                                formik.setFieldValue(
-                                                    'posMethodCheck',
-                                                    e.target.checked,
-                                                )
-                                            }
-                                            value={formik.values.posMethodCheck}
-                                            label={`측위방식`}
-                                        /> */}
                                         <CheckBox
                                             checked={formik.values.respCodeCheck}
                                             onChange={(e) =>

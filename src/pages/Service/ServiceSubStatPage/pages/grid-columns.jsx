@@ -10,7 +10,7 @@ export const columns = [
     {
         field: 'statDate',
         headerName: '통계일',
-        flex: 1.5,
+        flex: 1.2,
         renderCell: (params) => <Typography color="primary">{params.row.statDate}</Typography>,
     },
     {
@@ -80,7 +80,7 @@ export const columns = [
     {
         field: 'count',
         headerName: '전체',
-        flex: 1.2,
+        flex: 1,
         renderCell: (params) => {
             return <Typography>{params.row.count.toLocaleString()}</Typography>
         },

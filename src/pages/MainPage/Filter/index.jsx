@@ -12,13 +12,14 @@ import style from './style.module'
 function SearchFilter({ onSearch }) {
     const formik = useFormik({
         initialValues: {
-            statTime: '',
+            date: '',
             renewalCycle: 1,
             serviceCode: '',
         },
         onSubmit: (values) => {
-            const startDate = `${values.statTime.split('-').join('')}${values.statTime}`
-            if (onSearch) onSearch({ ...values, startDate })
+            const statDate = `${values.date.split('-').join('')}`
+            console.log(statDate)
+            if (onSearch) onSearch({ ...values, statDate })
         },
     })
 
@@ -35,7 +36,7 @@ function SearchFilter({ onSearch }) {
                                 alignItems={'center'}
                                 width="70%"
                             >
-                                <DatePickerInput name={'statTime'} formik={formik} />
+                                <DatePickerInput name={'date'} formik={formik} />
                             </Stack>
                         </TableCell>
                         <TableCell sx={style.cellTitle}>{`갱신 주기`}</TableCell>
@@ -59,7 +60,7 @@ function SearchFilter({ onSearch }) {
                         </TableCell>
                         <TableCell align="right">
                             <MuiSubButton
-                                disabled={!formik.values.statTime}
+                                disabled={!formik.values.date}
                                 name="search"
                                 title="검색"
                                 onClick={formik.handleSubmit}

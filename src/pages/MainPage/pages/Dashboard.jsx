@@ -2,7 +2,7 @@ import TitleBar from '#/components/common/menu/TitleBar'
 import CustomDataGrid from '#/components/common/table/datagrid'
 import { useDashboardStat } from '#/hooks/queries/dashboard'
 import PlaylistAddCheckOutlinedIcon from '@mui/icons-material/PlaylistAddCheckOutlined'
-import { Box, TableRow, Typography } from '@mui/material'
+import { Box, Table, TableBody, TableCell, TableRow, Typography } from '@mui/material'
 import { LineChart } from '@mui/x-charts'
 import { useEffect, useState } from 'react'
 import SearchFilter from '../Filter'
@@ -13,18 +13,19 @@ const TitleArea = ({ title }) => {
         <Box
             display="flex"
             alignItems="center"
-            mb={2}
+            mb={0.5}
             sx={{
-                backgroundColor: 'darkgray',
+                backgroundColor: '#009ACC',
+                border: '1px solid darkgray',
             }}
         >
             <PlaylistAddCheckOutlinedIcon />
             <Typography
                 sx={{
                     ml: 1,
-                    fontSize: '20px',
+                    fontSize: '21px',
                     fontWeight: 500,
-                    color: 'text.darkgray',
+                    color: '#ffff',
                 }}
             >
                 {title}
@@ -65,13 +66,19 @@ function Dashboard() {
         enabled: isQueryState,
     })
 
+    // row 클릭한 경우 상세 페이지 노출
+    // eslint-disable-next-line no-empty-pattern
+    const handleSelectRow = ({}) => {}
+
     // 검색 버튼 누른 경우
     const handleSearch = (values) => {
         setFetchData({ count: 0, lists: [] })
-        setQueryParams({ ...queryParams, ...values, page: 1 })
+        const { renewalCycle, date, ...restValues } = values // renewalCycle, date 제외한 나머지 값들을 restValues에 복사
+        setQueryParams({ ...queryParams, ...restValues, page: 1 })
         setIsQueryState(true)
-        // setIsSearchClick(true)
     }
+
+    console.log('queryParams: ', queryParams)
 
     // 리스트 하단의 페이지 이동 버튼 click시 동작
     const handleOnPageChange = (currPage) => {
@@ -97,23 +104,26 @@ function Dashboard() {
 
     console.log('fetchData : ', fetchData)
 
-
     return (
         <Box>
             <TitleBar title={`대시보드`} />
             <SearchFilter onSearch={handleSearch} />
             <Box sx={{ height: '20px' }} />
-            <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
-                <TableRow>
-                    <TitleArea title={`위치 조회 트래픽 TOP 5`} />
-                    <Box>{DifferentLength()}</Box>
-                </TableRow>
-                <TableRow>
-                    <TitleArea title={`응답 코드 통계 TOP 5`} />
-                    <Box>{DifferentLength()}</Box>
-                </TableRow>
-            </Box>
-            <Box sx={{ height: '30px' }} />
+            <Table>
+                <TableBody>
+                    <TableRow sx={{ display: 'flex', justifyContent: 'space-between' }}>
+                        <TableCell>
+                            <TitleArea title={`위치 조회 트래픽 TOP 5`} />
+                            <Box sx={{ border: '1px solid darkgray' }}>{DifferentLength()}</Box>
+                        </TableCell>
+                        <TableCell>
+                            <TitleArea title={`응답 코드 통계 TOP 5`} />
+                            <Box sx={{ border: '1px solid darkgray' }}>{DifferentLength()}</Box>
+                        </TableCell>
+                    </TableRow>
+                </TableBody>
+            </Table>
+            <Typography sx={{ height: '15px' }} />
             {fetchData && (
                 <Box
                     sx={{
@@ -130,12 +140,13 @@ function Dashboard() {
                         >{`Total Count: ${fetchData?.count}`}</Typography>
                     </Box>
                     <CustomDataGrid
-                        // checkboxSelection={false}
                         rows={fetchData?.lists}
                         rowCount={fetchData?.count}
                         columns={columns}
                         sort={{ field: 'id', orderby: 'desc' }}
                         onPageChange={handleOnPageChange}
+                        onRowClick={handleSelectRow}
+                        activeTools={['export']}
                         pageInit={queryParams.page === 1 ? true : false}
                     />
                 </Box>

@@ -11,14 +11,14 @@ export const columns = [
         field: 'statTime',
         headerName: '통계 일시',
         flex: 1.5,
-        renderCell: (params) => <Typography>{params.row.reqDate}</Typography>,
+        renderCell: (params) => <Typography>{params.row.statDate}</Typography>,
     },
     {
         field: 'serviceCode',
         headerName: '서비스코드',
         flex: 1.2,
         renderCell: (params) => {
-            return <Typography>{params.row.serviceCode}</Typography>
+            return <Typography>{params.row.service}</Typography>
         },
     },
     {

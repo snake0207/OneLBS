@@ -144,7 +144,7 @@ const calcDistance = (minLat, minLon, maxLat, maxLon) => {
     return distance
 }
 
-const getZoomLevel = (distance) => {
+const setZoomWithDistance = (distance) => {
     const miter = Math.floor(distance * 1000)
     if (miter > 660000) return 1
     else if (miter > 460000) return 2
@@ -168,8 +168,8 @@ const minMax = (locations) => {
 
     return {
         minLat: Math.min(...yArrs), // 위도 최소
-        minLon: Math.min(...xArrs), // 경도 최소
         maxLat: Math.max(...yArrs), // 위도 최대
+        minLon: Math.min(...xArrs), // 경도 최소
         maxLon: Math.max(...xArrs), // 경도 최대
     }
 }
@@ -182,7 +182,7 @@ export default {
     setZoomLevel,
     drawHexGrid,
     getDistance,
-    getZoomLevel,
+    setZoomWithDistance,
     minMax,
     drawMarker,
     clearMarker,

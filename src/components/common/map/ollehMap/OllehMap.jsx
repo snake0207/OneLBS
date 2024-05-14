@@ -81,11 +81,12 @@ const OllehMap = ({
                 setMarkers([..._markerArrs, _marker])
 
                 // 중심 좌표와 지도 레벨 조정
-                ollehMap.setCenter(
-                    mapInstance,
-                    ollehMap.initCenter(bounceMarker.latitude, bounceMarker.longitude),
-                )
-                ollehMap.setZoomLevel(mapInstance, 8)
+                ollehMap.moveCenter(mapInstance, bounceMarker, 8)
+                // ollehMap.setCenter(
+                //     mapInstance,
+                //     ollehMap.initCenter(bounceMarker.latitude, bounceMarker.longitude),
+                // )
+                // ollehMap.setZoomLevel(mapInstance, 8)
             } else {
                 const _markerArrs = locations.map((loc) => {
                     const _marker = ollehMap.drawMarker(mapInstance, loc, false, onMarkerClick)

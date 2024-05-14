@@ -156,7 +156,7 @@ const DetailForm = () => {
                 >
                     <Box
                         sx={{
-                            width: '55%',
+                            width: '45%',
                             display: 'flex',
                             flexDirection: 'column',
                             justifyContent: 'space-between',
@@ -396,7 +396,7 @@ const DetailForm = () => {
                             </TableContainer>
                         </Box>
                     </Box>
-                    <Box sx={{ width: '48%', mt: 5 }}>
+                    <Box sx={{ width: '55%', mt: 5 }}>
                         {!isQueryState && locations.length > 0 && (
                             <OllehMap locations={[...locations]} bounceMarker={bounceRow} />
                         )}

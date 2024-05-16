@@ -31,10 +31,10 @@ const OllehMap = ({
     let _center = { latitude: locations[0].latitude, longitude: locations[0].longitude }
 
     if (locations.length > 1) {
-        const { minLat, minLon, maxLat, maxLon } = ollehMap.minMax(locations)
+        const { minLat, maxLat, minLon, maxLon } = ollehMap.minMax(locations)
         _center = { latitude: (minLat + maxLat) / 2, longitude: (minLon + maxLon) / 2 }
         _distance = ollehMap.getDistance(minLat, minLon, maxLat, maxLon)
-        _zoom = ollehMap.getZoomLevel(_distance)
+        _zoom = ollehMap.setZoomWithDistance(_distance)
     }
     // console.log('locations : ', locations)
     // console.log(`_distance : ${_distance}, _zoom : ${_zoom}`)
@@ -81,11 +81,12 @@ const OllehMap = ({
                 setMarkers([..._markerArrs, _marker])
 
                 // 중심 좌표와 지도 레벨 조정
-                ollehMap.setCenter(
-                    mapInstance,
-                    ollehMap.initCenter(bounceMarker.latitude, bounceMarker.longitude),
-                )
-                ollehMap.setZoomLevel(mapInstance, 8)
+                ollehMap.moveCenter(mapInstance, bounceMarker, 8)
+                // ollehMap.setCenter(
+                //     mapInstance,
+                //     ollehMap.initCenter(bounceMarker.latitude, bounceMarker.longitude),
+                // )
+                // ollehMap.setZoomLevel(mapInstance, 8)
             } else {
                 const _markerArrs = locations.map((loc) => {
                     const _marker = ollehMap.drawMarker(mapInstance, loc, false, onMarkerClick)

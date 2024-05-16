@@ -20,13 +20,17 @@ function MuiIcon() {
     )
 }
 
-const DatePickerInput = ({ name, formik, disabled = false }) => {
+const DatePickerInput = ({ name, formik, disabled = false, additionalProps = {} }) => {
     const [dateError, setDateError] = useState(null)
 
     const stringToDayFormat = (stringDate) => (stringDate ? dayjs(stringDate) : null)
 
-    const handleChangeDate = (newDate) =>
+    const handleChangeDate = (newDate) => {
         formik.setFieldValue(name, newDate?.format('YYYY-MM-DD') || null)
+        if (additionalProps.onChange) {
+            additionalProps.onChange(newDate?.format('YYYY-MM-DD'))
+        }
+    }
 
     return (
         <LocalizationProvider dateAdapter={AdapterDayjs}>

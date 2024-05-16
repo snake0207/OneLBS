@@ -1,12 +1,14 @@
 import TitleBar from '#/components/common/menu/TitleBar'
 import CustomDataGrid from '#/components/common/table/datagrid'
 import { useDashboardStat } from '#/hooks/queries/dashboard'
+
 import PlaylistAddCheckOutlinedIcon from '@mui/icons-material/PlaylistAddCheckOutlined'
 import { Box, Table, TableBody, TableCell, TableRow, Typography } from '@mui/material'
-import { LineChart } from '@mui/x-charts'
 import { useEffect, useState } from 'react'
 import SearchFilter from '../Filter'
 import { columns } from './grid-columns'
+import ResponseCodeStat from './RespCodeStat'
+import LocationLookUpStat from './LocationLookUpStat'
 
 const TitleArea = ({ title }) => {
     return (
@@ -34,27 +36,6 @@ const TitleArea = ({ title }) => {
     )
 }
 
-function DifferentLength() {
-    const uData = [4000, 3000, 2000, 2780, 1890, 2390, 3490]
-    const pData = [2400, 1398, 9800, 3908, 4800, 3800, 4300]
-    const xLabels = ['Page A', 'Page B', 'Page C', 'Page D', 'Page E', 'Page F', 'Page G']
-
-    return (
-        <LineChart
-            width={900}
-            height={500}
-            series={[
-                { data: pData, label: 'pv' },
-                { data: uData, label: 'uv' },
-            ]}
-            xAxis={[{ scaleType: 'point', data: xLabels }]}
-            sx={{
-                backgroundColor: 'background.contents',
-            }}
-        />
-    )
-}
-
 function Dashboard() {
     const [isQueryState, setIsQueryState] = useState(false)
     const [fetchData, setFetchData] = useState({ count: 0, lists: [] })
@@ -68,7 +49,7 @@ function Dashboard() {
 
     // row 클릭한 경우 상세 페이지 노출
     // eslint-disable-next-line no-empty-pattern
-    const handleSelectRow = ({}) => {}
+    const handleSelectRow = ({ }) => { }
 
     // 검색 버튼 누른 경우
     const handleSearch = (values) => {
@@ -78,7 +59,7 @@ function Dashboard() {
         setIsQueryState(true)
     }
 
-    console.log('queryParams: ', queryParams)
+    // console.log('queryParams: ', queryParams)
 
     // 리스트 하단의 페이지 이동 버튼 click시 동작
     const handleOnPageChange = (currPage) => {
@@ -102,7 +83,7 @@ function Dashboard() {
         }
     }, [isQueryState, apiResult])
 
-    console.log('fetchData : ', fetchData)
+    // console.log('fetchData : ', fetchData)
 
     return (
         <Box>
@@ -114,11 +95,11 @@ function Dashboard() {
                     <TableRow sx={{ display: 'flex', justifyContent: 'space-between' }}>
                         <TableCell>
                             <TitleArea title={`위치 조회 트래픽 TOP 5`} />
-                            <Box sx={{ border: '1px solid darkgray' }}>{DifferentLength()}</Box>
+                            <Box sx={{ border: '1px solid darkgray' }}>{LocationLookUpStat()}</Box>
                         </TableCell>
                         <TableCell>
                             <TitleArea title={`응답 코드 통계 TOP 5`} />
-                            <Box sx={{ border: '1px solid darkgray' }}>{DifferentLength()}</Box>
+                            <Box sx={{ border: '1px solid darkgray' }}>{ResponseCodeStat()}</Box>
                         </TableCell>
                     </TableRow>
                 </TableBody>

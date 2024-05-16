@@ -3,13 +3,17 @@ import { useFormik } from 'formik'
 
 import { MuiSubButton } from '#/components/common/button/MuiButton'
 
-import { getRenewalCycle } from '#/common/libs/service'
+import { getRenewalCycle } from '#/common/libs/dashboard'
 import Select from '#/components/common/Select'
-import DatePickerInput from '#/components/common/input/DatePickerInput'
 import TextInput from '#/components/common/input/TextInput'
 import style from './style.module'
+import DatePickerInput from '#/components/common/input/DatePickerInput'
+import { useDashboardActions } from '#/store/useDashboardStore'
 
 function SearchFilter({ onSearch }) {
+    const { setDashboardStatDate } = useDashboardActions()
+    const { setDashboardInterval } = useDashboardActions()
+
     const formik = useFormik({
         initialValues: {
             date: '',
@@ -22,6 +26,18 @@ function SearchFilter({ onSearch }) {
             if (onSearch) onSearch({ ...values, statDate })
         },
     })
+
+    const handleChange = (date) => {
+        const statDate = date.split('-').join('')
+        console.log('stat date : ', statDate)
+        setDashboardStatDate(statDate)
+    }
+
+    const renewalCycleChange = (event) => {
+        const selectedValue = event.value
+        console.log('Selected value:', selectedValue)
+        setDashboardInterval(selectedValue)
+    }
 
     return (
         <Box sx={style.searchBox}>
@@ -36,7 +52,11 @@ function SearchFilter({ onSearch }) {
                                 alignItems={'center'}
                                 width="70%"
                             >
-                                <DatePickerInput name={'date'} formik={formik} />
+                                <DatePickerInput
+                                    name={'date'}
+                                    formik={formik}
+                                    additionalProps={{ onChange: handleChange }}
+                                />
                             </Stack>
                         </TableCell>
                         <TableCell sx={style.cellTitle}>{`갱신 주기`}</TableCell>
@@ -52,9 +72,10 @@ function SearchFilter({ onSearch }) {
                                     backgroundColor: 'form.main',
                                     borderRadius: '4px',
                                 }}
+                                onChange={renewalCycleChange}
                             />
                         </TableCell>
-                        <TableCell sx={style.cellTitle}>{`서비스코드`}</TableCell>
+                        <TableCell sx={style.cellTitle}>{`서비스 코드`}</TableCell>
                         <TableCell sx={style.cellInput}>
                             <TextInput name="serviceCode" formik={formik} />
                         </TableCell>

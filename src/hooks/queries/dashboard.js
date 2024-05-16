@@ -2,6 +2,19 @@ import dashboard from '#/api/dashboard'
 import { useDashboardInterval, useDashboardStatDate } from '#/store/useDashboardStore.js'
 import { useQuery } from '@tanstack/react-query'
 
+export const useLocationTrafficStat = () => {
+    const statDate = useDashboardStatDate()
+    const interval = useDashboardInterval()
+    const { data } = useQuery({
+        queryKey: ['location-traffic-stat', statDate],
+        queryFn: () => dashboard.locationTrafficStat({ statDate: statDate }),
+        enabled: !!statDate,
+        refetchInterval: interval * 60000,
+        select: (data) => data.data,
+    })
+    return { data }
+}
+
 export const useRespCodeStat = () => {
     const statDate = useDashboardStatDate()
     const interval = useDashboardInterval()

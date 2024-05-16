@@ -1,112 +1,77 @@
-// import dashboard from '#/api/dashboard'
-// import {
-//     useDashboardActions,
-//     useDashboardInterval,
-//     useDashboardStatDate,
-// } from '#/store/useDashboardStore'
-// import { LineChart } from '@mui/x-charts'
-// import { useCallback, useEffect, useState } from 'react'
+import { useLocationTrafficStat } from '#/hooks/queries/dashboard'
+import { LineChart } from '@mui/x-charts'
+import { useEffect, useState } from 'react'
 
-// function LocationLookUpStat() {
-//     const useStatDate = useDashboardStatDate()
-//     const useInterval = useDashboardInterval()
-//     const { setDashboardStatDate } = useDashboardActions()
+function LocationLookUpStat() {
+    const { data: apiResult } = useLocationTrafficStat()
 
-//     const [topFiveList, setTopFiveList] = useState([])
-//     const [codeStatList, setCodeStatList] = useState([])
+    const [data, setData] = useState({
+        service1: [],
+        service2: [],
+        service3: [],
+        service4: [],
+        service5: [],
+        xLabels: [],
+    })
 
-//     const [data, setData] = useState({
-//         code1: [],
-//         code2: [],
-//         code3: [],
-//         code4: [],
-//         code5: [],
-//         xLabels: [],
-//     })
+    const processData = () => {
+        const initialData = {
+            service1: [],
+            service2: [],
+            service3: [],
+            service4: [],
+            service5: [],
+            xLabels: [],
+        }
 
-//     const processData = useCallback(() => {
-//         const initialData = {
-//             xLabels: [],
-//             code1: [],
-//             code2: [],
-//             code3: [],
-//             code4: [],
-//             code5: [],
-//         }
+        const serviceMapping = apiResult.data.topFiveList.reduce((acc, service, index) => {
+            acc[service] = `service${index + 1}`
+            return acc
+        }, {})
 
-//         const codeMapping = topFiveList.reduce((acc, code, index) => {
-//             acc[code] = `code${index + 1}`
-//             return acc
-//         }, {})
+        apiResult.data.trafficStatList.forEach((item) => {
+            initialData.xLabels.push(item.statTime)
 
-//         codeStatList.forEach((item) => {
-//             initialData.xLabels.push(item.statTime)
+            apiResult.data.topFiveList.forEach((service) => {
+                const key = serviceMapping[service]
+                if (key) {
+                    initialData[key].push(0)
+                }
+            })
 
-//             topFiveList.forEach((code) => {
-//                 const key = codeMapping[code]
-//                 if (key) {
-//                     initialData[key].push(0)
-//                 }
-//             })
+            item.trafficInfos.forEach((trafficInfoItem) => {
+                const { service, count } = trafficInfoItem
+                const key = serviceMapping[service]
+                if (key) {
+                    if (!isNaN(count)) initialData[key][initialData.xLabels.length - 1] = count
+                }
+            })
+        })
+        return initialData
+    }
 
-//             item.respCodes.forEach((respCodeItem) => {
-//                 const { respCode, count } = respCodeItem
-//                 const key = codeMapping[respCode]
-//                 if (key) {
-//                     initialData[key][initialData.xLabels.length - 1] = count
-//                 }
-//             })
-//         })
+    useEffect(() => {
+        if (apiResult && apiResult.code === '0000') {
+            const processedData = processData()
+            setData(processedData)
+        }
+    }, [apiResult])
 
-//         return initialData
-//     }, [topFiveList, codeStatList])
+    const seriesData = apiResult?.data.topFiveList.map((label, index) => {
+        return { data: data[`service${index + 1}`], label: label }
+    })
 
-//     useEffect(() => {
-//         console.log('=============LOCATION LOOK UP===================')
-//         if (localStorage.getItem('dashboard-storage')) {
-//             const fetchData = async () => {
-//                 try {
-//                     if (useStatDate === '') {
-//                         setDashboardStatDate(
-//                             new Date(Date.now()).toISOString().split('T')[0].split('-').join(''),
-//                         )
-//                     }
+    return (
+        <LineChart
+            width={900}
+            height={500}
+            series={seriesData ?? []}
+            xAxis={[{ scaleType: 'point', data: data.xLabels }]}
+            sx={{
+                backgroundColor: 'background.contents',
+            }}
+        />
+    )
+}
 
-//                     const response = await dashboard.respCodeStat({ statDate: useStatDate })
-
-//                     if (response.data.code === '0000') {
-//                         setTopFiveList(response.data.data.topFiveList)
-//                         setCodeStatList(response.data.data.codeStatList)
-//                         const processedData = processData()
-//                         setData(processedData)
-//                     } else {
-//                         console.error('API 요청 실패:', response.error)
-//                     }
-//                 } catch (error) {
-//                     console.error('API 요청 실패:', error)
-//                 }
-//             }
-
-//             const intervalId = setInterval(fetchData, useInterval * 10000)
-//             return () => clearInterval(intervalId)
-//         }
-//     }, [useStatDate, useInterval, setDashboardStatDate, processData])
-
-//     const seriesData = topFiveList.map((label, index) => {
-//         return { data: data[`code${index + 1}`], label: label }
-//     })
-
-//     return (
-//         <LineChart
-//             width={900}
-//             height={500}
-//             series={seriesData}
-//             xAxis={[{ scaleType: 'point', data: data.xLabels }]}
-//             sx={{
-//                 backgroundColor: 'background.contents',
-//             }}
-//         />
-//     )
-// }
-
-// export default LocationLookUpStat
+export default LocationLookUpStat

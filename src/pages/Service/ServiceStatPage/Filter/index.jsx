@@ -9,7 +9,7 @@ import DatePickerInput from '#/components/common/input/DatePickerInput'
 import TimePickerInput from '#/components/common/input/TimePickerInput'
 import CheckBox from '#/components/common/input/CheckBox'
 import TextInput from '#/components/common/input/TextInput'
-import { getTimeTypeList } from '#/common/libs/service'
+import { getTimeTypeList, unionGetStatOpTypes } from '#/common/libs/service'
 
 function SearchFilter({ onSearch }) {
     const formik = useFormik({
@@ -27,13 +27,14 @@ function SearchFilter({ onSearch }) {
             service: '',
             appId: '',
             model: '',
-            opType: '',
+            opType: 'N',
             respCode: '',
         },
 
         onSubmit: (values) => {
             const startDate = `${values.startDate.split('-').join('')}${values.start_time}`
             const endDate = `${values.endDate.split('-').join('')}${values.end_time}`
+            const opType = values.opType === 'N' ? '' : values.opType
             if (onSearch) {
                 // API 불필요 field 삭제
                 delete values.start_time
@@ -197,8 +198,24 @@ function SearchFilter({ onSearch }) {
                                 </TableCell>
                                 <TableCell style={{ width: '7%' }}>{`OP Type`}</TableCell>
                                 <TableCell style={{ width: '10%' }}>
-                                    <TextInput name="opType" formik={formik} />
+                                    <Select
+                                        name="opType"
+                                        items={unionGetStatOpTypes()}
+                                        formik={formik}
+                                        style={{
+                                            height: '40px',
+                                            width: '100%',
+                                            fontSize: 14,
+                                            backgroundColor: 'form.main',
+                                            borderRadius: '4px',
+                                        }}
+                                    />
+                                    {/* <TextInput name="opType" formik={formik} /> */}
                                 </TableCell>
+                                {/* <TableCell style={{ width: '7%' }}>{`OP Type`}</TableCell>
+                                <TableCell style={{ width: '10%' }}>
+                                    <TextInput name="opType" formik={formik} />
+                                </TableCell> */}
                                 <TableCell style={{ width: '7%' }}>{`응답 코드`}</TableCell>
                                 <TableCell style={{ width: '10%' }}>
                                     <TextInput name="respCode" formik={formik} />

@@ -8,7 +8,7 @@ import { useEffect, useState } from 'react'
 import SearchFilter from '../Filter'
 import { columns } from './grid-columns'
 import ResponseCodeStat from './RespCodeStat'
-import LocationLookUpStat from './LocationLookUpStat'
+// import LocationLookUpStat from './LocationLookUpStat'
 
 const TitleArea = ({ title }) => {
     return (
@@ -93,10 +93,10 @@ function Dashboard() {
             <Table>
                 <TableBody>
                     <TableRow sx={{ display: 'flex', justifyContent: 'space-between' }}>
-                        <TableCell>
+                        {/* <TableCell>
                             <TitleArea title={`위치 조회 트래픽 TOP 5`} />
                             <Box sx={{ border: '1px solid darkgray' }}>{LocationLookUpStat()}</Box>
-                        </TableCell>
+                        </TableCell> */}
                         <TableCell>
                             <TitleArea title={`응답 코드 통계 TOP 5`} />
                             <Box sx={{ border: '1px solid darkgray' }}>{ResponseCodeStat()}</Box>

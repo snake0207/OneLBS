@@ -39,7 +39,7 @@ function SearchFilter({ onSearch }) {
                 // API 불필요 field 삭제
                 delete values.start_time
                 delete values.end_time
-                onSearch({ ...values, startDate, endDate })
+                onSearch({ ...values, startDate, endDate, opType })
             }
         },
     })

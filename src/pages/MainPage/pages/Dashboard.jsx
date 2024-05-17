@@ -7,9 +7,9 @@ import { Box, Table, TableBody, TableCell, TableRow, Typography } from '@mui/mat
 import { useEffect, useState } from 'react'
 import SearchFilter from '../Filter'
 import { columns } from './grid-columns'
-import ResponseCodeStat from './RespCodeStat'
-import LocationLookUpStat from './LocationLookUpStat'
 import { useDashboardActions } from '#/store/useDashboardStore'
+import LocationLookUpStat from '#/components/dashboard/LocationLookupTraffic'
+import ResponseCodeStat from '#/components/dashboard/ResponseCodeStat'
 
 const TitleArea = ({ title }) => {
     return (
@@ -98,12 +98,12 @@ function Dashboard() {
             <Box sx={{ height: '20px' }} />
             <Table>
                 <TableBody>
-                    <TableRow sx={{ display: 'flex', justifyContent: 'space-between' }}>
-                        <TableCell>
+                    <TableRow>
+                        <TableCell sx={{ width: '50%' }}>
                             <TitleArea title={`위치 조회 트래픽 TOP 5`} />
                             <Box sx={{ border: '1px solid darkgray' }}>{LocationLookUpStat()}</Box>
                         </TableCell>
-                        <TableCell>
+                        <TableCell sx={{ width: '50%' }}>
                             <TitleArea title={`응답 코드 통계 TOP 5`} />
                             <Box sx={{ border: '1px solid darkgray' }}>{ResponseCodeStat()}</Box>
                         </TableCell>
@@ -132,7 +132,7 @@ function Dashboard() {
                         columns={columns}
                         sort={{ field: 'id', orderby: 'desc' }}
                         onPageChange={handleOnPageChange}
-                        onRowClick={handleSelectRow}
+                        // onRowClick={handleSelectRow}
                         activeTools={['export']}
                         pageInit={queryParams.page === 1 ? true : false}
                     />

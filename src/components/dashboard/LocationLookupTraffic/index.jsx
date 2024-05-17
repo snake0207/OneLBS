@@ -63,7 +63,7 @@ function LocationLookUpStat() {
 
     return (
         <LineChart
-            width={900}
+            // width={900}
             height={500}
             series={seriesData ?? []}
             xAxis={[{ scaleType: 'point', data: data.xLabels }]}

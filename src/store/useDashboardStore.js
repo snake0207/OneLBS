@@ -14,7 +14,7 @@ const useDashboardStore = create(
             actions: {
                 setDashboardStatDate: (statDate) => set({ statDate }),
                 setDashboardInterval: (interval) => set({ interval }),
-                resetUserStore: () => set(initialState),
+                resetDashboardStore: () => set(initialState),
             },
         }),
         {

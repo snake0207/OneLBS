@@ -20,8 +20,8 @@ import { SyncHistoryPage } from '#/pages/Facility/SyncHistoryPage'
 import { BtsInfoMapPage } from '#/pages/Facility/BtsInfoPage'
 import { WifiInfoMapPage } from '#/pages/Facility/WiFiInfoPage'
 import { EngineEditPage } from '#/pages/System/EnginePage'
-import { ServiceSubStatPage } from '#/pages/Service/ServiceSubStatPage';
-import Dashboard from '#/pages/MainPage/pages/Dashboard'
+import { ServiceSubStatPage } from '#/pages/Service/ServiceSubStatPage'
+import { DashboardPage } from '#/pages/MainPage'
 
 const Routes = () => {
     return useRoutes([
@@ -31,7 +31,7 @@ const Routes = () => {
                 {
                     element: <MainLayout />,
                     children: [
-                        { path: '/', element: <Dashboard /> },
+                        { path: '/', element: <DashboardPage /> },
                         // 서비스 현황
                         { path: '/service-status/history', element: <ServiceHistoryPage /> },
                         {

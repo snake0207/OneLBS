@@ -9,6 +9,7 @@ import SearchFilter from '../Filter'
 import { columns } from './grid-columns'
 import ResponseCodeStat from './RespCodeStat'
 import LocationLookUpStat from './LocationLookUpStat'
+import { useDashboardActions } from '#/store/useDashboardStore'
 
 const TitleArea = ({ title }) => {
     return (
@@ -37,6 +38,7 @@ const TitleArea = ({ title }) => {
 }
 
 function Dashboard() {
+    const { resetDashboardStore } = useDashboardActions()
     const [isQueryState, setIsQueryState] = useState(false)
     const [fetchData, setFetchData] = useState({ count: 0, lists: [] })
     const [queryParams, setQueryParams] = useState({
@@ -49,7 +51,7 @@ function Dashboard() {
 
     // row 클릭한 경우 상세 페이지 노출
     // eslint-disable-next-line no-empty-pattern
-    const handleSelectRow = ({ }) => { }
+    const handleSelectRow = ({}) => {}
 
     // 검색 버튼 누른 경우
     const handleSearch = (values) => {
@@ -84,6 +86,10 @@ function Dashboard() {
     }, [isQueryState, apiResult])
 
     // console.log('fetchData : ', fetchData)
+
+    useEffect(() => {
+        resetDashboardStore()
+    }, [])
 
     return (
         <Box>

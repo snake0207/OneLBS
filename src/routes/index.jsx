@@ -21,7 +21,7 @@ import { BtsInfoMapPage } from '#/pages/Facility/BtsInfoPage'
 import { WifiInfoMapPage } from '#/pages/Facility/WiFiInfoPage'
 import { EngineEditPage } from '#/pages/System/EnginePage'
 import { ServiceSubStatPage } from '#/pages/Service/ServiceSubStatPage'
-import { DashboardPage } from '#/pages/MainPage'
+import { DashboardPage } from '#/pages/Dashboard'
 
 const Routes = () => {
     return useRoutes([

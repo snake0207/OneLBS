@@ -1,16 +1,16 @@
+import { Box, Typography } from '@mui/material'
 import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { Box, Typography } from '@mui/material'
 
 import TitleBar from '#/components/common/menu/TitleBar'
 import CustomDataGrid from '#/components/common/table/datagrid'
 import { useGetUEs, usePostDeleteUEs } from '#/hooks/queries/system'
 
+import { MuiSubButton } from '#/components/common/button/MuiButton'
+import MuiAlert from '#/components/common/popup/MuiAlert'
+import MuiDialog from '#/components/common/popup/MuiDialog'
 import SearchFilter from '../Filter'
 import { columns } from './grid-columns'
-import { MuiSubButton } from '#/components/common/button/MuiButton'
-import MuiDialog from '#/components/common/popup/MuiDialog'
-import MuiAlert from '#/components/common/popup/MuiAlert'
 
 const UeModelList = () => {
     const navigate = useNavigate()

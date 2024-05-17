@@ -2,14 +2,14 @@ import TitleBar from '#/components/common/menu/TitleBar'
 import CustomDataGrid from '#/components/common/table/datagrid'
 import { useDashboardStat } from '#/hooks/queries/dashboard'
 
+import LocationLookUpStat from '#/components/dashboard/LocationLookupTraffic'
+import ResponseCodeStat from '#/components/dashboard/ResponseCodeStat'
+import { useDashboardActions } from '#/store/useDashboardStore'
 import PlaylistAddCheckOutlinedIcon from '@mui/icons-material/PlaylistAddCheckOutlined'
 import { Box, Table, TableBody, TableCell, TableRow, Typography } from '@mui/material'
 import { useEffect, useState } from 'react'
 import SearchFilter from '../Filter'
 import { columns } from './grid-columns'
-import { useDashboardActions } from '#/store/useDashboardStore'
-import LocationLookUpStat from '#/components/dashboard/LocationLookupTraffic'
-import ResponseCodeStat from '#/components/dashboard/ResponseCodeStat'
 
 const TitleArea = ({ title }) => {
     return (
@@ -51,7 +51,7 @@ function Dashboard() {
 
     // row 클릭한 경우 상세 페이지 노출
     // eslint-disable-next-line no-empty-pattern
-    const handleSelectRow = ({}) => {}
+    const handleSelectRow = ({ }) => { }
 
     // 검색 버튼 누른 경우
     const handleSearch = (values) => {

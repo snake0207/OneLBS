@@ -1,30 +1,29 @@
-import { useEffect, useState } from 'react'
-import { useFormik } from 'formik'
+import SettingsSuggestOutlinedIcon from '@mui/icons-material/SettingsSuggestOutlined'
 import {
     Box,
-    Table,
-    TableHead,
-    TableRow,
-    TableCell,
-    Typography,
-    TableBody,
     Button,
-    TextField,
     Checkbox,
     FormControlLabel,
+    Table,
+    TableBody,
+    TableCell,
+    TableHead,
+    TableRow,
+    TextField,
+    Typography,
 } from '@mui/material'
-import SettingsSuggestOutlinedIcon from '@mui/icons-material/SettingsSuggestOutlined'
+import { useFormik } from 'formik'
+import { useEffect, useState } from 'react'
 
+import { MuiMainButton } from '#/components/common/button/MuiButton'
 import TitleBar from '#/components/common/menu/TitleBar'
 import MuiDialog from '#/components/common/popup/MuiDialog'
-import { MuiMainButton } from '#/components/common/button/MuiButton'
 
-import style from './style.module'
-import MuiAlert from '#/components/common/popup/MuiAlert'
-import { engineConfig } from '#/mock/data/engine.json'
-import Select from '#/components/common/Select'
 import { getDataTypeList } from '#/common/libs/service'
+import Select from '#/components/common/Select'
+import MuiAlert from '#/components/common/popup/MuiAlert'
 import { useGetEngine, usePostUpdateEngine } from '#/hooks/queries/system'
+import style from './style.module'
 
 const DataTypes = {
     TEXT: 0,

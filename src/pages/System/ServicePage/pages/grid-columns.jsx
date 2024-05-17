@@ -1,5 +1,5 @@
-import { Typography } from '@mui/material'
 import { getServiceTypeLabel } from '#/common/libs/service'
+import { Typography } from '@mui/material'
 
 export const columns = [
     {
@@ -41,7 +41,13 @@ export const columns = [
         headerName: '서비스 유형',
         flex: 1,
         renderCell: (params) => {
-            return <Typography>{getServiceTypeLabel[params.row.serviceType] !== undefined ? getServiceTypeLabel[params.row.serviceType].label : `${params.row.serviceType} is not exist`}</Typography>
+            return (
+                <Typography>
+                    {getServiceTypeLabel[params.row.serviceType] !== undefined
+                        ? getServiceTypeLabel[params.row.serviceType].label
+                        : `${params.row.serviceType} is not exist`}
+                </Typography>
+            )
         },
     },
     {

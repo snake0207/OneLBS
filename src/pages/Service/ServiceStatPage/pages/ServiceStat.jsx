@@ -1,13 +1,13 @@
+import { Box, Typography } from '@mui/material'
 import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { Box, Typography } from '@mui/material'
 
 import TitleBar from '#/components/common/menu/TitleBar'
 import CustomDataGrid from '#/components/common/table/datagrid'
 
+import { useGetServiceStat } from '#/hooks/queries/service'
 import SearchFilter from '../Filter'
 import { columns } from './grid-columns'
-import { useGetServiceStat } from '#/hooks/queries/service'
 
 const filterColumns = (params) => {
     console.log('params : ', params)
@@ -50,7 +50,7 @@ const ServiceStat = () => {
     }
 
     // row 클릭한 경우 상세 페이지 노출
-    const handleSelectRow = ({ row }) => {}
+    const handleSelectRow = ({ row }) => { }
 
     // 리스트 하단의 페이지 이동 버튼 click시 동작
     const handleOnPageChange = (currPage) => {

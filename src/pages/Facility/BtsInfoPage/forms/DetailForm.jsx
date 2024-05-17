@@ -1,13 +1,13 @@
-import { useEffect, useState } from 'react'
-import { Box, Table, TableHead, TableRow, TableCell, Typography, TableBody } from '@mui/material'
 import PlaylistAddCheckOutlinedIcon from '@mui/icons-material/PlaylistAddCheckOutlined'
+import { Box, Table, TableBody, TableCell, TableRow, Typography } from '@mui/material'
+import { useEffect, useState } from 'react'
 
 import TitleBar from '#/components/common/menu/TitleBar'
 
-import style from './style.module'
-import SearchFilter from '../Filter'
-import { useGetFacilityBtsSearch } from '#/hooks/queries/facility'
 import { OllehMap } from '#/components/common/map/ollehMap'
+import { useGetFacilityBtsSearch } from '#/hooks/queries/facility'
+import SearchFilter from '../Filter'
+import style from './style.module'
 
 const TitleArea = ({ title }) => {
     return (
@@ -113,9 +113,7 @@ const DetailForm = () => {
 
                 {/* 지도 영역 */}
                 <Box sx={{ width: '100%', height: '400px' }}>
-                    {!isQueryState && locations.length && (
-                        <OllehMap locations={[...locations]} />
-                    )}
+                    {!isQueryState && locations.length && <OllehMap locations={[...locations]} />}
                 </Box>
             </Box>
         </Box>

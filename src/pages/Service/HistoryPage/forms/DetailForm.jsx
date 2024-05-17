@@ -1,34 +1,34 @@
+import CloseIcon from '@mui/icons-material/Close'
+import PlaylistAddCheckOutlinedIcon from '@mui/icons-material/PlaylistAddCheckOutlined'
+import {
+    Box,
+    Stack,
+    Table,
+    TableBody,
+    TableCell,
+    TableContainer,
+    TableHead,
+    TableRow,
+    Typography,
+} from '@mui/material'
 import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router'
 import { useLocation } from 'react-router-dom'
-import {
-    Box,
-    Table,
-    TableHead,
-    TableRow,
-    TableCell,
-    Typography,
-    TableBody,
-    Stack,
-    TableContainer,
-} from '@mui/material'
-import CloseIcon from '@mui/icons-material/Close'
-import PlaylistAddCheckOutlinedIcon from '@mui/icons-material/PlaylistAddCheckOutlined'
 
 import TitleBar from '#/components/common/menu/TitleBar'
 
-import style from './style.module'
-import { useGetServiceHistoryDetail } from '#/hooks/queries/service'
-import { OllehMap } from '#/components/common/map/ollehMap'
 import {
     getBtsTypeListLabel,
     getCenterLabel,
     getPosMethodHistoryLabel,
 } from '#/common/libs/service'
+import { OllehMap } from '#/components/common/map/ollehMap'
+import { useGetServiceHistoryDetail } from '#/hooks/queries/service'
+import style from './style.module'
 
 import CellIcon from '#/components/common/map/ollehMap/img/cell.png'
-import WiFiIcon from '#/components/common/map/ollehMap/img/wifi.png'
 import GnssIcon from '#/components/common/map/ollehMap/img/gnss.png'
+import WiFiIcon from '#/components/common/map/ollehMap/img/wifi.png'
 
 // todo 중복 코드 제거
 const MainTitleArea = ({ title }) => {

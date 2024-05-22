@@ -25,8 +25,6 @@ import {
     getPosMethodHistoryLabel,
 } from '#/common/libs/service'
 import OllehMap from '../pages/OllehMap'
-import { useGetServiceHistoryDetail } from '#/hooks/queries/service'
-import style from './style.module'
 
 import CellIcon from '#/components/common/map/ollehMap/img/cell.png'
 import GnssIcon from '#/components/common/map/ollehMap/img/gnss.png'

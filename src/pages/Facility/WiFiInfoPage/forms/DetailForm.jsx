@@ -28,7 +28,6 @@ import { useFormik } from 'formik'
 import TextInput from '#/components/common/input/TextInput'
 import MuiDialog from '#/components/common/popup/MuiDialog'
 import MuiAlert from '#/components/common/popup/MuiAlert'
-// import { OllehMap } from '#/components/common/map/ollehMap'
 import { gradeTypeLabel } from '#/common/libs/facility'
 import OllehMap from './OllehMap'
 

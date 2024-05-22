@@ -19,7 +19,6 @@ import TitleBar from '#/components/common/menu/TitleBar'
 
 import style from './style.module'
 import { useGetServiceHistoryDetail } from '#/hooks/queries/service'
-import { OllehMap } from '#/components/common/map/ollehMap'
 import {
     getBtsTypeListLabel,
     getCenterLabel,
@@ -29,6 +28,7 @@ import {
 import CellIcon from '#/components/common/map/ollehMap/img/cell.png'
 import WiFiIcon from '#/components/common/map/ollehMap/img/wifi.png'
 import GnssIcon from '#/components/common/map/ollehMap/img/gnss.png'
+import OllehMap from '../pages/OllehMap'
 
 // todo 중복 코드 제거
 const MainTitleArea = ({ title }) => {

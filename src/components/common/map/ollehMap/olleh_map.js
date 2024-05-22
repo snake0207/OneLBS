@@ -8,16 +8,22 @@ import CellIcon from '#/components/common/map/ollehMap/img/cell.png'
 import WiFiIcon from '#/components/common/map/ollehMap/img/wifi.png'
 import GnssIcon from '#/components/common/map/ollehMap/img/gnss.png'
 
+// const show = (p) => console.log('Outer coord : ', p)
 const initMap = (_div, location, _zoom) => {
     const mapOpts = {
-        center: location,
         zoom: _zoom,
+        center: location,
         mapTypeId: 'ROADMAP', // SATELLITE, HYBRID
         panControl: false,
     }
 
     const map = new olleh.maps.Map(_div, mapOpts)
-    return map || null
+
+    return map
+}
+
+const onEventMapClick = (_map, callback, onMapClick) => {
+    _map.onEvent('click', (e) => callback(_map, e.getCoord(), onMapClick), this, true)
 }
 
 const initCenter = (lat, lng) => new olleh.maps.LatLng(lat, lng)
@@ -72,16 +78,20 @@ const drawMarker = (_mapInstance, loc, isBounce = false, onMarkerClick) => {
 }
 
 const clearMarker = (markerArrs) => {
-    markerArrs.map((marker) => {
-        // console.log(marker._id, ' is detach..')
+    const _ret = markerArrs.map((marker) => {
+        console.log(marker)
         marker.detach()
         marker.setMap(null)
     })
+    console.log('_ret : ', _ret)
 }
 
 const moveCenter = (_mapInstance, loc, zoom) => {
     _mapInstance.panTo(new olleh.maps.LatLng(loc.latitude, loc.longitude), zoom)
 }
+
+const getLatLng = (coord) => new olleh.maps.LatLng.valueOf(coord)
+const getUTMK = (coord) => new olleh.maps.UTMK.valueOf(coord)
 
 const drawHexGrid = (map, arrGridX, arrGridY, arrRssi) => {
     // console.log('drawHexGrid : ', map, arrGridX)
@@ -180,6 +190,8 @@ export default {
     setCenter,
     getCenter,
     setZoomLevel,
+    getLatLng,
+    getUTMK,
     drawHexGrid,
     getDistance,
     setZoomWithDistance,
@@ -187,4 +199,5 @@ export default {
     drawMarker,
     clearMarker,
     moveCenter,
+    onEventMapClick,
 }

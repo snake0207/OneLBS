@@ -28,8 +28,9 @@ import { useFormik } from 'formik'
 import TextInput from '#/components/common/input/TextInput'
 import MuiDialog from '#/components/common/popup/MuiDialog'
 import MuiAlert from '#/components/common/popup/MuiAlert'
-import { OllehMap } from '#/components/common/map/ollehMap'
+// import { OllehMap } from '#/components/common/map/ollehMap'
 import { gradeTypeLabel } from '#/common/libs/facility'
+import OllehMap from './OllehMap'
 
 const formikInitValues = {
     mac: '',
@@ -52,7 +53,7 @@ const formikInitValues = {
 const DetailForm = () => {
     const navigate = useNavigate()
     const [isQueryState, setIsQueryState] = useState(false)
-    const [modeToggle, setModeToggle] = useState(false)
+    const [modeCreate, setModeCreate] = useState(false)
     const [apiSuccess, setApiSuccess] = useState('')
     const [state, setState] = useState({
         edit: false,
@@ -104,7 +105,7 @@ const DetailForm = () => {
 
     // 검색 버튼 누른 경우
     const handleSearch = (values) => {
-        setModeToggle(false)
+        setModeCreate(false)
         setQueryParams({ ...queryParams, ...values })
         setIsQueryState(true)
     }
@@ -167,11 +168,8 @@ const DetailForm = () => {
     }
 
     const handleInputAllClear = () => {
-        console.log('handleInputAllClear...')
+        console.log('handleInputAllClear()...')
         formik.setValues({ ...formikInitValues })
-        setLocations([init_pos])
-        setQueryParams({ mac: '000000000', source: 'W' })
-        setIsQueryState(true)
     }
 
     const handleClickSave = () => {
@@ -201,39 +199,45 @@ const DetailForm = () => {
         }))
     }
 
+    const handleMapClick = (wgs84) => {
+        console.log('handleMapClick... : ', wgs84)
+        formik.setFieldValue('vap.wgs84', wgs84)
+    }
+
+    const setFormikValueApiResult = () => {
+        formik.setValues({ ...apiResult?.data })
+        formik.setFieldValue('grade', apiResult?.data?.grade || 0)
+        formik.setFieldValue('building', apiResult?.data?.building || '')
+        formik.setFieldValue('floor', apiResult?.data?.floor || '')
+        formik.setFieldValue('updDate', apiResult?.data?.updDate || '')
+        const vap = {
+            utmk: {
+                longitude: apiResult?.data?.vap?.utmk[0],
+                latitude: apiResult?.data?.vap?.utmk[1],
+            },
+            wgs84: {
+                longitude: apiResult?.data?.vap?.wgs84[0],
+                latitude: apiResult?.data?.vap?.wgs84[1],
+            },
+        }
+        formik.setFieldValue('vap', vap)
+        setLocations([
+            {
+                ...vap.wgs84,
+                title: apiResult?.data?.building || apiResult?.data?.ssid || '',
+            },
+        ])
+    }
+
     useEffect(() => {
         if (isQueryState && apiResult) {
             console.log('apiResult : ', apiResult)
             setIsQueryState(false)
             if (apiResult?.code === '0000') {
-                formik.setValues({ ...apiResult?.data })
-                formik.setFieldValue('grade', apiResult?.data?.grade || 0)
-                formik.setFieldValue('building', apiResult?.data?.building || '')
-                formik.setFieldValue('floor', apiResult?.data?.floor || '')
-                formik.setFieldValue('updDate', apiResult?.data?.updDate || '')
-                const vap = {
-                    utmk: {
-                        longitude: apiResult?.data?.vap?.utmk[0],
-                        latitude: apiResult?.data?.vap?.utmk[1],
-                    },
-                    wgs84: {
-                        longitude: apiResult?.data?.vap?.wgs84[0],
-                        latitude: apiResult?.data?.vap?.wgs84[1],
-                    },
-                }
-                formik.setFieldValue('vap', vap)
-                setLocations([
-                    {
-                        ...locations,
-                        ...vap.wgs84,
-                        title: apiResult?.data?.building || apiResult?.data?.ssid || '',
-                    },
-                ])
+                setFormikValueApiResult()
             }
         }
     }, [apiResult, queryParams])
-
-    console.log('locations >> ', locations)
 
     return (
         <Box>
@@ -256,12 +260,12 @@ const DetailForm = () => {
                         </Typography>
                     </Box>
                     <Box>
-                        {modeToggle ? (
+                        {modeCreate ? (
                             <Button
                                 type="text"
                                 onClick={() => {
-                                    apiResult?.code === '0000' && formik.setValues(apiResult?.data)
-                                    setModeToggle((prev) => !prev)
+                                    setModeCreate(false)
+                                    apiResult?.code === '0000' && setFormikValueApiResult()
                                 }}
                                 startIcon={<ChangeCircleOutlinedIcon />}
                             >{`편집 화면으로 전환`}</Button>
@@ -270,7 +274,7 @@ const DetailForm = () => {
                                 type="text"
                                 onClick={() => {
                                     handleInputAllClear()
-                                    setModeToggle((prev) => !prev)
+                                    setModeCreate(true)
                                 }}
                                 startIcon={<ChangeCircleOutlinedIcon />}
                             >{`등록 화면으로 전환`}</Button>
@@ -345,27 +349,38 @@ const DetailForm = () => {
 
                 {/* 측위 목록 */}
                 <Box sx={{ width: '100%', height: '400px', mb: 4 }}>
-                    {!isQueryState && locations.length && (
+                    {!isQueryState && locations.length > 0 && (
                         <OllehMap
+                            // key={Math.random()}
                             locations={[...locations]}
                             gridX={
-                                apiResult?.data?.hasOwnProperty('gridX')
-                                    ? formik.values.gridX
-                                    : null
+                                modeCreate
+                                    ? null
+                                    : apiResult?.code === '0000'
+                                      ? formik.values.gridX
+                                      : null
                             }
                             gridY={
-                                apiResult?.data?.hasOwnProperty('gridY')
-                                    ? formik.values.gridY
-                                    : null
+                                modeCreate
+                                    ? null
+                                    : apiResult?.code === '0000'
+                                      ? formik.values.gridY
+                                      : null
                             }
                             rssi={
-                                apiResult?.data?.hasOwnProperty('rssi') ? formik.values.rssi : null
+                                modeCreate
+                                    ? null
+                                    : apiResult?.code === '0000'
+                                      ? formik.values.rssi
+                                      : null
                             }
+                            modeCreate={modeCreate}
+                            onMapClick={(wgs84) => handleMapClick(wgs84)}
                         />
                     )}
                 </Box>
                 {/* 하단 버튼 */}
-                {modeToggle ? (
+                {modeCreate ? (
                     <Box align={'right'}>
                         <Stack spacing={2} direction="row" sx={{ justifyContent: 'flex-end' }}>
                             <MuiMainButton

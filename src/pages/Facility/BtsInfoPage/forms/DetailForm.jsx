@@ -7,7 +7,9 @@ import TitleBar from '#/components/common/menu/TitleBar'
 import style from './style.module'
 import SearchFilter from '../Filter'
 import { useGetFacilityBtsSearch } from '#/hooks/queries/facility'
-import { OllehMap } from '#/components/common/map/ollehMap'
+// import { OllehMap } from '#/components/common/map/ollehMap'
+import OllehMap from './OllehMap'
+import MuiAlert from '#/components/common/popup/MuiAlert'
 
 const TitleArea = ({ title }) => {
     return (
@@ -29,6 +31,7 @@ const TitleArea = ({ title }) => {
 
 const DetailForm = () => {
     const [isQueryState, setIsQueryState] = useState(false)
+    const [apiSuccess, setApiSuccess] = useState('')
     const [queryParams, setQueryParams] = useState({})
     const init_pos = {
         longitude: 127.1279874,
@@ -52,6 +55,8 @@ const DetailForm = () => {
             setIsQueryState(false)
             if (apiResult?.code === '0000') {
                 setLocations([apiResult?.data])
+            } else {
+                setApiSuccess(`QUERY API RESULT : ${apiResult?.message}`)
             }
         }
     }, [apiResult, queryParams])
@@ -113,8 +118,13 @@ const DetailForm = () => {
 
                 {/* 지도 영역 */}
                 <Box sx={{ width: '100%', height: '400px' }}>
-                    {!isQueryState && locations.length && (
-                        <OllehMap locations={[...locations]} />
+                    {!isQueryState && locations.length && <OllehMap locations={[...locations]} />}
+                    {apiSuccess && (
+                        <MuiAlert
+                            msg={apiSuccess}
+                            autoHideDuration={5000}
+                            callback={() => setApiSuccess('')}
+                        />
                     )}
                 </Box>
             </Box>

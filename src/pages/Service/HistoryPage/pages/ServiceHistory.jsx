@@ -8,12 +8,11 @@ import CustomDataGrid from '#/components/common/table/datagrid'
 import SearchFilter from '../Filter'
 import { columns } from './grid-columns'
 import { useGetServiceHistory } from '#/hooks/queries/service'
-import { OllehMap } from '#/components/common/map/ollehMap'
+import OllehMap from './OllehMap'
 
 const ServiceHistory = () => {
     const navigate = useNavigate()
     const [isQueryState, setIsQueryState] = useState(false)
-    const [isSearchClick, setIsSearchClick] = useState(false)
     const [fetchData, setFetchData] = useState({ count: 0, lists: [] })
     const init_pos = {
         longitude: 127.1279874,
@@ -35,7 +34,6 @@ const ServiceHistory = () => {
         setLocations([])
         setQueryParams({ ...queryParams, ...values, page: 1 })
         setIsQueryState(true)
-        // setIsSearchClick(true)
     }
 
     // row 클릭한 경우 상세 페이지 노출
@@ -59,14 +57,13 @@ const ServiceHistory = () => {
         if (currPage > 0 && rowCount >= fetchData.lists.length) {
             setQueryParams({ ...queryParams, page: queryParams.page + 1 })
             setIsQueryState(true)
-            // setIsSearchClick(true)
         }
     }
 
     useEffect(() => {
         if (isQueryState && apiResult) {
+            console.log('apiResult : ', apiResult)
             setIsQueryState(false)
-            // setIsSearchClick(false)
             if (apiResult?.code === '0000') {
                 const { totalCount, lists } = apiResult?.data
                 setFetchData({ count: totalCount, lists: [...fetchData.lists, ...lists] })
@@ -80,6 +77,8 @@ const ServiceHistory = () => {
                         title: item.resDate,
                     }))
                 setLocations(nArrs)
+            } else {
+                setLocations([init_pos])
             }
         }
     }, [apiResult, queryParams])

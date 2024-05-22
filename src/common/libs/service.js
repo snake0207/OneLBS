@@ -1,5 +1,4 @@
 // 서비스 유형
-
 export const getServiceTypeList = () => [
     { key: 'E', value: 'E', label: `긴급` },
     { key: 'N', value: 'N', label: `일반` },

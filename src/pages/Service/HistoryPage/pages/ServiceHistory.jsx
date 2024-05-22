@@ -1,13 +1,13 @@
+import { Box, Typography } from '@mui/material'
 import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { Box, Typography } from '@mui/material'
 
 import TitleBar from '#/components/common/menu/TitleBar'
 import CustomDataGrid from '#/components/common/table/datagrid'
 
+import { useGetServiceHistory } from '#/hooks/queries/service'
 import SearchFilter from '../Filter'
 import { columns } from './grid-columns'
-import { useGetServiceHistory } from '#/hooks/queries/service'
 import OllehMap from './OllehMap'
 
 const ServiceHistory = () => {

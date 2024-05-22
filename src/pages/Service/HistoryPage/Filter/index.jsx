@@ -1,22 +1,11 @@
 import { useFormik } from 'formik'
-import {
-    Box,
-    FormGroup,
-    Stack,
-    Table,
-    TableCell,
-    TableHead,
-    TableRow,
-    Typography,
-} from '@mui/material'
+import { Box, Stack, Table, TableCell, TableHead, TableRow, Typography } from '@mui/material'
 
 import { MuiSubButton } from '#/components/common/button/MuiButton'
 
 import style from './style.module'
-import Select from '#/components/common/Select'
 import DatePickerInput from '#/components/common/input/DatePickerInput'
 import TimePickerInput from '#/components/common/input/TimePickerInput'
-import CheckBox from '#/components/common/input/CheckBox'
 import TextInput from '#/components/common/input/TextInput'
 
 function SearchFilter({ onSearch }) {

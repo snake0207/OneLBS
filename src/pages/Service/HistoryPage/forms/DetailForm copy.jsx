@@ -1,4 +1,3 @@
-import CloseIcon from '@mui/icons-material/Close'
 import PlaylistAddCheckOutlinedIcon from '@mui/icons-material/PlaylistAddCheckOutlined'
 import {
     Box,
@@ -17,44 +16,18 @@ import { useLocation } from 'react-router-dom'
 
 import TitleBar from '#/components/common/menu/TitleBar'
 
-import style from './style.module'
-import { useGetServiceHistoryDetail } from '#/hooks/queries/service'
 import {
     getBtsTypeListLabel,
     getCenterLabel,
     getPosMethodHistoryLabel,
 } from '#/common/libs/service'
-import OllehMap from '../pages/OllehMap'
+import { OllehMap } from '#/components/common/map/ollehMap'
 import { useGetServiceHistoryDetail } from '#/hooks/queries/service'
 import style from './style.module'
 
 import CellIcon from '#/components/common/map/ollehMap/img/cell.png'
 import GnssIcon from '#/components/common/map/ollehMap/img/gnss.png'
 import WiFiIcon from '#/components/common/map/ollehMap/img/wifi.png'
-
-// todo 중복 코드 제거
-const MainTitleArea = ({ title }) => {
-    const navigate = useNavigate()
-    return (
-        <Box display="flex" alignItems="center" mb={2}>
-            <PlaylistAddCheckOutlinedIcon />
-            <Typography
-                sx={{
-                    ml: 1,
-                    fontSize: '16px',
-                    fontWeight: 500,
-                    color: 'text.darkgray',
-                }}
-            >
-                {title}
-            </Typography>
-            <CloseIcon
-                sx={{ align: 'right', marginLeft: 'auto' }}
-                onClick={() => navigate(-1)}
-            ></CloseIcon>
-        </Box>
-    )
-}
 
 const TitleArea = ({ title }) => {
     return (
@@ -78,14 +51,14 @@ const DetailForm = () => {
     const {
         state: { row },
     } = useLocation()
-
+    const navigate = useNavigate()
     const init_pos = {
-        latitude: 37.3998912,
         longitude: 127.1279874,
+        latitude: 37.3998912,
         title: 'KT 분당',
     }
     const [bounceRow, setBounceRow] = useState({})
-    const [locations, setLocations] = useState([])
+    const [locations, setLocations] = useState([init_pos])
     const [isQueryState, setIsQueryState] = useState(true)
     const { data: apiResult } = useGetServiceHistoryDetail(
         { trId: row?.trId },
@@ -107,19 +80,17 @@ const DetailForm = () => {
     useEffect(() => {
         if (isQueryState && apiResult) {
             console.log('Detail apiResult : ', apiResult)
+            setIsQueryState(false)
             if (apiResult?.code === '0000') {
                 const setLists = [
                     ...filterArray('P', apiResult?.data?.posList.lists),
                     ...filterArray('B', apiResult?.data?.btsList.lists),
                     ...filterArray('W', apiResult?.data?.wifiList.lists),
                 ]
-                setLocations((prev) => setLists)
-            } else {
-                setLocations((prev) => [init_pos])
+                setLocations(setLists)
             }
-            setIsQueryState(false)
         }
-    }, [apiResult])
+    }, [apiResult, locations])
 
     locations.length > 0 && console.log('Detail locations : ', locations)
 
@@ -127,7 +98,8 @@ const DetailForm = () => {
         <Box>
             <TitleBar title={`측위 결과 상세`} />
             <Box sx={style.contentBox}>
-                <MainTitleArea title={`측위 결과 요약`} />
+                <TitleArea title={`측위 결과 요약`} />
+
                 <Table sx={style.table_base}>
                     <TableHead>
                         {/* row - 1 */}
@@ -144,30 +116,19 @@ const DetailForm = () => {
                             <TableCell sx={{ width: '6%' }}>{`결과`}</TableCell>
                             <TableCell sx={{ width: '8%' }}>{`응답(초)`}</TableCell>
                         </TableRow>
-                        {row?.center ? (
-                            <TableRow>
-                                <TableCell>{getCenterLabel[row?.center].label}</TableCell>
-                                <TableCell>{row?.reqDate}</TableCell>
-                                <TableCell>{row?.resDate}</TableCell>
-                                <TableCell>{row?.serviceName}</TableCell>
-                                <TableCell>{row?.opType}</TableCell>
-                                <TableCell>{row?.reqMdn}</TableCell>
-                                <TableCell>{row?.targetMdn}</TableCell>
-                                <TableCell>
-                                    {getPosMethodHistoryLabel[row?.posMethod].label}
-                                </TableCell>
-                                <TableCell>{row?.model}</TableCell>
-                                <TableCell>{row?.result}</TableCell>
-                                <TableCell>{row?.respTime}</TableCell>
-                            </TableRow>
-                        ) : (
-                            <TableRow>
-                                <TableCell
-                                    colSpan={11}
-                                    align={`center`}
-                                >{`No data Found`}</TableCell>
-                            </TableRow>
-                        )}
+                        <TableRow>
+                            <TableCell>{getCenterLabel[row?.center].label}</TableCell>
+                            <TableCell>{row?.reqDate}</TableCell>
+                            <TableCell>{row?.resDate}</TableCell>
+                            <TableCell>{row?.serviceName}</TableCell>
+                            <TableCell>{row?.opType}</TableCell>
+                            <TableCell>{row?.reqMdn}</TableCell>
+                            <TableCell>{row?.targetMdn}</TableCell>
+                            <TableCell>{getPosMethodHistoryLabel[row?.posMethod].label}</TableCell>
+                            <TableCell>{row?.model}</TableCell>
+                            <TableCell>{row?.result}</TableCell>
+                            <TableCell>{row?.respTime}</TableCell>
+                        </TableRow>
                     </TableHead>
                 </Table>
 
@@ -182,7 +143,7 @@ const DetailForm = () => {
                 >
                     <Box
                         sx={{
-                            width: '45%',
+                            width: '55%',
                             display: 'flex',
                             flexDirection: 'column',
                             justifyContent: 'space-between',
@@ -214,9 +175,9 @@ const DetailForm = () => {
                                                         onClick={() => {
                                                             item.longitude > 0
                                                                 ? setBounceRow({
-                                                                      ...item,
-                                                                      id: `P_${item.id}`,
-                                                                  })
+                                                                    ...item,
+                                                                    id: `P_${item.id}`,
+                                                                })
                                                                 : null
                                                         }}
                                                     >
@@ -285,17 +246,17 @@ const DetailForm = () => {
                                                         onClick={() => {
                                                             item.longitude > 0
                                                                 ? setBounceRow({
-                                                                      ...item,
-                                                                      id: `B_${item.id}`,
-                                                                  })
+                                                                    ...item,
+                                                                    id: `B_${item.id}`,
+                                                                })
                                                                 : null
                                                         }}
                                                     >
                                                         <TableCell>
                                                             {getBtsTypeListLabel[item.network] !==
-                                                            undefined
+                                                                undefined
                                                                 ? getBtsTypeListLabel[item.network]
-                                                                      .label
+                                                                    .label
                                                                 : `${item.network} Unknown`}
                                                         </TableCell>
                                                         <TableCell>{item.cellid}</TableCell>
@@ -422,7 +383,7 @@ const DetailForm = () => {
                             </TableContainer>
                         </Box>
                     </Box>
-                    <Box sx={{ width: '55%', mt: 5 }}>
+                    <Box sx={{ width: '48%' }}>
                         {!isQueryState && locations.length > 0 && (
                             <OllehMap locations={[...locations]} bounceMarker={bounceRow} />
                         )}

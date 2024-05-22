@@ -1,21 +1,21 @@
-import { useEffect, useState } from 'react'
+import CreateIcon from '@mui/icons-material/Create'
+import { Box, Stack, Table, TableCell, TableHead, TableRow, Typography } from '@mui/material'
+import { useFormik } from 'formik'
+import { useState } from 'react'
 import { useNavigate } from 'react-router'
 import { useLocation } from 'react-router-dom'
-import { useFormik } from 'formik'
-import { Box, Table, TableHead, TableRow, TableCell, Typography, Stack } from '@mui/material'
-import CreateIcon from '@mui/icons-material/Create'
 
+import { MuiMainButton } from '#/components/common/button/MuiButton'
 import TextInput from '#/components/common/input/TextInput'
 import TitleBar from '#/components/common/menu/TitleBar'
 import MuiDialog from '#/components/common/popup/MuiDialog'
-import { MuiMainButton } from '#/components/common/button/MuiButton'
 import { registUserSchema } from '#/contents/validationSchema'
 
-import style from './style.module'
+import Select from '#/components/common/Select'
 import MuiAlert from '#/components/common/popup/MuiAlert'
 import { usePostDeleteUser, usePostUpdateUser } from '#/hooks/queries/user'
-import Select from '#/components/common/Select'
 import { authTypeList } from '../authType'
+import style from './style.module'
 
 const EditForm = () => {
     const {

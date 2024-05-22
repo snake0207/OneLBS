@@ -1,5 +1,3 @@
-import { fontSize } from '@mui/system'
-
 const style = {
     contentBox: {
         width: '100%',

@@ -1,22 +1,21 @@
+import CreateIcon from '@mui/icons-material/Create'
+import HighlightOffOutlinedIcon from '@mui/icons-material/HighlightOffOutlined'
+import { Box, Stack, Table, TableCell, TableHead, TableRow, Typography } from '@mui/material'
+import { useFormik } from 'formik'
 import { useState } from 'react'
 import { useNavigate } from 'react-router'
-import { useFormik } from 'formik'
-import { Box, Table, TableHead, TableRow, TableCell, Typography, Stack } from '@mui/material'
-import CreateIcon from '@mui/icons-material/Create'
-import RemoveCircleOutlineIcon from '@mui/icons-material/RemoveCircleOutline'
-import HighlightOffOutlinedIcon from '@mui/icons-material/HighlightOffOutlined'
 
+import { MuiMainButton } from '#/components/common/button/MuiButton'
+import CheckBox from '#/components/common/input/CheckBox'
 import TextInput from '#/components/common/input/TextInput'
 import TitleBar from '#/components/common/menu/TitleBar'
 import MuiDialog from '#/components/common/popup/MuiDialog'
-import { MuiMainButton } from '#/components/common/button/MuiButton'
-import CheckBox from '#/components/common/input/CheckBox'
-import { usePostRegistUE } from '#/hooks/queries/system'
 import { registUESchema } from '#/contents/validationSchema'
+import { usePostRegistUE } from '#/hooks/queries/system'
 
-import style from './style.module'
 import MuiAlert from '#/components/common/popup/MuiAlert'
 import SearchPopup from './SearchPopup'
+import style from './style.module'
 
 const CreateForm = () => {
     const navigate = useNavigate()

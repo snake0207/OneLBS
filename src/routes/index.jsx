@@ -1,7 +1,6 @@
 import { useRoutes } from 'react-router-dom'
 import AuthLayout from '#/layouts/AuthLayout'
 import MainLayout from '#/layouts/MainLayout'
-import MainPage from '#/pages/MainPage'
 import LoginPage from '#/pages/LoginPage'
 import EmptyLayout from '#/layouts/EmptyLayout'
 import NotFoundPage from '#/pages/NotFoundPage'
@@ -21,7 +20,8 @@ import { SyncHistoryPage } from '#/pages/Facility/SyncHistoryPage'
 import { BtsInfoMapPage } from '#/pages/Facility/BtsInfoPage'
 import { WifiInfoMapPage } from '#/pages/Facility/WiFiInfoPage'
 import { EngineEditPage } from '#/pages/System/EnginePage'
-import { ServiceSubStatPage } from '#/pages/Service/ServiceSubStatPage';
+import { ServiceSubStatPage } from '#/pages/Service/ServiceSubStatPage'
+import { DashboardPage } from '#/pages/Dashboard'
 
 const Routes = () => {
     return useRoutes([
@@ -31,7 +31,7 @@ const Routes = () => {
                 {
                     element: <MainLayout />,
                     children: [
-                        { path: '/', element: <MainPage /> },
+                        { path: '/', element: <DashboardPage /> },
                         // 서비스 현황
                         { path: '/service-status/history', element: <ServiceHistoryPage /> },
                         {

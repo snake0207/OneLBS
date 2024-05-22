@@ -1,15 +1,22 @@
-import { useEffect, useState } from 'react'
-import { Box, Table, TableHead, TableRow, TableCell, Typography, TableBody } from '@mui/material'
 import PlaylistAddCheckOutlinedIcon from '@mui/icons-material/PlaylistAddCheckOutlined'
+import { Box, Table, TableBody, TableCell, TableRow, Typography } from '@mui/material'
+import { useEffect, useState } from 'react'
 
 import TitleBar from '#/components/common/menu/TitleBar'
 
+<<<<<<< HEAD
 import style from './style.module'
 import SearchFilter from '../Filter'
 import { useGetFacilityBtsSearch } from '#/hooks/queries/facility'
 // import { OllehMap } from '#/components/common/map/ollehMap'
 import OllehMap from './OllehMap'
 import MuiAlert from '#/components/common/popup/MuiAlert'
+=======
+import { OllehMap } from '#/components/common/map/ollehMap'
+import { useGetFacilityBtsSearch } from '#/hooks/queries/facility'
+import SearchFilter from '../Filter'
+import style from './style.module'
+>>>>>>> onelbs-web/dev
 
 const TitleArea = ({ title }) => {
     return (
@@ -119,6 +126,7 @@ const DetailForm = () => {
                 {/* 지도 영역 */}
                 <Box sx={{ width: '100%', height: '400px' }}>
                     {!isQueryState && locations.length && <OllehMap locations={[...locations]} />}
+<<<<<<< HEAD
                     {apiSuccess && (
                         <MuiAlert
                             msg={apiSuccess}
@@ -126,6 +134,8 @@ const DetailForm = () => {
                             callback={() => setApiSuccess('')}
                         />
                     )}
+=======
+>>>>>>> onelbs-web/dev
                 </Box>
             </Box>
         </Box>

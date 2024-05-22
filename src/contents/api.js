@@ -1,4 +1,9 @@
 export const API_PATH = {
+    dashboard: {
+        location_lookup_traffic: '/api/dashboard/stat/traffic',
+        response_code_stat: '/api/dashboard/stat/code',
+        dashboard_stat: '/api/dashboard/stat',
+    },
     auth: {
         dummyToken: '/api/dummy',
         smscode: '/api/sms',

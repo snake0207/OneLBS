@@ -1,12 +1,12 @@
-import { useEffect, useState } from 'react'
 import { Box, Typography } from '@mui/material'
+import { useEffect, useState } from 'react'
 
 import TitleBar from '#/components/common/menu/TitleBar'
 import CustomDataGrid from '#/components/common/table/datagrid'
 
-import SearchFilter from '../Filter'
-import { columns, columnGroupingModel } from './grid-columns'
 import { useGetCrowdStat } from '#/hooks/queries/service'
+import SearchFilter from '../Filter'
+import { columnGroupingModel, columns } from './grid-columns'
 
 const CrowdStat = () => {
     const [isQueryState, setIsQueryState] = useState(false)
@@ -27,7 +27,7 @@ const CrowdStat = () => {
     }
 
     // row 클릭한 경우 상세 페이지 노출
-    const handleSelectRow = ({ row }) => {}
+    const handleSelectRow = ({ row }) => { }
 
     // 리스트 하단의 페이지 이동 버튼 click시 동작
     const handleOnPageChange = (currPage) => {

@@ -1,11 +1,11 @@
-import { DatePicker, LocalizationProvider } from '@mui/x-date-pickers'
-import { useState } from 'react'
-import dayjs from 'dayjs'
-import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
-import { Box } from '@mui/material'
 import DatePickerIcon from '#/assets/datePickerIcon.svg'
 import DatePickerIconDark from '#/assets/datePickerIconDark.svg'
 import useLayoutStore from '#/store/useLayoutStore'
+import { Box } from '@mui/material'
+import { DatePicker, LocalizationProvider } from '@mui/x-date-pickers'
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
+import dayjs from 'dayjs'
+import { useState } from 'react'
 
 function MuiIcon() {
     const { themeMode } = useLayoutStore()
@@ -20,16 +20,15 @@ function MuiIcon() {
     )
 }
 
-const DatePickerInput = ({ name, formik, disabled = false, additionalProps = {} }) => {
+const DatePickerInput = ({ name, formik, disabled = false, onChange }) => {
     const [dateError, setDateError] = useState(null)
 
     const stringToDayFormat = (stringDate) => (stringDate ? dayjs(stringDate) : null)
 
     const handleChangeDate = (newDate) => {
-        formik.setFieldValue(name, newDate?.format('YYYY-MM-DD') || null)
-        if (additionalProps.onChange) {
-            additionalProps.onChange(newDate?.format('YYYY-MM-DD'))
-        }
+        const date = newDate?.format('YYYY-MM-DD')
+        formik.setFieldValue(name, date || null)
+        onChange(date)
     }
 
     return (

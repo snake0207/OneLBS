@@ -1,17 +1,17 @@
+import SettingsSuggestOutlinedIcon from '@mui/icons-material/SettingsSuggestOutlined'
+import { Box, Table, TableBody, TableCell, TableHead, TableRow, Typography } from '@mui/material'
+import { useFormik } from 'formik'
 import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router'
-import { useFormik } from 'formik'
-import { Box, Table, TableHead, TableRow, TableCell, Typography, TableBody } from '@mui/material'
-import SettingsSuggestOutlinedIcon from '@mui/icons-material/SettingsSuggestOutlined'
 
-import TitleBar from '#/components/common/menu/TitleBar'
-import MuiDialog from '#/components/common/popup/MuiDialog'
 import { MuiMainButton } from '#/components/common/button/MuiButton'
 import CheckBox from '#/components/common/input/CheckBox'
+import TitleBar from '#/components/common/menu/TitleBar'
+import MuiDialog from '#/components/common/popup/MuiDialog'
 
-import style from './style.module'
 import MuiAlert from '#/components/common/popup/MuiAlert'
 import { useGetMenuPermission, usePostUpdatePermission } from '#/hooks/queries/user'
+import style from './style.module'
 
 const EditForm = () => {
     const navigate = useNavigate()

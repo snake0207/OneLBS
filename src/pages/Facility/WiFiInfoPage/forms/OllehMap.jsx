@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import ollehMap from '#/components/common/map/ollehMap/olleh_map'
 
 import { Box, ImageList, Stack, Typography } from '@mui/material'
+import PositionBlackIcon from '#/components/common/map/ollehMap/img/position_black.png'
 
 const rssiItems = [
     { img: 'hex50.png', title: 'rssi > -50' },
@@ -31,7 +32,7 @@ const OllehMap = ({
         title: locations[0].title,
     }
 
-    // console.log('OLLEHMAP : ', modeCreate)
+    console.log('locations : ', locations)
 
     let _marker
 
@@ -39,7 +40,7 @@ const OllehMap = ({
         if (_marker) {
             _marker.detach()
             _marker.setMap(null)
-            console.log('[click detach] : ', _marker._id)
+            console.log('[detach marker] : ', _marker._id)
         }
 
         let { y: latitude, x: longitude } = ollehMap.getLatLng(coord)
@@ -52,6 +53,8 @@ const OllehMap = ({
             title: `${latitude},${longitude}`,
         }
         _marker = ollehMap.drawMarker(map, _wgs84, false)
+        _marker.setIcon(PositionBlackIcon)
+        console.log('[create click-marker] : ', _marker._id)
         onMapClick(_wgs84)
     }
 
@@ -70,6 +73,11 @@ const OllehMap = ({
                 ollehMap.initCenter(_center.latitude, _center.longitude),
                 _zoom,
             )
+            // MAP 생성시 click 이벤트 활성화
+            map.onEvent('click', (e) => {
+                console.log('MAP Click Enable')
+                callback(map, e.getCoord(), onMapClick)
+            })
             setMapInstance(map)
         }
 
@@ -83,13 +91,9 @@ const OllehMap = ({
 
     useEffect(() => {
         if (mapInstance) {
-            if (_marker === null || _marker === undefined) {
+            if (!modeCreate && (_marker === null || _marker === undefined)) {
                 _marker = ollehMap.drawMarker(mapInstance, _center, false)
-                // ollehMap.setCenter(
-                //     mapInstance,
-                //     ollehMap.initCenter(_center.latitude, _center.longitude),
-                // )
-                // console.log('[marker init create] : ', _marker._id)
+                console.log('[create default-marker] : ', _marker._id)
             }
 
             Array.isArray(gridX) &&
@@ -105,20 +109,22 @@ const OllehMap = ({
         }
     }, [locations, mapInstance])
 
-    useEffect(() => {
-        if (modeCreate) {
-            mapInstance.onEvent('click', (e) => {
-                callback(mapInstance, e.getCoord(), onMapClick)
-            })
-        } else {
-            console.log('olleh map unregister event')
-            if (mapInstance) mapInstance.unsubscribeEvent('click')
-        }
+    // 등록 화면일 경우에만 click 이벤트 활성화
+    // useEffect(() => {
+    //     if (modeCreate) {
+    //         mapInstance.onEvent('click', (e) => {
+    //             console.log('Click event occured')
+    //             callback(mapInstance, e.getCoord(), onMapClick)
+    //         })
+    //     } else {
+    //         console.log('olleh map unregister event')
+    //         if (mapInstance) mapInstance.unsubscribeEvent('click')
+    //     }
 
-        return () => {
-            clearMarker()
-        }
-    }, [modeCreate])
+    //     return () => {
+    //         clearMarker()
+    //     }
+    // }, [modeCreate])
 
     return (
         <>

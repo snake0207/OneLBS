@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react'
-import { useNavigate } from 'react-router'
 import {
     Box,
     Table,
@@ -50,9 +49,8 @@ const formikInitValues = {
 }
 
 const DetailForm = () => {
-    const navigate = useNavigate()
     const [isQueryState, setIsQueryState] = useState(false)
-    const [modeCreate, setModeCreate] = useState(false)
+    const [modeCreate, setModeCreate] = useState(true)
     const [apiSuccess, setApiSuccess] = useState('')
     const [state, setState] = useState({
         edit: false,
@@ -201,6 +199,7 @@ const DetailForm = () => {
     const handleMapClick = (wgs84) => {
         console.log('handleMapClick... : ', wgs84)
         formik.setFieldValue('vap.wgs84', wgs84)
+        setLocations([wgs84])
     }
 
     const setFormikValueApiResult = () => {
@@ -232,8 +231,12 @@ const DetailForm = () => {
         if (isQueryState && apiResult) {
             console.log('apiResult : ', apiResult)
             setIsQueryState(false)
+            setApiSuccess(`QUERY API RESULT ${apiResult?.message}`)
             if (apiResult?.code === '0000') {
                 setFormikValueApiResult()
+            } else {
+                formik.setValues({ ...formikInitValues })
+                setLocations([init_pos])
             }
         }
     }, [apiResult, queryParams])

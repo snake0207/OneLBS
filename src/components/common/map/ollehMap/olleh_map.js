@@ -8,7 +8,6 @@ import CellIcon from '#/components/common/map/ollehMap/img/cell.png'
 import WiFiIcon from '#/components/common/map/ollehMap/img/wifi.png'
 import GnssIcon from '#/components/common/map/ollehMap/img/gnss.png'
 
-// const show = (p) => console.log('Outer coord : ', p)
 const initMap = (_div, location, _zoom) => {
     const mapOpts = {
         zoom: _zoom,
@@ -22,20 +21,16 @@ const initMap = (_div, location, _zoom) => {
     return map
 }
 
-const onEventMapClick = (_map, callback, onMapClick) => {
-    _map.onEvent('click', (e) => callback(_map, e.getCoord(), onMapClick), this, true)
-}
-
 const initCenter = (lat, lng) => new olleh.maps.LatLng(lat, lng)
 
-const setCenter = (_mapInstance, _center) => {
-    if (!_mapInstance || !_center) return
-    _mapInstance.setCenter(_center)
+const setCenter = (_map, _center) => {
+    if (!_map || !_center) return
+    _map.setCenter(_center)
 }
 
-const getCenter = (_mapInstance) => _mapInstance.getCenter()
+const getCenter = (_map) => _map.getCenter()
 
-const setZoomLevel = (_mapInstance, _zoom) => _mapInstance.setZoom(_zoom)
+const setZoomLevel = (_map, _zoom) => _map.setZoom(_zoom)
 
 const getIcon = (_location) => {
     if (_location.hasOwnProperty('id')) {
@@ -57,12 +52,12 @@ const getIcon = (_location) => {
     }
 }
 
-const drawMarker = (_mapInstance, loc, isBounce = false, onMarkerClick) => {
+const drawMarker = (_map, loc, isBounce = false, onMarkerClick) => {
     const _marker = new olleh.maps.overlay.Marker({
         position: new olleh.maps.LatLng(loc.latitude, loc.longitude),
         animation: isBounce ? olleh.maps.overlay.Marker.BOUNCE : '',
         title: loc.title || loc.address,
-        map: _mapInstance,
+        map: _map,
     })
     _marker.setIcon(getIcon(loc))
 
@@ -74,20 +69,18 @@ const drawMarker = (_mapInstance, loc, isBounce = false, onMarkerClick) => {
     }
 
     return _marker
-    // _marker.setMap(_mapInstance)
 }
 
 const clearMarker = (markerArrs) => {
-    const _ret = markerArrs.map((marker) => {
+    markerArrs.map((marker) => {
         console.log(marker)
         marker.detach()
         marker.setMap(null)
     })
-    console.log('_ret : ', _ret)
 }
 
-const moveCenter = (_mapInstance, loc, zoom) => {
-    _mapInstance.panTo(new olleh.maps.LatLng(loc.latitude, loc.longitude), zoom)
+const moveCenter = (_map, loc, zoom) => {
+    _map.panTo(new olleh.maps.LatLng(loc.latitude, loc.longitude), zoom)
 }
 
 const getLatLng = (coord) => new olleh.maps.LatLng.valueOf(coord)
@@ -199,5 +192,4 @@ export default {
     drawMarker,
     clearMarker,
     moveCenter,
-    onEventMapClick,
 }

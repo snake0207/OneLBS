@@ -43,15 +43,20 @@ const gridProps = {
 }
 
 // list 하단의 페이징 표시 영역
-const CustomPagination = ({ onPageChange, pageInit }) => {
+const CustomPagination = ({ onPageChange, pageInit, rowCount }) => {
     const apiRef = useGridApiContext()
     const selector = useGridSelector(apiRef, gridPageSelector)
+    const _rowCount = selector * parseInt(import.meta.env.VITE_LIST_PAGE_SIZE)
+
+    // console.log('page : ', selector, rowCount)
 
     useEffect(() => {
         pageInit && apiRef.current.setPage(0)
     }, [pageInit, apiRef])
 
-    return <GridPagination onClick={() => onPageChange(selector)} />
+    return (
+        <GridPagination onClick={() => (_rowCount <= rowCount ? onPageChange(selector) : null)} />
+    )
 }
 
 /**
@@ -95,7 +100,11 @@ const CustomDataGrid = ({
                     children: component,
                     tools: activeTools,
                 },
-                pagination: { onPageChange: onPageChange, pageInit: pageInit },
+                pagination: {
+                    onPageChange: onPageChange,
+                    pageInit: pageInit,
+                    rowCount: rowCount,
+                },
             }}
             disableColumnMenu={true}
             rows={rows}

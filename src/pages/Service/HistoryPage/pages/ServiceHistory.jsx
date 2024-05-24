@@ -54,9 +54,9 @@ const ServiceHistory = () => {
         const pageSize = parseInt(import.meta.env.VITE_LIST_PAGE_SIZE)
         const rowCount = (currPage + 1) * pageSize
 
-        console.log('fetch : ', fetchData.lists.length)
-        console.log('currPage : ', currPage)
-        console.log('rowCount : ', rowCount)
+        // console.log('fetch : ', fetchData.lists.length)
+        // console.log('currPage : ', currPage)
+        // console.log('rowCount : ', rowCount)
 
         if (currPage > 1 && rowCount <= fetchData.count && rowCount >= fetchData.lists.length) {
             setQueryParams({ ...queryParams, page: queryParams.page + 1 })
@@ -80,7 +80,7 @@ const ServiceHistory = () => {
                         longitude: item.longitude,
                         title: item.resDate,
                     }))
-                console.log(nArrs)
+                // console.log(nArrs)
                 setLocations(nArrs)
             } else {
                 setLocations([init_pos])

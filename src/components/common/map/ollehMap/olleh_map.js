@@ -149,19 +149,18 @@ const calcDistance = (minLat, minLon, maxLat, maxLon) => {
 
 const setZoomWithDistance = (distance) => {
     const miter = Math.floor(distance * 1000)
-    if (miter > 660000) return 1
-    else if (miter > 460000) return 2
-    else if (miter > 230000) return 3
-    else if (miter > 120000) return 4
-    else if (miter > 60000) return 5
-    else if (miter > 30000) return 6
-    else if (miter > 15000) return 7
-    else if (miter > 7000) return 8
-    else if (miter > 3500) return 9
-    else if (miter > 1900) return 10
-    else if (miter > 900) return 11
-    else if (miter > 400) return 12
-    else return 13
+    if (miter > 460000) return 1
+    else if (miter > 230000) return 2
+    else if (miter > 120000) return 3
+    else if (miter > 60000) return 4
+    else if (miter > 30000) return 5
+    else if (miter > 15000) return 6
+    else if (miter > 7000) return 7
+    else if (miter > 3500) return 8
+    else if (miter > 1900) return 9
+    else if (miter > 900) return 10
+    else if (miter > 400) return 11
+    else return 12
 }
 
 const minMax = (locations) => {

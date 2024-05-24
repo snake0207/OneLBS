@@ -197,9 +197,9 @@ const DetailForm = () => {
     }
 
     const handleMapClick = (wgs84) => {
-        console.log('handleMapClick... : ', wgs84)
+        console.log('handleMapClick... : ', wgs84, ',', modeCreate)
         formik.setFieldValue('vap.wgs84', wgs84)
-        setLocations([wgs84])
+        // setLocations([wgs84])
     }
 
     const setFormikValueApiResult = () => {

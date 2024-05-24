@@ -32,7 +32,7 @@ const OllehMap = ({
         title: locations[0].title,
     }
 
-    console.log('locations : ', locations)
+    console.log('modeCreate : ', modeCreate)
 
     let _marker
 

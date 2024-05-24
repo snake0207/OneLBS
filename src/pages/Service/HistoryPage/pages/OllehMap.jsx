@@ -16,8 +16,8 @@ const OllehMap = ({ locations, onMarkerClick, bounceMarker = {} }) => {
         _distance = ollehMap.getDistance(minLat, minLon, maxLat, maxLon)
         _zoom = ollehMap.setZoomWithDistance(_distance)
     }
-    console.log('_center : ', _center)
-    console.log(`_distance : ${_distance}, _zoom : ${_zoom}`)
+    // console.log('_center : ', _center)
+    // console.log(`_distance : ${_distance}, _zoom : ${_zoom}`)
 
     useEffect(() => {
         if (mapInstance === null || mapInstance === undefined) {

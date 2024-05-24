@@ -73,7 +73,7 @@ const drawMarker = (_map, loc, isBounce = false, onMarkerClick) => {
 
 const clearMarker = (markerArrs) => {
     markerArrs.map((marker) => {
-        console.log(marker)
+        // console.log(marker)
         marker.detach()
         marker.setMap(null)
     })

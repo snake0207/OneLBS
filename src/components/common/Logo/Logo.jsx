@@ -2,8 +2,8 @@
 import { CardMedia } from '@mui/material'
 import KtIcon from '#/assets/kt_logo_light.svg'
 import KtIconDark from '#/assets/kt_logo_dark.svg'
-import LogoIcon from '#/assets/loginLogoIcon.png'
-import LogoIconDark from '#/assets/loginLogoIconDark.png'
+import LogoIcon from '#/assets/kt_logo_light.svg'
+import LogoIconDark from '#/assets/kt_logo_dark.svg'
 
 // ==============================|| LOGO SVG ||============================== //
 

@@ -1,19 +1,19 @@
 import SettingsSuggestOutlinedIcon from '@mui/icons-material/SettingsSuggestOutlined'
 import { Box, Table, TableBody, TableCell, TableHead, TableRow, Typography } from '@mui/material'
 import { useFormik } from 'formik'
-import { useEffect, useState } from 'react'
+import { Suspense, lazy, useEffect, useState } from 'react'
 import { useNavigate } from 'react-router'
 
 import { MuiMainButton } from '#/components/common/button/MuiButton'
 import CheckBox from '#/components/common/input/CheckBox'
 import TitleBar from '#/components/common/menu/TitleBar'
-import MuiDialog from '#/components/common/popup/MuiDialog'
-
-import MuiAlert from '#/components/common/popup/MuiAlert'
 import { useGetMenuPermission, usePostUpdatePermission } from '#/hooks/queries/user'
 import style from './style.module'
 
-const EditForm = () => {
+const MuiDialog = lazy(() => import('#/components/common/popup/MuiDialog'))
+const MuiAlert = lazy(() => import('#/components/common/popup/MuiAlert'))
+
+const PEditForm = () => {
     const navigate = useNavigate()
     const { mutate: mutateUpdate, isPending: isUpdatePending } = usePostUpdatePermission()
     const [apiSuccess, setApiSuccess] = useState('')
@@ -716,22 +716,26 @@ const EditForm = () => {
                 </Box>
             </form>
             {state.openDialog && (
-                <MuiDialog
-                    isOpen={state.openDialog}
-                    content={state.msg}
-                    onCancel={handleStateReset}
-                    onConfirm={handleFormikSubmit}
-                />
+                <Suspense fallback={<div>Loading...</div>}>
+                    <MuiDialog
+                        isOpen={state.openDialog}
+                        content={state.msg}
+                        onCancel={handleStateReset}
+                        onConfirm={handleFormikSubmit}
+                    />
+                </Suspense>
             )}
             {apiSuccess && (
-                <MuiAlert
-                    msg={apiSuccess}
-                    autoHideDuration={5000}
-                    callback={() => setApiSuccess(false)}
-                />
+                <Suspense fallback={<div>Loading...</div>}>
+                    <MuiAlert
+                        msg={apiSuccess}
+                        autoHideDuration={5000}
+                        callback={() => setApiSuccess(false)}
+                    />
+                </Suspense>
             )}
         </Box>
     )
 }
 
-export default EditForm
+export default PEditForm

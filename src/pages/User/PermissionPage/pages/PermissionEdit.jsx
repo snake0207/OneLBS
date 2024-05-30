@@ -1,4 +1,4 @@
-import EditForm from '../forms/EditForm'
+import EditForm from '../forms/PEditForm'
 
 const PermissionEdit = () => {
     return (

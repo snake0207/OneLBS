@@ -1,5 +1,5 @@
 import { Box, Typography } from '@mui/material'
-import { useEffect, useState } from 'react'
+import { Suspense, lazy, useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 import TitleBar from '#/components/common/menu/TitleBar'
@@ -7,10 +7,11 @@ import CustomDataGrid from '#/components/common/table/datagrid'
 import { useGetUEs, usePostDeleteUEs } from '#/hooks/queries/system'
 
 import { MuiSubButton } from '#/components/common/button/MuiButton'
-import MuiAlert from '#/components/common/popup/MuiAlert'
-import MuiDialog from '#/components/common/popup/MuiDialog'
 import SearchFilter from '../Filter'
 import { columns } from './grid-columns'
+
+const MuiDialog = lazy(() => import('#/components/common/popup/MuiDialog'))
+const MuiAlert = lazy(() => import('#/components/common/popup/MuiAlert'))
 
 const UeModelList = () => {
     const navigate = useNavigate()
@@ -38,7 +39,7 @@ const UeModelList = () => {
 
     // row 클릭한 경우 상세 페이지 노출
     const handleSelectRow = ({ row }) => {
-        navigate('/system/ue/edit', { state: { row: row } })
+        navigate('/system/ue-edit', { state: { row: row } })
     }
 
     const handleRowSelectionChange = (selectionModel) => {
@@ -136,21 +137,25 @@ const UeModelList = () => {
                 />
             </Box>
             {openDeleteDialog && (
-                <MuiDialog
-                    isOpen={openDeleteDialog}
-                    content={`삭제하면 복구가 불가능합니다. 삭제 하시겠습니까?`}
-                    onCancel={() => setOpenDeleteDialog(false)}
-                    onConfirm={handleDeleteRows}
-                />
+                <Suspense fallback={<div>Loading...</div>}>
+                    <MuiDialog
+                        isOpen={openDeleteDialog}
+                        content={`삭제하면 복구가 불가능합니다. 삭제 하시겠습니까?`}
+                        onCancel={() => setOpenDeleteDialog(false)}
+                        onConfirm={handleDeleteRows}
+                    />
+                </Suspense>
             )}
             {apiSuccess && (
-                <MuiAlert
-                    msg={apiSuccess}
-                    autoHideDuration={3000}
-                    callback={() => {
-                        setApiSuccess('')
-                    }}
-                />
+                <Suspense fallback={<div>Loading...</div>}>
+                    <MuiAlert
+                        msg={apiSuccess}
+                        autoHideDuration={3000}
+                        callback={() => {
+                            setApiSuccess('')
+                        }}
+                    />
+                </Suspense>
             )}
         </Box>
     )

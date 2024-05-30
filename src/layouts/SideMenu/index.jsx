@@ -1,7 +1,7 @@
 import React from 'react'
 import List from '@mui/material/List'
 import IconButton from '@mui/material/IconButton'
-import { Toolbar, Icon, Box, CardMedia } from '@mui/material'
+import { Toolbar, Icon, CardMedia } from '@mui/material'
 import MuiDrawer from '@mui/material/Drawer'
 import { styled } from '@mui/material/styles'
 
@@ -12,7 +12,7 @@ import LogoIconDark from '#/assets/onelbs-logo.png'
 import MenuIcon from '#/assets/menuIcon.svg'
 import MenuIconDark from '#/assets/menuIconDark.svg'
 
-import { Close } from '@mui/icons-material'
+import Close from '@mui/icons-material/Close'
 
 import style from './style.module'
 
@@ -141,9 +141,9 @@ const SideMenu = ({ open, toggleDrawer }) => {
                     {openDrawer ? (
                         <Close sx={{ width: '20px', hegith: '20px' }} />
                     ) : themeMode === 'light' ? (
-                        <img src={MenuIcon} width={20} height={20} />
+                        <img src={MenuIcon} width={20} height={20} loading="lazy" />
                     ) : (
-                        <img src={MenuIconDark} width={20} height={20} />
+                        <img src={MenuIconDark} width={20} height={20} loading="lazy" />
                     )}
                 </IconButton>
             </Toolbar>

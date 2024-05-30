@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { Suspense, lazy, useCallback, useEffect, useState } from 'react'
 import {
     Box,
     Table,
@@ -25,10 +25,11 @@ import {
 import { MuiMainButton } from '#/components/common/button/MuiButton'
 import { useFormik } from 'formik'
 import TextInput from '#/components/common/input/TextInput'
-import MuiDialog from '#/components/common/popup/MuiDialog'
-import MuiAlert from '#/components/common/popup/MuiAlert'
 import { gradeTypeLabel } from '#/common/libs/facility'
-import OllehMap from './OllehMap'
+
+const OllehMap = lazy(() => import('./OllehMap'))
+const MuiDialog = lazy(() => import('#/components/common/popup/MuiDialog'))
+const MuiAlert = lazy(() => import('#/components/common/popup/MuiAlert'))
 
 const formikInitValues = {
     mac: '',
@@ -164,42 +165,42 @@ const DetailForm = () => {
         setState({ edit: false, delete: false, save: false, msg: '', openDialog: false })
     }
 
-    const handleInputAllClear = () => {
+    const handleInputAllClear = useCallback(() => {
         console.log('handleInputAllClear()...')
         formik.setValues({ ...formikInitValues })
-    }
+    }, [])
 
-    const handleClickSave = () => {
+    const handleClickSave = useCallback(() => {
         setState((prevState) => ({
             ...prevState,
             save: true,
             msg: '입력한 정보로 저장 하시겠습니까?',
             openDialog: true,
         }))
-    }
+    }, [])
 
-    const handleClickEdit = () => {
+    const handleClickEdit = useCallback(() => {
         setState((prevState) => ({
             ...prevState,
             edit: true,
             msg: '수정한 정보로 저장 하시겠습니까?',
             openDialog: true,
         }))
-    }
+    }, [])
 
-    const handleClickDelete = () => {
+    const handleClickDelete = useCallback(() => {
         setState((prevState) => ({
             ...prevState,
             delete: true,
             msg: '삭제하면 복구가 불가능합니다. 삭제 하시겠습니까?',
             openDialog: true,
         }))
-    }
+    }, [])
 
     const handleMapClick = (wgs84) => {
-        console.log('handleMapClick... : ', wgs84, ',', modeCreate)
+        // console.log('handleMapClick... : ', wgs84, ',', modeCreate)
         formik.setFieldValue('vap.wgs84', wgs84)
-        // setLocations([wgs84])
+        setLocations([wgs84])
     }
 
     const setFormikValueApiResult = () => {
@@ -264,7 +265,6 @@ const DetailForm = () => {
                     <Box>
                         {modeCreate ? (
                             <Button
-                                type="text"
                                 onClick={() => {
                                     setModeCreate(false)
                                     apiResult?.code === '0000' && setFormikValueApiResult()
@@ -273,7 +273,6 @@ const DetailForm = () => {
                             >{`편집 화면으로 전환`}</Button>
                         ) : (
                             <Button
-                                type="text"
                                 onClick={() => {
                                     handleInputAllClear()
                                     setModeCreate(true)
@@ -352,86 +351,92 @@ const DetailForm = () => {
                 {/* 측위 목록 */}
                 <Box sx={{ width: '100%', height: '400px', mb: 4 }}>
                     {!isQueryState && locations.length > 0 && (
-                        <OllehMap
-                            // key={Math.random()}
-                            locations={[...locations]}
-                            gridX={
-                                modeCreate
-                                    ? null
-                                    : apiResult?.code === '0000'
-                                      ? formik.values.gridX
-                                      : null
-                            }
-                            gridY={
-                                modeCreate
-                                    ? null
-                                    : apiResult?.code === '0000'
-                                      ? formik.values.gridY
-                                      : null
-                            }
-                            rssi={
-                                modeCreate
-                                    ? null
-                                    : apiResult?.code === '0000'
-                                      ? formik.values.rssi
-                                      : null
-                            }
-                            modeCreate={modeCreate}
-                            onMapClick={(wgs84) => handleMapClick(wgs84)}
-                        />
+                        <Suspense fallback={<div>Map Loading...</div>}>
+                            <OllehMap
+                                // key={Math.random()}
+                                locations={[...locations]}
+                                gridX={
+                                    modeCreate
+                                        ? []
+                                        : apiResult?.code === '0000'
+                                          ? formik.values.gridX
+                                          : null
+                                }
+                                gridY={
+                                    modeCreate
+                                        ? []
+                                        : apiResult?.code === '0000'
+                                          ? formik.values.gridY
+                                          : null
+                                }
+                                rssi={
+                                    modeCreate
+                                        ? []
+                                        : apiResult?.code === '0000'
+                                          ? formik.values.rssi
+                                          : null
+                                }
+                                modeCreate={modeCreate}
+                                onMapClick={(wgs84) => handleMapClick(wgs84)}
+                            />
+                        </Suspense>
                     )}
                 </Box>
                 {/* 하단 버튼 */}
-                {modeCreate ? (
-                    <Box align={'right'}>
-                        <Stack spacing={2} direction="row" sx={{ justifyContent: 'flex-end' }}>
-                            <MuiMainButton
-                                disabled={isRegistPending}
-                                name="cancel"
-                                title="초기화"
-                                onClick={handleInputAllClear}
-                            />
-                            <MuiMainButton
-                                disabled={isRegistPending}
-                                name="create"
-                                title="저장"
-                                onClick={handleClickSave}
-                            />
-                        </Stack>
-                    </Box>
-                ) : (
-                    <Box align={'right'}>
-                        <Stack spacing={2} direction="row" sx={{ justifyContent: 'flex-end' }}>
-                            <MuiMainButton
-                                disabled={isDeletePending || isUpdatePending}
-                                name="edit"
-                                title="수정"
-                                onClick={handleClickEdit}
-                            />
-                            <MuiMainButton
-                                disabled={isDeletePending || isUpdatePending}
-                                name="delete"
-                                title="삭제"
-                                onClick={handleClickDelete}
-                            />
-                        </Stack>
-                    </Box>
-                )}
+                <Box align={'right'}>
+                    <Stack spacing={2} direction="row" sx={{ justifyContent: 'flex-end' }}>
+                        {modeCreate ? (
+                            <>
+                                <MuiMainButton
+                                    disabled={isRegistPending}
+                                    name="cancel"
+                                    title="초기화"
+                                    onClick={handleInputAllClear}
+                                />
+                                <MuiMainButton
+                                    disabled={isRegistPending}
+                                    name="create"
+                                    title="저장"
+                                    onClick={handleClickSave}
+                                />
+                            </>
+                        ) : (
+                            <>
+                                <MuiMainButton
+                                    disabled={isDeletePending || isUpdatePending}
+                                    name="edit"
+                                    title="수정"
+                                    onClick={handleClickEdit}
+                                />
+                                <MuiMainButton
+                                    disabled={isDeletePending || isUpdatePending}
+                                    name="delete"
+                                    title="삭제"
+                                    onClick={handleClickDelete}
+                                />
+                            </>
+                        )}
+                    </Stack>
+                </Box>
             </Box>
             {state.openDialog && (
-                <MuiDialog
-                    isOpen={state.openDialog}
-                    content={state.msg}
-                    onCancel={handleStateReset}
-                    onConfirm={handleFormikSubmit}
-                />
+                <Suspense fallback={<div>Map Loading...</div>}>
+                    <MuiDialog
+                        isOpen={state.openDialog}
+                        content={state.msg}
+                        onCancel={handleStateReset}
+                        onConfirm={handleFormikSubmit}
+                    />
+                </Suspense>
             )}
             {apiSuccess && (
-                <MuiAlert
-                    msg={apiSuccess}
-                    autoHideDuration={3000}
-                    callback={() => setApiSuccess('')}
-                />
+                <Suspense fallback={<div>Map Loading...</div>}>
+                    <MuiAlert
+                        msg={apiSuccess}
+                        autoHideDuration={3000}
+                        callback={() => setApiSuccess('')}
+                    />
+                </Suspense>
             )}
         </Box>
     )

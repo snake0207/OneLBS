@@ -1,7 +1,7 @@
 import CreateIcon from '@mui/icons-material/Create'
 import { Box, Stack, Table, TableCell, TableHead, TableRow, Typography } from '@mui/material'
 import { useFormik } from 'formik'
-import { useState } from 'react'
+import { Suspense, lazy, useState } from 'react'
 import { useNavigate } from 'react-router'
 import { useLocation } from 'react-router-dom'
 
@@ -9,11 +9,12 @@ import { MuiMainButton } from '#/components/common/button/MuiButton'
 import CheckBox from '#/components/common/input/CheckBox'
 import TextInput from '#/components/common/input/TextInput'
 import TitleBar from '#/components/common/menu/TitleBar'
-import MuiDialog from '#/components/common/popup/MuiDialog'
 import { deleteUpdateUESchema } from '#/contents/validationSchema'
 import { usePostDeleteUEs, usePostUpdateUE } from '#/hooks/queries/system'
 
-import MuiAlert from '#/components/common/popup/MuiAlert'
+const MuiDialog = lazy(() => import('#/components/common/popup/MuiDialog'))
+const MuiAlert = lazy(() => import('#/components/common/popup/MuiAlert'))
+
 import style from './style.module'
 
 const EditForm = () => {
@@ -401,7 +402,7 @@ const EditForm = () => {
                                 disabled={isDeletePending || isUpdatePending}
                                 name="cancel"
                                 title="목록"
-                                onClick={() => navigate('/system/ue/list')}
+                                onClick={() => navigate('/system/ue-list')}
                             />
                             <MuiMainButton
                                 disabled={isDeletePending || isUpdatePending}
@@ -420,22 +421,26 @@ const EditForm = () => {
                 </Box>
             </form>
             {state.openDialog && (
-                <MuiDialog
-                    isOpen={state.openDialog}
-                    content={state.msg}
-                    onCancel={handleStateReset}
-                    onConfirm={handleFormikSubmit}
-                />
+                <Suspense fallback={<div>Loading...</div>}>
+                    <MuiDialog
+                        isOpen={state.openDialog}
+                        content={state.msg}
+                        onCancel={handleStateReset}
+                        onConfirm={handleFormikSubmit}
+                    />
+                </Suspense>
             )}
             {apiSuccess && (
-                <MuiAlert
-                    msg={apiSuccess}
-                    autoHideDuration={3000}
-                    callback={() => {
-                        setApiSuccess('')
-                        navigate('/system/ue/list')
-                    }}
-                />
+                <Suspense fallback={<div>Loading...</div>}>
+                    <MuiAlert
+                        msg={apiSuccess}
+                        autoHideDuration={3000}
+                        callback={() => {
+                            setApiSuccess('')
+                            navigate('/system/ue/list')
+                        }}
+                    />
+                </Suspense>
             )}
         </Box>
     )

@@ -13,15 +13,16 @@ import {
     Typography,
 } from '@mui/material'
 import { useFormik } from 'formik'
-import { useEffect, useState } from 'react'
+import { Suspense, lazy, useEffect, useState } from 'react'
 
 import { MuiMainButton } from '#/components/common/button/MuiButton'
 import TitleBar from '#/components/common/menu/TitleBar'
-import MuiDialog from '#/components/common/popup/MuiDialog'
+
+const MuiDialog = lazy(() => import('#/components/common/popup/MuiDialog'))
+const MuiAlert = lazy(() => import('#/components/common/popup/MuiAlert'))
 
 import { getDataTypeList } from '#/common/libs/service'
 import Select from '#/components/common/Select'
-import MuiAlert from '#/components/common/popup/MuiAlert'
 import { useGetEngine, usePostUpdateEngine } from '#/hooks/queries/system'
 import style from './style.module'
 
@@ -382,19 +383,23 @@ const EditForm = () => {
                 </Box>
             </form>
             {state.openDialog && (
-                <MuiDialog
-                    isOpen={state.openDialog}
-                    content={state.msg}
-                    onCancel={handleStateReset}
-                    onConfirm={handleFormikSubmit}
-                />
+                <Suspense fallback={<div>Loading...</div>}>
+                    <MuiDialog
+                        isOpen={state.openDialog}
+                        content={state.msg}
+                        onCancel={handleStateReset}
+                        onConfirm={handleFormikSubmit}
+                    />
+                </Suspense>
             )}
             {apiSuccess && (
-                <MuiAlert
-                    msg={apiSuccess}
-                    autoHideDuration={5000}
-                    callback={() => setApiSuccess(false)}
-                />
+                <Suspense fallback={<div>Loading...</div>}>
+                    <MuiAlert
+                        msg={apiSuccess}
+                        autoHideDuration={5000}
+                        callback={() => setApiSuccess(false)}
+                    />
+                </Suspense>
             )}
         </Box>
     )

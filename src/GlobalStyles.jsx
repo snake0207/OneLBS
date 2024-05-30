@@ -2,9 +2,13 @@ import { Global, css } from '@emotion/react'
 
 const globalStyles = css`
     @import url('http://fonts.googleapis.com/earlyaccess/notosanskr.css');
+
+    .notosanskr * {
+        font-family: 'Noto Sans KR', sans-serif;
+    }
+
     :root {
         font-size: 16px;
-
         font-synthesis: none;
         text-rendering: optimizeLegibility;
         -webkit-font-smoothing: antialiased;

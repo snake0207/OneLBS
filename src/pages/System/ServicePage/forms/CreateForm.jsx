@@ -10,7 +10,7 @@ import {
     Typography,
 } from '@mui/material'
 import { useFormik } from 'formik'
-import { useState } from 'react'
+import { Suspense, lazy, useState } from 'react'
 import { useNavigate } from 'react-router'
 
 import {
@@ -25,12 +25,13 @@ import { MuiMainButton } from '#/components/common/button/MuiButton'
 import CheckBox from '#/components/common/input/CheckBox'
 import TextInput from '#/components/common/input/TextInput'
 import TitleBar from '#/components/common/menu/TitleBar'
-import MuiDialog from '#/components/common/popup/MuiDialog'
 import { registServiceSchema } from '#/contents/validationSchema'
 import { usePostServiceRegist } from '#/hooks/queries/system'
-import SearchPopup from './SearchPopup'
 
-import MuiAlert from '#/components/common/popup/MuiAlert'
+const SearchPopup = lazy(() => import('./SearchPopup'))
+const MuiDialog = lazy(() => import('#/components/common/popup/MuiDialog'))
+const MuiAlert = lazy(() => import('#/components/common/popup/MuiAlert'))
+
 import style from './style.module'
 
 const CreateForm = () => {
@@ -711,30 +712,36 @@ const CreateForm = () => {
                 </Box>
             </form>
             {state.openDialog && (
-                <MuiDialog
-                    isOpen={state.openDialog}
-                    content={state.msg}
-                    onCancel={handleStateReset}
-                    onConfirm={handleFormikSubmit}
-                />
+                <Suspense fallback={<div>Loading...</div>}>
+                    <MuiDialog
+                        isOpen={state.openDialog}
+                        content={state.msg}
+                        onCancel={handleStateReset}
+                        onConfirm={handleFormikSubmit}
+                    />
+                </Suspense>
             )}
             {apiSuccess && (
-                <MuiAlert
-                    msg={apiSuccess}
-                    autoHideDuration={3000}
-                    callback={() => navigate(`/system/service-list`)}
-                />
+                <Suspense fallback={<div>Loading...</div>}>
+                    <MuiAlert
+                        msg={apiSuccess}
+                        autoHideDuration={3000}
+                        callback={() => navigate(`/system/service-list`)}
+                    />
+                </Suspense>
             )}
             {isOpenServicePopup && (
-                <SearchPopup
-                    isOpen={isOpenServicePopup}
-                    title={`서비스 코드 중복 체크`}
-                    onCancel={() => setIsOpenServicePopup(false)}
-                    onConfirm={(param) => {
-                        setIsOpenServicePopup(false)
-                        formik.setFieldValue('serviceCode', param)
-                    }}
-                />
+                <Suspense fallback={<div>Loading...</div>}>
+                    <SearchPopup
+                        isOpen={isOpenServicePopup}
+                        title={`서비스 코드 중복 체크`}
+                        onCancel={() => setIsOpenServicePopup(false)}
+                        onConfirm={(param) => {
+                            setIsOpenServicePopup(false)
+                            formik.setFieldValue('serviceCode', param)
+                        }}
+                    />
+                </Suspense>
             )}
         </Box>
     )

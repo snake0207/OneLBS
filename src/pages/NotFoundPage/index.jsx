@@ -22,7 +22,11 @@ function NotFoundPage() {
             }}
         >
             <Icon sx={style.img}>
-                {themeMode === 'light' ? <img src={ErrorIcon} /> : <img src={ErrorIconDark} />}
+                {themeMode === 'light' ? (
+                    <img src={ErrorIcon} loading="lazy" />
+                ) : (
+                    <img src={ErrorIconDark} loading="lazy" />
+                )}
             </Icon>
             <Typography variant="h3" component="h1" sx={style.title}>
                 {`페이지 없음`}

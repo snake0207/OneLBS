@@ -1,3 +1,4 @@
+import React from 'react'
 import Button from '@mui/material/Button'
 import CreateIcon from '@mui/icons-material/Create'
 import ListIcon from '@mui/icons-material/List'
@@ -7,7 +8,7 @@ import PlaylistAddOutlinedIcon from '@mui/icons-material/PlaylistAddOutlined'
 import DeleteIcon from '@mui/icons-material/Delete'
 import SearchIcon from '@mui/icons-material/Search'
 import AnnouncementIcon from '@mui/icons-material/Announcement'
-import SaveOutlinedIcon from '@mui/icons-material/SaveOutlined';
+import SaveOutlinedIcon from '@mui/icons-material/SaveOutlined'
 
 const buttonUI = {
     create: {
@@ -47,7 +48,7 @@ const buttonUI = {
     },
 }
 
-export const MuiMainButton = ({ disabled, name, title, onClick }) => {
+const MainButton = ({ disabled, name, title, onClick }) => {
     const _name = name.toLowerCase()
 
     return (
@@ -77,7 +78,7 @@ export const MuiMainButton = ({ disabled, name, title, onClick }) => {
     )
 }
 
-export const MuiSubButton = ({
+const SubButton = ({
     disabled = false,
     name,
     title,
@@ -102,3 +103,6 @@ export const MuiSubButton = ({
         </Button>
     )
 }
+
+export const MuiMainButton = React.memo(MainButton)
+export const MuiSubButton = React.memo(SubButton)

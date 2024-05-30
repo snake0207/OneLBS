@@ -93,7 +93,7 @@ function Row({
                 <Stack direction={'row'} sx={{ display: 'flex', justifyContent: 'space-between' }}>
                     {editable ? <TextInput name="remark" formik={formik} /> : row?.remark}
                     <Button onClick={handleEditable} sx={style.lightButton}>
-                        <img src={EditIconWhite} width={22} />
+                        <img src={EditIconWhite} width={22} loading="lazy" />
                     </Button>
                 </Stack>
             </TableCell>
@@ -108,7 +108,7 @@ function Row({
                                 alignItems: 'center',
                             }}
                         >
-                            <img src={ResetIcon} />
+                            <img src={ResetIcon} loading="lazy" />
                         </Icon>
                     </Button>
                     <Button onClick={handleWithdraw} sx={style.lineButton}>

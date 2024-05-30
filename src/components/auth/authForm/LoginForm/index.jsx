@@ -1,12 +1,11 @@
-import { useEffect, useState } from 'react'
+import { Suspense, lazy, useEffect, useState } from 'react'
 import { useFormik } from 'formik'
-import { Typography, Box, Avatar, Stack, CardMedia } from '@mui/material'
-import { LoadingButton } from '@mui/lab'
+import { Typography, Box, Avatar, Stack, CardMedia, Button } from '@mui/material'
+
 import TextInput from '#/components/common/input/TextInput'
 import PasswordInput from '#/components/common/input/PasswordInput'
 import { loginSchema } from '#/contents/validationSchema'
 import {
-    useGetAuthCode,
     useGetCaptcha,
     useGetDummyToken,
     usePostLogin,
@@ -14,14 +13,15 @@ import {
 } from '#/hooks/queries/auth'
 import { getLayoutState } from '#/store/useLayoutStore'
 import { useAuthActions } from '#/store/useAuthStore'
-import { useUserActions, useUserTypeState } from '#/store/useUserStore'
+import { useUserActions } from '#/store/useUserStore'
 
 import style from './style.module'
 
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined'
 import CachedOutlinedIcon from '@mui/icons-material/CachedOutlined'
 import { useNavigate } from 'react-router-dom'
-import MuiAlert from '#/components/common/popup/MuiAlert'
+
+const MuiAlert = lazy(() => import('#/components/common/popup/MuiAlert'))
 
 const MAX_REQ_AUTHCODE = 3
 
@@ -33,7 +33,6 @@ const LoginForm = () => {
     const { setUserTypeUserStore } = useUserActions()
     const { setUserIdUserStore } = useUserActions()
     const { setUserCropNameUserStore } = useUserActions()
-    const storeUserType = useUserTypeState()
     const { mutate: submitMutate, isPending } = usePostLogin()
     const [apiResultLogin, setApiResultLogin] = useState({
         code: '',
@@ -183,8 +182,7 @@ const LoginForm = () => {
                         <Typography variant="h6" sx={style.labelText}>
                             {`요청 횟수 (${state.authcodeLimits}/3)`}
                         </Typography>
-                        <LoadingButton
-                            loading={isSmsAuthCodePending}
+                        <Button
                             variant="contained"
                             disabled={
                                 formik.values.userId?.length &&
@@ -196,7 +194,7 @@ const LoginForm = () => {
                             sx={{ ...style.loadingButton, pt: 1.1, pb: 1.1 }}
                         >
                             {`인증번호 요청`}
-                        </LoadingButton>
+                        </Button>
                     </Box>
                 </Box>
                 <Typography variant="h6" sx={style.labelText}>
@@ -224,7 +222,7 @@ const LoginForm = () => {
                         <Typography>Loading...</Typography>
                     )}
 
-                    <LoadingButton
+                    <Button
                         variant="contained"
                         disabled={!respDummyToken?.data?.data}
                         startIcon={<CachedOutlinedIcon />}
@@ -232,13 +230,12 @@ const LoginForm = () => {
                         sx={style.loadingButton}
                     >
                         {`Reload`}
-                    </LoadingButton>
+                    </Button>
                 </Stack>
                 <TextInput name={'captcha'} placeholder={`보안문자 입력`} formik={formik} />
                 <Stack sx={{ alignSelf: 'end', gap: 1, mt: '30px', width: '100%' }}>
-                    <LoadingButton
+                    <Button
                         fullWidth
-                        loading={isPending}
                         disabled={
                             !formik.values.userId ||
                             !formik.values.password ||
@@ -257,11 +254,17 @@ const LoginForm = () => {
                         }}
                     >
                         {`로그인`}
-                    </LoadingButton>
+                    </Button>
                 </Stack>
             </form>
             {apiResultLogin?.data && (
-                <MuiAlert msg={apiResultLogin.message} autoHideDuration={5000} callback={null} />
+                <Suspense fallback={<div>Loading...</div>}>
+                    <MuiAlert
+                        msg={apiResultLogin.message}
+                        autoHideDuration={5000}
+                        callback={null}
+                    />
+                </Suspense>
             )}
             <Typography color={'text.light'} sx={{ mt: 4, fontSize: '11px', fontStyle: 'italic' }}>
                 Copyright© OneLBS Admin 2024.

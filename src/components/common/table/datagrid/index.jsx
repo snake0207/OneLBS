@@ -1,3 +1,4 @@
+import { useEffect } from 'react'
 import {
     DataGrid,
     GridPagination,
@@ -6,7 +7,6 @@ import {
     useGridSelector,
 } from '@mui/x-data-grid'
 import { LinearProgress } from '@mui/material'
-import { useEffect } from 'react'
 import CustomToolbar from '#/components/common/table/toolbar'
 
 const gridProps = {

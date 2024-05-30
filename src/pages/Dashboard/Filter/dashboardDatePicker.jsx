@@ -12,9 +12,9 @@ function MuiIcon() {
     return (
         <Box sx={{}}>
             {themeMode === 'light' ? (
-                <img src={DatePickerIcon} />
+                <img src={DatePickerIcon} loading="lazy" />
             ) : (
-                <img src={DatePickerIconDark} />
+                <img src={DatePickerIconDark} loading="lazy" />
             )}
         </Box>
     )

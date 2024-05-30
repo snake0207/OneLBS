@@ -6,7 +6,6 @@ import UserIconDark from '#/assets/userIconDark.svg'
 import LogoutIcon from '#/assets/logoutIcon.svg'
 import LogoutIconDark from '#/assets/logoutIconDark.svg'
 
-
 function UserInfo() {
     const navigate = useNavigate()
     const handleLogout = () => {
@@ -28,9 +27,9 @@ function UserInfo() {
                         }}
                     >
                         {themeMode === 'light' ? (
-                            <img src={UserIcon} />
+                            <img src={UserIcon} loading="lazy" />
                         ) : (
-                            <img src={UserIconDark} />
+                            <img src={UserIconDark} loading="lazy" />
                         )}
                     </Icon>
                     <Typography
@@ -49,9 +48,9 @@ function UserInfo() {
                             }}
                         >
                             {themeMode === 'light' ? (
-                                <img src={LogoutIcon} />
+                                <img src={LogoutIcon} loading="lazy" />
                             ) : (
-                                <img src={LogoutIconDark} />
+                                <img src={LogoutIconDark} loading="lazy" />
                             )}
                         </Icon>
                     </IconButton>

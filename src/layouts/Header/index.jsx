@@ -68,7 +68,13 @@ function Header({ toggleDrawer }) {
                             aria-haspopup="true"
                             onClick={toggleDrawer}
                         >
-                            <img src={MenuIconDark} />
+                            <img
+                                src={MenuIconDark}
+                                width={20}
+                                height={20}
+                                loading="lazy"
+                                alt="메뉴"
+                            />
                         </IconButton>
                     </Box>
                     <Stack direction={`row`} spacing={1.5}>
@@ -80,7 +86,8 @@ function Header({ toggleDrawer }) {
                                 color: `text.gray`,
                             }}
                         >
-                            {`${storeCropName}`} {`${storeUserId}`}({storeUserType === 'A' ? `관리자` : `운영자`})
+                            {`${storeCropName}`} {`${storeUserId}`}(
+                            {storeUserType === 'A' ? `관리자` : `운영자`})
                             {/* {data && data.userName} */}
                         </Box>
                         <Tooltip title={`로그아웃`}>

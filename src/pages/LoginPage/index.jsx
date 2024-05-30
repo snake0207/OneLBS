@@ -1,7 +1,7 @@
 import { Box } from '@mui/material'
 import AuthFormContainer from '#/components/auth/authForm/AuthFormContainer'
 
-function LoginPage() {
+const LoginPage = () => {
     return (
         <Box sx={{ display: 'flex', justifyContent: 'space-between', height: '100vh' }}>
             <Box

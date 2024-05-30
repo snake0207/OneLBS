@@ -5,7 +5,6 @@ import { ThemeProvider } from '@mui/material'
 import { createTheme } from '@mui/material/styles'
 import useLayoutStore from '#/store/useLayoutStore'
 
-
 import Routes from './routes'
 import CommonPopup from '#/components/common/popup/CommonPopup'
 
@@ -13,7 +12,6 @@ function App() {
     const { themeMode } = useLayoutStore()
 
     const theme = useMemo(() => createTheme(getThemeSettings(themeMode)), [themeMode])
-
 
     return (
         <ThemeProvider theme={theme}>

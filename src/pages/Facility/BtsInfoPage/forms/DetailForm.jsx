@@ -1,14 +1,15 @@
 import PlaylistAddCheckOutlinedIcon from '@mui/icons-material/PlaylistAddCheckOutlined'
 import { Box, Table, TableBody, TableCell, TableRow, Typography } from '@mui/material'
-import { useEffect, useState } from 'react'
+import { Suspense, lazy, useEffect, useState } from 'react'
 
 import TitleBar from '#/components/common/menu/TitleBar'
 
 import style from './style.module'
 import SearchFilter from '../Filter'
 import { useGetFacilityBtsSearch } from '#/hooks/queries/facility'
-import OllehMap from './OllehMap'
-import MuiAlert from '#/components/common/popup/MuiAlert'
+
+const OllehMap = lazy(() => import('./OllehMap'))
+const MuiAlert = lazy(() => import('#/components/common/popup/MuiAlert'))
 
 const TitleArea = ({ title }) => {
     return (
@@ -117,13 +118,19 @@ const DetailForm = () => {
 
                 {/* 지도 영역 */}
                 <Box sx={{ width: '100%', height: '400px' }}>
-                    {!isQueryState && locations.length && <OllehMap locations={[...locations]} />}
+                    {!isQueryState && locations.length && (
+                        <Suspense fallback={<div>Loading...</div>}>
+                            <OllehMap locations={[...locations]} />
+                        </Suspense>
+                    )}
                     {apiSuccess && (
-                        <MuiAlert
-                            msg={apiSuccess}
-                            autoHideDuration={5000}
-                            callback={() => setApiSuccess('')}
-                        />
+                        <Suspense fallback={<div>Loading...</div>}>
+                            <MuiAlert
+                                msg={apiSuccess}
+                                autoHideDuration={5000}
+                                callback={() => setApiSuccess('')}
+                            />
+                        </Suspense>
                     )}
                 </Box>
             </Box>

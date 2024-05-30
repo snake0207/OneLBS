@@ -1,6 +1,9 @@
 import Logo from '#/components/common/Logo/Logo'
 import useLayoutStore from '#/store/useLayoutStore'
-import { Box, Button, Grid, Stack, Typography } from '@mui/material'
+import { Box, Button, Stack, Typography } from '@mui/material'
+import { Suspense, lazy } from 'react'
+
+const LazyTypography = lazy(() => import('@mui/material/Typography'))
 
 const footer = {
     menu: [
@@ -15,7 +18,6 @@ const footer = {
         {
             name: '개인정보처리방침',
             link: 'https://inside.kt.com/html/privacy/privacy12.html',
-            fontWeight: 'bold',
         },
         {
             name: '법적고지',
@@ -29,67 +31,63 @@ const footer = {
     copyright: 'Copyright© KT Corp. All rights reserved.',
 }
 
+const textProps = {
+    color: 'text.secondary',
+    fontSize: '12px',
+}
+
 const Footer = (props) => {
     const { themeMode } = useLayoutStore()
 
     return (
-        <Grid container rowSpacing={1.2} {...props}>
-            {/* row 1 */}
-            <Grid item xs={12}>
+        <Stack spacing={2} sx={{ width: '100%', mb: 6 }}>
+            <Box>
                 <Stack direction="row" alignItems="center" spacing={0.3}>
-                    {footer &&
-                        footer.menu.map((item, i) => (
-                            <Button
-                                key={item.name}
-                                onClick={() => window.open(item.link)}
-                                sx={{
-                                    fontSize: '13px',
-                                    color: 'text.primary',
-                                    fontWeight: item.fontWeight ? item.fontWeight : undefined,
-                                }}
-                            >
-                                {item.name}
-                            </Button>
-                        ))}
+                    {footer?.menu?.map((item, i) => (
+                        <Button
+                            key={item.name}
+                            onClick={() => window.open(item.link)}
+                            sx={{
+                                fontSize: '13px',
+                                color: 'text.primary',
+                                paddingTop: 0,
+                                paddingBottom: 0,
+                            }}
+                        >
+                            {item.name}
+                        </Button>
+                    ))}
                 </Stack>
-            </Grid>
-            {/* row 2 */}
-            <Grid item xs={12}>
-                <Grid container alignItems="center" justifyContent="flex-end">
-                    <Grid item xs={10}>
-                        {footer.address && (
-                            <Typography
-                                color="text.secondary"
-                                sx={{ fontSize: '12px', letterSpacing: '-0.5px' }}
-                            >
+            </Box>
+            <Box display="flex">
+                <Box flex={10}>
+                    {footer?.address?.corp && (
+                        <Suspense fallback={<div>Loading...</div>}>
+                            <LazyTypography sx={{ ...textProps }}>
                                 {footer.address.corp}
-                            </Typography>
-                        )}
-                        {footer.address && (
-                            <Typography
-                                color={'text.secondary'}
-                                sx={{ fontSize: '12px', letterSpacing: '-0.5px' }}
-                            >
+                            </LazyTypography>
+                        </Suspense>
+                    )}
+                    {footer?.address?.center && (
+                        <Suspense fallback={<div>Loading...</div>}>
+                            <LazyTypography sx={{ ...textProps }}>
                                 {footer.address.center}
-                            </Typography>
-                        )}
-                    </Grid>
-                    <Grid item xs={2}>
-                        <Box display="flex" justifyContent="flex-end">
-                            <Logo imgKt mode={themeMode} />
-                        </Box>
-                    </Grid>
-                </Grid>
-            </Grid>
-            {/* row 3 */}
-            <Grid item xs={12}>
-                {footer && (
+                            </LazyTypography>
+                        </Suspense>
+                    )}
+                </Box>
+                <Box flex={2} display="flex" justifyContent="flex-end" alignItems="center">
+                    <Logo imgKt mode={themeMode} />
+                </Box>
+            </Box>
+            <Box>
+                {footer?.copyright && (
                     <Typography color={'text.primary'} sx={{ fontSize: '12px' }}>
                         {footer.copyright}
                     </Typography>
                 )}
-            </Grid>
-        </Grid>
+            </Box>
+        </Stack>
     )
 }
 

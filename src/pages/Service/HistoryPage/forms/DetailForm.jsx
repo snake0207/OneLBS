@@ -224,6 +224,7 @@ const DetailForm = () => {
                                                                     src={CellIcon}
                                                                     width="20px"
                                                                     height="28px"
+                                                                    loading="lazy"
                                                                 />
                                                             )}
                                                             {item.posMethod === 'WIFI' && (
@@ -231,6 +232,7 @@ const DetailForm = () => {
                                                                     src={WiFiIcon}
                                                                     width="20px"
                                                                     height="28px"
+                                                                    loading="lazy"
                                                                 />
                                                             )}
                                                             {item.posMethod === 'GNSS' && (
@@ -238,6 +240,7 @@ const DetailForm = () => {
                                                                     src={GnssIcon}
                                                                     width="20px"
                                                                     height="28px"
+                                                                    loading="lazy"
                                                                 />
                                                             )}
                                                         </TableCell>

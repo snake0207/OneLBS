@@ -61,9 +61,9 @@ function Notify({ notifications }) {
                             }}
                         >
                             {themeMode === 'light' ? (
-                                <img src={AlramIcon} />
+                                <img src={AlramIcon} loading="lazy" alt="알림" />
                             ) : (
-                                <img src={AlramIconDark} />
+                                <img src={AlramIconDark} loading="lazy" alt="알림" />
                             )}
                         </Icon>
                     </Badge>

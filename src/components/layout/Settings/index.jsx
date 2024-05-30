@@ -11,17 +11,12 @@ import FormControl from '@mui/material/FormControl'
 import FormLabel from '@mui/material/FormLabel'
 import Button from '@mui/material/Button'
 import useLayoutStore from '#/store/useLayoutStore'
-import { BrowserView, MobileView } from 'react-device-detect'
 import { Icon, Tooltip } from '@mui/material'
 
 import SettingIcon from '#/assets/settingIcon.svg'
 import SettingIconDark from '#/assets/settingIconDark.svg'
-import SettingMobIcon from '#/assets/settingMobIcon.svg'
-import SettingMobIconDark from '#/assets/settingMobIconDark.svg'
 
 import style from './style.module'
-
-import t from '#/common/libs/trans'
 
 function Settings() {
     const [anchorEl, setAnchorEl] = useState(null)
@@ -55,38 +50,20 @@ function Settings() {
         <>
             <Tooltip title="설정">
                 <IconButton aria-describedby={id} sx={{ p: 0 }} onClick={handleClick}>
-                    <BrowserView>
-                        <Icon
-                            sx={{
-                                display: 'flex',
-                                width: '20px',
-                                height: '20px',
-                                ml: '8px',
-                            }}
-                        >
-                            {themeMode === 'light' ? (
-                                <img src={SettingIcon} />
-                            ) : (
-                                <img src={SettingIconDark} />
-                            )}
-                        </Icon>
-                    </BrowserView>
-                    <MobileView>
-                        <Icon
-                            sx={{
-                                display: 'flex',
-                                width: '21px',
-                                height: '20px',
-                                ml: '8px',
-                            }}
-                        >
-                            {themeMode === 'light' ? (
-                                <img src={SettingMobIcon} />
-                            ) : (
-                                <img src={SettingMobIconDark} />
-                            )}
-                        </Icon>
-                    </MobileView>
+                    <Icon
+                        sx={{
+                            display: 'flex',
+                            width: '20px',
+                            height: '20px',
+                            ml: '8px',
+                        }}
+                    >
+                        {themeMode === 'light' ? (
+                            <img src={SettingIcon} loading="lazy" alt="설정" />
+                        ) : (
+                            <img src={SettingIconDark} loading="lazy" alt="설정" />
+                        )}
+                    </Icon>
                 </IconButton>
             </Tooltip>
             <Popover

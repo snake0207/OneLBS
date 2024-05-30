@@ -1,21 +1,23 @@
 import CreateIcon from '@mui/icons-material/Create'
 import { Box, Stack, Table, TableCell, TableHead, TableRow, Typography } from '@mui/material'
 import { useFormik } from 'formik'
-import { useState } from 'react'
+import { lazy, useState } from 'react'
 import { useNavigate } from 'react-router'
 import { useLocation } from 'react-router-dom'
 
 import { MuiMainButton } from '#/components/common/button/MuiButton'
 import TextInput from '#/components/common/input/TextInput'
 import TitleBar from '#/components/common/menu/TitleBar'
-import MuiDialog from '#/components/common/popup/MuiDialog'
 import { registUserSchema } from '#/contents/validationSchema'
 
 import Select from '#/components/common/Select'
-import MuiAlert from '#/components/common/popup/MuiAlert'
 import { usePostRegistUser } from '#/hooks/queries/user'
 import { authTypeList } from '../authType'
-import SearchPopup from './SearchPopup'
+
+const SearchPopup = lazy(() => import('./SearchPopup'))
+const MuiDialog = lazy(() => import('#/components/common/popup/MuiDialog'))
+const MuiAlert = lazy(() => import('#/components/common/popup/MuiAlert'))
+
 import style from './style.module'
 
 const CreateForm = () => {
@@ -214,33 +216,39 @@ const CreateForm = () => {
                 </Box>
             </form>
             {state.openDialog && (
-                <MuiDialog
-                    isOpen={state.openDialog}
-                    content={state.msg}
-                    onCancel={handleStateReset}
-                    onConfirm={handleFormikSubmit}
-                />
+                <Suspense fallback={<div>Loading...</div>}>
+                    <MuiDialog
+                        isOpen={state.openDialog}
+                        content={state.msg}
+                        onCancel={handleStateReset}
+                        onConfirm={handleFormikSubmit}
+                    />
+                </Suspense>
             )}
             {apiSuccess && (
-                <MuiAlert
-                    msg={apiSuccess}
-                    autoHideDuration={5000}
-                    callback={() => {
-                        setApiSuccess(false)
-                        navigate('/user/user-list')
-                    }}
-                />
+                <Suspense fallback={<div>Loading...</div>}>
+                    <MuiAlert
+                        msg={apiSuccess}
+                        autoHideDuration={5000}
+                        callback={() => {
+                            setApiSuccess(false)
+                            navigate('/user/user-list')
+                        }}
+                    />
+                </Suspense>
             )}
             {isOpenUserCheckPopup && (
-                <SearchPopup
-                    isOpen={isOpenUserCheckPopup}
-                    title={`사용자 아이디 중복 체크`}
-                    onCancel={() => setIsOpenUserCheckPopup(false)}
-                    onConfirm={(param) => {
-                        setIsOpenUserCheckPopup(false)
-                        formik.setFieldValue('userId', param)
-                    }}
-                />
+                <Suspense fallback={<div>Loading...</div>}>
+                    <SearchPopup
+                        isOpen={isOpenUserCheckPopup}
+                        title={`사용자 아이디 중복 체크`}
+                        onCancel={() => setIsOpenUserCheckPopup(false)}
+                        onConfirm={(param) => {
+                            setIsOpenUserCheckPopup(false)
+                            formik.setFieldValue('userId', param)
+                        }}
+                    />
+                </Suspense>
             )}
         </Box>
     )

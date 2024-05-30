@@ -9,8 +9,9 @@ import {
     TableRow,
     Typography,
 } from '@mui/material'
+
 import { useFormik } from 'formik'
-import { useState } from 'react'
+import { Suspense, lazy, useState } from 'react'
 import { useNavigate } from 'react-router'
 import { useLocation } from 'react-router-dom'
 
@@ -25,12 +26,14 @@ import Select from '#/components/common/Select'
 import { MuiMainButton } from '#/components/common/button/MuiButton'
 import TextInput from '#/components/common/input/TextInput'
 import TitleBar from '#/components/common/menu/TitleBar'
-import MuiDialog from '#/components/common/popup/MuiDialog'
 import { registServiceSchema } from '#/contents/validationSchema'
 import { usePostServiceDelete, usePostServiceUpdate } from '#/hooks/queries/system'
 
 import CheckBox from '#/components/common/input/CheckBox'
-import MuiAlert from '#/components/common/popup/MuiAlert'
+
+const MuiDialog = lazy(() => import('#/components/common/popup/MuiDialog'))
+const MuiAlert = lazy(() => import('#/components/common/popup/MuiAlert'))
+
 import style from './style.module'
 
 const EditForm = () => {
@@ -749,19 +752,23 @@ const EditForm = () => {
                 </Box>
             </form>
             {state.openDialog && (
-                <MuiDialog
-                    isOpen={state.openDialog}
-                    content={state.msg}
-                    onCancel={handleStateReset}
-                    onConfirm={handleFormikSubmit}
-                />
+                <Suspense fallback={<div>Loading...</div>}>
+                    <MuiDialog
+                        isOpen={state.openDialog}
+                        content={state.msg}
+                        onCancel={handleStateReset}
+                        onConfirm={handleFormikSubmit}
+                    />
+                </Suspense>
             )}
             {apiResult && (
-                <MuiAlert
-                    msg={apiResult}
-                    autoHideDuration={3000}
-                    callback={() => navigate('/system/service-list')}
-                />
+                <Suspense fallback={<div>Loading...</div>}>
+                    <MuiAlert
+                        msg={apiResult}
+                        autoHideDuration={3000}
+                        callback={() => navigate('/system/service-list')}
+                    />
+                </Suspense>
             )}
         </Box>
     )

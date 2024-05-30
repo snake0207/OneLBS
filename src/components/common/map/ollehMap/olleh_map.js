@@ -59,7 +59,12 @@ const drawMarker = (_map, loc, isBounce = false, onMarkerClick) => {
         title: loc.title || loc.address,
         map: _map,
     })
-    _marker.setIcon(getIcon(loc))
+    const _icon = {
+        url: getIcon(loc),
+        size: new olleh.maps.Size(55, 55),
+    }
+    _marker.setIcon(_icon)
+    // _marker.setIcon(getIcon(loc))
 
     if (typeof onMarkerClick === 'function') {
         _marker.onEvent('click', () => {

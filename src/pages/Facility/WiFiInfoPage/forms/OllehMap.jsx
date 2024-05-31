@@ -3,19 +3,24 @@ import ollehMap from '#/components/common/map/ollehMap/olleh_map'
 
 import { Box, ImageList, Stack, Typography } from '@mui/material'
 import PositionBlackIcon from '#/components/common/map/ollehMap/img/position_black.png'
+import imgHex50 from '#/components/common/map/ollehMap/img/hex50.png'
+import imgHex60 from '#/components/common/map/ollehMap/img/hex60.png'
+import imgHex70 from '#/components/common/map/ollehMap/img/hex70.png'
+import imgHex80 from '#/components/common/map/ollehMap/img/hex80.png'
+import imgHex90 from '#/components/common/map/ollehMap/img/hex90.png'
+import imgHex100 from '#/components/common/map/ollehMap/img/hex100.png'
 
 const rssiItems = [
-    { img: 'hex50.png', title: 'rssi > -50' },
-    { img: 'hex60.png', title: 'rssi -60 ~ -50' },
-    { img: 'hex70.png', title: 'rssi -70 ~ -60' },
-    { img: 'hex80.png', title: 'rssi -80 ~ -70' },
-    { img: 'hex90.png', title: 'rssi -90 ~ -80' },
-    { img: 'hex100.png', title: 'rssi < -90' },
+    { img: imgHex50, title: 'rssi > -50' },
+    { img: imgHex60, title: 'rssi -60 ~ -50' },
+    { img: imgHex70, title: 'rssi -70 ~ -60' },
+    { img: imgHex80, title: 'rssi -80 ~ -70' },
+    { img: imgHex90, title: 'rssi -90 ~ -80' },
+    { img: imgHex100, title: 'rssi < -90' },
 ]
 
 const OllehMap = ({ locations, onMapClick, gridX = null, gridY = null, rssi }) => {
     const [mapInstance, setMapInstance] = useState(null)
-    const IMAGE_URL = import.meta.env.VITE_HOME_IMAGE_URL
     // 처음 지도 로딩시에는 marker를 모두 그려준다.
     // 이후 목록에서 특정 행을 선택 한 경우 해당 marker는 bounce 시킨다
     const _zoom = 13
@@ -24,8 +29,6 @@ const OllehMap = ({ locations, onMapClick, gridX = null, gridY = null, rssi }) =
         latitude: locations[0].latitude,
         title: locations[0].title,
     }
-
-    // console.log('rssi : ', rssi)
 
     let _marker
 
@@ -125,7 +128,7 @@ const OllehMap = ({ locations, onMapClick, gridX = null, gridY = null, rssi }) =
                                         sx={{ '& .MuiImageListItem-img': { width: 20 } }}
                                     >
                                         <img
-                                            src={`${IMAGE_URL}${item.img}`}
+                                            src={item.img}
                                             width={`20`}
                                             height={`20`}
                                             alt={item.title}

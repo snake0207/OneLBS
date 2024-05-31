@@ -1,11 +1,7 @@
 import { Global, css } from '@emotion/react'
 
 const globalStyles = css`
-    @import url('http://fonts.googleapis.com/earlyaccess/notosanskr.css');
-
-    .notosanskr * {
-        font-family: 'Noto Sans KR', sans-serif;
-    }
+    @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap');
 
     :root {
         font-size: 16px;
@@ -13,7 +9,6 @@ const globalStyles = css`
         text-rendering: optimizeLegibility;
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
-
         box-sizing: border-box;
     }
     ::-ms-reveal {

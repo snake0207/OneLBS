@@ -1,0 +1,1 @@
+import{o as e,p as a,j as d}from"./index-DNBezHmp.js";var t={},l=a;Object.defineProperty(t,"__esModule",{value:!0});var r=t.default=void 0,o=l(e()),s=d;r=t.default=(0,o.default)((0,s.jsx)("path",{d:"M3 17.25V21h3.75L17.81 9.94l-3.75-3.75zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34a.9959.9959 0 0 0-1.41 0l-1.83 1.83 3.75 3.75z"}),"Create");export{r as d};

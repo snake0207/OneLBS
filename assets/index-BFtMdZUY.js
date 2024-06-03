@@ -1,0 +1,1 @@
+import{j as e}from"./index-CtGT7pB0.js";import{F as o,C as n}from"./FormControlLabel-CIx-0vjk.js";function r({checked:r,onChange:s,label:a="",...l}){return e.jsx(o,{onChange:s,control:e.jsx(n,{checked:r,...l}),label:e.jsx("span",{style:{fontSize:"14px"},children:a})})}export{r as C};

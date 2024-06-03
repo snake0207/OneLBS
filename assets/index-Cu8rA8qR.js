@@ -1,1 +1,0 @@
-import{j as o}from"./index-CMVj578i.js";import{F as n,C as x}from"./FormControlLabel-DqmbKUpD.js";function i({checked:r,onChange:s,label:t="",...e}){return o.jsx(n,{onChange:s,control:o.jsx(x,{checked:r,...e}),label:o.jsx("span",{style:{fontSize:"14px"},children:t})})}export{i as C};
